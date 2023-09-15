@@ -4,7 +4,7 @@ const Logo = () => {
   return (
     <Box>
       <Box maxWidth={190}>
-        <img src="/images/logo.1.png" width={"100%"} />
+        <img src="/images/logo.png" width={"100%"} />
       </Box>
     </Box>
   );

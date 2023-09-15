@@ -1,0 +1,52 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
+body {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: "Outfit", sans-serif;
+  /* Use Outfit font */
+ 
+  color: #fff;
+}
+img {
+  max-width: 100%;
+}
+
+
+@keyframes borderBlink {
+  0% {
+     background:linear-gradient(#fff, #fff) padding-box,
+     linear-gradient(80deg, #eeeeee, #eeeeee, #eeeeee, #eeeeee, #eeeeee) border-box/* Start with a transparent border */
+  }
+  25% {
+     background: linear-gradient(#fff, #fff) padding-box,
+     linear-gradient(80deg, #eeeeee, #eeeeee, #eeeeee, #eeeeee, #eeeeee) border-box/* Blink to your desired border color */
+  }
+
+  50% {
+     background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;; /* Blink to your desired border color */
+  }
+  75% {
+    background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box; /* Blink to your desired border color */
+  }
+  100% {
+     background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;/* Return to transparent */
+  }
+}
+
+/* Apply the animation to your button */
+.button {
+  border-radius: 50px;
+  color: #fff;
+  background: linear-gradient(#fff, #fff) padding-box,
+              linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;
+  border: 3px solid transparent;
+  color: grey;
+  animation: borderBlink 1s infinite; /* Use the animation with an infinite loop */
+}
+
+
+/*# sourceMappingURL=main.css.map */

@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@ethersproject/providers": "^5.7.2",
     "@mui/icons-material": "^5.14.9",
-    "@mui/material": "^5.14.8",
+    "@mui/material": "^5.14.9",
     "@mui/styles": "^5.14.9",
     "@rainbow-me/rainbowkit": "^1.0.8",
     "@unlock-protocol/unlock-js": "0.38.3",

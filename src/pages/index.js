@@ -1,13 +1,14 @@
-import React from "react";
-import PageLayout from "../layout";
-import HomePage from "../pages/components/home";
-
-function ClientPage() {
+import HomeLayout from "@/layout/HomeLayout";
+import { Container, Typography, Box } from "@mui/material";
+import Banner from "./home/Banner";
+export default function ClientPage() {
   return (
-    <PageLayout>
-      <HomePage />
-    </PageLayout>
+    <Box>
+      <Banner />
+    </Box>
   );
 }
 
-export default ClientPage;
+ClientPage.getLayout = function getLayout(page) {
+  return <HomeLayout>{page}</HomeLayout>;
+};

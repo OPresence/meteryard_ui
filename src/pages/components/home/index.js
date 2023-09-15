@@ -1,7 +1,18 @@
 import React from "react";
-import { Box } from "@mui/material";
-
+import { Box, Container } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+// import Banner from "src/pages/home/Banner";
+const useStyles = makeStyles(() => ({}));
 const HomePage = () => {
-  return <Box>meteryard.com</Box>;
+  const classes = useStyles();
+  return (
+    <Box>
+      <Box maxWidth={700}>
+        <Container>
+          <Banner />
+        </Container>
+      </Box>
+    </Box>
+  );
 };
 export default HomePage;

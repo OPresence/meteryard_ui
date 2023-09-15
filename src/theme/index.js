@@ -1,9 +1,5 @@
 import _ from "lodash";
-import {
-  colors,
-  createMuiTheme,
-  responsiveFontSizes,
-} from "@mui/material/styles";
+import { createMuiTheme, responsiveFontSizes } from "@mui/material/styles";
 import typography from "./typography";
 
 const baseOptions = {
