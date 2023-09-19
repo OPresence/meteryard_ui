@@ -1,5 +1,4 @@
 // client/_app.js
-
 import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 import "../../src/layout/globals.css";

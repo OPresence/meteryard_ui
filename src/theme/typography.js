@@ -3,7 +3,7 @@ export default {
     fontWeight: "600",
     color: "#000",
     lineHeight: "1.2",
-    fontSize: "26px",
+    fontSize: "42px",
     fontFamily: "system-ui",
   },
   h2: {
@@ -21,9 +21,9 @@ export default {
     fontFamily: "system-ui",
   },
   h4: {
-    fontSize: "20px",
+    fontSize: "22px",
     fontWeight: "600",
-    color: "#000",
+    color: "#444444",
     fontFamily: "system-ui",
   },
   h5: {
@@ -49,7 +49,8 @@ export default {
   },
 
   button: {
-    textTransform: "capitalize",
+    padding: "0px",
+    background: "#ACACAC",
     borderRadius: 27,
     fontFamily: "system-ui",
   },

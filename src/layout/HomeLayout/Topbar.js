@@ -136,7 +136,12 @@ export default function Topbar() {
             </Box> */}
           </Drawer>
         </Hidden>
-        <Box className="topbarmainBox">
+        <Box
+          className="topbarmainBox"
+          display={"flex"}
+          justifyContent={"space-between"}
+          width={"100%"}
+        >
           <div>{femmecubatorLogo}</div>
           <IconButton
             edge="start"
@@ -144,12 +149,12 @@ export default function Topbar() {
             aria-label="menu"
             aria-haspopup="true"
             onClick={handleDrawerOpen}
-            style={{ background: "none" }}
+            style={{ background: "transparent" }}
           >
             <MenuIcon
               width="60px"
               height="60px"
-              style={{ color: "rgb(255 255 255)", fontSize: "30px" }}
+              style={{ color: "#000", fontSize: "30px" }}
             />
           </IconButton>
         </Box>
