@@ -7,11 +7,9 @@ const HomePage = () => {
   const classes = useStyles();
   return (
     <Box>
-      <Box maxWidth={700}>
-        <Container>
-          <Banner />
-        </Container>
-      </Box>
+      <Container>
+        <Banner />
+      </Container>
     </Box>
   );
 };

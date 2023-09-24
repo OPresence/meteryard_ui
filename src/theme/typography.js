@@ -39,13 +39,8 @@ export default {
     fontFamily: "system-ui",
   },
   overline: {
-    fontSize: "18px",
+    fontSize: "8px",
     fontFamily: "system-ui",
-    marginBottom: "15px",
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    textAlign: "justify",
-    color: "#999",
   },
 
   button: {

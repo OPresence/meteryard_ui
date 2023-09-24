@@ -208,7 +208,7 @@ export default function Topbar() {
                     </Box>
                   </Box>
                   <Box p={"0 120px 0 0"} className={"JoinLiveChatBox"}>
-                    <Button className="button">Join live chat</Button>
+                    <Button className="button">My Citychat</Button>
                   </Box>
                 </Box>
               </Box>
