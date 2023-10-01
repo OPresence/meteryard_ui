@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-// import Banner from "src/pages/home/Banner";
+import Banner from "../../home/Banner";
 const useStyles = makeStyles(() => ({}));
 const HomePage = () => {
   const classes = useStyles();

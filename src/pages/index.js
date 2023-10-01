@@ -1,7 +1,6 @@
 import HomeLayout from "@/layout/HomeLayout";
 import { Box } from "@mui/material";
-import Banner from "./home/Banner";
-import ChatBoat from "src/component/ChatBoat";
+import Banner from "../pages/home/Banner";
 import SliderComponent from "../component/SliderComponent";
 import CardComponent from "../component/CardComponent";
 import ResidentialProjects from "../component/ResidentialProjects";
