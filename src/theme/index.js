@@ -7,8 +7,10 @@ const baseOptions = {
   overrides: {
     MuiContainer: {
       root: {
+        // "@media(min-width:1200px)":{},
         "@media(max-width:1280px)": {
           paddingLeft: "60px",
+          // maxWidth: "initial",
           paddingRight: "60px",
         },
       },

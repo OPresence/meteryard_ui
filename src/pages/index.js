@@ -1,14 +1,20 @@
 import HomeLayout from "@/layout/HomeLayout";
-import { Container, Typography, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import Banner from "./home/Banner";
-import ChatBoat from "../component/ChatBoat";
-
+import ChatBoat from "src/component/ChatBoat";
+import SliderComponent from "../component/SliderComponent";
+import CardComponent from "../component/CardComponent";
+import ResidentialProjects from "../component/ResidentialProjects";
+import CommercialProjects from "../component/CommercialProjects";
 export default function ClientPage() {
   return (
-    <Box>
-      <ChatBoat />
-
+    <Box mb={5}>
       <Banner />
+      <SliderComponent />
+      <CardComponent />
+      <ResidentialProjects />
+      <CommercialProjects />
+      {/* <ChatBoat /> */}
     </Box>
   );
 }

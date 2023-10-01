@@ -34,7 +34,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
   },
   "& .TopIconBox": {
     "& .TopIconBoxChild": {
-      padding: "10px 120px  ",
+      padding: "10px 25px  ",
       display: "flex",
       justifyContent: "space-between",
       "& svg": {
@@ -171,7 +171,7 @@ export default function Topbar() {
             md={4}
             style={{ display: "flex", alignItems: "center" }}
           >
-            <Box p={"0 0 0 85px"}>
+            <Box>
               <Container>{femmecubatorLogo}</Container>
             </Box>
           </Grid>
@@ -207,7 +207,7 @@ export default function Topbar() {
                       </Typography>
                     </Box>
                   </Box>
-                  <Box p={"0 120px 0 0"} className={"JoinLiveChatBox"}>
+                  <Box p={"0 25px 0 0"} className={"JoinLiveChatBox"}>
                     <Button className="button">My Citychat</Button>
                   </Box>
                 </Box>

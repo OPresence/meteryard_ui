@@ -48,5 +48,7 @@ img {
   animation: borderBlink 1s infinite; /* Use the animation with an infinite loop */
 }
 
-
+.slick-prev:before, .slick-next:before{
+  color: #a7d325 !important;
+}
 /*# sourceMappingURL=main.css.map */
