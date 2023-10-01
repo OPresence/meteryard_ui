@@ -103,7 +103,7 @@ const ResidentialProjects = () => {
       <div className="mainSliderDiv">
         <Container>
           <Box>
-            <Typography variant="h2">Featured Projects</Typography>
+            <Typography variant="h2">Residential Projects</Typography>
             <Typography variant="h6">
               Featured Residential Projects Across India
             </Typography>
