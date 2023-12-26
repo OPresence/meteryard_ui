@@ -7,9 +7,9 @@ import ButtonComponent from "./ButtonComponent";
 
 const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
-    marginTop: "20px",
+    padding: "80px 0px",
     background: "#fff",
-    padding: "50px",
+    // padding: "50px",
     "& h2": {
       fontWeight: "500",
     },
@@ -18,7 +18,7 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
     width: "100%",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    height: "164px",
+    height: "265px",
     "& h6": {
       color: "#A7D325",
       fontSize: "14px",
@@ -35,10 +35,16 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
     width: "100%",
     borderRadius: "15px",
     position: "relative",
+    transition: "0.8s",
+    transform: "scale(0.9)",
+    "&:hover": {
+      transform: "scale(1)",
+      transition: "0.8s",
+    },
     "& .contentBox": {
       boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
       padding: "10px",
-      marginTop: "-30px",
+      marginTop: "-60px",
       background: "#fff",
       borderRadius: "10px",
       position: "relative",
@@ -91,7 +97,7 @@ const ResidentialProjects = () => {
       image: "/images/meteryard/Images/Screenshot 2023-09-02 100309.png",
     },
     {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
+      image: "/images/meteryard/Images/Image 23.png",
     },
     {
       image: "/images/meteryard/Images/Screenshot 2023-09-02 100420.png",
@@ -101,7 +107,7 @@ const ResidentialProjects = () => {
   return (
     <ResidentStyle>
       <div className="mainSliderDiv">
-        <Container>
+        <Container maxWidth>
           <Box>
             <Typography variant="h2">Residential Projects</Typography>
             <Typography variant="h6">
@@ -113,28 +119,15 @@ const ResidentialProjects = () => {
               {projectDetails.map((data, index) => {
                 return (
                   <Grid item lg={3} md={3} sm={6} xs={12}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"center"}
-                      height={"100%"}
-                      pb={"20px"}
-                    >
+                    <Box height={"100%"} pb={"20px"}>
                       <Box className="cards">
-                        <Box
-                          className="circleimg"
-                          style={{
-                            backgroundImage: `url('${data?.image}')`,
-                          }}
-                        ></Box>
+                        <Box>
+                          <img src={data?.image} width={"100%"} />
+                        </Box>
 
                         <Box display={"flex"} justifyContent={"center"}>
                           <Box className="contentBox" width={"90%"}>
                             <Box display={"flex"} alignItems={"center"}>
-                              <Box className="circleBox">
-                                <Box maxWidth={50}>
-                                  <img src="/images/meteryard/Graphics/Group 7803.png" />
-                                </Box>
-                              </Box>
                               <Typography variant="h5">
                                 BLK 7-1005, Vascon Tulips Gold
                               </Typography>

@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { create, responsiveFontSizes } from "@mui/material/styles";
 import { themeOptions } from "./typography";
 
 const baseOptions = {

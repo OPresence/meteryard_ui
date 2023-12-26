@@ -16,54 +16,7 @@ import { createTheme } from "../theme";
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-// const useStyles = makeStyles(() => ({
-//   "& .appbarBox": {
-//     background: "#fff ",
-//     boxShadow: "none ",
-//     "& .flexJustify": {
-//       display: "flex",
-//       justifyContent: "space-between",
-//     },
-//     "& .flexAlign": {
-//       display: "flex",
-//       alignItems: "center",
-//     },
-//   },
-//   "& .TopIconBox": {
-//     "& .TopIconBoxChild": {
-//       padding: "10px 120px  ",
-//       display: "flex",
-//       justifyContent: "space-between",
-//       "& svg": {
-//         color: "#fff ",
-//         background: "#343A40 ",
-//         padding: "5px ",
-//         fontSize: "28px ",
-//         borderRadius: "50px ",
-//       },
-//     },
-//     "& .ContentBox": {
-//       background: "#444444 ",
-//       display: "flex",
-//       alignItems: "center",
-//       padding: "10px 0px 10px 120px ",
-//       clipPath: "polygon(6% 0%, 100% 0%, 100% 100%, 0% 100%) ",
-//     },
-//   },
-//   "& .JoinLiveChatBox": {
-//     display: "flex",
-//     alignItems: "center",
-//     "& button": {
-//       borderRadius: "50px",
-//       color: "#fff",
-//       background:
-//         "linear-gradient(#fff, #fff) padding-box, linear-gradient(80deg, #ff001f, #e50b17,#3dfb15,#FBB415,#FBB415) border-box",
-//       border: "3px solid transparent",
-//       color: "grey",
-//     },
-//   },
-//   // Define the blinking animation
-// }));
+
 const layOutcss = styled("Box")(({ theme }) => ({
   "& .appbarBox": {
     background: "#fff ",

@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -14,15 +15,22 @@ import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Logo from "src/component/Logo";
+import Logo from "../../component/Logo";
 import styled from "@emotion/styled";
+import MenuComponent from "../../component/MenuComponent";
+import DialogComponent from "../../component/DialogComponent";
+import { useRouter } from "next/router";
+import LoginDialog from "../../component/LoginDialog";
+import "../../Scss/border.css";
 
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .appbarBox": {
     background: "#fff ",
-    boxShadow: "none ",
+    // boxShadow:
+    //   "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
+    boxShadow: "0px 1px 13px #00000026",
+
     "& .flexJustify": {
       display: "flex",
       justifyContent: "space-between",
@@ -30,6 +38,12 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "& .flexAlign": {
       display: "flex",
       alignItems: "center",
+      "& span": {
+        color: "#000",
+        fontFamily: "system-ui",
+        fontWeight: "500",
+        cursor: "pointer",
+      },
     },
   },
   "& .TopIconBox": {
@@ -49,23 +63,28 @@ const MainComponent = styled("Box")(({ theme }) => ({
       background: "#444444 ",
       display: "flex",
       alignItems: "center",
-      padding: "10px 0px 10px 120px ",
-      clipPath: "polygon(6% 0%, 100% 0%, 100% 100%, 0% 100%) ",
+      padding: "0 0px 0 120px ",
+      clipPath: "polygon(6% 0%, 100% 0%, 100% 700%, -35% 700%) ",
     },
   },
 
   "& .JoinLiveChatBox": {
     display: "flex",
     alignItems: "center",
-
-    // "& button": {
-    //   borderRadius: "50px",
-    //   color: "#fff",
-    //   background:
-    //     "linear-gradient(#fff, #fff) padding-box, linear-gradient(80deg, #ff001f, #e50b17,#3dfb15,#FBB415,#FBB415) border-box",
-    //   border: "3px solid transparent",
-    //   color: "grey",
-    // },
+    "& .buttonclass": {
+      borderRadius: "50px",
+      color: "grey",
+      background:
+        "linear-gradient(#fff, #fff) padding-box,\n  linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box",
+      border: "3px solid transparent",
+      animation: "borderBlink 1s infinite",
+    },
+  },
+  "& .LogoBox": {
+    maxWidth: "230px",
+    "@media(max-width:1080px)": {
+      maxWidth: "140px",
+    },
   },
 }));
 
@@ -74,6 +93,28 @@ export default function Topbar() {
     mobileView: false,
     drawerOpen: false,
   });
+
+  const [_openDialog, setOpenDialog] = useState(false);
+  const [_openDialogLogin, setOpenDialogLogin] = useState(false);
+  const [_selectScreen, setSelectScreen] = useState("");
+  const [_signcomplete, setSignUpComplete] = useState(false);
+  const router = useRouter();
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpenDialog(false);
+  };
+  const handleClickOpenLogin = (value) => {
+    setSelectScreen(value);
+    setOpenDialogLogin(true);
+    setSignUpComplete(false);
+  };
+
+  const handleCloseLogin = () => {
+    setOpenDialogLogin(false);
+  };
 
   const { mobileView, drawerOpen } = state;
 
@@ -84,26 +125,34 @@ export default function Topbar() {
 
   useEffect(() => {
     const setResponsiveness = () => {
-      setState((prevState) => ({
-        ...prevState,
-        mobileView: window.innerWidth < 1080,
-      }));
+      if (typeof window !== "undefined") {
+        setState((prevState) => ({
+          ...prevState,
+          mobileView: window.innerWidth < 1080,
+        }));
+      }
     };
 
     setResponsiveness();
-    window.addEventListener("resize", setResponsiveness);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", setResponsiveness);
+    }
 
     return () => {
-      window.removeEventListener("resize", setResponsiveness);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", setResponsiveness);
+      }
     };
   }, []);
   const femmecubatorLogo = (
-    <Box maxWidth={230}>
+    <Box className="LogoBox">
       <Link href="/">
         <Logo className="logoImg" />
       </Link>
     </Box>
   );
+  {
+  }
 
   const displayMobile = () => {
     return (
@@ -129,11 +178,6 @@ export default function Topbar() {
             >
               {femmecubatorLogo}
             </Box>
-            {/* <Box mr={1} ml={1}>
-              <Button variant="contained" fullWidth>
-                Sign Up
-              </Button>
-            </Box> */}
           </Drawer>
         </Hidden>
         <Box
@@ -141,6 +185,7 @@ export default function Topbar() {
           display={"flex"}
           justifyContent={"space-between"}
           width={"100%"}
+          alignItems="center"
         >
           <div>{femmecubatorLogo}</div>
           <IconButton
@@ -192,29 +237,50 @@ export default function Topbar() {
                 </Box>
                 <Box className="flexAlign" p={"0 0 0 30px"}>
                   <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
-                  <Typography variant="body1">Login/Sign Up</Typography>
+                  <span onClick={() => handleClickOpenLogin("Login")}>
+                    Login
+                  </span>
+                  <span onClick={() => handleClickOpenLogin("Sign Up")}>
+                    /Sign Up
+                  </span>
                 </Box>
               </Box>
               <Box className={"ContentBox"}>
                 <Box className="flexJustify" width={"100%"}>
                   <Box className="flexAlign">
-                    <Typography variant="body1" style={{ color: "#fff" }}>
-                      Cities
-                    </Typography>
-                    <Box p={"0 0 0 70px"}>
-                      <Typography variant="body1" style={{ color: "#fff" }}>
-                        Property Type
-                      </Typography>
+                    <MenuComponent />
+                  </Box>
+                  {router.pathname == "/" && (
+                    <Box p={"0 25px 0 0"}>
+                      <Button
+                        className="rainbowGradient"
+                        onClick={handleClickOpen}
+                      >
+                        My Citychat
+                      </Button>
                     </Box>
-                  </Box>
-                  <Box p={"0 25px 0 0"} className={"JoinLiveChatBox"}>
-                    <Button className="button">My Citychat</Button>
-                  </Box>
+                  )}
                 </Box>
               </Box>
             </Box>
           </Grid>
         </Grid>
+        <DialogComponent
+          open={_openDialog}
+          setOpen={setOpenDialog}
+          handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+        />
+        <LoginDialog
+          open={_openDialogLogin}
+          setOpen={setOpenDialogLogin}
+          handleClickOpen={handleClickOpenLogin}
+          handleClose={handleCloseLogin}
+          _selectScreen={_selectScreen}
+          setSelectScreen={setSelectScreen}
+          setSignUpComplete={setSignUpComplete}
+          _signcomplete={_signcomplete}
+        />
       </Box>
     );
   };

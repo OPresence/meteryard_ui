@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Card, Grid, Typography, Box, Container, Button } from "@mui/material";
+import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,9 +9,9 @@ import ButtonComponent from "./ButtonComponent";
 
 const CardComponentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
-    marginTop: "20px",
+    padding: "20px 0 30px 0",
     background: "#fff",
-    padding: "50px",
+    // padding: "50px",
     "& h2": {
       fontWeight: "500",
     },
@@ -20,7 +20,7 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     width: "100%",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    height: "158px",
+    height: "250px",
     "& h6": {
       color: "#A7D325",
       fontSize: "14px",
@@ -36,7 +36,15 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     cursor: "pointer",
     width: "90%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    borderRadius: "15px",
+    borderRadius: "20px",
+    transform: "0",
+    transition: "0.8s",
+    transform: "scale(0.9)",
+
+    "&:hover": {
+      transform: "scale(1)",
+      transition: "0.8s",
+    },
     "& .contentBox": {
       padding: "0 10px 10px",
       "& h5": {
@@ -178,7 +186,7 @@ const CardComponent = () => {
   return (
     <CardComponentStyle>
       <div className="mainSliderDiv">
-        <Container>
+        <Container maxWidth>
           <Box>
             <Typography variant="h2">Featured Projects</Typography>
             <Typography variant="h6">
@@ -191,20 +199,14 @@ const CardComponent = () => {
               {projectDetails.map((data, index) => {
                 return (
                   <Grid item lg={3} md={6} sm={6} xs={12}>
-                    <Box
-                      display={"flex"}
-                      justifyContent={"center"}
-                      height={"100%"}
-                      pb={"20px"}
-                    >
+                    <Box height={"100%"} pb={"20px"}>
                       <Box className="cards">
-                        <Box
-                          className="circleimg"
-                          style={{
-                            backgroundImage:
-                              "url('/images/meteryard/Images/Screenshot 2023-09-02 100309.png')",
-                          }}
-                        ></Box>
+                        <Box>
+                          <img
+                            src="/images/meteryard/Images/Screenshot 2023-09-02 100309.png"
+                            width={"100%"}
+                          />
+                        </Box>
                         <Box className="contentBox">
                           <Typography variant="h5">
                             BLK 7-1005, Vascon Tulips Gold

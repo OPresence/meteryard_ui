@@ -8,33 +8,48 @@ import ButtonComponent from "./ButtonComponent";
 const Commercialstyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     background: "#fff",
-    padding: "50px",
+    // padding: "50px",
     "& h2": {
       fontWeight: "500",
     },
-  },
-  "& .circleimg": {
-    width: "90%",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: "125px",
-    zIndex: 1,
-    "& h6": {
-      color: "#A7D325",
-      fontSize: "14px",
-    },
-    "& svg": {
-      color: "#A7D325",
+    "& .cardBox": {
+      display: "flex",
+      justifyItems: "center",
+      height: "100%",
+      paddingBlock: "20px",
+      "@media(max-width:900px)": {
+        marginTop: "90px",
+      },
     },
   },
-  "& .large": {
-    background: "#FFF",
-  },
+  // "& .circleimg": {
+  //   width: "90%",
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   height: "210px",
+  //   zIndex: 1,
+  //   "& h6": {
+  //     color: "#A7D325",
+  //     fontSize: "14px",
+  //   },
+  //   "& svg": {
+  //     color: "#A7D325",
+  //   },
+  // },
+  // "& .large": {
+  //   background: "#FFF",
+  // },
   "& .cards": {
     cursor: "pointer",
     width: "100%",
     borderRadius: "15px",
     position: "relative",
+    transition: "0.8s",
+    transform: "scale(0.9)",
+    "&:hover": {
+      transform: "scale(1)",
+      transition: "0.8s",
+    },
     "& .contentBox": {
       boxShadow: "0px 5px 10px 0px rgba(0, 0, 0, 0.5)",
       padding: "10px",
@@ -42,6 +57,7 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
       background: "#fff",
       borderRadius: "10px",
       position: "relative",
+      width: "100%",
       "& svg": {
         color: "#000",
         fontSize: "16px",
@@ -92,7 +108,7 @@ const CommercialProjects = () => {
   return (
     <Commercialstyle>
       <div className="mainSliderDiv">
-        <Container>
+        <Container maxWidth>
           <Box>
             <Typography variant="h2">Commercial Projects</Typography>
             <Typography variant="h6">
@@ -104,13 +120,7 @@ const CommercialProjects = () => {
               {projectDetails.map((data, index) => {
                 return (
                   <Grid item lg={3} md={3} sm={6} xs={12}>
-                    <Box
-                      key={index}
-                      display={"flex"}
-                      justifyContent={"center"}
-                      height={"100%"}
-                      pb={"20px"}
-                    >
+                    <Box className="cardBox" key={index}>
                       <Box className="cards">
                         <Box display={"flex"} justifyContent={"center"}>
                           <Box className="contentBox" width={"90%"}>
@@ -118,14 +128,14 @@ const CommercialProjects = () => {
                               <Box
                                 display={"flex"}
                                 justifyContent={"center"}
-                                m={"-75px 0 0 0"}
+                                m={"-95px 0 0 0"}
                               >
-                                <Box
-                                  className="circleimg"
-                                  style={{
-                                    backgroundImage: `url('${data?.image}')`,
-                                  }}
-                                ></Box>
+                                <Box>
+                                  <img
+                                    src="/images/meteryard/Images/Screenshot 2023-09-02 100309.png"
+                                    width={"100%"}
+                                  />
+                                </Box>
                               </Box>
                             </Box>
                             <Typography
