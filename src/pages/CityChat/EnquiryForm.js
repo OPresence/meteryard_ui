@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Typography,
@@ -19,6 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import CheckBoxComponent from "src/component/CheckBoxComponent.js";
+import { AuthContext } from "../../context/Auth";
 const DialogStyleComponent = styled(Dialog)({
   "& .MuiDialog-paper": {
     width: "100%",
@@ -127,6 +128,9 @@ const EnquiryForm = ({
   const [_property_category, setPropertyCategory] = React.useState("");
   const [checked_get, setChecked_Get] = React.useState("");
 
+  const auth = useContext(AuthContext);
+
+  console.log("authnjfndj--->", auth);
   return (
     <DialogStyleComponent open={open} keepMounted onClose={handleClose}>
       <Box className="mainDialogBox">

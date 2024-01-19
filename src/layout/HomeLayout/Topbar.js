@@ -251,7 +251,7 @@ export default function Topbar() {
                     <MenuComponent />
                   </Box>
                   {router.pathname == "/" && (
-                    <Box p={"0 25px 0 0"}>
+                    <Box p={"10px 25px 0 0"}>
                       <Button
                         className="rainbowGradient"
                         onClick={handleClickOpen}

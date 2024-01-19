@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import { Gallery } from "react-grid-gallery";
+// import { Gallery } from "react-grid-gallery";
 
 // import FBImageGrid from "react-fb-image-grid";
 const images = [
@@ -40,7 +40,7 @@ const ImageGrid = () => {
 
   return (
     <Box>
-      <Gallery images={images} />
+      {/* <Gallery images={images} /> */}
 
       {/* <FBImageGrid images={images} /> */}
     </Box>

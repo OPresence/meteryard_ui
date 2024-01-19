@@ -34,6 +34,8 @@ const Accordionstyle = styled("dic")(({ theme }) => ({
     "& .summary": {
       height: "60px",
       margin: "0",
+      padding: "0px !important",
+
       "& h6": {
         fontSize: "14px",
         fontWeight: "550",

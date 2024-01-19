@@ -172,13 +172,12 @@
 //   );
 // }
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Container, Typography, Box, Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import ButtonSwitchComponent from "../../component/ButtonSwitchComponent";
 import RegisterSeller from "src/component/RegisterSeller";
 import SearchIcon from "@mui/icons-material/Search";
-
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     height: "100vh",
@@ -273,6 +272,11 @@ const MainComponent = styled("Box")(({ theme }) => ({
       padding: 0,
       clipPath: "polygon(0% 4%, 100% 0%, 70% 123%, 0% 100%, 0 0%)",
       color: "#fff",
+      background: "rgb(172 172 172)",
+
+      "& .buttonText": {
+        color: "#0000",
+      },
       "& .buttonIconBox": {
         background: "#fff",
         borderTopRightRadius: "20px",
@@ -379,7 +383,9 @@ export default function Home() {
                       </Box>
                     </Box>
                     <Box p={"0 90px 0 50px"}>
-                      <span>Buyer</span>
+                      <span style={{ color: "#eeeeee" }} className="buttonText">
+                        Buyer
+                      </span>
                     </Box>
                   </Button>
                   &nbsp;

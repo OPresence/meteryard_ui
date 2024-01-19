@@ -45,7 +45,8 @@ export default {
 
   button: {
     padding: "0px",
-    background: "#ACACAC",
+    // background: "#ACACAC",
+    color: "#000",
     borderRadius: 27,
     fontFamily: "system-ui",
   },
