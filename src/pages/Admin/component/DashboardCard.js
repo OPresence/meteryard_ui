@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { FaCircleArrowRight } from "react-icons/fa6";

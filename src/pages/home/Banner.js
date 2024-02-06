@@ -372,7 +372,6 @@ export default function Home() {
                     variant="button"
                     className="ButtonClass"
                     onMouseEnter={() => handleMouseEnter("Buyer")}
-                    // onMouseLeave={() => handleMouseEnter("SEARCH")}
                   >
                     <Box p={"10px"} className={"buttonIconBox"}>
                       <Box maxWidth={25}>
@@ -407,7 +406,6 @@ export default function Home() {
                     variant="button"
                     className="ButtonClass1"
                     onMouseEnter={() => handleMouseEnter("Seller")}
-                    // onMouseLeave={() => handleMouseEnter("SEARCH")}
                   >
                     <Box p={"0px 50px 0 90px"}>
                       <span>Seller</span>

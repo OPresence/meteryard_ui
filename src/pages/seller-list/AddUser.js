@@ -38,7 +38,7 @@ const phoneInputStyles = {
   height: "54px",
 };
 
-const CreateAdmin = ({
+const AddUser = ({
   handleClose,
   ButtonName,
   ImageUpload,
@@ -302,4 +302,4 @@ const CreateAdmin = ({
   );
 };
 
-export default CreateAdmin;
+export default AddUser;

@@ -1,4 +1,11 @@
-import React, { useState } from "react";
+// import React from "react";
+
+// const ViewCountry = () => {
+//   return <div>ViewCountry</div>;
+// };
+
+// export default ViewCountry;
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Grid,
@@ -42,6 +49,8 @@ const UpdateCountry = ({
   _image_upload,
   _isloading,
   AddMoreList,
+  _viewData,
+  type,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
 
@@ -51,16 +60,28 @@ const UpdateCountry = ({
     imageValue: "",
     status: "",
   });
-
+  console.log("djfd--->", type);
   const formValidationSchemaDepartment = yep.object().shape({
     countryName: yep.string().required("country name is required."),
     phoneNo: yep.string().required("Country code is required."),
     imageValue: yep.string().required("Country flag is required."),
     status: yep.string().required("status is required."),
   });
-
+  useEffect(() => {
+    setInitialState({
+      countryName: _viewData?.countryName,
+      phoneNo: _viewData?.countryCode,
+      imageValue: _viewData?.image,
+      status: _viewData?.status,
+    });
+  }, []);
   return (
     <div>
+      <Box display={"flex"} justifyContent={"center"}>
+        <Box maxWidth={75}>
+          <img src="/images/Group 8163.png" width={"100%"} />
+        </Box>
+      </Box>
       <Formik
         initialValues={_initialstate}
         enableReinitialize={true}
@@ -94,9 +115,13 @@ const UpdateCountry = ({
                   <Box mt={2}>
                     <TextField
                       fullWidth
-                      disabled={_image_upload || _isloading}
+                      disabled={
+                        _image_upload || _isloading || type == "VIEW"
+                          ? true
+                          : false
+                      }
                       id="outlined-basic"
-                      label="County Name"
+                      // label="County Name"
                       variant="outlined"
                       placeholder="Enter your county name"
                       name="countryName"
@@ -112,7 +137,11 @@ const UpdateCountry = ({
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <PhoneInput
-                      disabled={_image_upload || _isloading}
+                      disabled={
+                        _image_upload || _isloading || type == "VIEW"
+                          ? true
+                          : false
+                      }
                       country={"in"}
                       inputClass="phoneInputField"
                       buttonClass="phoneInputButton"
@@ -136,13 +165,17 @@ const UpdateCountry = ({
                   <Box mt={2}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
-                        Select Status
+                        {/* Select Status */}
                       </InputLabel>
                       <Select
-                        disabled={_image_upload || _isloading}
+                        disabled={
+                          _image_upload || _isloading || type == "VIEW"
+                            ? true
+                            : false
+                        }
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Select Status"
+                        // label="Select Status"
                         name="status"
                         value={values?.status}
                         onChange={handleChange}
@@ -160,7 +193,11 @@ const UpdateCountry = ({
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <TextField
-                      disabled={_image_upload || _isloading}
+                      disabled={
+                        _image_upload || _isloading || type == "VIEW"
+                          ? true
+                          : false
+                      }
                       type="file"
                       fullWidth
                       id="outlined-basic"
@@ -180,45 +217,47 @@ const UpdateCountry = ({
                 </Grid>
               </Grid>
 
-              <Box
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                mt={3}
-                gap={"50px"}
-              >
-                <DialogButtonStyle>
-                  <Box display={"flex"} gap={"20px"}>
-                    <Button
-                      onClick={handleClose}
-                      disabled={_image_upload || _isloading}
-                    >
-                      <span>CANCEL</span>
-                    </Button>
-                    <Button
-                      disabled={_image_upload || _isloading}
-                      type="submit"
-                      style={{
-                        background: "#A2D117",
-                      }}
-                    >
-                      <span>CREATE Country</span>
-                      {_isloading && (
-                        <>
+              {type != "VIEW" && (
+                <Box
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  mt={3}
+                  gap={"50px"}
+                >
+                  <DialogButtonStyle>
+                    <Box display={"flex"} gap={"20px"}>
+                      <Button
+                        onClick={handleClose}
+                        disabled={_image_upload || _isloading}
+                      >
+                        <span>CANCEL</span>
+                      </Button>
+                      <Button
+                        disabled={_image_upload || _isloading}
+                        type="submit"
+                        style={{
+                          background: "#A2D117",
+                        }}
+                      >
+                        <span>Update Country</span>
+                        {_isloading && (
+                          <>
+                            &nbsp;&nbsp;
+                            <CircularProgressComponent colorValue="#fff" />
+                          </>
+                        )}
+                      </Button>
+                      {_image_upload && (
+                        <Box>
                           &nbsp;&nbsp;
-                          <CircularProgressComponent colorValue="#fff" />
-                        </>
+                          <CircularProgressComponent colorValue="#000" />
+                        </Box>
                       )}
-                    </Button>
-                    {_image_upload && (
-                      <Box>
-                        &nbsp;&nbsp;
-                        <CircularProgressComponent colorValue="#000" />
-                      </Box>
-                    )}
-                  </Box>
-                </DialogButtonStyle>
-              </Box>
+                    </Box>
+                  </DialogButtonStyle>
+                </Box>
+              )}
             </Box>
           </Form>
         )}

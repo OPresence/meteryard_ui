@@ -1,23 +1,23 @@
 import * as React from "react";
-import { Button, Typography, Box } from "@mui/material";
+import { IconButton, Typography, Box } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { styled } from "@mui/system";
-import CreateDepartment from "../../admin/component/CreateDepartment";
-import CreateAdmin from "@/pages/admin-list/CreateAdmin";
-import AddBanner from "@/pages/banner/AddBanner";
-import UpdateCountry from "@/pages/countries/UpdateCountry";
-import AddState from "../../../pages/state/AddState";
+import DepartmentView from "../../department-list/DepartmentView";
+import ViewCountry from "../../countries/ViewCountry";
 import AddCity from "@/pages/cities/AddCity";
 import AddProjectType from "@/pages/project-type/AddProjectType";
 import AddProjectFinishing from "@/pages/project-finishing/AddProjectFinishing";
 import AddAmenties from "@/pages/amenties/AddAmenties";
 import AddUnites from "@/pages/area-unites/AddUnites";
 import AddProperty from "@/pages/property-availabilities/AddProperty";
-import JoditComponent from "../../admin/component/JoditComponent";
+import ViewState from "../../state/ViewState.js";
+import ViewBanner from "../../banner/ViewBanner";
+import ViewAdmin from "@/pages/admin-list/ViewAdmin";
+import ViewUser from "../../seller-list/ViewUser";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -27,11 +27,7 @@ const DialogStyle = styled("Box")(({ theme }) => ({
     background: "#A2D117",
     padding: "8px 25px",
     borderRadius: "10px",
-    "&:hover": {
-      background: "#A2D117",
-      padding: "8px 25px",
-      borderRadius: "10px",
-    },
+
     "& span": {
       color: "#fff",
       fontSize: "14px",
@@ -53,7 +49,7 @@ const DialogStyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-export default function AlertDialogSlide({
+export default function ViewDialog({
   ButtonName,
   HeadingDialog,
   AddMoreList,
@@ -62,9 +58,8 @@ export default function AlertDialogSlide({
   setOpen,
   handleClickOpen,
   handleClose,
-  _change_about,
-  setChange_About,
-  _about,
+  type,
+  _viewData,
   ImageUpload,
   _image_upload,
   _getcountrylist,
@@ -101,18 +96,8 @@ export default function AlertDialogSlide({
   return (
     <React.Fragment>
       <DialogStyle>
-        <Button onClick={handleClickOpen}>
-          <span>{ButtonName}</span>{" "}
-        </Button>
         <Dialog
-          maxWidth={
-            ButtonName == "Create Admin" ||
-            ButtonName == "Update About US" ||
-            ButtonName == "Update Privacy Policy" ||
-            ButtonName == "Update Terms Conditions"
-              ? "md"
-              : "sm"
-          }
+          maxWidth={ButtonName == "Create Admin" ? "md" : "sm"}
           fullWidth
           open={open}
           TransitionComponent={Transition}
@@ -129,67 +114,67 @@ export default function AlertDialogSlide({
             <DialogContent>
               <DialogContentText id="alert-dialog-slide-description">
                 {ButtonName == "Create Admin" ? (
-                  <>
-                    {open && (
-                      <Box display={"flex"} justifyContent={"center"}>
-                        <Box maxWidth={600} width={"100%"}>
-                          <CreateAdmin
-                            handleClose={handleClose}
-                            ButtonName={ButtonName}
-                            ImageUpload={ImageUpload}
-                            _isloading={_isloading}
-                            AddMoreList={AddMoreList}
-                          />
-                        </Box>
-                      </Box>
-                    )}
-                  </>
+                  <Box display={"flex"} justifyContent={"center"}>
+                    <Box maxWidth={600} width={"100%"}>
+                      {open && (
+                        <ViewAdmin
+                          handleClose={handleClose}
+                          ButtonName={ButtonName}
+                          _viewData={_viewData}
+                          type={type}
+                          AddMoreList={AddMoreList}
+                          _isloadin={_isloading}
+                        />
+                      )}
+                    </Box>
+                  </Box>
                 ) : ButtonName == "Add Banner" ? (
-                  <>
-                    <AddBanner
-                      handleClose={handleClose}
-                      ButtonName={ButtonName}
-                      ImageUpload={ImageUpload}
-                      _isloading={_isloading}
-                      AddMoreList={AddMoreList}
-                    />
-                  </>
-                ) : ButtonName == "Update About US" ||
-                  ButtonName == "Update Privacy Policy" ||
-                  ButtonName == "Update Terms Conditions" ? (
-                  <JoditComponent
-                    _initial_state={_change_about}
-                    set_Content_State={setChange_About}
-                    title="Enter Title"
-                    AddAboutContent={AddMoreList}
-                    _isloading={_isloading}
-                    _about={_about}
-                  />
-                ) : ButtonName == "Update Country" ? (
-                  <UpdateCountry
+                  <ViewBanner
                     handleClose={handleClose}
                     ButtonName={ButtonName}
-                    ImageUpload={ImageUpload}
-                    _image_upload={_image_upload}
-                    _isloading={_isloading}
+                    _viewData={_viewData}
+                    type={type}
                     AddMoreList={AddMoreList}
+                    _isloading={_isloading}
                   />
-                ) : ButtonName == "Update State" ? (
-                  <>
+                ) : ButtonName == "Update Country" ? (
+                  <Box>
                     {open && (
-                      <AddState
+                      <ViewCountry
                         handleClose={handleClose}
                         ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
                         ImageUpload={ImageUpload}
                         _image_upload={_image_upload}
-                        _isloading={_isloading}
+                      />
+                    )}
+                  </Box>
+                ) : ButtonName == "Update State" ? (
+                  <Box>
+                    {open && (
+                      <ViewState
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
                         AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        ImageUpload={ImageUpload}
+                        _image_upload={_image_upload}
                         _getcountrylist={_getcountrylist}
                       />
                     )}
-                  </>
-                ) : ButtonName == "Create State" ? (
-                  <AddState handleClose={handleClose} ButtonName={ButtonName} />
+                  </Box>
+                ) : ButtonName == "Create User" ? (
+                  <ViewUser
+                    handleClose={handleClose}
+                    ButtonName={ButtonName}
+                    _viewData={_viewData}
+                    type={type}
+                  />
                 ) : ButtonName == "Add City" ? (
                   <AddCity handleClose={handleClose} ButtonName={ButtonName} />
                 ) : ButtonName == "Create project" ? (
@@ -218,13 +203,15 @@ export default function AlertDialogSlide({
                     ButtonName={ButtonName}
                   />
                 ) : (
-                  <CreateDepartment
+                  <DepartmentView
                     handleClose={handleClose}
                     AddMoreList={AddMoreList}
                     _isloading={_isloading}
                     open={open}
                     setOpen={setOpen}
                     handleClickOpen={handleClickOpen}
+                    type={type}
+                    _viewData={_viewData}
                   />
                 )}
               </DialogContentText>

@@ -122,7 +122,7 @@
 // };
 
 // export default AddCity;
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Grid,
@@ -162,17 +162,18 @@ const phoneInputStyles = {
 
 const AddState = ({
   handleClose,
-  _getcountrylist,
-  _image_upload,
-  _isloading,
+  ButtonName,
+  _viewData,
+  type,
   AddMoreList,
+  _isloading,
+  ImageUpload,
+  _image_upload,
+  _getcountrylist,
 }) => {
-  console.log("_getcountrylist---->", _getcountrylist);
-  const [_countrycode, setCountryCode] = useState("");
-
   const [_initialstate, setInitialState] = useState({
     countryName: "",
-    phoneNo: "",
+    stateName: "",
     status: "",
   });
 
@@ -181,7 +182,13 @@ const AddState = ({
     stateName: yep.string().required("state name is required."),
     status: yep.string().required("status is required."),
   });
-
+  useEffect(() => {
+    setInitialState({
+      countryName: _viewData?.countryId?._id,
+      stateName: _viewData?.stateName,
+      status: _viewData?.status,
+    });
+  }, []);
   return (
     <div>
       <Formik
@@ -217,20 +224,21 @@ const AddState = ({
                   <Box mt={2}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
-                        Country Name
+                        {/* Country Name */}
                       </InputLabel>
                       <Select
-                        disabled={_image_upload || _isloading}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Select Country"
+                        // label="Select Country"
                         name="countryName"
                         value={values?.countryName}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        disabled={_isloading || type == "VIEW" ? true : false}
                       >
                         {_getcountrylist &&
                           _getcountrylist?.map((data, index) => {
+                            console.log("dataxcxc--->", data);
                             return (
                               <MenuItem value={data?._id}>
                                 {data?.countryName}
@@ -244,32 +252,14 @@ const AddState = ({
                     </FormControl>
                   </Box>
                 </Grid>
-                {/* <Grid item lg={6} md={6} sm={12}>
-                  <Box mt={2}>
-                    <TextField
-                      fullWidth
-                      disabled={_image_upload || _isloading}
-                      id="outlined-basic"
-                      label="County Name"
-                      variant="outlined"
-                      placeholder="Enter your county name"
-                      name="countryName"
-                      value={values?.countryName}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <FormHelperText error>
-                      {touched.countryName && errors.countryName}
-                    </FormHelperText>
-                  </Box>
-                </Grid> */}
+
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <TextField
                       fullWidth
-                      disabled={_image_upload || _isloading}
+                      disabled={_isloading || type == "VIEW" ? true : false}
                       id="outlined-basic"
-                      label="State Name"
+                      // label="State Name"
                       variant="outlined"
                       placeholder="Enter your state name"
                       name="stateName"
@@ -287,13 +277,13 @@ const AddState = ({
                   <Box mt={2}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
-                        Select Status
+                        {/* Select Status */}
                       </InputLabel>
                       <Select
-                        disabled={_image_upload || _isloading}
+                        disabled={_isloading || type == "VIEW" ? true : false}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Select Status"
+                        // label="Select Status"
                         name="status"
                         value={values?.status}
                         onChange={handleChange}
@@ -310,45 +300,47 @@ const AddState = ({
                 </Grid>
               </Grid>
 
-              <Box
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                mt={3}
-                gap={"50px"}
-              >
-                <DialogButtonStyle>
-                  <Box display={"flex"} gap={"20px"}>
-                    <Button
-                      onClick={handleClose}
-                      disabled={_image_upload || _isloading}
-                    >
-                      <span>CANCEL</span>
-                    </Button>
-                    <Button
-                      disabled={_image_upload || _isloading}
-                      type="submit"
-                      style={{
-                        background: "#A2D117",
-                      }}
-                    >
-                      <span>Create State</span>
-                      {_isloading && (
-                        <>
+              {type != "VIEW" && (
+                <Box
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  mt={3}
+                  gap={"50px"}
+                >
+                  <DialogButtonStyle>
+                    <Box display={"flex"} gap={"20px"}>
+                      <Button
+                        onClick={handleClose}
+                        disabled={_image_upload || _isloading}
+                      >
+                        <span>CANCEL</span>
+                      </Button>
+                      <Button
+                        disabled={_image_upload || _isloading}
+                        type="submit"
+                        style={{
+                          background: "#A2D117",
+                        }}
+                      >
+                        <span>Create State</span>
+                        {_isloading && (
+                          <>
+                            &nbsp;&nbsp;
+                            <CircularProgressComponent colorValue="#fff" />
+                          </>
+                        )}
+                      </Button>
+                      {_image_upload && (
+                        <Box>
                           &nbsp;&nbsp;
-                          <CircularProgressComponent colorValue="#fff" />
-                        </>
+                          <CircularProgressComponent colorValue="#000" />
+                        </Box>
                       )}
-                    </Button>
-                    {_image_upload && (
-                      <Box>
-                        &nbsp;&nbsp;
-                        <CircularProgressComponent colorValue="#000" />
-                      </Box>
-                    )}
-                  </Box>
-                </DialogButtonStyle>
-              </Box>
+                    </Box>
+                  </DialogButtonStyle>
+                </Box>
+              )}
             </Box>
           </Form>
         )}

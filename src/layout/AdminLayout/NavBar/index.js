@@ -83,7 +83,7 @@ const sections = [
       {
         title: "Dashboard",
         icon: FaHospitalUser,
-        href: "/Admin",
+        href: "/admin",
       },
       {
         title: "Admin",
@@ -190,27 +190,6 @@ const sections = [
         ],
       },
       {
-        title: "Enquirie's",
-        icon: FaQuestionCircle,
-        href: "/enquiries",
-      },
-      {
-        title: "Property Enquirie's",
-        icon: IoDocument,
-        href: "/property-enquiries",
-      },
-      {
-        title: "Property Posts",
-        icon: FaBuilding,
-        href: "/property-posts",
-      },
-
-      {
-        title: "Properties",
-        icon: MdOutlineSettingsSuggest,
-        href: "/Properties",
-      },
-      {
         title: "CMS",
         icon: FaWifi,
 
@@ -236,6 +215,27 @@ const sections = [
             href: "/banner",
           },
         ],
+      },
+      {
+        title: "Enquirie's",
+        icon: FaQuestionCircle,
+        href: "/enquiries",
+      },
+      {
+        title: "Property Enquirie's",
+        icon: IoDocument,
+        href: "/property-enquiries",
+      },
+      {
+        title: "Property Posts",
+        icon: FaBuilding,
+        href: "/property-posts",
+      },
+
+      {
+        title: "Properties",
+        icon: MdOutlineSettingsSuggest,
+        href: "/Properties",
       },
     ],
   },

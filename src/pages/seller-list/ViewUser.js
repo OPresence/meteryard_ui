@@ -1,3 +1,12 @@
+// import React from 'react'
+
+// const ViewUser = () => {
+//   return (
+//     <div>ViewUser</div>
+//   )
+// }
+
+// export default ViewUser
 import React, { useEffect, useState } from "react";
 import {
   Button,
@@ -27,8 +36,8 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
     color: "#fff",
     clipPath: "polygon(0 0, 130% 0, 82% 99%, 0 100%)",
     "&:hover": {
-      background: "#fff",
-      color: "#444444",
+      background: "#444444",
+      color: "#fff",
       border: "1px solid #fff",
     },
   },
@@ -38,53 +47,63 @@ const phoneInputStyles = {
   height: "54px",
 };
 
-const CreateAdmin = ({
+const ViewUser = ({
   handleClose,
   ButtonName,
-  ImageUpload,
+  _viewData,
   _isloading,
   AddMoreList,
+  type,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
   const [_departmentlist, setDepartmentList] = useState([]);
   const [_initialstate, setInitialState] = useState({
-    department: "",
-    Name: "",
-    email: "",
-    password: "",
-    phoneNo: "",
-    status: "ACTIVE",
+    // department: _viewData?.departmentId?._id,
+    Name: _viewData?.name,
+    email: _viewData?.email,
+    password: _viewData?.userType,
+    phoneNo: _viewData?.phoneNumber,
+    status: _viewData?.status,
   });
   const formValidationSchemaDepartment = yep.object().shape({
-    department: yep.string().required("Department name is required."),
+    // department: yep.string().required("Department name is required."),
     Name: yep.string().required("Name is required."),
     email: yep.string().required("Email is required."),
     password: yep.string().required("Password is required."),
     phoneNo: yep.string().required("Phone Number is required."),
   });
-  const DepartList = async (value, code) => {
-    console.log("value000--->", value, code);
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs.listAllDepartment,
-      });
-      if (res) {
-        if (res?.responseCode == 200) {
-          setDepartmentList(res?.result?.docs);
-        } else if (res?.responseCode == 404) {
-          toast.error(res?.responseMessage);
-        } else if (res?.responseCode == 501) {
-          toast.error(res?.responseMessage);
-        } else {
-          toast.error(res?.responseMessage);
-        }
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
+  //   const DepartList = async (value, code) => {
+  //     try {
+  //       const res = await PostApiFunction({
+  //         endPoint: Apiconfigs.listAllDepartment,
+  //       });
+  //       if (res) {
+  //         if (res?.responseCode == 200) {
+  //           setDepartmentList(res?.result?.docs);
+  //         } else if (res?.responseCode == 404) {
+  //           toast.error(res?.responseMessage);
+  //         } else if (res?.responseCode == 501) {
+  //           toast.error(res?.responseMessage);
+  //         } else {
+  //           toast.error(res?.responseMessage);
+  //         }
+  //       }
+  //     } catch (error) {
+  //       console.log("error", error);
+  //     }
+  //   };
+  //   console.log("value0005878787--->", _viewData);
   useEffect(() => {
-    DepartList();
+    setInitialState({
+      //   department: _viewData?.departmentId?._id,
+      Name: _viewData?.name,
+      email: _viewData?.email,
+      password: _viewData?.userType,
+      phoneNo: _viewData?.phoneNumber,
+      status: _viewData?.status,
+    });
+
+    // DepartList();
   }, []);
   return (
     <div>
@@ -135,7 +154,7 @@ const CreateAdmin = ({
           <Form>
             <Box justifyContent={"center"} mt={3} mb={5}>
               <Grid container spacing={2}>
-                <Grid item lg={6} md={6} sm={12}>
+                {/* <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
@@ -149,6 +168,7 @@ const CreateAdmin = ({
                         value={values?.department}
                         onChange={handleChange}
                         onBlur={handleBlur}
+                        disabled={type == "VIEW"}
                       >
                         {_departmentlist &&
                           _departmentlist?.map((data, index) => {
@@ -164,19 +184,20 @@ const CreateAdmin = ({
                       </FormHelperText>
                     </FormControl>
                   </Box>
-                </Grid>
+                </Grid> */}
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <TextField
                       fullWidth
                       id="outlined-basic"
                       label="Name"
+                      value={values.Name}
                       variant="outlined"
                       placeholder="Enter your name"
                       name="Name"
-                      value={values.Name}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled={type == "VIEW"}
                     />
                     <FormHelperText error>
                       {touched.Name && errors.Name}
@@ -195,6 +216,7 @@ const CreateAdmin = ({
                       value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled={type == "VIEW"}
                     />
                     <FormHelperText error>
                       {touched.email && errors.email}
@@ -206,13 +228,14 @@ const CreateAdmin = ({
                     <TextField
                       fullWidth
                       id="outlined-basic"
-                      label="Password"
+                      label="User Type"
                       variant="outlined"
-                      placeholder="Enter your password"
+                      placeholder="User Type"
                       name="password"
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
+                      disabled={type == "VIEW"}
                     />
                     <FormHelperText error>
                       {touched.password && errors.password}
@@ -229,6 +252,7 @@ const CreateAdmin = ({
                         buttonClass="phoneInputButton"
                         variant="outlined"
                         value={values.phoneNo}
+                        disabled={type == "VIEW"}
                         error={Boolean(touched.phoneNo && errors.phoneNo)}
                         onBlur={handleBlur}
                         onChange={(phone, e) => {
@@ -256,6 +280,7 @@ const CreateAdmin = ({
                         name="status"
                         value={values?.status}
                         onChange={handleChange}
+                        disabled={type == "VIEW"}
                       >
                         <MenuItem value={"ACTIVE"}>Active</MenuItem>
                         <MenuItem value={"BLOCKED"}>Deactive</MenuItem>
@@ -277,20 +302,22 @@ const CreateAdmin = ({
                     <Button onClick={handleClose}>
                       <span>CANCEL</span>
                     </Button>
-                    <Button
-                      type="submit"
-                      style={{
-                        background: "#A2D117",
-                      }}
-                    >
-                      <span>CREATE</span>
-                      {_isloading && (
-                        <>
-                          &nbsp;&nbsp;
-                          <CircularProgressCompoennt />
-                        </>
-                      )}
-                    </Button>
+                    {type != "VIEW" && (
+                      <Button
+                        type="submit"
+                        style={{
+                          background: "#A2D117",
+                        }}
+                      >
+                        <span>CREATE</span>
+                        {_isloading && (
+                          <>
+                            &nbsp;&nbsp;
+                            <CircularProgressCompoennt />
+                          </>
+                        )}
+                      </Button>
+                    )}
                   </Box>
                 </DialogButtonStyle>
               </Box>
@@ -302,4 +329,4 @@ const CreateAdmin = ({
   );
 };
 
-export default CreateAdmin;
+export default ViewUser;

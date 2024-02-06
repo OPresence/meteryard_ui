@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, Select, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { PiNoteFill } from "react-icons/pi";
-import DialogComponent from "../component/DialogComponent";
+import DialogComponent from "../../admin/component/DialogComponent";
 
 const FilterStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -46,18 +46,45 @@ const FilterStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const FilterComponent = ({ title, ButtonName, HeadingDialog }) => {
+const FilterComponent = ({
+  title,
+  ButtonName,
+  HeadingDialog,
+  AddMoreList,
+  _isloading,
+  open,
+  setOpen,
+  handleClickOpen,
+  handleClose,
+  handleOpen,
+  ImageUpload,
+  _image_upload,
+  _getcountrylist,
+}) => {
   return (
     <FilterStyle>
       <Box className="mainBox">
         <Box display={"flex"} justifyContent={"space-between"}>
           <Typography variant="h5">{title}</Typography>
           <Box display={"flex"} alignItems={"center"}>
-            {ButtonName != "enquery" ? (
-              <DialogComponent
-                ButtonName={ButtonName}
-                HeadingDialog={HeadingDialog}
-              />
+            {ButtonName != "enquery" && ButtonName != "Create User" ? (
+              <>
+                {console.log("xcjxghkdfjhkghfkgk")}
+                <DialogComponent
+                  ButtonName={ButtonName}
+                  HeadingDialog={HeadingDialog}
+                  AddMoreList={AddMoreList}
+                  _isloading={_isloading}
+                  open={open}
+                  setOpen={setOpen}
+                  handleClickOpen={handleClickOpen}
+                  handleClose={handleClose}
+                  handleOpen={handleOpen}
+                  ImageUpload={ImageUpload}
+                  _image_upload={_image_upload}
+                  _getcountrylist={_getcountrylist}
+                />
+              </>
             ) : (
               ""
             )}

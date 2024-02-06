@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/system";
 import NavBar from "./NavBar";
+import { useRouter } from "next/router";
 import TopBar from "./TopBar";
 
 const Root = styled("div")(({ theme }) => ({
@@ -49,6 +50,21 @@ const DashboardLayout = ({ children }) => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
   const [selectedTab, setSelectedTab] = useState("Arbitrage");
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const adminToken = window.sessionStorage.getItem("adminToken");
+
+      if (!adminToken) {
+        router.push("/admin-login");
+      }
+    }
+  }, [router]);
+
+  if (typeof window === undefined) {
+    return null; // Return null during server-side rendering
+  }
 
   return (
     <Root>

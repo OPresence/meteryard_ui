@@ -10,10 +10,9 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import CircularProgressCompoennt from "../../../component/CircularProgressComponent";
 import { Form, Formik } from "formik";
 import * as yep from "yup";
-
+import CircularProgressComponent from "../../component/CircularProgressComponent";
 const DialogButtonStyle = styled("Box")(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
@@ -28,18 +27,36 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const CreateDepartment = ({ handleClose, AddMoreList, _isloading, open }) => {
+const DepartmentView = ({
+  type,
+  _viewData,
+  handleClose,
+  AddMoreList,
+  _isloading,
+  open,
+  setOpen,
+  handleClickOpen,
+}) => {
   const formInitialSchema = {
     departmentName: "",
     status: "",
   };
-  const [_initialstate, setInitialState] = useState(formInitialSchema);
-  console.log("kfdkjfdn-===>?", _initialstate);
+  const [_initialstate, setInitialState] = useState({
+    departmentName: _viewData?.departmentRole,
+    status: _viewData?.status || "ACTIVE",
+  });
   const formValidationSchemaDepartment = yep.object().shape({
     departmentName: yep.string().required("department name is required."),
     status: yep.string().required("status is required."),
   });
-
+  useEffect(() => {
+    if (open) {
+      setInitialState({
+        departmentName: _viewData?.departmentRole,
+        status: _viewData?.status,
+      });
+    }
+  }, [open]);
   return (
     <div>
       <Formik
@@ -69,16 +86,17 @@ const CreateDepartment = ({ handleClose, AddMoreList, _isloading, open }) => {
           setFieldValue,
         }) => (
           <Form>
+            {console.log("values--->", values)}
             <Box display={"flex"} justifyContent={"center"} mt={3} mb={5}>
               <Box maxWidth={400} width={"100%"}>
                 <TextField
                   fullWidth
                   id="outlined-basic"
-                  label="department"
+                  label={type == "VIEW" ? "" : ""}
                   variant="outlined"
                   name="departmentName"
                   placeholder="department"
-                  disabled={_isloading}
+                  disabled={_isloading || type == "VIEW"}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.departmentName}
@@ -96,7 +114,7 @@ const CreateDepartment = ({ handleClose, AddMoreList, _isloading, open }) => {
                       <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        disabled={_isloading}
+                        disabled={_isloading || type == "VIEW"}
                         label="status"
                         name="status"
                         onChange={handleChange}
@@ -106,37 +124,36 @@ const CreateDepartment = ({ handleClose, AddMoreList, _isloading, open }) => {
                         <MenuItem value={"ACTIVE"}>Active</MenuItem>
                         <MenuItem value={"BLOCK"}>Deactive</MenuItem>
                       </Select>
-                      <FormHelperText
-                        error
-                        // style={{ marginLeft: "0px !important" }}
-                      >
+                      <FormHelperText error>
                         {touched.status && errors.status}
                       </FormHelperText>
                     </FormControl>
                   </Box>
                   <DialogButtonStyle>
-                    <Box display={"flex"} gap={"20px"} mt={3}>
-                      <Button
-                        onClick={() => {
-                          setFieldValue("departmentName", "");
-                          setFieldValue("status", "");
-                          handleClose();
-                        }}
-                        disabled={_isloading}
-                      >
-                        <span>CANCEL</span>
-                      </Button>
-                      <Button
-                        disabled={_isloading}
-                        type="submit"
-                        style={{
-                          background: "#A2D117",
-                        }}
-                      >
-                        <span>CREATE</span> &nbsp;
-                        {_isloading && <CircularProgressCompoennt />}
-                      </Button>
-                    </Box>
+                    {type != "VIEW" ? (
+                      <Box display={"flex"} gap={"20px"} mt={3}>
+                        <Button
+                          onClick={() => {
+                            handleClose();
+                          }}
+                          disabled={_isloading}
+                        >
+                          <span>CANCEL</span>
+                        </Button>
+                        <Button
+                          disabled={_isloading}
+                          type="submit"
+                          style={{
+                            background: "#A2D117",
+                          }}
+                        >
+                          <span>Update</span> &nbsp;
+                          {_isloading && <CircularProgressComponent />}
+                        </Button>
+                      </Box>
+                    ) : (
+                      ""
+                    )}
                   </DialogButtonStyle>
                 </Box>
               </Box>
@@ -148,4 +165,4 @@ const CreateDepartment = ({ handleClose, AddMoreList, _isloading, open }) => {
   );
 };
 
-export default CreateDepartment;
+export default DepartmentView;

@@ -1,12 +1,15 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
+import {
+  TableBody,
+  Box,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -18,6 +21,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   // Set a fixed width for all StyledTableCell
   width: "15%",
+  maxWidth: "120px",
+  wordWrap: "break-word",
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -30,54 +35,44 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(
-    "Monu Rajput",
-    "Monu Rajput",
-    "Monu Rajput",
-    "Monu Rajput",
-    "Monu Rajput"
-  ),
-  createData(
-    "Monu Rajput",
-    "Monu Rajput",
-    "Monu Rajput",
-    "Monu Rajput",
-    "Monu Rajput"
-  ),
-];
-
-export default function TableList() {
+export default function TableList({ data, headerData }) {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell>Name</StyledTableCell>
-            <StyledTableCell>Name</StyledTableCell>
+            {headerData?.map((data, index) => {
+              return (
+                <StyledTableCell key={index}>{data?.title}</StyledTableCell>
+              );
+            })}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, index) => {
-            return (
-              <StyledTableRow key={index}>
-                <StyledTableCell component="th" scope="row">
-                  {row.name}
-                </StyledTableCell>
-                <StyledTableCell>{row.calories}</StyledTableCell>
-                <StyledTableCell>{row.fat}</StyledTableCell>
-                <StyledTableCell>{row.carbs}</StyledTableCell>
-                <StyledTableCell>{row.protein}</StyledTableCell>
-              </StyledTableRow>
-            );
-          })}
+          {data &&
+            data?.map((value, index) => {
+              return (
+                <StyledTableRow key={index}>
+                  {headerData.map((head, i) => {
+                    if (head?.title == "Image") {
+                      return (
+                        <StyledTableCell component="th" scope="row">
+                          <Box maxWidth={150}>
+                            <img src={value[head.title]} width={"100%"} />
+                          </Box>
+                        </StyledTableCell>
+                      );
+                    } else {
+                      return (
+                        <StyledTableCell component="th" scope="row">
+                          {value[head.title]}
+                        </StyledTableCell>
+                      );
+                    }
+                  })}
+                </StyledTableRow>
+              );
+            })}
         </TableBody>
       </Table>
     </TableContainer>
