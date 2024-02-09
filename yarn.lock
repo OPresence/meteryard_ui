@@ -1094,6 +1094,16 @@
     "qrcode" "1.5.0"
     "react-remove-scroll" "2.5.4"
 
+"@reduxjs/toolkit@^2.1.0":
+  "integrity" "sha512-nfJ/b4ZhzUevQ1ZPKjlDL6CMYxO4o7ZL7OSsvSOxzT/EN11LsBDgTqP7aedHtBrFSVoK7oTP1SbMWUwGb30NLg=="
+  "resolved" "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-2.1.0.tgz"
+  "version" "2.1.0"
+  dependencies:
+    "immer" "^10.0.3"
+    "redux" "^5.0.1"
+    "redux-thunk" "^3.1.0"
+    "reselect" "^5.0.1"
+
 "@remix-run/router@1.10.0":
   "integrity" "sha512-Lm+fYpMfZoEucJ7cMxgt4dYt8jLfbpwRCzAjm9UgSLOkmlqo9gupxt6YX3DY0Fk155NT9l17d/ydi+964uS9Lw=="
   "resolved" "https://registry.npmjs.org/@remix-run/router/-/router-1.10.0.tgz"
@@ -1449,6 +1459,11 @@
   "integrity" "sha512-IDaobHimLQhjwsQ/NMwRVfa/yL7L/wriQPMhw1ZJall0KX6E1oxk29XMDeilW5qTIg5aoiqf5Udy8U/51aNoQQ=="
   "resolved" "https://registry.npmjs.org/@types/trusted-types/-/trusted-types-2.0.4.tgz"
   "version" "2.0.4"
+
+"@types/use-sync-external-store@^0.0.3":
+  "integrity" "sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA=="
+  "resolved" "https://registry.npmjs.org/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz"
+  "version" "0.0.3"
 
 "@types/ws@^7.4.4":
   "integrity" "sha512-JQbbmxZTZehdc2iszGKs5oC3NFnjeay7mtAWrdt7qNtAVK0g19muApzAy4bm9byz79xa2ZnO/BOBC2R8RC5Lww=="
@@ -4242,6 +4257,11 @@
   "resolved" "https://registry.npmjs.org/ignore/-/ignore-5.2.4.tgz"
   "version" "5.2.4"
 
+"immer@^10.0.3":
+  "integrity" "sha512-pwupu3eWfouuaowscykeckFmVTpqbzW+rXFCX8rQLkZzM9ftBmU/++Ra+o+L27mz03zJTlyV4UUr+fdKNffo4A=="
+  "resolved" "https://registry.npmjs.org/immer/-/immer-10.0.3.tgz"
+  "version" "10.0.3"
+
 "import-fresh@^3.2.1":
   "integrity" "sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw=="
   "resolved" "https://registry.npmjs.org/import-fresh/-/import-fresh-3.3.0.tgz"
@@ -5564,6 +5584,14 @@
     "lodash.startswith" "^4.2.1"
     "prop-types" "^15.7.2"
 
+"react-redux@^9.1.0":
+  "integrity" "sha512-6qoDzIO+gbrza8h3hjMA9aq4nwVFCKFtY2iLxCtVT38Swyy2C/dJCGBXHeHLtx6qlg/8qzc2MrhOeduf5K32wQ=="
+  "resolved" "https://registry.npmjs.org/react-redux/-/react-redux-9.1.0.tgz"
+  "version" "9.1.0"
+  dependencies:
+    "@types/use-sync-external-store" "^0.0.3"
+    "use-sync-external-store" "^1.0.0"
+
 "react-remove-scroll-bar@^2.3.3":
   "integrity" "sha512-63C4YQBUt0m6ALadE9XV56hV8BgJWDmmTPY758iIJjfQKt2nYwoUrPk0LXRXcB/yIj82T1/Ixfdpdk68LwIB0A=="
   "resolved" "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.4.tgz"
@@ -5680,6 +5708,16 @@
   "resolved" "https://registry.npmjs.org/real-require/-/real-require-0.1.0.tgz"
   "version" "0.1.0"
 
+"redux-thunk@^3.1.0":
+  "integrity" "sha512-NW2r5T6ksUKXCabzhL9z+h206HQw/NJkcLm1GPImRQ8IzfXwRGqjVhKJGauHirT0DAuyy6hjdnMZaRoAcy0Klw=="
+  "resolved" "https://registry.npmjs.org/redux-thunk/-/redux-thunk-3.1.0.tgz"
+  "version" "3.1.0"
+
+"redux@^5.0.1":
+  "integrity" "sha512-M9/ELqF6fy8FwmkpnF0S3YKOqMyoWJ4+CS5Efg2ct3oY9daQvd/Pc71FpGZsVsbl3Cpb+IIcjBDUnnyBdQbq4w=="
+  "resolved" "https://registry.npmjs.org/redux/-/redux-5.0.1.tgz"
+  "version" "5.0.1"
+
 "reflect.getprototypeof@^1.0.3":
   "integrity" "sha512-ECkTw8TmJwW60lOTR+ZkODISW6RQ8+2CL3COqtiJKLd6MmB45hN51HprHFziKLGkAuTGQhBb91V8cy+KHlaCjw=="
   "resolved" "https://registry.npmjs.org/reflect.getprototypeof/-/reflect.getprototypeof-1.0.4.tgz"
@@ -5715,6 +5753,11 @@
   "integrity" "sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg=="
   "resolved" "https://registry.npmjs.org/require-main-filename/-/require-main-filename-2.0.0.tgz"
   "version" "2.0.0"
+
+"reselect@^5.0.1":
+  "integrity" "sha512-aw7jcGLDpSgNDyWBQLv2cedml85qd95/iszJjN988zX1t7AVRJi19d9kto5+W7oCfQ94gyo40dVbT6g2k4/kXg=="
+  "resolved" "https://registry.npmjs.org/reselect/-/reselect-5.1.0.tgz"
+  "version" "5.1.0"
 
 "resize-observer-polyfill@^1.5.0":
   "integrity" "sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg=="
@@ -6399,7 +6442,7 @@
     "detect-node-es" "^1.1.0"
     "tslib" "^2.0.0"
 
-"use-sync-external-store@^1.2.0", "use-sync-external-store@1.2.0":
+"use-sync-external-store@^1.0.0", "use-sync-external-store@^1.2.0", "use-sync-external-store@1.2.0":
   "integrity" "sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA=="
   "resolved" "https://registry.npmjs.org/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz"
   "version" "1.2.0"

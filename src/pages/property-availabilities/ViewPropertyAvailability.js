@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  PostApiFunction,
-  PutApiFunction,
-  DeleteApiFunction,
-  convertDateTime,
-} from "../../utils";
-import Apiconfigs from "../../ApiConfig/ApiConfig";
-import {
   Button,
   Grid,
   Box,
@@ -38,14 +31,10 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const phoneInputStyles = {
-  width: "100%",
-  height: "54px",
-};
 
-const AddCity = ({
+const ViewAreaUnit = ({
   handleClose,
-  _getcountrylist,
+  _viewData,
   _image_upload,
   _isloading,
   AddMoreList,
@@ -56,16 +45,16 @@ const AddCity = ({
   });
 
   const formValidationSchemaDepartment = yep.object().shape({
-    project_type: yep.string().required("project finishing is required."),
+    project_type: yep.string().required("property name is required."),
     status: yep.string().required("status is required."),
   });
 
-  // useEffect(() => {
-  //   setInitialState({
-  //     project_type: projectType,
-  //     status: "",
-  //   })
-  // },[])
+  useEffect(() => {
+    setInitialState({
+      project_type: _viewData?.propertyAvailibility,
+      status: _viewData?.status,
+    });
+  }, []);
   return (
     <div>
       <Formik
@@ -97,15 +86,15 @@ const AddCity = ({
           <Form>
             <Box justifyContent={"center"} mt={3} mb={5}>
               <Grid container spacing={2}>
-                <Grid item lg={12} md={12} sm={12}>
+                <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <TextField
                       fullWidth
                       disabled={_image_upload || _isloading}
                       id="outlined-basic"
-                      label="project finishing"
+                      label="property availability"
                       variant="outlined"
-                      placeholder="Enter your project finishing name"
+                      placeholder="Enter your property name"
                       name="project_type"
                       value={values?.project_type}
                       onChange={handleChange}
@@ -117,7 +106,7 @@ const AddCity = ({
                   </Box>
                 </Grid>
 
-                <Grid item lg={12} md={12} sm={12}>
+                <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
@@ -191,4 +180,4 @@ const AddCity = ({
   );
 };
 
-export default AddCity;
+export default ViewAreaUnit;

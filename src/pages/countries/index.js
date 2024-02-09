@@ -1,8 +1,8 @@
 // import React from "react";
-// import TableList from "../Admin/component/TableList";
+// import TableList from "../admin/component/TableList";
 // import { Box } from "@mui/material";
 // import { styled } from "@mui/system";
-// import FilterComponent from "../Admin/component/FilterComponent";
+// import FilterComponent from "../admin/component/FilterComponent";
 // import AdminLayout from "../../layout/AdminLayout";
 
 // const Root = styled("Box")(({ theme }) => ({
@@ -71,9 +71,9 @@ import SureModal from "../../component/SureModal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import TableList from "../Admin/component/TableList";
+import TableList from "../admin/component/TableList";
 import FilterComponent from "../admin/component/FilterComponent";
-// import FilterComponent from "../Admin/component/FilterComponent";
+// import FilterComponent from "../admin/component/FilterComponent";
 const Root = styled("Box")(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element

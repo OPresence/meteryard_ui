@@ -1,4 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import {
+  PostApiFunction,
+  PutApiFunction,
+  DeleteApiFunction,
+  convertDateTime,
+} from "../../utils";
+import Apiconfigs from "../../ApiConfig/ApiConfig";
 import {
   Button,
   Grid,
@@ -8,10 +15,14 @@ import {
   InputLabel,
   MenuItem,
   FormControl,
+  FormHelperText,
 } from "@mui/material";
 import { styled } from "@mui/system";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { Form, Formik } from "formik";
+import * as yep from "yup";
+import CircularProgressComponent from "../../component/CircularProgressComponent";
 
 const DialogButtonStyle = styled("Box")(({ theme }) => ({
   "& button": {
@@ -32,72 +43,144 @@ const phoneInputStyles = {
   height: "54px",
 };
 
-const AddUnites = ({ handleClose }) => {
-  const [age, setAge] = React.useState("");
+const AddUnites = ({
+  handleClose,
+  _getcountrylist,
+  _image_upload,
+  _isloading,
+  AddMoreList,
+}) => {
+  const [_initialstate, setInitialState] = useState({
+    project_type: "",
+    status: "",
+  });
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+  const formValidationSchemaDepartment = yep.object().shape({
+    project_type: yep.string().required("area unit is required."),
+    status: yep.string().required("status is required."),
+  });
+
   return (
     <div>
-      <Box justifyContent={"center"} mt={3} mb={5}>
-        <Grid container spacing={2}>
-          <Grid item lg={6} md={6} sm={12}>
-            <Box mt={2}>
-              <TextField
-                fullWidth
-                id="outlined-basic"
-                label="County Name"
-                variant="outlined"
-                placeholder="Enter your county name"
-              />
-            </Box>
-          </Grid>
+      <Formik
+        initialValues={_initialstate}
+        enableReinitialize={true}
+        initialStatus={{
+          success: false,
+          successMsg: "",
+        }}
+        validationSchema={formValidationSchemaDepartment}
+        onSubmit={(values, { resetForm }) => {
+          AddMoreList(values)
+            .then(() => {
+              resetForm();
+            })
+            .catch((error) => {
+              console.error("API call failed", error);
+            });
+        }}
+      >
+        {({
+          errors,
+          handleBlur,
+          handleChange,
+          touched,
+          values,
+          setFieldValue,
+        }) => (
+          <Form>
+            <Box justifyContent={"center"} mt={3} mb={5}>
+              <Grid container spacing={2}>
+                <Grid item lg={12} md={12} sm={12}>
+                  <Box mt={2}>
+                    <TextField
+                      fullWidth
+                      disabled={_image_upload || _isloading}
+                      id="outlined-basic"
+                      label="Area unit"
+                      variant="outlined"
+                      placeholder="Enter your state name"
+                      name="project_type"
+                      value={values?.project_type}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <FormHelperText error>
+                      {touched.project_type && errors.project_type}
+                    </FormHelperText>
+                  </Box>
+                </Grid>
 
-          <Grid item lg={6} md={6} sm={12}>
-            <Box mt={2}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Select Status
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={age}
-                  label="Select Status"
-                  onChange={handleChange}
-                >
-                  <MenuItem value={10}>Active</MenuItem>
-                  <MenuItem value={20}>Deactive</MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-          </Grid>
-        </Grid>
+                <Grid item lg={12} md={12} sm={12}>
+                  <Box mt={2}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        Select Status
+                      </InputLabel>
+                      <Select
+                        disabled={_image_upload || _isloading}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Select Status"
+                        name="status"
+                        value={values?.status}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        <MenuItem value={"ACTIVE"}>Active</MenuItem>
+                        <MenuItem value={"BLOCKED"}>Deactive</MenuItem>
+                      </Select>
+                      <FormHelperText error>
+                        {touched.status && errors.status}
+                      </FormHelperText>
+                    </FormControl>
+                  </Box>
+                </Grid>
+              </Grid>
 
-        <Box
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
-          mt={3}
-          gap={"50px"}
-        >
-          <DialogButtonStyle>
-            <Box display={"flex"} gap={"20px"}>
-              <Button onClick={handleClose}>
-                <span>CANCEL</span>
-              </Button>
-              <Button
-                style={{
-                  background: "#A2D117",
-                }}
+              <Box
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                mt={3}
+                gap={"50px"}
               >
-                <span>CREATE</span>
-              </Button>
+                <DialogButtonStyle>
+                  <Box display={"flex"} gap={"20px"}>
+                    <Button
+                      onClick={handleClose}
+                      disabled={_image_upload || _isloading}
+                    >
+                      <span>CANCEL</span>
+                    </Button>
+                    <Button
+                      disabled={_image_upload || _isloading}
+                      type="submit"
+                      style={{
+                        background: "#A2D117",
+                      }}
+                    >
+                      <span>Create State</span>
+                      {_isloading && (
+                        <>
+                          &nbsp;&nbsp;
+                          <CircularProgressComponent colorValue="#fff" />
+                        </>
+                      )}
+                    </Button>
+                    {_image_upload && (
+                      <Box>
+                        &nbsp;&nbsp;
+                        <CircularProgressComponent colorValue="#000" />
+                      </Box>
+                    )}
+                  </Box>
+                </DialogButtonStyle>
+              </Box>
             </Box>
-          </DialogButtonStyle>
-        </Box>
-      </Box>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

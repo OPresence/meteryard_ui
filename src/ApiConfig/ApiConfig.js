@@ -64,12 +64,85 @@ const Apiconfigs = {
   activeDeactiveCity: `${masterLink}/activeDeactiveCity`,
 
   // MASTER PROJECT_TYPE MANAGEMENT
-  createProjectType: `${masterLink}/createProjectType`,
+  listAllProjectType: `${masterLink}/listAllProjectType`,
+  createProjectType: `${masterLink}/creaProjectType`,
   editProjectType: `${masterLink}/editProjectType`,
   viewProjectType: `${masterLink}/viewProjectType`,
-  listAllProjectType: `${masterLink}/listAllProjectType`,
   deleteProjectType: `${masterLink}/deleteProjectType`,
   activeDeactiveProjectType: `${masterLink}/activeDeactiveProjectType`,
+
+  // MASTER PROJECT_SUB_TYPE MANAGEMENT
+  createProjectSubType: `${masterLink}/createProjectSubType`,
+  editProjectSubType: `${masterLink}/editProjectSubType`,
+  viewProjectSubType: `${masterLink}/viewProjectSubType`,
+  listAllProjectSubType: `${masterLink}/listAllProjectSubType`,
+  activeDeactiveProjectType: `${masterLink}/activeDeactiveProjectType`,
+  deleteProjectSubType: `${masterLink}/deleteProjectSubType`,
+
+  // MASTER PROJECT_FURNISHING MANAGEMENT
+  createProjectFurnishing: `${masterLink}/createProjectFurnishing`,
+  editProjectFurnishing: `${masterLink}/editProjectFurnishing`,
+  viewProjectFurnishing: `${masterLink}/viewProjectFurnishing`,
+  listAllProjectFurnishing: `${masterLink}/listAllProjectFurnishing`,
+  deleteProjectFurnishing: `${masterLink}/deleteProjectFurnishing`,
+  activeDeactiveProjectFurnishing: `${masterLink}/activeDeactiveProjectFurnishing`,
+
+  // MASTER AMINITY MANAGEMENT
+  createAminity: `${masterLink}/createAminity`,
+  editAminity: `${masterLink}/editAminity`,
+  viewAminity: `${masterLink}/viewAminity`,
+  listAllAminity: `${masterLink}/listAllAminity`,
+  deleteAminity: `${masterLink}/deleteAminity`,
+  activeDeactiveAminity: `${masterLink}/activeDeactiveAminity`,
+
+  // MASTER AREA_UNIT MANAGEMENT
+  createAreaUnit: `${masterLink}/createAreaUnit`,
+  editAreaUnit: `${masterLink}/editAreaUnit`,
+  viewAreaUnit: `${masterLink}/viewAreaUnit`,
+  listAllAreaUnit: `${masterLink}/listAllAreaUnit`,
+  deleteAreaUnit: `${masterLink}/deleteAreaUnit`,
+  activeDeactiveAreaUnit: `${masterLink}/activeDeactiveAreaUnit`,
+
+  // MASTER PROPERTY_AVAILABILITY MANAGEMENT
+  createPropertyAvailibility: `${masterLink}/createPropertyAvailibility`,
+  editPropertyAvailibility: `${masterLink}/editPropertyAvailibility`,
+  viewPropertyAvailibility: `${masterLink}/viewPropertyAvailibility`,
+  listAllPropertyAvailibility: `${masterLink}/listAllPropertyAvailibility`,
+  deletePropertyAvailibility: `${masterLink}/deletePropertyAvailibility`,
+  activeDeactivePropertyAvailibility: `${masterLink}/activeDeactivePropertyAvailibility`,
+
+  // MASTER WATER RESOURCE MANAGEMENT
+  createWaterResource: `${masterLink}/createWaterResource`,
+  editWaterResource: `${masterLink}/editWaterResource`,
+  viewWaterResource: `${masterLink}/viewWaterResource`,
+  listAllWaterResource: `${masterLink}/listAllWaterResource`,
+  deleteWaterResource: `${masterLink}/deleteWaterResource`,
+  activeDeactiveWaterResource: `${masterLink}/activeDeactiveWaterResource`,
+
+  // MASTER WATER RESOURCE MANAGEMENT
+  createOverlooking: `${masterLink}/createOverlooking`,
+  editOverlooking: `${masterLink}/editOverlooking`,
+  viewOverlooking: `${masterLink}/viewOverlooking`,
+  listAllOverlooking: `${masterLink}/listAllOverlooking`,
+  deleteOverlooking: `${masterLink}/deleteOverlooking`,
+  activeDeactiveOverlooking: `${masterLink}/activeDeactiveOverlooking`,
+
+  // MASTER PROPERTY OTHER FEATURE MANAGEMENT
+  createOtherFeature: `${masterLink}/createOtherFeature`,
+  editOtherFeature: `${masterLink}/editOtherFeature`,
+  viewOtherFeature: `${masterLink}/viewOtherFeature`,
+  listAllOtherFeature: `${masterLink}/listAllOtherFeature`,
+  deleteOtherFeature: `${masterLink}/deleteOtherFeature`,
+  activeDeactiveOtherFeature: `${masterLink}/activeDeactiveOtherFeature`,
+
+  // MASTER PROPERTY FACING MANAGEMENT
+  createPropFacing: `${masterLink}/createPropFacing`,
+  editPropFacing: `${masterLink}/editPropFacing`,
+  viewPropFacing: `${masterLink}/viewPropFacing`,
+  listAllPropFacing: `${masterLink}/listAllPropFacing`,
+  deletePropFacing: `${masterLink}/deletePropFacing`,
+  activeDeactivePropFacing: `${masterLink}/activeDeactivePropFacing`,
+
 };
 
 export default Apiconfigs;

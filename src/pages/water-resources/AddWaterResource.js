@@ -43,7 +43,7 @@ const phoneInputStyles = {
   height: "54px",
 };
 
-const AddCity = ({
+const AddUnites = ({
   handleClose,
   _getcountrylist,
   _image_upload,
@@ -56,16 +56,10 @@ const AddCity = ({
   });
 
   const formValidationSchemaDepartment = yep.object().shape({
-    project_type: yep.string().required("project finishing is required."),
+    project_type: yep.string().required("water resource name is required."),
     status: yep.string().required("status is required."),
   });
 
-  // useEffect(() => {
-  //   setInitialState({
-  //     project_type: projectType,
-  //     status: "",
-  //   })
-  // },[])
   return (
     <div>
       <Formik
@@ -103,9 +97,9 @@ const AddCity = ({
                       fullWidth
                       disabled={_image_upload || _isloading}
                       id="outlined-basic"
-                      label="project finishing"
+                      label="Water resource"
                       variant="outlined"
-                      placeholder="Enter your project finishing name"
+                      placeholder="Enter your water resource name"
                       name="project_type"
                       value={values?.project_type}
                       onChange={handleChange}
@@ -191,4 +185,4 @@ const AddCity = ({
   );
 };
 
-export default AddCity;
+export default AddUnites;

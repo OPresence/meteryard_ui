@@ -18,6 +18,18 @@ import ViewState from "../../state/ViewState.js";
 import ViewBanner from "../../banner/ViewBanner";
 import ViewAdmin from "@/pages/admin-list/ViewAdmin";
 import ViewUser from "../../seller-list/ViewUser";
+import ViewCity from "@/pages/cities/ViewCity";
+import ViewProjectType from "../../project-type/ViewProjectType";
+import ViewProjectSubType from "../../Project-Sub-Type/ViewProjectType.js";
+import ViewProjectFinishing from "../../project-finishing/ViewProjectFinishing";
+import ViewAminity from "../../amenties/ViewAminity";
+import ViewAreaUnit from "../../area-unites/ViewAreaUnit";
+import ViewPropertyAvailability from "../../property-availabilities/ViewPropertyAvailability";
+import ViewWaterResource from "../../water-resources/ViewWaterResource";
+import ViewOverlooking from "../../overlooking/ViewOverLooking";
+import ViewFeatures from "../../property-other-features/ViewFeatures";
+import ViewFacing from "../../property-facing/ViewFacing";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -176,34 +188,92 @@ export default function ViewDialog({
                     type={type}
                   />
                 ) : ButtonName == "Add City" ? (
-                  <AddCity handleClose={handleClose} ButtonName={ButtonName} />
-                ) : ButtonName == "Create project" ? (
-                  <AddProjectType
+                  <>
+                    {open && (
+                      <ViewCity
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        ImageUpload={ImageUpload}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create project" ||
+                  ButtonName == "Update project" ? (
+                  <ViewProjectType
                     handleClose={handleClose}
                     ButtonName={ButtonName}
+                    _viewData={_viewData}
+                    type={type}
+                    AddMoreList={AddMoreList}
+                    _isloading={_isloading}
+                    ImageUpload={ImageUpload}
                   />
-                ) : ButtonName == "Create project finishing" ? (
-                  <AddProjectFinishing
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
+                ) : ButtonName == "Add sub-type" ? (
+                  <>
+                    {open && (
+                      <ViewProjectSubType
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        ImageUpload={ImageUpload}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Finishing" ? (
+                  <>
+                    {open && (
+                      <ViewProjectFinishing
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        ImageUpload={ImageUpload}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
                 ) : ButtonName == "Create Aminity" ? (
-                  <AddAmenties
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
-                ) : ButtonName == "Create Unites" ? (
-                  <AddUnites
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
-                ) : ButtonName == "Create Property" ? (
-                  <AddProperty
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
-                ) : (
-                  <DepartmentView
+                  <>
+                    {open && (
+                      <ViewAminity
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        ImageUpload={ImageUpload}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Area Unit" ? (
+                  <>
+                    {open && (
+                      <ViewAreaUnit
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        ImageUpload={ImageUpload}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Update Property" ? (
+                  <ViewPropertyAvailability
                     handleClose={handleClose}
                     AddMoreList={AddMoreList}
                     _isloading={_isloading}
@@ -213,6 +283,81 @@ export default function ViewDialog({
                     type={type}
                     _viewData={_viewData}
                   />
+                ) : ButtonName == "Update Resource" ? (
+                  <>
+                    {open && (
+                      <ViewWaterResource
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        type={type}
+                        _viewData={_viewData}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Update Overlooking" ? (
+                  <>
+                    {open && (
+                      <ViewFeatures
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        type={type}
+                        _viewData={_viewData}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Update Other" ? (
+                  <>
+                    {open && (
+                      <ViewFeatures
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        type={type}
+                        _viewData={_viewData}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Update Facing" ? (
+                  <>
+                    {open && (
+                      <ViewFacing
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        type={type}
+                        _viewData={_viewData}
+                      />
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {open && (
+                      <DepartmentView
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        type={type}
+                        _viewData={_viewData}
+                      />
+                    )}
+                  </>
                 )}
               </DialogContentText>
             </DialogContent>

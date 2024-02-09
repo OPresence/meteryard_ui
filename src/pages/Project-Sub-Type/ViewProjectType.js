@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  PostApiFunction,
-  PutApiFunction,
-  DeleteApiFunction,
-  convertDateTime,
-} from "../../utils";
-import Apiconfigs from "../../ApiConfig/ApiConfig";
-import {
   Button,
   Grid,
   Box,
@@ -38,17 +31,14 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const phoneInputStyles = {
-  width: "100%",
-  height: "54px",
-};
 
-const AddCity = ({
+const ProjectSubType = ({
   handleClose,
-  _getcountrylist,
+  _viewData,
   _image_upload,
   _isloading,
   AddMoreList,
+  _getcountrylist,
 }) => {
   const [_initialstate, setInitialState] = useState({
     project_type: "",
@@ -56,16 +46,17 @@ const AddCity = ({
   });
 
   const formValidationSchemaDepartment = yep.object().shape({
-    project_type: yep.string().required("project finishing is required."),
+    project_type: yep.string().required("country name is required."),
     status: yep.string().required("status is required."),
   });
 
-  // useEffect(() => {
-  //   setInitialState({
-  //     project_type: projectType,
-  //     status: "",
-  //   })
-  // },[])
+  useEffect(() => {
+    setInitialState({
+      project_type: _viewData?.projectTypeId?._id,
+      project_type_sub: _viewData?.projectSubType,
+      status: _viewData?.status,
+    });
+  }, []);
   return (
     <div>
       <Formik
@@ -97,15 +88,46 @@ const AddCity = ({
           <Form>
             <Box justifyContent={"center"} mt={3} mb={5}>
               <Grid container spacing={2}>
-                <Grid item lg={12} md={12} sm={12}>
+                <Grid item lg={6} md={6} sm={12}>
+                  <Box mt={2}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        project type{" "}
+                      </InputLabel>
+                      <Select
+                        disabled={_image_upload || _isloading}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Project Type "
+                        name="project_type"
+                        value={values?.project_type}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        {_getcountrylist &&
+                          _getcountrylist?.map((data, index) => {
+                            return (
+                              <MenuItem value={data?._id} key={index}>
+                                {data?.projectType}
+                              </MenuItem>
+                            );
+                          })}
+                      </Select>
+                      <FormHelperText error>
+                        {touched.project_type && errors.project_type}
+                      </FormHelperText>
+                    </FormControl>
+                  </Box>
+                </Grid>
+                <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <TextField
                       fullWidth
                       disabled={_image_upload || _isloading}
                       id="outlined-basic"
-                      label="project finishing"
+                      label="project type"
                       variant="outlined"
-                      placeholder="Enter your project finishing name"
+                      placeholder="Enter your state name"
                       name="project_type"
                       value={values?.project_type}
                       onChange={handleChange}
@@ -117,7 +139,7 @@ const AddCity = ({
                   </Box>
                 </Grid>
 
-                <Grid item lg={12} md={12} sm={12}>
+                <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
@@ -191,4 +213,4 @@ const AddCity = ({
   );
 };
 
-export default AddCity;
+export default ProjectSubType;

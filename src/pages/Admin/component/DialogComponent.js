@@ -13,11 +13,17 @@ import UpdateCountry from "@/pages/countries/UpdateCountry";
 import AddState from "../../../pages/state/AddState";
 import AddCity from "@/pages/cities/AddCity";
 import AddProjectType from "@/pages/project-type/AddProjectType";
+import AddProjectSubType from "../../Project-Sub-Type/AddProjectType";
 import AddProjectFinishing from "@/pages/project-finishing/AddProjectFinishing";
 import AddAmenties from "@/pages/amenties/AddAmenties";
 import AddUnites from "@/pages/area-unites/AddUnites";
 import AddProperty from "@/pages/property-availabilities/AddProperty";
 import JoditComponent from "../../admin/component/JoditComponent";
+import AddWaterResource from "../../water-resources/AddWaterResource";
+import AddOverlooking from "../../overlooking/AddOverLooking";
+import AddFeatures from "../../property-other-features/AddFeatures";
+import AddFacing from "../../property-facing/AddFacing";
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -109,6 +115,7 @@ export default function AlertDialogSlide({
             ButtonName == "Create Admin" ||
             ButtonName == "Update About US" ||
             ButtonName == "Update Privacy Policy" ||
+            ButtonName == "Add sub-type" ||
             ButtonName == "Update Terms Conditions"
               ? "md"
               : "sm"
@@ -191,41 +198,152 @@ export default function AlertDialogSlide({
                 ) : ButtonName == "Create State" ? (
                   <AddState handleClose={handleClose} ButtonName={ButtonName} />
                 ) : ButtonName == "Add City" ? (
-                  <AddCity handleClose={handleClose} ButtonName={ButtonName} />
+                  <>
+                    {open && (
+                      <AddCity
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                      />
+                    )}
+                  </>
                 ) : ButtonName == "Create project" ? (
-                  <AddProjectType
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
-                ) : ButtonName == "Create project finishing" ? (
-                  <AddProjectFinishing
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
+                  <>
+                    {open && (
+                      <AddProjectType
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Add sub-type" ? (
+                  <>
+                    {console.log("_getcountrylist--->", _getcountrylist)}
+                    {open && (
+                      <AddProjectSubType
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Finishing" ? (
+                  <>
+                    {open && (
+                      <AddProjectFinishing
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
                 ) : ButtonName == "Create Aminity" ? (
-                  <AddAmenties
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
-                ) : ButtonName == "Create Unites" ? (
-                  <AddUnites
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
+                  <>
+                    {open && (
+                      <AddAmenties
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Area Unit" ? (
+                  <>
+                    {open && (
+                      <AddUnites
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
                 ) : ButtonName == "Create Property" ? (
-                  <AddProperty
-                    handleClose={handleClose}
-                    ButtonName={ButtonName}
-                  />
+                  <>
+                    {open && (
+                      <AddProperty
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Resource" ? (
+                  <>
+                    {open && (
+                      <AddWaterResource
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Features" ? (
+                  <>
+                    {open && (
+                      <AddFeatures
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Overlooking" ? (
+                  <>
+                    {open && (
+                      <AddOverlooking
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Facing" ? (
+                  <>
+                    {open && (
+                      <AddFacing
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                      />
+                    )}
+                  </>
                 ) : (
-                  <CreateDepartment
-                    handleClose={handleClose}
-                    AddMoreList={AddMoreList}
-                    _isloading={_isloading}
-                    open={open}
-                    setOpen={setOpen}
-                    handleClickOpen={handleClickOpen}
-                  />
+                  <>
+                    {open && (
+                      <CreateDepartment
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                      />
+                    )}
+                  </>
                 )}
               </DialogContentText>
             </DialogContent>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import TableList from "../Admin/component/TableList";
-import FilterComponent from "../Admin/component/FilterComponent";
+import TableList from "../admin/component/TableList";
+import FilterComponent from "../admin/component/FilterComponent";
 import { Box, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 import Apiconfigs from "../../ApiConfig/ApiConfig";

@@ -43,15 +43,16 @@ const phoneInputStyles = {
   height: "54px",
 };
 
-const AddCity = ({
+const ViewCity = ({
   handleClose,
-  _getcountrylist,
+  _viewData,
   _image_upload,
   _isloading,
   AddMoreList,
+  type,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
-  console.log("_countrycode-->", _countrycode);
+  console.log("_countrycode-->", _viewData);
   const [_countrylist, setCountryList] = useState([]);
   const [_statelist, setStateList] = useState([]);
   const [_initialstate, setInitialState] = useState({
@@ -119,12 +120,18 @@ const AddCity = ({
   };
   useEffect(() => {
     GetCountryList();
+    GetStateList();
   }, []);
   useEffect(() => {
-    if (_countrycode) {
-      GetStateList();
-    }
-  }, [_countrycode]);
+    setInitialState({
+      countryName: _viewData?.countryId?._id,
+      stateName: _viewData?.stateId?._id,
+      cityName: _viewData?.cityName,
+      // homeStatus: _viewData?.countryId?.countryName,
+      homeStatus: "YES",
+      status: _viewData?.status,
+    });
+  }, []);
   return (
     <div>
       <Formik
@@ -163,10 +170,10 @@ const AddCity = ({
                         Country Name
                       </InputLabel>
                       <Select
-                        disabled={_image_upload || _isloading}
+                        disabled={type == "VIEW" ? true : false || _isloading}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Select Country"
+                        label=""
                         name="countryName"
                         value={values?.countryName}
                         onChange={(e) => {
@@ -198,10 +205,10 @@ const AddCity = ({
                         State Name
                       </InputLabel>
                       <Select
-                        disabled={_image_upload || _isloading}
+                        disabled={type == "VIEW" ? true : false || _isloading}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Select state"
+                        label=""
                         name="stateName"
                         value={values?.stateName}
                         onChange={handleChange}
@@ -226,9 +233,9 @@ const AddCity = ({
                   <Box mt={2}>
                     <TextField
                       fullWidth
-                      disabled={_image_upload || _isloading}
+                      disabled={type == "VIEW" ? true : false || _isloading}
                       id="outlined-basic"
-                      label="City Name"
+                      label="City name"
                       variant="outlined"
                       placeholder="Enter your state name"
                       name="cityName"
@@ -248,10 +255,10 @@ const AddCity = ({
                         show on home page{" "}
                       </InputLabel>
                       <Select
-                        disabled={_image_upload || _isloading}
+                        disabled={type == "VIEW" ? true : false || _isloading}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Select home Status"
+                        label=""
                         name="homeStatus"
                         value={values?.homeStatus}
                         onChange={handleChange}
@@ -273,10 +280,10 @@ const AddCity = ({
                         Select Status
                       </InputLabel>
                       <Select
-                        disabled={_image_upload || _isloading}
+                        disabled={type == "VIEW" ? true : false || _isloading}
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        label="Select Status"
+                        label=""
                         name="status"
                         value={values?.status}
                         onChange={handleChange}
@@ -292,46 +299,49 @@ const AddCity = ({
                   </Box>
                 </Grid>
               </Grid>
-
-              <Box
-                display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                mt={3}
-                gap={"50px"}
-              >
-                <DialogButtonStyle>
-                  <Box display={"flex"} gap={"20px"}>
-                    <Button
-                      onClick={handleClose}
-                      disabled={_image_upload || _isloading}
-                    >
-                      <span>CANCEL</span>
-                    </Button>
-                    <Button
-                      disabled={_image_upload || _isloading}
-                      type="submit"
-                      style={{
-                        background: "#A2D117",
-                      }}
-                    >
-                      <span>Create State</span>
-                      {_isloading && (
-                        <>
-                          &nbsp;&nbsp;
-                          <CircularProgressComponent colorValue="#fff" />
-                        </>
-                      )}
-                    </Button>
-                    {_image_upload && (
-                      <Box>
-                        &nbsp;&nbsp;
-                        <CircularProgressComponent colorValue="#000" />
-                      </Box>
-                    )}
-                  </Box>
-                </DialogButtonStyle>
-              </Box>
+              {type != "VIEW" && (
+                <Box
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  mt={3}
+                  gap={"50px"}
+                >
+                  <DialogButtonStyle>
+                    <Box display={"flex"} gap={"20px"}>
+                      <Button
+                        onClick={handleClose}
+                        disabled={type == "VIEW" ? true : false || _isloading}
+                      >
+                        <span>CANCEL</span>
+                      </Button>
+                      <Button
+                        disabled={type == "VIEW" ? true : false || _isloading}
+                        type="submit"
+                        style={{
+                          background: "#A2D117",
+                        }}
+                      >
+                        <span>Create State</span>
+                        {_isloading && (
+                          <>
+                            &nbsp;&nbsp;
+                            <CircularProgressComponent colorValue="#fff" />
+                          </>
+                        )}
+                      </Button>
+                      {type == "VIEW"
+                        ? true
+                        : false && (
+                            <Box>
+                              &nbsp;&nbsp;
+                              <CircularProgressComponent colorValue="#000" />
+                            </Box>
+                          )}
+                    </Box>
+                  </DialogButtonStyle>
+                </Box>
+              )}
             </Box>
           </Form>
         )}
@@ -340,4 +350,4 @@ const AddCity = ({
   );
 };
 
-export default AddCity;
+export default ViewCity;

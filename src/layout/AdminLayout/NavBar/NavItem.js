@@ -211,6 +211,7 @@ const NavItem = ({
                   title == "Testimonial" ||
                   title == "Property Video" ||
                   title == "About" ||
+                  title == "Project Sub-Type" ||
                   title == "Privacy Policy" ||
                   title == "Term & Conditions" ||
                   title == "Home Page Banner"
@@ -239,6 +240,7 @@ const NavItem = ({
             title == "Property Other Features" ||
             title == "Property Facing" ||
             title == "Blog" ||
+            title == "Project Sub-Type" ||
             title == "Testimonial" ||
             title == "Property Video" ||
             title == "About" ||

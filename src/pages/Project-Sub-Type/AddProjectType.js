@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  PostApiFunction,
-  PutApiFunction,
-  DeleteApiFunction,
-  convertDateTime,
-} from "../../utils";
-import Apiconfigs from "../../ApiConfig/ApiConfig";
+
 import {
   Button,
   Grid,
@@ -43,29 +37,33 @@ const phoneInputStyles = {
   height: "54px",
 };
 
-const AddCity = ({
+const AddProjectType = ({
   handleClose,
   _getcountrylist,
   _image_upload,
   _isloading,
   AddMoreList,
 }) => {
+  console.log("00004545400000000--->", _getcountrylist);
   const [_initialstate, setInitialState] = useState({
     project_type: "",
+    project_type_sub: "",
     status: "",
   });
 
   const formValidationSchemaDepartment = yep.object().shape({
-    project_type: yep.string().required("project finishing is required."),
+    project_type: yep.string().required("project type  is required."),
+    project_type_sub: yep.string().required("project sub type is required."),
     status: yep.string().required("status is required."),
   });
 
-  // useEffect(() => {
-  //   setInitialState({
-  //     project_type: projectType,
-  //     status: "",
-  //   })
-  // },[])
+  //   useEffect(() => {
+  //     setInitialState({
+  //       project_type: "",
+  //       project_type_sub: "",
+  //       status: "",
+  //     });
+  //   }, []);
   return (
     <div>
       <Formik
@@ -99,25 +97,57 @@ const AddCity = ({
               <Grid container spacing={2}>
                 <Grid item lg={12} md={12} sm={12}>
                   <Box mt={2}>
-                    <TextField
-                      fullWidth
-                      disabled={_image_upload || _isloading}
-                      id="outlined-basic"
-                      label="project finishing"
-                      variant="outlined"
-                      placeholder="Enter your project finishing name"
-                      name="project_type"
-                      value={values?.project_type}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <FormHelperText error>
-                      {touched.project_type && errors.project_type}
-                    </FormHelperText>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        project type{" "}
+                      </InputLabel>
+                      <Select
+                        disabled={_image_upload || _isloading}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Project Type "
+                        name="project_type"
+                        value={values?.project_type}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        {_getcountrylist &&
+                          _getcountrylist?.map((data, index) => {
+                            return (
+                              <MenuItem value={data?._id} key={index}>
+                                {data?.projectType}
+                              </MenuItem>
+                            );
+                          })}
+                      </Select>
+                      <FormHelperText error>
+                        {touched.project_type && errors.project_type}
+                      </FormHelperText>
+                    </FormControl>
                   </Box>
                 </Grid>
 
                 <Grid item lg={12} md={12} sm={12}>
+                  <Box mt={2}>
+                    <TextField
+                      fullWidth
+                      disabled={_image_upload || _isloading}
+                      id="outlined-basic"
+                      label="project sub type"
+                      variant="outlined"
+                      placeholder="Enter project sub type name"
+                      name="project_type_sub"
+                      value={values?.project_type_sub}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                    />
+                    <FormHelperText error>
+                      {touched.project_type_sub && errors.project_type_sub}
+                    </FormHelperText>
+                  </Box>
+                </Grid>
+
+                <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
@@ -191,4 +221,4 @@ const AddCity = ({
   );
 };
 
-export default AddCity;
+export default AddProjectType;

@@ -1,108 +1,3 @@
-// import React from "react";
-// import TableList from "../Admin/component/TableList";
-// import { Box } from "@mui/material";
-// import { styled } from "@mui/system";
-// import FilterComponent from "../Admin/component/FilterComponent";
-// import AdminLayout from "../../layout/AdminLayout";
-
-// const Root = styled("Box")(({ theme }) => ({
-//   "& .mainPage": {
-//     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
-//     background: "#fff",
-//     borderRadius: "15px",
-//     padding: "20px",
-//     height: "100%",
-
-//     "&::before": {
-//       content: '""',
-//       position: "absolute",
-//       top: 0,
-//       left: 0,
-//       right: 0,
-//       bottom: 0,
-//       borderTop: "9px solid #444444", // Customize the border as needed
-//       borderRadius: "20px", // Use the same border radius as the main container
-//       pointerEvents: "none", // Ensure the pseudo-element doesn't interfere with interactions
-//       boxSizing: "border-box", // Include border in the total width/height
-//     },
-//   },
-// }));
-// const countries = () => {
-//   return (
-//     <AdminLayout>
-//       <Root>
-//         <Box className="mainPage">
-//           <Box mt={2}>
-//             <FilterComponent
-//               title="State List"
-//               ButtonName="Create State"
-//               HeadingDialog="Create State"
-//             />
-//           </Box>
-
-//           <Box mt={3}>
-//             <TableList />
-//           </Box>
-//         </Box>
-//       </Root>
-//     </AdminLayout>
-//   );
-// };
-
-// export default countries;
-
-// import React from "react";
-// import TableList from "../Admin/component/TableList";
-// import { Box } from "@mui/material";
-// import { styled } from "@mui/system";
-// import FilterComponent from "../Admin/component/FilterComponent";
-// import AdminLayout from "../../layout/AdminLayout";
-
-// const Root = styled("Box")(({ theme }) => ({
-//   "& .mainPage": {
-//     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
-//     background: "#fff",
-//     borderRadius: "15px",
-//     padding: "20px",
-//     height: "100%",
-
-//     "&::before": {
-//       content: '""',
-//       position: "absolute",
-//       top: 0,
-//       left: 0,
-//       right: 0,
-//       bottom: 0,
-//       borderTop: "9px solid #444444", // Customize the border as needed
-//       borderRadius: "20px", // Use the same border radius as the main container
-//       pointerEvents: "none", // Ensure the pseudo-element doesn't interfere with interactions
-//       boxSizing: "border-box", // Include border in the total width/height
-//     },
-//   },
-// }));
-// const countries = () => {
-//   return (
-//     <AdminLayout>
-//       <Root>
-//         <Box className="mainPage">
-//           <Box mt={2}>
-//             <FilterComponent
-//               title="Country List"
-//               ButtonName="Update Country"
-//               HeadingDialog="Update Country"
-//             />
-//           </Box>
-
-//           <Box mt={3}>
-//             <TableList />
-//           </Box>
-//         </Box>
-//       </Root>
-//     </AdminLayout>
-//   );
-// };
-
-// export default countries;
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../../layout/AdminLayout";
 import { Box, IconButton, Divider } from "@mui/material";
@@ -124,9 +19,8 @@ import SureModal from "../../component/SureModal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import TableList from "../Admin/component/TableList";
+import TableList from "../admin/component/TableList";
 import FilterComponent from "../admin/component/FilterComponent";
-// import FilterComponent from "../Admin/component/FilterComponent";
 const Root = styled("Box")(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
@@ -340,7 +234,7 @@ const StateComponent = () => {
         endPoint: Apiconfigs.createState,
         data: {
           stateName: value?.stateName,
-          stateId: value?.countryName,
+          countryId: value?.countryName,
           status: value?.status,
         },
       });
