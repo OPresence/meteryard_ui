@@ -14,10 +14,10 @@ import {
 } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import { useRouter } from "next/router";
-import Logo from "src/components/Logo";
+import Logo from "../../../component/Logo";
 import Link from "next/link";
-import AppContext from "@/context/AppContext";
-import { generateUniqueAvatar } from "@/utils";
+// import AppContext from "@/context/AppContext";
+// import { generateUniqueAvatar } from "@/utils";
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   padding: "7px 30px 7px 30px",
   background: "rgba(56, 53, 125, 1)",
@@ -73,10 +73,8 @@ const TopBar = ({
   ...rest
 }) => {
   const router = useRouter();
-  const appContext = useContext(AppContext);
-  const { userData } = appContext;
   return (
-    <StyledAppBar elevation={0} className={clsx(className)} color="inherit">
+    <StyledAppBar elevation={0} fonMobileNavOpencolor="inherit">
       <Toolbar>
         <Hidden lgUp>
           <IconButton
@@ -106,10 +104,7 @@ const TopBar = ({
                   onClick={() => router.push("/profile")}
                   style={{ cursor: "pointer" }}
                 >
-                  <Avatar
-                    src={userData && generateUniqueAvatar(userData?._id)}
-                    alt=""
-                  />
+                  <Avatar src={"/images/1567018939360.png"} alt="" />
                 </AvatarMain>
               </Box>
             </Grid>

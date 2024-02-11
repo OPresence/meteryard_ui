@@ -12,7 +12,6 @@ import Divider from "@mui/material/Divider";
 const ChatBoat = () => {
   const [_view_chat_screen, setView_chat_Screen] = useState(false);
   const [_view_search_screen, setSearch_screen] = useState(false);
-  console.log("_view_search_screen--->", _view_search_screen);
   const chatJson = [
     {
       type: "text",
@@ -905,6 +904,7 @@ const ChatBoat = () => {
                 setSearch_screen(false);
               }}
               src="/images/meteryard/Images/chat-boat-icon.gif"
+              width={"100%"}
               style={{
                 borderRadius: "50px",
                 cursor: "pointer",

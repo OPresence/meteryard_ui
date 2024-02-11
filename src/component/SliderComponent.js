@@ -8,8 +8,9 @@ import styled from "@emotion/styled";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
-    marginTop: "80px",
+    padding: "60px 0",
     textAlign: "center",
+    margin: "0 20px",
     // background: "rgba(0,0,0,0.5)",
   },
   "& .circleimg": {
@@ -157,7 +158,7 @@ const SliderComponent = () => {
           <Slider {...settings} ref={sliderRef}>
             {projectDetails.map((data, index) => {
               return (
-                <Grid item lg={3} md={3} sm={6} xs={12}>
+                <Grid item lg={3} md={6} sm={6} xs={12}>
                   <Box display={"flex"} justifyContent={"center"} key={index}>
                     <Card className="cards">
                       <Box>

@@ -1,4 +1,4 @@
-import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { create, responsiveFontSizes } from "@mui/material/styles";
 import { themeOptions } from "./typography";
 
 const baseOptions = {
@@ -19,6 +19,18 @@ const baseOptions = {
     // Add more color definitions as needed
   },
   components: {
+    MuiInputBase: {
+      input: {
+        MuiOutlinedInput: {
+          WebkitTextFillColor: "#000 !important",
+
+          "& .input.Mui-disabled": {
+            WebkitTextFillColor: "#000 !important",
+            color: "#000 !important",
+          },
+        },
+      },
+    },
     MuiPickersCalendarHeader: {
       styleOverrides: {
         switchViewButton: {

@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/system";
 import NavBar from "./NavBar";
-import TopBar from "./TopBar";
+import TopBar from "../HomeLayout/Topbar";
 
 const Root = styled("div")(({ theme }) => ({
   display: "flex",
@@ -20,13 +20,12 @@ const Wrapper = styled("div")(({ theme }) => ({
   position: "relative",
   // paddingTop: 70,
   minHeight: "calc(100vh - 75px)",
-  backgroundColor:"#080031",
-  marginTop:"83px",
-  borderRadius:"5px",
+  backgroundColor: "#fff",
+  marginTop: "83px",
+  borderRadius: "5px",
   // [theme.breakpoints.up("lg")]: {
   //   paddingLeft: 256,
   // },
- 
 }));
 
 const ContentContainer = styled("div")({
@@ -53,10 +52,7 @@ const DashboardLayout = ({ children }) => {
 
   return (
     <Root>
-      <TopBar
-        onMobileNavOpen={() => setMobileNavOpen(true)}
-       
-      />
+      <TopBar onMobileNavOpen={() => setMobileNavOpen(true)} />
       <NavBar
         onMobileClose={() => setMobileNavOpen(false)}
         openMobile={isMobileNavOpen}

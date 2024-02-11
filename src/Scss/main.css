@@ -1,13 +1,22 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
-body {
+/* body {
   margin: 0;
   overflow-x: hidden;
-  font-family: "Outfit", sans-serif;
-  /* Use Outfit font */
- 
+  font-family: "Outfit", sans-serif; 
   color: #fff;
+} */
+body {
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  margin: 0 !important;
+   padding-right: initial !important;
+  /*overflow: auto !important; */
 }
+
 img {
   max-width: 100%;
 }
@@ -37,18 +46,19 @@ img {
   }
 }
 
-/* Apply the animation to your button */
-.button {
+.buttonclass {
   border-radius: 50px;
   color: #fff;
   background: linear-gradient(#fff, #fff) padding-box,
               linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;
   border: 3px solid transparent;
   color: grey;
-  animation: borderBlink 1s infinite; /* Use the animation with an infinite loop */
+  animation: borderBlink 1s infinite; 
 }
 
 .slick-prev:before, .slick-next:before{
   color: #a7d325 !important;
 }
+
+
 /*# sourceMappingURL=main.css.map */

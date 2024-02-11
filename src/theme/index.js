@@ -5,6 +5,15 @@ import typography from "./typography";
 const baseOptions = {
   typography,
   overrides: {
+    MuiOutlinedInput: {
+      input: {
+        WebkitTextFillColor: "red !important",
+        "&.Mui-disabled": {
+          color: "red !important",
+        },
+      },
+    },
+
     MuiContainer: {
       root: {
         // "@media(min-width:1200px)":{},

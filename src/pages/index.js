@@ -1,24 +1,33 @@
 import HomeLayout from "@/layout/HomeLayout";
 import { Box } from "@mui/material";
-import Banner from "./home/Banner";
-import ChatBoat from "src/component/ChatBoat";
+import Banner from "../pages/home/Banner";
 import SliderComponent from "../component/SliderComponent";
 import CardComponent from "../component/CardComponent";
 import ResidentialProjects from "../component/ResidentialProjects";
 import CommercialProjects from "../component/CommercialProjects";
+import BannerCompont from "../component/BannerCompont";
+import ProjectComponent from "../component/ProjectComponent";
+import MobileAppComponent from "../component/MobileAppComponent";
+import TestimonialComponent from "../component/TestimonialComponent";
+import ChatBoat from "../component/ChatBoat";
 export default function ClientPage() {
   return (
-    <Box mb={5}>
+    <Box>
       <Banner />
       <SliderComponent />
       <CardComponent />
+      <BannerCompont />
+
       <ResidentialProjects />
       <CommercialProjects />
-      {/* <ChatBoat /> */}
+      {/* <YoutubeComponent /> */}
+      <ProjectComponent />
+      <MobileAppComponent />
+      <TestimonialComponent />
+      <ChatBoat />
     </Box>
   );
 }
-
 ClientPage.getLayout = function getLayout(page) {
   return <HomeLayout>{page}</HomeLayout>;
 };

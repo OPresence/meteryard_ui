@@ -8,7 +8,7 @@ export default function HomeLayout({ children }) {
       <Topbar />
       <div>{children}</div>
 
-      {/* <Footer /> */}
+      <Footer />
     </React.Fragment>
   );
 }

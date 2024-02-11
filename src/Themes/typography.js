@@ -52,6 +52,8 @@ export default {
     textTransform: "capitalize",
     borderRadius: 27,
     fontFamily: "system-ui",
+    background: "red",
+    fontSize: "50px",
   },
 
   body1: {

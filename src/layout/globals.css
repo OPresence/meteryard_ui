@@ -12,6 +12,183 @@ body {
   overflow-x: hidden;
   font-family: 'Roboto', sans-serif;
   background: #eeeeee;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  margin: 0 !important;
+  padding-right: initial !important;
 }
 
 
+.dropbtn {
+  background: transparent;
+  padding: 20px 0;
+  border: none;
+  line-height: 24px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  font-family: system-ui;
+  font-weight: 400;
+  position: relative;
+  min-width: 150px;
+}
+
+.dropbtn::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transition: 0.1s ease-in-out;
+}
+.dropbtn:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #a2d117;
+  transition: 0.3s ease-in-out;
+}
+.cityname {
+  background: transparent;
+  /* padding: 8px; */
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: system-ui;
+  font-weight: 400;
+  position: relative;
+}
+
+.cityname::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transition: 0.1s ease-in-out;
+}
+.cityname:hover::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #a2d117;
+  transition: 0.3s ease-in-out;
+}
+
+@media (max-width: 1210px) {
+  .dropbtn {
+    background: transparent;
+    padding: 16px;
+    border: none;
+    line-height: 24px;
+    color: #222222;
+    font-size: 17px;
+    font-family: system-ui;
+    font-weight: 500;
+  }
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown .submenus {
+  display: none;
+  transition: 5s;
+  background: #f0f8ff14;
+  border-radius: 3px;
+}
+.dropdown:hover .submenus {
+  display: none;
+  transition: 5s;
+}
+
+.notshowContact {
+  transition: 5s;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: white;
+  min-width: 650px;
+margin-top: 9px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  display: none;
+}
+.dropdown-content1 {
+  display: block;
+  position: absolute;
+  background-color: transparent;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px transparent;
+  z-index: 1;
+}
+.dropdown-content a {
+  color: "#757873";
+  padding: 8px 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color: #a2d117;
+}
+.dropdown .forwardIconContainer {
+  transition: 0.5s;
+}
+.dropdown:hover .forwardIconContainer {
+  transform: rotate(90deg);
+  transition: 0.5s;
+}
+
+.buttonclass {
+  /* border-radius: 50px;
+  color: #fff;
+  background: linear-gradient(#fff, #fff) padding-box,
+  linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;
+  border: 3px solid transparent;
+  color: grey;
+  animation: borderBlink 1s infinite;  */
+}
+@keyframes borderBlink {
+  0% {
+     background: linear-gradient(#fff, #fff) padding-box,
+                linear-gradient(80deg, #eeeeee, #eeeeee, #eeeeee, #eeeeee, #eeeeee) border-box;
+  }
+  25% {
+     background: linear-gradient(#fff, #fff) padding-box,
+                linear-gradient(80deg, #eeeeee, #eeeeee, #eeeeee, #eeeeee, #eeeeee) border-box;
+  }
+  50% {
+     background: linear-gradient(#fff, #fff) padding-box,
+                  linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;
+  }
+  75% {
+    background: linear-gradient(#fff, #fff) padding-box,
+                  linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;
+  }
+  100% {
+     background: linear-gradient(#fff, #fff) padding-box,
+                  linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;
+  }
+}
