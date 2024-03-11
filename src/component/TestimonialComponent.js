@@ -10,7 +10,7 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
     backgroundPosition: "center",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    height: "735px",
+    // height: "735px",
     position: "relative",
     left: "-190px",
 

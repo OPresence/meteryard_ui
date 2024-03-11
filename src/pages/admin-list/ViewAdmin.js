@@ -45,9 +45,9 @@ const ViewAdmin = ({
   _isloading,
   AddMoreList,
   type,
+  _departmentlist,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
-  const [_departmentlist, setDepartmentList] = useState([]);
   const [_initialstate, setInitialState] = useState({
     department: _viewData?.departmentId?._id,
     Name: _viewData?.name,
@@ -63,27 +63,8 @@ const ViewAdmin = ({
     password: yep.string().required("Password is required."),
     phoneNo: yep.string().required("Phone Number is required."),
   });
-  const DepartList = async (value, code) => {
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs.listAllDepartment,
-      });
-      if (res) {
-        if (res?.responseCode == 200) {
-          setDepartmentList(res?.result?.docs);
-        } else if (res?.responseCode == 404) {
-          toast.error(res?.responseMessage);
-        } else if (res?.responseCode == 501) {
-          toast.error(res?.responseMessage);
-        } else {
-          toast.error(res?.responseMessage);
-        }
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-  console.log("value0005878787--->", _viewData);
+
+  console.log("value0005878787--->", _viewData, _departmentlist);
   useEffect(() => {
     setInitialState({
       department: _viewData?.departmentId?._id,
@@ -93,8 +74,6 @@ const ViewAdmin = ({
       phoneNo: _viewData?.phoneNumber,
       status: _viewData?.status,
     });
-
-    DepartList();
   }, []);
   return (
     <div>

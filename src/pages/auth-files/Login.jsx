@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+"use client";
+import React, { useState, useContext } from "react";
 import styled from "@emotion/styled";
 import {
   Box,
@@ -22,6 +23,8 @@ import * as yep from "yup";
 import CircularProgressCompoennt from "../../component/CircularProgressComponent";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../context/Auth";
+
 const LoginStyle = styled("Box")(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
@@ -111,39 +114,39 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-
-const formInitialSchema = {
-  email: "",
-  password: "",
-};
-
-const formValidationSchemaLogin = yep.object().shape({
-  email: yep.string().required("Email is required."),
-
-  password: yep
-    .string()
-    .required("Password is required.")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-    ),
-});
 const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
+  const formInitialSchema = {
+    email: localStorage.getItem("email") || "",
+    password: localStorage.getItem("password") || "",
+  };
+  const formValidationSchemaLogin = yep.object().shape({
+    email: yep.string().required("Email is required."),
+
+    password: yep
+      .string()
+      .required("Password is required.")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      ),
+  });
+  const Auth = useContext(AuthContext);
+  console.log("Authdfdf--->", Auth);
   const [isloading, setIsLoading] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(false);
-  // function rememberMe() {
-  //   if (!isRememberMe) {
-  //     setIsRememberMe(true);
-  //     const email = document.getElementById("email");
-  //     const password = document.getElementById("password");
-  //     window.localStorage.setItem("email", email?.value);
-  //     window.localStorage.setItem("password", password?.value);
-  //   } else {
-  //     setIsRememberMe(false);
-  //     window.localStorage.removeItem("email");
-  //     window.localStorage.removeItem("password");
-  //   }
-  // }
+  function rememberMe() {
+    if (!isRememberMe) {
+      setIsRememberMe(true);
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      window.localStorage.setItem("email", email?.value);
+      window.localStorage.setItem("password", password?.value);
+    } else {
+      setIsRememberMe(false);
+      window.localStorage.removeItem("email");
+      window.localStorage.removeItem("password");
+    }
+  }
 
   const Login_Function = async (values) => {
     let data_Login = {
@@ -157,19 +160,26 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
         data: data_Login,
       });
       if (res) {
+        console.log("njkdnsjfds---->", res);
         if (res?.responseCode == 200) {
-          toast.success("Login successful!"); // Display success notification
+          sessionStorage.setItem("token", res?.result?.token);
+          toast.success(res?.responseMessage);
 
           setOpen(false);
-
           setIsLoading(false);
           setSelectScreen("Login");
-        } else if (res?.responseCode == 404) {
+          Auth.setAccessToken(res?.result?.token);
+        } else if (res?.responseCode == 409) {
+          toast.error(res?.responseMessage);
           setIsLoading(false);
-
-          toast.error(res?.responseMessage); // Display success notification
+        } else if (res?.responseCode == 404) {
+          toast.error(res?.responseMessage);
+          setIsLoading(false);
+        } else if (res?.responseCode == 500) {
+          toast.error(res?.responseMessage);
+          setIsLoading(false);
         } else {
-          toast.error(res?.responseMessage); // Display success notification
+          toast.error(res?.responseMessage);
           setIsLoading(false);
         }
       }
@@ -179,52 +189,6 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
       console.log("error", error);
     }
   };
-  // useEffect(() => {
-  //   if(!isRememberMe){
-  //      if (!isRememberMe) {
-  //     setIsRememberMe(true);
-  //     const email = document.getElementById("email");
-  //     const password = document.getElementById("password");
-  //     window.localStorage.setItem("email", email?.value);
-  //     window.localStorage.setItem("password", password?.value);
-  //   } else {
-  //     setIsRememberMe(false);
-  //     window.localStorage.removeItem("email");
-  //     window.localStorage.removeItem("password");
-  //   }
-  //   }
-   
-  // }, [
-  //   isRememberMe
-  // ]);
-  // useEffect(() => {
-  //      if (!isRememberMe) {
-  //     setIsRememberMe(true);
-  //     const email = document.getElementById("email");
-  //     const password = document.getElementById("password");
-  //     window.localStorage.setItem("email", email?.value);
-  //     window.localStorage.setItem("password", password?.value);
-  //   } else {
-  //     setIsRememberMe(false);
-  //     window.localStorage.removeItem("email");
-  //     window.localStorage.removeItem("password");
-  //   }
-  //   if (typeof window !== "undefined") {
-  //     if (
-  //       window.localStorage.getItem("password") != null ||
-  //       window.localStorage.getItem("email") != null
-  //     ) {
-  //       setIsRememberMe(true);
-  //     } else {
-  //       setIsRememberMe(false);
-  //     }
-  //   } else {
-  //     console.log("Window is not defined. Skipping the code...");
-  //   }
-  // }, [
-  //   window.localStorage.getItem("email"),
-  //   window.localStorage.getItem("password"),
-  // ]);
   return (
     <LoginStyle>
       <Box className="backgroundBox">
@@ -241,9 +205,18 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                 successMsg: "",
               }}
               validationSchema={formValidationSchemaLogin}
-              onSubmit={(values) => {
-                Login_Function(values);
+              onSubmit={(values, { resetForm }) => {
+                Login_Function(values)
+                  .then(() => {
+                    resetForm();
+                  })
+                  .catch((error) => {
+                    console.error("API call failed", error);
+                  });
               }}
+              // onSubmit={(values) => {
+              //   Login_Function(values);
+              // }}
             >
               {({
                 errors,
@@ -320,24 +293,24 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                             <Typography variant="h6">
                               Enter Your E-Mail
                             </Typography>
-                            <FormControl fullWidth>
-                              <TextField
-                                name="email"
-                                id="email"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email}
-                                fullWidth
-                                variant="outlined"
-                                placeholder="Examle11@gmail.com"
-                              />
-                              <FormHelperText
-                                error
-                                style={{ marginLeft: "0px !important" }}
-                              >
-                                {touched.email && errors.email}
-                              </FormHelperText>
-                            </FormControl>
+                            {/* <FormControl fullWidth> */}
+                            <TextField
+                              name="email"
+                              id="email"
+                              onChange={handleChange}
+                              onBlur={handleBlur}
+                              value={values.email}
+                              fullWidth
+                              variant="outlined"
+                              placeholder="Examle11@gmail.com"
+                            />
+                            <FormHelperText
+                              error
+                              style={{ marginLeft: "0px !important" }}
+                            >
+                              {touched.email && errors.email}
+                            </FormHelperText>
+                            {/* </FormControl> */}
                           </Box>
 
                           <Box mt={2}>
@@ -370,10 +343,10 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                               )}
                             </Button>
                             <Box className="checkBox" mt={2}>
-                              {console.log("isRememberMe--->",isRememberMe)}
                               <Checkbox
-                                checked={!isRememberMe}
-                                onClick={() => setIsRememberMe(isRememberMe)}
+                                checked={isRememberMe}
+                                // onClick={() => setIsRememberMe(isRememberMe)}
+                                onClick={rememberMe}
                               />
                               <span>Remember Me</span>
                             </Box>

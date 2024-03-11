@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import styled from "@emotion/styled";
 import Dialog from "@mui/material/Dialog";

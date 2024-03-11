@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-// import { styled } from "@mui/material/styles";
+import React, { useContext } from "react";
 import {
   Container,
   Typography,
@@ -9,10 +8,10 @@ import {
   Grid,
 } from "@mui/material";
 import styled from "@emotion/styled";
-// import VideoChatIcon from "@mui/icons-material/VideoChat";
-// import VideoChatIcon from "@mui/icons-material/VideoChat";
+import { AuthContext } from "../context/Auth";
 import { MdOutlineVideoChat } from "react-icons/md";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 const MainComponent = styled("Box")(({ theme }) => ({
@@ -64,33 +63,43 @@ const MainComponent = styled("Box")(({ theme }) => ({
     justifyContent: "center",
     borderRadius: "8px 0px 0px 8px;",
     alignItems: "center",
-    // padding: "5px 0px",
-    width: "367px",
-    height: "48px",
+    width: "100%",
+    height: "46px",
+    "@media(max-width:615px)": {
+      height: "40px",
+    },
     "& h6": {
       fontSize: "18px",
       fontWeight: "600",
       color: "#444444",
+      "@media(max-width:615px)": {
+        fontSize: "14px",
+      },
     },
   },
   "& .searchbox_button": {
     borderRadius: "0px 8px 8px 0px;",
     background: "#444444 0% 0% no-repeat padding-box",
-    height: "48px",
+    height: "46px",
+    "@media(max-width:615px)": {
+      height: "40px",
+    },
   },
+  "& .BuyerBox": {},
 }));
 
-export default function ButtonSwitchComponent({ activeBtn, setOpen, Type }) {
+export default function ButtonSwitchComponent({
+  handleClickOpen,
+  setOpen,
+  Type,
+}) {
+  const auth = useContext(AuthContext);
   return (
     <MainComponent>
       <Box>
         <Box className="mai1nBox">
           <Box>
-            <Box
-              style={{
-                width: "761px",
-              }}
-            >
+            <Box className="BuyerBox">
               {Type == "Buyer" && (
                 <Box className="buttons">
                   <Typography
@@ -150,11 +159,7 @@ export default function ButtonSwitchComponent({ activeBtn, setOpen, Type }) {
                 </Box>
               )}
             </Box>
-            <Box
-              style={{
-                width: "100%",
-              }}
-            >
+            <Box>
               {Type == "Seller" && (
                 <Box className="buttons">
                   <Typography
@@ -169,73 +174,85 @@ export default function ButtonSwitchComponent({ activeBtn, setOpen, Type }) {
                   >
                     Please Select Your Category
                   </Typography>
-                  <Grid container spacing={4}>
-                    <Grid item xs={12} sm={6} md={6} lg={4}>
-                      <Box mt={3} className={"videoButton"}>
-                        <Box
-                          variant="outlined"
-                          className={"Banner_inputField_button"}
-                        >
-                          <Typography variant="h6">join city chat</Typography>
+                  <Box width={"100%"}>
+                    <Grid container spacing={4}>
+                      <Grid item xs={12} sm={6} md={6} lg={4}>
+                        <Box mt={3} className={"videoButton"}>
+                          <Box
+                            variant="outlined"
+                            className={"Banner_inputField_button"}
+                          >
+                            <Typography variant="h6">join city chat</Typography>
+                          </Box>
+                          <Button className="searchbox_button">
+                            <MdOutlineVideoChat
+                              style={{ fontSize: "28px", color: "#FFFF" }}
+                            />
+                          </Button>
                         </Box>
-                        <Button className="searchbox_button">
-                          <MdOutlineVideoChat
-                            style={{ fontSize: "28px", color: "#FFFF" }}
-                          />
-                        </Button>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={6} lg={4}>
-                      <Box mt={3} className={"videoButton"}>
-                        <Box
-                          variant="outlined"
-                          className={"Banner_inputField_button"}
-                          style={{
-                            background: "#EFEFEF 0% 0% no-repeat padding-box",
-                          }}
-                        >
-                          <Typography variant="h6">property listing</Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6} lg={4}>
+                        <Box mt={3} className={"videoButton"}>
+                          <Box
+                            variant="outlined"
+                            className={"Banner_inputField_button"}
+                            style={{
+                              background: "#EFEFEF 0% 0% no-repeat padding-box",
+                            }}
+                          >
+                            <Typography variant="h6">
+                              property listing
+                            </Typography>
+                          </Box>
+                          <Button
+                            onClick={() => {
+                              if (auth?._getprofile?.userType == "SELLER") {
+                                handleClickOpen();
+                              } else {
+                                toast.error(
+                                  "Only Seller post the property please login."
+                                );
+                              }
+                            }}
+                            className="searchbox_button"
+                            style={{
+                              background: "#A7D325 0% 0% no-repeat padding-box",
+                            }}
+                          >
+                            <HomeIcon
+                              style={{ fontSize: "28px", color: "#FFFF" }}
+                            />
+                          </Button>
                         </Box>
-                        <Button
-                          // onClick={() => setOpen(true)}
-                          className="searchbox_button"
-                          style={{
-                            background: "#A7D325 0% 0% no-repeat padding-box",
-                          }}
-                        >
-                          <HomeIcon
-                            style={{ fontSize: "28px", color: "#FFFF" }}
-                          />
-                        </Button>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={6} lg={4}>
-                      <Box mt={3} className={"videoButton"}>
-                        <Box
-                          variant="outlined"
-                          className={"Banner_inputField_button"}
-                          style={{
-                            background: "#EFEFEF 0% 0% no-repeat padding-box",
-                          }}
-                        >
-                          <Typography variant="h6">
-                            register as seller
-                          </Typography>
+                      </Grid>
+                      <Grid item xs={12} sm={6} md={6} lg={4}>
+                        <Box mt={3} className={"videoButton"}>
+                          <Box
+                            variant="outlined"
+                            className={"Banner_inputField_button"}
+                            style={{
+                              background: "#EFEFEF 0% 0% no-repeat padding-box",
+                            }}
+                          >
+                            <Typography variant="h6">
+                              register as seller
+                            </Typography>
+                          </Box>
+                          <Button
+                            onClick={() => setOpen(true)}
+                            className="searchbox_button"
+                            style={{
+                              background: "#ACACAC 0% 0% no-repeat padding-box",
+                            }}
+                          >
+                            <PersonAddAltIcon
+                              style={{ fontSize: "28px", color: "#FFFF" }}
+                            />
+                          </Button>
                         </Box>
-                        <Button
-                          onClick={() => setOpen(true)}
-                          className="searchbox_button"
-                          style={{
-                            background: "#ACACAC 0% 0% no-repeat padding-box",
-                          }}
-                        >
-                          <PersonAddAltIcon
-                            style={{ fontSize: "28px", color: "#FFFF" }}
-                          />
-                        </Button>
-                      </Box>
+                      </Grid>
                     </Grid>
-                  </Grid>
+                  </Box>
                 </Box>
               )}
             </Box>

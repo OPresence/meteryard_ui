@@ -98,20 +98,30 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
       if (res) {
         if (res?.responseCode == 200) {
           setIsLoading(false);
-
-          toast.success(res?.responseMessage); // Display success notification
+          toast.success(res?.responseMessage);
           setSignUpComplete(false);
           setSelectScreen("Login");
-        } else if (res?.responseCode == 400) {
-          toast.error(res?.responseMessage); // Display success notification
+        } else if (res?.responseCode == 409) {
+          toast.error(res?.responseMessage);
+          setSignUpComplete(false);
+          setIsLoading(false);
+        } else if (res?.responseCode == 404) {
+          toast.error(res?.responseMessage);
+          setSignUpComplete(false);
+          setIsLoading(false);
+        } else if (res?.responseCode == 500) {
+          toast.error(res?.responseMessage);
+          setSignUpComplete(false);
           setIsLoading(false);
         } else {
-          toast.error(res?.responseMessage); // Display success notification
+          toast.error(res?.responseMessage);
+          setSignUpComplete(false);
+          setIsLoading(false);
         }
       }
     } catch (error) {
       setIsLoading(false);
-      toast.error("Please try again."); // Display error notification
+      toast.error(res?.responseMessage);
       console.log("error", error);
     }
   };
@@ -127,22 +137,28 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
       if (res) {
         if (res?.responseCode == 200) {
           setIsLoadingOTP(false);
-
-          toast.success(res?.responseMessage); // Display success notification
-        } else if (res?.responseCode == 400) {
-          setIsLoadingOTP(false);
-
-          toast.error(res?.responseMessage); // Display success notification
+          toast.success(res?.responseMessage);
+        } else if (res?.responseCode == 409) {
+          toast.error(res?.responseMessage);
+          setSignUpComplete(false);
+          setIsLoading(false);
+        } else if (res?.responseCode == 404) {
+          toast.error(res?.responseMessage);
+          setSignUpComplete(false);
+          setIsLoading(false);
+        } else if (res?.responseCode == 500) {
+          toast.error(res?.responseMessage);
+          setSignUpComplete(false);
+          setIsLoading(false);
         } else {
-          setIsLoadingOTP(false);
-
-          toast.error(res?.responseMessage); // Display success notification
+          toast.error(res?.responseMessage);
+          setSignUpComplete(false);
+          setIsLoading(false);
         }
       }
     } catch (error) {
       setIsLoadingOTP(false);
-
-      toast.error("Please try again."); // Display error notification
+      toast.error(res?.responseMessage);
       console.log("error", error);
     }
   };

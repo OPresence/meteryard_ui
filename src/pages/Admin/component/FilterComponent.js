@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, Select, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { PiNoteFill } from "react-icons/pi";
-import DialogComponent from "../../admin/component/DialogComponent";
+import DialogComponent from "../../../component/DialogComponent copy";
 
 const FilterStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -60,6 +60,11 @@ const FilterComponent = ({
   ImageUpload,
   _image_upload,
   _getcountrylist,
+  handleRating,
+  onPointerEnter,
+  onPointerLeave,
+  rating,
+  _imageurl,
 }) => {
   return (
     <FilterStyle>
@@ -83,6 +88,11 @@ const FilterComponent = ({
                   ImageUpload={ImageUpload}
                   _image_upload={_image_upload}
                   _getcountrylist={_getcountrylist}
+                  handleRating={handleRating}
+                  onPointerEnter={onPointerEnter}
+                  onPointerLeave={onPointerLeave}
+                  rating={rating}
+                  _imageurl={_imageurl}
                 />
               </>
             ) : (

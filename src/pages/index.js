@@ -10,6 +10,7 @@ import ProjectComponent from "../component/ProjectComponent";
 import MobileAppComponent from "../component/MobileAppComponent";
 import TestimonialComponent from "../component/TestimonialComponent";
 import ChatBoat from "../component/ChatBoat";
+import AgreecultureComponent from "../component/AgreecultureComponent";
 export default function ClientPage() {
   return (
     <Box>
@@ -20,6 +21,7 @@ export default function ClientPage() {
 
       <ResidentialProjects />
       <CommercialProjects />
+      <AgreecultureComponent />
       {/* <YoutubeComponent /> */}
       <ProjectComponent />
       <MobileAppComponent />

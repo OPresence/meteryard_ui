@@ -8,17 +8,11 @@ import Slide from "@mui/material/Slide";
 import { styled } from "@mui/system";
 import DepartmentView from "../../department-list/DepartmentView";
 import ViewCountry from "../../countries/ViewCountry";
-import AddCity from "@/pages/cities/AddCity";
-import AddProjectType from "@/pages/project-type/AddProjectType";
-import AddProjectFinishing from "@/pages/project-finishing/AddProjectFinishing";
-import AddAmenties from "@/pages/amenties/AddAmenties";
-import AddUnites from "@/pages/area-unites/AddUnites";
-import AddProperty from "@/pages/property-availabilities/AddProperty";
 import ViewState from "../../state/ViewState.js";
 import ViewBanner from "../../banner/ViewBanner";
-import ViewAdmin from "@/pages/admin-list/ViewAdmin";
+import ViewAdmin from "../../admin-list/ViewAdmin";
 import ViewUser from "../../seller-list/ViewUser";
-import ViewCity from "@/pages/cities/ViewCity";
+import ViewCity from "../../cities/ViewCity.js";
 import ViewProjectType from "../../project-type/ViewProjectType";
 import ViewProjectSubType from "../../Project-Sub-Type/ViewProjectType.js";
 import ViewProjectFinishing from "../../project-finishing/ViewProjectFinishing";
@@ -29,7 +23,9 @@ import ViewWaterResource from "../../water-resources/ViewWaterResource";
 import ViewOverlooking from "../../overlooking/ViewOverLooking";
 import ViewFeatures from "../../property-other-features/ViewFeatures";
 import ViewFacing from "../../property-facing/ViewFacing";
-
+import ViewBlog from "../../blog/ViewBlog";
+import ViewTestimonial from "../../testimonial/ViewTestimonial";
+import ViewVideo from "../../property-videos/ViewVideo";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -75,6 +71,13 @@ export default function ViewDialog({
   ImageUpload,
   _image_upload,
   _getcountrylist,
+  _imageurl,
+  _imageurl1,
+  handleRating,
+  onPointerEnter,
+  onPointerLeave,
+  rating,
+  _departmentlist,
 }) {
   const modalClassStyles = {
     "&::before": {
@@ -109,7 +112,14 @@ export default function ViewDialog({
     <React.Fragment>
       <DialogStyle>
         <Dialog
-          maxWidth={ButtonName == "Create Admin" ? "md" : "sm"}
+          maxWidth={
+            ButtonName == "Create Admin" ||
+            ButtonName == "Update Blog" ||
+            // ButtonName == "Update Video" ||
+            ButtonName == "Update Testimonial"
+              ? "md"
+              : "sm"
+          }
           fullWidth
           open={open}
           TransitionComponent={Transition}
@@ -135,7 +145,8 @@ export default function ViewDialog({
                           _viewData={_viewData}
                           type={type}
                           AddMoreList={AddMoreList}
-                          _isloadin={_isloading}
+                          _isloading={_isloading}
+                          _departmentlist={_departmentlist}
                         />
                       )}
                     </Box>
@@ -328,6 +339,26 @@ export default function ViewDialog({
                       />
                     )}
                   </>
+                ) : ButtonName == "Update Blog" ? (
+                  <>
+                    {open && (
+                      <ViewBlog
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        type={type}
+                        _viewData={_viewData}
+                        ImageUpload={ImageUpload}
+                        ButtonName={ButtonName}
+                        _image_upload={_image_upload}
+                        _imageurl={_imageurl}
+                        _imageurl1={_imageurl1}
+                      />
+                    )}
+                  </>
                 ) : ButtonName == "Update Facing" ? (
                   <>
                     {open && (
@@ -340,6 +371,52 @@ export default function ViewDialog({
                         handleClickOpen={handleClickOpen}
                         type={type}
                         _viewData={_viewData}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Update Testimonial" ? (
+                  <>
+                    {open && (
+                      <ViewTestimonial
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        type={type}
+                        _viewData={_viewData}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _image_upload={_image_upload}
+                        onPointerEnter={onPointerEnter}
+                        onPointerLeave={onPointerLeave}
+                        rating={rating}
+                        handleRating={handleRating}
+                        _imageurl={_imageurl}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Update Video" ? (
+                  <>
+                    {open && (
+                      <ViewVideo
+                        handleClose={handleClose}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        type={type}
+                        _viewData={_viewData}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _image_upload={_image_upload}
+                        onPointerEnter={onPointerEnter}
+                        onPointerLeave={onPointerLeave}
+                        rating={rating}
+                        handleRating={handleRating}
+                        _imageurl={_imageurl}
                       />
                     )}
                   </>

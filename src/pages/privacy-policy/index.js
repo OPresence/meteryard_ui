@@ -1,28 +1,8 @@
-// import React, { useState } from "react";
-
-// import { Box } from "@mui/material";
-// import JoditComponent from "../Admin/component/JoditComponent";
-
-// const index = () => {
-//   const [_change_privacy, setChange_Privacy] = useState("");
-//   return (
-//     <Box>
-//       <JoditComponent
-//         _initial_state={_change_privacy}
-//         set_Content_State={setChange_Privacy}
-//         title="Privacy Policy"
-//       />
-//     </Box>
-//   );
-// };
-
-// export default index;
 import React, { useEffect, useState, useSyncExternalStore } from "react";
 import { Box, Button, Typography, Divider } from "@mui/material";
 import AdminLayout from "../../layout/AdminLayout";
 import DialogComponent from "../../pages/admin/component/DialogComponent";
 
-import JoditComponent from "../admin/component/JoditComponent";
 import { PostApiFunction, PutApiFunction } from "../../utils/index";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

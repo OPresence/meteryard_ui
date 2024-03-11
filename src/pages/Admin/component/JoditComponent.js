@@ -48,11 +48,12 @@ const ButtonStyle = styled("Box")(({ theme }) => ({
 }));
 
 const JoditComponent = ({ _isloading, AddAboutContent, title, _about }) => {
-  console.log("_about-------->", _about);
   const editor = useRef(null);
   const formInitialSchema = {
-    titleName: _about[0]?.title,
-    description: _about[0]?.description,
+    titleName: "",
+    description: "",
+    // titleName: _about[0]?.title,
+    // description: _about[0]?.description,
   };
 
   const formValidationSchemaLogin = yep.object().shape({

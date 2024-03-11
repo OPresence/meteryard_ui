@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import { Box, Button } from "@mui/material";
+import { useRouter } from "next/router";
 
 const ButonStyle = styled("Box")(({ theme }) => ({
   "& .viewmoreButton": {
@@ -15,11 +16,22 @@ const ButonStyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-const ButtonComponent = () => {
+const ButtonComponent = ({ data }) => {
+  const router = useRouter();
+  console.log("datazdjknfnz---->", data);
   return (
     <ButonStyle>
       <Box p={"10px 0 0 0"} className="viewmoreButton">
-        <Button>
+        <Button
+          onClick={() =>
+            router.push({
+              pathname: "/view-property",
+              query: {
+                data: JSON.stringify(data),
+              },
+            })
+          }
+        >
           <span>Get View More</span>
         </Button>
       </Box>

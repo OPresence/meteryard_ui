@@ -98,7 +98,6 @@ const DialogStyleComponent = styled(Dialog)({
 
 const RegisterSeller = ({
   handleClose,
-  //   setChecked_Get,
   open,
   setOpen,
   handleChangeCheckBox,

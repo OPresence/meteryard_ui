@@ -11,7 +11,6 @@ const index = () => {
       <DashboardLayout>
         <Box>
           <FilterSection />
-          {/* <Residential_Property /> */}
         </Box>
       </DashboardLayout>
 

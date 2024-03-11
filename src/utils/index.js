@@ -37,7 +37,9 @@ export const getAPIdata = async ({ endPoint, data }) => {
     res = await axios({
       url: endPoint,
       method: "GET",
-      headers: data,
+      headers: {
+        token: data,
+      },
     });
     if (res?.status === 200) {
       return res?.data;
@@ -63,7 +65,8 @@ export const getAPIdata = async ({ endPoint, data }) => {
 export const PostApiFunction = async ({ endPoint, data }) => {
   try {
     let res,
-      token = sessionStorage.getItem("adminToken");
+      token =
+        sessionStorage.getItem("adminToken") || sessionStorage.getItem("token");
 
     console.log("gjgjgjhgjghjg5656", token);
     res = await axios({

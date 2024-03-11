@@ -16,8 +16,8 @@ import {
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import TableList from "../Admin/component/TableList";
-import FilterComponent from "../Admin/component/FilterComponent";
+import TableList from "../../component/TableList";
+import FilterComponent from "../../component/FilterComponent";
 import ViewDialog from "../admin/component/ViewDialog";
 import SureModal from "../../component/SureModal";
 import LoaderComponent from "../../component/LoaderComponent";
@@ -72,7 +72,7 @@ const index = () => {
   const [_IconType, setIconType] = useState("");
   const [_confirm, setConfirm] = useState(false);
   const [_listloading, setListLoading] = useState(false);
-  console.log("_viewData---->", _viewData);
+  const [_departmentlist, setDepartmentList] = useState([]);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -300,7 +300,28 @@ const index = () => {
       console.log("error", error);
     }
   };
+  const DepartList = async (value, code) => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.listAllDepartment,
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setDepartmentList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          toast.error(res?.responseMessage);
+        } else if (res?.responseCode == 501) {
+          toast.error(res?.responseMessage);
+        } else {
+          toast.error(res?.responseMessage);
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   useEffect(() => {
+    DepartList();
     GetAdminLIst();
   }, []);
   return (
@@ -317,6 +338,7 @@ const index = () => {
               title="Admin List"
               ButtonName="Create Admin"
               HeadingDialog="Create Admin"
+              _departmentlist={_departmentlist}
             />
           </Box>
           <Box mt={2} mb={1}>
@@ -388,6 +410,7 @@ const index = () => {
               handleClose={handleViewClose}
               AddMoreList={Update_Admin}
               type={_IconType}
+              _departmentlist={_departmentlist}
               _isloading={_isloading}
             />
           )}

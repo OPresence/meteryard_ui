@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -6,7 +5,9 @@ import "slick-carousel/slick/slick-theme.css";
 import Divider from "@mui/material/Divider";
 import styled from "@emotion/styled";
 import ButtonComponent from "./ButtonComponent";
-
+import React, { useEffect, useState, useRef } from "react";
+import { PostApiFunction } from "../utils";
+import Apiconfigs from "../ApiConfig/ApiConfig";
 const CardComponentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
@@ -125,7 +126,7 @@ const CardComponent = () => {
           slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -135,7 +136,7 @@ const CardComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -145,7 +146,7 @@ const CardComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -155,7 +156,7 @@ const CardComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -165,7 +166,7 @@ const CardComponent = () => {
           slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
@@ -176,13 +177,42 @@ const CardComponent = () => {
           slidesToScroll: 1,
           infinite: true,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
     ],
   };
+  const [_getlist, setGetList] = useState([]);
+  console.log("res---->5s645sds6a+d4sa", _getlist);
 
+  const [_isloading, setIsLoading] = useState(false);
+
+  const ResidentialAPI = async () => {
+    try {
+      setIsLoading(true);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllPropertyPost,
+        data: {
+          projectTypeId: "65dc4b9cda234100342352b1",
+          page: "1",
+          limit: "10",
+        },
+      });
+      if (res?.responseCode == 200) {
+        setIsLoading(false);
+
+        setGetList(res?.result?.docs);
+      }
+    } catch (error) {
+      setIsLoading(false);
+
+      console.log("eror", error);
+    }
+  };
+  useEffect(() => {
+    ResidentialAPI();
+  }, []);
   return (
     <CardComponentStyle>
       <div className="mainSliderDiv">
@@ -194,12 +224,16 @@ const CardComponent = () => {
             </Typography>
           </Box>
           <Box mt={5}>
-            {/* <Grid container> */}
             <Slider {...settings} ref={sliderRef}>
               {projectDetails.map((data, index) => {
                 return (
                   <Grid item lg={3} md={6} sm={6} xs={12}>
-                    <Box height={"100%"} pb={"20px"}>
+                    <Box
+                      height={"100%"}
+                      pb={"20px"}
+                      display={"flex"}
+                      justifyContent={"center"}
+                    >
                       <Box className="cards">
                         <Box>
                           <img
@@ -236,7 +270,7 @@ const CardComponent = () => {
                               <Typography variant="h5">900 Sqr Ft.</Typography>
                             </Box>
                           </Box>
-                          <ButtonComponent />
+                          <ButtonComponent data={data} />
                         </Box>
                       </Box>{" "}
                     </Box>

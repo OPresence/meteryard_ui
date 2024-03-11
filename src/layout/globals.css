@@ -21,7 +21,15 @@ body {
   padding-right: initial !important;
 }
 
-
+.custom-radio-group {
+  display:-webkit-box !important ;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 0 0 0 20px;
+}
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+  color: #a2d117;
+}
 .dropbtn {
   background: transparent;
   padding: 20px 0;
@@ -56,6 +64,23 @@ body {
   height: 3px;
   background-color: #a2d117;
   transition: 0.3s ease-in-out;
+}
+.mainModalClassForm {
+  border-radius: 10px;
+
+}
+
+.mainModalClassForm::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 54px;
+  right: 0;
+  transform: translate(0%, -50%);
+  height: 400px;
+  border-right: 81px solid rgb(162, 209, 23);
+  bottom: 0;
+  clip-path: polygon(20% 39%, 100% 1%, 100% 133%, 110% 102%, -40% 50%);
 }
 .cityname {
   background: transparent;

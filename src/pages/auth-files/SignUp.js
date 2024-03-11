@@ -23,7 +23,10 @@ import * as yep from "yup";
 import CircularProgressCompoennt from "../../component/CircularProgressComponent";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
 const LoginStyle = styled("Box")(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
@@ -121,7 +124,10 @@ const formValidationSchema = yep.object().shape({
 const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
   const [isloading, setIsLoading] = useState(false);
   const [_isSignup, setIsSignUp] = useState(false);
-
+  const [selectedValue, setSelectedValue] = useState("BUYER"); // Initial selected value
+  const handleChangeType = (event) => {
+    setSelectedValue(event.target.value);
+  };
   const SignUp_Function = async (values) => {
     try {
       setIsLoading(true);
@@ -131,13 +137,29 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
           email: values?.email,
           password: values?.password,
           phoneNumber: values?.PhoneNumber,
-          userType: "BUYER",
+          userType: selectedValue,
         },
       });
       if (res) {
-        console.log("fdfdfd--->", res?.result);
-        toast.success("SignUp successful!"); // Display success notification
-        setSignUpComplete(res?.result);
+        console.log("fdfdfd--->", res);
+        if (res?.responseCode == 200) {
+          toast.success("SignUp successful!"); // Display success notification
+          setIsLoading(false);
+
+          setSignUpComplete(res?.result);
+        } else if (res?.responseCode == 409) {
+          toast.error(res?.responseMessage); // Display error notification
+          setIsLoading(false);
+        } else if (res?.responseCode == 404) {
+          toast.error(res?.responseMessage); // Display error notification
+          setIsLoading(false);
+        } else if (res?.responseCode == 500) {
+          toast.error(res?.responseMessage); // Display error notification
+          setIsLoading(false);
+        } else {
+          toast.error(res?.responseMessage); // Display error notification
+          setIsLoading(false);
+        }
       }
     } catch (error) {
       setIsLoading(false);
@@ -233,6 +255,44 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                               Sign In
                             </Button>
                           </Box>
+                        </Box>
+                        <Box>
+                          <FormControl>
+                            <Box>
+                              <RadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                defaultValue="female"
+                                name="radio-buttons-group"
+                                className="custom-radio-group"
+                                value={selectedValue}
+                                onChange={handleChangeType}
+                                style={{ display: "-webkit-box !important" }}
+                              >
+                                <Box>
+                                  <FormControlLabel
+                                    value="BUYER"
+                                    control={<Radio />}
+                                    label="BUYER"
+                                  />
+                                </Box>
+                                <Box>
+                                  <FormControlLabel
+                                    value="SELLER"
+                                    control={<Radio />}
+                                    label="SELLER"
+                                  />
+                                </Box>
+
+                                <Box>
+                                  <FormControlLabel
+                                    value="GUEST"
+                                    control={<Radio />}
+                                    label="GUEST"
+                                  />
+                                </Box>
+                              </RadioGroup>
+                            </Box>
+                          </FormControl>
                         </Box>
                         <Box className="loginBox">
                           <Typography variant="h2">Please Sign Up</Typography>

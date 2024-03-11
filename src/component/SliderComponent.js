@@ -11,7 +11,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
     padding: "60px 0",
     textAlign: "center",
     margin: "0 20px",
-    // background: "rgba(0,0,0,0.5)",
+    "@media(max-width:615px)": {
+      padding: "0px 0 60px 0",
+      marginTop: "-150px",
+    },
   },
   "& .circleimg": {
     width: "100%",
@@ -153,7 +156,7 @@ const SliderComponent = () => {
 
   return (
     <MainComponent>
-      <div className="mainSliderDiv">
+      <Box className="mainSliderDiv" mt={"25rem"}>
         <Container maxWidth>
           <Slider {...settings} ref={sliderRef}>
             {projectDetails.map((data, index) => {
@@ -188,7 +191,7 @@ const SliderComponent = () => {
             })}
           </Slider>
         </Container>
-      </div>
+      </Box>
     </MainComponent>
   );
 };

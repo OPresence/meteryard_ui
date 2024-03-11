@@ -49,6 +49,9 @@ const AddFacing = ({
   _image_upload,
   _isloading,
   AddMoreList,
+  onPointerEnter,
+  onPointerLeave,
+  rating,
 }) => {
   const [_initialstate, setInitialState] = useState({
     project_type: "",

@@ -157,43 +157,57 @@ const ProjectComponent = () => {
             <Box className="shodowBox">
               <Box width={"100%"}>
                 <Box
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  mt={"-70px"}
-                  gap={"5px"}
+                // display={"flex"}
+                // justifyContent={"space-between"}
+                // mt={"-70px"}
+                // gap={"5px"}
                 >
-                  <Box className="rainbow">
-                    <Box className="contentBox" textAlign={"center"}>
-                      <Typography variant="h1">51</Typography>
-                      <Box mt={2}>
-                        <Typography variant="h3">Total Projects</Typography>
+                  <Grid
+                    container
+                    spacing={3}
+                    style={{ justifyContent: "center" }}
+                  >
+                    <Grid item lg={3} md={3} sm={6} xs={6}>
+                      <Box className="rainbow" maxWidth={180}>
+                        <Box className="contentBox" textAlign={"center"}>
+                          <Typography variant="h1">51</Typography>
+                          <Box mt={2}>
+                            <Typography variant="h3">Total Projects</Typography>
+                          </Box>
+                        </Box>
                       </Box>
-                    </Box>
-                  </Box>
-                  <Box className="rainbowSecond">
-                    <Box className="contentBox" textAlign={"center"}>
-                      <Typography variant="h1">51</Typography>
-                      <Box mt={2}>
-                        <Typography variant="h3">Total Projects</Typography>
+                    </Grid>
+                    <Grid item lg={3} md={3} sm={6} xs={6}>
+                      <Box className="rainbowSecond" maxWidth={180}>
+                        <Box className="contentBox" textAlign={"center"}>
+                          <Typography variant="h1">51</Typography>
+                          <Box mt={2}>
+                            <Typography variant="h3">Total Projects</Typography>
+                          </Box>
+                        </Box>
                       </Box>
-                    </Box>
-                  </Box>
-                  <Box className="rainbow">
-                    <Box className="contentBox" textAlign={"center"}>
-                      <Typography variant="h1">51</Typography>
-                      <Box mt={2}>
-                        <Typography variant="h3">Total Projects</Typography>
+                    </Grid>
+                    <Grid item lg={3} md={3} sm={6} xs={6}>
+                      <Box className="rainbow" maxWidth={180}>
+                        <Box className="contentBox" textAlign={"center"}>
+                          <Typography variant="h1">51</Typography>
+                          <Box mt={2}>
+                            <Typography variant="h3">Total Projects</Typography>
+                          </Box>
+                        </Box>
                       </Box>
-                    </Box>
-                  </Box>
-                  <Box className="rainbowSecond">
-                    <Box className="contentBox" textAlign={"center"}>
-                      <Typography variant="h1">51</Typography>
-                      <Box mt={2}>
-                        <Typography variant="h3">Total Projects</Typography>
+                    </Grid>
+                    <Grid item lg={3} md={3} sm={6} xs={6}>
+                      <Box className="rainbowSecond" maxWidth={180}>
+                        <Box className="contentBox" textAlign={"center"}>
+                          <Typography variant="h1">51</Typography>
+                          <Box mt={2}>
+                            <Typography variant="h3">Total Projects</Typography>
+                          </Box>
+                        </Box>
                       </Box>
-                    </Box>
-                  </Box>
+                    </Grid>
+                  </Grid>
                 </Box>
                 <Box
                   display={"flex"}

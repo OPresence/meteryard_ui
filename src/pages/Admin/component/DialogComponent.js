@@ -6,24 +6,26 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { styled } from "@mui/system";
-import CreateDepartment from "../../admin/component/CreateDepartment";
-import CreateAdmin from "@/pages/admin-list/CreateAdmin";
-import AddBanner from "@/pages/banner/AddBanner";
-import UpdateCountry from "@/pages/countries/UpdateCountry";
-import AddState from "../../../pages/state/AddState";
-import AddCity from "@/pages/cities/AddCity";
-import AddProjectType from "@/pages/project-type/AddProjectType";
+import CreateDepartment from "../component/CreateDepartment";
+import CreateAdmin from "../../admin-list/CreateAdmin";
+import AddBanner from "../../banner/AddBanner";
+import UpdateCountry from "../../countries/UpdateCountry";
+import AddState from "../../state/AddState";
+import AddCity from "../../cities/AddCity";
+import AddProjectType from "../../project-type/AddProjectType";
 import AddProjectSubType from "../../Project-Sub-Type/AddProjectType";
-import AddProjectFinishing from "@/pages/project-finishing/AddProjectFinishing";
-import AddAmenties from "@/pages/amenties/AddAmenties";
-import AddUnites from "@/pages/area-unites/AddUnites";
-import AddProperty from "@/pages/property-availabilities/AddProperty";
-import JoditComponent from "../../admin/component/JoditComponent";
+import AddProjectFinishing from "../../project-finishing/AddProjectFinishing";
+import AddAmenties from "../../amenties/AddAmenties";
+import AddUnites from "../../area-unites/AddUnites";
+import AddProperty from "../../property-availabilities/AddProperty";
+import JoditComponent from "../component/JoditComponent";
 import AddWaterResource from "../../water-resources/AddWaterResource";
 import AddOverlooking from "../../overlooking/AddOverLooking";
 import AddFeatures from "../../property-other-features/AddFeatures";
 import AddFacing from "../../property-facing/AddFacing";
-
+import AddBlog from "../../blog/AddBlog";
+import AddTestimonial from "../../testimonial/AddTestimonial";
+import AddVideo from "../../property-videos/AddVideo";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -74,6 +76,11 @@ export default function AlertDialogSlide({
   ImageUpload,
   _image_upload,
   _getcountrylist,
+  handleRating,
+  onPointerEnter,
+  onPointerLeave,
+  rating,
+  _imageurl,
 }) {
   const modalClassStyles = {
     "&::before": {
@@ -116,6 +123,9 @@ export default function AlertDialogSlide({
             ButtonName == "Update About US" ||
             ButtonName == "Update Privacy Policy" ||
             ButtonName == "Add sub-type" ||
+            ButtonName == "Create Blog" ||
+            // ButtonName == "Create Video" ||
+            ButtonName == "Create Testimonial" ||
             ButtonName == "Update Terms Conditions"
               ? "md"
               : "sm"
@@ -224,7 +234,6 @@ export default function AlertDialogSlide({
                   </>
                 ) : ButtonName == "Add sub-type" ? (
                   <>
-                    {console.log("_getcountrylist--->", _getcountrylist)}
                     {open && (
                       <AddProjectSubType
                         handleClose={handleClose}
@@ -232,6 +241,19 @@ export default function AlertDialogSlide({
                         _isloading={_isloading}
                         AddMoreList={AddMoreList}
                         _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Blog" ? (
+                  <>
+                    {open && (
+                      <AddBlog
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                        _getcountrylist={_getcountrylist}
+                        ImageUpload={ImageUpload}
                       />
                     )}
                   </>
@@ -328,6 +350,42 @@ export default function AlertDialogSlide({
                         ImageUpload={ImageUpload}
                         _isloading={_isloading}
                         AddMoreList={AddMoreList}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Testimonial" ? (
+                  <>
+                    {open && (
+                      <AddTestimonial
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                        onPointerEnter={onPointerEnter}
+                        onPointerLeave={onPointerLeave}
+                        rating={rating}
+                        handleRating={handleRating}
+                        _image_upload={_image_upload}
+                        _imageurl={_imageurl}
+                      />
+                    )}
+                  </>
+                ) : ButtonName == "Create Video" ? (
+                  <>
+                    {open && (
+                      <AddVideo
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        ImageUpload={ImageUpload}
+                        _isloading={_isloading}
+                        AddMoreList={AddMoreList}
+                        onPointerEnter={onPointerEnter}
+                        onPointerLeave={onPointerLeave}
+                        rating={rating}
+                        handleRating={handleRating}
+                        _image_upload={_image_upload}
+                        _imageurl={_imageurl}
                       />
                     )}
                   </>

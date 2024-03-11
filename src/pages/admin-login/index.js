@@ -363,11 +363,11 @@ const AdminLogin = () => {
                                 )}
                               </Button>
 
-                              <Box mt={2} textAlign={"center"}>
+                              {/* <Box mt={2} textAlign={"center"}>
                                 <Typography variant="h6">
                                   Terms of use privacy policy
                                 </Typography>
-                              </Box>
+                              </Box> */}
                             </Box>
                           </Box>
                         </Box>

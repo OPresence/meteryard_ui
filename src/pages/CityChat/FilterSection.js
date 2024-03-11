@@ -288,7 +288,7 @@ const FilterSection = () => {
             >
               <Box p={"5px"}>
                 <CityProperty />
-                {BuyerKey == "Seller" && (
+                {BuyerKey != "Seller" && (
                   <Box mt={2}>
                     <Button className="EnquiryButton" onClick={handleClickOpen}>
                       <span>Raise Enquiry</span>

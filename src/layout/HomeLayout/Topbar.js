@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect, useContext } from "react";
 import {
   AppBar,
   Toolbar,
@@ -23,6 +24,9 @@ import DialogComponent from "../../component/DialogComponent";
 import { useRouter } from "next/router";
 import LoginDialog from "../../component/LoginDialog";
 import "../../Scss/border.css";
+import Apiconfigs from "@/ApiConfig/ApiConfig";
+import { PostApiFunction, getAPIdata } from "@/utils";
+import { AuthContext } from "../../context/Auth";
 
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .appbarBox": {
@@ -87,22 +91,36 @@ const MainComponent = styled("Box")(({ theme }) => ({
     },
   },
 }));
-
 export default function Topbar() {
+  const auth = useContext(AuthContext);
+
   const [state, setState] = useState({
     mobileView: false,
     drawerOpen: false,
   });
-
   const [_openDialog, setOpenDialog] = useState(false);
   const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);
+  const [_accesstoken, setAccessToken] = useState();
+  const GetProfileFunction = async () => {
+    try {
+      const res = await getAPIdata({
+        endPoint: Apiconfigs?.myProfile,
+        data: window.sessionStorage.getItem("token"),
+      });
+      if (res) {
+        console.log("ndfbdkj--->", res);
+        auth?.setGetProfile(res?.result);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
   const router = useRouter();
   const handleClickOpen = () => {
     setOpenDialog(true);
   };
-
   const handleClose = () => {
     setOpenDialog(false);
   };
@@ -111,18 +129,14 @@ export default function Topbar() {
     setOpenDialogLogin(true);
     setSignUpComplete(false);
   };
-
   const handleCloseLogin = () => {
     setOpenDialogLogin(false);
   };
-
   const { mobileView, drawerOpen } = state;
-
   const handleDrawerOpen = () =>
     setState((prevState) => ({ ...prevState, drawerOpen: true }));
   const handleDrawerClose = () =>
     setState((prevState) => ({ ...prevState, drawerOpen: false }));
-
   useEffect(() => {
     const setResponsiveness = () => {
       if (typeof window !== "undefined") {
@@ -132,17 +146,18 @@ export default function Topbar() {
         }));
       }
     };
-
     setResponsiveness();
     if (typeof window !== "undefined") {
       window.addEventListener("resize", setResponsiveness);
     }
-
     return () => {
       if (typeof window !== "undefined") {
         window.removeEventListener("resize", setResponsiveness);
       }
     };
+  }, []);
+  useEffect(() => {
+    GetProfileFunction();
   }, []);
   const femmecubatorLogo = (
     <Box className="LogoBox">
@@ -236,13 +251,17 @@ export default function Topbar() {
                   </Box>
                 </Box>
                 <Box className="flexAlign" p={"0 0 0 30px"}>
-                  <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
-                  <span onClick={() => handleClickOpenLogin("Login")}>
-                    Login
-                  </span>
-                  <span onClick={() => handleClickOpenLogin("Sign Up")}>
-                    /Sign Up
-                  </span>
+                  {_accesstoken == null && (
+                    <>
+                      <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
+                      <span onClick={() => handleClickOpenLogin("Login")}>
+                        Login
+                      </span>
+                      <span onClick={() => handleClickOpenLogin("Sign Up")}>
+                        /Sign Up
+                      </span>
+                    </>
+                  )}
                 </Box>
               </Box>
               <Box className={"ContentBox"}>
@@ -271,16 +290,18 @@ export default function Topbar() {
           handleClickOpen={handleClickOpen}
           handleClose={handleClose}
         />
-        <LoginDialog
-          open={_openDialogLogin}
-          setOpen={setOpenDialogLogin}
-          handleClickOpen={handleClickOpenLogin}
-          handleClose={handleCloseLogin}
-          _selectScreen={_selectScreen}
-          setSelectScreen={setSelectScreen}
-          setSignUpComplete={setSignUpComplete}
-          _signcomplete={_signcomplete}
-        />
+        {_openDialogLogin && (
+          <LoginDialog
+            open={_openDialogLogin}
+            setOpen={setOpenDialogLogin}
+            handleClickOpen={handleClickOpenLogin}
+            handleClose={handleCloseLogin}
+            _selectScreen={_selectScreen}
+            setSelectScreen={setSelectScreen}
+            setSignUpComplete={setSignUpComplete}
+            _signcomplete={_signcomplete}
+          />
+        )}
       </Box>
     );
   };

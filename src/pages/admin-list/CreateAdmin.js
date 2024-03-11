@@ -44,9 +44,9 @@ const CreateAdmin = ({
   ImageUpload,
   _isloading,
   AddMoreList,
+  _departmentlist,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
-  const [_departmentlist, setDepartmentList] = useState([]);
   const [_initialstate, setInitialState] = useState({
     department: "",
     Name: "",
@@ -62,30 +62,30 @@ const CreateAdmin = ({
     password: yep.string().required("Password is required."),
     phoneNo: yep.string().required("Phone Number is required."),
   });
-  const DepartList = async (value, code) => {
-    console.log("value000--->", value, code);
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs.listAllDepartment,
-      });
-      if (res) {
-        if (res?.responseCode == 200) {
-          setDepartmentList(res?.result?.docs);
-        } else if (res?.responseCode == 404) {
-          toast.error(res?.responseMessage);
-        } else if (res?.responseCode == 501) {
-          toast.error(res?.responseMessage);
-        } else {
-          toast.error(res?.responseMessage);
-        }
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-  useEffect(() => {
-    DepartList();
-  }, []);
+  // const DepartList = async (value, code) => {
+  //   console.log("value000--->", value, code);
+  //   try {
+  //     const res = await PostApiFunction({
+  //       endPoint: Apiconfigs.listAllDepartment,
+  //     });
+  //     if (res) {
+  //       if (res?.responseCode == 200) {
+  //         setDepartmentList(res?.result?.docs);
+  //       } else if (res?.responseCode == 404) {
+  //         toast.error(res?.responseMessage);
+  //       } else if (res?.responseCode == 501) {
+  //         toast.error(res?.responseMessage);
+  //       } else {
+  //         toast.error(res?.responseMessage);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   DepartList();
+  // }, []);
   return (
     <div>
       <Formik
@@ -143,6 +143,7 @@ const CreateAdmin = ({
                       </InputLabel>
                       <Select
                         labelId="demo-simple-select-label"
+                        disabled={_isloading}
                         id="demo-simple-select"
                         label="Select Department"
                         name="department"
@@ -169,6 +170,7 @@ const CreateAdmin = ({
                   <Box mt={2}>
                     <TextField
                       fullWidth
+                      disabled={_isloading}
                       id="outlined-basic"
                       label="Name"
                       variant="outlined"
@@ -189,6 +191,7 @@ const CreateAdmin = ({
                       fullWidth
                       id="outlined-basic"
                       label="Email"
+                      disabled={_isloading}
                       variant="outlined"
                       placeholder="Enter your email"
                       name="email"
@@ -207,6 +210,7 @@ const CreateAdmin = ({
                       fullWidth
                       id="outlined-basic"
                       label="Password"
+                      disabled={_isloading}
                       variant="outlined"
                       placeholder="Enter your password"
                       name="password"
@@ -227,6 +231,7 @@ const CreateAdmin = ({
                         name="phoneNo"
                         inputClass="phoneInputField"
                         buttonClass="phoneInputButton"
+                        disabled={_isloading}
                         variant="outlined"
                         value={values.phoneNo}
                         error={Boolean(touched.phoneNo && errors.phoneNo)}
@@ -256,6 +261,7 @@ const CreateAdmin = ({
                         name="status"
                         value={values?.status}
                         onChange={handleChange}
+                        disabled={_isloading}
                       >
                         <MenuItem value={"ACTIVE"}>Active</MenuItem>
                         <MenuItem value={"BLOCKED"}>Deactive</MenuItem>

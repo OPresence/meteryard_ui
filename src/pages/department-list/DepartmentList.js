@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import TableList from "../admin/component/TableList";
-import FilterComponent from "../admin/component/FilterComponent";
+import TableList from "../../component/TableList";
+import FilterComponent from "../../component/FilterComponent";
 import { Box, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
@@ -359,7 +359,9 @@ const DepartmentList = () => {
 
         <ViewDialog
           ButtonName={"Create Department"}
-          HeadingDialog={"View Department"}
+          HeadingDialog={
+            _IconType == "VIEW" ? "View Department" : "Edit Department"
+          }
           _viewData={_viewData}
           open={openView}
           handleClickOpen={handleViewOpen}
