@@ -1,11 +1,22 @@
 import React, { useState } from "react";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-
-import { Box, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  Grid,
+  Box,
+  TextField,
+  Select,
+  InputLabel,
+  MenuItem,
+  FormControl,
+  FormHelperText,
+  Typography,
+  Icon,
+} from "@mui/material";
 import { styled } from "@mui/system";
 const LocationStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -13,7 +24,9 @@ const LocationStyle = styled("Box")(({ theme }) => ({
   },
   "& .locationStyleShow": {
     cursor: "pointer",
+    // position: "absolute",
     display: "flex",
+    // top: "0",
     zIndex: 1,
     "&:hover": {
       background: "green",
@@ -107,4 +120,5 @@ const LocationDialog = ({
     </LocationStyle>
   );
 };
+
 export default LocationDialog;

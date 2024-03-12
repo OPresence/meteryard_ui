@@ -178,6 +178,14 @@ const Apiconfigs = {
   viewPropertyPost: `${propertyLink}/viewPropertyPost`,
   listAllPropertyPost: `${propertyLink}/listAllPropertyPost`,
   deletePropertyPost: `${propertyLink}/deletePropertyPost`,
+
+  // MASTER AREA_UNIT MANAGEMENT
+  createAreaUnit: `${masterLink}/createAreaUnit`,
+  editAreaUnit: `${masterLink}/editAreaUnit`,
+  viewAreaUnit: `${masterLink}/viewAreaUnit`,
+  listAllAreaUnit: `${masterLink}/listAllAreaUnit`,
+  deleteAreaUnit: `${masterLink}/deleteAreaUnit`,
+  activeDeactiveAreaUnit: `${masterLink}/activeDeactiveAreaUnit`,
 };
 
 export default Apiconfigs;

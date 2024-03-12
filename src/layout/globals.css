@@ -217,3 +217,11 @@ margin-top: 9px;
                   linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;
   }
 }
+.slick-prev:before, .slick-next:before{
+  color: #a2d117 !important;
+  padding: 0 5px;
+}
+.slick-next:before{
+  padding: 0 !important;
+
+}

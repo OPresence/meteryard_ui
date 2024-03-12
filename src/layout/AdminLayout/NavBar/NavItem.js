@@ -198,6 +198,7 @@ const NavItem = ({
                   title == "Countries" ||
                   title == "States" ||
                   title == "Cities" ||
+                  title == "Area" ||
                   title == "Project Types" ||
                   title == "Project Furnishing" ||
                   title == "Amenities" ||
@@ -222,7 +223,6 @@ const NavItem = ({
             }
           </StyledIcon>
         )}
-        {console.log("title-0->", open)}
         <StyledTitle
           style={
             title == "Admin" ||
@@ -230,6 +230,7 @@ const NavItem = ({
             title == "Countries" ||
             title == "States" ||
             title == "Cities" ||
+            title == "Area" ||
             title == "Project Types" ||
             title == "Project Furnishing" ||
             title == "Amenities" ||
