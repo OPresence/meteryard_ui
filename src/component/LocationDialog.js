@@ -13,9 +13,7 @@ const LocationStyle = styled("Box")(({ theme }) => ({
   },
   "& .locationStyleShow": {
     cursor: "pointer",
-    // position: "absolute",
     display: "flex",
-    // top: "0",
     zIndex: 1,
     "&:hover": {
       background: "green",
