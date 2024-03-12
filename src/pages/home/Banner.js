@@ -19,17 +19,6 @@ const MainComponent = styled("Box")(({ theme }) => ({
       position: "relative",
       marginTop: "18px",
       left: "0",
-      "@media(max-width:900px)": {
-        maxWidth: "753px",
-        maxHeight: "575px",
-        overflow: "hidden",
-        position: "relative",
-        marginTop: "20px",
-      },
-      "@media(max-width:615px)": {
-        marginTop: "40px",
-        left: "40px",
-      },
     },
   },
   "& .bacBox": {
@@ -74,10 +63,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: "15px 0px 0px 15px",
-      "@media(max-width:615px)": {
-        right: "-30px",
-      },
+      borderRadius: "15px",
     },
     "& .Banner_textFild": {
       position: "relative",
@@ -85,19 +71,18 @@ const MainComponent = styled("Box")(({ theme }) => ({
       boxShadow: "0px 3px 27px #68686829",
       borderRadius: "11px",
       opacity: "1",
-      width: "10%",
+      width: "100%",
       transition: "0.8s",
       marginLeft: "20px",
       "@media(max-width:615px)": {
         marginLeft: "0px",
-        padding: "0 0 0 20px",
       },
 
       "&:hover": {
         transition: "0.8s",
-        width: "80%",
+        width: "100%",
         "@media(max-width:615px)": {
-          width: "85%",
+          width: "100%",
           right: "0",
         },
       },
@@ -399,7 +384,7 @@ export default function Home() {
         <Container maxWidth>
           <Box position={"absolute"} className="contentBox">
             <Box>
-              <Typography variant="h1">
+              <Typography variant="h1" className="banner-heading">
                 <span className="find">Find Your Place</span>
                 <span className="Make">, Make It Home</span>
               </Typography>
@@ -408,7 +393,7 @@ export default function Home() {
                   Please Select Your Category
                 </Typography>
               </Box>
-              <Box display={"flex"}>
+              <Box display={"flex"} justifyContent={"center"}>
                 <Box
                   mt={5}
                   position={"relative"}

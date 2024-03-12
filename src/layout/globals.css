@@ -1,5 +1,5 @@
-
-
+@import '../layout/css/style.css';
+@import '../layout/css/responsive.css';
 * {
   box-sizing: border-box;
   padding: 0;
@@ -217,3 +217,4 @@ margin-top: 9px;
                   linear-gradient(80deg, #ff001f, #e50b17, #3dfb15, #FBB415, #FBB415) border-box;
   }
 }
+

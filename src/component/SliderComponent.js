@@ -13,7 +13,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
     margin: "0 20px",
     "@media(max-width:615px)": {
       padding: "0px 0 60px 0",
-      marginTop: "-150px",
+      marginTop: "-110px",
     },
   },
   "& .circleimg": {
@@ -113,7 +113,7 @@ const SliderComponent = () => {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -123,7 +123,7 @@ const SliderComponent = () => {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -133,7 +133,7 @@ const SliderComponent = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -161,9 +161,9 @@ const SliderComponent = () => {
           <Slider {...settings} ref={sliderRef}>
             {projectDetails.map((data, index) => {
               return (
-                <Grid item lg={3} md={6} sm={6} xs={12}>
+                <Grid item lg={3} md={6} sm={12} xs={12}>
                   <Box display={"flex"} justifyContent={"center"} key={index}>
-                    <Card className="cards">
+                    <Card className="cards project-slider">
                       <Box>
                         <Typography variant="h5">{data?.name}</Typography>
                       </Box>
@@ -177,7 +177,7 @@ const SliderComponent = () => {
                         >
                           <img src={data?.image} alt="img" width={"100%"} />
                         </Box>
-                        <Box display={"flex"} alignItems={"center"}>
+                        <Box display={"flex"}>
                           <Typography variant="h6">View all</Typography>
                           <span>
                             <ArrowRightAltIcon />
