@@ -156,8 +156,8 @@ const SliderComponent = () => {
 
   return (
     <MainComponent>
+      <Container maxWidth>
       <Box className="mainSliderDiv" mt={"25rem"}>
-        <Container maxWidth>
           <Slider {...settings} ref={sliderRef}>
             {projectDetails.map((data, index) => {
               return (
@@ -190,8 +190,8 @@ const SliderComponent = () => {
               );
             })}
           </Slider>
-        </Container>
       </Box>
+      </Container>
     </MainComponent>
   );
 };

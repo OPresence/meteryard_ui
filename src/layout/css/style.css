@@ -1,0 +1,6 @@
+.slick-prev:before, .slick-next:before {
+    color: #a9d910 !important;
+}
+.searchbox{
+    height: -webkit-fill-available !important;
+}

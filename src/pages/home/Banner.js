@@ -13,6 +13,9 @@ const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     height: "100vh",
     overflow: "hidden",
+    "@media(max-width:615px)": {
+      marginBottom: "-140px"
+    },
     "& .backImage": {
       maxWidth: "892px",
       overflow: "hidden",
@@ -43,6 +46,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "& .Banner_inputField": {
       background: "#FFFFFF 0% 0% no-repeat padding-box",
       borderRadius: "11px",
+      "@media(max-width:615px)": {
+        padding: "0px",
+        fontSize:"15px",
+      },
       "& ::placeholder": {
         textAlign: "left",
         font: "normal normal medium 23px/30px Samsung Sharp Sans",
@@ -75,7 +82,11 @@ const MainComponent = styled("Box")(({ theme }) => ({
       transition: "0.8s",
       marginLeft: "20px",
       "@media(max-width:615px)": {
+        margin: "0px",
         marginLeft: "0px",
+        marginTop: "30px",
+        width:"95% !important",
+        margin:"auto",
       },
 
       "&:hover": {
@@ -122,8 +133,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
           padding: "10px",
           maxWidth: "40px !Important",
           "@media(max-width:615px)": {
-            padding: "5px",
-            maxWidth: "40px !important",
+            padding: "9px",
+            maxWidth: "38px !important",
           },
         },
       },
@@ -185,8 +196,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
           padding: "10px",
           maxWidth: "40px !important",
           "@media(max-width:615px)": {
-            padding: "5px",
-            maxWidth: "40px !important",
+            padding: "9px",
+            maxWidth: "38px !important",
           },
         },
       },
@@ -207,6 +218,13 @@ const MainComponent = styled("Box")(({ theme }) => ({
       },
     },
   },
+  "& .banner-heading": {
+    
+    "@media(max-width:615px)": {
+      marginTop: "0px",
+    },
+  },
+  
 }));
 
 export default function Home() {
@@ -380,8 +398,8 @@ export default function Home() {
   }, [selectedImages]);
   return (
     <MainComponent>
+       <Container maxWidth>
       <Box>
-        <Container maxWidth>
           <Box position={"absolute"} className="contentBox">
             <Box>
               <Typography variant="h1" className="banner-heading">
@@ -393,7 +411,7 @@ export default function Home() {
                   Please Select Your Category
                 </Typography>
               </Box>
-              <Box display={"flex"} justifyContent={"center"}>
+              <Box display={"flex"} justifyContent={"center"} className="buyer-seller-btn">
                 <Box
                   mt={5}
                   position={"relative"}
@@ -477,12 +495,11 @@ export default function Home() {
                   className={"Banner_inputField"}
                 />
                 <Button className="searchbox">
-                  <SearchIcon style={{ fontSize: "43px", color: "#FFFF" }} />
+                  <SearchIcon style={{ fontSize: "25px", color: "#FFFF" }} />
                 </Button>
               </Box>
             </Box>
           </Box>
-        </Container>
         <Box className="mainBox">
           <Box display={"flex"} justifyContent={"end"} className="bacBox">
             <Box>
@@ -540,6 +557,8 @@ export default function Home() {
         handleClose={handleClose}
         handleClickOpen={handleClickOpen}
       /> */}
+      
+      </Container>
     </MainComponent>
   );
 }
