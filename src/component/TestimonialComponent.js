@@ -68,7 +68,6 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
       },
       "& h6": {
         textAlign: "center",
-        maxWidth: "230px",
         fontSize: "12px",
       },
       "& h4": {
@@ -107,7 +106,7 @@ const TestimonialComponent = () => {
     infinite: true,
     speed: 500,
     arrows: false,
-    slidesToShow: 1,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: false,
     responsive: [
@@ -189,9 +188,6 @@ const TestimonialComponent = () => {
           <Container maxWidth>
             <Box className="mainBox">
               <Typography variant="h2">Testimonials</Typography>
-              <Slider ref={sliderRef} {...settings}>
-                {CardJson.map((data, index) => {
-                  return (
                     <Box>
                       <Grid container>
                         <Grid item lg={3} md={3} sm={3} xs={12}>
@@ -211,9 +207,9 @@ const TestimonialComponent = () => {
                           md={9}
                           sm={9}
                           xs={12}
-                          style={{ display: "flex", justifyContent: "end" }}
+                          style={{justifyContent: "end" }}
                         >
-                          <Box display={"flex"} mt={"40px"}>
+                          <Slider ref={sliderRef} {...settings}>
                             <Card className="Cards">
                               <Box
                                 display={"flex"}
@@ -273,13 +269,39 @@ const TestimonialComponent = () => {
                               </Box>
                               <Typography variant="h4">DIVYA BAJAJ</Typography>
                             </Card>
-                          </Box>
+                            <Card className="Cards">
+                              <Box
+                                display={"flex"}
+                                justifyContent={"center"}
+                                mt={"10px"}
+                              >
+                                <Box className="imageBox">
+                                  <img
+                                    src="\images\meteryard\Images\profile.png"
+                                    width={"100%"}
+                                  />
+                                </Box>
+                              </Box>
+                              <Typography variant="h6">
+                                Lorem Ipsum is simply dummy text of the printing
+                                and typesetting industry. Lorem Ipsum has been
+                                the industry's standard dummy text ever since
+                                the 1500s, when an unknown printer took a galley
+                                of type.
+                              </Typography>
+                              <Box
+                                display={"flex"}
+                                justifyContent={"center"}
+                                m={"20px 0"}
+                              >
+                                <Box className="borderLine"></Box>
+                              </Box>
+                              <Typography variant="h4">DIVYA BAJAJ</Typography>
+                            </Card>
+                            </Slider>
                         </Grid>
                       </Grid>
                     </Box>
-                  );
-                })}
-              </Slider>
 
               {/* <Box > */}
               <Box className="arrowsBox">
