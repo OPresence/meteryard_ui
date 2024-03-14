@@ -155,7 +155,7 @@ const ProjectComponent = () => {
           </Box>
           <Box>
             <Box className="shodowBox">
-              <Box width={"100%"}>
+              <Box width={"100%"} marginTop={"40px"}>
                 <Box
                 // display={"flex"}
                 // justifyContent={"space-between"}

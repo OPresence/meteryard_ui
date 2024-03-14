@@ -4,3 +4,11 @@
 .searchbox{
     height: -webkit-fill-available !important;
 }
+.download-app-section{
+    padding: 40px 60px;
+}
+/* .property-card-style img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+} */

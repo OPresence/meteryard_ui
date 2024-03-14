@@ -5,14 +5,7 @@
         margin-top: 15px !important;
         left: 0px !important;
     }
-    .handImage {
-        top: 12px !important;
-        left: 20px !important;
-        width: 260px !important;
-    }
-    .handImage img{
-        transform: scaleX(-1);
-    }
+   
     .project-slider{
         width: 100% !important;
     }
@@ -24,9 +17,23 @@
     }
     .buyer-seller-btn{
         margin-right: 20px !important;
+        justify-content: center;
     }
     .projects-card h2{
 margin-bottom: 5px;
+    }
+    .download-app-section{
+        padding: 10px !important;
+    }
+    .css-csmqbv-MuiPaper-root-MuiDialog-paper {
+        margin: 0px !important;
+        width: calc(100% - 21px) !important;
+    }
+    .mainModalClassForm::after {
+        content: unset !important;
+      }
+      .css-mhc70k-MuiGrid-root {
+        width: calc(100% + 20px) !important;
     }
     
   }

@@ -188,7 +188,7 @@ export default function PropertyForm({
     >
       <DialogContent className="mainModalClassForm">
         <Grid container spacing={2}>
-          <Grid item lg={2} md={2}>
+          <Grid item lg={2} md={2} sm={12} xs={12}>
             {_propertyList?.map((data, index) => {
               return (
                 <Box mt={2}>
@@ -204,7 +204,7 @@ export default function PropertyForm({
               );
             })}
           </Grid>
-          <Grid item lg={10} md={10}>
+          <Grid item lg={10} md={10} >
             <MainFormStyle>
               <Box className="mainBoxStyle">
                 <HouseForm

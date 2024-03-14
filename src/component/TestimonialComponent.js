@@ -27,6 +27,7 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
       "& h6": {
         color: "#fff",
         fontSize: "14px",
+        marginBottom:"20px"
       },
     },
     "& .ArrowClass": {
@@ -93,7 +94,7 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     padding: "190px 90px 190px 190px",
     "@media(max-width:1080px)": {
-      padding: "190px 0 0 0",
+      padding: "140px 0 0 0",
     },
   },
 }));
@@ -191,6 +192,7 @@ const TestimonialComponent = () => {
                     <Box>
                       <Grid container>
                         <Grid item lg={3} md={3} sm={3} xs={12}>
+                          
                           <Box className={"sliderBox"}>
                             <Typography variant="h6">
                               Lorem Ipsum is simply dummy text of the printing

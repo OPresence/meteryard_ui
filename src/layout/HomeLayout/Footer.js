@@ -92,7 +92,11 @@ const MainComponent = styled("Box")(({ theme }) => ({
     padding: "20px 0",
     borderBottom: "1px solid #f1f1f14d",
     gap: "50px",
+    "@media(max-width:615px)": {
+      display: "block",
+    },
   },
+ 
   "& .bottomFooter": {
     padding: "40px 0px 0",
     display: "flex",
@@ -110,6 +114,9 @@ const MainComponent = styled("Box")(({ theme }) => ({
       color: "#FFFF",
       fontWeight: 400,
       fontSize: "14px",
+      "@media(max-width:615px)": {
+        marginBottom: "10px",
+      },
     },
   },
   "& .text": {

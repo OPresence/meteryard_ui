@@ -9,12 +9,14 @@ import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useMediaQuery from '@mui/material/useMediaQuery';
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     height: "100vh",
     overflow: "hidden",
     "@media(max-width:615px)": {
-      marginBottom: "-140px"
+      marginBottom: "-140px",
+      height: "auto",
     },
     "& .backImage": {
       maxWidth: "892px",
@@ -37,12 +39,18 @@ const MainComponent = styled("Box")(({ theme }) => ({
     position: "absolute",
     maxWidth: "748px",
     "@media(max-width:615px)": {
-      top: "0px",
+      top: "50px",
+      left: "170px",
+      width:"190px"
+      
     },
   },
   "& .contentBox": {
     top: "35%",
     zIndex: "1",
+    "@media(max-width:615px)": {
+      top: "12%",
+    },
     "& .Banner_inputField": {
       background: "#FFFFFF 0% 0% no-repeat padding-box",
       borderRadius: "11px",
@@ -80,12 +88,11 @@ const MainComponent = styled("Box")(({ theme }) => ({
       opacity: "1",
       width: "100%",
       transition: "0.8s",
-      marginLeft: "20px",
       "@media(max-width:615px)": {
         margin: "0px",
         marginLeft: "0px",
         marginTop: "30px",
-        width:"95% !important",
+        width:"100% !important",
         margin:"auto",
       },
 
@@ -112,6 +119,9 @@ const MainComponent = styled("Box")(({ theme }) => ({
       clipPath: "polygon(0% 4%, 100% 0%, 70% 123%, 0% 100%, 0 0%)",
       color: "#fff",
       background: "rgb(172 172 172)",
+      "@media(max-width:615px)": {
+        height:"40px"
+      },
       "& .buyerBoxSpan": {
         padding: "0 90px 0 50px",
         "@media(max-width:615px)": {
@@ -187,6 +197,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       },
       "@media(max-width:433px)": {
         marginLeft: "0px",
+        height:"40px"
       },
       "& .buttonIconBox": {
         background: "#fff",
@@ -222,12 +233,21 @@ const MainComponent = styled("Box")(({ theme }) => ({
     
     "@media(max-width:615px)": {
       marginTop: "0px",
+      fontSize:"16px"
+    },
+  },
+  "& h4": {
+    
+    "@media(max-width:615px)": {
+      marginTop: "0px",
+      fontSize:"14px"
     },
   },
   
 }));
 
 export default function Home() {
+  const isMobile = useMediaQuery('(max-width:600px)');
   const [selectedImages, setSelectedImages] = useState([]);
   const [imageUploadResponses, setImageUploadResponses] = useState([]);
   const [_video_url, setVideoURL] = useState("");
@@ -406,12 +426,12 @@ export default function Home() {
                 <span className="find">Find Your Place</span>
                 <span className="Make">, Make It Home</span>
               </Typography>
-              <Box mt={3.5}>
+              <Box mt={isMobile ? 2 : 3.5}>
                 <Typography variant="h4">
                   Please Select Your Category
                 </Typography>
               </Box>
-              <Box display={"flex"} justifyContent={"center"} className="buyer-seller-btn">
+              <Box display={"flex"}  className="buyer-seller-btn">
                 <Box
                   mt={5}
                   position={"relative"}
