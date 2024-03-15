@@ -1,0 +1,95 @@
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+self["webpackHotUpdate_N_E"]("pages/index",{
+
+/***/ "./src/pages/home/Banner.js":
+/*!**********************************!*\
+  !*** ./src/pages/home/Banner.js ***!
+  \**********************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+
+
+;
+    // Wrapped in an IIFE to avoid polluting the global scope
+    ;
+    (function () {
+        var _a, _b;
+        // Legacy CSS implementations will `eval` browser code in a Node.js context
+        // to extract CSS. For backwards compatibility, we need to check we're in a
+        // browser context before continuing.
+        if (typeof self !== 'undefined' &&
+            // AMP / No-JS mode does not inject these helpers:
+            '$RefreshHelpers$' in self) {
+            // @ts-ignore __webpack_module__ is global
+            var currentExports = module.exports;
+            // @ts-ignore __webpack_module__ is global
+            var prevExports = (_b = (_a = module.hot.data) === null || _a === void 0 ? void 0 : _a.prevExports) !== null && _b !== void 0 ? _b : null;
+            // This cannot happen in MainTemplate because the exports mismatch between
+            // templating and execution.
+            self.$RefreshHelpers$.registerExportsForReactRefresh(currentExports, module.id);
+            // A module can be accepted automatically based on its exports, e.g. when
+            // it is a Refresh Boundary.
+            if (self.$RefreshHelpers$.isReactRefreshBoundary(currentExports)) {
+                // Save the previous exports on update so we can compare the boundary
+                // signatures.
+                module.hot.dispose(function (data) {
+                    data.prevExports = currentExports;
+                });
+                // Unconditionally accept an update to this module, we'll check if it's
+                // still a Refresh Boundary later.
+                // @ts-ignore importMeta is replaced in the loader
+                module.hot.accept();
+                // This field is set when the previous version of this module was a
+                // Refresh Boundary, letting us know we need to check for invalidation or
+                // enqueue an update.
+                if (prevExports !== null) {
+                    // A boundary can become ineligible if its exports are incompatible
+                    // with the previous exports.
+                    //
+                    // For example, if you add/remove/change exports, we'll want to
+                    // re-execute the importing modules, and force those components to
+                    // re-render. Similarly, if you convert a class component to a
+                    // function, we want to invalidate the boundary.
+                    if (self.$RefreshHelpers$.shouldInvalidateReactRefreshBoundary(prevExports, currentExports)) {
+                        module.hot.invalidate();
+                    }
+                    else {
+                        self.$RefreshHelpers$.scheduleUpdate();
+                    }
+                }
+            }
+            else {
+                // Since we just executed the code for the module, it's possible that the
+                // new exports made it ineligible for being a boundary.
+                // We only care about the case when we were _previously_ a boundary,
+                // because we already accepted this update (accidental side effect).
+                var isNoLongerABoundary = prevExports !== null;
+                if (isNoLongerABoundary) {
+                    module.hot.invalidate();
+                }
+            }
+        }
+    })();
+
+
+/***/ }),
+
+/***/ "./src/pages/index.js":
+/*!****************************!*\
+  !*** ./src/pages/index.js ***!
+  \****************************/
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": function() { return /* binding */ ClientPage; }\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"./node_modules/react/jsx-dev-runtime.js\");\n/* harmony import */ var _layout_HomeLayout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/layout/HomeLayout */ \"./src/layout/HomeLayout/index.js\");\n/* harmony import */ var _mui_material__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @mui/material */ \"./node_modules/@mui/material/Box/Box.js\");\n/* harmony import */ var _pages_home_Banner__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/home/Banner */ \"./src/pages/home/Banner.js\");\n/* harmony import */ var _pages_home_Banner__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_pages_home_Banner__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _component_SliderComponent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/SliderComponent */ \"./src/component/SliderComponent.js\");\n/* harmony import */ var _component_CardComponent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../component/CardComponent */ \"./src/component/CardComponent.js\");\n/* harmony import */ var _component_ResidentialProjects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../component/ResidentialProjects */ \"./src/component/ResidentialProjects.js\");\n/* harmony import */ var _component_CommercialProjects__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../component/CommercialProjects */ \"./src/component/CommercialProjects.js\");\n/* harmony import */ var _component_BannerCompont__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../component/BannerCompont */ \"./src/component/BannerCompont.js\");\n/* harmony import */ var _component_ProjectComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../component/ProjectComponent */ \"./src/component/ProjectComponent.js\");\n/* harmony import */ var _component_MobileAppComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../component/MobileAppComponent */ \"./src/component/MobileAppComponent.js\");\n/* harmony import */ var _component_TestimonialComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../component/TestimonialComponent */ \"./src/component/TestimonialComponent.js\");\n/* harmony import */ var _component_ChatBoat__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../component/ChatBoat */ \"./src/component/ChatBoat.js\");\n/* harmony import */ var _component_AgreecultureComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../component/AgreecultureComponent */ \"./src/component/AgreecultureComponent.js\");\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nfunction ClientPage() {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_mui_material__WEBPACK_IMPORTED_MODULE_13__[\"default\"], {\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)((_pages_home_Banner__WEBPACK_IMPORTED_MODULE_2___default()), {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 17,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_SliderComponent__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 18,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_CardComponent__WEBPACK_IMPORTED_MODULE_4__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 19,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_BannerCompont__WEBPACK_IMPORTED_MODULE_7__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 20,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_ResidentialProjects__WEBPACK_IMPORTED_MODULE_5__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 22,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_CommercialProjects__WEBPACK_IMPORTED_MODULE_6__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 23,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_AgreecultureComponent__WEBPACK_IMPORTED_MODULE_12__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 24,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_ProjectComponent__WEBPACK_IMPORTED_MODULE_8__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 26,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_MobileAppComponent__WEBPACK_IMPORTED_MODULE_9__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 27,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_TestimonialComponent__WEBPACK_IMPORTED_MODULE_10__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 28,\n                columnNumber: 7\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_component_ChatBoat__WEBPACK_IMPORTED_MODULE_11__[\"default\"], {}, void 0, false, {\n                fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n                lineNumber: 29,\n                columnNumber: 7\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n        lineNumber: 16,\n        columnNumber: 5\n    }, this);\n}\n_c = ClientPage;\nClientPage.getLayout = function getLayout(page) {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_layout_HomeLayout__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n        children: page\n    }, void 0, false, {\n        fileName: \"D:\\\\for prac\\\\projects\\\\meteryard_ui\\\\src\\\\pages\\\\index.js\",\n        lineNumber: 34,\n        columnNumber: 10\n    }, this);\n};\nvar _c;\n$RefreshReg$(_c, \"ClientPage\");\n\n\n;\n    // Wrapped in an IIFE to avoid polluting the global scope\n    ;\n    (function () {\n        var _a, _b;\n        // Legacy CSS implementations will `eval` browser code in a Node.js context\n        // to extract CSS. For backwards compatibility, we need to check we're in a\n        // browser context before continuing.\n        if (typeof self !== 'undefined' &&\n            // AMP / No-JS mode does not inject these helpers:\n            '$RefreshHelpers$' in self) {\n            // @ts-ignore __webpack_module__ is global\n            var currentExports = module.exports;\n            // @ts-ignore __webpack_module__ is global\n            var prevExports = (_b = (_a = module.hot.data) === null || _a === void 0 ? void 0 : _a.prevExports) !== null && _b !== void 0 ? _b : null;\n            // This cannot happen in MainTemplate because the exports mismatch between\n            // templating and execution.\n            self.$RefreshHelpers$.registerExportsForReactRefresh(currentExports, module.id);\n            // A module can be accepted automatically based on its exports, e.g. when\n            // it is a Refresh Boundary.\n            if (self.$RefreshHelpers$.isReactRefreshBoundary(currentExports)) {\n                // Save the previous exports on update so we can compare the boundary\n                // signatures.\n                module.hot.dispose(function (data) {\n                    data.prevExports = currentExports;\n                });\n                // Unconditionally accept an update to this module, we'll check if it's\n                // still a Refresh Boundary later.\n                // @ts-ignore importMeta is replaced in the loader\n                module.hot.accept();\n                // This field is set when the previous version of this module was a\n                // Refresh Boundary, letting us know we need to check for invalidation or\n                // enqueue an update.\n                if (prevExports !== null) {\n                    // A boundary can become ineligible if its exports are incompatible\n                    // with the previous exports.\n                    //\n                    // For example, if you add/remove/change exports, we'll want to\n                    // re-execute the importing modules, and force those components to\n                    // re-render. Similarly, if you convert a class component to a\n                    // function, we want to invalidate the boundary.\n                    if (self.$RefreshHelpers$.shouldInvalidateReactRefreshBoundary(prevExports, currentExports)) {\n                        module.hot.invalidate();\n                    }\n                    else {\n                        self.$RefreshHelpers$.scheduleUpdate();\n                    }\n                }\n            }\n            else {\n                // Since we just executed the code for the module, it's possible that the\n                // new exports made it ineligible for being a boundary.\n                // We only care about the case when we were _previously_ a boundary,\n                // because we already accepted this update (accidental side effect).\n                var isNoLongerABoundary = prevExports !== null;\n                if (isNoLongerABoundary) {\n                    module.hot.invalidate();\n                }\n            }\n        }\n    })();\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcGFnZXMvaW5kZXguanMiLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBNkM7QUFDVDtBQUNNO0FBQ2lCO0FBQ0o7QUFDWTtBQUNGO0FBQ1Y7QUFDTTtBQUNJO0FBQ0k7QUFDeEI7QUFDMEI7QUFDeEQsU0FBU2E7SUFDdEIscUJBQ0UsOERBQUNaLHNEQUFHQTs7MEJBQ0YsOERBQUNDLDJEQUFNQTs7Ozs7MEJBQ1AsOERBQUNDLGtFQUFlQTs7Ozs7MEJBQ2hCLDhEQUFDQyxnRUFBYUE7Ozs7OzBCQUNkLDhEQUFDRyxnRUFBYUE7Ozs7OzBCQUVkLDhEQUFDRixzRUFBbUJBOzs7OzswQkFDcEIsOERBQUNDLHFFQUFrQkE7Ozs7OzBCQUNuQiw4REFBQ00seUVBQXFCQTs7Ozs7MEJBRXRCLDhEQUFDSixtRUFBZ0JBOzs7OzswQkFDakIsOERBQUNDLHFFQUFrQkE7Ozs7OzBCQUNuQiw4REFBQ0Msd0VBQW9CQTs7Ozs7MEJBQ3JCLDhEQUFDQyw0REFBUUE7Ozs7Ozs7Ozs7O0FBR2Y7S0FsQndCRTtBQW1CeEJBLFdBQVdDLFNBQVMsR0FBRyxTQUFTQSxVQUFVQyxJQUFJO0lBQzVDLHFCQUFPLDhEQUFDZiwwREFBVUE7a0JBQUVlOzs7Ozs7QUFDdEIiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9fTl9FLy4vc3JjL3BhZ2VzL2luZGV4LmpzPzQwODAiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IEhvbWVMYXlvdXQgZnJvbSBcIkAvbGF5b3V0L0hvbWVMYXlvdXRcIjtcclxuaW1wb3J0IHsgQm94IH0gZnJvbSBcIkBtdWkvbWF0ZXJpYWxcIjtcclxuaW1wb3J0IEJhbm5lciBmcm9tIFwiLi4vcGFnZXMvaG9tZS9CYW5uZXJcIjtcclxuaW1wb3J0IFNsaWRlckNvbXBvbmVudCBmcm9tIFwiLi4vY29tcG9uZW50L1NsaWRlckNvbXBvbmVudFwiO1xyXG5pbXBvcnQgQ2FyZENvbXBvbmVudCBmcm9tIFwiLi4vY29tcG9uZW50L0NhcmRDb21wb25lbnRcIjtcclxuaW1wb3J0IFJlc2lkZW50aWFsUHJvamVjdHMgZnJvbSBcIi4uL2NvbXBvbmVudC9SZXNpZGVudGlhbFByb2plY3RzXCI7XHJcbmltcG9ydCBDb21tZXJjaWFsUHJvamVjdHMgZnJvbSBcIi4uL2NvbXBvbmVudC9Db21tZXJjaWFsUHJvamVjdHNcIjtcclxuaW1wb3J0IEJhbm5lckNvbXBvbnQgZnJvbSBcIi4uL2NvbXBvbmVudC9CYW5uZXJDb21wb250XCI7XHJcbmltcG9ydCBQcm9qZWN0Q29tcG9uZW50IGZyb20gXCIuLi9jb21wb25lbnQvUHJvamVjdENvbXBvbmVudFwiO1xyXG5pbXBvcnQgTW9iaWxlQXBwQ29tcG9uZW50IGZyb20gXCIuLi9jb21wb25lbnQvTW9iaWxlQXBwQ29tcG9uZW50XCI7XHJcbmltcG9ydCBUZXN0aW1vbmlhbENvbXBvbmVudCBmcm9tIFwiLi4vY29tcG9uZW50L1Rlc3RpbW9uaWFsQ29tcG9uZW50XCI7XHJcbmltcG9ydCBDaGF0Qm9hdCBmcm9tIFwiLi4vY29tcG9uZW50L0NoYXRCb2F0XCI7XHJcbmltcG9ydCBBZ3JlZWN1bHR1cmVDb21wb25lbnQgZnJvbSBcIi4uL2NvbXBvbmVudC9BZ3JlZWN1bHR1cmVDb21wb25lbnRcIjtcclxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gQ2xpZW50UGFnZSgpIHtcclxuICByZXR1cm4gKFxyXG4gICAgPEJveD5cclxuICAgICAgPEJhbm5lciAvPlxyXG4gICAgICA8U2xpZGVyQ29tcG9uZW50IC8+XHJcbiAgICAgIDxDYXJkQ29tcG9uZW50IC8+XHJcbiAgICAgIDxCYW5uZXJDb21wb250IC8+XHJcblxyXG4gICAgICA8UmVzaWRlbnRpYWxQcm9qZWN0cyAvPlxyXG4gICAgICA8Q29tbWVyY2lhbFByb2plY3RzIC8+XHJcbiAgICAgIDxBZ3JlZWN1bHR1cmVDb21wb25lbnQgLz5cclxuICAgICAgey8qIDxZb3V0dWJlQ29tcG9uZW50IC8+ICovfVxyXG4gICAgICA8UHJvamVjdENvbXBvbmVudCAvPlxyXG4gICAgICA8TW9iaWxlQXBwQ29tcG9uZW50IC8+XHJcbiAgICAgIDxUZXN0aW1vbmlhbENvbXBvbmVudCAvPlxyXG4gICAgICA8Q2hhdEJvYXQgLz5cclxuICAgIDwvQm94PlxyXG4gICk7XHJcbn1cclxuQ2xpZW50UGFnZS5nZXRMYXlvdXQgPSBmdW5jdGlvbiBnZXRMYXlvdXQocGFnZSkge1xyXG4gIHJldHVybiA8SG9tZUxheW91dD57cGFnZX08L0hvbWVMYXlvdXQ+O1xyXG59O1xyXG4iXSwibmFtZXMiOlsiSG9tZUxheW91dCIsIkJveCIsIkJhbm5lciIsIlNsaWRlckNvbXBvbmVudCIsIkNhcmRDb21wb25lbnQiLCJSZXNpZGVudGlhbFByb2plY3RzIiwiQ29tbWVyY2lhbFByb2plY3RzIiwiQmFubmVyQ29tcG9udCIsIlByb2plY3RDb21wb25lbnQiLCJNb2JpbGVBcHBDb21wb25lbnQiLCJUZXN0aW1vbmlhbENvbXBvbmVudCIsIkNoYXRCb2F0IiwiQWdyZWVjdWx0dXJlQ29tcG9uZW50IiwiQ2xpZW50UGFnZSIsImdldExheW91dCIsInBhZ2UiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/pages/index.js\n"));
+
+/***/ })
+
+});
