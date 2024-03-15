@@ -2,11 +2,30 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Box, Container, IconButton, Grid, Typography } from "@mui/material";
 import SubMenuComponent from "./SubMenuComponent";
-const MainComponent = styled("Box")(({ theme }) => ({}));
+const MenuComponentStyle = styled("Box")(({ theme }) => ({
+  "& .submenueTab": {
+   display:"flex",
+   "@media(max-width:615px)": {
+    display:"grid",
+    justifyContent:"start",
+  },
+  "& button": {
+    "@media(max-width:615px)": {
+     padding:"10px",
+     width:"100%",
+     display:"flex",
+     boxShadow:"0px 3px 46px #00000029",
+     margin:"5px",
+   },
+   },
+  },
+  
+}));
 
 const MenuComponent = () => {
   return (
-    <Box display={"flex"} justifyContent={"space-between"}>
+    <MenuComponentStyle>
+    <Box className="submenueTab" justifyContent={"space-between"}>
       <div class={"dropdown"} style={{ width: "100%" }}>
         <Box style={{}}>
           <button class="dropbtn">Cities</button>
@@ -26,6 +45,7 @@ const MenuComponent = () => {
         </div>
       </div>
     </Box>
+    </MenuComponentStyle>
   );
 };
 

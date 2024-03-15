@@ -72,7 +72,7 @@ export default function DialogComponent({ open, handleClose }) {
               </Box>
             </DialogTitle>
             <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description">
+              <DialogContentText id="alert-dialog-slide-description" className="chat-now-buyer-seller-btn">
                 <Box>
                   <Button
                     onClick={() =>

@@ -27,6 +27,7 @@ import "../../Scss/border.css";
 import Apiconfigs from "@/ApiConfig/ApiConfig";
 import { PostApiFunction, getAPIdata } from "@/utils";
 import { AuthContext } from "../../context/Auth";
+import CloseIcon from '@mui/icons-material/Close';
 
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .appbarBox": {
@@ -171,8 +172,7 @@ export default function Topbar() {
 
   const displayMobile = () => {
     return (
-      <Toolbar className={""}>
-        <Hidden xsDown>
+      <Toolbar>
           <Drawer
             anchor="right"
             open={drawerOpen}
@@ -190,11 +190,64 @@ export default function Topbar() {
                 justifyContent: "center",
                 marginTop: "20px",
               }}
+              className={"forMobileView"}
             >
               {femmecubatorLogo}
             </Box>
+            <Box className="close-icon">
+          <IconButton onClick={handleDrawerClose} >
+            <CloseIcon />
+          </IconButton>
+        </Box>
+            <Box className={"ContentBox"}>
+                <Box className="flexJustify" width={"100%"}>
+                  <Box className="flexAlign">
+                    <MenuComponent />
+                  </Box>
+                  {router.pathname == "/" && (
+                    <Box p={"10px 25px 0 0"}>
+                      <Button
+                        className="rainbowGradient"
+                        onClick={handleClickOpen}
+                      >
+                        My Citychat
+                      </Button>
+                    </Box>
+                  )}
+                </Box>
+              </Box>
+              <Box className="flexAlign for-svg-design"  p={"0 0 0 30px"}>
+                  {_accesstoken == null && (
+                    <>
+                      <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
+                      <span onClick={() => handleClickOpenLogin("Login")}>
+                        Login
+                      </span>
+                      <span onClick={() => handleClickOpenLogin("Sign Up")}>
+                        /Sign Up
+                      </span>
+                    </>
+                  )}
+                </Box>
+                <DialogComponent
+          open={_openDialog}
+          setOpen={setOpenDialog}
+          handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+        />
+        {_openDialogLogin && (
+          <LoginDialog
+            open={_openDialogLogin}
+            setOpen={setOpenDialogLogin}
+            handleClickOpen={handleClickOpenLogin}
+            handleClose={handleCloseLogin}
+            _selectScreen={_selectScreen}
+            setSelectScreen={setSelectScreen}
+            setSignUpComplete={setSignUpComplete}
+            _signcomplete={_signcomplete}
+          />
+        )}
           </Drawer>
-        </Hidden>
         <Box
           className="topbarmainBox"
           display={"flex"}
@@ -308,7 +361,7 @@ export default function Topbar() {
   return (
     <MainComponent>
       <AppBar elevation={0} className={"appbarBox"}>
-        <Box>{mobileView ? displayMobile() : displayDesktop()}</Box>
+        {mobileView ? displayMobile() : displayDesktop()}
       </AppBar>
     </MainComponent>
   );

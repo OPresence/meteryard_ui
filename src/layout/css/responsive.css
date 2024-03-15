@@ -35,6 +35,34 @@ margin-bottom: 5px;
       .css-mhc70k-MuiGrid-root {
         width: calc(100% + 20px) !important;
     }
+    .forMobileView{
+        width: 261px !important;
+        left: 0 !important;
+        padding: 0px 71px 13px 12px !important;
+    }
+    .close-icon{
+        position: absolute;
+        top: 8px;
+        right: 4px;
+    }
+    .chat-now-buyer-seller-btn div{
+        display: flex;
+    }
+    .css-5bkk0{
+position: absolute;
+bottom: 120px;
+left: 40px;
+right: 0;
+display: flex;
+align-items: center;
+    }
+    .for-svg-design svg{
+        color: #fff;
+        background: #343A40;
+        padding: 5px;
+        font-size: 28px;
+        border-radius: 50px;
+    }
     
   }
   
