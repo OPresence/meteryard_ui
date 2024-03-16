@@ -3,7 +3,7 @@ import { Container, Typography, Box, Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import ButtonSwitchComponent from "../../component/ButtonSwitchComponent";
 import RegisterSeller from "../../component/RegisterSeller";
-import SearchIcon from "@mui/icons-material/Search";
+import MicIcon from '@mui/icons-material/Mic';
 import PropertyForm from "./PropertyForm";
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
@@ -74,11 +74,16 @@ const MainComponent = styled("Box")(({ theme }) => ({
       position: "absolute",
       right: "0px",
       top: "0px",
-      width: "65px",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       borderRadius: "15px",
+      "@media(max-width:615px)": {
+        width: "40px",
+        height: "40px !important",
+        margin: "5px 8px",
+        minWidth:"unset",
+      },
     },
     "& .Banner_textFild": {
       position: "relative",
@@ -515,7 +520,7 @@ export default function Home() {
                   className={"Banner_inputField"}
                 />
                 <Button className="searchbox">
-                  <SearchIcon style={{ fontSize: "25px", color: "#FFFF" }} />
+                  <MicIcon style={{ fontSize: "25px", color: "#FFFF" }} />
                 </Button>
               </Box>
             </Box>
