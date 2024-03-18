@@ -106,7 +106,7 @@ const PriceBox = styled("Box")(({ theme }) => ({
     "@media(max-width:615px)": {
      fontSize:"13px",
      padding:"0px !important",
-     margin:"3px",
+     margin:"0px",
     },
   }
 }));

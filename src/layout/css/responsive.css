@@ -83,6 +83,10 @@ align-items: center;
         right: 7px;
         top: 4px;
     }
+    .custom-radio-group {
+        margin: 0px !important;
+        padding: 0 0 0 0px !important;
+    }
     
   }
   
