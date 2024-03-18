@@ -18,7 +18,6 @@ export default function ClientPage() {
       <SliderComponent />
       <CardComponent />
       <BannerCompont />
-
       <ResidentialProjects />
       <CommercialProjects />
       <AgreecultureComponent />

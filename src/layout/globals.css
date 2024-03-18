@@ -1,5 +1,5 @@
-
-
+@import '../layout/css/style.css';
+@import '../layout/css/responsive.css';
 * {
   box-sizing: border-box;
   padding: 0;

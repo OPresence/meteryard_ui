@@ -127,6 +127,11 @@ const sections = [
             href: "/cities",
           },
           {
+            title: "Area",
+            icon: PanoramaFishEyeIcon,
+            href: "/area",
+          },
+          {
             title: "Project Types",
             icon: PanoramaFishEyeIcon,
             href: "/project-type",

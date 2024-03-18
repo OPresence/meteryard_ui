@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Grid, Typography, Box, Container } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import styled from "@emotion/styled";
@@ -6,12 +6,14 @@ import Divider from "@mui/material/Divider";
 import ButtonComponent from "./ButtonComponent";
 import { PostApiFunction } from "../utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
-
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const Commercialstyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     background: "#fff",
     "& .mainBoxCard": {
-      marginTop: "144px",
+      marginTop: "54px",
       "@media(max-width:615px)": {
         marginTop: "0",
       },
@@ -53,7 +55,7 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
     "& .contentBox": {
       boxShadow: "0px 5px 10px 0px rgba(0, 0, 0, 0.5)",
       padding: "10px",
-      marginTop: "-30px",
+      marginTop: "69px",
       background: "#fff",
       borderRadius: "10px",
       position: "relative",
@@ -97,23 +99,82 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
 }));
 
 const CommercialProjects = () => {
-  const projectDetails = [
-    {
-      image: "/images/meteryard/Images/Image 23.png",
-    },
-    {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100309.png",
-    },
-    {
-      image: "/images/meteryard/Images/Image 23.png",
-    },
-    {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100420.png",
-    },
-  ];
+  const sliderRef = useRef(null);
   const [_getlist, setGetList] = useState([]);
   const [_isloading, setIsLoading] = useState(false);
+  const settings = {
+    dots: false,
+    infinite: true,
+    autoplay: false,
+    arrows: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
 
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: true,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          infinite: true,
+          autoplay: true,
+          initialSlide: 1,
+        },
+      },
+    ],
+  };
   const ResidentialAPI = async () => {
     try {
       setIsLoading(true);
@@ -150,10 +211,96 @@ const CommercialProjects = () => {
             </Typography>
           </Box>
           <Box className="mainBoxCard">
-            <Grid container spacing={2}>
-              {_getlist.map((data, index) => {
-                console.log("datadnjfdjf--->", index);
-                if (index < 8) {
+            {_getlist?.length > 4 ? (
+              <>
+                <Slider {...settings} ref={sliderRef}>
+                  {_getlist.map((data, index) => {
+                    console.log("datadnjfdjf--->", index);
+                    return (
+                      <Grid
+                        item
+                        lg={3}
+                        md={3}
+                        sm={6}
+                        xs={12}
+                        className="GridClassCard"
+                        style={index > 3 ? { marginTop: "60px" } : {}}
+                      >
+                        <Box className="cardBox" key={index}>
+                          <Box className="cards">
+                            <Box display={"flex"} justifyContent={"center"}>
+                              <Box className="contentBox" width={"90%"}>
+                                <Box>
+                                  <Box
+                                    display={"flex"}
+                                    justifyContent={"center"}
+                                    m={"-95px 0 0 0"}
+                                  >
+                                    <Box maxWidth={280}>
+                                      <img
+                                        src={data?.coverImage}
+                                        width={"100%"}
+                                        style={{ borderRadius: "15px" }}
+                                      />
+                                    </Box>
+                                  </Box>
+                                </Box>
+                                <Typography
+                                  variant="h5"
+                                  style={{ padding: "20px 25px 9px" }}
+                                >
+                                  {data?.projectName}{" "}
+                                </Typography>
+                                <Box display={"flex"} mt={1}>
+                                  <FmdGoodIcon />
+                                  &nbsp;
+                                  <Box m={"0 0 0 5px"}>
+                                    <Typography variant="h4">
+                                      {data?.title}{" "}
+                                    </Typography>
+                                    <Typography variant="h6">
+                                      {data?.description}
+                                    </Typography>
+                                    <Box m={"10px 0"}>
+                                      <Divider color="#D2D2D2" />
+                                    </Box>
+                                    <Box
+                                      display={"flex"}
+                                      alignItems={"center"}
+                                      justifyContent={"space-between"}
+                                    >
+                                      <Box>
+                                        <Typography variant="h6">
+                                          Property Size
+                                        </Typography>
+                                        <Typography variant="h5">
+                                          {data?.superBuildupArea}
+                                        </Typography>
+                                      </Box>
+                                      <Box>
+                                        <Typography variant="h6">
+                                          Price
+                                        </Typography>
+                                        <Typography variant="h5">
+                                          {data?.price}/-
+                                        </Typography>
+                                      </Box>
+                                    </Box>
+                                    <ButtonComponent data={data} />
+                                  </Box>
+                                </Box>
+                              </Box>
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Grid>
+                    );
+                  })}
+                </Slider>
+              </>
+            ) : (
+              <>
+                {_getlist.map((data, index) => {
                   return (
                     <Grid
                       item
@@ -233,9 +380,10 @@ const CommercialProjects = () => {
                       </Box>
                     </Grid>
                   );
-                }
-              })}
-            </Grid>
+                })}
+              </>
+            )}
+
             {_getlist?.length > 7 && (
               <Box
                 display={"flex"}

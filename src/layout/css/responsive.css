@@ -1,0 +1,34 @@
+/* ==================Mobile view css start ==================*/
+
+@media only screen and (max-width: 768px) {
+    .backImage {
+        margin-top: 15px !important;
+        left: 0px !important;
+    }
+    .handImage {
+        top: 12px !important;
+        left: 20px !important;
+        width: 260px !important;
+    }
+    .handImage img{
+        transform: scaleX(-1);
+    }
+    .project-slider{
+        width: 100% !important;
+    }
+    .searchbox{
+        border-radius: 15px !important;
+    }
+    .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+        padding: 14px !important;
+    }
+    .buyer-seller-btn{
+        margin-right: 20px !important;
+    }
+    .projects-card h2{
+margin-bottom: 5px;
+    }
+    
+  }
+  
+  /* ==================Mobile view css end ==================*/
