@@ -3,7 +3,7 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/admin-login": "pages/admin-login.js",
-  "/CityChat": "pages/CityChat.js",
   "/admin": "pages/admin.js",
+  "/": "pages/index.js",
   "/area": "pages/area.js"
 }
