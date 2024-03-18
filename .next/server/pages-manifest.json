@@ -2,7 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/area": "pages/area.js",
-  "/": "pages/index.js",
-  "/CityChat": "pages/CityChat.js"
+  "/admin-login": "pages/admin-login.js",
+  "/CityChat": "pages/CityChat.js",
+  "/admin": "pages/admin.js",
+  "/area": "pages/area.js"
 }
