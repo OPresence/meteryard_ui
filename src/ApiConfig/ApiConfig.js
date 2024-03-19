@@ -186,6 +186,22 @@ const Apiconfigs = {
   listAllAreaUnit: `${masterLink}/listAllAreaUnit`,
   deleteAreaUnit: `${masterLink}/deleteAreaUnit`,
   activeDeactiveAreaUnit: `${masterLink}/activeDeactiveAreaUnit`,
+
+  // MASTER LOCAL AREA MANAGEMENT
+  createLocalArea: `${masterLink}/createLocalArea`,
+  editLocalArea: `${masterLink}/editLocalArea`,
+  viewLocalArea: `${masterLink}/viewLocalArea`,
+  listAllLocalArea: `${masterLink}/listAllLocalArea`,
+  deleteLocalArea: `${masterLink}/deleteLocalArea`,
+  activeDeactiveLocalArea: `${masterLink}/activeDeactiveLocalArea`,
+
+  // ENQUIRY MANAGEMENT
+  generateEnquiry: `${user}/generateEnquiry`,
+  editEnquiry: `${user}/editEnquiry`,
+  viewEnquiry: `${user}/viewEnquiry`,
+  listAllEnquiry: `${user}/listAllEnquiry`,
+  deleteEnquiry: `${user}/deleteEnquiry`,
+  changePassword: `${user}/changePassword`,
 };
 
 export default Apiconfigs;

@@ -1,12 +1,3 @@
-// import React from 'react'
-
-// const AddArea = () => {
-//   return (
-//     <div>AddArea</div>
-//   )
-// }
-
-// export default AddArea
 import React, { useEffect, useState } from "react";
 import {
   PostApiFunction,
@@ -14,6 +5,7 @@ import {
   DeleteApiFunction,
   convertDateTime,
 } from "../../utils";
+
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import {
   Button,
@@ -62,11 +54,20 @@ const AddArea = ({
   const [_countrycode, setCountryCode] = useState("");
   console.log("_countrycode-->", _countrycode);
   const [_countrylist, setCountryList] = useState([]);
+  const [_statename, setStateName] = useState("");
   const [_statelist, setStateList] = useState([]);
+  const [address, setAddress] = useState("");
+  const [_citylist, setCityList] = useState([]);
+
+  const [coordinates, setCoordinates] = useState({
+    lat: 27.1881,
+    lng: 77.935,
+  });
   const [_initialstate, setInitialState] = useState({
     countryName: "",
     stateName: "",
     cityName: "",
+    Local_Area_Name: "",
     homeStatus: "",
     status: "",
   });
@@ -75,6 +76,7 @@ const AddArea = ({
     countryName: yep.string().required("country name is required."),
     stateName: yep.string().required("state name is required."),
     cityName: yep.string().required("city name is required."),
+    Local_Area_Name: yep.string().required("local area name is required."),
     homeStatus: yep
       .string()
       .required("Please select dropdown show on home screen is required."),
@@ -108,10 +110,12 @@ const AddArea = ({
         endPoint: Apiconfigs?.listAllState,
         data: {
           limit: "10",
+          page: "1",
+          countryId: _countrycode,
         },
-        params: {
-          stateId: _countrycode,
-        },
+        // params: {
+        //   stateId: _countrycode,
+        // },
       });
       if (res) {
         if (res?.responseCode == 200) {
@@ -126,6 +130,33 @@ const AddArea = ({
       console.log(error);
     }
   };
+  const GetCityList = async () => {
+    try {
+      console.log("hdsbbfdsjbfjds--->", _statename);
+
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllCity,
+        data: {
+          limit: "10",
+          stateId: _statename,
+        },
+        // params: {
+        //   stateId: _statename,
+        // },
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setCityList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+        } else {
+          setCityList([]);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
     GetCountryList();
   }, []);
@@ -134,6 +165,11 @@ const AddArea = ({
       GetStateList();
     }
   }, [_countrycode]);
+  useEffect(() => {
+    if (_statename) {
+      GetCityList();
+    }
+  }, [_statename]);
   return (
     <div>
       <Formik
@@ -213,7 +249,11 @@ const AddArea = ({
                         label="Select state"
                         name="stateName"
                         value={values?.stateName}
-                        onChange={handleChange}
+                        // onChange={handleChange}
+                        onChange={(e) => {
+                          setStateName(e.target.value);
+                          setFieldValue("stateName", e.target.value);
+                        }}
                         onBlur={handleBlur}
                       >
                         {_statelist &&
@@ -233,22 +273,62 @@ const AddArea = ({
                 </Grid>
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        City Name
+                      </InputLabel>
+                      <Select
+                        disabled={_image_upload || _isloading}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label="Select state"
+                        name="cityName"
+                        value={values?.cityName}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        {_citylist &&
+                          _citylist?.map((data, index) => {
+                            return (
+                              <MenuItem value={data?._id}>
+                                {data?.cityName}
+                              </MenuItem>
+                            );
+                          })}
+                      </Select>
+                      <FormHelperText error>
+                        {touched.cityName && errors.cityName}
+                      </FormHelperText>
+                    </FormControl>
+                  </Box>
+                </Grid>
+                <Grid item lg={6} md={6} sm={12}>
+                  <Box mt={2}>
                     <TextField
                       fullWidth
                       disabled={_image_upload || _isloading}
                       id="outlined-basic"
-                      label="City Name"
+                      label="Local Area Name"
                       variant="outlined"
-                      placeholder="Enter your state name"
-                      name="cityName"
-                      value={values?.cityName}
+                      placeholder="Enter your local area name"
+                      name="Local_Area_Name"
+                      value={values?.Local_Area_Name}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
                     <FormHelperText error>
-                      {touched.cityName && errors.cityName}
+                      {touched.Local_Area_Name && errors.Local_Area_Name}
                     </FormHelperText>
                   </Box>
+                  {/* <Box mt={2}>
+                    <LocationDialog
+                      address={address}
+                      setAddress={setAddress}
+                      coordinates={coordinates}
+                      setCoordinates={setCoordinates}
+                      type="Area"
+                    />
+                  </Box> */}
                 </Grid>
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
@@ -324,7 +404,7 @@ const AddArea = ({
                         background: "#A2D117",
                       }}
                     >
-                      <span>Create State</span>
+                      <span>Create Local Area</span>
                       {_isloading && (
                         <>
                           &nbsp;&nbsp;

@@ -26,6 +26,7 @@ import ViewFacing from "../../property-facing/ViewFacing";
 import ViewBlog from "../../blog/ViewBlog";
 import ViewTestimonial from "../../testimonial/ViewTestimonial";
 import ViewVideo from "../../property-videos/ViewVideo";
+import ViewArea from "../../../pages/area/ViewArea";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -179,6 +180,22 @@ export default function ViewDialog({
                   <Box>
                     {open && (
                       <ViewState
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        ImageUpload={ImageUpload}
+                        _image_upload={_image_upload}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </Box>
+                ) : ButtonName == "View Area" ? (
+                  <Box>
+                    {open && (
+                      <ViewArea
                         handleClose={handleClose}
                         ButtonName={ButtonName}
                         _viewData={_viewData}

@@ -91,6 +91,18 @@ const MainComponent = styled("Box")(({ theme }) => ({
     },
   },
 }));
+const DrowerComponent = styled("Box")(({ theme }) => ({
+  "& .drowerClass": {
+    width: "260px",
+    height: "100%",
+    display: "flex",
+    padding: "20px 0px 20px 20px",
+    "& .LogoBox": {
+      maxWidth: "190px",
+    },
+  },
+}));
+
 export default function Topbar() {
   const auth = useContext(AuthContext);
 
@@ -159,41 +171,32 @@ export default function Topbar() {
   useEffect(() => {
     GetProfileFunction();
   }, []);
-  const femmecubatorLogo = (
-    <Box className="LogoBox">
-      <Link href="/">
-        <Logo className="logoImg" />
-      </Link>
-    </Box>
-  );
+  const femmecubatorLogo = <Logo className="LogoBox" />;
   {
   }
 
   const displayMobile = () => {
     return (
-      <Toolbar className={""}>
+      <Toolbar>
         <Hidden xsDown>
-          <Drawer
-            anchor="right"
-            open={drawerOpen}
-            onClose={handleDrawerClose}
-            style={{
-              width: "260px",
-              height: "100%",
-              display: "flex",
-              padding: "20px 0px 20px 20px",
-            }}
-          >
-            <Box
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "20px",
-              }}
+          <DrowerComponent>
+            <Drawer
+              anchor="right"
+              open={drawerOpen}
+              onClose={handleDrawerClose}
+              className="drowerClass"
             >
-              {femmecubatorLogo}
-            </Box>
-          </Drawer>
+              <Container>
+                <Link href="/">
+                  <Box className="LogoBox" maxWidth={170}>
+                    <Link href="/" passHref>
+                      {femmecubatorLogo}
+                    </Link>
+                  </Box>
+                </Link>
+              </Container>
+            </Drawer>
+          </DrowerComponent>
         </Hidden>
         <Box
           className="topbarmainBox"
@@ -202,7 +205,11 @@ export default function Topbar() {
           width={"100%"}
           alignItems="center"
         >
-          <div>{femmecubatorLogo}</div>
+          <div>
+            <Link href="/" passHref>
+              {femmecubatorLogo}
+            </Link>
+          </div>
           <IconButton
             edge="start"
             color="inherit"
@@ -232,7 +239,13 @@ export default function Topbar() {
             style={{ display: "flex", alignItems: "center" }}
           >
             <Box>
-              <Container>{femmecubatorLogo}</Container>
+              <Container>
+                <Box maxWidth={230}>
+                  <Link href="/" passHref>
+                    {femmecubatorLogo}
+                  </Link>
+                </Box>
+              </Container>
             </Box>
           </Grid>
           <Grid item lg={8} md={8}>

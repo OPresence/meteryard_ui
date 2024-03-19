@@ -13,15 +13,23 @@ const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     height: "100vh",
     overflow: "hidden",
-    "@media(max-width:615px)": {
-      marginBottom: "-140px"
-    },
     "& .backImage": {
       maxWidth: "892px",
       overflow: "hidden",
       position: "relative",
       marginTop: "18px",
       left: "0",
+      "@media(max-width:900px)": {
+        maxWidth: "753px",
+        maxHeight: "575px",
+        overflow: "hidden",
+        position: "relative",
+        marginTop: "20px",
+      },
+      "@media(max-width:615px)": {
+        marginTop: "40px",
+        left: "40px",
+      },
     },
   },
   "& .bacBox": {
@@ -46,10 +54,6 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "& .Banner_inputField": {
       background: "#FFFFFF 0% 0% no-repeat padding-box",
       borderRadius: "11px",
-      "@media(max-width:615px)": {
-        padding: "0px",
-        fontSize:"15px",
-      },
       "& ::placeholder": {
         textAlign: "left",
         font: "normal normal medium 23px/30px Samsung Sharp Sans",
@@ -70,7 +74,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: "15px",
+      borderRadius: "15px 0px 0px 15px",
+      "@media(max-width:615px)": {
+        right: "-30px",
+      },
     },
     "& .Banner_textFild": {
       position: "relative",
@@ -78,22 +85,19 @@ const MainComponent = styled("Box")(({ theme }) => ({
       boxShadow: "0px 3px 27px #68686829",
       borderRadius: "11px",
       opacity: "1",
-      width: "100%",
+      width: "10%",
       transition: "0.8s",
       marginLeft: "20px",
       "@media(max-width:615px)": {
-        margin: "0px",
         marginLeft: "0px",
-        marginTop: "30px",
-        width:"95% !important",
-        margin:"auto",
+        padding: "0 0 0 20px",
       },
 
       "&:hover": {
         transition: "0.8s",
-        width: "100%",
+        width: "80%",
         "@media(max-width:615px)": {
-          width: "100%",
+          width: "85%",
           right: "0",
         },
       },
@@ -133,8 +137,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
           padding: "10px",
           maxWidth: "40px !Important",
           "@media(max-width:615px)": {
-            padding: "9px",
-            maxWidth: "38px !important",
+            padding: "5px",
+            maxWidth: "40px !important",
           },
         },
       },
@@ -196,8 +200,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
           padding: "10px",
           maxWidth: "40px !important",
           "@media(max-width:615px)": {
-            padding: "9px",
-            maxWidth: "38px !important",
+            padding: "5px",
+            maxWidth: "40px !important",
           },
         },
       },
@@ -218,13 +222,6 @@ const MainComponent = styled("Box")(({ theme }) => ({
       },
     },
   },
-  "& .banner-heading": {
-    
-    "@media(max-width:615px)": {
-      marginTop: "0px",
-    },
-  },
-  
 }));
 
 export default function Home() {
@@ -398,11 +395,11 @@ export default function Home() {
   }, [selectedImages]);
   return (
     <MainComponent>
-       <Container maxWidth>
       <Box>
+        <Container maxWidth>
           <Box position={"absolute"} className="contentBox">
             <Box>
-              <Typography variant="h1" className="banner-heading">
+              <Typography variant="h1">
                 <span className="find">Find Your Place</span>
                 <span className="Make">, Make It Home</span>
               </Typography>
@@ -411,7 +408,7 @@ export default function Home() {
                   Please Select Your Category
                 </Typography>
               </Box>
-              <Box display={"flex"} justifyContent={"center"} className="buyer-seller-btn">
+              <Box display={"flex"}>
                 <Box
                   mt={5}
                   position={"relative"}
@@ -495,11 +492,12 @@ export default function Home() {
                   className={"Banner_inputField"}
                 />
                 <Button className="searchbox">
-                  <SearchIcon style={{ fontSize: "25px", color: "#FFFF" }} />
+                  <SearchIcon style={{ fontSize: "43px", color: "#FFFF" }} />
                 </Button>
               </Box>
             </Box>
           </Box>
+        </Container>
         <Box className="mainBox">
           <Box display={"flex"} justifyContent={"end"} className="bacBox">
             <Box>
@@ -557,8 +555,6 @@ export default function Home() {
         handleClose={handleClose}
         handleClickOpen={handleClickOpen}
       /> */}
-      
-      </Container>
     </MainComponent>
   );
 }

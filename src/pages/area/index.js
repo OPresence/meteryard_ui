@@ -63,12 +63,12 @@ const StateComponent = () => {
     {
       title: "Country",
     },
-    {
-      title: "CreatedAt",
-    },
-    {
-      title: "Status",
-    },
+    // {
+    //   title: "CreatedAt",
+    // },
+    // {
+    //   title: "Status",
+    // },
     {
       title: "Action",
     },
@@ -136,11 +136,11 @@ const StateComponent = () => {
     }
   };
 
-  const GetCityList = async () => {
+  const getLocalArea = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllAreaUnit,
+        endPoint: Apiconfigs?.listAllLocalArea,
         data: {
           page: page,
           limit: "10",
@@ -167,23 +167,28 @@ const StateComponent = () => {
     }
   };
 
-  const Add_Country = async (value) => {
+  const Add_Local_Area = async (value) => {
     try {
       setIsLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs.createAreaUnit,
+        endPoint: Apiconfigs.createLocalArea,
         data: {
-          cityName: value?.cityName,
+          cityId: value?.cityName,
           stateId: value?.stateName,
           countryId: value?.countryName,
           status: value?.status,
           homeStatus: value?.showHome,
+          localAreaName: value?.Local_Area_Name,
+          location: {
+            type: "Point",
+            coordinates: [28.6139, 77.209],
+          },
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          getLocalArea();
           setIsLoading(false);
           handleClose();
         } else if (res?.responseCode == 404) {
@@ -206,24 +211,29 @@ const StateComponent = () => {
       console.log("error", error);
     }
   };
-  const Update_Country = async (value) => {
+  const Update_Local_Area = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.editAreaUnit,
+        endPoint: Apiconfigs.editLocalArea,
         data: {
-          cityName: value?.cityName,
+          cityId: value?.cityName,
           stateId: value?.stateName,
           countryId: value?.countryName,
           status: value?.status,
           homeStatus: value?.showHome,
+          localAreaName: value?.Local_Area_Name,
+          location: {
+            type: "Point",
+            coordinates: [28.6139, 77.209],
+          },
         },
         params: {
-          cityId: _viewData?._id,
+          localAreaId: _viewData?._id,
         },
       });
       if (res) {
-        GetCityList();
+        getLocalArea();
         if (res?.responseCode == 200) {
           setIsLoading(false);
           handleViewClose();
@@ -248,19 +258,19 @@ const StateComponent = () => {
       console.log("error", error);
     }
   };
-  const AD_country = async (value) => {
+  const AD_Local_Area = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.activeDeactiveAreaUnit,
+        endPoint: Apiconfigs.activeDeactiveLocalArea,
         params: {
-          cityId: _viewData?._id,
+          localAreaId: _viewData?._id,
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          getLocalArea();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -283,19 +293,19 @@ const StateComponent = () => {
       console.log("error", error);
     }
   };
-  const DeleteBanner = async (value) => {
+  const Delete_local_Area = async (value) => {
     try {
       setIsLoading(true);
       const res = await DeleteApiFunction({
-        endPoint: Apiconfigs.deleteAreaUnit,
+        endPoint: Apiconfigs.deleteLocalArea,
         params: {
-          cityId: _viewData?._id,
+          localAreaId: _viewData?._id,
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          getLocalArea();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -320,7 +330,7 @@ const StateComponent = () => {
   };
   useEffect(() => {
     if (page) {
-      GetCityList();
+      getLocalArea();
     }
   }, [page]);
   return (
@@ -337,7 +347,7 @@ const StateComponent = () => {
               handleClose={handleClose}
               handleClickOpen={handleOpen}
               ImageUpload={ImageUpload}
-              AddMoreList={Add_Country}
+              AddMoreList={Add_Local_Area}
               _isloading={_isloading}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}
@@ -350,11 +360,12 @@ const StateComponent = () => {
             ) : (
               <TableList
                 data={_bannerlist?.map((data, index) => ({
-                  "City name": data?.cityName,
-                  Country: data?.countryId?.countryName,
+                  "Area name": data?.localAreaName,
+                  City: data?.cityId?.cityName,
                   State: data?.stateId?.stateName,
-                  CreatedAt: convertDateTime(data?.createdAt),
-                  Status: data?.status,
+                  Country: data?.countryId?.countryName,
+                  // CreatedAt: convertDateTime(data?.createdAt),
+                  // Status: data?.status,
 
                   Action: (
                     <Box className="iconBox">
@@ -406,14 +417,14 @@ const StateComponent = () => {
           {openView && (
             <ViewDialog
               title="Area List"
-              ButtonName="Add Area"
-              HeadingDialog="Add Area"
+              ButtonName="View Area"
+              HeadingDialog={_IconType == "VIEW" ? "View Area" : "Edit Area"}
               _viewData={_viewData}
               setViewData={setViewData}
               open={openView}
               handleClickOpen={handleViewOpen}
               handleClose={handleViewClose}
-              AddMoreList={Update_Country}
+              AddMoreList={Update_Local_Area}
               type={_IconType}
               _isloading={_isloading}
               ImageUpload={ImageUpload}
@@ -426,11 +437,11 @@ const StateComponent = () => {
             _confirm={_confirm}
             confirmModalOpen={confirmModalOpen}
             confirmModalClose={confirmModalClose}
-            AD_Banner={AD_country}
+            AD_Banner={AD_Local_Area}
             _isloading={_isloading}
             type={_IconType}
-            screen="state"
-            DeleteBanner={DeleteBanner}
+            screen="area"
+            DeleteBanner={Delete_local_Area}
           />
         </Box>
       </Root>

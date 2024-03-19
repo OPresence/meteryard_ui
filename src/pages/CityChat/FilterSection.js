@@ -328,11 +328,13 @@ const FilterSection = () => {
               </Box>
             </Grid>
           </Grid>
-          <EnquiryForm
-            open={open}
-            setOpen={setOpen}
-            handleClose={handleClose}
-          />
+          {open && (
+            <EnquiryForm
+              open={open}
+              setOpen={setOpen}
+              handleClose={handleClose}
+            />
+          )}
         </Container>
       </Box>
     </BuyerStyle>

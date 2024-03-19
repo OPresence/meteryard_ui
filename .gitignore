@@ -21,7 +21,12 @@ sonarqube.sh
 /.env.development.local
 /.env.test.local
 /.env.production.local
-
+/.pack
+/.next
+.next
+.pack
+.pack.gz
+.trace
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

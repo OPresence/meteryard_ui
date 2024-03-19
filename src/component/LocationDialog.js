@@ -40,6 +40,7 @@ const LocationDialog = ({
   setAddress,
   coordinates,
   setCoordinates,
+  type,
 }) => {
   const mapStyles = {
     height: "250px",
@@ -72,9 +73,10 @@ const LocationDialog = ({
               <TextField
                 {...getInputProps({
                   fullWidth: true,
-                  label: "Location",
+                  label: type != "Area" ? "Location" : "Local Area Name",
                   variant: "outlined",
-                  placeholder: "Enter location",
+                  placeholder:
+                    type != "Area" ? "Enter location" : "Enter Local Area Name",
                   name: "location",
                 })}
               />
@@ -112,11 +114,17 @@ const LocationDialog = ({
         </PlacesAutocomplete>
       </Box>
       {console.log("coordinates--->", coordinates)}
-      <Box mt={2} zIndex={0}>
-        <GoogleMap mapContainerStyle={mapStyles} zoom={14} center={coordinates}>
-          <Marker position={coordinates} />
-        </GoogleMap>
-      </Box>
+      {type != "Area" && (
+        <Box mt={2} zIndex={0}>
+          <GoogleMap
+            mapContainerStyle={mapStyles}
+            zoom={14}
+            center={coordinates}
+          >
+            <Marker position={coordinates} />
+          </GoogleMap>
+        </Box>
+      )}
     </LocationStyle>
   );
 };

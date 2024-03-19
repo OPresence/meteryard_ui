@@ -62,30 +62,6 @@ const CreateAdmin = ({
     password: yep.string().required("Password is required."),
     phoneNo: yep.string().required("Phone Number is required."),
   });
-  // const DepartList = async (value, code) => {
-  //   console.log("value000--->", value, code);
-  //   try {
-  //     const res = await PostApiFunction({
-  //       endPoint: Apiconfigs.listAllDepartment,
-  //     });
-  //     if (res) {
-  //       if (res?.responseCode == 200) {
-  //         setDepartmentList(res?.result?.docs);
-  //       } else if (res?.responseCode == 404) {
-  //         toast.error(res?.responseMessage);
-  //       } else if (res?.responseCode == 501) {
-  //         toast.error(res?.responseMessage);
-  //       } else {
-  //         toast.error(res?.responseMessage);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   DepartList();
-  // }, []);
   return (
     <div>
       <Formik

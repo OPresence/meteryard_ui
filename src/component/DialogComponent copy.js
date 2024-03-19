@@ -26,6 +26,7 @@ import AddFacing from "../pages/property-facing/AddFacing";
 import AddBlog from "../pages/blog/AddBlog";
 import AddTestimonial from "../pages/testimonial/AddTestimonial";
 import AddVideo from "../pages/property-videos/AddVideo";
+import AddArea from "../pages/area/AddArea";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -186,6 +187,15 @@ export default function AlertDialogSlide({
                   />
                 ) : ButtonName == "Update Country" ? (
                   <UpdateCountry
+                    handleClose={handleClose}
+                    ButtonName={ButtonName}
+                    ImageUpload={ImageUpload}
+                    _image_upload={_image_upload}
+                    _isloading={_isloading}
+                    AddMoreList={AddMoreList}
+                  />
+                ) : ButtonName == "Add Area" ? (
+                  <AddArea
                     handleClose={handleClose}
                     ButtonName={ButtonName}
                     ImageUpload={ImageUpload}

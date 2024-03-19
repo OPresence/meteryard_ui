@@ -61,14 +61,17 @@ const ViewArea = ({
   type,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
-  console.log("_countrycode-->", _viewData);
   const [_countrylist, setCountryList] = useState([]);
   const [_statelist, setStateList] = useState([]);
+  const [_citylist, setCityList] = useState([]);
+  const [_statename, setStateName] = useState("");
+
   const [_initialstate, setInitialState] = useState({
     countryName: "",
     stateName: "",
     cityName: "",
     homeStatus: "",
+    Local_Area_Name: "",
     status: "",
   });
 
@@ -76,6 +79,8 @@ const ViewArea = ({
     countryName: yep.string().required("country name is required."),
     stateName: yep.string().required("state name is required."),
     cityName: yep.string().required("city name is required."),
+    Local_Area_Name: yep.string().required("local area name is required."),
+
     homeStatus: yep
       .string()
       .required("Please select dropdown show on home screen is required."),
@@ -109,9 +114,7 @@ const ViewArea = ({
         endPoint: Apiconfigs?.listAllState,
         data: {
           limit: "10",
-        },
-        params: {
-          stateId: _countrycode,
+          countryId: _countrycode,
         },
       });
       if (res) {
@@ -127,17 +130,51 @@ const ViewArea = ({
       console.log(error);
     }
   };
+  const GetCityList = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllCity,
+        data: {
+          limit: "10",
+          stateId: _statename,
+        },
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setCityList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+        } else {
+          setCityList([]);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     GetCountryList();
-    GetStateList();
   }, []);
   useEffect(() => {
+    if (_countrycode) {
+      GetStateList();
+    }
+  }, [_countrycode]);
+  useEffect(() => {
+    if (_statename) {
+      GetCityList();
+    }
+  }, [_statename]);
+  useEffect(() => {
+    setCountryCode(_viewData?.countryId?._id);
+    setStateName(_viewData?.stateId?._id);
     setInitialState({
       countryName: _viewData?.countryId?._id,
       stateName: _viewData?.stateId?._id,
-      cityName: _viewData?.cityName,
-      // homeStatus: _viewData?.countryId?.countryName,
-      homeStatus: "YES",
+      cityName: _viewData?.cityId?._id,
+      Local_Area_Name: _viewData?.localAreaName,
+      homeStatus: _viewData?.homeStatus,
       status: _viewData?.status,
     });
   }, []);
@@ -170,7 +207,7 @@ const ViewArea = ({
           setFieldValue,
         }) => (
           <Form>
-            <Box justifyContent={"center"} mt={3} mb={5}>
+            <Box justifyContent={"center"} mt={3}>
               <Grid container spacing={2}>
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
@@ -220,7 +257,10 @@ const ViewArea = ({
                         label=""
                         name="stateName"
                         value={values?.stateName}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                          setStateName(e.target.value);
+                          setFieldValue("stateName", e.target.value);
+                        }}
                         onBlur={handleBlur}
                       >
                         {_statelist &&
@@ -240,20 +280,53 @@ const ViewArea = ({
                 </Grid>
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">
+                        City Name
+                      </InputLabel>
+                      <Select
+                        disabled={type == "VIEW" ? true : false || _isloading}
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        label=""
+                        name="cityName"
+                        value={values?.cityName}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      >
+                        {console.log("_citylist0---->", _citylist)}
+                        {_citylist &&
+                          _citylist?.map((data, index) => {
+                            return (
+                              <MenuItem value={data?._id}>
+                                {data?.cityName}
+                              </MenuItem>
+                            );
+                          })}
+                      </Select>
+                      <FormHelperText error>
+                        {touched.cityName && errors.cityName}
+                      </FormHelperText>
+                    </FormControl>
+                  </Box>
+                </Grid>
+                <Grid item lg={6} md={6} sm={12}>
+                  <Box mt={2}>
                     <TextField
                       fullWidth
                       disabled={type == "VIEW" ? true : false || _isloading}
+                      // disabled={_image_upload || _isloading}
                       id="outlined-basic"
-                      label="City name"
+                      label="Local Area Name"
                       variant="outlined"
-                      placeholder="Enter your state name"
-                      name="cityName"
-                      value={values?.cityName}
+                      placeholder="Enter your local area name"
+                      name="Local_Area_Name"
+                      value={values?.Local_Area_Name}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
                     <FormHelperText error>
-                      {touched.cityName && errors.cityName}
+                      {touched.Local_Area_Name && errors.Local_Area_Name}
                     </FormHelperText>
                   </Box>
                 </Grid>
@@ -261,7 +334,7 @@ const ViewArea = ({
                   <Box mt={2}>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">
-                        show on home page{" "}
+                        show on home page
                       </InputLabel>
                       <Select
                         disabled={type == "VIEW" ? true : false || _isloading}
@@ -273,8 +346,8 @@ const ViewArea = ({
                         onChange={handleChange}
                         onBlur={handleBlur}
                       >
-                        <MenuItem value={"YES"}>YES</MenuItem>
-                        <MenuItem value={"NO"}>NO</MenuItem>
+                        <MenuItem value={true}>YES</MenuItem>
+                        <MenuItem value={false}>NO</MenuItem>
                       </Select>
                       <FormHelperText error>
                         {touched.homeStatus && errors.homeStatus}
@@ -308,49 +381,48 @@ const ViewArea = ({
                   </Box>
                 </Grid>
               </Grid>
-              {type != "VIEW" && (
-                <Box
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  mt={3}
-                  gap={"50px"}
-                >
-                  <DialogButtonStyle>
-                    <Box display={"flex"} gap={"20px"}>
-                      <Button
-                        onClick={handleClose}
-                        disabled={type == "VIEW" ? true : false || _isloading}
-                      >
-                        <span>CANCEL</span>
-                      </Button>
-                      <Button
-                        disabled={type == "VIEW" ? true : false || _isloading}
-                        type="submit"
-                        style={{
-                          background: "#A2D117",
-                        }}
-                      >
-                        <span>Create State</span>
-                        {_isloading && (
-                          <>
-                            &nbsp;&nbsp;
-                            <CircularProgressComponent colorValue="#fff" />
-                          </>
-                        )}
-                      </Button>
-                      {type == "VIEW"
-                        ? true
-                        : false && (
-                            <Box>
+              <Box
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                mt={3}
+                gap={"50px"}
+              >
+                <DialogButtonStyle>
+                  <Box display={"flex"} gap={"20px"}>
+                    <Button onClick={handleClose} disabled={_isloading}>
+                      <span>CANCEL</span>
+                    </Button>
+                    {type != "VIEW" && (
+                      <>
+                        <Button
+                          disabled={type == "VIEW" ? true : false || _isloading}
+                          type="submit"
+                          style={{
+                            background: "#A2D117",
+                          }}
+                        >
+                          <span>Create State</span>
+                          {_isloading && (
+                            <>
                               &nbsp;&nbsp;
-                              <CircularProgressComponent colorValue="#000" />
-                            </Box>
+                              <CircularProgressComponent colorValue="#fff" />
+                            </>
                           )}
-                    </Box>
-                  </DialogButtonStyle>
-                </Box>
-              )}
+                        </Button>
+                        {type == "VIEW"
+                          ? true
+                          : false && (
+                              <Box>
+                                &nbsp;&nbsp;
+                                <CircularProgressComponent colorValue="#000" />
+                              </Box>
+                            )}
+                      </>
+                    )}
+                  </Box>
+                </DialogButtonStyle>
+              </Box>
             </Box>
           </Form>
         )}
