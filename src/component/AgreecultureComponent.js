@@ -14,6 +14,9 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
     padding: "80px 0px",
     background: "#fff",
     // padding: "50px",
+    "@media(max-width:615px)": {
+      padding: "20px 0px",
+    },
     "& h2": {
       fontWeight: "500",
     },
@@ -140,12 +143,14 @@ const AgreecultureComponent = () => {
     <ResidentStyle>
       <div className="mainSliderDiv">
         <Container maxWidth>
+        <section>
           <Box>
             <Typography variant="h2">Agriculture Projects</Typography>
             <Typography variant="h6">
               Agriculture Projects Across India.
             </Typography>
           </Box>
+          </section>
           <Box mt={5}>
             <Grid container spacing={3}>
               {_getlist &&

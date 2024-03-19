@@ -27,6 +27,9 @@ const MainComponent = styled("Box")(({ theme }) => ({
     background: "rgba(0,0,0,0.8)",
 
     padding: "60px 0 30px 0",
+    "@media(max-width:615px)": {
+      padding: "20px 0 20px 0",
+    },
     [theme.breakpoints.up("sm")]: {
       paddingTop: theme.spacing(4),
     },
@@ -62,7 +65,17 @@ const MainComponent = styled("Box")(({ theme }) => ({
       maxWidth: "300px",
       fontWeight: 300,
       color: "#FFFF",
+      "@media(max-width:615px)": {
+        lineHeight:"31px"
+      },
     },
+    "& .emailsection": {
+      marginTop: "40px",
+      "@media(max-width:615px)": {
+        marginTop: "25px",
+      },
+    },
+    
   },
   "& .footer_menu_title": {
     "& h5": {
@@ -92,7 +105,11 @@ const MainComponent = styled("Box")(({ theme }) => ({
     padding: "20px 0",
     borderBottom: "1px solid #f1f1f14d",
     gap: "50px",
+    "@media(max-width:615px)": {
+      display: "block",
+    },
   },
+ 
   "& .bottomFooter": {
     padding: "40px 0px 0",
     display: "flex",
@@ -106,10 +123,17 @@ const MainComponent = styled("Box")(({ theme }) => ({
   },
   "& .suscribe": {
     width: "10%",
+    "@media(max-width:615px)": {
+      width: "100%",
+      marginBottom:"20px",
+    },
     "& h5": {
       color: "#FFFF",
       fontWeight: 400,
       fontSize: "14px",
+      "@media(max-width:615px)": {
+        marginBottom: "10px",
+      },
     },
   },
   "& .text": {
@@ -129,6 +153,13 @@ const MainComponent = styled("Box")(({ theme }) => ({
     width: "100%",
     "@media(max-width:615px)": {
       display: "initial",
+    },
+    "& .city-item-footer": {
+      "@media(max-width:615px)": {
+        flexWrap: "nowrap",
+        overflowX:"auto",
+        marginLeft:"-10px"
+      },
     },
   },
 }));
@@ -164,16 +195,13 @@ const Footer = () => {
                       residential and commercial establishments and rental
                       properties.
                     </Typography>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-
+                    <Box className={"emailsection"}>
                     <Typography variant="h6">
                       {" "}
                       Email: info@meteryard.com
                     </Typography>
                     <Typography variant="h6"> Phone: 9027659397</Typography>
+                    </Box>
                   </Box>
                 </Grid>
 
@@ -268,7 +296,7 @@ const Footer = () => {
                   <Typography variant="h5">OUR PRESENCE</Typography>
                 </Box>
                 <Box className="cityBox">
-                  <Grid container spacing={3}>
+                  <Grid container spacing={3} className="city-item-footer">
                     {/* <Grid item lg={1} md={1} sm={2} xs={2}></Grid> */}
                     {cityName.map((data, index) => {
                       return (

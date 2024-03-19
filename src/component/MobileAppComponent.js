@@ -28,7 +28,7 @@ const MobileAppComponent = () => {
         <Container maxWidth>
           <Box>
             <Box className="backgorunClass">
-              <Box p={"60px 40px"}>
+              <Box className="download-app-section" >
                 <Typography variant="h1">
                   Download 99acres Mobile App
                 </Typography>

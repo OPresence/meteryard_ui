@@ -40,6 +40,10 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
       color: "#444444",
       border: "1px solid #fff",
     },
+    "@media(max-width:615px)": {
+      padding: "10px 18px",
+      marginBottom:"20px"
+     },
   },
 }));
 const PriceBox = styled("Box")(({ theme }) => ({
@@ -81,10 +85,34 @@ const PriceBox = styled("Box")(({ theme }) => ({
         fontSize: "16px",
       },
     },
+    "& .main-upload-file": {
+      "@media(max-width:615px)": {
+        display:"block !important",
+      },
+      "& .CoverImage": {
+        "@media(max-width:615px)": {
+          marginBottom:"10px",
+        },
+      },
+      "& .multipleImageBox": {
+        "@media(max-width:615px)": {
+         alignItems: "start"
+        },
+      },
+      
+    }
   },
+  "& .checkboxStyle span": {
+    "@media(max-width:615px)": {
+     fontSize:"13px",
+     padding:"0px !important",
+     margin:"0px",
+    },
+  }
 }));
 
 const HouseForm = ({
+  
   handleClose,
   _image_upload,
   _isloading,
@@ -255,6 +283,7 @@ const HouseForm = ({
 
     setSelectedImages1(images);
   };
+ 
   return (
     <Box>
       <Box>
@@ -557,7 +586,7 @@ const HouseForm = ({
                         </FormHelperText>
                       </Box>
                     </Grid>
-                    <Grid item lg={12} md={12} sm={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                       <Box mt={2}>
                         <TextField
                           fullWidth
@@ -576,7 +605,7 @@ const HouseForm = ({
                         </FormHelperText>
                       </Box>
                     </Grid>
-                    <Grid item lg={12} md={12} sm={12}>
+                    <Grid item lg={12} md={12} sm={12} xs={12}>
                       <Box mt={2}>
                         <TextField
                           style={{ height: "80px" }}
@@ -608,7 +637,7 @@ const HouseForm = ({
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item lg={4} md={3}>
+                <Grid item lg={4} md={3} sm={12} xs={12}>
                   <PriceBox>
                     <Box className="mainPriceBox">
                       <Box>
@@ -630,7 +659,11 @@ const HouseForm = ({
                             {touched.price && errors.price}
                           </FormHelperText>
                         </Box>
-                        <Box display={"flex"} mt={2} gap={"15px"}>
+                        <Box display={"flex"} mt={2} gap={"15px"} className="main-upload-file">
+                        <Box
+                              display={"flex"}
+                              gap={"5px"}
+                            >
                           <label>
                             <Box className="videoBox">
                               <Typography variant="h2">
@@ -666,7 +699,7 @@ const HouseForm = ({
                             </Box>
                           </label>
                           <label>
-                            <Box className="videoBox">
+                            <Box className="videoBox CoverImage">
                               <Typography variant="h2">Cover Image</Typography>
                               <Box textAlign={"center"} mt={"20px"}>
                                 <input
@@ -704,11 +737,13 @@ const HouseForm = ({
                               {touched.coverImage && errors.coverImage}
                             </FormHelperText>
                           </label>{" "}
+                          </Box>
                           <Box
                             display={"flex"}
                             flexDirection={"column"} // Display items in a column
                             alignItems={"center"}
                             gap={"6px"}
+                            className="multipleImageBox"
                           >
                             <label>
                               <input
@@ -851,7 +886,7 @@ const HouseForm = ({
                     </Box>
                     <Box>
                       <Box display={"flex"} gap={"20px"} mt={2}>
-                        <Box>
+                        <Box display={"inline-flex"} alignItems={"center"} className="checkboxStyle">
                           <span>Terms & Condition</span>
                           <Checkbox
                             required
@@ -860,7 +895,7 @@ const HouseForm = ({
                             onClick={termConditionCheck}
                           />
                         </Box>
-                        <Box>
+                        <Box display={"inline-flex"} alignItems={"center"} className="checkboxStyle">
                           <span>Featured Property</span>
                           <Checkbox
                             checked={_checked}
@@ -878,7 +913,7 @@ const HouseForm = ({
                     gap={"50px"}
                   >
                     <DialogButtonStyle>
-                      <Box display={"flex"} gap={"20px"}>
+                      <Box display={"flex"} gap={"20px"} justifyContent={"left"}>
                         <Button
                           onClick={handleClose}
                           disabled={_image_upload || _isloading || _videoupload}

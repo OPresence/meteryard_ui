@@ -237,7 +237,7 @@ const CardComponent = () => {
                       display={"flex"}
                       justifyContent={"center"}
                     >
-                      <Box className="cards">
+                      <Box className="cards property-card-style">
                         <Box>
                           <img
                             src="/images/meteryard/Images/Screenshot 2023-09-02 100309.png"

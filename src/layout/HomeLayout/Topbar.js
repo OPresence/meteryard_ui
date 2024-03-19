@@ -27,6 +27,7 @@ import "../../Scss/border.css";
 import Apiconfigs from "@/ApiConfig/ApiConfig";
 import { PostApiFunction, getAPIdata } from "@/utils";
 import { AuthContext } from "../../context/Auth";
+import CloseIcon from "@mui/icons-material/Close";
 
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .appbarBox": {
@@ -321,7 +322,7 @@ export default function Topbar() {
   return (
     <MainComponent>
       <AppBar elevation={0} className={"appbarBox"}>
-        <Box>{mobileView ? displayMobile() : displayDesktop()}</Box>
+        {mobileView ? displayMobile() : displayDesktop()}
       </AppBar>
     </MainComponent>
   );

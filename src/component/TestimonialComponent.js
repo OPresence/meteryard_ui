@@ -23,10 +23,15 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
     "& .sliderBox": {
       maxWidth: "250px",
       marginTop: "40px",
+      "@media(max-width:615px)": {
+        maxWidth: "100%",
+        marginTop: "20px",
+      },
 
       "& h6": {
         color: "#fff",
         fontSize: "14px",
+        marginBottom:"20px"
       },
     },
     "& .ArrowClass": {
@@ -54,6 +59,19 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
       marginTop: "-50px",
       "@media(max-width:1080px)": {
         marginTop: "0px",
+        top:"-150px",
+      },
+      "& .ArrowClassprev": {
+        "@media(max-width:1080px)": {
+          position:"absolute",
+          left:"-9px",
+        },
+      },
+      "& .ArrowClassNext": {
+        "@media(max-width:1080px)": {
+          position:"absolute",
+          right:"-9px",
+        },
       },
     },
     "& .Cards": {
@@ -62,6 +80,7 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
       padding: "20px",
       transition: "0.8s",
       transform: "scale(0.9)",
+      borderRadius:"20px",
       "&:hover": {
         transform: "scale(1)",
         transition: "0.8s",
@@ -93,7 +112,10 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     padding: "190px 90px 190px 190px",
     "@media(max-width:1080px)": {
-      padding: "190px 0 0 0",
+      padding: "140px 0 0 0",
+    },
+    "@media(max-width:615px)": {
+      paddingBottom: "40px",
     },
   },
 }));
@@ -190,7 +212,8 @@ const TestimonialComponent = () => {
               <Typography variant="h2">Testimonials</Typography>
                     <Box>
                       <Grid container>
-                        <Grid item lg={3} md={3} sm={3} xs={12}>
+                        <Grid item lg={3} md={3} sm={12} xs={12}>
+                          
                           <Box className={"sliderBox"}>
                             <Typography variant="h6">
                               Lorem Ipsum is simply dummy text of the printing
@@ -305,10 +328,10 @@ const TestimonialComponent = () => {
 
               {/* <Box > */}
               <Box className="arrowsBox">
-                <Box className={"ArrowClass"} onClick={previous}>
+                <Box className={"ArrowClass ArrowClassprev"} onClick={previous}>
                   <NavigateBeforeIcon />
                 </Box>
-                <Box onClick={next} className={"ArrowClass"}>
+                <Box onClick={next} className={"ArrowClass ArrowClassNext"}>
                   <NavigateNextIcon />
                 </Box>
               </Box>
