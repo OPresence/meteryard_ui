@@ -1,0 +1,92 @@
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import { Typography, Box } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import styled from "@emotion/styled";
+import CheckBoxComponent from "src/component/CheckBoxComponent";
+const Accordionstyle = styled("div")(({ theme }) => ({
+  "& .MuiPaper-root": {
+    top: "0px !important",
+    borderRadius: "5px",
+  },
+  "& .accordionstyle": {
+    boxShadow: "none",
+    "& .summary": {
+      height: "60px",
+      margin: "0",
+      padding: "0",
+    },
+    "& h6": {
+      fontSize: "14px",
+      fontWeight: "500",
+    },
+    "& .iconBox": {
+      "& svg": {
+        background: "#C8F2CD",
+        color: "#fff",
+        fontSize: "46px",
+        padding: "8px",
+        borderRadius: "50px",
+      },
+    },
+  },
+}));
+export default function ControlledAccordions({ data, index, imgURL }) {
+  const [expanded, setExpanded] = React.useState(false);
+  const [checked_get, setChecked_Get] = React.useState("");
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  return (
+    <Accordionstyle>
+      <Accordion
+        key={index}
+        className="accordionstyle"
+        expanded={expanded === "panel1"}
+        onChange={handleChange("panel1")}
+      >
+        <AccordionSummary
+          className="summary"
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
+        >
+          <Box display={"flex"} alignItems={"center"} mt={2}>
+            <Box className="iconBox">
+              <img src={imgURL} width={"100%"} />
+            </Box>
+            &nbsp;
+            <Typography variant="h6">{data?.name}</Typography>
+          </Box>
+        </AccordionSummary>
+        <AccordionDetails>
+          {data?.valueName?.map((data, index) => {
+            return (
+              <Box
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent={"center"}
+                mt={"-10px"}
+              >
+                <Typography sx={{ width: "33%", flexShrink: 0 }}>
+                  {data?.name}
+                </Typography>{" "}
+                <Box>
+                  <CheckBoxComponent
+                    data={data}
+                    index={index}
+                    setChecked_Get={setChecked_Get}
+                    // handleChangeCheckBox={handleChangeCheckBox}
+                  />
+                </Box>
+              </Box>
+            );
+          })}
+        </AccordionDetails>
+      </Accordion>
+    </Accordionstyle>
+  );
+}

@@ -8,23 +8,25 @@
 # testing
 /coverage
 
-# next.js
-/.next/
-/out/
-
 # production
 /build
 
 # misc
+.gitlab-ci.yml
+sonarqube.sh
 .DS_Store
-
-# debug
+/.env
+/.env.local
+/.env.development
+/.env.development.local
+/.env.test.local
+/.env.production.local
+/.pack
+/.next
+.next
+.pack
+.pack.gz
+.trace
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local

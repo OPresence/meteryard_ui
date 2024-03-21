@@ -1,0 +1,29 @@
+@media (max-width:1440px){
+   
+}
+@media (max-width:1280px){
+   
+}
+@media (max-width:1024px){
+    .mainConatiner{
+        padding:0px 30px !important;
+    }
+}
+@media (max-width:991px){
+   
+}
+@media (max-width:767px){
+    .staticFooter{
+        flex-direction: column;
+    }
+    .footerBtn{
+        font-size: 12px !important;
+        margin-bottom: 10px !important;
+    }
+    .mainFooterBox{
+        padding: 20px 35px;
+    }
+    .mainContainer{
+        padding: 0 15px !important;
+    }
+}
