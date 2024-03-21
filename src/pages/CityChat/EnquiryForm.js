@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Button,
   Typography,
@@ -38,6 +38,7 @@ const DialogStyleComponent = styled(Dialog)({
     borderTopRightRadius: "55px !important",
   },
   "& .mainDialogBox": {
+    // overflowY: "scroll",
     "& .submit": {
       background: "#444444",
       color: "#fff",
@@ -108,12 +109,21 @@ const EnquiryForm = ({
 }) => {
   const router = useRouter();
   const [_property_type, setProperty_type] = React.useState("");
+  const [_propertyList, setPropertyList] = React.useState([]);
+  const [_subtypelist, setSubTypeList] = React.useState([]);
   const [_budget, setbudget] = React.useState("");
   const [_property_category, setPropertyCategory] = React.useState("");
   const [_getwhatsapp_check, setWhatsapp_CheckBox] = useState(false);
   const [_getemail_check, setEmail_CheckBox] = useState(false);
   const [_countrycode, setCountryCode] = useState("");
   const [_isloading, setIsLoading] = useState(false);
+  const [_getproprty_type, setGetPropetyType] = useState("");
+  const [_statelist, setStateList] = useState([]);
+  const [_citylist, setCityList] = useState([]);
+  const [_statename, setStateName] = useState("");
+
+  console.log("_getproprty_type-->", _subtypelist);
+
   const auth = useContext(AuthContext);
   const [_initialstate, setInitialState] = useState({
     fullname: "",
@@ -126,10 +136,12 @@ const EnquiryForm = ({
     area: "",
     alert_whatsapp: "",
     alert_Email_message: "",
+    Message: "",
+    state: "",
   });
 
   const formValidationSchemaDepartment = yep.object().shape({
-    fullname: yep.string().required("fullname name is required."),
+    fullname: yep.string().required("full name is required."),
     email: yep.string().required("email is required."),
     mobile_Number: yep.string().required("mobile number is required."),
     budget: yep.string().required("budget is required."),
@@ -137,10 +149,141 @@ const EnquiryForm = ({
     sub_project_Type: yep.string().required("sub project type is required."),
     city: yep.string().required("city name is required."),
     area: yep.string().required("area name is required."),
-    // alert_whatsapp: yep.string().required("alert_whatsapp name is required."),
-    // alert_Email_message: yep.string().required("alert_Email_message name is required."),
+    Message: yep.string().required("message name is required."),
+    state: yep.string().required("state name is required."),
   });
-  const EnwuiryFunction = async (value) => {
+  const ProjectType = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllProjectType,
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setPropertyList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setPropertyList([]);
+          toast.error(res?.responseMessage);
+          setPropertyList([]);
+        } else if (res?.responseCode == 404) {
+          setPropertyList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else if (res?.responseCode == 500) {
+          setPropertyList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else {
+          setPropertyList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        }
+      }
+    } catch (error) {
+      console.log("error");
+      setPropertyList([]);
+    }
+  };
+  const SubProjectType = async (id) => {
+    console.log("dfdsbfdsifiudsui9888");
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllProjectSubType,
+        data: {
+          projectTypeId: _getproprty_type,
+          page: "1",
+          limit: "10",
+        },
+      });
+      if (res?.responseCode == 200) {
+        console.log("dnfknkdfn--0->", res);
+        setSubTypeList(res?.result?.docs);
+        setItemData(resolvedData);
+        // return res?.result?.docs;
+      } else if (res?.responseCode == 404) {
+        setSubTypeList([]);
+        toast.error(res?.responseMessage);
+        setSubTypeList([]);
+        // Display error notification
+      } else if (res?.responseCode == 404) {
+        setSubTypeList([]);
+
+        toast.error(res?.responseMessage); // Display error notification
+      } else if (res?.responseCode == 500) {
+        setSubTypeList([]);
+
+        toast.error(res?.responseMessage); // Display error notification
+      } else {
+        setSubTypeList([]);
+
+        toast.error(res?.responseMessage); // Display error notification
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const GetStateList = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllState,
+        data: {
+          limit: "10",
+          countryId: _countrycode,
+        },
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setStateList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setStateList([]);
+        } else {
+          setStateList([]);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const GetCityList = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllCity,
+        data: {
+          limit: "10",
+          stateId: _statename,
+        },
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setCityList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+        } else {
+          setCityList([]);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    GetStateList();
+  }, []);
+  useEffect(() => {
+    if (_statename) {
+      GetCityList();
+    }
+  }, [_statename]);
+  useEffect(() => {
+    ProjectType();
+  }, []);
+  useEffect(() => {
+    if (_getproprty_type) {
+      SubProjectType();
+    }
+  }, [_getproprty_type]);
+
+  const EnquiryFunction = async (value) => {
     if (_getwhatsapp_check && _getemail_check) {
       console.log("dnjnfkdkfndn--->", value);
       try {
@@ -152,17 +295,23 @@ const EnquiryForm = ({
             email: value?.email,
             mobileNumber: value?.mobile_Number,
             budget: value?.budget,
-            message: "message",
+            message: value?.message,
             projectTypeId: value?.project_Type,
             projectSubTypeId: value?.sub_project_Type,
             getWhatsappEnquiry: _getwhatsapp_check,
             getAllertOnEnquiry: _getemail_check,
+            stateId: value.state,
+            cityId: value.city,
+            localAreaName: value.area,
+            location: {
+              type: "Point",
+              coordinates: [28.6139, 77.209],
+            },
           },
         });
         if (res) {
           if (res?.responseCode == 200) {
             toast.success(res?.responseMessage);
-            getLocalArea();
             setIsLoading(false);
             handleClose();
           } else if (res?.responseCode == 404) {
@@ -212,13 +361,7 @@ const EnquiryForm = ({
               }}
               validationSchema={formValidationSchemaDepartment}
               onSubmit={(values) => {
-                EnwuiryFunction(values);
-                // .then(() => {
-                //   resetForm();
-                // })
-                // .catch((error) => {
-                //   console.error("API call failed", error);
-                // });
+                EnquiryFunction(values);
               }}
             >
               {({
@@ -308,9 +451,8 @@ const EnquiryForm = ({
                             <MenuItem value="" disabled>
                               <em>None</em>
                             </MenuItem>
-                            <MenuItem value={"HOUSE"}>HOUSE</MenuItem>
-                            <MenuItem value={"VILLA"}>VILLA</MenuItem>
-                            <MenuItem value={"PLOTS"}>PLOTS</MenuItem>
+                            <MenuItem value={"MIN-500"}>MIN-500</MenuItem>
+                            <MenuItem value={"MAX-500"}>MAX-500</MenuItem>
                           </Select>
                         </FormControl>
                         <FormHelperText error>
@@ -330,15 +472,23 @@ const EnquiryForm = ({
                             disabled={_isloading}
                             name="project_Type"
                             value={values?.project_Type}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                              setGetPropetyType(e.target.value);
+                              setFieldValue("project_Type", e.target.value);
+                            }}
                             onBlur={handleBlur}
                           >
                             <MenuItem value="" disabled>
                               <em>None</em>
                             </MenuItem>
-                            <MenuItem value={"HOUSE"}>HOUSE</MenuItem>
-                            <MenuItem value={"VILLA"}>VILLA</MenuItem>
-                            <MenuItem value={"PLOTS"}>PLOTS</MenuItem>
+                            {_propertyList &&
+                              _propertyList?.map((data, index) => {
+                                return (
+                                  <MenuItem value={data?._id} key={index}>
+                                    {data?.projectType}
+                                  </MenuItem>
+                                );
+                              })}
                           </Select>
                         </FormControl>
                         <FormHelperText error>
@@ -364,9 +514,14 @@ const EnquiryForm = ({
                             <MenuItem value="" disabled>
                               <em>None</em>
                             </MenuItem>
-                            <MenuItem value={"HOUSE"}>HOUSE</MenuItem>
-                            <MenuItem value={"VILLA"}>VILLA</MenuItem>
-                            <MenuItem value={"PLOTS"}>PLOTS</MenuItem>
+                            {_subtypelist &&
+                              _subtypelist?.map((data, index) => {
+                                return (
+                                  <MenuItem value={data?._id} key={index}>
+                                    {data?.projectSubType}
+                                  </MenuItem>
+                                );
+                              })}
                           </Select>
                         </FormControl>
                         <FormHelperText error>
@@ -374,21 +529,75 @@ const EnquiryForm = ({
                         </FormHelperText>
                       </Grid>
                       <Grid item={6} md={6} sm={6} xs={12}>
-                        <TextField
-                          fullWidth
-                          id="outlined-read-only-input"
-                          placeholder="Enter city"
-                          label="City"
-                          disabled={_isloading}
-                          name="city"
-                          value={values?.city}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                        />
+                        <FormControl fullWidth>
+                          <InputLabel id="demo-simple-select-helper-label">
+                            State
+                          </InputLabel>
+                          <Select
+                            fullWidth
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            label="State"
+                            disabled={_isloading}
+                            name="state"
+                            value={values?.state}
+                            onChange={(e) => {
+                              setStateName(e.target.value);
+                              setFieldValue("state", e.target.value);
+                            }}
+                            onBlur={handleBlur}
+                          >
+                            <MenuItem value="" disabled>
+                              <em>None</em>
+                            </MenuItem>
+                            {_statelist &&
+                              _statelist?.map((data, index) => {
+                                return (
+                                  <MenuItem value={data?._id}>
+                                    {data?.stateName}
+                                  </MenuItem>
+                                );
+                              })}
+                          </Select>
+                        </FormControl>
+                        <FormHelperText error>
+                          {touched.state && errors.state}
+                        </FormHelperText>
+                      </Grid>
+                      <Grid item={6} md={6} sm={6} xs={12}>
+                        <FormControl fullWidth>
+                          <InputLabel id="demo-simple-select-helper-label">
+                            City
+                          </InputLabel>
+                          <Select
+                            fullWidth
+                            labelId="demo-simple-select-helper-label"
+                            id="demo-simple-select-helper"
+                            label="City"
+                            disabled={_isloading}
+                            name="city"
+                            value={values?.city}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          >
+                            <MenuItem value="" disabled>
+                              <em>None</em>
+                            </MenuItem>
+                            {_citylist &&
+                              _citylist?.map((data, index) => {
+                                return (
+                                  <MenuItem value={data?._id}>
+                                    {data?.cityName}
+                                  </MenuItem>
+                                );
+                              })}
+                          </Select>
+                        </FormControl>
                         <FormHelperText error>
                           {touched.city && errors.city}
                         </FormHelperText>
                       </Grid>
+
                       <Grid item={6} md={6} sm={6} xs={12}>
                         <TextField
                           fullWidth
@@ -403,6 +612,22 @@ const EnquiryForm = ({
                         />
                         <FormHelperText error>
                           {touched.area && errors.area}
+                        </FormHelperText>
+                      </Grid>
+                      <Grid item={6} md={6} sm={6} xs={12}>
+                        <TextField
+                          fullWidth
+                          placeholder="Enter location"
+                          id="outlined-read-only-input"
+                          label="Message"
+                          disabled={_isloading}
+                          name="Message"
+                          value={values?.Message}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        <FormHelperText error>
+                          {touched.Message && errors.Message}
                         </FormHelperText>
                       </Grid>
                     </Grid>
@@ -442,10 +667,9 @@ const EnquiryForm = ({
                           background: "#9fcd17",
                         }}
                       >
-                        SUBMIT{" "}
+                        SUBMIT
                         {_isloading && (
                           <>
-                            {" "}
                             &nbsp; &nbsp;
                             <CircularProgressComponent />
                           </>

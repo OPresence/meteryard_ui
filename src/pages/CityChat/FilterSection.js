@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Grid, Container, Typography, Button } from "@mui/material";
-import AccordionComponent from "./AccordionComponent";
-import Divider from "@mui/material/Divider";
-import PriceRangeComponent from "src/component/PriceRangeComponent";
-import StateComponent from "src/component/StateComponent";
 import { useRouter } from "next/router";
 import CityProperty from "./CityProperty";
 import PostSection from "./PostSection/index";
@@ -66,63 +62,6 @@ const FilterSection = () => {
     setOpen(false);
   };
 
-  const CheckBoxName = [
-    {
-      name: "residential",
-      valueName: [
-        { name: "HOUSE" },
-        { name: "VILLA" },
-        { name: "APARTMENTS" },
-        { name: "PLOTS" },
-      ],
-    },
-  ];
-  const CheckBoxName1 = [
-    {
-      name: "commercial",
-      valueName: [
-        { name: "HOUSE" },
-        { name: "VILLA" },
-        { name: "APARTMENTS" },
-        { name: "PLOTS" },
-      ],
-    },
-  ];
-  const CheckBoxName2 = [
-    {
-      name: "agriculture",
-      valueName: [
-        { name: "HOUSE" },
-        { name: "VILLA" },
-        { name: "APARTMENTS" },
-        { name: "PLOTS" },
-      ],
-    },
-  ];
-  const State_name = [
-    {
-      name: "Uttar Pradesh",
-    },
-    {
-      name: "Delhi",
-    },
-    {
-      name: "Gujarat",
-    },
-  ];
-  const City_name = [
-    { name: "Agra" },
-    { name: "Mumbai" },
-    { name: "Delhi" },
-    { name: "Bangalore" },
-  ];
-  const City_name_LocalArea = [
-    { name: "Pashchim Puri" },
-    { name: "Sikandra" },
-    { name: "Bodla" },
-    { name: "Fatehabad Road" },
-    { name: "Kamla Nagar" },
-  ];
   const SellerList = [
     {
       name: "Monu Rajput",
@@ -175,107 +114,12 @@ const FilterSection = () => {
       online: false,
     },
   ];
+
   return (
     <BuyerStyle>
       <Box minHeight={"100vh"} mt={"30px"} className="mainBox">
         <Container maxWidth style={{ padding: "0 0 0 25px" }}>
           <Grid container spacing={3}>
-            {/* <Grid item lg={3} md={3}>
-              <Box className="filterBox">
-                <Box display={"flex"} alignItems={"center"}>
-                  <Box className="imgBox">
-                    <img
-                      src="/images/meteryard/Images/Image 23.png"
-                      width={"100%"}
-                    />
-                  </Box>
-                  &nbsp;&nbsp;&nbsp;
-                  <Typography variant="h6">Monu Rajput</Typography>
-                </Box>
-                <Box>
-                  <Box m={"10px 0"}>
-                    <Typography variant="h2">property category</Typography>
-                  </Box>
-                  {CheckBoxName.map((data, index) => {
-                    return (
-                      <AccordionComponent
-                        data={data}
-                        index={index}
-                        imgURL="/images/Group 8163.png"
-                      />
-                    );
-                  })}
-                  <Box m={"10px 0 0 0"}>
-                    <Divider className="devider" />
-                  </Box>
-
-                  {CheckBoxName1.map((data, index) => {
-                    return (
-                      <AccordionComponent
-                        data={data}
-                        index={index}
-                        imgURL="/images/Group 8164.png"
-                      />
-                    );
-                  })}
-                  <Box m={"10px 0 0 0"}>
-                    <Divider className="devider" />
-                  </Box>
-
-                  {CheckBoxName2.map((data, index) => {
-                    return (
-                      <AccordionComponent
-                        data={data}
-                        index={index}
-                        imgURL="/images/Group 8165.png"
-                      />
-                    );
-                  })}
-                  <Box m={"10px 0 0 0"}>
-                    <Divider className="devider" />
-                  </Box>
-                  <Box>
-                    <PriceRangeComponent imgURL="/images/Group 8346.png" />
-                  </Box>
-                  <Box m={"10px 0 0 0"}>
-                    <Divider className="devider" />
-                  </Box>
-                  <Box>
-                    <StateComponent
-                      StattName={State_name}
-                      type="Select State"
-                      name="State"
-                      imgURL="/images/Group 8180.png"
-                    />
-                  </Box>
-                  <Box m={"10px 0 0 0"}>
-                    <Divider className="devider" />
-                  </Box>
-                  <Box>
-                    <StateComponent
-                      StattName={City_name}
-                      type="Select City"
-                      name="City"
-                      imgURL="/images/Group 8179.png"
-                    />
-                  </Box>
-                  <Box m={"10px 0 0 0"}>
-                    <Divider className="devider" />
-                  </Box>
-                  <Box>
-                    <StateComponent
-                      StattName={City_name_LocalArea}
-                      type="Select Local Area"
-                      imgURL="/images/Group 8180.png"
-                      name="Local Area"
-                    />
-                  </Box>
-                  <Box m={"10px 0 0 0"}>
-                    <Divider className="devider" />
-                  </Box>
-                </Box>
-              </Box>
-            </Grid> */}
             <Grid
               item
               lg={8}

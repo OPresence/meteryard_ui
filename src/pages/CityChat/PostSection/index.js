@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { Divider, Typography, Box } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
@@ -7,6 +7,7 @@ import PublicIcon from "@mui/icons-material/Public";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsChatDots } from "react-icons/bs";
+import { AuthContext } from "../../../context/Auth";
 
 const CityPropertyStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -74,8 +75,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
         boxShadow: theme.shadows[2],
         overflow: "hidden",
         "& img": {
-          width: "70px",
-          height: "70px",
+          width: "100%",
         },
       },
       "& .contentBox": {
@@ -95,12 +95,12 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
 }));
 
 const index = () => {
-  const _postData = [{}, {}, {}, {}];
+  const auth = useContext(AuthContext);
   return (
     <CityPropertyStyle>
-      {_postData?.map((data, index) => {
+      {auth?._postlist?.map((data, index) => {
         return (
-          <Box className="mainBox">
+          <Box className="mainBox" key={index}>
             <Box maxWidth={280} position={"absolute"} right={-17} top={-13}>
               <img src="/images/Path 8257.svg" width={"100%"} />
             </Box>
@@ -108,38 +108,41 @@ const index = () => {
               <Box className="ProfileBox">
                 <Box display={"flex"} alignItems={"center"}>
                   <Box className="imgBox">
-                    <img
-                      src="/images/meteryard/Images/Image 23.png"
-                      width={"100%"}
-                    />
+                    {data?.sellerId?.profilePicture == "" ? (
+                      <img
+                        src="https://res.cloudinary.com/mobiloitteblockchain/image/upload/v1710956640/h7dhmg9pquip3assdqz3.jpg"
+                        width={"100%"}
+                      />
+                    ) : (
+                      <img
+                        src={data?.sellerId?.profilePicture}
+                        width={"100%"}
+                      />
+                    )}
                   </Box>
                   &nbsp;&nbsp;&nbsp;
-                  <Typography variant="h6">Monu Rajput</Typography>
+                  <Typography variant="h6">{data?.sellerId?.name}</Typography>
                 </Box>
                 <Box mt={1} className="contentBox">
-                  <Typography variant="h6">
-                    BLK 7-1005, Vascon Tulips Gold
-                  </Typography>
-                  <Typography variant="h5">
-                    It Is A Piece Of Really Soft Tissue That Appears As A Thin
-                    Line Between The Gums And Lips. You Can Find It On The Top
-                    And The Bottom Of Your Oral Cavity.
-                  </Typography>
+                  <Typography variant="h6">{data?.title}</Typography>
+                  <Typography variant="h5">{data?.description}</Typography>
                   <Box display={"flex"} alignItems={"center"} mt={1}>
                     <Box>
                       <Typography variant="h6">Property Size</Typography>
-                      <Typography variant="h5">900 Sqr Ft.</Typography>
+                      <Typography variant="h5">
+                        {data?.superBuildupArea}
+                      </Typography>
                     </Box>
                     &nbsp;&nbsp; &nbsp;&nbsp;
                     <Box>
-                      <Typography variant="h6">Property Size</Typography>
-                      <Typography variant="h5">900 Sqr Ft.</Typography>
+                      <Typography variant="h6">Project Name</Typography>
+                      <Typography variant="h5">{data?.projectName} </Typography>
                     </Box>
                   </Box>
                 </Box>
               </Box>
               <Box>
-                <img src="/images/Picture1.png" width={"100%"} />
+                <img src={data?.coverImage} width={"100%"} />
               </Box>
               <Box padding={"15px"}>
                 <Box
@@ -159,8 +162,6 @@ const index = () => {
                         <Box>
                           <img src="/images/Group 4144.png" width={"100%"} />
                         </Box>
-
-                        {/* <GradeIcon /> */}
                       </Box>
                       &nbsp;&nbsp;&nbsp;
                       <Box className="viewBox">
