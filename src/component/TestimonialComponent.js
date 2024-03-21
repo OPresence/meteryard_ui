@@ -31,7 +31,7 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
       "& h6": {
         color: "#fff",
         fontSize: "14px",
-        marginBottom:"20px"
+        marginBottom: "20px",
       },
     },
     "& .ArrowClass": {
@@ -59,18 +59,18 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
       marginTop: "-50px",
       "@media(max-width:1080px)": {
         marginTop: "0px",
-        top:"-150px",
+        top: "-150px",
       },
       "& .ArrowClassprev": {
         "@media(max-width:1080px)": {
-          position:"absolute",
-          left:"-9px",
+          position: "absolute",
+          left: "-9px",
         },
       },
       "& .ArrowClassNext": {
         "@media(max-width:1080px)": {
-          position:"absolute",
-          right:"-9px",
+          position: "absolute",
+          right: "-9px",
         },
       },
     },
@@ -80,7 +80,7 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
       padding: "20px",
       transition: "0.8s",
       transform: "scale(0.9)",
-      borderRadius:"20px",
+      borderRadius: "20px",
       "&:hover": {
         transform: "scale(1)",
         transition: "0.8s",
@@ -210,121 +210,116 @@ const TestimonialComponent = () => {
           <Container maxWidth>
             <Box className="mainBox">
               <Typography variant="h2">Testimonials</Typography>
-                    <Box>
-                      <Grid container>
-                        <Grid item lg={3} md={3} sm={12} xs={12}>
-                          
-                          <Box className={"sliderBox"}>
-                            <Typography variant="h6">
-                              Lorem Ipsum is simply dummy text of the printing
-                              and typesetting industry. Lorem Ipsum has been the
-                              industry's standard dummy text ever since the
-                              1500s, when an unknown printer took a galley of
-                              type.
-                            </Typography>
-                          </Box>
-                        </Grid>
-                        <Grid
-                          item
-                          lg={9}
-                          md={9}
-                          sm={9}
-                          xs={12}
-                          style={{justifyContent: "end" }}
-                        >
-                          <Slider ref={sliderRef} {...settings}>
-                            <Card className="Cards">
-                              <Box
-                                display={"flex"}
-                                justifyContent={"center"}
-                                mb={"10px"}
-                              >
-                                <Box className="imageBox">
-                                  <img
-                                    src="\images\meteryard\Images\profile.png"
-                                    width={"100%"}
-                                  />
-                                </Box>
-                              </Box>
-                              <Typography variant="h6">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard dummy text ever since
-                                the 1500s, when an unknown printer took a galley
-                                of type.
-                              </Typography>
-                              <Box
-                                display={"flex"}
-                                justifyContent={"center"}
-                                m={"20px 0"}
-                              >
-                                <Box className="borderLine"></Box>
-                              </Box>
-                              <Typography variant="h4">DIVYA BAJAJ</Typography>
-                            </Card>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Card className="Cards">
-                              <Box
-                                display={"flex"}
-                                justifyContent={"center"}
-                                mt={"10px"}
-                              >
-                                <Box className="imageBox">
-                                  <img
-                                    src="\images\meteryard\Images\profile.png"
-                                    width={"100%"}
-                                  />
-                                </Box>
-                              </Box>
-                              <Typography variant="h6">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard dummy text ever since
-                                the 1500s, when an unknown printer took a galley
-                                of type.
-                              </Typography>
-                              <Box
-                                display={"flex"}
-                                justifyContent={"center"}
-                                m={"20px 0"}
-                              >
-                                <Box className="borderLine"></Box>
-                              </Box>
-                              <Typography variant="h4">DIVYA BAJAJ</Typography>
-                            </Card>
-                            <Card className="Cards">
-                              <Box
-                                display={"flex"}
-                                justifyContent={"center"}
-                                mt={"10px"}
-                              >
-                                <Box className="imageBox">
-                                  <img
-                                    src="\images\meteryard\Images\profile.png"
-                                    width={"100%"}
-                                  />
-                                </Box>
-                              </Box>
-                              <Typography variant="h6">
-                                Lorem Ipsum is simply dummy text of the printing
-                                and typesetting industry. Lorem Ipsum has been
-                                the industry's standard dummy text ever since
-                                the 1500s, when an unknown printer took a galley
-                                of type.
-                              </Typography>
-                              <Box
-                                display={"flex"}
-                                justifyContent={"center"}
-                                m={"20px 0"}
-                              >
-                                <Box className="borderLine"></Box>
-                              </Box>
-                              <Typography variant="h4">DIVYA BAJAJ</Typography>
-                            </Card>
-                            </Slider>
-                        </Grid>
-                      </Grid>
+              <Box>
+                <Grid container>
+                  <Grid item lg={3} md={3} sm={12} xs={12}>
+                    <Box className={"sliderBox"}>
+                      <Typography variant="h6">
+                        Lorem Ipsum is simply dummy text of the printing and
+                        typesetting industry. Lorem Ipsum has been the
+                        industry&apos;s standard dummy text ever since the
+                        1500s, when an unknown printer took a galley of type.
+                      </Typography>
                     </Box>
+                  </Grid>
+                  <Grid
+                    item
+                    lg={9}
+                    md={9}
+                    sm={9}
+                    xs={12}
+                    style={{ justifyContent: "end" }}
+                  >
+                    <Slider ref={sliderRef} {...settings}>
+                      <Card className="Cards">
+                        <Box
+                          display={"flex"}
+                          justifyContent={"center"}
+                          mb={"10px"}
+                        >
+                          <Box className="imageBox">
+                            <img
+                              src="\images\meteryard\Images\profile.png"
+                              width={"100%"}
+                            />
+                          </Box>
+                        </Box>
+                        <Typography variant="h6">
+                          Lorem Ipsum is simply dummy text of the printing and
+                          typesetting industry. Lorem Ipsum has been the
+                          industry&apos;s standard dummy text ever since the
+                          1500s, when an unknown printer took a galley of type.
+                        </Typography>
+                        <Box
+                          display={"flex"}
+                          justifyContent={"center"}
+                          m={"20px 0"}
+                        >
+                          <Box className="borderLine"></Box>
+                        </Box>
+                        <Typography variant="h4">DIVYA BAJAJ</Typography>
+                      </Card>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <Card className="Cards">
+                        <Box
+                          display={"flex"}
+                          justifyContent={"center"}
+                          mt={"10px"}
+                        >
+                          <Box className="imageBox">
+                            <img
+                              src="\images\meteryard\Images\profile.png"
+                              width={"100%"}
+                            />
+                          </Box>
+                        </Box>
+                        <Typography variant="h6">
+                          Lorem Ipsum is simply dummy text of the printing and
+                          typesetting industry. Lorem Ipsum has been the
+                          industry&apos;s standard dummy text ever since the
+                          1500s, when an unknown printer took a galley of type.
+                        </Typography>
+                        <Box
+                          display={"flex"}
+                          justifyContent={"center"}
+                          m={"20px 0"}
+                        >
+                          <Box className="borderLine"></Box>
+                        </Box>
+                        <Typography variant="h4">DIVYA BAJAJ</Typography>
+                      </Card>
+                      <Card className="Cards">
+                        <Box
+                          display={"flex"}
+                          justifyContent={"center"}
+                          mt={"10px"}
+                        >
+                          <Box className="imageBox">
+                            <img
+                              src="\images\meteryard\Images\profile.png"
+                              width={"100%"}
+                            />
+                          </Box>
+                        </Box>
+                        <Typography variant="h6">
+                          Lorem Ipsum is simply dummy text of the printing and
+                          typesetting industry. Lorem Ipsum has been the
+                          industry&apos;s standard dummy text ever since the
+                          1500s, when an unknown printer took a galley of type.
+                        </Typography>
+                        <Box
+                          display={"flex"}
+                          justifyContent={"center"}
+                          m={"20px 0"}
+                        >
+                          <Box className="borderLine"></Box>
+                        </Box>
+                        <Typography variant="h4">DIVYA BAJAJ</Typography>
+                      </Card>
+                    </Slider>
+                  </Grid>
+                </Grid>
+              </Box>
 
               {/* <Box > */}
               <Box className="arrowsBox">

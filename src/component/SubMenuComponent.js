@@ -6,17 +6,17 @@ import { cityObject } from "../utils";
 const SubMenuStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     // padding: "20px 20px 0 20px  ",
-    boxShadow:"unset",
+    boxShadow: "unset",
     "& h5": {
       fontSize: "16px",
       fontWeight: "600",
-      position:"relative",
+      position: "relative",
       "@media(max-width:615px)": {
         "&::after": {
           top: "27px",
           width: "100px !important",
           height: "1.5px",
-          backgroundColor:"#a2d017",
+          backgroundColor: "#a2d017",
         },
       },
       "&::after": {
@@ -35,7 +35,7 @@ const SubMenuStyle = styled("Box")(({ theme }) => ({
       fontWeight: "600",
     },
     "& .choose-section": {
-      paddingLeft:"9px"
+      paddingLeft: "9px",
     },
   },
 }));
@@ -58,10 +58,17 @@ const SubMenuComponent = () => {
             sm={3}
             xs={12}
             style={{
-              boxShadow: window.innerWidth >= 600 ? "0px 5px 10px 0px rgba(0, 0, 0, 0.5)" : "unset",
+              boxShadow:
+                window.innerWidth >= 600
+                  ? "0px 5px 10px 0px rgba(0, 0, 0, 0.5)"
+                  : "unset",
             }}
           >
-            <Box textAlign={{ xs: "left", md: "center" }} height={"100%"} className="choose-section">
+            <Box
+              textAlign={{ xs: "left", md: "center" }}
+              height={"100%"}
+              className="choose-section"
+            >
               <Typography variant="h5">Choose your city</Typography>
               <Box maxWidth={125} position={"absolute"} bottom={0}>
                 <img
@@ -74,7 +81,7 @@ const SubMenuComponent = () => {
           <Grid item lg={3} md={3} sm={3} xs={12}>
             {cityObject.map((data, index) => {
               return (
-                <Box>
+                <Box key={index}>
                   <a href="">
                     <Typography className="cityname" variant="h6">
                       {data}
@@ -87,7 +94,7 @@ const SubMenuComponent = () => {
           <Grid item lg={3} md={3} sm={3} xs={12}>
             {cityObject.map((data, index) => {
               return (
-                <Box>
+                <Box key={index}>
                   <a href="">
                     <Typography className="cityname" variant="h6">
                       {data}
@@ -100,7 +107,7 @@ const SubMenuComponent = () => {
           <Grid item lg={3} md={3} sm={3} xs={12}>
             {cityObject.map((data, index) => {
               return (
-                <Box>
+                <Box key={index}>
                   <a href="">
                     <Typography className="cityname" variant="h6">
                       {data}

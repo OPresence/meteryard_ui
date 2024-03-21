@@ -8,7 +8,7 @@ import ButtonComponent from "./ButtonComponent";
 import React, { useEffect, useState, useRef } from "react";
 import { PostApiFunction } from "../utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
-import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from "@mui/material/useMediaQuery";
 const CardComponentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
@@ -77,8 +77,8 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
 }));
 const CardComponent = () => {
   const sliderRef = useRef(null);
-  
-  const isMobile = useMediaQuery('(max-width:600px)');
+
+  const isMobile = useMediaQuery("(max-width:600px)");
   const projectDetails = [
     {
       name: "It Is A Piece Of Really Soft Tissue That Appears As A Thin Line Between The Gums And Lips. You Can Find It OnThe Top And The Bottom Of Your Oral Cavity.",
@@ -230,7 +230,7 @@ const CardComponent = () => {
             <Slider {...settings} ref={sliderRef}>
               {projectDetails.map((data, index) => {
                 return (
-                  <Grid item lg={3} md={6} sm={6} xs={12}>
+                  <Grid item lg={3} md={6} sm={6} xs={12} key={index}>
                     <Box
                       height={"100%"}
                       pb={"20px"}

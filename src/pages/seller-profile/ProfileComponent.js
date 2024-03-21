@@ -272,7 +272,7 @@ const ProfileComponent = () => {
                           className="locationBox"
                           style={{ display: "initial" }}
                         >
-                          <Typography variant="h6">Follower's</Typography>
+                          <Typography variant="h6">Follower&apos;s</Typography>
                           &nbsp;
                           <span>4.5</span>
                         </Box>

@@ -126,9 +126,9 @@ const PostDetails = () => {
         </Box>
         <Box mt={1}>
           <Grid container spacing={1}>
-            {ArrayJson.map((data) => {
+            {ArrayJson.map((data, index) => {
               return (
-                <Grid item lg={6} md={6} sm={12} xs={12}>
+                <Grid item lg={6} md={6} sm={12} xs={12} key={index}>
                   <Box
                     style={{
                       background: "#fff",

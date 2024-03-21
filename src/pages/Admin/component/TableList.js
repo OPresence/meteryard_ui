@@ -53,10 +53,10 @@ export default function TableList({ data, headerData }) {
             data?.map((value, index) => {
               return (
                 <StyledTableRow key={index}>
-                  {headerData.map((head, i) => {
+                  {headerData.map((head, index) => {
                     if (head?.title == "Image") {
                       return (
-                        <StyledTableCell component="th" scope="row">
+                        <StyledTableCell component="th" scope="row" key={index}>
                           <Box maxWidth={100}>
                             <img src={value[head.title]} width={"100%"} />
                           </Box>
@@ -64,7 +64,7 @@ export default function TableList({ data, headerData }) {
                       );
                     } else {
                       return (
-                        <StyledTableCell component="th" scope="row">
+                        <StyledTableCell component="th" scope="row" key={index}>
                           {value[head.title]}
                         </StyledTableCell>
                       );

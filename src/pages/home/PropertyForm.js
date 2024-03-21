@@ -2,7 +2,7 @@
 import * as React from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-import { Box, Grid, IconButton  } from "@mui/material";
+import { Box, Grid, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import HouseForm from "./HouseForm";
 import Residetial from "./Residetial";
@@ -16,7 +16,7 @@ const MainFormStyle = styled("Box")(({ theme }) => ({
   "& .mainBoxStyle": {
     borderLeft: "3px solid rgb(162, 209, 23)",
     paddingLeft: "10px",
-    marginTop:"20px",
+    marginTop: "20px",
   },
 }));
 export default function PropertyForm({
@@ -189,7 +189,7 @@ export default function PropertyForm({
       className="customDialogClass" // Add your custom class here
     >
       <DialogContent className="mainModalClassForm">
-      <IconButton
+        <IconButton
           className="Property-form-close"
           onClick={handleClose} // Close the dialog when clicked
         >
@@ -199,7 +199,7 @@ export default function PropertyForm({
           <Grid item lg={2} md={2} sm={12} xs={12}>
             {_propertyList?.map((data, index) => {
               return (
-                <Box mt={2}>
+                <Box mt={2} key={index}>
                   <Residetial
                     data={data}
                     index={index}
@@ -212,7 +212,7 @@ export default function PropertyForm({
               );
             })}
           </Grid>
-          <Grid item lg={10} md={10} >
+          <Grid item lg={10} md={10}>
             <MainFormStyle>
               <Box className="mainBoxStyle">
                 <HouseForm

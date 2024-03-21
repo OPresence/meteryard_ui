@@ -66,6 +66,7 @@ export default function ControlledAccordions({ data, index, imgURL }) {
           {data?.valueName?.map((data, index) => {
             return (
               <Box
+                key={index}
                 display={"flex"}
                 alignItems={"center"}
                 justifyContent={"center"}

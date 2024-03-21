@@ -22,7 +22,7 @@ const FilterButton = () => {
       <Box className="mainBoxButton" display={"flex"}>
         {ButtonArray.map((data) => {
           return (
-            <Box>
+            <Box key={index}>
               <Button>{data}</Button>
             </Box>
           );

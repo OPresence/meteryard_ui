@@ -218,6 +218,7 @@ const CommercialProjects = () => {
                     console.log("datadnjfdjf--->", index);
                     return (
                       <Grid
+                        key={index}
                         item
                         lg={3}
                         md={3}
@@ -303,6 +304,7 @@ const CommercialProjects = () => {
                 {_getlist.map((data, index) => {
                   return (
                     <Grid
+                      key={index}
                       item
                       lg={3}
                       md={3}

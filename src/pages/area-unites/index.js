@@ -320,7 +320,7 @@ const StateComponent = () => {
                   Status: data?.status,
 
                   Action: (
-                    <Box className="iconBox">
+                    <Box className="iconBox" key={index}>
                       <IconButton onClick={() => handleViewOpen(data, "EDIT")}>
                         <CreateIcon />
                       </IconButton>

@@ -121,14 +121,16 @@ const index = () => {
                       justifyContent={"space-between"}
                       alignItems={"center"}
                     >
-                      <Typography variant="h6">SUGGEST SELLER'S</Typography>
+                      <Typography variant="h6">
+                        SUGGEST SELLER&apos;S
+                      </Typography>
                       <a href="">More</a>
                     </Box>
                     <Box className="listBox">
                       {SellerList &&
                         SellerList?.map((data, index) => {
                           return (
-                            <Box m={"20px 0"}>
+                            <Box m={"20px 0"} key={index}>
                               <SellerListComponent data={data} index={index} />
                             </Box>
                           );

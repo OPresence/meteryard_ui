@@ -21,6 +21,7 @@ import "react-toastify/dist/ReactToastify.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import TableList from "../admin/component/TableList";
 import FilterComponent from "../admin/component/FilterComponent";
+// import FilterComponent from "../admin/component/FilterComponent";
 const Root = styled("Box")(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
@@ -49,10 +50,16 @@ const Root = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const StateComponent = () => {
+const CountryIndex = () => {
   const headerData = [
     {
-      title: "Project finishing",
+      title: "Flag",
+    },
+    {
+      title: "Name",
+    },
+    {
+      title: "Dial code",
     },
     {
       title: "CreatedAt",
@@ -76,7 +83,7 @@ const StateComponent = () => {
   const [_image_upload, setImageUpload] = useState(false);
   const [_imageurl, setImageURL] = useState("");
   const [openView, setOpenView] = useState(false);
-  const [_getcountrylist, setCountryList] = useState([]);
+  console.log("_viewData--->", _viewData);
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -106,18 +113,42 @@ const StateComponent = () => {
     setIsLoading(false);
   };
 
-  const GetCityList = async () => {
+  const ImageUpload = async (imageValue) => {
+    try {
+      setImageUpload(true);
+      const formdata = new FormData();
+      formdata.append("uploaded_file", imageValue);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.uploadImage,
+        data: formdata,
+      });
+      if (res) {
+        setImageUpload(false);
+
+        setImageURL(res?.result[0]?.mediaUrl);
+      }
+    } catch (error) {
+      setImageUpload(false);
+
+      console.log(error);
+    }
+  };
+
+  const GetCountryList = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllProjectFurnishing,
+        endPoint: Apiconfigs?.listAllCountry,
         data: {
           page: page,
           limit: "10",
         },
       });
       if (res) {
+        console.log("res000990---->", res);
+
         setListLoading(false);
+
         if (res?.responseCode == 200) {
           setIsLoading(false);
           setCount(res?.result?.pages);
@@ -136,59 +167,23 @@ const StateComponent = () => {
       console.log(error);
     }
   };
-
-  const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs.createProjectFurnishing,
-        data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
-        },
-      });
-      if (res) {
-        if (res?.responseCode == 200) {
-          toast.success(res?.responseMessage);
-          GetCityList();
-          setIsLoading(false);
-          handleClose();
-        } else if (res?.responseCode == 404) {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
-        } else if (res?.responseCode == 501) {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
-        } else {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
-        }
-      }
-    } catch (error) {
-      setIsLoading(false);
-      handleClose();
-      console.log("error", error);
-    }
-  };
   const Update_Country = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.editProjectFurnishing,
+        endPoint: Apiconfigs.editCountry,
         data: {
-          projectFurnishing: value?.project_type,
+          countryName: value?.countryName,
+          countryCode: value?.phoneNo,
           status: value?.status,
+          image: _imageurl,
         },
         params: {
-          proFurnishingId: _viewData?._id,
+          countryId: _viewData?._id,
         },
       });
       if (res) {
-        GetCityList();
+        GetCountryList();
         if (res?.responseCode == 200) {
           setIsLoading(false);
           handleViewClose();
@@ -213,19 +208,61 @@ const StateComponent = () => {
       console.log("error", error);
     }
   };
+  const Add_Country = async (value) => {
+    if (_imageurl != "") {
+      try {
+        setIsLoading(true);
+        const res = await PostApiFunction({
+          endPoint: Apiconfigs.createCountry,
+          data: {
+            countryName: value?.countryName,
+            countryCode: value?.phoneNo,
+            status: value?.status,
+            image: _imageurl,
+          },
+        });
+        if (res) {
+          if (res?.responseCode == 200) {
+            toast.success(res?.responseMessage);
+            GetCountryList();
+            setIsLoading(false);
+            handleClose();
+          } else if (res?.responseCode == 404) {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          } else if (res?.responseCode == 501) {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          } else {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          }
+        }
+      } catch (error) {
+        setIsLoading(false);
+        handleClose();
+        console.log("error", error);
+      }
+    } else {
+      toast.error("Please upload the image");
+    }
+  };
   const AD_country = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.activeDeactiveProjectFurnishing,
+        endPoint: Apiconfigs.activeDeactiveCountry,
         params: {
-          proFurnishingId: _viewData?._id,
+          countryId: _viewData?._id,
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          GetCountryList();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -252,15 +289,15 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await DeleteApiFunction({
-        endPoint: Apiconfigs.deleteProjectFurnishing,
+        endPoint: Apiconfigs.deleteCountry,
         params: {
-          proFurnishingId: _viewData?._id,
+          countryId: _viewData?._id,
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          GetCountryList();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -285,27 +322,27 @@ const StateComponent = () => {
   };
   useEffect(() => {
     if (page) {
-      GetCityList();
+      GetCountryList();
     }
   }, [page]);
+
   return (
     <AdminLayout>
       <Root>
         <Box className="mainPage">
           <Box mt={1} mb={1}>
             <FilterComponent
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Create Finishing"
+              title="Country List"
+              ButtonName="Update Country"
+              HeadingDialog="Update Country"
               open={open}
               handleChange={handleChange}
               handleClose={handleClose}
               handleClickOpen={handleOpen}
-              // ImageUpload={ImageUpload}
+              ImageUpload={ImageUpload}
               AddMoreList={Add_Country}
               _isloading={_isloading}
               _image_upload={_image_upload}
-              _getcountrylist={_getcountrylist}
             />
           </Box>
           <Divider />
@@ -315,12 +352,18 @@ const StateComponent = () => {
             ) : (
               <TableList
                 data={_bannerlist?.map((data, index) => ({
-                  "Project finishing": data?.projectFurnishing,
+                  Flag: data?.image,
+                  Name: data?.countryName,
+                  "Dial code": data?.countryCode,
                   CreatedAt: convertDateTime(data?.createdAt),
                   Status: data?.status,
 
                   Action: (
                     <Box className="iconBox" key={index}>
+                      <IconButton onClick={() => handleViewOpen(data, "VIEW")}>
+                        <RemoveRedEyeIcon color="#A2D117" />
+                      </IconButton>
+                      &nbsp;&nbsp;&nbsp;
                       <IconButton onClick={() => handleViewOpen(data, "EDIT")}>
                         <CreateIcon />
                       </IconButton>
@@ -364,9 +407,8 @@ const StateComponent = () => {
 
           {openView && (
             <ViewDialog
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Update Project Finishing"
+              ButtonName={"Update Country"}
+              HeadingDialog={"View Country"}
               _viewData={_viewData}
               setViewData={setViewData}
               open={openView}
@@ -375,9 +417,8 @@ const StateComponent = () => {
               AddMoreList={Update_Country}
               type={_IconType}
               _isloading={_isloading}
-              // ImageUpload={ImageUpload}
+              ImageUpload={ImageUpload}
               _image_upload={_image_upload}
-              _getcountrylist={_getcountrylist}
             />
           )}
 
@@ -388,7 +429,7 @@ const StateComponent = () => {
             AD_Banner={AD_country}
             _isloading={_isloading}
             type={_IconType}
-            screen="project finishing"
+            screen="country"
             DeleteBanner={DeleteBanner}
           />
         </Box>
@@ -397,4 +438,4 @@ const StateComponent = () => {
   );
 };
 
-export default StateComponent;
+export default CountryIndex;

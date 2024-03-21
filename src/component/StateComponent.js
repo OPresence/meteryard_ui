@@ -115,7 +115,11 @@ export default function StateComponent({ StattName, type, name, imgURL }) {
                   {type}
                 </MenuItem>
                 {StattName.map((data, index) => {
-                  return <MenuItem value={data?.name}>{data?.name}</MenuItem>;
+                  return (
+                    <MenuItem key={index} value={data?.name}>
+                      {data?.name}
+                    </MenuItem>
+                  );
                 })}
               </Select>
             </FormControl>

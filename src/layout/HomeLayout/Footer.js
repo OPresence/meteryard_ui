@@ -66,7 +66,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       fontWeight: 300,
       color: "#FFFF",
       "@media(max-width:615px)": {
-        lineHeight:"31px"
+        lineHeight: "31px",
       },
     },
     "& .emailsection": {
@@ -75,7 +75,6 @@ const MainComponent = styled("Box")(({ theme }) => ({
         marginTop: "25px",
       },
     },
-    
   },
   "& .footer_menu_title": {
     "& h5": {
@@ -109,7 +108,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "block",
     },
   },
- 
+
   "& .bottomFooter": {
     padding: "40px 0px 0",
     display: "flex",
@@ -125,7 +124,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
     width: "10%",
     "@media(max-width:615px)": {
       width: "100%",
-      marginBottom:"20px",
+      marginBottom: "20px",
     },
     "& h5": {
       color: "#FFFF",
@@ -157,8 +156,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "& .city-item-footer": {
       "@media(max-width:615px)": {
         flexWrap: "nowrap",
-        overflowX:"auto",
-        marginLeft:"-10px"
+        overflowX: "auto",
+        marginLeft: "-10px",
       },
     },
   },
@@ -196,11 +195,11 @@ const Footer = () => {
                       properties.
                     </Typography>
                     <Box className={"emailsection"}>
-                    <Typography variant="h6">
-                      {" "}
-                      Email: info@meteryard.com
-                    </Typography>
-                    <Typography variant="h6"> Phone: 9027659397</Typography>
+                      <Typography variant="h6">
+                        {" "}
+                        Email: info@meteryard.com
+                      </Typography>
+                      <Typography variant="h6"> Phone: 9027659397</Typography>
                     </Box>
                   </Box>
                 </Grid>
@@ -300,7 +299,7 @@ const Footer = () => {
                     {/* <Grid item lg={1} md={1} sm={2} xs={2}></Grid> */}
                     {cityName.map((data, index) => {
                       return (
-                        <Grid item lg={1} md={3} sm={3} xs={4}>
+                        <Grid item lg={1} md={3} sm={3} xs={4} key={index}>
                           <Box display={"flex"}>
                             <Typography variant="body1" className={"text"}>
                               {data?.name}

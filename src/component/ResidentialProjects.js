@@ -153,7 +153,7 @@ const ResidentialProjects = () => {
               {_getlist &&
                 _getlist?.map((data, index) => {
                   return (
-                    <Grid item lg={3} md={3} sm={6} xs={12}>
+                    <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
                       <Box height={"100%"} pb={"20px"}>
                         <Box className="cards">
                           <Box>

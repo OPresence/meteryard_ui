@@ -77,7 +77,7 @@ const SuggestionProperties = () => {
     <CardComponentStyle>
       <Box className="SuggestionHeading">
         <Typography variant="h2">
-          Suggestion Properties' In This Project And Near By{" "}
+          Suggestion Properties&apos; In This Project And Near By{" "}
         </Typography>
         <Typography variant="body1">
           Featured Residential Projects Across India{" "}

@@ -9,14 +9,10 @@ const baseOptions = {
     secondary: {
       main: "rgba(255, 255, 255, 0.60)", // Customize this color as needed
     },
-    background: {
-      // main: "#080031", // Customize this color as needed
-    },
+    background: {},
     text: {
-      // primary: "#080031",
       secondary: "#B8C3FF",
     },
-    // Add more color definitions as needed
   },
   components: {
     MuiInputBase: {

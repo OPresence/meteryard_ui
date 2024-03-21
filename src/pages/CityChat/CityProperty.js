@@ -79,7 +79,7 @@ const CityProperty = () => {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: false,
+    arrows: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -192,7 +192,7 @@ const CityProperty = () => {
         <Slider {...settings} ref={sliderRef} style={{ width: "130%" }}>
           {projectDetails.map((data, index) => {
             return (
-              <Card className="cards">
+              <Card className="cards" key={index}>
                 <Box className="circleimg">
                   <div className="overlay"></div>
                   <img src={data?.image} alt="img" width={"100%"} />
@@ -217,6 +217,7 @@ const CityProperty = () => {
             );
           })}
         </Slider>
+        {/* </Grid> */}
       </Box>
     </CityPropertyStyle>
   );
