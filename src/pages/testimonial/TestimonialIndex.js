@@ -49,10 +49,19 @@ const Root = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const StateComponent = () => {
+const TestimonialIndex = () => {
   const headerData = [
     {
-      title: "Project finishing",
+      title: "Customer Name",
+    },
+    {
+      title: "Comments",
+    },
+    {
+      title: "Rating",
+    },
+    {
+      title: "Image",
     },
     {
       title: "CreatedAt",
@@ -75,8 +84,16 @@ const StateComponent = () => {
   const [_listloading, setListLoading] = useState(false);
   const [_image_upload, setImageUpload] = useState(false);
   const [_imageurl, setImageURL] = useState("");
+  const [_imageurl1, setImageURL1] = useState("");
   const [openView, setOpenView] = useState(false);
   const [_getcountrylist, setCountryList] = useState([]);
+  const [rating, setRating] = useState(0);
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
+  const onPointerEnter = () => console.log("Enter");
+  const onPointerLeave = () => console.log("Leave");
+
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -95,6 +112,7 @@ const StateComponent = () => {
   const handleViewClose = (data) => {
     setOpenView(false);
     setIsLoading(false);
+    setImageURL("");
   };
   const confirmModalOpen = (data, type) => {
     setIconType(type);
@@ -104,13 +122,32 @@ const StateComponent = () => {
   const confirmModalClose = () => {
     setConfirm(false);
     setIsLoading(false);
+    setImageURL("");
   };
+  const ImageUpload = async (imageValue, type) => {
+    try {
+      setImageUpload(true);
+      const formdata = new FormData();
+      formdata.append("uploaded_file", imageValue);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.uploadImage,
+        data: formdata,
+      });
+      if (res) {
+        setImageUpload(false);
+        setImageURL(res?.result[0]?.mediaUrl);
+      }
+    } catch (error) {
+      setImageUpload(false);
 
+      console.log(error);
+    }
+  };
   const GetCityList = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllProjectFurnishing,
+        endPoint: Apiconfigs?.listAllTestimonial,
         data: {
           page: page,
           limit: "10",
@@ -138,53 +175,60 @@ const StateComponent = () => {
   };
 
   const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs.createProjectFurnishing,
-        data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
-        },
-      });
-      if (res) {
-        if (res?.responseCode == 200) {
-          toast.success(res?.responseMessage);
-          GetCityList();
-          setIsLoading(false);
-          handleClose();
-        } else if (res?.responseCode == 404) {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
-        } else if (res?.responseCode == 501) {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
-        } else {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
+    if (rating != 0) {
+      try {
+        setIsLoading(true);
+        const res = await PostApiFunction({
+          endPoint: Apiconfigs.createTestimonial,
+          data: {
+            customerName: value?.customer_name,
+            comments: value?.comment,
+            ratings: rating,
+            file: _imageurl,
+          },
+        });
+        if (res) {
+          if (res?.responseCode == 200) {
+            toast.success(res?.responseMessage);
+            GetCityList();
+            setIsLoading(false);
+            handleClose();
+          } else if (res?.responseCode == 404) {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          } else if (res?.responseCode == 501) {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          } else {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          }
         }
+      } catch (error) {
+        setIsLoading(false);
+        handleClose();
+        console.log("error", error);
       }
-    } catch (error) {
-      setIsLoading(false);
-      handleClose();
-      console.log("error", error);
+    } else {
+      toast.error("Please Select Rating Point.");
     }
   };
   const Update_Country = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.editProjectFurnishing,
+        endPoint: Apiconfigs.editTestimonial,
         data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
+          customerName: value?.customer_name,
+          comments: value?.comment,
+          ratings: rating || _viewData?.ratings,
+          file: _imageurl || _viewData?.file,
         },
         params: {
-          proFurnishingId: _viewData?._id,
+          testimonialId: _viewData?._id,
         },
       });
       if (res) {
@@ -217,9 +261,9 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.activeDeactiveProjectFurnishing,
+        endPoint: Apiconfigs.activeDeactiveTestimonial,
         params: {
-          proFurnishingId: _viewData?._id,
+          testimonialId: _viewData?._id,
         },
       });
       if (res) {
@@ -252,9 +296,9 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await DeleteApiFunction({
-        endPoint: Apiconfigs.deleteProjectFurnishing,
+        endPoint: Apiconfigs.deleteTestimonial,
         params: {
-          proFurnishingId: _viewData?._id,
+          testimonialId: _viewData?._id,
         },
       });
       if (res) {
@@ -294,18 +338,23 @@ const StateComponent = () => {
         <Box className="mainPage">
           <Box mt={1} mb={1}>
             <FilterComponent
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Create Finishing"
+              title="Testimonial List"
+              ButtonName="Create Testimonial"
+              HeadingDialog="Create Testimonial"
               open={open}
               handleChange={handleChange}
               handleClose={handleClose}
               handleClickOpen={handleOpen}
-              // ImageUpload={ImageUpload}
               AddMoreList={Add_Country}
               _isloading={_isloading}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}
+              ImageUpload={ImageUpload}
+              rating={rating}
+              handleRating={handleRating}
+              onPointerEnter={onPointerEnter}
+              onPointerLeave={onPointerLeave}
+              _imageurl={_imageurl}
             />
           </Box>
           <Divider />
@@ -315,12 +364,17 @@ const StateComponent = () => {
             ) : (
               <TableList
                 data={_bannerlist?.map((data, index) => ({
-                  "Project finishing": data?.projectFurnishing,
+                  "Customer Name": data?.customerName,
+                  Comments: data?.comments,
+                  Image: data?.file,
+                  Rating: data?.ratings,
                   CreatedAt: convertDateTime(data?.createdAt),
                   Status: data?.status,
-
                   Action: (
                     <Box className="iconBox" key={index}>
+                      <IconButton onClick={() => handleViewOpen(data, "VIEW")}>
+                        <RemoveRedEyeIcon color="#A2D117" />
+                      </IconButton>
                       <IconButton onClick={() => handleViewOpen(data, "EDIT")}>
                         <CreateIcon />
                       </IconButton>
@@ -364,9 +418,11 @@ const StateComponent = () => {
 
           {openView && (
             <ViewDialog
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Update Project Finishing"
+              title="Testimonial List"
+              ButtonName="Update Testimonial"
+              HeadingDialog={
+                _IconType == "VIEW" ? "View Testimonial" : "Update Testimonial"
+              }
               _viewData={_viewData}
               setViewData={setViewData}
               open={openView}
@@ -375,9 +431,14 @@ const StateComponent = () => {
               AddMoreList={Update_Country}
               type={_IconType}
               _isloading={_isloading}
-              // ImageUpload={ImageUpload}
+              ImageUpload={ImageUpload}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}
+              _imageurl={_imageurl}
+              rating={rating}
+              handleRating={handleRating}
+              onPointerEnter={onPointerEnter}
+              onPointerLeave={onPointerLeave}
             />
           )}
 
@@ -388,7 +449,7 @@ const StateComponent = () => {
             AD_Banner={AD_country}
             _isloading={_isloading}
             type={_IconType}
-            screen="project finishing"
+            screen="testimonial"
             DeleteBanner={DeleteBanner}
           />
         </Box>
@@ -397,4 +458,4 @@ const StateComponent = () => {
   );
 };
 
-export default StateComponent;
+export default TestimonialIndex;

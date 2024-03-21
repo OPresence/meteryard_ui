@@ -553,7 +553,7 @@ const EnquiryForm = ({
                             {_statelist &&
                               _statelist?.map((data, index) => {
                                 return (
-                                  <MenuItem value={data?._id}>
+                                  <MenuItem value={data?._id} key={index}>
                                     {data?.stateName}
                                   </MenuItem>
                                 );
@@ -586,7 +586,7 @@ const EnquiryForm = ({
                             {_citylist &&
                               _citylist?.map((data, index) => {
                                 return (
-                                  <MenuItem value={data?._id}>
+                                  <MenuItem value={data?._id} key={index}>
                                     {data?.cityName}
                                   </MenuItem>
                                 );

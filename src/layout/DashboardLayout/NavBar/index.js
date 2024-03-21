@@ -391,6 +391,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
             {CheckBoxName.map((data, index) => {
               return (
                 <AccordionComponent
+                  key={index}
                   data={data}
                   index={index}
                   imgURL="/images/Group 8163.png"
@@ -404,6 +405,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
             {CheckBoxName1.map((data, index) => {
               return (
                 <AccordionComponent
+                  key={index}
                   data={data}
                   index={index}
                   imgURL="/images/Group 8164.png"
@@ -417,6 +419,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
             {CheckBoxName2.map((data, index) => {
               return (
                 <AccordionComponent
+                  key={index}
                   data={data}
                   index={index}
                   imgURL="/images/Group 8165.png"

@@ -154,37 +154,6 @@ const ViewUser = ({
           <Form>
             <Box justifyContent={"center"} mt={3} mb={5}>
               <Grid container spacing={2}>
-                {/* <Grid item lg={6} md={6} sm={12}>
-                  <Box mt={2}>
-                    <FormControl fullWidth>
-                      <InputLabel id="demo-simple-select-label">
-                        Select Department
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        label="Select Department"
-                        name="department"
-                        value={values?.department}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        disabled={type == "VIEW"}
-                      >
-                        {_departmentlist &&
-                          _departmentlist?.map((data, index) => {
-                            return (
-                              <MenuItem value={data?._id}>
-                                {data?.departmentRole}
-                              </MenuItem>
-                            );
-                          })}
-                      </Select>
-                      <FormHelperText error>
-                        {touched.department && errors.department}
-                      </FormHelperText>
-                    </FormControl>
-                  </Box>
-                </Grid> */}
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <TextField

@@ -59,7 +59,6 @@ const Apiconfigs = {
   deleteState: `${masterLink}/deleteState`,
   activeDeactiveState: `${masterLink}/activeDeactiveState`,
   listAllState: `${masterLink}/listAllState`,
-  proSubTypeListWithProType: `${masterLink}/proSubTypeListWithProType`,
 
   // MASTER CITY MANAGEMENT
   createCity: `${masterLink}/createCity`,

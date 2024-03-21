@@ -232,7 +232,7 @@ const AddState = ({
                         {_getcountrylist &&
                           _getcountrylist?.map((data, index) => {
                             return (
-                              <MenuItem value={data?._id}>
+                              <MenuItem value={data?._id} key={index}>
                                 {data?.countryName}
                               </MenuItem>
                             );

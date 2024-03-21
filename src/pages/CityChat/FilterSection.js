@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import { Box, Grid, Container, Typography, Button } from "@mui/material";
+import AccordionComponent from "./AccordionComponent";
+import Divider from "@mui/material/Divider";
+import PriceRangeComponent from "src/component/PriceRangeComponent";
+import StateComponent from "src/component/StateComponent";
 import { useRouter } from "next/router";
 import CityProperty from "./CityProperty";
 import PostSection from "./PostSection/index";
@@ -62,6 +66,63 @@ const FilterSection = () => {
     setOpen(false);
   };
 
+  const CheckBoxName = [
+    {
+      name: "residential",
+      valueName: [
+        { name: "HOUSE" },
+        { name: "VILLA" },
+        { name: "APARTMENTS" },
+        { name: "PLOTS" },
+      ],
+    },
+  ];
+  const CheckBoxName1 = [
+    {
+      name: "commercial",
+      valueName: [
+        { name: "HOUSE" },
+        { name: "VILLA" },
+        { name: "APARTMENTS" },
+        { name: "PLOTS" },
+      ],
+    },
+  ];
+  const CheckBoxName2 = [
+    {
+      name: "agriculture",
+      valueName: [
+        { name: "HOUSE" },
+        { name: "VILLA" },
+        { name: "APARTMENTS" },
+        { name: "PLOTS" },
+      ],
+    },
+  ];
+  const State_name = [
+    {
+      name: "Uttar Pradesh",
+    },
+    {
+      name: "Delhi",
+    },
+    {
+      name: "Gujarat",
+    },
+  ];
+  const City_name = [
+    { name: "Agra" },
+    { name: "Mumbai" },
+    { name: "Delhi" },
+    { name: "Bangalore" },
+  ];
+  const City_name_LocalArea = [
+    { name: "Pashchim Puri" },
+    { name: "Sikandra" },
+    { name: "Bodla" },
+    { name: "Fatehabad Road" },
+    { name: "Kamla Nagar" },
+  ];
   const SellerList = [
     {
       name: "Monu Rajput",
@@ -114,7 +175,6 @@ const FilterSection = () => {
       online: false,
     },
   ];
-
   return (
     <BuyerStyle>
       <Box minHeight={"100vh"} mt={"30px"} className="mainBox">
@@ -163,7 +223,7 @@ const FilterSection = () => {
                   {SellerList &&
                     SellerList?.map((data, index) => {
                       return (
-                        <Box m={"20px 0"}>
+                        <Box m={"20px 0"} key={index}>
                           <SellerListComponent data={data} index={index} />
                         </Box>
                       );

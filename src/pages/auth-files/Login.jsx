@@ -35,8 +35,8 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     backgroundRepeat: "no-repeat",
     backgroundImage: 'url("/images/Path 8365 (1).svg")',
     "@media(max-width:615px)": {
-		  marginBottom: "80px",
-		},
+      marginBottom: "80px",
+    },
   },
   // "& .checkBox": {
   //   display: "flex",
@@ -45,8 +45,8 @@ const LoginStyle = styled("Box")(({ theme }) => ({
   "& .loginBox": {
     padding: "0 35px",
     "@media(max-width:615px)": {
-		  padding: "0 0px",
-		},
+      padding: "0 0px",
+    },
     "& input": {
       padding: "10.5px 14px !important",
     },
@@ -361,7 +361,7 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                             </Box>
                             <Box mt={2}>
                               <Typography variant="h6">
-                                Don't Have An Account?{" "}
+                                Don&apos;t Have An Account?{" "}
                                 <span
                                   onClick={() => setSelectScreen("Sign Up")}
                                 >

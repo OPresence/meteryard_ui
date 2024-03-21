@@ -355,7 +355,7 @@ const StateComponent = () => {
                   Status: data?.status,
 
                   Action: (
-                    <Box className="iconBox">
+                    <Box className="iconBox" key={index}>
                       <IconButton onClick={() => handleViewOpen(data, "VIEW")}>
                         <RemoveRedEyeIcon color="#A2D117" />
                       </IconButton>

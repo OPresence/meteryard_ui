@@ -92,7 +92,7 @@ const DashboardCard = () => {
                     <Grid item lg={6} md={6}>
                       <Box className="contentBox">
                         <Typography variant="h1">0</Typography>
-                        <Typography variant="h6">Total Buyer's</Typography>
+                        <Typography variant="h6">Total Buyer&apos;s</Typography>
                       </Box>
                     </Grid>
                     <Grid

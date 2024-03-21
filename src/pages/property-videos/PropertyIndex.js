@@ -19,8 +19,8 @@ import SureModal from "../../component/SureModal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import TableList from "../admin/component/TableList";
-import FilterComponent from "../admin/component/FilterComponent";
+import TableList from "../../component/TableList";
+import FilterComponent from "../../component/FilterComponent";
 const Root = styled("Box")(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
@@ -49,11 +49,15 @@ const Root = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const StateComponent = () => {
+const PropertyIndex = () => {
   const headerData = [
     {
-      title: "Project finishing",
+      title: "Video Link",
     },
+    {
+      title: "Display Order",
+    },
+
     {
       title: "CreatedAt",
     },
@@ -75,8 +79,16 @@ const StateComponent = () => {
   const [_listloading, setListLoading] = useState(false);
   const [_image_upload, setImageUpload] = useState(false);
   const [_imageurl, setImageURL] = useState("");
+  const [_imageurl1, setImageURL1] = useState("");
   const [openView, setOpenView] = useState(false);
   const [_getcountrylist, setCountryList] = useState([]);
+  const [rating, setRating] = useState(0);
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
+  const onPointerEnter = () => console.log("Enter");
+  const onPointerLeave = () => console.log("Leave");
+
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -95,6 +107,7 @@ const StateComponent = () => {
   const handleViewClose = (data) => {
     setOpenView(false);
     setIsLoading(false);
+    setImageURL("");
   };
   const confirmModalOpen = (data, type) => {
     setIconType(type);
@@ -104,13 +117,32 @@ const StateComponent = () => {
   const confirmModalClose = () => {
     setConfirm(false);
     setIsLoading(false);
+    setImageURL("");
   };
+  const ImageUpload = async (imageValue, type) => {
+    try {
+      setImageUpload(true);
+      const formdata = new FormData();
+      formdata.append("uploaded_file", imageValue);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.uploadImage,
+        data: formdata,
+      });
+      if (res) {
+        setImageUpload(false);
+        setImageURL(res?.result[0]?.mediaUrl);
+      }
+    } catch (error) {
+      setImageUpload(false);
 
+      console.log(error);
+    }
+  };
   const GetCityList = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllProjectFurnishing,
+        endPoint: Apiconfigs?.listAllPropertyVideo,
         data: {
           page: page,
           limit: "10",
@@ -138,14 +170,13 @@ const StateComponent = () => {
   };
 
   const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
     try {
       setIsLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs.createProjectFurnishing,
+        endPoint: Apiconfigs.createPropertyVideo,
         data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
+          videoLink: value?.video_URL,
+          displayOrder: value?.video_order,
         },
       });
       if (res) {
@@ -178,13 +209,13 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.editProjectFurnishing,
+        endPoint: Apiconfigs.editPropertyVideo,
         data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
+          videoLink: value?.video_URL,
+          displayOrder: value?.video_order,
         },
         params: {
-          proFurnishingId: _viewData?._id,
+          propVideoId: _viewData?._id,
         },
       });
       if (res) {
@@ -217,9 +248,9 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.activeDeactiveProjectFurnishing,
+        endPoint: Apiconfigs.activeDeactivePropertyVideo,
         params: {
-          proFurnishingId: _viewData?._id,
+          propVideoId: _viewData?._id,
         },
       });
       if (res) {
@@ -252,9 +283,9 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await DeleteApiFunction({
-        endPoint: Apiconfigs.deleteProjectFurnishing,
+        endPoint: Apiconfigs.deletePropertyVideo,
         params: {
-          proFurnishingId: _viewData?._id,
+          propVideoId: _viewData?._id,
         },
       });
       if (res) {
@@ -294,18 +325,23 @@ const StateComponent = () => {
         <Box className="mainPage">
           <Box mt={1} mb={1}>
             <FilterComponent
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Create Finishing"
+              title="Create Youtube Video Link"
+              ButtonName="Create Video"
+              HeadingDialog="Create Property Video"
               open={open}
               handleChange={handleChange}
               handleClose={handleClose}
               handleClickOpen={handleOpen}
-              // ImageUpload={ImageUpload}
               AddMoreList={Add_Country}
               _isloading={_isloading}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}
+              ImageUpload={ImageUpload}
+              rating={rating}
+              handleRating={handleRating}
+              onPointerEnter={onPointerEnter}
+              onPointerLeave={onPointerLeave}
+              _imageurl={_imageurl}
             />
           </Box>
           <Divider />
@@ -315,12 +351,15 @@ const StateComponent = () => {
             ) : (
               <TableList
                 data={_bannerlist?.map((data, index) => ({
-                  "Project finishing": data?.projectFurnishing,
+                  "Video Link": data?.videoLink,
+                  "Display Order": data?.displayOrder,
                   CreatedAt: convertDateTime(data?.createdAt),
                   Status: data?.status,
-
                   Action: (
                     <Box className="iconBox" key={index}>
+                      {/* <IconButton onClick={() => handleViewOpen(data, "VIEW")}>
+                        <RemoveRedEyeIcon color="#A2D117" />
+                      </IconButton> */}
                       <IconButton onClick={() => handleViewOpen(data, "EDIT")}>
                         <CreateIcon />
                       </IconButton>
@@ -364,9 +403,13 @@ const StateComponent = () => {
 
           {openView && (
             <ViewDialog
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Update Project Finishing"
+              title="Property Video List"
+              ButtonName="Update Video"
+              HeadingDialog={
+                _IconType == "VIEW"
+                  ? "View Youtube Video Link"
+                  : "Update Youtube Video Link"
+              }
               _viewData={_viewData}
               setViewData={setViewData}
               open={openView}
@@ -375,9 +418,14 @@ const StateComponent = () => {
               AddMoreList={Update_Country}
               type={_IconType}
               _isloading={_isloading}
-              // ImageUpload={ImageUpload}
+              ImageUpload={ImageUpload}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}
+              _imageurl={_imageurl}
+              rating={rating}
+              handleRating={handleRating}
+              onPointerEnter={onPointerEnter}
+              onPointerLeave={onPointerLeave}
             />
           )}
 
@@ -388,7 +436,7 @@ const StateComponent = () => {
             AD_Banner={AD_country}
             _isloading={_isloading}
             type={_IconType}
-            screen="project finishing"
+            screen="property video"
             DeleteBanner={DeleteBanner}
           />
         </Box>
@@ -397,4 +445,4 @@ const StateComponent = () => {
   );
 };
 
-export default StateComponent;
+export default PropertyIndex;

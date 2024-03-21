@@ -84,7 +84,7 @@ const Footer = () => {
         <Container>
           <Box className="headBox">
             <Box>
-              <Typography variant="h1">Let's Talk About</Typography>
+              <Typography variant="h1">Let&apos;s Talk About</Typography>
             </Box>
             <Box>
               <Typography variant="h1" style={{ color: "#fff" }}>

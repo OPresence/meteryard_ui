@@ -767,7 +767,7 @@ const ChatBoat = () => {
                     <Box p={"20px"}>
                       {chatJson.map((data, index) => {
                         return (
-                          <Box>
+                          <Box key={index}>
                             <Box display={"flex"} alignItems={"center"} mt={1}>
                               <Box maxWidth={50} maxHeight={50} style={{}}>
                                 <Avatar

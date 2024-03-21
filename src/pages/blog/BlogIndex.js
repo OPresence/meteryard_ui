@@ -49,10 +49,16 @@ const Root = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const StateComponent = () => {
+const BlogIndex = () => {
   const headerData = [
     {
-      title: "Project finishing",
+      title: "Seo URL",
+    },
+    {
+      title: "Author Name",
+    },
+    {
+      title: "Meta Title",
     },
     {
       title: "CreatedAt",
@@ -75,8 +81,11 @@ const StateComponent = () => {
   const [_listloading, setListLoading] = useState(false);
   const [_image_upload, setImageUpload] = useState(false);
   const [_imageurl, setImageURL] = useState("");
+  const [_imageurl1, setImageURL1] = useState("");
+  console.log("_imageurl1ssd--->", _imageurl1);
   const [openView, setOpenView] = useState(false);
   const [_getcountrylist, setCountryList] = useState([]);
+
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -105,12 +114,34 @@ const StateComponent = () => {
     setConfirm(false);
     setIsLoading(false);
   };
+  const ImageUpload = async (imageValue, type) => {
+    try {
+      setImageUpload(true);
+      const formdata = new FormData();
+      formdata.append("uploaded_file", imageValue);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.uploadImage,
+        data: formdata,
+      });
+      if (res) {
+        setImageUpload(false);
+        if (type != "Second") {
+          setImageURL(res?.result[0]?.mediaUrl);
+        } else {
+          setImageURL1(res?.result[0]?.mediaUrl);
+        }
+      }
+    } catch (error) {
+      setImageUpload(false);
 
+      console.log(error);
+    }
+  };
   const GetCityList = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllProjectFurnishing,
+        endPoint: Apiconfigs?.listAllBlog,
         data: {
           page: page,
           limit: "10",
@@ -142,10 +173,19 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs.createProjectFurnishing,
+        endPoint: Apiconfigs.createBlog,
         data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
+          seo_url: value?.seo_url,
+          authorName: value?.author_name,
+          publishDate: value?.publish_date,
+          file_1: _imageurl,
+          heading_1: value?.heading,
+          heading_2: value?.heading_description,
+          meta_title: value?.meta_title,
+          meta_description: value?.meta_title_description,
+          short_description: value?.description,
+          file_2: _imageurl1,
+          heading_3: "string",
         },
       });
       if (res) {
@@ -178,13 +218,22 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.editProjectFurnishing,
+        endPoint: Apiconfigs.editBlog,
         data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
+          seo_url: value?.seo_url,
+          authorName: value?.author_name,
+          publishDate: value?.publish_date,
+          file_1: _imageurl != "" ? _imageurl : _imageurl?.file_1,
+          heading_1: value?.heading,
+          heading_2: value?.heading_description,
+          meta_title: value?.meta_title,
+          meta_description: value?.meta_title_description,
+          short_description: value?.description,
+          file_2: _imageurl1 != "" ? _imageurl1 : _imageurl?.file_2,
+          heading_3: "string",
         },
         params: {
-          proFurnishingId: _viewData?._id,
+          blogId: _viewData?._id,
         },
       });
       if (res) {
@@ -217,9 +266,9 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.activeDeactiveProjectFurnishing,
+        endPoint: Apiconfigs.activeDeactiveBlog,
         params: {
-          proFurnishingId: _viewData?._id,
+          blogId: _viewData?._id,
         },
       });
       if (res) {
@@ -252,9 +301,9 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await DeleteApiFunction({
-        endPoint: Apiconfigs.deleteProjectFurnishing,
+        endPoint: Apiconfigs.deleteBlog,
         params: {
-          proFurnishingId: _viewData?._id,
+          blogId: _viewData?._id,
         },
       });
       if (res) {
@@ -294,18 +343,18 @@ const StateComponent = () => {
         <Box className="mainPage">
           <Box mt={1} mb={1}>
             <FilterComponent
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Create Finishing"
+              title="Blog List"
+              ButtonName="Create Blog"
+              HeadingDialog="Create Blog"
               open={open}
               handleChange={handleChange}
               handleClose={handleClose}
               handleClickOpen={handleOpen}
-              // ImageUpload={ImageUpload}
               AddMoreList={Add_Country}
               _isloading={_isloading}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}
+              ImageUpload={ImageUpload}
             />
           </Box>
           <Divider />
@@ -315,12 +364,16 @@ const StateComponent = () => {
             ) : (
               <TableList
                 data={_bannerlist?.map((data, index) => ({
-                  "Project finishing": data?.projectFurnishing,
+                  "Seo URL": data?.seo_url,
+                  "Author Name": data?.authorName,
+                  "Meta Title": data?.meta_title,
                   CreatedAt: convertDateTime(data?.createdAt),
                   Status: data?.status,
-
                   Action: (
                     <Box className="iconBox" key={index}>
+                      <IconButton onClick={() => handleViewOpen(data, "VIEW")}>
+                        <RemoveRedEyeIcon color="#A2D117" />
+                      </IconButton>
                       <IconButton onClick={() => handleViewOpen(data, "EDIT")}>
                         <CreateIcon />
                       </IconButton>
@@ -364,9 +417,9 @@ const StateComponent = () => {
 
           {openView && (
             <ViewDialog
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Update Project Finishing"
+              title="Blog List"
+              ButtonName="Update Blog"
+              HeadingDialog={_IconType == "VIEW" ? "View Blog" : "Update Blog"}
               _viewData={_viewData}
               setViewData={setViewData}
               open={openView}
@@ -375,9 +428,11 @@ const StateComponent = () => {
               AddMoreList={Update_Country}
               type={_IconType}
               _isloading={_isloading}
-              // ImageUpload={ImageUpload}
+              ImageUpload={ImageUpload}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}
+              _imageurl={_imageurl}
+              _imageurl1={_imageurl1}
             />
           )}
 
@@ -388,7 +443,7 @@ const StateComponent = () => {
             AD_Banner={AD_country}
             _isloading={_isloading}
             type={_IconType}
-            screen="project finishing"
+            screen="blog"
             DeleteBanner={DeleteBanner}
           />
         </Box>
@@ -397,4 +452,4 @@ const StateComponent = () => {
   );
 };
 
-export default StateComponent;
+export default BlogIndex;

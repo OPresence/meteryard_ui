@@ -178,7 +178,7 @@ const AddCity = ({
                         {_countrylist &&
                           _countrylist?.map((data, index) => {
                             return (
-                              <MenuItem value={data?._id}>
+                              <MenuItem value={data?._id} key={index}>
                                 {data?.countryName}
                               </MenuItem>
                             );
@@ -210,7 +210,7 @@ const AddCity = ({
                         {_statelist &&
                           _statelist?.map((data, index) => {
                             return (
-                              <MenuItem value={data?._id}>
+                              <MenuItem value={data?._id} key={index}>
                                 {data?.stateName}
                               </MenuItem>
                             );

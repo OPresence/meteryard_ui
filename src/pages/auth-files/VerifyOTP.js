@@ -200,7 +200,7 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
 
         <Box className={"DontRotp"} display={"flex"}>
           <Typography variant="h6">
-            If you don't receive any OTP? &nbsp;{" "}
+            If you don&apos;t receive any OTP? &nbsp;{" "}
             <span onClick={OTP_Resend_Function}>Resend OTP &nbsp;</span>
           </Typography>
           {isloading_otp && (

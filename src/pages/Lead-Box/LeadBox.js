@@ -112,7 +112,7 @@ const LeadBox = () => {
                 <Grid container spacing={3}>
                   {ArrayCard.map((data, index) => {
                     return (
-                      <Grid item lg={6} md={6} sm={12} xs={12}>
+                      <Grid item lg={6} md={6} sm={12} xs={12} key={index}>
                         <Box className="cardBox">
                           <Box className="topBox">
                             <Typography variant="h6">

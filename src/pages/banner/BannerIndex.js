@@ -49,10 +49,13 @@ const Root = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const StateComponent = () => {
+const BannerIndex = () => {
   const headerData = [
     {
-      title: "Project finishing",
+      title: "Title",
+    },
+    {
+      title: "Image",
     },
     {
       title: "CreatedAt",
@@ -69,14 +72,15 @@ const StateComponent = () => {
   const [_count, setCount] = useState("");
   const [_confirm, setConfirm] = useState(false);
   const [_bannerlist, setBannerList] = useState([]);
+  const [_addbanner, setBannerAdd] = useState("");
   const [open, setOpen] = useState(false);
   const [_IconType, setIconType] = useState("");
   const [_isloading, setIsLoading] = useState(false);
   const [_listloading, setListLoading] = useState(false);
-  const [_image_upload, setImageUpload] = useState(false);
+
   const [_imageurl, setImageURL] = useState("");
   const [openView, setOpenView] = useState(false);
-  const [_getcountrylist, setCountryList] = useState([]);
+  console.log("_viewData--->", _viewData);
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -106,11 +110,28 @@ const StateComponent = () => {
     setIsLoading(false);
   };
 
-  const GetCityList = async () => {
+  const ImageUpload = async (imageValue) => {
+    try {
+      const formdata = new FormData();
+      formdata.append("uploaded_file", imageValue);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.uploadImage,
+        data: formdata,
+      });
+      if (res) {
+        console.log("res000990---->", res);
+        setImageURL(res?.result[0]?.mediaUrl);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const GetBannerLIst = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllProjectFurnishing,
+        endPoint: Apiconfigs.listAllBanner,
         data: {
           page: page,
           limit: "10",
@@ -118,6 +139,7 @@ const StateComponent = () => {
       });
       if (res) {
         setListLoading(false);
+
         if (res?.responseCode == 200) {
           setIsLoading(false);
           setCount(res?.result?.pages);
@@ -136,59 +158,21 @@ const StateComponent = () => {
       console.log(error);
     }
   };
-
-  const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs.createProjectFurnishing,
-        data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
-        },
-      });
-      if (res) {
-        if (res?.responseCode == 200) {
-          toast.success(res?.responseMessage);
-          GetCityList();
-          setIsLoading(false);
-          handleClose();
-        } else if (res?.responseCode == 404) {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
-        } else if (res?.responseCode == 501) {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
-        } else {
-          setIsLoading(false);
-          handleClose();
-          toast.error(res?.responseMessage);
-        }
-      }
-    } catch (error) {
-      setIsLoading(false);
-      handleClose();
-      console.log("error", error);
-    }
-  };
-  const Update_Country = async (value) => {
+  const Update_Department = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.editProjectFurnishing,
+        endPoint: Apiconfigs.editBanner,
         data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
+          title: value?.title,
+          image: _imageurl?.image,
         },
         params: {
-          proFurnishingId: _viewData?._id,
+          bannerId: _viewData?._id,
         },
       });
       if (res) {
-        GetCityList();
+        GetDepartmentList();
         if (res?.responseCode == 200) {
           setIsLoading(false);
           handleViewClose();
@@ -213,19 +197,59 @@ const StateComponent = () => {
       console.log("error", error);
     }
   };
-  const AD_country = async (value) => {
+  const Add_Banner = async (value) => {
+    if (_imageurl != "") {
+      try {
+        setIsLoading(true);
+        const res = await PostApiFunction({
+          endPoint: Apiconfigs.createBanner,
+          data: {
+            title: value?.title,
+            image: _imageurl,
+          },
+        });
+        if (res) {
+          if (res?.responseCode == 200) {
+            toast.success(res?.responseMessage);
+            GetBannerLIst();
+            setIsLoading(false);
+            handleClose();
+          } else if (res?.responseCode == 404) {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          } else if (res?.responseCode == 501) {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          } else {
+            setIsLoading(false);
+            handleClose();
+            toast.error(res?.responseMessage);
+          }
+        }
+      } catch (error) {
+        setIsLoading(false);
+        handleClose();
+        console.log("error", error);
+      }
+    } else {
+      toast.error("Please upload the image");
+    }
+  };
+  const AD_Banner = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.activeDeactiveProjectFurnishing,
+        endPoint: Apiconfigs.activeDeactiveBanner,
         params: {
-          proFurnishingId: _viewData?._id,
+          bannerId: _viewData?._id,
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          GetBannerLIst();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -252,15 +276,15 @@ const StateComponent = () => {
     try {
       setIsLoading(true);
       const res = await DeleteApiFunction({
-        endPoint: Apiconfigs.deleteProjectFurnishing,
+        endPoint: Apiconfigs.deleteBanner,
         params: {
-          proFurnishingId: _viewData?._id,
+          bannerId: _viewData?._id,
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          GetBannerLIst();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -285,27 +309,26 @@ const StateComponent = () => {
   };
   useEffect(() => {
     if (page) {
-      GetCityList();
+      GetBannerLIst();
     }
   }, [page]);
+
   return (
     <AdminLayout>
       <Root>
         <Box className="mainPage">
           <Box mt={1} mb={1}>
             <FilterComponent
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Create Finishing"
+              title="Banner List"
+              ButtonName="Add Banner"
+              HeadingDialog="Add Banner"
               open={open}
               handleChange={handleChange}
               handleClose={handleClose}
               handleClickOpen={handleOpen}
-              // ImageUpload={ImageUpload}
-              AddMoreList={Add_Country}
+              ImageUpload={ImageUpload}
+              AddMoreList={Add_Banner}
               _isloading={_isloading}
-              _image_upload={_image_upload}
-              _getcountrylist={_getcountrylist}
             />
           </Box>
           <Divider />
@@ -315,12 +338,17 @@ const StateComponent = () => {
             ) : (
               <TableList
                 data={_bannerlist?.map((data, index) => ({
-                  "Project finishing": data?.projectFurnishing,
-                  CreatedAt: convertDateTime(data?.createdAt),
+                  Title: data?.title,
+                  Image: data?.image,
+                  CreatedAt: convertDateTime(data?.updatedAt),
                   Status: data?.status,
 
                   Action: (
                     <Box className="iconBox" key={index}>
+                      <IconButton onClick={() => handleViewOpen(data, "VIEW")}>
+                        <RemoveRedEyeIcon color="#A2D117" />
+                      </IconButton>
+                      &nbsp;&nbsp;&nbsp;
                       <IconButton onClick={() => handleViewOpen(data, "EDIT")}>
                         <CreateIcon />
                       </IconButton>
@@ -364,20 +392,16 @@ const StateComponent = () => {
 
           {openView && (
             <ViewDialog
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Update Project Finishing"
+              ButtonName={"Add Banner"}
+              HeadingDialog={"View Banner"}
               _viewData={_viewData}
               setViewData={setViewData}
               open={openView}
               handleClickOpen={handleViewOpen}
               handleClose={handleViewClose}
-              AddMoreList={Update_Country}
+              AddMoreList={Update_Department}
               type={_IconType}
               _isloading={_isloading}
-              // ImageUpload={ImageUpload}
-              _image_upload={_image_upload}
-              _getcountrylist={_getcountrylist}
             />
           )}
 
@@ -385,10 +409,10 @@ const StateComponent = () => {
             _confirm={_confirm}
             confirmModalOpen={confirmModalOpen}
             confirmModalClose={confirmModalClose}
-            AD_Banner={AD_country}
+            AD_Banner={AD_Banner}
             _isloading={_isloading}
             type={_IconType}
-            screen="project finishing"
+            screen="banner"
             DeleteBanner={DeleteBanner}
           />
         </Box>
@@ -397,4 +421,4 @@ const StateComponent = () => {
   );
 };
 
-export default StateComponent;
+export default BannerIndex;

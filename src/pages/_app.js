@@ -11,7 +11,6 @@ function MyApp({ Component, pageProps }) {
   const theme = createTheme();
   const getLayout = Component.getLayout || ((page) => page);
   const [isClient, setIsClient] = useState(false);
-  console.log(">>>>>>>>isClient>>>>", isClient);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setIsClient(true);

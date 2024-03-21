@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from "react";
-import AdminLayout from "../../layout/AdminLayout";
-import { Box, IconButton, Divider } from "@mui/material";
+import { Box, Divider, IconButton } from "@mui/material";
 import { styled } from "@mui/system";
-import LoaderComponent from "../../component/LoaderComponent";
-import {
-  PostApiFunction,
-  PutApiFunction,
-  DeleteApiFunction,
-  convertDateTime,
-} from "../../utils";
-import Apiconfigs from "../../ApiConfig/ApiConfig";
+import AdminLayout from "../../layout/AdminLayout";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import BlockIcon from "@mui/icons-material/Block";
 import ListPagination from "../admin/component/ListPagination";
-import ViewDialog from "../admin/component/ViewDialog";
-import SureModal from "../../component/SureModal";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import {
+  PostApiFunction,
+  convertDateTime,
+  PutApiFunction,
+  DeleteApiFunction,
+} from "../../utils";
+import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import TableList from "../admin/component/TableList";
-import FilterComponent from "../admin/component/FilterComponent";
+import TableList from "../../component/TableList";
+import FilterComponent from "../../component/FilterComponent";
+import ViewDialog from "../admin/component/ViewDialog";
+import SureModal from "../../component/SureModal";
+import LoaderComponent from "../../component/LoaderComponent";
+
 const Root = styled("Box")(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
@@ -28,6 +29,7 @@ const Root = styled("Box")(({ theme }) => ({
     borderRadius: "15px",
     padding: "20px",
     height: "100%",
+
     "&::before": {
       content: '""',
       position: "absolute",
@@ -40,53 +42,47 @@ const Root = styled("Box")(({ theme }) => ({
       pointerEvents: "none", // Ensure the pseudo-element doesn't interfere with interactions
       boxSizing: "border-box", // Include border in the total width/height
     },
-    "& .headingBox": {
-      padding: "15px 0",
-      "& h1": {
-        fontSize: "16px",
-        fontWeigth: "600",
-      },
-    },
   },
 }));
-const StateComponent = () => {
+const AdminIndex = () => {
   const headerData = [
     {
-      title: "Project finishing",
+      title: "Name",
+    },
+    {
+      title: "Email",
+    },
+    {
+      title: "Department Name",
     },
     {
       title: "CreatedAt",
     },
     {
-      title: "Status",
-    },
-    {
       title: "Action",
     },
   ];
-  const [_viewData, setViewData] = useState("");
+  const [open, setOpen] = useState(false);
+  const [_adminlist, setAdminList] = useState([]);
+  const [_isloading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [_count, setCount] = useState("");
-  const [_confirm, setConfirm] = useState(false);
-  const [_bannerlist, setBannerList] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [_IconType, setIconType] = useState("");
-  const [_isloading, setIsLoading] = useState(false);
-  const [_listloading, setListLoading] = useState(false);
-  const [_image_upload, setImageUpload] = useState(false);
-  const [_imageurl, setImageURL] = useState("");
   const [openView, setOpenView] = useState(false);
-  const [_getcountrylist, setCountryList] = useState([]);
-  const handleChange = (event, value) => {
-    setPage(value);
+  const [_viewData, setViewData] = useState("");
+  const [_IconType, setIconType] = useState("");
+  const [_confirm, setConfirm] = useState(false);
+  const [_listloading, setListLoading] = useState(false);
+  const [_departmentlist, setDepartmentList] = useState([]);
+  const handleClickOpen = () => {
+    setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
-    setIsLoading(false);
   };
-  const handleOpen = () => {
-    setOpen(true);
+  const handleChange = (event, value) => {
+    setPage(value);
   };
+
   const handleViewOpen = (data, type) => {
     setOpenView(true);
     setViewData(data);
@@ -106,62 +102,74 @@ const StateComponent = () => {
     setIsLoading(false);
   };
 
-  const GetCityList = async () => {
+  // List Sub-Admin
+  const GetAdminLIst = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllProjectFurnishing,
+        endPoint: Apiconfigs.listAllUsers,
         data: {
+          search: "ADMIN",
           page: page,
           limit: "10",
         },
       });
       if (res) {
         setListLoading(false);
+
         if (res?.responseCode == 200) {
+          setAdminList(res?.result?.docs);
           setIsLoading(false);
           setCount(res?.result?.pages);
-          setBannerList(res?.result?.docs);
         } else if (res?.responseCode == 404) {
-          setBannerList([]);
           toast.error(res?.responseMessage);
+          setAdminList([]);
         } else {
-          setBannerList([]);
           toast.error(res?.responseMessage);
         }
       }
     } catch (error) {
-      setListLoading(false);
+      setAdminList([]);
 
+      setListLoading(false);
       console.log(error);
     }
   };
-
-  const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
+  // Add Sub Admin
+  const Add_Sub_Admin = async (value, code) => {
     try {
       setIsLoading(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs.createProjectFurnishing,
+        endPoint: Apiconfigs.createSubAdmin,
         data: {
-          projectFurnishing: value?.project_type,
-          status: value?.status,
+          name: value?.Name,
+          email: value?.email,
+          password: value?.password,
+          countryCode: value?.code,
+          phoneNumber: value?.phoneNo,
+          departmentId: value?.department,
+          status: "ACTIVE",
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
+          GetAdminLIst();
           toast.success(res?.responseMessage);
-          GetCityList();
           setIsLoading(false);
           handleClose();
         } else if (res?.responseCode == 404) {
+          toast.error(res?.responseMessage);
           setIsLoading(false);
           handleClose();
-          toast.error(res?.responseMessage);
         } else if (res?.responseCode == 501) {
+          toast.error(res?.responseMessage);
           setIsLoading(false);
           handleClose();
+        } else if (res?.responseCode == 409) {
+          console.log("sjdjsjdsjhd---->", typeof res?.responseCode);
           toast.error(res?.responseMessage);
+          setIsLoading(false);
+          handleClose();
         } else {
           setIsLoading(false);
           handleClose();
@@ -174,21 +182,28 @@ const StateComponent = () => {
       console.log("error", error);
     }
   };
-  const Update_Country = async (value) => {
+  // updat admin
+  const Update_Admin = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.editProjectFurnishing,
+        endPoint: Apiconfigs.editSubAdmin,
         data: {
-          projectFurnishing: value?.project_type,
+          name: value?.Name,
+          email: value?.email,
+          password: value?.password,
+          countryCode: value?.code,
+          phoneNumber: value?.phoneNo,
+          departmentId: value?.department,
           status: value?.status,
         },
         params: {
-          proFurnishingId: _viewData?._id,
+          admintId: _viewData?._id,
         },
       });
       if (res) {
-        GetCityList();
+        GetAdminLIst();
+
         if (res?.responseCode == 200) {
           setIsLoading(false);
           handleViewClose();
@@ -213,19 +228,20 @@ const StateComponent = () => {
       console.log("error", error);
     }
   };
-  const AD_country = async (value) => {
+  const AD_Admin = async (value) => {
     try {
       setIsLoading(true);
       const res = await PutApiFunction({
-        endPoint: Apiconfigs.activeDeactiveProjectFurnishing,
+        endPoint: Apiconfigs.activeBlockUser,
+
         params: {
-          proFurnishingId: _viewData?._id,
+          userId: _viewData?._id,
         },
       });
       if (res) {
+        GetAdminLIst();
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -248,21 +264,22 @@ const StateComponent = () => {
       console.log("error", error);
     }
   };
-  const DeleteBanner = async (value) => {
+  const Delete_Admin = async (value) => {
     try {
       setIsLoading(true);
       const res = await DeleteApiFunction({
-        endPoint: Apiconfigs.deleteProjectFurnishing,
+        endPoint: Apiconfigs.deleteUser,
+
         params: {
-          proFurnishingId: _viewData?._id,
+          admintId: _viewData?._id,
         },
       });
       if (res) {
+        GetAdminLIst();
         if (res?.responseCode == 200) {
-          toast.success(res?.responseMessage);
-          GetCityList();
           setIsLoading(false);
           confirmModalClose();
+          toast.success(res?.responseMessage);
         } else if (res?.responseCode == 404) {
           setIsLoading(false);
           confirmModalClose();
@@ -280,47 +297,70 @@ const StateComponent = () => {
     } catch (error) {
       setIsLoading(false);
       confirmModalClose();
+      console.log("error", error);
+    }
+  };
+  const DepartList = async (value, code) => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.listAllDepartment,
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setDepartmentList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          toast.error(res?.responseMessage);
+        } else if (res?.responseCode == 501) {
+          toast.error(res?.responseMessage);
+        } else {
+          toast.error(res?.responseMessage);
+        }
+      }
+    } catch (error) {
       console.log("error", error);
     }
   };
   useEffect(() => {
-    if (page) {
-      GetCityList();
-    }
-  }, [page]);
+    DepartList();
+    GetAdminLIst();
+  }, []);
   return (
     <AdminLayout>
       <Root>
         <Box className="mainPage">
-          <Box mt={1} mb={1}>
+          <Box mt={1}>
             <FilterComponent
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Create Finishing"
               open={open}
-              handleChange={handleChange}
-              handleClose={handleClose}
-              handleClickOpen={handleOpen}
-              // ImageUpload={ImageUpload}
-              AddMoreList={Add_Country}
+              AddMoreList={Add_Sub_Admin}
               _isloading={_isloading}
-              _image_upload={_image_upload}
-              _getcountrylist={_getcountrylist}
+              handleClickOpen={handleClickOpen}
+              handleClose={handleClose}
+              title="Admin List"
+              ButtonName="Create Admin"
+              HeadingDialog="Create Admin"
+              _departmentlist={_departmentlist}
             />
           </Box>
-          <Divider />
+          <Box mt={2} mb={1}>
+            <Divider />
+          </Box>
           <Box mt={3}>
             {_listloading ? (
               <LoaderComponent />
             ) : (
               <TableList
-                data={_bannerlist?.map((data, index) => ({
-                  "Project finishing": data?.projectFurnishing,
+                data={_adminlist?.map((data, index) => ({
+                  Name: data?.name,
+                  Email: data?.email,
+                  "Department Name": data?.departmentId?.departmentRole,
                   CreatedAt: convertDateTime(data?.createdAt),
-                  Status: data?.status,
 
                   Action: (
                     <Box className="iconBox" key={index}>
+                      <IconButton onClick={() => handleViewOpen(data, "VIEW")}>
+                        <RemoveRedEyeIcon color="#A2D117" />
+                      </IconButton>
+                      &nbsp;&nbsp;&nbsp;
                       <IconButton onClick={() => handleViewOpen(data, "EDIT")}>
                         <CreateIcon />
                       </IconButton>
@@ -355,46 +395,41 @@ const StateComponent = () => {
             <Box mt={2} display={"flex"} justifyContent={"center"}>
               <ListPagination
                 page={page}
-                setPage={setPage}
                 handleChange={handleChange}
                 _count={_count}
               />
             </Box>
           )}
-
-          {openView && (
+          {_viewData && (
             <ViewDialog
-              title="Project Finishing List"
-              ButtonName="Create Finishing"
-              HeadingDialog="Update Project Finishing"
+              ButtonName="Create Admin"
+              HeadingDialog={"View Admin"}
               _viewData={_viewData}
-              setViewData={setViewData}
               open={openView}
               handleClickOpen={handleViewOpen}
               handleClose={handleViewClose}
-              AddMoreList={Update_Country}
+              AddMoreList={Update_Admin}
               type={_IconType}
+              _departmentlist={_departmentlist}
               _isloading={_isloading}
-              // ImageUpload={ImageUpload}
-              _image_upload={_image_upload}
-              _getcountrylist={_getcountrylist}
             />
           )}
-
-          <SureModal
-            _confirm={_confirm}
-            confirmModalOpen={confirmModalOpen}
-            confirmModalClose={confirmModalClose}
-            AD_Banner={AD_country}
-            _isloading={_isloading}
-            type={_IconType}
-            screen="project finishing"
-            DeleteBanner={DeleteBanner}
-          />
+          {_confirm && (
+            <SureModal
+              _confirm={_confirm}
+              confirmModalOpen={confirmModalOpen}
+              confirmModalClose={confirmModalClose}
+              AD_Banner={AD_Admin}
+              _isloading={_isloading}
+              type={_IconType}
+              screen="Admin"
+              DeleteBanner={Delete_Admin}
+            />
+          )}
         </Box>
       </Root>
     </AdminLayout>
   );
 };
 
-export default StateComponent;
+export default AdminIndex;

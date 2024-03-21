@@ -42,8 +42,8 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
     },
     "@media(max-width:615px)": {
       padding: "10px 18px",
-      marginBottom:"20px"
-     },
+      marginBottom: "20px",
+    },
   },
 }));
 const PriceBox = styled("Box")(({ theme }) => ({
@@ -87,32 +87,30 @@ const PriceBox = styled("Box")(({ theme }) => ({
     },
     "& .main-upload-file": {
       "@media(max-width:615px)": {
-        display:"block !important",
+        display: "block !important",
       },
       "& .CoverImage": {
         "@media(max-width:615px)": {
-          marginBottom:"10px",
+          marginBottom: "10px",
         },
       },
       "& .multipleImageBox": {
         "@media(max-width:615px)": {
-         alignItems: "start"
+          alignItems: "start",
         },
       },
-      
-    }
+    },
   },
   "& .checkboxStyle span": {
     "@media(max-width:615px)": {
-     fontSize:"13px",
-     padding:"0px !important",
-     margin:"0px",
+      fontSize: "13px",
+      padding: "0px !important",
+      margin: "0px",
     },
-  }
+  },
 }));
 
 const HouseForm = ({
-  
   handleClose,
   _image_upload,
   _isloading,
@@ -283,7 +281,7 @@ const HouseForm = ({
 
     setSelectedImages1(images);
   };
- 
+
   return (
     <Box>
       <Box>
@@ -355,7 +353,7 @@ const HouseForm = ({
                             {propertyType &&
                               propertyType?.map((data, index) => {
                                 return (
-                                  <MenuItem value={data?.value}>
+                                  <MenuItem value={data?.value} key={index}>
                                     {data?.name}
                                   </MenuItem>
                                 );
@@ -386,7 +384,7 @@ const HouseForm = ({
                             {listedData &&
                               listedData?.map((data, index) => {
                                 return (
-                                  <MenuItem value={data?.name}>
+                                  <MenuItem value={data?.name} key={index}>
                                     {data?.name}
                                   </MenuItem>
                                 );
@@ -417,7 +415,7 @@ const HouseForm = ({
                             {furnishingList &&
                               furnishingList?.map((data, index) => {
                                 return (
-                                  <MenuItem value={data?.name}>
+                                  <MenuItem value={data?.name} key={index}>
                                     {data?.name}
                                   </MenuItem>
                                 );
@@ -659,84 +657,92 @@ const HouseForm = ({
                             {touched.price && errors.price}
                           </FormHelperText>
                         </Box>
-                        <Box display={"flex"} mt={2} gap={"15px"} className="main-upload-file">
                         <Box
-                              display={"flex"}
-                              gap={"5px"}
-                            >
-                          <label>
-                            <Box className="videoBox">
-                              <Typography variant="h2">
-                                upload 30 sec video
-                              </Typography>
-                              <Box textAlign={"center"} mt={1}>
-                                <input
-                                  type="file"
-                                  accept="video/*"
-                                  capture="user"
-                                  style={{ display: "none" }}
-                                  ref={fileInputRef}
-                                  onChange={handleFileChange}
-                                  onInvalid={() => {
-                                    alert("Please upload a valid video file.");
-                                    // Optionally, you can clear the file input
-                                    fileInputRef.current.value = "";
-                                  }}
-                                />
-                                <VideocamIcon style={{ cursor: "pointer" }} />
+                          display={"flex"}
+                          mt={2}
+                          gap={"15px"}
+                          className="main-upload-file"
+                        >
+                          <Box display={"flex"} gap={"5px"}>
+                            <label>
+                              <Box className="videoBox">
+                                <Typography variant="h2">
+                                  upload 30 sec video
+                                </Typography>
+                                <Box textAlign={"center"} mt={1}>
+                                  <input
+                                    type="file"
+                                    accept="video/*"
+                                    capture="user"
+                                    style={{ display: "none" }}
+                                    ref={fileInputRef}
+                                    onChange={handleFileChange}
+                                    onInvalid={() => {
+                                      alert(
+                                        "Please upload a valid video file."
+                                      );
+                                      // Optionally, you can clear the file input
+                                      fileInputRef.current.value = "";
+                                    }}
+                                  />
+                                  <VideocamIcon style={{ cursor: "pointer" }} />
+                                </Box>
                               </Box>
-                            </Box>
-                            <Box
-                              display={"flex"}
-                              justifyContent={"center"}
-                              mt={1}
-                            >
-                              {_videoupload && (
-                                <>
-                                  <CircularProgressComponent />
-                                </>
-                              )}
-                            </Box>
-                          </label>
-                          <label>
-                            <Box className="videoBox CoverImage">
-                              <Typography variant="h2">Cover Image</Typography>
-                              <Box textAlign={"center"} mt={"20px"}>
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  style={{ display: "none" }}
-                                  // ref={fileInputRef}
-                                  name="coverImage"
-                                  onChange={(e) => {
-                                    const selectedImage = e.target.files[0];
-                                    if (selectedImage) {
-                                      CoverImageFunction(e.target.files[0]);
-                                      setCoverImage(selectedImage);
-                                      const imageUrl =
-                                        URL.createObjectURL(selectedImage);
-                                      setCoverImage(imageUrl); // Create state for preview image
-                                    }
-                                  }}
-                                  onBlur={handleBlur}
-                                />
-                                {/* Display the preview image */}
-                                {_coverImage && (
-                                  <Box maxWidth={100}>
-                                    <img
-                                      src={_coverImage}
-                                      alt="Cover Preview"
-                                      style={{ width: "100%" }}
-                                    />
-                                  </Box>
+                              <Box
+                                display={"flex"}
+                                justifyContent={"center"}
+                                mt={1}
+                              >
+                                {_videoupload && (
+                                  <>
+                                    <CircularProgressComponent />
+                                  </>
                                 )}
-                                <CameraAltIcon style={{ cursor: "pointer" }} />
                               </Box>
-                            </Box>
-                            <FormHelperText error>
-                              {touched.coverImage && errors.coverImage}
-                            </FormHelperText>
-                          </label>{" "}
+                            </label>
+                            <label>
+                              <Box className="videoBox CoverImage">
+                                <Typography variant="h2">
+                                  Cover Image
+                                </Typography>
+                                <Box textAlign={"center"} mt={"20px"}>
+                                  <input
+                                    type="file"
+                                    accept="image/*"
+                                    style={{ display: "none" }}
+                                    // ref={fileInputRef}
+                                    name="coverImage"
+                                    onChange={(e) => {
+                                      const selectedImage = e.target.files[0];
+                                      if (selectedImage) {
+                                        CoverImageFunction(e.target.files[0]);
+                                        setCoverImage(selectedImage);
+                                        const imageUrl =
+                                          URL.createObjectURL(selectedImage);
+                                        setCoverImage(imageUrl); // Create state for preview image
+                                      }
+                                    }}
+                                    onBlur={handleBlur}
+                                  />
+                                  {/* Display the preview image */}
+                                  {_coverImage && (
+                                    <Box maxWidth={100}>
+                                      <img
+                                        src={_coverImage}
+                                        alt="Cover Preview"
+                                        style={{ width: "100%" }}
+                                      />
+                                    </Box>
+                                  )}
+                                  <CameraAltIcon
+                                    style={{ cursor: "pointer" }}
+                                  />
+                                </Box>
+                              </Box>
+                              <FormHelperText error>
+                                {touched.coverImage && errors.coverImage}
+                              </FormHelperText>
+                            </label>{" "}
                           </Box>
                           <Box
                             display={"flex"}
@@ -886,7 +892,11 @@ const HouseForm = ({
                     </Box>
                     <Box>
                       <Box display={"flex"} gap={"20px"} mt={2}>
-                        <Box display={"inline-flex"} alignItems={"center"} className="checkboxStyle">
+                        <Box
+                          display={"inline-flex"}
+                          alignItems={"center"}
+                          className="checkboxStyle"
+                        >
                           <span>Terms & Condition</span>
                           <Checkbox
                             required
@@ -895,7 +905,11 @@ const HouseForm = ({
                             onClick={termConditionCheck}
                           />
                         </Box>
-                        <Box display={"inline-flex"} alignItems={"center"} className="checkboxStyle">
+                        <Box
+                          display={"inline-flex"}
+                          alignItems={"center"}
+                          className="checkboxStyle"
+                        >
                           <span>Featured Property</span>
                           <Checkbox
                             checked={_checked}
@@ -913,7 +927,11 @@ const HouseForm = ({
                     gap={"50px"}
                   >
                     <DialogButtonStyle>
-                      <Box display={"flex"} gap={"20px"} justifyContent={"left"}>
+                      <Box
+                        display={"flex"}
+                        gap={"20px"}
+                        justifyContent={"left"}
+                      >
                         <Button
                           onClick={handleClose}
                           disabled={_image_upload || _isloading || _videoupload}

@@ -157,11 +157,11 @@ const SliderComponent = () => {
   return (
     <MainComponent>
       <Container maxWidth>
-      <Box className="mainSliderDiv" mt={"25rem"}>
+        <Box className="mainSliderDiv" mt={"25rem"}>
           <Slider {...settings} ref={sliderRef}>
             {projectDetails.map((data, index) => {
               return (
-                <Grid item lg={3} md={6} sm={12} xs={12}>
+                <Grid item lg={3} md={6} sm={12} xs={12} key={index}>
                   <Box display={"flex"} justifyContent={"center"} key={index}>
                     <Card className="cards project-slider">
                       <Box>
@@ -190,7 +190,7 @@ const SliderComponent = () => {
               );
             })}
           </Slider>
-      </Box>
+        </Box>
       </Container>
     </MainComponent>
   );

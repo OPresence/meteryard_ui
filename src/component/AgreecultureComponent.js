@@ -143,13 +143,13 @@ const AgreecultureComponent = () => {
     <ResidentStyle>
       <div className="mainSliderDiv">
         <Container maxWidth>
-        <section>
-          <Box>
-            <Typography variant="h2">Agriculture Projects</Typography>
-            <Typography variant="h6">
-              Agriculture Projects Across India.
-            </Typography>
-          </Box>
+          <section>
+            <Box>
+              <Typography variant="h2">Agriculture Projects</Typography>
+              <Typography variant="h6">
+                Agriculture Projects Across India.
+              </Typography>
+            </Box>
           </section>
           <Box mt={5}>
             <Grid container spacing={3}>
@@ -157,6 +157,7 @@ const AgreecultureComponent = () => {
                 _getlist?.map((data, index) => {
                   return (
                     <Grid
+                      key={index}
                       item
                       lg={3}
                       md={3}

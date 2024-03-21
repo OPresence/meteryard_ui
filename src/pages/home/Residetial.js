@@ -69,6 +69,7 @@ export default function Residetial({
                 <>
                   {data2?.projectTypeId?._id == data?._id && (
                     <Box
+                      key={index}
                       style={{
                         borderLeft: "1px solid #ccc",
                       }}

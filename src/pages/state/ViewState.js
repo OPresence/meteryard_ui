@@ -240,7 +240,7 @@ const AddState = ({
                           _getcountrylist?.map((data, index) => {
                             console.log("dataxcxc--->", data);
                             return (
-                              <MenuItem value={data?._id}>
+                              <MenuItem value={data?._id} key={index}>
                                 {data?.countryName}
                               </MenuItem>
                             );

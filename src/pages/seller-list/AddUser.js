@@ -153,7 +153,7 @@ const AddUser = ({
                         {_departmentlist &&
                           _departmentlist?.map((data, index) => {
                             return (
-                              <MenuItem value={data?._id}>
+                              <MenuItem value={data?._id} key={index}>
                                 {data?.departmentRole}
                               </MenuItem>
                             );
