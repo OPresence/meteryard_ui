@@ -104,7 +104,9 @@ const PriceBox = styled("Box")(({ theme }) => ({
   },
   "& .checkboxStyle span": {
     "@media(max-width:615px)": {
-     fontSize:"14px"
+     fontSize:"13px",
+     padding:"0px !important",
+     margin:"0px",
     },
   }
 }));
@@ -281,6 +283,7 @@ const HouseForm = ({
 
     setSelectedImages1(images);
   };
+  
   return (
     <Box>
       <Box>

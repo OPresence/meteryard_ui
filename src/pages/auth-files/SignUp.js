@@ -36,12 +36,18 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     justifyContent: "center",
     backgroundRepeat: "no-repeat",
     backgroundImage: 'url("/images/Path 8365.svg")',
+    "@media(max-width:615px)": {
+		  marginBottom: "80px",
+		},
     "& input": {
       padding: "10.5px 14px !important",
     },
   },
   "& .loginBox": {
     padding: "0 35px",
+    "@media(max-width:615px)": {
+		  padding: "0 0px",
+		},
     "& h2": {
       fontWeight: "600",
       color: "#6F6F6F",
@@ -90,6 +96,9 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       padding: "8px 40px",
       background: "#0099FF",
       color: "#fff",
+      "@media(max-width:615px)": {
+        padding: "8px 19px",
+      },
     },
   },
 }));

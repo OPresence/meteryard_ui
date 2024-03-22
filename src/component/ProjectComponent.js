@@ -6,6 +6,9 @@ const ProjectStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     padding: "80px 0 100px 0",
     background: "#F7F7F7",
+    "@media(max-width:615px)": {
+      padding: "34px 0 100px 0",
+    },
     // padding: "50px",
     "& h2": {
       fontWeight: "500",
@@ -19,6 +22,9 @@ const ProjectStyle = styled("Box")(({ theme }) => ({
       boxShadow: "0px 3px 39px #0000000A",
       "@media(max-width:460px)": {
         padding: "0 10px",
+      },
+      "@media(max-width:615px)": {
+        margin: "34px 0 0 0",
       },
       "& .smallBox": {
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
