@@ -7,6 +7,15 @@ import PublicIcon from "@mui/icons-material/Public";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsChatDots } from "react-icons/bs";
+import FormControl, { useFormControl } from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import FormHelperText from '@mui/material/FormHelperText';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const CityPropertyStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -212,6 +221,40 @@ const index = () => {
                       &nbsp;&nbsp;&nbsp;
                       <Typography variant="h6">ratings</Typography>
                     </Box>
+                  </Box>
+                </Box>
+                <Box p={"0 40px"}>
+                  <Box className="comment-section">
+                    <Stack direction="row" spacing={2}>
+                      <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" />
+                    </Stack>
+                    <form noValidate autoComplete="off">
+                      <FormControl sx={{ width: '50ch' }}>
+                        <OutlinedInput placeholder="Comments...." />
+                      </FormControl>
+                    </form>
+                    <Box className="iconBox comment-send-btn">
+                        <TelegramIcon />
+                      </Box>
+                  </Box>
+                  <Box className="comment-details">
+                    <Stack direction="row" spacing={2} className="comment-details-below" >
+                      <Avatar sx={{ width: '20px',  height: '20px'}} alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" />
+                      <Typography variant="h6">
+                      ashok sharma
+                    </Typography>
+                    </Stack>
+                    <Box className="sub-comment-section">
+                    <Typography sx={{ marginTop:"8px"}}>
+                    <span>Good</span>
+                    </Typography>
+                    <Box className="iconBox activity-icon-comments">
+                    <span>8 min ago</span>
+                        <FavoriteBorderIcon />
+                        <EditIcon />
+                        <DeleteIcon />
+                      </Box>
+                      </Box>
                   </Box>
                 </Box>
               </Box>
