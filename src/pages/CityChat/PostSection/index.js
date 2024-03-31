@@ -104,6 +104,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
 }));
 
 const index = () => {
+  const _postData = [{}, {}, {}, {}];
   return (
     <CityPropertyStyle>
       {_postData?.map((data, index) => {

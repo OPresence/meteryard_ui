@@ -199,7 +199,7 @@ export default function PropertyForm({
           <Grid item lg={2} md={2} sm={12} xs={12}>
             {_propertyList?.map((data, index) => {
               return (
-                <Box mt={2} key={index}>
+                <Box mt={2}>
                   <Residetial
                     data={data}
                     index={index}
