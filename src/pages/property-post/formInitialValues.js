@@ -1,0 +1,40 @@
+import checkoutFormModel from "./checkoutFormModel";
+const {
+  formField: {
+    listed_name,
+    furnishing,
+    bedrooms,
+    bathrooms,
+    super_building,
+    carpet_area,
+    total_floors,
+    floors_no,
+    facing,
+    project_name,
+    add_title,
+    description,
+    price,
+    location,
+    coverImage,
+    typeProperty,
+  },
+} = checkoutFormModel;
+
+export default {
+  [listed_name]: "",
+  [furnishing]: "",
+  [bedrooms]: "",
+  [bathrooms]: "",
+  [super_building]: "",
+  [carpet_area]: "",
+  [total_floors]: "",
+  [floors_no]: "",
+  [facing]: "",
+  [project_name]: "",
+  [add_title]: "",
+  [description]: "",
+  [price]: "",
+  [location]: "",
+  [coverImage]: "",
+  [typeProperty]: "",
+};

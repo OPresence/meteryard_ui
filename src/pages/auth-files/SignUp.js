@@ -37,8 +37,8 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     backgroundRepeat: "no-repeat",
     backgroundImage: 'url("/images/Path 8365.svg")',
     "@media(max-width:615px)": {
-		  marginBottom: "80px",
-		},
+      marginBottom: "80px",
+    },
     "& input": {
       padding: "10.5px 14px !important",
     },
@@ -46,9 +46,8 @@ const LoginStyle = styled("Box")(({ theme }) => ({
   "& .loginBox": {
     padding: "0 35px",
     "@media(max-width:615px)": {
-		  padding: "0 0px",
-		},
-	
+      padding: "0 0px",
+    },
     "& h2": {
       fontWeight: "600",
       color: "#6F6F6F",
@@ -101,8 +100,6 @@ const LoginStyle = styled("Box")(({ theme }) => ({
         padding: "8px 19px",
       },
     },
-   
-	
   },
 }));
 const phoneRegExp =
