@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid, Typography, FormControlLabel, Button } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  FormControlLabel,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 import styled from "@emotion/styled";
-import PostCheckBox from "../../component/PostCheckBox";
+import CircularProgressComponent from "../../component/CircularProgressComponent";
+
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { SelectField, InputField } from "./FormFields";
+import { withStyles } from "@material-ui/core/styles";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
   "& .borderBox": {
@@ -78,11 +89,28 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
       },
     },
   },
+  "& .buttonStyle": {
+    padding: "5px 20px",
+    borderRadius: "26px",
+    color: "#000",
+  },
 }));
-
+const GreenCheckbox = withStyles({
+  root: {
+    color: "#b8db53",
+    "&$checked": {
+      color: "#b8db53",
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
 const PropertyPost_s_1 = (props) => {
   const {
-    _projecttype,
+    _getproprty_type,
+    handleCheckboxChange,
+    setGetProject_sub_Type,
+    setGetPropetyType,
+    _getproject_sub_type,
     formField: {
       listed_name,
       furnishing,
@@ -104,6 +132,9 @@ const PropertyPost_s_1 = (props) => {
   } = props;
   const [state, setState] = React.useState(false);
   const [_propertyList, setPropertyList] = React.useState([]);
+  const [_subytypelist, setSubTypeList] = useState([]);
+  const [_isloading, setIsLoading] = useState(false);
+
   const propertyType = [
     {
       name: "For Rent",
@@ -217,86 +248,180 @@ const PropertyPost_s_1 = (props) => {
       value: "9",
     },
   ];
-  const handleChange = (event) => {
-    setState(event.target.value);
-  };
-  const [selectedId, setSelectedId] = useState(null);
-
-  const handleCheckboxChange = (id) => {
-    setSelectedId(id);
-  };
   const ProjectType = async () => {
     try {
+      setIsLoading(true);
+
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.proSubTypeListWithProType,
+        endPoint: Apiconfigs?.listAllProjectType,
       });
       if (res) {
-        console.log("res00-->", res?.result?.docs);
+        setGetPropetyType(res?.result?.docs[0]?._id);
         if (res?.responseCode == 200) {
+          setIsLoading(false);
+
           setPropertyList(res?.result?.docs);
         } else if (res?.responseCode == 404) {
+          setIsLoading(false);
+
           setPropertyList([]);
           toast.error(res?.responseMessage);
           setPropertyList([]);
         } else if (res?.responseCode == 404) {
+          setIsLoading(false);
+
           setPropertyList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         } else if (res?.responseCode == 500) {
+          setIsLoading(false);
+
           setPropertyList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         } else {
+          setIsLoading(false);
+
           setPropertyList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         }
       }
     } catch (error) {
+      setIsLoading(false);
+
       console.log("error");
       setPropertyList([]);
     }
   };
+  const SubProjectType = async (id) => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllProjectSubType,
+        data: {
+          projectTypeId: _getproprty_type,
+          page: "1",
+          limit: "10",
+        },
+      });
+      if (res?.responseCode == 200) {
+        setGetProject_sub_Type(res?.result?.docs[0]?._id);
+        setSubTypeList(res?.result?.docs);
+      } else if (res?.responseCode == 404) {
+        setSubTypeList([]);
+        toast.error(res?.responseMessage);
+        setSubTypeList([]);
+      } else if (res?.responseCode == 404) {
+        setSubTypeList([]);
+        toast.error(res?.responseMessage); // Display error notification
+      } else if (res?.responseCode == 500) {
+        setSubTypeList([]);
+
+        toast.error(res?.responseMessage); // Display error notification
+      } else {
+        setSubTypeList([]);
+
+        toast.error(res?.responseMessage); // Display error notification
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+  React.useEffect(() => {
+    if (_getproprty_type) {
+      SubProjectType();
+    }
+  }, [_getproprty_type]);
   useEffect(() => {
     ProjectType();
   }, []);
-  console.log("bdhjfds---->", _projecttype);
+
+  // const [checkedIndexPost, setCheckedIndexPost] = useState(-1); // Keep track of the index of the currently checked checkbox
+
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBox">
         <Box className="HeadingBox">
           <Typography variant="h2">List Your property</Typography>
           <Box className="CheckBox">
-            <Box mb={1}>
-              <Typography variant="h3">Property Type</Typography>
-            </Box>
-            {/* <Grid container spacing={3}>
-              {_propertyList &&
-                _propertyList?.map((data) => {
-                  return (
-                    <Grid item lg={4} md={4} sm={6} xs={6}>
-                      <Box key={data?._id}>
-                        <PostCheckBox
-                          data={data}
-                          isSelected={selectedId === data._id}
-                          state={state}
-                          handleChange={() => handleCheckboxChange(data._id)}
+            {_isloading ? (
+              <Box display={"flex"} justifyContent={"center"} mb={2}>
+                &nbsp;&nbsp;{" "}
+                <CircularProgressComponent
+                  colorValue="#BADC54"
+                  size={40}
+                  // className={"buttonProgress"}
+                />
+              </Box>
+            ) : (
+              <>
+                <Box mb={1}>
+                  <Typography variant="h3">Property Type</Typography>
+                </Box>
+                <Grid container spacing={3}>
+                  {_propertyList.map((data, index) => (
+                    <Grid item lg={3} md={3} sm={6} xs={6}>
+                      <div key={index}>
+                        <FormControlLabel
+                          control={
+                            <GreenCheckbox
+                              checked={_getproprty_type === data?._id}
+                              onChange={() => handleCheckboxChange(data?._id)}
+                            />
+                          }
+                          label={data?.projectType}
                         />
-                      </Box>
+                      </div>
                     </Grid>
-                  );
-                })}
-            </Grid> */}
-            {/* <Box>
-              <Typography variant="h3">Property Category</Typography>
-            </Box>
-            <Box>
-              {console.log("_propertyList--->", _propertyList)}
-              {_propertyList &&
-                _propertyList?.map((data) => {
-                  return <Button key={data?._id}></Button>;
-                })}
-            </Box> */}
+                  ))}
+                </Grid>
+                <Box>
+                  <Typography variant="h3">Property Category</Typography>
+                </Box>
+                <Box mb={2} mt={1}>
+                  <Grid container spacing={3}>
+                    {_subytypelist &&
+                      _subytypelist?.map((data) => {
+                        return (
+                          <>
+                            <Grid
+                              item
+                              lg={data?.projectSubType?.length >= 8 ? 3 : 2}
+                              md={2}
+                              sm={4}
+                              xs={6}
+                            >
+                              <Button
+                                className="buttonStyle"
+                                style={
+                                  _getproject_sub_type == data?._id
+                                    ? {
+                                        background: "#BADC54",
+                                        border: "1px solid #BADC54",
+                                      }
+                                    : {
+                                        background: "#fff",
+                                        border: "1px solid #000",
+
+                                        color: "#000",
+                                      }
+                                }
+                                key={data?._id}
+                                onClick={() =>
+                                  setGetProject_sub_Type(data?._id)
+                                }
+                              >
+                                {data?.projectSubType}
+                              </Button>
+                            </Grid>
+                            &nbsp;&nbsp;
+                          </>
+                        );
+                      })}
+                  </Grid>
+                </Box>
+              </>
+            )}
             <Grid container spacing={3}>
               <Grid item lg={6} md={6} sm={12} xs={12}>
                 <SelectField

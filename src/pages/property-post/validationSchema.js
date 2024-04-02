@@ -16,13 +16,12 @@ const {
     add_title,
     description,
     price,
-    location,
-    coverImage,
-    typeProperty,
+    // location,
+    // coverImage,
+    // typeProperty,
     landmark,
   },
 } = checkoutFormModel;
-
 export default [
   Yup.object().shape({
     [listed_name.name]: Yup.string().required(

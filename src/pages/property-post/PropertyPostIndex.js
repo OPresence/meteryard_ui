@@ -20,7 +20,8 @@ import validationSchema from "./validationSchema";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useRouter } from "next/router";
+import swal from "sweetalert";
 import { PostApiFunction } from "../../utils";
 import formInitialValues from "./formInitialValues";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
@@ -113,11 +114,11 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
   },
 }));
 const PropertyPostIndex = () => {
+  const router = useRouter();
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
   });
-  console.log("windowSize----->", windowSize);
   useEffect(() => {
     function handleResize() {
       setWindowSize({
@@ -149,6 +150,8 @@ const PropertyPostIndex = () => {
   const [_get_type_name, setGet_Type_Name] = useState("");
   const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
   const [_getproprty_type, setGetPropetyType] = useState("");
+  const [_getsubtype, setSubTypeList] = useState("");
+
   const [_videoupload, setVideoUpload] = useState(false);
   const [coordinates, setCoordinates] = useState({
     lat: 27.1881,
@@ -162,6 +165,9 @@ const PropertyPostIndex = () => {
     } else {
       setChecked(false);
     }
+  };
+  const handleCheckboxChange = (_id) => {
+    setGetPropetyType(_id);
   };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -240,7 +246,6 @@ const PropertyPostIndex = () => {
         endPoint: Apiconfigs.listAllProjectType,
       });
       if (res) {
-        console.log("bjdbbfs---->", res?.result?.docs);
         setProjectType(res?.result?.docs);
       }
     } catch (error) {
@@ -248,9 +253,6 @@ const PropertyPostIndex = () => {
     }
   };
 
-  useEffect(() => {
-    ProjectType();
-  }, []);
   const handleImageUpload = async () => {
     try {
       const responses = [];
@@ -259,9 +261,7 @@ const PropertyPostIndex = () => {
       const processImage = async (index) => {
         if (index < selectedImages.length) {
           const image = selectedImages[index];
-          console.log("Processing image:", image);
           const response = await imageUploadFunction(image);
-          // console.log("responses---->0", response?.result[0]?.mediaUrl);
           responses.push(response?.result[0]?.mediaUrl);
 
           // Process the next image recursively
@@ -284,7 +284,6 @@ const PropertyPostIndex = () => {
     }
   }, [selectedImages]);
   function _renderStepContent(step) {
-    console.log("stepfjndfnjd--->", step, formField);
     switch (step) {
       case 0:
         return (
@@ -292,6 +291,11 @@ const PropertyPostIndex = () => {
             formField={formField}
             setTrueCaptcha={setTrueCaptcha}
             _isloading={_isloading}
+            setGetPropetyType={setGetPropetyType}
+            _getproprty_type={_getproprty_type}
+            handleCheckboxChange={handleCheckboxChange}
+            _getproject_sub_type={_getproject_sub_type}
+            setGetProject_sub_Type={setGetProject_sub_Type}
           />
         );
       case 1:
@@ -326,97 +330,32 @@ const PropertyPostIndex = () => {
         );
     }
   }
-  async function _submitForm(values, actions) {
-    if (_trucapthca) {
+  async function _handleSubmit(values, actions) {
+    if (isLastStep) {
       try {
-        setIsLoading(true);
-        actions.setSubmitting(false);
-        setActiveStep(activeStep + 1);
-        const res = await PostApiFunctionWipro({
-          endPoint:
-            "https://mob.aicofindia.com/UATMAWrapper/cpmaNewInsuranceController/cpmaGrsServiceCall?serviceName=%2Fgrv%2FcreateGrsWithoutMultipart&methodType=POST",
-          data: {
-            acBankIfscId: "",
-          },
-        });
-        if (res) {
-          setIsLoading(false);
+        const apiResponse = await PropertyPostFunction(values, actions);
 
-          setSaveData(res?.data);
-          if (res?.data?.code == 1) {
-            swal({
-              icon: "success",
-              title: "Your form has been submitted successfully!",
-
-              content: {
-                element: "span",
-                attributes: {
-                  innerHTML:
-                    "Your Grievance number is : <span id='grievanceNumber'>" +
-                    res?.data?.data?.grievanceCd +
-                    "</span>",
-                },
-              },
-              buttons: {
-                confirm: "OK",
-              },
-            }).then((value) => {
-              if (value) {
-                window.location.reload();
-              }
-            });
-            setIsLoading(false);
-          } else {
-            swal({
-              icon: "error",
-              title: "Oops...",
-              text: res?.data?.messageResponse,
-              buttons: {
-                confirm: "OK",
-              },
-            }).then((value) => {
-              if (value) {
-                window.location.reload();
-              }
-            });
-
-            setIsLoading(false);
-          }
+        if (apiResponse && apiResponse.success) {
+          setActiveStep(activeStep + 1);
+        } else {
+          console.error("API call failed:", apiResponse.error);
+          swal("error", `${apiResponse.error}`);
         }
       } catch (error) {
-        setIsLoading(false);
-
-        console.log(error);
+        console.error("Error in API call:", error);
       }
     } else {
-      alert("Please enter the captcha and verify.");
+      setActiveStep(activeStep + 1);
+      actions.setTouched({});
+      actions.setSubmitting(false);
     }
   }
-
-  // async function _handleSubmit(values, actions) {
-  //   console.log("000000000000000----------->");
-  //   if (isLastStep) {
-  //     try {
-  //       const apiResponse = await _submitForm(values, actions);
-
-  //       if (apiResponse && apiResponse.success) {
-  //         setActiveStep(activeStep + 1);
-  //       } else {
-  //         console.error("API call failed:", apiResponse.error);
-  //         swal("error", `${apiResponse.error}`);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error in API call:", error);
-  //     }
-  //   } else {
-  //     setActiveStep(activeStep + 1);
-  //     actions.setTouched({});
-  //     actions.setSubmitting(false);
-  //   }
-  // }
-  const _handleSubmit = async (values) => {
+  async function PropertyPostFunction(values) {
     try {
       setIsLoading(true);
+      actions.setSubmitting(false);
+      setActiveStep(activeStep + 1);
+
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.createPropertyPost,
         data: {
@@ -449,11 +388,30 @@ const PropertyPostIndex = () => {
       if (res) {
         setIsLoading(false);
         if (res?.responseCode == 200) {
-          toast.success(res?.responseMessage); // Display success notification
+          // toast.success(res?.responseMessage); // Display success notification
           setIsLoading(false);
           setPropertyForm(false);
-
           setSelectedImages([]);
+          swal({
+            icon: "success",
+            title: "Your property has been post successfully!",
+
+            content: {
+              element: "span",
+              attributes: {
+                innerHTML: "Congratulations your property post complete.",
+              },
+            },
+            buttons: {
+              confirm: "OK",
+            },
+          }).then((value) => {
+            if (value) {
+              router.push("/");
+              // window.location.reload();
+            }
+          });
+          // router.push("/");
         } else if (res?.responseCode == 404) {
           setPropertyForm(false);
           toast.error(res?.responseMessage); // Display error notification
@@ -472,7 +430,6 @@ const PropertyPostIndex = () => {
           setIsLoading(false);
           setPropertyForm(false);
         }
-        console.log("res---->", res);
       }
     } catch (error) {
       setIsLoading(false);
@@ -480,17 +437,16 @@ const PropertyPostIndex = () => {
 
       console.log("error", error);
     }
-  };
+  }
   function _handleBack() {
     setActiveStep(activeStep - 1);
   }
+  useEffect(() => {
+    ProjectType();
+  }, []);
   return (
     <PropertyPostIndexStyle>
-      <Box
-        mt={"136px"}
-        className="MainBox"
-        // style={{ height: `${windowSize?.height}px` }}
-      >
+      <Box mt={"136px"} className="MainBox">
         <Container>
           <Grid container spacing={3}>
             <Grid
@@ -554,7 +510,6 @@ const PropertyPostIndex = () => {
                                 </>
                               )}
                             </Box>
-                            {console.log("isLastStep--->", activeStep)}
                             &nbsp;&nbsp;{" "}
                             <Box
                               className={"wrapper"}

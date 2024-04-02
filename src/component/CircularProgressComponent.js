@@ -8,8 +8,8 @@ export default function CircularIndeterminate({ colorValue }) {
       <CircularProgress
         sx={{
           color: `${colorValue} !important`,
-          height: "25px !important ",
-          width: "25px !important ",
+          height: "35px !important ",
+          width: "35px !important ",
         }}
       />
     </Box>

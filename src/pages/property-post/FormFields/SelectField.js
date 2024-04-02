@@ -142,7 +142,7 @@ function SelectField(props) {
   }
   return (
     <>
-      <FormControl fullWidth sx={{}}>
+      <FormControl fullWidth sx={{}} {...rest} error={isError}>
         <InputLabel id="demo-multiple-name-label">{label}</InputLabel>
         <NativeSelect
           labelId="demo-multiple-name-label"
@@ -156,7 +156,9 @@ function SelectField(props) {
           input={<OutlinedInput label={label} />}
           MenuProps={MenuProps}
         >
-          <option selected></option>
+          <option selected disabled value={""}>
+            {/* {label} */}
+          </option>
 
           {data?.length > 0 &&
             data?.map((item) => (
@@ -170,130 +172,6 @@ function SelectField(props) {
         </NativeSelect>
         {_renderHelperText()}
       </FormControl>
-      {/* <>
-      <Box mb={1}>
-        <Typography variant="h6">
-          {props?.label}
-          {(props?.name == "Channel" ||
-            props?.name == "State" ||
-            props?.name == "District" ||
-            props?.name == "product_State" ||
-            props?.name == "product_Year" ||
-            props?.name == "product_Season" ||
-            props?.name == "Product_Scheme" ||
-            props?.name == "product_District" ||
-            props?.name == "Use_Type" ||
-            props?.name == "Officer_Designation" ||
-            props?.name == "Insurance_type" ||
-            props?.name == "Policy_Type" ||
-            props?.name == "Complaint_Type" ||
-            props?.name == "Complaint_Description" ||
-            props?.name == "Note_Number" ||
-            props?.name == "Broker_License" ||
-            props?.name == "Identifier_Type_Value") && (
-            <span style={{ color: "red", fontWeight: "900" }}>*</span>
-          )}
-        </Typography>
-      </Box>
-      {props?.valueName ? (
-        <>
-          <FormControl {...rest} error={isError}>
-            <NativeSelect
-              {...field}
-              id="demo-customized-select-native"
-              input={<BootstrapInput />}
-              value={selectedValue ? selectedValue : ""}
-              label={label}
-              variant="outlined"
-              disabled={props._isloading}
-              onChange={(e) => {
-                handleChange(e);
-              }}
-            >
-              <option selected>Select {props?.label}</option>
-
-              {data?.length > 0 &&
-                data?.map((item, index) => {
-                  return (
-                    <option
-                      key={index}
-                      value={
-                        item?.GR_AGAINST_TYPE_ID ||
-                        item?.yearId ||
-                        item?.cropSeasonId ||
-                        (type == "ProductDetails" && item?.stateId) ||
-                        (type == "stateValue" && item?.GR_IGMS_STATE_ID) ||
-                        (type == "destrictValue" &&
-                          item?.GR_IGMS_DISTRICT_ID) ||
-                        item?.productId ||
-                        item?.distictId ||
-                        item?.stateId ||
-                        item?.GR_REGISTRATION_NUMBER_ID ||
-                        item?.value ||
-                        (type == undefined && item?.GR_POLICY_TYPE_ID) ||
-                        (type == "complain" && item?.GR_COMPL_TYPE_ID) ||
-                        item?.GR_INSURANCE_TYPE_ID ||
-                        item?.GR_COMPL_DESC_ID
-                      }
-                    >
-                      {item?.AGAINST_TYPE ||
-                        item?.COMPL_TYPE ||
-                        item?.BROKER_NAME ||
-                        item?.STATE_NAME ||
-                        item?.DISTRICT_NAME ||
-                        item?.yearCd ||
-                        item?.cropSeasonName ||
-                        item?.productCd ||
-                        item?.distictName ||
-                        item?.stateName ||
-                        item?.name ||
-                        item?.POLICY_TYPE ||
-                        item?.COMPL_TYPE ||
-                        item?.INSURANCE_TYPE ||
-                        item?.COMPL_DESC}
-                    </option>
-                  );
-                })}
-            </NativeSelect>
-            {_renderHelperText()}
-          </FormControl>
-        </>
-      ) : (
-        <FormControl {...rest} fullWidth>
-          <NativeSelect
-            {...field}
-            fullWidth
-            disabled={props._isloading}
-            id="demo-customized-select-native"
-            input={<BootstrapInput />}
-            value={selectedValue ? selectedValue : ""}
-            label={label}
-            variant="outlined"
-            onChange={(e) => {
-              handleChange(e);
-            }}
-          >
-            <option selected>Select {props?.label}</option>
-            {data?.length > 0 &&
-              data?.map((item, index) => (
-                <option
-                  key={index}
-                  value={
-                    item?.listCd}
-                >
-                  {item?.listDesc ||
-                    item?.CITY_NAME ||
-                    item?.loctnHierarchyName ||
-                    item?.CROP_NAME ||
-                    item?.documentType ||
-                    item?.name ||
-                    item?.BROKER_NAME}
-                </option>
-              ))}
-          </NativeSelect>
-        </FormControl>
-      )}
-    </> */}
     </>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Grid, Typography, Box, Container } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import styled from "@emotion/styled";
@@ -98,9 +98,82 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
   },
 }));
 const ResidentialProjects = () => {
+  const sliderRef = useRef(null);
   const [_getlist, setGetList] = useState([]);
   const [_isloading, setIsLoading] = useState(false);
+  const settings = {
+    dots: true,
+    infinite: true,
+    autoplay: false,
+    arrows: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
 
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          infinite: true,
+          autoplay: false,
+          initialSlide: 1,
+        },
+      },
+    ],
+  };
   const ResidentialAPI = async () => {
     try {
       setIsLoading(true);

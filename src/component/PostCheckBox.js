@@ -19,23 +19,24 @@ const GreenCheckbox = withStyles({
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 
-export default function PostCheckBox({ data }) {
-  const { projectType, _id, state, handleChange, isSelected } = data;
+export default function PostCheckBox({
+  data,
+  index,
+  checkedIndex,
+  handleCheckboxChange,
+}) {
+  const { projectType, _id, state, isSelected } = data;
 
   return (
-    <FormGroup row>
-      <FormControlLabel
-        control={
-          <GreenCheckbox
-            Checkbox
-            checked={isSelected}
-            onChange={handleChange}
-            name={_id}
-            color="primary"
-          />
-        }
-        label={projectType}
-      />
-    </FormGroup>
+    <FormControlLabel
+      control={
+        <GreenCheckbox
+          checked={checkedIndex === index}
+          onChange={() => handleCheckboxChange(index)}
+          color="primary"
+        />
+      }
+      label={projectType}
+    />
   );
 }
