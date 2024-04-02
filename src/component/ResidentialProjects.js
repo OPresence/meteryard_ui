@@ -93,26 +93,18 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
       fontSize: "18px",
     },
   },
+  "& .GridClassCard": {
+    "@media(max-width:615px)": {
+      marginTop: "10px !important",
+    },
+  },
 }));
 const ResidentialProjects = () => {
   const [_getlist, setGetList] = useState([]);
   console.log("res---->sndkjfkdkfsd", _getlist);
 
   const [_isloading, setIsLoading] = useState(false);
-  const projectDetails = [
-    {
-      image: "/images/meteryard/Images/Image 23.png",
-    },
-    {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100309.png",
-    },
-    {
-      image: "/images/meteryard/Images/Image 23.png",
-    },
-    {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100420.png",
-    },
-  ];
+
   const ResidentialAPI = async () => {
     try {
       setIsLoading(true);
@@ -153,10 +145,18 @@ const ResidentialProjects = () => {
               {_getlist &&
                 _getlist?.map((data, index) => {
                   return (
-                    <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
+                    <Grid
+                      item
+                      lg={3}
+                      md={3}
+                      sm={6}
+                      xs={12}
+                      key={index}
+                      className="GridClassCard"
+                    >
                       <Box height={"100%"} pb={"20px"}>
                         <Box className="cards">
-                          <Box>
+                          <Box maxWidth={310}>
                             <img
                               src={data?.coverImage}
                               width={"100%"}
@@ -178,9 +178,11 @@ const ResidentialProjects = () => {
                                   <Typography variant="h4">
                                     {data?.title}
                                   </Typography>
-                                  <Typography variant="h6">
-                                    {data?.description}
-                                  </Typography>
+                                  <div className="paragraph-container">
+                                    <p className="paragraph">
+                                      {data?.description}
+                                    </p>
+                                  </div>
                                   <Box m={"10px 0"}>
                                     <Divider color="#D2D2D2" />
                                   </Box>

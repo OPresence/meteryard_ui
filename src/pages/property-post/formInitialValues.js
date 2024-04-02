@@ -17,6 +17,7 @@ const {
     location,
     coverImage,
     typeProperty,
+    landmark,
   },
 } = checkoutFormModel;
 
@@ -37,4 +38,5 @@ export default {
   [location]: "",
   [coverImage]: "",
   [typeProperty]: "",
+  [landmark]: "",
 };

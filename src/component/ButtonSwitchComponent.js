@@ -206,13 +206,13 @@ export default function ButtonSwitchComponent({
                           </Box>
                           <Button
                             onClick={() => {
-                              if (auth?._getprofile?.userType == "SELLER") {
-                                handleClickOpen();
-                              } else {
-                                toast.error(
-                                  "Only Seller post the property please login."
-                                );
-                              }
+                              handleClickOpen();
+                              // if (auth?._getprofile?.userType == "SELLER") {
+                              // } else {
+                              //   toast.error(
+                              //     "Only Seller post the property please login."
+                              //   );
+                              // }
                             }}
                             className="searchbox_button"
                             style={{

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import PropertyPost_s_1 from "./PropertyPost_s_1";
+import PropertyPost_s_2 from "./PropertyPost_s_2";
+import PropertyPost_s_3 from "./PropertyPost_s_3";
+import CircularProgressComponent from "../../component/CircularProgressComponent";
 import {
   Box,
   Grid,
@@ -9,11 +12,15 @@ import {
   Step,
   StepLabel,
   Typography,
+  CircularProgress,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import checkoutFormModel from "./checkoutFormModel";
 import validationSchema from "./validationSchema";
 import { Formik, Form } from "formik";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { PostApiFunction } from "../../utils";
 import formInitialValues from "./formInitialValues";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
@@ -126,14 +133,101 @@ const PropertyPostIndex = () => {
   const { formId, formField } = checkoutFormModel;
   const [activeStep, setActiveStep] = useState(0);
   const currentValidationSchema = validationSchema[activeStep];
+  const [selectedImages, setSelectedImages] = useState([]);
   const isLastStep = activeStep === steps.length - 1;
+  const [imageUploadResponses, setImageUploadResponses] = useState([]);
+  const [address, setAddress] = useState("");
   const [_trucapthca, setTrueCaptcha] = useState(false);
+  const [selectedImages1, setSelectedImages1] = useState([]);
   const [_savedata, setSaveData] = useState("");
   const [_isloading, setIsLoading] = useState(false);
+  const [_coverImage, setCoverImage] = useState("");
+  const [_video_url, setVideoURL] = useState("");
+  const [_consition, setConsition] = useState(false);
+  const [_propertyform, setPropertyForm] = useState(false);
+  const [_checked, setChecked] = useState(false);
+  const [_get_type_name, setGet_Type_Name] = useState("");
+  const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
+  const [_getproprty_type, setGetPropetyType] = useState("");
+  const [_videoupload, setVideoUpload] = useState(false);
+  const [coordinates, setCoordinates] = useState({
+    lat: 27.1881,
+    lng: 77.935,
+  });
   const [_projecttype, setProjectType] = useState([]);
   const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleChangeCheck = (event) => {
+    if (!_checked) {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
+  };
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Check if the video duration is less than or equal to 30 seconds
+      const video = document.createElement("video");
+      video.preload = "metadata";
+      video.onloadedmetadata = async function () {
+        if (video.duration > 30) {
+          alert("Please upload a video that is 30 seconds or shorter.");
+          // Optionally, you can clear the file input
+          fileInputRef.current.value = "";
+        } else {
+          try {
+            setVideoUpload(true);
+            const res = await imageUploadFunction(e.target.files[0]);
+
+            if (res?.responseCode == 200) {
+              setVideoUpload(false);
+            }
+          } catch (error) {
+            setVideoUpload(false);
+          }
+        }
+      };
+      video.src = URL.createObjectURL(file);
+    }
+  };
+  const CoverImageFunction = async (imageValue) => {
+    try {
+      const formdata = new FormData();
+      formdata.append("uploaded_file", imageValue);
+
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.uploadImage,
+        data: formdata,
+      });
+
+      if (res) {
+        toast.success("Cover image uploaded successfully.");
+        setCoverImage(res?.result[0]?.mediaUrl);
+      }
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
+  };
+  const handleFileChangeImage = (e) => {
+    const files = e.target.files;
+    const images = [];
+    const selectedImagesInfo = [];
+    for (let i = 0; i < Math.min(files.length, 8); i++) {
+      const file = files[i];
+      const url = URL.createObjectURL(files[i]);
+      images.push(url);
+      const fileInfo = {
+        file,
+        url,
+        name: file.name,
+        type: file.type,
+        size: file.size,
+      };
+      selectedImagesInfo.push(file);
+    }
+    setSelectedImages(selectedImagesInfo);
+
+    setSelectedImages1(images);
   };
 
   const handleClose = () => {
@@ -157,6 +251,38 @@ const PropertyPostIndex = () => {
   useEffect(() => {
     ProjectType();
   }, []);
+  const handleImageUpload = async () => {
+    try {
+      const responses = [];
+
+      // Use asynchronous recursion to process images one by one
+      const processImage = async (index) => {
+        if (index < selectedImages.length) {
+          const image = selectedImages[index];
+          console.log("Processing image:", image);
+          const response = await imageUploadFunction(image);
+          // console.log("responses---->0", response?.result[0]?.mediaUrl);
+          responses.push(response?.result[0]?.mediaUrl);
+
+          // Process the next image recursively
+          await processImage(index + 1);
+        } else {
+          // All images processed, set the responses in the state
+          setImageUploadResponses(responses);
+        }
+      };
+
+      // Start processing images from index 0
+      await processImage(0);
+    } catch (error) {
+      console.error("Error uploading images:", error);
+    }
+  };
+  useEffect(() => {
+    if (selectedImages.length > 0) {
+      handleImageUpload();
+    }
+  }, [selectedImages]);
   function _renderStepContent(step) {
     console.log("stepfjndfnjd--->", step, formField);
     switch (step) {
@@ -164,20 +290,38 @@ const PropertyPostIndex = () => {
         return (
           <PropertyPost_s_1
             formField={formField}
+            setTrueCaptcha={setTrueCaptcha}
             _isloading={_isloading}
-            _projecttype={_projecttype}
           />
         );
       case 1:
         return (
-          <PropertyPost_s_1 formField={formField} _isloading={_isloading} />
+          <PropertyPost_s_2 formField={formField} _isloading={_isloading} />
         );
       default:
         return (
-          <PropertyPost_s_1
+          <PropertyPost_s_3
             formField={formField}
-            setTrueCaptcha={setTrueCaptcha}
             _isloading={_isloading}
+            _projecttype={_projecttype}
+            _videoupload={_videoupload}
+            _coverImage={_coverImage}
+            handleFileChange={handleFileChange}
+            selectedImages={selectedImages}
+            selectedImages1={selectedImages1}
+            handleFileChangeImage={handleFileChangeImage}
+            address={address}
+            setAddress={setAddress}
+            coordinates={coordinates}
+            setCoordinates={setCoordinates}
+            _consition={_consition}
+            setConsition={setConsition}
+            _checked={_checked}
+            setChecked={setChecked}
+            handleClose={handleClose}
+            CoverImageFunction={CoverImageFunction}
+            setCoverImage={setCoverImage}
+            handleChangeCheck={handleChangeCheck}
           />
         );
     }
@@ -249,26 +393,94 @@ const PropertyPostIndex = () => {
     }
   }
 
-  async function _handleSubmit(values, actions) {
-    if (isLastStep) {
-      try {
-        const apiResponse = await _submitForm(values, actions);
+  // async function _handleSubmit(values, actions) {
+  //   console.log("000000000000000----------->");
+  //   if (isLastStep) {
+  //     try {
+  //       const apiResponse = await _submitForm(values, actions);
 
-        if (apiResponse && apiResponse.success) {
-          setActiveStep(activeStep + 1);
+  //       if (apiResponse && apiResponse.success) {
+  //         setActiveStep(activeStep + 1);
+  //       } else {
+  //         console.error("API call failed:", apiResponse.error);
+  //         swal("error", `${apiResponse.error}`);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error in API call:", error);
+  //     }
+  //   } else {
+  //     setActiveStep(activeStep + 1);
+  //     actions.setTouched({});
+  //     actions.setSubmitting(false);
+  //   }
+  // }
+  const _handleSubmit = async (values) => {
+    try {
+      setIsLoading(true);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.createPropertyPost,
+        data: {
+          listedBy: values?.listed_name,
+          bedroom: values?.bedrooms,
+          bathroom: values?.bathrooms,
+          superBuildupArea: values?.super_building,
+          carpetArea: values?.carpet_area,
+          totalFloors: values?.floors_no,
+          floorNumber: values?.floors_no,
+          projectName: values?.project_name,
+          title: values?.add_title,
+          description: values?.description,
+          price: values?.price,
+          coverImage: _coverImage,
+          video: _video_url,
+          type: values?.typeProperty,
+          image: imageUploadResponses,
+          address: address,
+          termAndConditions: _consition,
+          featuredProperty: _checked,
+          projectTypeId: _getproprty_type,
+          projectSubTypeId: _getproject_sub_type,
+          location: {
+            type: "Point",
+            coordinates: [coordinates?.lat, coordinates?.lng],
+          },
+        },
+      });
+      if (res) {
+        setIsLoading(false);
+        if (res?.responseCode == 200) {
+          toast.success(res?.responseMessage); // Display success notification
+          setIsLoading(false);
+          setPropertyForm(false);
+
+          setSelectedImages([]);
+        } else if (res?.responseCode == 404) {
+          setPropertyForm(false);
+          toast.error(res?.responseMessage); // Display error notification
+          setIsLoading(false);
+          setPropertyForm(false);
+        } else if (res?.responseCode == 404) {
+          toast.error(res?.responseMessage); // Display error notification
+          setIsLoading(false);
+          setPropertyForm(false);
+        } else if (res?.responseCode == 500) {
+          toast.error(res?.responseMessage); // Display error notification
+          setIsLoading(false);
+          setPropertyForm(false);
         } else {
-          console.error("API call failed:", apiResponse.error);
-          swal("error", `${apiResponse.error}`);
+          toast.error(res?.responseMessage); // Display error notification
+          setIsLoading(false);
+          setPropertyForm(false);
         }
-      } catch (error) {
-        console.error("Error in API call:", error);
+        console.log("res---->", res);
       }
-    } else {
-      setActiveStep(activeStep + 1);
-      actions.setTouched({});
-      actions.setSubmitting(false);
+    } catch (error) {
+      setIsLoading(false);
+      setPropertyForm(false);
+
+      console.log("error", error);
     }
-  }
+  };
   function _handleBack() {
     setActiveStep(activeStep - 1);
   }
@@ -329,17 +541,20 @@ const PropertyPostIndex = () => {
                               justifyContent={"center"}
                             >
                               {activeStep !== 0 && (
-                                <Button
-                                  disabled={_isloading}
-                                  onClick={_handleBack}
-                                  className={"button"}
-                                  variant="contained"
-                                  color="primary"
-                                >
-                                  Back
-                                </Button>
+                                <>
+                                  <Button
+                                    disabled={_isloading}
+                                    onClick={_handleBack}
+                                    className={"button"}
+                                    variant="contained"
+                                    color="primary"
+                                  >
+                                    Back
+                                  </Button>
+                                </>
                               )}
                             </Box>
+                            {console.log("isLastStep--->", activeStep)}
                             &nbsp;&nbsp;{" "}
                             <Box
                               className={"wrapper"}
@@ -357,7 +572,7 @@ const PropertyPostIndex = () => {
                                 {_isloading && (
                                   <>
                                     &nbsp;&nbsp;{" "}
-                                    <CircularProgress
+                                    <CircularProgressComponent
                                       color="#000"
                                       size={24}
                                       className={"buttonProgress"}

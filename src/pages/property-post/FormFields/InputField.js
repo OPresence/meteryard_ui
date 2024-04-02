@@ -13,13 +13,25 @@ export default function InputField(props) {
       return error;
     }
   }
-
+  console.log("props---->", props?.name == "description");
   function handleChange(event) {
     helpers.setValue(event.target.value);
   }
   return (
     <>
       <TextField
+        // sx={{
+        //   "& .MuiInputBase": {
+        //     "& .input": {
+        //       "& .MuiOutlinedInput": {
+        //         "& .input": {
+        //           height: "90px",
+        //         },
+        //       },
+        //     },
+        //   },
+        // }}
+        style={props?.name == "description" ? { height: "90px" } : {}}
         id="outlined-basic"
         label={rest.label}
         variant="outlined"

@@ -19,7 +19,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 const LocationStyle = styled("Box")(({ theme }) => ({
-  "& .mainBox": {
+  "& .mainBoxLocation": {
     position: "relative",
   },
   "& .locationStyleShow": {
@@ -43,7 +43,7 @@ const LocationDialog = ({
   type,
 }) => {
   const mapStyles = {
-    height: "250px",
+    // height: "250px",
     width: "100%",
   };
 
@@ -57,7 +57,7 @@ const LocationDialog = ({
 
   return (
     <LocationStyle>
-      <Box mt={2} className="mainBox">
+      <Box mt={2} className="mainBoxLocation">
         <PlacesAutocomplete
           value={address}
           onChange={setAddress}

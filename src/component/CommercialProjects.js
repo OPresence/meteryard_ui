@@ -215,7 +215,6 @@ const CommercialProjects = () => {
               <>
                 <Slider {...settings} ref={sliderRef}>
                   {_getlist.map((data, index) => {
-                    console.log("datadnjfdjf--->", index);
                     return (
                       <Grid
                         key={index}
@@ -259,9 +258,11 @@ const CommercialProjects = () => {
                                     <Typography variant="h4">
                                       {data?.title}{" "}
                                     </Typography>
-                                    <Typography variant="h6">
-                                      {data?.description}
-                                    </Typography>
+                                    <div className="paragraph-container">
+                                      <p className="paragraph">
+                                        {data?.description}
+                                      </p>
+                                    </div>
                                     <Box m={"10px 0"}>
                                       <Divider color="#D2D2D2" />
                                     </Box>

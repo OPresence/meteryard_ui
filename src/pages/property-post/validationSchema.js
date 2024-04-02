@@ -19,6 +19,7 @@ const {
     location,
     coverImage,
     typeProperty,
+    landmark,
   },
 } = checkoutFormModel;
 
@@ -37,51 +38,44 @@ export default [
       `${carpet_area.requiredErrorMsg}`
     ),
   }),
-  // Yup.object().shape({
-  //   [product_State.name]: Yup.string().required(
-  //     `${product_State.requiredErrorMsg}`
-  //   ),
-  //   [product_Year.name]: Yup.string().required(
-  //     `${product_Year.requiredErrorMsg}`
-  //   ),
-  //   [product_Season.name]: Yup.string().required(
-  //     `${product_Season.requiredErrorMsg}`
-  //   ),
-  //   [Product_Scheme.name]: Yup.string().required(
-  //     `${Product_Scheme.requiredErrorMsg}`
-  //   ),
-  //   [product_District.name]: Yup.string().required(
-  //     `${product_District.requiredErrorMsg}`
-  //   ),
-  //   [Note_Number.name]: Yup.string().required(
-  //     `${Note_Number.requiredErrorMsg}`
-  //   ),
-  // }),
-  // Yup.object().shape({
-  //   [Use_Type.name]: Yup.string().required(`${Use_Type.requiredErrorMsg}`),
-  //   [Insurance_type.name]: Yup.string().required(
-  //     `${Insurance_type.requiredErrorMsg}`
-  //   ),
-  //   [Policy_Type.name]: Yup.string().required(
-  //     `${Policy_Type.requiredErrorMsg}`
-  //   ),
-  //   [Complaint_Type.name]: Yup.string().required(
-  //     `${Complaint_Type.requiredErrorMsg}`
-  //   ),
-  //   [Complaint_Description.name]: Yup.string().required(
-  //     `${Complaint_Description.requiredErrorMsg}`
-  //   ),
-  //   [Grievance_Description.name]: Yup.string().required(
-  //     `${Grievance_Description.requiredErrorMsg}`
-  //   ),
-  //   [Branch_Code.name]: Yup.string().required(
-  //     `${Branch_Code.requiredErrorMsg}`
-  //   ),
-  //   [Broker_License.name]: Yup.string().required(
-  //     `${Broker_License.requiredErrorMsg}`
-  //   ),
-  //   [Identifier_Type_Value.name]: Yup.string().required(
-  //     `${Identifier_Type_Value.requiredErrorMsg}`
-  //   ),
-  // }),
+
+  Yup.object().shape({
+    [total_floors.name]: Yup.string().required(
+      `${total_floors.requiredErrorMsg}`
+    ),
+    [floors_no.name]: Yup.string().required(`${floors_no.requiredErrorMsg}`),
+    [facing.name]: Yup.string().required(`${facing.requiredErrorMsg}`),
+    [project_name.name]: Yup.string().required(
+      `${project_name.requiredErrorMsg}`
+    ),
+    [add_title.name]: Yup.string().required(`${add_title.requiredErrorMsg}`),
+    [description.name]: Yup.string().required(
+      `${description.requiredErrorMsg}`
+    ),
+  }),
+  Yup.object().shape({
+    [price.name]: Yup.string().required(`${price.requiredErrorMsg}`),
+    [landmark.name]: Yup.string().required(`${landmark.requiredErrorMsg}`),
+    // [Policy_Type.name]: Yup.string().required(
+    //   `${Policy_Type.requiredErrorMsg}`
+    // ),
+    // [Complaint_Type.name]: Yup.string().required(
+    //   `${Complaint_Type.requiredErrorMsg}`
+    // ),
+    // [Complaint_Description.name]: Yup.string().required(
+    //   `${Complaint_Description.requiredErrorMsg}`
+    // ),
+    // [Grievance_Description.name]: Yup.string().required(
+    //   `${Grievance_Description.requiredErrorMsg}`
+    // ),
+    // [Branch_Code.name]: Yup.string().required(
+    //   `${Branch_Code.requiredErrorMsg}`
+    // ),
+    // [Broker_License.name]: Yup.string().required(
+    //   `${Broker_License.requiredErrorMsg}`
+    // ),
+    // [Identifier_Type_Value.name]: Yup.string().required(
+    //   `${Identifier_Type_Value.requiredErrorMsg}`
+    // ),
+  }),
 ];
