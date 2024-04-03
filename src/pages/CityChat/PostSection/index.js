@@ -107,9 +107,9 @@ const index = () => {
   const _postData = [{}, {}, {}, {}];
   return (
     <CityPropertyStyle>
-      {_postData?.map((data, index) => {
+      {_postData?.map((data, _id) => {
         return (
-          <Box className="mainBox">
+          <Box className="mainBox" key={_id}>
             <Box maxWidth={280} position={"absolute"} right={-17} top={-13}>
               <img src="/images/Path 8257.svg" width={"100%"} />
             </Box>

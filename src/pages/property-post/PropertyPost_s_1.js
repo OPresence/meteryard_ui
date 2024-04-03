@@ -358,10 +358,11 @@ const PropertyPost_s_1 = (props) => {
                 <Box mb={2} mt={1}>
                   <Grid container spacing={3}>
                     {_subytypelist &&
-                      _subytypelist?.map((data) => {
+                      _subytypelist?.map((data, index) => {
                         return (
                           <>
                             <Grid
+                              key={index}
                               item
                               lg={data?.projectSubType?.length >= 8 ? 3 : 2}
                               md={2}
