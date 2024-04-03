@@ -114,6 +114,7 @@ function SelectField(props) {
   const [touched, error] = at(meta, "touched", "error");
   const isError = touched && error && true;
   function _renderHelperText() {
+    console.log("njczxjjxznbcb---->", error);
     if (isError) {
       return (
         <FormHelperText style={{ color: "#d32f2f" }}>{error}</FormHelperText>

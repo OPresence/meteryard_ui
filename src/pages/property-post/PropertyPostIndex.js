@@ -30,6 +30,7 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
     height: "100%",
     display: "flex",
     alignItems: "center",
+
     "& h2": {
       fontSize: "14px",
       fontWeight: "600",
@@ -458,7 +459,7 @@ const PropertyPostIndex = () => {
               style={{ display: "flex", alignItems: "center" }}
             >
               <Box maxWidth={500}>
-                <img src="/images/Group 8422.svg" width={"100%"} />
+                <img src="/images/Group 8363.svg" width={"100%"} />
               </Box>
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
