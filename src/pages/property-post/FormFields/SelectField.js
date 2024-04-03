@@ -89,31 +89,9 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase);
 
 function SelectField(props) {
-  const {
-    label,
-    data,
-    ChangeDropDownValue,
-    // set_State_GetDropdown,
-    // set_Destrict_Getdropdown,
-    // set_Yaer_Getdropdown,
-    // set_Year_Getdropdown,
-    // set_Season_getdropdown,
-    // set_ProductScheme_getdropdown,
-    // setLabel_4_Getdropdown,
-    // setLabel_5_Getdropdown,
-    // setLabel_6_Getdropdown,
-    // setLabel_7_Getdropdown,
-    // set_CropName_dropdown,
-    // setInsurance_type,
-    // set_Policy_Type_dropdown,
-    // set_Complaint_Type_dropdown,
-    // setGet_User_Type,
-    // type,
-
-    ...rest
-  } = props;
-
+  const { label, data, ChangeDropDownValue, ...rest } = props;
   const [field, meta] = useField(props);
+  console.log("dfsdfdf5d454------->", props?.field);
   const { value: selectedValue } = field;
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -131,6 +109,8 @@ function SelectField(props) {
     field.onChange(event); // This is important to update the Formik state
     ChangeDropDownValue && ChangeDropDownValue(value || value?.stateId); // Optional: Call your custom function
   };
+  console.log("fieldh4644648694sjsdas--->", field);
+
   const [touched, error] = at(meta, "touched", "error");
   const isError = touched && error && true;
   function _renderHelperText() {
@@ -148,15 +128,19 @@ function SelectField(props) {
           labelId="demo-multiple-name-label"
           id="demo-multiple-name"
           {...field}
-          value={selectedValue ? selectedValue : ""}
+          value={selectedValue != undefined ? selectedValue : ""}
           disabled={props._isloading}
           onChange={(e) => {
             handleChange(e);
           }}
+          error={meta.touched && meta.error && true}
+          handleBlur={props.handleBlur}
+          helperText={_renderHelperText()}
           input={<OutlinedInput label={label} />}
           MenuProps={MenuProps}
+          onFocus={props.handleFocus} // Add the onFocus function=
         >
-          <option selected disabled value={""}>
+          <option selected disabled>
             {/* {label} */}
           </option>
 

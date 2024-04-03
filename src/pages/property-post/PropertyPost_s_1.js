@@ -118,33 +118,12 @@ const PropertyPost_s_1 = (props) => {
       bathrooms,
       super_building,
       carpet_area,
-      total_floors,
-      floors_no,
-      facing,
-      project_name,
-      add_title,
-      description,
-      price,
-      location,
-      coverImage,
-      typeProperty,
     },
   } = props;
-  const [state, setState] = React.useState(false);
   const [_propertyList, setPropertyList] = React.useState([]);
   const [_subytypelist, setSubTypeList] = useState([]);
   const [_isloading, setIsLoading] = useState(false);
 
-  const propertyType = [
-    {
-      name: "For Rent",
-      value: "FOR_RENT",
-    },
-    {
-      name: "For Sale",
-      value: "FOR_SALE",
-    },
-  ];
   const listedData = [
     {
       value: "Owner",
@@ -335,8 +314,6 @@ const PropertyPost_s_1 = (props) => {
   useEffect(() => {
     ProjectType();
   }, []);
-
-  // const [checkedIndexPost, setCheckedIndexPost] = useState(-1); // Keep track of the index of the currently checked checkbox
 
   return (
     <PropertyPostScreenStyle>

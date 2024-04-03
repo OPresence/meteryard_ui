@@ -484,6 +484,7 @@ const PropertyPostIndex = () => {
                     <Form id={formId}>
                       <Box className="Form_main_Box">
                         {_renderStepContent(activeStep)}
+                        {console.log("activeStepxcx---->", activeStep)}
                         <DialogButtonStyle>
                           <Box
                             className={"buttons"}
