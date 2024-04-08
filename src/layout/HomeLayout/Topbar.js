@@ -111,7 +111,6 @@ export default function Topbar() {
         data: window.sessionStorage.getItem("token"),
       });
       if (res) {
-        console.log("ndfbdkj--->", res);
         auth?.setGetProfile(res?.result);
       }
     } catch (error) {

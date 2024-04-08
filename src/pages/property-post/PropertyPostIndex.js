@@ -15,25 +15,109 @@ import {
   CircularProgress,
 } from "@mui/material";
 import styled from "@emotion/styled";
-import checkoutFormModel from "./checkoutFormModel";
-import validationSchema from "./validationSchema";
+// import validationSchema from "./validationSchema";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import swal from "sweetalert";
 import { PostApiFunction } from "../../utils";
-import formInitialValues from "./formInitialValues";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
+import { formFieldValue, ValidationValue, initialValue } from "../../utils";
 const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
-  "& .MainBox": {
+  "& .MainBoxIndex": {
     height: "100%",
     display: "flex",
     alignItems: "center",
+    paddingTop: "136px",
+    "@media(max-width:615px)": {
+      background:
+        "transparent linear-gradient(113deg, #383838 0%, #4E6407 100%) 0% 0% no-repeat padding-box",
+      paddingTop: "90px",
+      "& .conatinerBox": {
+        padding: "0",
+      },
+    },
+    "& h3": {
+      color: "#fff",
+      fontSize: "22px",
+      fontWeight: "600",
+      padding: "0 0 10px 0",
 
+      // display: "none",
+      "@media(max-width:615px)": {
+        display: "Block",
+        padding: "0 0 0 10px",
+      },
+    },
+    "& h5": {
+      color: "#fff",
+      fontSize: "14px",
+      fontWeight: "600",
+
+      display: "none",
+      "@media(max-width:615px)": {
+        display: "block",
+        padding: "0 0 0 10px",
+      },
+    },
+    "& .stepperBox": {
+      width: "60%",
+      marginTop: "40px",
+      marginBottom: "40px",
+      "@media(max-width:615px)": {
+        width: "75%",
+        marginBottom: "10px",
+
+        // display: "none",
+      },
+    },
+    "& .gridClass": {
+      display: "flex",
+      alignItems: "center",
+      "@media(max-width:615px)": {
+        display: "none",
+      },
+    },
     "& h2": {
       fontSize: "14px",
       fontWeight: "600",
+    },
+    "& .h2-class": {
+      fontSize: "14px",
+      fontWeight: "600",
+      position: "absolute",
+      top: "-24px",
+      left: "-30px",
+      width: "106px",
+      "@media(max-width:615px)": {
+        color: "#fff",
+        fontSize: "12px",
+      },
+    },
+    "& .h2-class1": {
+      fontSize: "14px",
+      fontWeight: "600",
+      position: "absolute",
+      top: "-24px",
+      left: "-20px",
+      width: "106px",
+      "@media(max-width:615px)": {
+        color: "#fff",
+        fontSize: "12px",
+      },
+    },
+    "& .h2-class2": {
+      fontSize: "14px",
+      fontWeight: "600",
+      position: "absolute",
+      top: "-24px",
+      left: "-40px",
+      width: "130px",
+      "@media(max-width:615px)": {
+        color: "#fff",
+        fontSize: "12px",
+      },
     },
   },
   "& .Form_main_Box": {
@@ -43,6 +127,9 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
     background: "#fff",
     borderRadius: "0 15px 15px 15px",
     position: "relative",
+    "@media(max-width:615px)": {
+      borderRadius: "15px",
+    },
     "&::before": {
       content: '""',
       position: "absolute",
@@ -54,6 +141,9 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
       borderTopRightRadius: "0px",
       borderTopLeftRadius: "0px",
       borderBottomLeftRadius: "63px",
+      "@media(max-width:615px)": {
+        left: "-1000px",
+      },
     },
     "&::after": {
       background: "#b8db53",
@@ -73,6 +163,9 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
       MsTransform: "rotateZ(271deg)",
       transform: "rotateZ(270deg)",
       borderTopRightRadius: "90px",
+      "@media(max-width:615px)": {
+        left: "-1000px",
+      },
     },
     "& .HeadingBox": {
       padding: "0 20px",
@@ -82,6 +175,9 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
         fontSize: "28px",
         fontWeight: "600",
         padding: "20px 0",
+        "@media(max-width:615px)": {
+          display: "none",
+        },
       },
       "& h3": {
         color: "#444444",
@@ -114,6 +210,33 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
+
+const StepperStyle = styled("Stepper")(({ theme }) => ({
+  "& .Mui-active .MuiSvgIcon-root": {
+    color: "#badc54",
+    fontSize: "1.8rem",
+  },
+  "& .MuiSvgIcon-root": {
+    // color: "#badc54",
+    fontSize: "1.8rem",
+  },
+  "& .MuiStepConnector-line": {
+    borderTopWidth: "12px",
+    borderColor: " #badc54",
+    borderTopWidth: "9px",
+  },
+  "& .MuiStepLabel-iconContainer": {
+    paddingRight: "0px",
+  },
+  "& .MuiStep-root": {
+    paddingLeft: "0px",
+    paddingRight: "0px",
+  },
+  "& .MuiSvgIcon-root-MuiStepIcon-root.Mui-completed": {
+    color: "red !important",
+  },
+}));
+
 const PropertyPostIndex = () => {
   const router = useRouter();
   const [windowSize, setWindowSize] = useState({
@@ -132,27 +255,24 @@ const PropertyPostIndex = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   const steps = ["Property Details", "Area Details", "Images & Location"];
-  const { formId, formField } = checkoutFormModel;
+  const { formField, formId } = formFieldValue;
   const [activeStep, setActiveStep] = useState(0);
-  const currentValidationSchema = validationSchema[activeStep];
+  const currentValidationSchema = ValidationValue[activeStep];
   const [selectedImages, setSelectedImages] = useState([]);
   const isLastStep = activeStep === steps.length - 1;
   const [imageUploadResponses, setImageUploadResponses] = useState([]);
   const [address, setAddress] = useState("");
   const [_trucapthca, setTrueCaptcha] = useState(false);
   const [selectedImages1, setSelectedImages1] = useState([]);
-  const [_savedata, setSaveData] = useState("");
   const [_isloading, setIsLoading] = useState(false);
   const [_coverImage, setCoverImage] = useState("");
   const [_video_url, setVideoURL] = useState("");
   const [_consition, setConsition] = useState(false);
   const [_propertyform, setPropertyForm] = useState(false);
   const [_checked, setChecked] = useState(false);
-  const [_get_type_name, setGet_Type_Name] = useState("");
   const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
   const [_getproprty_type, setGetPropetyType] = useState("");
-  const [_getsubtype, setSubTypeList] = useState("");
-
+  const [_imageuploading, setImageUploading] = useState(false);
   const [_videoupload, setVideoUpload] = useState(false);
   const [coordinates, setCoordinates] = useState({
     lat: 27.1881,
@@ -170,6 +290,37 @@ const PropertyPostIndex = () => {
   const handleCheckboxChange = (_id) => {
     setGetPropetyType(_id);
   };
+  const imageUploadFunction = async (imageValue) => {
+    try {
+      setImageUploading(true);
+      const formdata = new FormData();
+      formdata.append("uploaded_file", imageValue);
+
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.uploadImage,
+        data: formdata,
+      });
+
+      if (res) {
+        setImageUploading(false);
+
+        if (res?.result[0]?.mediaType == "mp4") {
+          toast.success("Video uploaded successfully.");
+          setVideoURL(res?.result[0]?.mediaUrl);
+          return res;
+        } else {
+          setImageUploading(false);
+
+          console.log("Uploaded image:", res);
+          return res; // Return the response for later use
+        }
+      }
+    } catch (error) {
+      setImageUploading(false);
+
+      console.error("Error uploading image:", error);
+    }
+  };
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -183,6 +334,8 @@ const PropertyPostIndex = () => {
           fileInputRef.current.value = "";
         } else {
           try {
+            // setImageUploading(true)
+
             setVideoUpload(true);
             const res = await imageUploadFunction(e.target.files[0]);
 
@@ -199,6 +352,8 @@ const PropertyPostIndex = () => {
   };
   const CoverImageFunction = async (imageValue) => {
     try {
+      setImageUploading(true);
+
       const formdata = new FormData();
       formdata.append("uploaded_file", imageValue);
 
@@ -208,10 +363,14 @@ const PropertyPostIndex = () => {
       });
 
       if (res) {
+        setImageUploading(false);
+
         toast.success("Cover image uploaded successfully.");
         setCoverImage(res?.result[0]?.mediaUrl);
       }
     } catch (error) {
+      setImageUploading(false);
+
       console.error("Error uploading image:", error);
     }
   };
@@ -257,7 +416,6 @@ const PropertyPostIndex = () => {
   const handleImageUpload = async () => {
     try {
       const responses = [];
-
       // Use asynchronous recursion to process images one by one
       const processImage = async (index) => {
         if (index < selectedImages.length) {
@@ -272,7 +430,6 @@ const PropertyPostIndex = () => {
           setImageUploadResponses(responses);
         }
       };
-
       // Start processing images from index 0
       await processImage(0);
     } catch (error) {
@@ -289,6 +446,7 @@ const PropertyPostIndex = () => {
       case 0:
         return (
           <PropertyPost_s_1
+            activeStep={activeStep}
             formField={formField}
             setTrueCaptcha={setTrueCaptcha}
             _isloading={_isloading}
@@ -351,12 +509,11 @@ const PropertyPostIndex = () => {
       actions.setSubmitting(false);
     }
   }
-  async function PropertyPostFunction(values) {
+  async function PropertyPostFunction(values, actions) {
     try {
       setIsLoading(true);
       actions.setSubmitting(false);
       setActiveStep(activeStep + 1);
-
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.createPropertyPost,
         data: {
@@ -434,9 +591,8 @@ const PropertyPostIndex = () => {
       }
     } catch (error) {
       setIsLoading(false);
-      setPropertyForm(false);
 
-      console.log("error", error);
+      console.log(error);
     }
   }
   function _handleBack() {
@@ -445,39 +601,57 @@ const PropertyPostIndex = () => {
   useEffect(() => {
     ProjectType();
   }, []);
+
   return (
     <PropertyPostIndexStyle>
-      <Box mt={"136px"} className="MainBox">
-        <Container>
+      <Box className="MainBoxIndex">
+        <Container className="conatinerBox">
           <Grid container spacing={3}>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              sm={12}
-              xs={12}
-              style={{ display: "flex", alignItems: "center" }}
-            >
+            <Grid item lg={6} md={6} sm={12} xs={12} className="gridClass">
               <Box maxWidth={500}>
                 <img src="/images/Group 8363.svg" width={"100%"} />
               </Box>
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Box mt={5} mb={5}>
-                <Stepper activeStep={activeStep} className={"stepper"}>
-                  {steps.map((label) => (
-                    <Step key={label}>
-                      <StepLabel>
-                        <Typography variant="h2">{label}</Typography>
-                      </StepLabel>
-                    </Step>
-                  ))}
-                </Stepper>
+              <Typography variant="h3">List Your property</Typography>
+              <Typography variant="h5">Fill Basic Details</Typography>
+              <Box display={"flex"} justifyContent={"center"}>
+                <Box className="stepperBox">
+                  <StepperStyle>
+                    <Stepper
+                      activeStep={activeStep}
+                      className={"stepper"}
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <Step key={"label"} style={{ position: "relative" }}>
+                        <StepLabel>
+                          <Typography className="h2-class">
+                            {"Property Details"}
+                          </Typography>
+                        </StepLabel>
+                      </Step>
+                      <Step key={"label"} style={{ position: "relative" }}>
+                        <StepLabel>
+                          <Typography className="h2-class1">
+                            {"Area Details"}
+                          </Typography>
+                        </StepLabel>
+                      </Step>
+                      <Step key={"label"} style={{ position: "relative" }}>
+                        <StepLabel>
+                          <Typography className="h2-class2">
+                            {"Images & Location"}
+                          </Typography>
+                        </StepLabel>
+                      </Step>
+                    </Stepper>
+                  </StepperStyle>
+                </Box>
               </Box>
 
               <Box>
                 <Formik
-                  initialValues={formInitialValues}
+                  initialValues={initialValue}
                   validationSchema={currentValidationSchema}
                   onSubmit={_handleSubmit}
                 >
@@ -485,7 +659,6 @@ const PropertyPostIndex = () => {
                     <Form id={formId}>
                       <Box className="Form_main_Box">
                         {_renderStepContent(activeStep)}
-                        {console.log("activeStepxcx---->", activeStep)}
                         <DialogButtonStyle>
                           <Box
                             className={"buttons"}
@@ -501,7 +674,7 @@ const PropertyPostIndex = () => {
                               {activeStep !== 0 && (
                                 <>
                                   <Button
-                                    disabled={_isloading}
+                                    disabled={_isloading || _imageuploading}
                                     onClick={_handleBack}
                                     className={"button"}
                                     variant="contained"
@@ -519,7 +692,9 @@ const PropertyPostIndex = () => {
                               justifyContent={"center"}
                             >
                               <Button
-                                disabled={_isloading}
+                                disabled={
+                                  _isloading || _videoupload || _imageuploading
+                                }
                                 type="submit"
                                 variant="contained"
                                 color="primary"

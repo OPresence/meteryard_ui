@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import PostCheckBox from "../../component/PostCheckBox";
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
-import { SelectField, InputField } from "./FormFields";
+import { SelectField, InputField } from "../../component/FormFields";
 
 const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
   "& .borderBox": {
@@ -26,37 +26,37 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
     // background: "#fff",
     // borderRadius: "0 15px 15px 15px",
     // position: "relative",
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: "-1px",
-      left: "-12px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "0px",
-      borderTopLeftRadius: "0px",
-      borderBottomLeftRadius: "63px",
-    },
-    "&::after": {
-      background: "#b8db53",
-      content: '""',
-      position: "absolute",
-      top: "-153px",
-      left: "129px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "25px",
-      borderTopLeftRadius: "0px",
-      borderBottomRightRadius: "77px",
-      borderBottomLeftRadius: "0px",
-      WebkitTransform: "rotateZ(271deg)",
-      MozTransform: "rotateZ(271deg)",
-      MsTransform: "rotateZ(271deg)",
-      transform: "rotateZ(270deg)",
-      borderTopRightRadius: "90px",
-    },
+    // "&::before": {
+    //   content: '""',
+    //   position: "absolute",
+    //   top: "-1px",
+    //   left: "-12px",
+    //   height: "282px",
+    //   border: "6px solid #b8db53",
+    //   borderRadius: "0 0 10 76px",
+    //   borderTopRightRadius: "0px",
+    //   borderTopLeftRadius: "0px",
+    //   borderBottomLeftRadius: "63px",
+    // },
+    // "&::after": {
+    //   background: "#b8db53",
+    //   content: '""',
+    //   position: "absolute",
+    //   top: "-153px",
+    //   left: "129px",
+    //   height: "282px",
+    //   border: "6px solid #b8db53",
+    //   borderRadius: "0 0 10 76px",
+    //   borderTopRightRadius: "25px",
+    //   borderTopLeftRadius: "0px",
+    //   borderBottomRightRadius: "77px",
+    //   borderBottomLeftRadius: "0px",
+    //   WebkitTransform: "rotateZ(271deg)",
+    //   MozTransform: "rotateZ(271deg)",
+    //   MsTransform: "rotateZ(271deg)",
+    //   transform: "rotateZ(270deg)",
+    //   borderTopRightRadius: "90px",
+    // },
     "& .HeadingBox": {
       padding: "0 20px",
       "& h2": {
@@ -298,7 +298,7 @@ const PropertyPost_s_2 = (props) => {
                   valueName={facing.value}
                   label={facing.label}
                   fullWidth
-                  data={badRoomNumberList}
+                  yourMaxLengthValue={120}
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -308,7 +308,7 @@ const PropertyPost_s_2 = (props) => {
                   valueName={project_name.value}
                   label={project_name.label}
                   fullWidth
-                  data={bathroomNumberList}
+                  yourMaxLengthValue={90}
                 />
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -318,6 +318,7 @@ const PropertyPost_s_2 = (props) => {
                   valueName={add_title.value}
                   label={add_title.label}
                   fullWidth
+                  yourMaxLengthValue={120}
                 />
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -327,6 +328,7 @@ const PropertyPost_s_2 = (props) => {
                   valueName={description.value}
                   label={description.label}
                   fullWidth
+                  yourMaxLengthValue={250}
                 />
               </Grid>
             </Grid>

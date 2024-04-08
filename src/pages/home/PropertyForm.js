@@ -1,4 +1,3 @@
-// Import necessary components and styles
 import React, { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -174,9 +173,7 @@ export default function PropertyForm({
     ProjectType();
   }, []);
   useEffect(() => {
-    if (_getproprty_type) {
-      SubProjectType();
-    }
+    SubProjectType();
   }, [_getproprty_type]);
   return (
     <Dialog

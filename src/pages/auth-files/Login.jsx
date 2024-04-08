@@ -9,13 +9,15 @@ import {
   TextField,
   Button,
   IconButton,
-  FormControl,
+  InputAdornment,
   FormHelperText,
   Checkbox,
 } from "@mui/material";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { PostApiFunction } from "../../utils";
 import { Form, Formik } from "formik";
@@ -124,6 +126,7 @@ const LoginStyle = styled("Box")(({ theme }) => ({
   },
 }));
 const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
+  const [showPassword, setShowPassword] = React.useState(false);
   const formInitialSchema = {
     email: localStorage.getItem("email") || "",
     password: localStorage.getItem("password") || "",
@@ -300,7 +303,8 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
 
                           <Box mt={2}>
                             <Typography variant="h6">
-                              Enter Your E-Mail
+                              Enter Your Email
+                              <span className="span-astrick">*</span>
                             </Typography>
                             {/* <FormControl fullWidth> */}
                             <TextField
@@ -312,6 +316,9 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                               fullWidth
                               variant="outlined"
                               placeholder="Examle11@gmail.com"
+                              inputProps={{
+                                maxLength: 160,
+                              }}
                             />
                             <FormHelperText
                               error
@@ -323,7 +330,10 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                           </Box>
 
                           <Box mt={2}>
-                            <Typography variant="h6">Password</Typography>
+                            <Typography variant="h6">
+                              Password
+                              <span className="span-astrick">*</span>
+                            </Typography>
                             <TextField
                               fullWidth
                               id="password"
@@ -333,6 +343,38 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                               onBlur={handleBlur}
                               value={values.password}
                               placeholder="********"
+                              inputProps={{
+                                maxLength: 16,
+                              }}
+                              type={showPassword ? "text" : "password"}
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      onClick={() =>
+                                        setShowPassword(!showPassword)
+                                      }
+                                      edge="end"
+                                    >
+                                      {showPassword ? (
+                                        <Visibility
+                                          style={{
+                                            fontSize: "18px",
+                                            color: "#A2D117",
+                                          }}
+                                        />
+                                      ) : (
+                                        <VisibilityOff
+                                          style={{
+                                            fontSize: "18px",
+                                            color: "#A2D117",
+                                          }}
+                                        />
+                                      )}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }}
                             />
                             <FormHelperText
                               error

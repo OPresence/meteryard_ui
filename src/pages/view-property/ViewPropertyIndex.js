@@ -119,9 +119,11 @@ const ViewPropertyIndex = () => {
                           </Typography>
                         </Box>
                         <Box className="PhotoImg">
-                          <IconButton>
-                            <VideocamIcon />
-                          </IconButton>
+                          <a href={dataArray?.video} target="_blank">
+                            <IconButton>
+                              <VideocamIcon />
+                            </IconButton>
+                          </a>
                           <Typography variant="h6">1 Video</Typography>
                         </Box>
                       </Box>

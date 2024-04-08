@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "@emotion/styled";
 import {
   Box,
@@ -10,8 +10,14 @@ import {
   IconButton,
   FormControl,
   FormHelperText,
+  InputAdornment,
 } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import moment from "moment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
 import { FaFacebookF } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -26,7 +32,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
+import { AuthContext } from "../../context/Auth";
 const LoginStyle = styled("Box")(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
@@ -102,8 +108,13 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const PhoneINputStyle = styled("Box")(({ theme }) => ({
+  "& .phoneInputBox": {
+    "& input": {
+      padding: "10.5px 40px !important",
+    },
+  },
+}));
 
 const formInitialSchema = {
   name: "",
@@ -113,14 +124,19 @@ const formInitialSchema = {
 };
 
 const formValidationSchema = yep.object().shape({
-  name: yep.string().required("Name is required."),
-  email: yep.string().required("Email is required."),
-  PhoneNumber: yep
+  name: yep
     .string()
-    .required("Phone Number is required.")
-    .min(10, "too short")
-    .max(10, "too long")
-    .matches(phoneRegExp, "Phone number is not valid"),
+    .required("Name is required.")
+    .min(2, "Please enter min 2 charector")
+    .matches(/^[a-zA-Z]+$/, "Name must contain only alphabetic characters"),
+  email: yep
+    .string()
+    .required("Email is required.")
+    .matches(
+      /^[^@]+@[^@.]+\.[^@.]+$/,
+      "Please enter a valid email address with only one '@' and one '.'"
+    ),
+  PhoneNumber: yep.string().required("Phone Number is required."),
   password: yep
     .string()
     .required("Password is required.")
@@ -132,11 +148,28 @@ const formValidationSchema = yep.object().shape({
 
 const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
   const [isloading, setIsLoading] = useState(false);
+  const auth = useContext(AuthContext);
+  const [showPassword, setShowPassword] = React.useState(false);
   const [_isSignup, setIsSignUp] = useState(false);
+  const [_countrycode, setCountryCode] = useState("");
   const [selectedValue, setSelectedValue] = useState("BUYER"); // Initial selected value
   const handleChangeType = (event) => {
     setSelectedValue(event.target.value);
   };
+  const phoneInputStyles = {
+    width: "100%",
+    height: "44px",
+    background: "transparent",
+    padding: "10.5px 40px !important",
+  };
+  const handleNameKeyDown = (event) => {
+    // Check if the pressed key is a number
+    if (event.key >= "0" && event.key <= "9") {
+      // Prevent the default behavior of the key
+      event.preventDefault();
+    }
+  };
+
   const SignUp_Function = async (values) => {
     try {
       setIsLoading(true);
@@ -154,6 +187,7 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
         if (res?.responseCode == 200) {
           toast.success("SignUp successful!"); // Display success notification
           setIsLoading(false);
+          auth.setEndtime(moment().add(2, "m").unix());
 
           setSignUpComplete(res?.result);
         } else if (res?.responseCode == 409) {
@@ -280,12 +314,14 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                                 <Box>
                                   <FormControlLabel
                                     value="BUYER"
+                                    disabled={isloading}
                                     control={<Radio />}
                                     label="BUYER"
                                   />
                                 </Box>
                                 <Box>
                                   <FormControlLabel
+                                    disabled={isloading}
                                     value="SELLER"
                                     control={<Radio />}
                                     label="SELLER"
@@ -295,6 +331,7 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                                 <Box>
                                   <FormControlLabel
                                     value="GUEST"
+                                    disabled={isloading}
                                     control={<Radio />}
                                     label="GUEST"
                                   />
@@ -305,20 +342,27 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                         </Box>
                         <Box className="loginBox">
                           <Typography variant="h2">Please Sign Up</Typography>
-                          <Box mt={3}>
+                          <Box mt={1}>
                             <Typography variant="h6">
                               Enter Your Name
+                              <span className="span-astrick">*</span>
                             </Typography>
                             <FormControl fullWidth>
                               <TextField
                                 name="name"
+                                type="text"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                onKeyDown={handleNameKeyDown}
                                 value={values.name}
                                 id="outlined-basic"
                                 fullWidth
                                 variant="outlined"
                                 placeholder="Enter Your Name"
+                                disabled={isloading}
+                                inputProps={{
+                                  maxLength: 32,
+                                }}
                               />
                               <FormHelperText
                                 style={{
@@ -331,24 +375,28 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                             </FormControl>
                           </Box>
 
-                          <Box mt={2}>
+                          <Box mt={1}>
                             <Typography variant="h6">
-                              Enter Your E-Mail
+                              Enter Your Email
+                              <span className="span-astrick">*</span>
                             </Typography>
                             <FormControl fullWidth>
                               <TextField
                                 name="email"
+                                type="email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                disabled={isloading}
                                 value={values.email}
                                 id="outlined-basic"
                                 fullWidth
                                 variant="outlined"
                                 placeholder="Examle11@gmail.com"
-                                // className="emailText"
+                                inputProps={{
+                                  maxLength: 160,
+                                }}
                               />
                               <FormHelperText
-                                // className="emailText"
                                 style={{
                                   marginLeft: "0px",
                                   color: "red",
@@ -358,33 +406,45 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                               </FormHelperText>
                             </FormControl>
                           </Box>
-                          <Box mt={2}>
+                          <PhoneINputStyle>
+                            <Box mt={1} className="phoneInputBox">
+                              <Typography variant="h6">
+                                Enter Your Phone
+                                <span className="span-astrick">*</span>
+                              </Typography>
+
+                              <PhoneInput
+                                country={"in"}
+                                onlyCountries={["in"]}
+                                name="PhoneNumber"
+                                inputClass="phoneInputField"
+                                disabled={isloading}
+                                buttonClass="phoneInputButton"
+                                variant="outlined"
+                                value={values.PhoneNumber}
+                                error={Boolean(
+                                  touched.PhoneNumber && errors.PhoneNumber
+                                )}
+                                onBlur={handleBlur}
+                                onChange={(phone, e) => {
+                                  setCountryCode(e.dialCode);
+                                  setFieldValue("PhoneNumber", phone);
+                                }}
+                                inputStyle={phoneInputStyles}
+                              />
+                              <FormHelperText error>
+                                {touched.PhoneNumber && errors.PhoneNumber}
+                              </FormHelperText>
+                            </Box>
+                          </PhoneINputStyle>
+
+                          <Box mt={1}>
                             <Typography variant="h6">
-                              Enter Your Phone
+                              Password
+                              <span className="span-astrick">*</span>
                             </Typography>
                             <TextField
-                              id="outlined-basic"
-                              fullWidth
-                              type="number"
-                              variant="outlined"
-                              name="PhoneNumber"
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={values.PhoneNumber}
-                              inputProps={{ maxLength: 10 }}
-                              placeholder="000 000 0000"
-                            />
-                            <FormHelperText
-                              error
-                              style={{ marginLeft: "0px !important" }}
-                            >
-                              {touched.PhoneNumber && errors.PhoneNumber}
-                            </FormHelperText>
-                          </Box>
-
-                          <Box mt={2}>
-                            <Typography variant="h6">Password</Typography>
-                            <TextField
+                              disabled={isloading}
                               id="outlined-basic"
                               fullWidth
                               variant="outlined"
@@ -393,6 +453,38 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                               onBlur={handleBlur}
                               value={values.password}
                               placeholder="********"
+                              inputProps={{
+                                maxLength: 16,
+                              }}
+                              type={showPassword ? "text" : "password"}
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      onClick={() =>
+                                        setShowPassword(!showPassword)
+                                      }
+                                      edge="end"
+                                    >
+                                      {showPassword ? (
+                                        <Visibility
+                                          style={{
+                                            fontSize: "18px",
+                                            color: "#A2D117",
+                                          }}
+                                        />
+                                      ) : (
+                                        <VisibilityOff
+                                          style={{
+                                            fontSize: "18px",
+                                            color: "#A2D117",
+                                          }}
+                                        />
+                                      )}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }}
                             />
                             <FormHelperText
                               error
@@ -412,11 +504,11 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                               )}
                             </Button>
                           </Box>
-                          {/* <Box className="checkBox" mt={2}>
+                          {/* <Box className="checkBox" mt={1}>
                             <Checkbox {...label} />
                             <span>Remember Me</span>
                           </Box> */}
-                          <Box mt={2} className="socialIconBox">
+                          <Box mt={1} className="socialIconBox">
                             <IconButton className="iconButton">
                               <FaFacebookF />
                             </IconButton>

@@ -16,7 +16,7 @@ import VideocamIcon from "@mui/icons-material/Videocam";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import LocationDialog from "../../component/LocationDialog";
 
-import { SelectField, InputField } from "./FormFields";
+import { SelectField, InputField } from "../../component/FormFields";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
 const PriceBox = styled("Box")(({ theme }) => ({
   "& .mainPriceBox": {
@@ -103,38 +103,38 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
     // background: "#fff",
     // borderRadius: "0 15px 15px 15px",
     // position: "relative",
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: "-1px",
-      left: "-12px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "0px",
-      borderTopLeftRadius: "0px",
-      borderBottomLeftRadius: "63px",
-    },
-    "&::after": {
-      background: "#b8db53",
-      content: '""',
-      position: "absolute",
-      top: "-153px",
-      left: "129px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "25px",
-      borderTopLeftRadius: "0px",
-      borderBottomRightRadius: "77px",
-      borderBottomLeftRadius: "0px",
-      WebkitTransform: "rotateZ(271deg)",
-      MozTransform: "rotateZ(271deg)",
-      MsTransform: "rotateZ(271deg)",
-      transform: "rotateZ(270deg)",
-      borderTopRightRadius: "90px",
-    },
-    "& .HeadingBox": {
+    // "&::before": {
+    //   content: '""',
+    //   position: "absolute",
+    //   top: "-1px",
+    //   left: "-12px",
+    //   height: "282px",
+    //   border: "6px solid #b8db53",
+    //   borderRadius: "0 0 10 76px",
+    //   borderTopRightRadius: "0px",
+    //   borderTopLeftRadius: "0px",
+    //   borderBottomLeftRadius: "63px",
+    // },
+    // "&::after": {
+    //   background: "#b8db53",
+    //   content: '""',
+    //   position: "absolute",
+    //   top: "-153px",
+    //   left: "129px",
+    //   height: "282px",
+    //   border: "6px solid #b8db53",
+    //   borderRadius: "0 0 10 76px",
+    //   borderTopRightRadius: "25px",
+    //   borderTopLeftRadius: "0px",
+    //   borderBottomRightRadius: "77px",
+    //   borderBottomLeftRadius: "0px",
+    //   WebkitTransform: "rotateZ(271deg)",
+    //   MozTransform: "rotateZ(271deg)",
+    //   MsTransform: "rotateZ(271deg)",
+    //   transform: "rotateZ(270deg)",
+    //   borderTopRightRadius: "90px",
+    // },
+    "& .HeadingBox3": {
       padding: "0 20px",
       "& h2": {
         //   textAlign: "center",
@@ -150,8 +150,10 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
       //     padding: "5px 0",
       //   },
       "& .CheckBox": {
-        // display: "flex",
         alignItems: "center",
+        "@media(max-width:615px)": {
+          marginTop: "30px",
+        },
       },
     },
   },
@@ -176,7 +178,6 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
 }));
 const PropertyPost_s_3 = (props) => {
   const {
-    _projecttype,
     formField: {
       listed_name,
       furnishing,
@@ -198,129 +199,8 @@ const PropertyPost_s_3 = (props) => {
   } = props;
   const fileInputRef = useRef(null);
 
-  const [state, setState] = React.useState(false);
   const [_propertyList, setPropertyList] = React.useState([]);
-  const propertyType = [
-    {
-      name: "For Rent",
-      value: "FOR_RENT",
-    },
-    {
-      name: "For Sale",
-      value: "FOR_SALE",
-    },
-  ];
-  const listedData = [
-    {
-      value: "Owner",
-      name: "Owner",
-    },
-    {
-      value: "Dealer",
-      name: "Dealer",
-    },
-    {
-      value: "Builder",
-      name: "Builder",
-    },
-  ];
-  const furnishingList = [
-    {
-      name: "Furnished",
-    },
-    {
-      name: "UnFurnished",
-    },
-    {
-      name: "Semi-Furnished",
-    },
-  ];
-  const badRoomNumberList = [
-    {
-      name: "1",
-      value: "1",
-    },
-    {
-      name: "2",
-      value: "2",
-    },
-    {
-      name: "3",
-      value: "3",
-    },
-    {
-      name: "4",
-      value: "4",
-    },
 
-    {
-      name: "5",
-      value: "5",
-    },
-    {
-      name: "6",
-      value: "6",
-    },
-    {
-      name: "7",
-      value: "7",
-    },
-    {
-      name: "8",
-      value: "8",
-    },
-    {
-      name: "9",
-      value: "9",
-    },
-  ];
-  const bathroomNumberList = [
-    {
-      name: "1",
-      value: "1",
-    },
-    {
-      name: "2",
-      value: "2",
-    },
-    {
-      name: "3",
-      value: "3",
-    },
-    {
-      name: "4",
-      value: "4",
-    },
-
-    {
-      name: "5",
-      value: "5",
-    },
-    {
-      name: "6",
-      value: "6",
-    },
-    {
-      name: "7",
-      value: "7",
-    },
-    {
-      name: "8",
-      value: "8",
-    },
-    {
-      name: "9",
-      value: "9",
-    },
-  ];
-  const handleChange = (event) => {
-    setState(event.target.value);
-  };
-  const [selectedId, setSelectedId] = useState(null);
-
-  const handleCheckboxChange = (id) => {
-    setSelectedId(id);
-  };
   const termConditionCheck = (event) => {
     if (!props?._consition) {
       props?.setConsition(true);
@@ -366,7 +246,7 @@ const PropertyPost_s_3 = (props) => {
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBox">
-        <Box className="HeadingBox">
+        <Box className="HeadingBox3">
           <Typography variant="h2">List Your property</Typography>
           <Box className="CheckBox">
             <Grid container spacing={3}>
@@ -382,6 +262,7 @@ const PropertyPost_s_3 = (props) => {
                           valueName={price.value}
                           label={price.label}
                           fullWidth
+                          yourMaxLengthValue={10}
                         />
                       </Box>
                       <Box
@@ -390,8 +271,8 @@ const PropertyPost_s_3 = (props) => {
                         gap={"15px"}
                         className="main-upload-file"
                       >
-                        <Box display={"flex"} gap={"5px"}>
-                          <label>
+                        <Box gap={"5px"}>
+                          <label style={{ display: "inline-flex" }}>
                             <Box className="videoBox">
                               <Typography variant="h2">
                                 upload 30 sec video
@@ -423,8 +304,9 @@ const PropertyPost_s_3 = (props) => {
                                 </>
                               )}
                             </Box>
-                          </label>
-                          <label>
+                          </label>{" "}
+                          &nbsp;&nbsp;&nbsp;
+                          <label style={{ display: "inline-flex" }}>
                             <Box className="videoBox CoverImage">
                               <Typography variant="h2">Cover Image</Typography>
                               <Box textAlign={"center"} mt={"17px"}>
@@ -447,11 +329,11 @@ const PropertyPost_s_3 = (props) => {
                                   }}
                                 />
                                 {props?._coverImage && (
-                                  <Box maxWidth={100}>
+                                  <Box maxWidth={100} maxHeight={50}>
                                     <img
                                       src={props?._coverImage}
                                       alt="Cover Preview"
-                                      style={{ width: "100%" }}
+                                      style={{ width: "100px", height: "50px" }}
                                     />
                                   </Box>
                                 )}
@@ -592,6 +474,7 @@ const PropertyPost_s_3 = (props) => {
                         valueName={location.value}
                         label={location.label}
                         fullWidth
+                        yourMaxLengthValue={120}
                       />
                     </Box>
                   </Box>
@@ -611,6 +494,7 @@ const PropertyPost_s_3 = (props) => {
                       valueName={landmark.value}
                       label={landmark.label}
                       fullWidth
+                      yourMaxLengthValue={120}
                     />
                   </Grid>
                   <Box>
@@ -624,7 +508,6 @@ const PropertyPost_s_3 = (props) => {
                         <Checkbox
                           required
                           checked={props?._consition}
-                          // onClick={(e) => setConsition(e.target.value)}
                           onClick={termConditionCheck}
                         />
                       </Box>
@@ -650,35 +533,11 @@ const PropertyPost_s_3 = (props) => {
                   gap={"50px"}
                 >
                   <DialogButtonStyle>
-                    <Box display={"flex"} gap={"20px"} justifyContent={"left"}>
-                      {/* <Button
-                        onClick={props?.handleClose}
-                        disabled={props?._isloading || props?._videoupload}
-                      >
-                        <span>CANCEL</span>
-                      </Button> */}
-                      {/* <Button
-                        disabled={props?._isloading || props?._videoupload}
-                        type="submit"
-                        style={{
-                          background: "#A2D117",
-                        }}
-                      >
-                        <span>Add Property</span>
-                        {props?._isloading && (
-                          <>
-                            &nbsp;&nbsp;
-                            <CircularProgressComponent colorValue="#fff" />
-                          </>
-                        )}
-                      </Button>
-                      {props?._image_upload && (
-                        <Box>
-                          &nbsp;&nbsp;
-                          <CircularProgressComponent colorValue="#000" />
-                        </Box>
-                      )} */}
-                    </Box>
+                    <Box
+                      display={"flex"}
+                      gap={"20px"}
+                      justifyContent={"left"}
+                    ></Box>
                   </DialogButtonStyle>
                 </Box>
               </Grid>

@@ -284,9 +284,7 @@ const StateComponent = () => {
     }
   };
   useEffect(() => {
-    if (page) {
-      GetCityList();
-    }
+    GetCityList();
   }, [page]);
   return (
     <AdminLayout>

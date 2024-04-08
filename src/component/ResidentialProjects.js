@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Grid, Typography, Box, Container } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import styled from "@emotion/styled";
@@ -8,7 +8,7 @@ import { PostApiFunction } from "../utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { AuthContext } from "../context/Auth";
 const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "80px 0px",
@@ -94,42 +94,15 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
     },
   },
   "& .GridClassCard": {
+    height: "100%",
+    display: "flex",
     "@media(max-width:615px)": {
       marginTop: "10px !important",
     },
   },
 }));
 const ResidentialProjects = () => {
-  const [_getlist, setGetList] = useState([]);
-  console.log("res---->sndkjfkdkfsd", _getlist);
-
-  const [_isloading, setIsLoading] = useState(false);
-
-  const ResidentialAPI = async () => {
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeId: "65dc4b9cda234100342352b1",
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setIsLoading(false);
-
-        setGetList(res?.result?.docs);
-      }
-    } catch (error) {
-      setIsLoading(false);
-
-      console.log("eror", error);
-    }
-  };
-  useEffect(() => {
-    ResidentialAPI();
-  }, []);
+  const auth = useContext(AuthContext);
   return (
     <ResidentStyle>
       <div className="mainSliderDiv">
@@ -142,8 +115,8 @@ const ResidentialProjects = () => {
           </Box>
           <Box mt={5}>
             <Grid container spacing={3}>
-              {_getlist &&
-                _getlist?.map((data, index) => {
+              {auth?._getlist &&
+                auth?._getlist?.map((data, index) => {
                   return (
                     <Grid
                       item
@@ -156,11 +129,20 @@ const ResidentialProjects = () => {
                     >
                       <Box height={"100%"} pb={"20px"}>
                         <Box className="cards">
-                          <Box maxWidth={310}>
+                          <Box
+                            // maxWidth={310}
+                            maxHeight={220}
+                            minHeight={220}
+                            display={"flex"}
+                            justifyContent={"center"}
+                          >
                             <img
                               src={data?.coverImage}
                               width={"100%"}
-                              style={{ borderRadius: "15px" }}
+                              style={{
+                                borderRadius: "15px",
+                                // inlineSize: " max-content",
+                              }}
                             />
                           </Box>
 
@@ -222,7 +204,7 @@ const ResidentialProjects = () => {
                   );
                 })}
             </Grid>
-            {_getlist?.length > 7 && (
+            {auth?._getlist?.length > 7 && (
               <Box
                 display={"flex"}
                 justifyContent={"end"}

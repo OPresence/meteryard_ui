@@ -5,69 +5,50 @@ import {
   Typography,
   FormControlLabel,
   Button,
-  CircularProgress,
+  Stepper,
+  Step,
+  StepLabel,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
-
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
-import { SelectField, InputField } from "./FormFields";
+import { SelectField, InputField } from "../../component/FormFields";
 import { withStyles } from "@material-ui/core/styles";
 // import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-
+const StepperStyle = styled("Stepper")(({ theme }) => ({
+  "& .Mui-active .MuiSvgIcon-root": {
+    color: "#badc54",
+    fontSize: "1.8rem",
+  },
+  "& .MuiSvgIcon-root": {
+    fontSize: "1.8rem",
+  },
+  "& .MuiStepConnector-line": {
+    borderTopWidth: "12px",
+    borderColor: " #badc54",
+    borderTopWidth: "9px",
+  },
+  "& .MuiStepLabel-iconContainer": {
+    paddingRight: "0px",
+  },
+  "& .MuiStep-root": {
+    paddingLeft: "0px",
+    paddingRight: "0px",
+  },
+  "& .MuiSvgIcon-root-MuiStepIcon-root.Mui-completed": {
+    color: "red !important",
+  },
+}));
 const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
   "& .borderBox": {
     width: "250px",
     height: "350px",
     position: "absolute",
   },
-  "& .mainBox": {
-    height: "500px",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    background: "#fff",
-    borderRadius: "15px",
-    position: "relative",
-  },
-  "& .mainBox": {
-    // height: "500px",
-    // paddingBottom: "50px",
-    // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    // background: "#fff",
-    // borderRadius: "0 15px 15px 15px",
-    // position: "relative",
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: "-1px",
-      left: "-12px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "0px",
-      borderTopLeftRadius: "0px",
-      borderBottomLeftRadius: "63px",
-    },
-    "&::after": {
-      background: "#b8db53",
-      content: '""',
-      position: "absolute",
-      top: "-153px",
-      left: "129px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "25px",
-      borderTopLeftRadius: "0px",
-      borderBottomRightRadius: "77px",
-      borderBottomLeftRadius: "0px",
-      WebkitTransform: "rotateZ(271deg)",
-      MozTransform: "rotateZ(271deg)",
-      MsTransform: "rotateZ(271deg)",
-      transform: "rotateZ(270deg)",
-      borderTopRightRadius: "90px",
-    },
+
+  "& .mainBoxS1": {
     "& .HeadingBox": {
       padding: "0 20px",
       "& h2": {
@@ -82,29 +63,74 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
         fontSize: "16px",
         fontWeight: "600",
         padding: "5px 0",
+        "@media(max-width:615px)": {
+          padding: "10px 0",
+        },
       },
       "& .CheckBox": {
         // display: "flex",
         alignItems: "center",
       },
+      // "& .stepperBox": {
+      //   display: "none",
+
+      //   "@media(max-width:615px)": {
+      //     width: "100%",
+      //     display: "block",
+      //   },
+      //   "& .h2-class": {
+      //     fontSize: "12px",
+      //     fontWeight: "600",
+      //     position: "absolute",
+      //     top: "-24px",
+      //     left: "-17px",
+      //     width: "106px",
+      //   },
+      //   "& .h2-class1": {
+      //     fontSize: "12px",
+      //     fontWeight: "600",
+      //     position: "absolute",
+      //     top: "-24px",
+      //     left: "-24px",
+      //     width: "106px",
+      //   },
+      //   "& .h2-class2": {
+      //     fontSize: "12px",
+      //     fontWeight: "600",
+      //     position: "absolute",
+      //     top: "-24px",
+      //     left: "-57px",
+      //     width: "130px",
+      //   },
+      // },
     },
   },
   "& .buttonStyle": {
     padding: "5px 20px",
     borderRadius: "26px",
     color: "#000",
+    margin: "0 5px 10px 0",
+  },
+  "& .Property_Type": {
+    "@media(max-width:615px)": {
+      paddingTop: "15px",
+    },
   },
 }));
 const GreenCheckbox = withStyles({
   root: {
     color: "#b8db53",
+    padding: "0px 10px 0 0 !important",
+
     "&$checked": {
       color: "#b8db53",
+      padding: "0px 10px 0 0 !important",
     },
   },
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 const PropertyPost_s_1 = (props) => {
+  console.log("propsZzxzxz---->", props);
   const {
     _getproprty_type,
     handleCheckboxChange,
@@ -120,6 +146,8 @@ const PropertyPost_s_1 = (props) => {
       carpet_area,
     },
   } = props;
+  console.log("formField--000>", listed_name);
+
   const [_propertyList, setPropertyList] = React.useState([]);
   const [_subytypelist, setSubTypeList] = useState([]);
   const [_isloading, setIsLoading] = useState(false);
@@ -317,9 +345,42 @@ const PropertyPost_s_1 = (props) => {
 
   return (
     <PropertyPostScreenStyle>
-      <Box className="mainBox">
+      <Box className="mainBoxS1">
         <Box className="HeadingBox">
           <Typography variant="h2">List Your property</Typography>
+          {/* <Box display={"flex"} justifyContent={"center"}>
+            <Box mt={6} mb={1} className="stepperBox">
+              <StepperStyle>
+                <Stepper
+                  activeStep={props?.activeStep}
+                  className={"stepper"}
+                  style={{ display: "flex", justifyContent: "center" }}
+                >
+                  <Step key={"label"} style={{ position: "relative" }}>
+                    <StepLabel>
+                      <Typography className="h2-class">
+                        {"Property Details"}
+                      </Typography>
+                    </StepLabel>
+                  </Step>
+                  <Step key={"label"} style={{ position: "relative" }}>
+                    <StepLabel>
+                      <Typography className="h2-class1">
+                        {"Area Details"}
+                      </Typography>
+                    </StepLabel>
+                  </Step>
+                  <Step key={"label"} style={{ position: "relative" }}>
+                    <StepLabel>
+                      <Typography className="h2-class2">
+                        {"Images & Location"}
+                      </Typography>
+                    </StepLabel>
+                  </Step>
+                </Stepper>
+              </StepperStyle>
+            </Box>
+          </Box> */}
           <Box className="CheckBox">
             {_isloading ? (
               <Box display={"flex"} justifyContent={"center"} mb={2}>
@@ -332,71 +393,61 @@ const PropertyPost_s_1 = (props) => {
               </Box>
             ) : (
               <>
-                <Box mb={1}>
+                <Box mb={1} className="Property_Type">
                   <Typography variant="h3">Property Type</Typography>
                 </Box>
-                <Grid container spacing={3}>
-                  {_propertyList.map((data, index) => (
-                    <Grid item lg={3} md={3} sm={6} xs={6}>
-                      <div key={index}>
-                        <FormControlLabel
-                          control={
-                            <GreenCheckbox
-                              checked={_getproprty_type === data?._id}
-                              onChange={() => handleCheckboxChange(data?._id)}
-                            />
-                          }
-                          label={data?.projectType}
-                        />
-                      </div>
-                    </Grid>
+                <Box>
+                  {_propertyList?.map((data, index) => (
+                    <Box display={"inline-flex"} key={index}>
+                      <FormControlLabel
+                        control={
+                          <GreenCheckbox
+                            sx={{
+                              "& .MuiIconButton-root": {
+                                padding: "0px !important",
+                              },
+                            }}
+                            checked={_getproprty_type === data?._id}
+                            onChange={() => handleCheckboxChange(data?._id)}
+                          />
+                        }
+                        label={data?.projectType}
+                      />
+                    </Box>
                   ))}
-                </Grid>
+                </Box>
                 <Box>
                   <Typography variant="h3">Property Category</Typography>
                 </Box>
                 <Box mb={2} mt={1}>
-                  <Grid container spacing={3}>
-                    {_subytypelist &&
-                      _subytypelist?.map((data, index) => {
-                        return (
-                          <>
-                            <Grid
-                              key={index}
-                              item
-                              lg={data?.projectSubType?.length >= 8 ? 3 : 2}
-                              md={2}
-                              sm={4}
-                              xs={6}
-                            >
-                              <Button
-                                className="buttonStyle"
-                                style={
-                                  _getproject_sub_type == data?._id
-                                    ? {
-                                        background: "#BADC54",
-                                        border: "1px solid #BADC54",
-                                      }
-                                    : {
-                                        background: "#fff",
-                                        border: "1px solid #000",
+                  {_subytypelist &&
+                    _subytypelist?.map((data, index) => {
+                      return (
+                        <>
+                          <Button
+                            className="buttonStyle"
+                            key={index}
+                            style={
+                              _getproject_sub_type == data?._id
+                                ? {
+                                    background: "#BADC54",
+                                    border: "1px solid #BADC54",
+                                  }
+                                : {
+                                    background: "#fff",
+                                    border: "1px solid #000",
 
-                                        color: "#000",
-                                      }
-                                }
-                                key={data?._id}
-                                onClick={() =>
-                                  setGetProject_sub_Type(data?._id)
-                                }
-                              >
-                                {data?.projectSubType}
-                              </Button>
-                            </Grid>
-                            &nbsp;&nbsp;
-                          </>
-                        );
-                      })}
-                  </Grid>
+                                    color: "#000",
+                                  }
+                            }
+                            onClick={() => setGetProject_sub_Type(data?._id)}
+                          >
+                            {data?.projectSubType}
+                          </Button>
+                          {/* &nbsp; &nbsp; */}
+                        </>
+                      );
+                    })}
                 </Box>
               </>
             )}
@@ -421,7 +472,7 @@ const PropertyPost_s_1 = (props) => {
                   data={furnishingList}
                 />
               </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid item lg={6} md={6} sm={6} xs={6}>
                 <SelectField
                   _isloading={props._isloading}
                   name={bedrooms.name}
@@ -431,7 +482,7 @@ const PropertyPost_s_1 = (props) => {
                   data={badRoomNumberList}
                 />
               </Grid>
-              <Grid item lg={6} md={6} sm={12} xs={12}>
+              <Grid item lg={6} md={6} sm={6} xs={6}>
                 <SelectField
                   _isloading={props._isloading}
                   name={bathrooms.name}
@@ -448,6 +499,7 @@ const PropertyPost_s_1 = (props) => {
                   valueName={super_building.value}
                   label={super_building.label}
                   fullWidth
+                  yourMaxLengthValue={90}
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -457,6 +509,7 @@ const PropertyPost_s_1 = (props) => {
                   valueName={carpet_area.value}
                   label={carpet_area.label}
                   fullWidth
+                  yourMaxLengthValue={25}
                 />
               </Grid>
             </Grid>

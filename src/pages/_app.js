@@ -16,38 +16,37 @@ function MyApp({ Component, pageProps }) {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    const startLoading = () => {
-      setLoading(true);
-    };
-    const stopLoading = () => {
-      setLoading(false);
-    };
+  // useEffect(() => {
+  //   const startLoading = () => {
+  //     setLoading(true);
+  //   };
+  //   const stopLoading = () => {
+  //     setLoading(false);
+  //   };
 
-    Router.events.on("routeChangeStart", startLoading);
-    Router.events.on("routeChangeComplete", stopLoading);
-    Router.events.on("routeChangeError", stopLoading);
+  //   Router.events.on("routeChangeStart", startLoading);
+  //   Router.events.on("routeChangeComplete", stopLoading);
+  //   Router.events.on("routeChangeError", stopLoading);
 
-    return () => {
-      Router.events.off("routeChangeStart", startLoading);
-      Router.events.off("routeChangeComplete", stopLoading);
-      Router.events.off("routeChangeError", stopLoading);
-    };
-  }, []);
-
+  //   return () => {
+  //     Router.events.off("routeChangeStart", startLoading);
+  //     Router.events.off("routeChangeComplete", stopLoading);
+  //     Router.events.off("routeChangeError", stopLoading);
+  //   };
+  // }, []);
   return (
     <div className="App">
       <Head>
         <meta name="description" content="" />
         <link rel="icon" href="" />
-        <script
+        {/* <script
           async
           defer
           src={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBpWyPnAG_3CFQC3NU0hJPt4r_IBhpsPEA&libraries=places`}
-        ></script>
+        ></script> */}
       </Head>
       {loading && "Loading"}
-      {!loading && isClient && (
+      {isClient && (
         <ThemeProvider theme={theme}>
           <AuthContext>{getLayout(<Component {...pageProps} />)}</AuthContext>
           <ToastContainer />

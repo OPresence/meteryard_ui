@@ -202,6 +202,8 @@ const Apiconfigs = {
   listAllEnquiry: `${user}/listAllEnquiry`,
   deleteEnquiry: `${user}/deleteEnquiry`,
   changePassword: `${user}/changePassword`,
+  likeDislikeProperty: `${user}/likeDislikeProperty`,
+  addComment: `${user}/addComment`,
 };
 
 export default Apiconfigs;

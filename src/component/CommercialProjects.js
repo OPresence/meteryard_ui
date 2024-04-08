@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Grid, Typography, Box, Container } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import styled from "@emotion/styled";
@@ -9,6 +9,7 @@ import Apiconfigs from "../ApiConfig/ApiConfig";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { AuthContext } from "../context/Auth";
 const Commercialstyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     background: "#fff",
@@ -100,7 +101,7 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
 
 const CommercialProjects = () => {
   const sliderRef = useRef(null);
-  const [_getlist, setGetList] = useState([]);
+  const auth = useContext(AuthContext);
   const [_isloading, setIsLoading] = useState(false);
   const settings = {
     dots: false,
@@ -175,31 +176,7 @@ const CommercialProjects = () => {
       },
     ],
   };
-  const ResidentialAPI = async () => {
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeId: "65dc4c11da234100342352f4",
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setIsLoading(false);
-        console.log("sdfdsfjdsfdsbfs--->", res?.result?.docs);
-        setGetList(res?.result?.docs);
-      }
-    } catch (error) {
-      setIsLoading(false);
 
-      console.log("eror", error);
-    }
-  };
-  useEffect(() => {
-    ResidentialAPI();
-  }, []);
   return (
     <Commercialstyle>
       <div className="mainSliderDiv">
@@ -211,10 +188,10 @@ const CommercialProjects = () => {
             </Typography>
           </Box>
           <Box className="mainBoxCard">
-            {_getlist?.length > 4 ? (
+            {auth?._getlist_commercial?.length > 4 ? (
               <>
                 <Slider {...settings} ref={sliderRef}>
-                  {_getlist.map((data, index) => {
+                  {auth?._getlist_commercial.map((data, index) => {
                     return (
                       <Grid
                         key={index}
@@ -302,7 +279,7 @@ const CommercialProjects = () => {
               </>
             ) : (
               <>
-                {_getlist.map((data, index) => {
+                {auth?._getlist_commercial.map((data, index) => {
                   return (
                     <Grid
                       key={index}
@@ -387,7 +364,7 @@ const CommercialProjects = () => {
               </>
             )}
 
-            {_getlist?.length > 7 && (
+            {auth?._getlist_commercial?.length > 7 && (
               <Box
                 display={"flex"}
                 justifyContent={"end"}

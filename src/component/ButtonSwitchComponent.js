@@ -12,6 +12,7 @@ import { AuthContext } from "../context/Auth";
 import { MdOutlineVideoChat } from "react-icons/md";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
 const MainComponent = styled("Box")(({ theme }) => ({
@@ -94,6 +95,8 @@ export default function ButtonSwitchComponent({
   Type,
 }) {
   const auth = useContext(AuthContext);
+  const router = useRouter();
+
   return (
     <MainComponent>
       <Box>
@@ -206,13 +209,13 @@ export default function ButtonSwitchComponent({
                           </Box>
                           <Button
                             onClick={() => {
-                              handleClickOpen();
-                              // if (auth?._getprofile?.userType == "SELLER") {
-                              // } else {
-                              //   toast.error(
-                              //     "Only Seller post the property please login."
-                              //   );
-                              // }
+                              if (auth?._getprofile?.userType == "SELLER") {
+                                router.push("property-post");
+                              } else {
+                                toast.error(
+                                  "Only Seller post the property please login."
+                                );
+                              }
                             }}
                             className="searchbox_button"
                             style={{
