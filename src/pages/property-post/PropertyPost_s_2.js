@@ -265,26 +265,29 @@ const PropertyPost_s_2 = (props) => {
     <PropertyPostScreenStyle>
       <Box className="mainBox">
         <Box className="HeadingBox">
-          <Typography variant="h2">List Your property</Typography>
+          <Typography variant="h2">List Your Property</Typography>
           <Box className="CheckBox">
             <Box mb={1}>
               <Typography variant="h3">Property Type</Typography>
             </Box>
             <Grid container spacing={3}>
               <Grid item lg={6} md={6} sm={12} xs={12}>
-                <SelectField
+                <InputField
                   _isloading={props._isloading}
                   name={total_floors.name}
                   data={badRoomNumberList}
                   valueName={total_floors.value}
                   label={total_floors.label}
+                  Placeholder_name={total_floors.Placeholder_name}
+                  // yourMaxLengthValue={2}
                   fullWidth
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12}>
-                <SelectField
+                <InputField
                   _isloading={props._isloading}
                   name={floors_no.name}
+                  Placeholder_name={floors_no.Placeholder_name}
                   valueName={floors_no.value}
                   label={floors_no.label}
                   fullWidth
@@ -296,6 +299,7 @@ const PropertyPost_s_2 = (props) => {
                   _isloading={props._isloading}
                   name={facing.name}
                   valueName={facing.value}
+                  Placeholder_name={facing.Placeholder_name}
                   label={facing.label}
                   fullWidth
                   yourMaxLengthValue={120}
@@ -305,6 +309,7 @@ const PropertyPost_s_2 = (props) => {
                 <InputField
                   _isloading={props._isloading}
                   name={project_name.name}
+                  Placeholder_name={project_name.Placeholder_name}
                   valueName={project_name.value}
                   label={project_name.label}
                   fullWidth
@@ -313,6 +318,7 @@ const PropertyPost_s_2 = (props) => {
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <InputField
+                  Placeholder_name={add_title.Placeholder_name}
                   _isloading={props._isloading}
                   name={add_title.name}
                   valueName={add_title.value}
@@ -323,6 +329,7 @@ const PropertyPost_s_2 = (props) => {
               </Grid>
               <Grid item lg={12} md={12} sm={12} xs={12}>
                 <InputField
+                  Placeholder_name={description.Placeholder_name}
                   _isloading={props._isloading}
                   name={description.name}
                   valueName={description.value}

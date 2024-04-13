@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import PropertyPost_s_1 from "./PropertyPost_s_1";
 import PropertyPost_s_2 from "./PropertyPost_s_2";
 import PropertyPost_s_3 from "./PropertyPost_s_3";
@@ -24,6 +24,7 @@ import swal from "sweetalert";
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { formFieldValue, ValidationValue, initialValue } from "../../utils";
+import { AuthContext } from "../../context/Auth";
 const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
   "& .MainBoxIndex": {
     height: "100%",
@@ -44,7 +45,7 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
       fontWeight: "600",
       padding: "0 0 10px 0",
 
-      // display: "none",
+      display: "none",
       "@media(max-width:615px)": {
         display: "Block",
         padding: "0 0 0 10px",
@@ -239,6 +240,7 @@ const StepperStyle = styled("Stepper")(({ theme }) => ({
 
 const PropertyPostIndex = () => {
   const router = useRouter();
+  const auth = useContext(AuthContext);
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
@@ -270,10 +272,9 @@ const PropertyPostIndex = () => {
   const [_consition, setConsition] = useState(false);
   const [_propertyform, setPropertyForm] = useState(false);
   const [_checked, setChecked] = useState(false);
-  const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
-  const [_getproprty_type, setGetPropetyType] = useState("");
   const [_imageuploading, setImageUploading] = useState(false);
   const [_videoupload, setVideoUpload] = useState(false);
+  console.log("_coverImage--->", _videoupload);
   const [coordinates, setCoordinates] = useState({
     lat: 27.1881,
     lng: 77.935,
@@ -288,7 +289,7 @@ const PropertyPostIndex = () => {
     }
   };
   const handleCheckboxChange = (_id) => {
-    setGetPropetyType(_id);
+    auth?.setGetPropetyType(_id);
   };
   const imageUploadFunction = async (imageValue) => {
     try {
@@ -353,7 +354,7 @@ const PropertyPostIndex = () => {
   const CoverImageFunction = async (imageValue) => {
     try {
       setImageUploading(true);
-
+      console.log("ghavsdjbsab");
       const formdata = new FormData();
       formdata.append("uploaded_file", imageValue);
 
@@ -450,11 +451,11 @@ const PropertyPostIndex = () => {
             formField={formField}
             setTrueCaptcha={setTrueCaptcha}
             _isloading={_isloading}
-            setGetPropetyType={setGetPropetyType}
-            _getproprty_type={_getproprty_type}
+            // setGetPropetyType={setGetPropetyType}
+            // _getproprty_type={_getproprty_type}
             handleCheckboxChange={handleCheckboxChange}
-            _getproject_sub_type={_getproject_sub_type}
-            setGetProject_sub_Type={setGetProject_sub_Type}
+            // _getproject_sub_type={_getproject_sub_type}
+            // setGetProject_sub_Type={setGetProject_sub_Type}
           />
         );
       case 1:
@@ -467,7 +468,7 @@ const PropertyPostIndex = () => {
             formField={formField}
             _isloading={_isloading}
             _projecttype={_projecttype}
-            _videoupload={_videoupload}
+            _videoupload={_imageuploading}
             _coverImage={_coverImage}
             handleFileChange={handleFileChange}
             selectedImages={selectedImages}
@@ -510,89 +511,95 @@ const PropertyPostIndex = () => {
     }
   }
   async function PropertyPostFunction(values, actions) {
-    try {
-      setIsLoading(true);
-      actions.setSubmitting(false);
-      setActiveStep(activeStep + 1);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.createPropertyPost,
-        data: {
-          listedBy: values?.listed_name,
-          bedroom: values?.bedrooms,
-          bathroom: values?.bathrooms,
-          superBuildupArea: values?.super_building,
-          carpetArea: values?.carpet_area,
-          totalFloors: values?.floors_no,
-          floorNumber: values?.floors_no,
-          projectName: values?.project_name,
-          title: values?.add_title,
-          description: values?.description,
-          price: values?.price,
-          coverImage: _coverImage,
-          video: _video_url,
-          type: values?.typeProperty,
-          image: imageUploadResponses,
-          address: address,
-          termAndConditions: _consition,
-          featuredProperty: _checked,
-          projectTypeId: _getproprty_type,
-          projectSubTypeId: _getproject_sub_type,
-          location: {
-            type: "Point",
-            coordinates: [coordinates?.lat, coordinates?.lng],
+    console.log("valueszjzknknisd--->", values);
+    if (_coverImage != "") {
+      try {
+        setIsLoading(true);
+        actions.setSubmitting(false);
+        setActiveStep(activeStep + 1);
+        const res = await PostApiFunction({
+          endPoint: Apiconfigs?.createPropertyPost,
+          data: {
+            listedBy: values?.listed_name,
+            bedroom: values?.bedrooms,
+            bathroom: values?.bathrooms,
+            superBuildupArea: values?.super_building,
+            carpetArea: values?.carpet_area,
+            totalFloors: values?.floors_no,
+            floorNumber: values?.floors_no,
+            projectName: values?.project_name,
+            title: values?.add_title,
+            description: values?.description,
+            price: values?.price,
+            price_breakup: values?.price_breakup,
+            coverImage: _coverImage,
+            video: _video_url,
+            type: values?.typeProperty,
+            image: imageUploadResponses,
+            address: values?.location,
+            termAndConditions: _consition,
+            featuredProperty: _checked,
+            projectTypeId: auth?._getproprty_type,
+            projectSubTypeId: auth?._getproject_sub_type,
+            location: {
+              type: "Point",
+              coordinates: [coordinates?.lat, coordinates?.lng],
+            },
           },
-        },
-      });
-      if (res) {
-        setIsLoading(false);
-        if (res?.responseCode == 200) {
-          // toast.success(res?.responseMessage); // Display success notification
+        });
+        if (res) {
           setIsLoading(false);
-          setPropertyForm(false);
-          setSelectedImages([]);
-          swal({
-            icon: "success",
-            title: "Your property has been post successfully!",
+          if (res?.responseCode == 200) {
+            // toast.success(res?.responseMessage); // Display success notification
+            setIsLoading(false);
+            setPropertyForm(false);
+            setSelectedImages([]);
+            swal({
+              icon: "success",
+              title: "Your property has been post successfully!",
 
-            content: {
-              element: "span",
-              attributes: {
-                innerHTML: "Congratulations your property post complete.",
+              content: {
+                element: "span",
+                attributes: {
+                  innerHTML: "Congratulations your property post complete.",
+                },
               },
-            },
-            buttons: {
-              confirm: "OK",
-            },
-          }).then((value) => {
-            if (value) {
-              router.push("/");
-              // window.location.reload();
-            }
-          });
-          // router.push("/");
-        } else if (res?.responseCode == 404) {
-          setPropertyForm(false);
-          toast.error(res?.responseMessage); // Display error notification
-          setIsLoading(false);
-          setPropertyForm(false);
-        } else if (res?.responseCode == 404) {
-          toast.error(res?.responseMessage); // Display error notification
-          setIsLoading(false);
-          setPropertyForm(false);
-        } else if (res?.responseCode == 500) {
-          toast.error(res?.responseMessage); // Display error notification
-          setIsLoading(false);
-          setPropertyForm(false);
-        } else {
-          toast.error(res?.responseMessage); // Display error notification
-          setIsLoading(false);
-          setPropertyForm(false);
+              buttons: {
+                confirm: "OK",
+              },
+            }).then((value) => {
+              if (value) {
+                router.push("/");
+                // window.location.reload();
+              }
+            });
+            // router.push("/");
+          } else if (res?.responseCode == 404) {
+            setPropertyForm(false);
+            toast.error(res?.responseMessage); // Display error notification
+            setIsLoading(false);
+            setPropertyForm(false);
+          } else if (res?.responseCode == 404) {
+            toast.error(res?.responseMessage); // Display error notification
+            setIsLoading(false);
+            setPropertyForm(false);
+          } else if (res?.responseCode == 500) {
+            toast.error(res?.responseMessage); // Display error notification
+            setIsLoading(false);
+            setPropertyForm(false);
+          } else {
+            toast.error(res?.responseMessage); // Display error notification
+            setIsLoading(false);
+            setPropertyForm(false);
+          }
         }
-      }
-    } catch (error) {
-      setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
 
-      console.log(error);
+        console.log(error);
+      }
+    } else {
+      toast.error("Please upload property cover image.");
     }
   }
   function _handleBack() {
@@ -613,8 +620,10 @@ const PropertyPostIndex = () => {
               </Box>
             </Grid>
             <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Typography variant="h3">List Your property</Typography>
-              <Typography variant="h5">Fill Basic Details</Typography>
+              <Typography variant="h3">List Your Property</Typography>
+              <Box mt={2}>
+                <Typography variant="h5">Fill Basic Details</Typography>
+              </Box>
               <Box display={"flex"} justifyContent={"center"}>
                 <Box className="stepperBox">
                   <StepperStyle>
@@ -671,19 +680,23 @@ const PropertyPostIndex = () => {
                               display={"flex"}
                               justifyContent={"center"}
                             >
-                              {activeStep !== 0 && (
-                                <>
-                                  <Button
-                                    disabled={_isloading || _imageuploading}
-                                    onClick={_handleBack}
-                                    className={"button"}
-                                    variant="contained"
-                                    color="primary"
-                                  >
-                                    Back
-                                  </Button>
-                                </>
-                              )}
+                              <>
+                                <Button
+                                  disabled={auth?._isloading || _imageuploading}
+                                  onClick={() => {
+                                    if (activeStep !== 0) {
+                                      _handleBack();
+                                    } else {
+                                      router.push("/");
+                                    }
+                                  }}
+                                  className={"button"}
+                                  variant="contained"
+                                  color="primary"
+                                >
+                                  {activeStep !== 0 ? "Back" : "Back Home"}
+                                </Button>
+                              </>
                             </Box>
                             &nbsp;&nbsp;{" "}
                             <Box
@@ -692,6 +705,7 @@ const PropertyPostIndex = () => {
                               justifyContent={"center"}
                             >
                               <Button
+                                style={{ background: "#a2d117" }}
                                 disabled={
                                   _isloading || _videoupload || _imageuploading
                                 }

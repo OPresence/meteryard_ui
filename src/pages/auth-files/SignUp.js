@@ -127,14 +127,13 @@ const formValidationSchema = yep.object().shape({
   name: yep
     .string()
     .required("Name is required.")
-    .min(2, "Please enter min 2 charector")
-    .matches(/^[a-zA-Z]+$/, "Name must contain only alphabetic characters"),
+    .min(2, "Please enter min 2 charector."),
   email: yep
     .string()
     .required("Email is required.")
     .matches(
       /^[^@]+@[^@.]+\.[^@.]+$/,
-      "Please enter a valid email address with only one '@' and one '.'"
+      "Please enter a valid email address with only one '@' and one '.'."
     ),
   PhoneNumber: yep.string().required("Phone Number is required."),
   password: yep
@@ -142,7 +141,7 @@ const formValidationSchema = yep.object().shape({
     .required("Password is required.")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
     ),
 });
 
@@ -162,14 +161,20 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
     background: "transparent",
     padding: "10.5px 40px !important",
   };
+  // const handleNameKeyDown = (event) => {
+  //   // Check if the pressed key is a number
+  //   if (event.key >= "0" && event.key <= "9") {
+  //     // Prevent the default behavior of the key
+  //     event.preventDefault();
+  //   }
+  // };
   const handleNameKeyDown = (event) => {
-    // Check if the pressed key is a number
-    if (event.key >= "0" && event.key <= "9") {
+    // Check if the pressed key is a special character
+    if (/[^a-zA-Z\s]/.test(event.key)) {
       // Prevent the default behavior of the key
       event.preventDefault();
     }
   };
-
   const SignUp_Function = async (values) => {
     try {
       setIsLoading(true);
@@ -427,8 +432,20 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                                 )}
                                 onBlur={handleBlur}
                                 onChange={(phone, e) => {
+                                  let formattedPhone = phone;
+                                  // Check if the phone number doesn't start with "+91" or "91", then add it
+                                  if (
+                                    !phone.startsWith("+91") &&
+                                    !phone.startsWith("91")
+                                  ) {
+                                    formattedPhone = "+91" + phone;
+                                  }
                                   setCountryCode(e.dialCode);
-                                  setFieldValue("PhoneNumber", phone);
+                                  setFieldValue("PhoneNumber", formattedPhone);
+                                  console.log(
+                                    "formattedPhone--->",
+                                    formattedPhone
+                                  );
                                 }}
                                 inputStyle={phoneInputStyles}
                               />

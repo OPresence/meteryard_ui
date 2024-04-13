@@ -209,15 +209,18 @@ const CommercialProjects = () => {
                               <Box className="contentBox" width={"90%"}>
                                 <Box>
                                   <Box
-                                    display={"flex"}
-                                    justifyContent={"center"}
+                                    // display={"flex"}
+                                    // justifyContent={"center"}
                                     m={"-95px 0 0 0"}
                                   >
-                                    <Box maxWidth={280}>
+                                    <Box>
                                       <img
                                         src={data?.coverImage}
                                         width={"100%"}
-                                        style={{ borderRadius: "15px" }}
+                                        style={{
+                                          borderRadius: "15px",
+                                          height: "180px",
+                                        }}
                                       />
                                     </Box>
                                   </Box>

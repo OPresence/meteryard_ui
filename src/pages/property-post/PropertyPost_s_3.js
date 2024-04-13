@@ -54,6 +54,7 @@ const PriceBox = styled("Box")(({ theme }) => ({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
+      cursor: "pointer",
       "& svg": {
         color: "#676767",
         fontSize: "16px",
@@ -137,18 +138,18 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
     "& .HeadingBox3": {
       padding: "0 20px",
       "& h2": {
-        //   textAlign: "center",
-        // color: "#444444",
-        // fontSize: "15px",
-        // fontWeight: "600",
-        // padding: "10px 0",
+        textAlign: "center",
+        color: "#444444",
+        fontSize: "28px",
+        fontWeight: "600",
+        padding: "20px 0",
       },
-      //   "& h3": {
-      //     color: "#444444",
-      //     fontSize: "16px",
-      //     fontWeight: "600",
-      //     padding: "5px 0",
-      //   },
+      "& h3": {
+        color: "#444444",
+        fontSize: "16px",
+        fontWeight: "600",
+        padding: "5px 0",
+      },
       "& .CheckBox": {
         alignItems: "center",
         "@media(max-width:615px)": {
@@ -178,24 +179,7 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
 }));
 const PropertyPost_s_3 = (props) => {
   const {
-    formField: {
-      listed_name,
-      furnishing,
-      bedrooms,
-      bathrooms,
-      super_building,
-      carpet_area,
-      total_floors,
-      floors_no,
-      facing,
-      project_name,
-      add_title,
-      description,
-      price,
-      location,
-      landmark,
-      coverImage,
-    },
+    formField: { price, location, landmark, price_breakup },
   } = props;
   const fileInputRef = useRef(null);
 
@@ -247,7 +231,8 @@ const PropertyPost_s_3 = (props) => {
     <PropertyPostScreenStyle>
       <Box className="mainBox">
         <Box className="HeadingBox3">
-          <Typography variant="h2">List Your property</Typography>
+          <Typography variant="h2">List Your Property</Typography>
+
           <Box className="CheckBox">
             <Grid container spacing={3}>
               <Grid item lg={12} md={12} sm={12} xs={12}>
@@ -255,16 +240,34 @@ const PropertyPost_s_3 = (props) => {
                   <Box className="mainPriceBox">
                     <Box>
                       <Typography variant="h2">SET A PRICE</Typography>
-                      <Box mt={2}>
-                        <InputField
-                          _isloading={props._isloading}
-                          name={price.name}
-                          valueName={price.value}
-                          label={price.label}
-                          fullWidth
-                          yourMaxLengthValue={10}
-                        />
-                      </Box>
+                      <Grid container spacing={3}>
+                        <Grid item lg={6} md={6} sm={6} xs={12}>
+                          <Box mt={2}>
+                            <InputField
+                              _isloading={props._isloading}
+                              name={price.name}
+                              valueName={price.value}
+                              Placeholder_name={price.Placeholder_name}
+                              label={price.label}
+                              fullWidth
+                              yourMaxLengthValue={10}
+                            />
+                          </Box>
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xs={12}>
+                          <Box mt={2}>
+                            <InputField
+                              _isloading={props._isloading}
+                              name={price_breakup.name}
+                              valueName={price_breakup.value}
+                              Placeholder_name={price_breakup.Placeholder_name}
+                              label={price_breakup.label}
+                              fullWidth
+                              yourMaxLengthValue={10}
+                            />
+                          </Box>
+                        </Grid>
+                      </Grid>
                       <Box
                         display={"flex"}
                         mt={2}
@@ -297,13 +300,7 @@ const PropertyPost_s_3 = (props) => {
                               display={"flex"}
                               justifyContent={"center"}
                               mt={1}
-                            >
-                              {props?._videoupload && (
-                                <>
-                                  <CircularProgressComponent />
-                                </>
-                              )}
-                            </Box>
+                            ></Box>
                           </label>{" "}
                           &nbsp;&nbsp;&nbsp;
                           <label style={{ display: "inline-flex" }}>
@@ -328,6 +325,14 @@ const PropertyPost_s_3 = (props) => {
                                     }
                                   }}
                                 />
+                                {props?._videoupload && (
+                                  <Box
+                                    display={"flex"}
+                                    justifyContent={"center"}
+                                  >
+                                    <CircularProgressComponent />
+                                  </Box>
+                                )}
                                 {props?._coverImage && (
                                   <Box maxWidth={100} maxHeight={50}>
                                     <img
@@ -466,37 +471,42 @@ const PropertyPost_s_3 = (props) => {
                       </Box>
                     </Box>
                   </Box>
-                  <Box>
-                    <Box mt={2} display={"none"}>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
+                    <Box mt={2}>
                       <InputField
                         _isloading={props._isloading}
                         name={location.name}
+                        Placeholder_name={location.Placeholder_name}
                         valueName={location.value}
                         label={location.label}
                         fullWidth
                         yourMaxLengthValue={120}
                       />
                     </Box>
-                  </Box>
+                  </Grid>
 
-                  <Box mt={2}>
+                  {/* <Box mt={2}>
                     <LocationDialog
                       address={props?.address}
                       setAddress={props?.setAddress}
                       coordinates={props?.coordinates}
                       setCoordinates={props?.setCoordinates}
                     />
-                  </Box>
+                  </Box> */}
                   <Grid item lg={12} md={12} sm={12} xs={12}>
-                    <InputField
-                      _isloading={props._isloading}
-                      name={landmark.name}
-                      valueName={landmark.value}
-                      label={landmark.label}
-                      fullWidth
-                      yourMaxLengthValue={120}
-                    />
+                    <Box mt={2}>
+                      <InputField
+                        _isloading={props._isloading}
+                        name={landmark.name}
+                        Placeholder_name={landmark.Placeholder_name}
+                        valueName={landmark.value}
+                        label={landmark.label}
+                        fullWidth
+                        yourMaxLengthValue={120}
+                      />
+                    </Box>
                   </Grid>
+
                   <Box>
                     <Box display={"flex"} gap={"20px"} mt={2}>
                       <Box
@@ -504,7 +514,7 @@ const PropertyPost_s_3 = (props) => {
                         alignItems={"center"}
                         className="checkboxStyle"
                       >
-                        <span>Terms & Condition</span>
+                        <span>Terms & Conditions</span>
                         <Checkbox
                           required
                           checked={props?._consition}

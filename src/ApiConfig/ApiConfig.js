@@ -20,6 +20,8 @@ const Apiconfigs = {
   resendOtp: `${user}/resendOtp`,
   uploadImage: `${user}/uploadImage`,
   myProfile: `${user}/myProfile`,
+  forgotPassword: `${user}/forgotPassword`,
+  resetPassword: `${user}/resetPassword`,
 
   listAllDepartment: `${admin}/listAllDepartment`,
   createDepartment: `${admin}/createDepartment`,

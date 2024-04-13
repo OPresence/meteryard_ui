@@ -40,6 +40,7 @@ const LoginDialog = ({
               _selectScreen={_selectScreen}
               setSelectScreen={setSelectScreen}
               setOpen={setOpen}
+              handleClose={handleClose}
             />
           ) : (
             <>

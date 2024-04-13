@@ -10,10 +10,13 @@ const PropertyMoreDetails = ({ dataArray }) => {
           <Grid item xs={12} lg={4}>
             <Box className="contentdiv">
               <Box className="moreDetailcontent" style={{ width: "150px" }}>
+                {console.log("dataArrays--->", dataArray)}
                 <Typography variant="h3">Price Breakup</Typography>
               </Box>
               <Box className="moreDetailcontent">
-                <Typography variant="body1">{dataArray?.price}/- Rs</Typography>
+                <Typography variant="body1">
+                  {dataArray?.price?.toLocaleString()}/- Rs
+                </Typography>
               </Box>
             </Box>
 
@@ -22,7 +25,9 @@ const PropertyMoreDetails = ({ dataArray }) => {
                 <Typography variant="h3">Booking Amount</Typography>
               </Box>
               <Box className="moreDetailcontent">
-                <Typography variant="body1">{dataArray?.price}</Typography>
+                <Typography variant="body1">
+                  {dataArray?.price?.toLocaleString()}/- Rs
+                </Typography>
               </Box>
             </Box>
             <Box className="contentdiv">
@@ -38,9 +43,7 @@ const PropertyMoreDetails = ({ dataArray }) => {
                 <Typography variant="h3">Furnishing</Typography>
               </Box>
               <Box className="moreDetailcontent">
-                <Typography variant="body1">
-                  {dataArray?.projectName}
-                </Typography>
+                <Typography variant="body1">{dataArray?.furnishing}</Typography>
               </Box>
             </Box>
             <Box className="contentdiv">

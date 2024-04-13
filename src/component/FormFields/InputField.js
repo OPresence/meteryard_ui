@@ -13,7 +13,6 @@ export default function InputField(props) {
       return error;
     }
   }
-  console.log("props---->", props?.name == "description");
   function handleChange(event) {
     helpers.setValue(event.target.value);
   }
@@ -27,7 +26,7 @@ export default function InputField(props) {
         type={props.inputType}
         fullWidth
         disabled={props._isloading}
-        placeholder={rest.label}
+        placeholder={rest.Placeholder_name}
         error={meta.touched && meta.error && true}
         helperText={_renderHelperText()}
         {...field}

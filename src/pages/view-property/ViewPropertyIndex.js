@@ -148,7 +148,7 @@ const ViewPropertyIndex = () => {
                       <Box className="detailsHeading">
                         <Typography variant="h3">Carpet Area</Typography>
                         <Typography variant="body1">
-                          {dataArray?.superBuildupArea}
+                          {dataArray?.carpetArea}
                         </Typography>
                         <br />
 
@@ -182,7 +182,7 @@ const ViewPropertyIndex = () => {
 
                         <Typography variant="h3">Facing</Typography>
                         <Typography variant="body1">
-                          {dataArray?.floorNumber}{" "}
+                          {dataArray?.facing}{" "}
                         </Typography>
                       </Box>
                     </Box>
@@ -223,7 +223,7 @@ const ViewPropertyIndex = () => {
               </Box>
 
               <Box className="getQnwerontactBtn">
-                <Button>Get ONWER Conatact</Button>
+                <Button>Get ONWER Contact</Button>
               </Box>
             </Box>
 

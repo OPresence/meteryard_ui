@@ -15,7 +15,6 @@ import CircularProgressCompoennt from "../../component/CircularProgressComponent
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../context/Auth";
-
 const OTPStyle = styled("Box")(({ theme }) => ({
   "& .mapbox": {
     "& .otpSendBox": {
@@ -44,6 +43,7 @@ const OTPStyle = styled("Box")(({ theme }) => ({
       background: "#a2d117",
       color: "#fff",
       padding: "10px",
+      width: "35%",
     },
     "& .DontRotp": {
       marginTop: "30px",
@@ -71,19 +71,25 @@ const DisabledSpan = styled("span")({
   color: "#999", // Change color to gray
   pointerEvents: "none", // Disable mouse events
 });
-const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
+const VerifyOTP = ({
+  _saveForgot,
+  handleOpenReset,
+  handleCloseOTP,
+  handleOpenOTP,
+  handleOpenForgot,
+}) => {
   const auth = useContext(AuthContext);
   const [_OTP, setOTP] = useState("");
   const [getOtpValidate, setOtpValidate] = useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [isloading_otp, setIsLoadingOTP] = useState(false);
-
-  const handleOtpChange = async (enteredOtp) => {
-    if (_OTP.length < 4) {
-      setOtpValidate(true);
-    } else {
-      setOtpValidate(false);
+  const handleNameKeyDown = (otpValue) => {
+    const numericRegex = /^[0-9]*$/;
+    if (!numericRegex.test(otpValue)) {
+      console.log("Please enter only numbers.");
+      return;
     }
+    setOTP(otpValue);
   };
   const handleFormSubmit = async () => {
     if (_OTP.length < 4) {
@@ -98,7 +104,7 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
       const res = await PostApiFunction({
         endPoint: Apiconfigs.otpVerify,
         data: {
-          email: _signcomplete?.email,
+          email: _saveForgot?.email,
           otp: _OTP,
         },
       });
@@ -106,30 +112,25 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
         if (res?.responseCode == 200) {
           setIsLoading(false);
           toast.success(res?.responseMessage);
-          // auth.setEndtime(moment().add(3, "m").unix());
-
-          setSelectScreen("Login");
+          handleOpenReset();
+          handleCloseOTP();
         } else if (res?.responseCode == 409) {
           toast.error(res?.responseMessage);
-          // setSignUpComplete(false);
           setIsLoading(false);
         } else if (res?.responseCode == 404) {
           toast.error(res?.responseMessage);
-          // setSignUpComplete(false);
           setIsLoading(false);
         } else if (res?.responseCode == 500) {
           toast.error(res?.responseMessage);
-          // setSignUpComplete(false);
           setIsLoading(false);
         } else {
           toast.error(res?.responseMessage);
-          // setSignUpComplete(false);
           setIsLoading(false);
         }
       }
     } catch (error) {
       setIsLoading(false);
-      toast.error(res?.responseMessage);
+      toast.error(error?.responseMessage);
       console.log("error", error);
     }
   };
@@ -139,7 +140,7 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
       const res = await PostApiFunction({
         endPoint: Apiconfigs.resendOtp,
         data: {
-          email: _signcomplete?.email,
+          email: _saveForgot?.email,
         },
       });
       if (res) {
@@ -178,7 +179,7 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
         <Typography variant="h5">Verify OTP</Typography>
         <Box className="otpSendBox">
           <Typography variant="h6">
-            OTP has been sent to <span>{_signcomplete?.email}</span>
+            OTP has been sent to <span>{_saveForgot?.email}</span>
           </Typography>
         </Box>
         <FormControl fullWidth className={"otpFormControl1"}>
@@ -190,10 +191,11 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
             autoFocus
             OTPLength={4}
             numInputs={4}
-            onChange={setOTP}
+            onChange={handleNameKeyDown}
             separateAfter={false}
             otpType="number"
             className="otpBox"
+            onKeyDown={handleNameKeyDown}
           />
           <sapn
             style={{
@@ -211,19 +213,7 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
             {auth?.timeLeft &&
             auth?.timeLeft?.minutes != undefined &&
             auth?.timeLeft?.seconds != undefined ? (
-              <span
-                style={
-                  auth?.timeLeft?.minutes != undefined &&
-                  auth?.timeLeft?.seconds != undefined
-                    ? { pointerEvents: "none" }
-                    : {
-                        pointerEvents: "block !important",
-                        color: "#0099FF",
-                        textDecoration: "underline",
-                        cursor: "pointer",
-                      }
-                }
-              >
+              <span style={{}}>
                 OTP will expire in &nbsp; {auth?.timeLeft?.minutes} M :{" "}
                 {auth?.timeLeft?.seconds} S
               </span>
@@ -232,15 +222,26 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
             )}
           </Typography>
         </FormControl>
-        <Button
-          className="singup"
-          fullWidth
-          onClick={handleFormSubmit}
-          disabled={isloading}
-        >
-          Verify OTP &nbsp;
-          {isloading && <CircularProgressCompoennt colorValue={"#fff"} />}
-        </Button>
+        <Box mt={0} className="loginBox1" display={"flex"} gap={5}>
+          <Button
+            className="singup"
+            fullWidth
+            onClick={() => {
+              handleOpenForgot();
+              handleCloseOTP();
+            }}
+          >
+            BACK &nbsp;
+          </Button>
+          <Button
+            className="singup"
+            onClick={handleFormSubmit}
+            disabled={isloading}
+          >
+            Verify OTP &nbsp;
+            {isloading && <CircularProgressCompoennt colorValue={"#fff"} />}
+          </Button>
+        </Box>
 
         <Box className={"DontRotp"} display={"flex"} alignItems={"center"}>
           <Typography variant="h6">

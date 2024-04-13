@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import {
   Box,
   Grid,
@@ -15,8 +15,9 @@ import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { SelectField, InputField } from "../../component/FormFields";
 import { withStyles } from "@material-ui/core/styles";
-// import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { AuthContext } from "../../context/Auth";
 import Checkbox from "@material-ui/core/Checkbox";
+import { fontSize } from "@mui/system";
 const StepperStyle = styled("Stepper")(({ theme }) => ({
   "& .Mui-active .MuiSvgIcon-root": {
     color: "#badc54",
@@ -47,7 +48,9 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
     height: "350px",
     position: "absolute",
   },
-
+  // "& .MuiSvgIcon-root": {
+  //   fontSize: "50px !important",
+  // },
   "& .mainBoxS1": {
     "& .HeadingBox": {
       padding: "0 20px",
@@ -112,6 +115,9 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
     margin: "0 5px 10px 0",
   },
   "& .Property_Type": {
+    "& h3": {
+      display: "block !important",
+    },
     "@media(max-width:615px)": {
       paddingTop: "15px",
     },
@@ -121,10 +127,17 @@ const GreenCheckbox = withStyles({
   root: {
     color: "#b8db53",
     padding: "0px 10px 0 0 !important",
+    // fontSize: "50px !important",
 
-    "&$checked": {
+    "&$checked ": {
       color: "#b8db53",
       padding: "0px 10px 0 0 !important",
+      // fontSize: "50px !important",
+    },
+    "& .MuiSvgIcon-root": {
+      // fontSize: "50px !important",
+
+      fill: "red !important", // Change the fill color of the SVG icon to green
     },
   },
   checked: {},
@@ -132,11 +145,11 @@ const GreenCheckbox = withStyles({
 const PropertyPost_s_1 = (props) => {
   console.log("propsZzxzxz---->", props);
   const {
-    _getproprty_type,
+    // _getproprty_type,
     handleCheckboxChange,
-    setGetProject_sub_Type,
+    // setGetProject_sub_Type,
     setGetPropetyType,
-    _getproject_sub_type,
+    // auth?._getproject_sub_type,
     formField: {
       listed_name,
       furnishing,
@@ -144,13 +157,11 @@ const PropertyPost_s_1 = (props) => {
       bathrooms,
       super_building,
       carpet_area,
+      Placeholder_name,
     },
   } = props;
   console.log("formField--000>", listed_name);
-
-  const [_propertyList, setPropertyList] = React.useState([]);
-  const [_subytypelist, setSubTypeList] = useState([]);
-  const [_isloading, setIsLoading] = useState(false);
+  const auth = useContext(AuthContext);
 
   const listedData = [
     {
@@ -171,7 +182,7 @@ const PropertyPost_s_1 = (props) => {
       name: "Furnished",
     },
     {
-      name: "UnFurnished",
+      name: "Unfurnished",
     },
     {
       name: "Semi-Furnished",
@@ -199,22 +210,6 @@ const PropertyPost_s_1 = (props) => {
       name: "5",
       value: "5",
     },
-    {
-      name: "6",
-      value: "6",
-    },
-    {
-      name: "7",
-      value: "7",
-    },
-    {
-      name: "8",
-      value: "8",
-    },
-    {
-      name: "9",
-      value: "9",
-    },
   ];
   const bathroomNumberList = [
     {
@@ -238,116 +233,100 @@ const PropertyPost_s_1 = (props) => {
       name: "5",
       value: "5",
     },
-    {
-      name: "6",
-      value: "6",
-    },
-    {
-      name: "7",
-      value: "7",
-    },
-    {
-      name: "8",
-      value: "8",
-    },
-    {
-      name: "9",
-      value: "9",
-    },
   ];
-  const ProjectType = async () => {
-    try {
-      setIsLoading(true);
+  // const ProjectType = async () => {
+  //   try {
+  //     setIsLoading(true);
 
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllProjectType,
-      });
-      if (res) {
-        setGetPropetyType(res?.result?.docs[0]?._id);
-        if (res?.responseCode == 200) {
-          setIsLoading(false);
+  //     const res = await PostApiFunction({
+  //       endPoint: Apiconfigs?.listAllProjectType,
+  //     });
+  //     if (res) {
+  //       setGetPropetyType(res?.result?.docs[0]?._id);
+  //       if (res?.responseCode == 200) {
+  //         setIsLoading(false);
 
-          setPropertyList(res?.result?.docs);
-        } else if (res?.responseCode == 404) {
-          setIsLoading(false);
+  //         setPropertyList(res?.result?.docs);
+  //       } else if (res?.responseCode == 404) {
+  //         setIsLoading(false);
 
-          setPropertyList([]);
-          toast.error(res?.responseMessage);
-          setPropertyList([]);
-        } else if (res?.responseCode == 404) {
-          setIsLoading(false);
+  //         setPropertyList([]);
+  //         toast.error(res?.responseMessage);
+  //         setPropertyList([]);
+  //       } else if (res?.responseCode == 404) {
+  //         setIsLoading(false);
 
-          setPropertyList([]);
+  //         setPropertyList([]);
 
-          toast.error(res?.responseMessage); // Display error notification
-        } else if (res?.responseCode == 500) {
-          setIsLoading(false);
+  //         toast.error(res?.responseMessage); // Display error notification
+  //       } else if (res?.responseCode == 500) {
+  //         setIsLoading(false);
 
-          setPropertyList([]);
+  //         setPropertyList([]);
 
-          toast.error(res?.responseMessage); // Display error notification
-        } else {
-          setIsLoading(false);
+  //         toast.error(res?.responseMessage); // Display error notification
+  //       } else {
+  //         setIsLoading(false);
 
-          setPropertyList([]);
+  //         setPropertyList([]);
 
-          toast.error(res?.responseMessage); // Display error notification
-        }
-      }
-    } catch (error) {
-      setIsLoading(false);
+  //         toast.error(res?.responseMessage); // Display error notification
+  //       }
+  //     }
+  //   } catch (error) {
+  //     setIsLoading(false);
 
-      console.log("error");
-      setPropertyList([]);
-    }
-  };
-  const SubProjectType = async (id) => {
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllProjectSubType,
-        data: {
-          projectTypeId: _getproprty_type,
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setGetProject_sub_Type(res?.result?.docs[0]?._id);
-        setSubTypeList(res?.result?.docs);
-      } else if (res?.responseCode == 404) {
-        setSubTypeList([]);
-        toast.error(res?.responseMessage);
-        setSubTypeList([]);
-      } else if (res?.responseCode == 404) {
-        setSubTypeList([]);
-        toast.error(res?.responseMessage); // Display error notification
-      } else if (res?.responseCode == 500) {
-        setSubTypeList([]);
+  //     console.log("error");
+  //     setPropertyList([]);
+  //   }
+  // };
+  // const SubProjectType = async (id) => {
+  //   try {
+  //     const res = await PostApiFunction({
+  //       endPoint: Apiconfigs?.listAllProjectSubType,
+  //       data: {
+  //         projectTypeId: _getproprty_type,
+  //         page: "1",
+  //         limit: "10",
+  //       },
+  //     });
+  //     if (res?.responseCode == 200) {
+  //       setGetProject_sub_Type(res?.result?.docs[0]?._id);
+  //       setSubTypeList(res?.result?.docs);
+  //     } else if (res?.responseCode == 404) {
+  //       setSubTypeList([]);
+  //       toast.error(res?.responseMessage);
+  //       setSubTypeList([]);
+  //     } else if (res?.responseCode == 404) {
+  //       setSubTypeList([]);
+  //       toast.error(res?.responseMessage); // Display error notification
+  //     } else if (res?.responseCode == 500) {
+  //       setSubTypeList([]);
 
-        toast.error(res?.responseMessage); // Display error notification
-      } else {
-        setSubTypeList([]);
+  //       toast.error(res?.responseMessage); // Display error notification
+  //     } else {
+  //       setSubTypeList([]);
 
-        toast.error(res?.responseMessage); // Display error notification
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-  React.useEffect(() => {
-    if (_getproprty_type) {
-      SubProjectType();
-    }
-  }, [_getproprty_type]);
-  useEffect(() => {
-    ProjectType();
-  }, []);
+  //       toast.error(res?.responseMessage); // Display error notification
+  //     }
+  //   } catch (error) {
+  //     console.log("error", error);
+  //   }
+  // };
+  // React.useEffect(() => {
+  //   if (_getproprty_type) {
+  //     SubProjectType();
+  //   }
+  // }, [_getproprty_type]);
+  // useEffect(() => {
+  //   ProjectType();
+  // }, []);
 
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBoxS1">
         <Box className="HeadingBox">
-          <Typography variant="h2">List Your property</Typography>
+          <Typography variant="h2">List Your Property</Typography>
           {/* <Box display={"flex"} justifyContent={"center"}>
             <Box mt={6} mb={1} className="stepperBox">
               <StepperStyle>
@@ -382,7 +361,7 @@ const PropertyPost_s_1 = (props) => {
             </Box>
           </Box> */}
           <Box className="CheckBox">
-            {_isloading ? (
+            {auth?._isloading ? (
               <Box display={"flex"} justifyContent={"center"} mb={2}>
                 &nbsp;&nbsp;{" "}
                 <CircularProgressComponent
@@ -397,17 +376,13 @@ const PropertyPost_s_1 = (props) => {
                   <Typography variant="h3">Property Type</Typography>
                 </Box>
                 <Box>
-                  {_propertyList?.map((data, index) => (
+                  {auth?._propertyList?.map((data, index) => (
                     <Box display={"inline-flex"} key={index}>
                       <FormControlLabel
                         control={
                           <GreenCheckbox
-                            sx={{
-                              "& .MuiIconButton-root": {
-                                padding: "0px !important",
-                              },
-                            }}
-                            checked={_getproprty_type === data?._id}
+                            className="MuiSvgIcon-root"
+                            checked={auth?._getproprty_type === data?._id}
                             onChange={() => handleCheckboxChange(data?._id)}
                           />
                         }
@@ -416,19 +391,19 @@ const PropertyPost_s_1 = (props) => {
                     </Box>
                   ))}
                 </Box>
-                <Box>
+                <Box className="Property_Type">
                   <Typography variant="h3">Property Category</Typography>
                 </Box>
                 <Box mb={2} mt={1}>
-                  {_subytypelist &&
-                    _subytypelist?.map((data, index) => {
+                  {auth?._subytypelist &&
+                    auth?._subytypelist?.map((data, index) => {
                       return (
                         <>
                           <Button
                             className="buttonStyle"
                             key={index}
                             style={
-                              _getproject_sub_type == data?._id
+                              auth?._getproject_sub_type == data?._id
                                 ? {
                                     background: "#BADC54",
                                     border: "1px solid #BADC54",
@@ -440,7 +415,9 @@ const PropertyPost_s_1 = (props) => {
                                     color: "#000",
                                   }
                             }
-                            onClick={() => setGetProject_sub_Type(data?._id)}
+                            onClick={() =>
+                              auth?.setGetProject_sub_Type(data?._id)
+                            }
                           >
                             {data?.projectSubType}
                           </Button>
@@ -497,6 +474,7 @@ const PropertyPost_s_1 = (props) => {
                   _isloading={props._isloading}
                   name={super_building.name}
                   valueName={super_building.value}
+                  Placeholder_name={super_building.Placeholder_name}
                   label={super_building.label}
                   fullWidth
                   yourMaxLengthValue={90}
@@ -509,6 +487,7 @@ const PropertyPost_s_1 = (props) => {
                   valueName={carpet_area.value}
                   label={carpet_area.label}
                   fullWidth
+                  Placeholder_name={carpet_area.Placeholder_name}
                   yourMaxLengthValue={25}
                 />
               </Grid>

@@ -18,6 +18,7 @@ import { FaGoogle } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import EnterOptScreen from "../verify-otp/VerifyOTP";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { PostApiFunction } from "../../utils";
 import { Form, Formik } from "formik";
@@ -26,6 +27,8 @@ import CircularProgressCompoennt from "../../component/CircularProgressComponent
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../context/Auth";
+import Forgot from "../forgot-password";
+import ResetPassword from "../forgot-password/ResetPassword";
 
 const LoginStyle = styled("Box")(({ theme }) => ({
   "& .backgroundBox": {
@@ -80,6 +83,13 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     "& .checkBox": {
       display: "flex",
       alignItems: "center",
+      justifyContent: "space-between",
+      "& a": {
+        textDecoration: "none",
+        "& span": {
+          color: "#0099FF",
+        },
+      },
       "& span": {
         color: "#0099FF",
       },
@@ -125,11 +135,37 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
+const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const [_forgot_open, setForgot_Open] = useState(false);
+  const [_forotp_open, setOTP_Open] = useState(false);
+  const [_saveForgot, setSaveForgot] = useState("");
+  const [_openReset, setOpenReset] = useState(false);
   const formInitialSchema = {
     email: localStorage.getItem("email") || "",
     password: localStorage.getItem("password") || "",
+  };
+
+  const handleOpenForgot = () => {
+    setForgot_Open(true);
+  };
+  const handleCloseForgot = () => {
+    setForgot_Open(false);
+  };
+
+  const handleOpenReset = () => {
+    setOpenReset(true);
+  };
+  const handleCloseReset = () => {
+    setOpenReset(false);
+  };
+
+  console.log("_forgot_open---------->", _forotp_open);
+  const handleOpenOTP = () => {
+    setOTP_Open(true);
+  };
+  const handleCloseOTP = () => {
+    setOTP_Open(false);
   };
   const formValidationSchemaLogin = yep.object().shape({
     email: yep.string().required("Email is required."),
@@ -226,9 +262,6 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                     console.error("API call failed", error);
                   });
               }}
-              // onSubmit={(values) => {
-              //   Login_Function(values);
-              // }}
             >
               {({
                 errors,
@@ -326,7 +359,6 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                             >
                               {touched.email && errors.email}
                             </FormHelperText>
-                            {/* </FormControl> */}
                           </Box>
 
                           <Box mt={2}>
@@ -394,12 +426,20 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                               )}
                             </Button>
                             <Box className="checkBox" mt={2}>
-                              <Checkbox
-                                checked={isRememberMe}
-                                // onClick={() => setIsRememberMe(isRememberMe)}
-                                onClick={rememberMe}
-                              />
-                              <span>Remember Me</span>
+                              <Box display={"flex"} alignItems={"center"}>
+                                <Checkbox
+                                  checked={isRememberMe}
+                                  onClick={rememberMe}
+                                />
+
+                                <span>Remember Me</span>
+                              </Box>
+                              <Box>
+                                {/* <a href="/forgot-password"> */}
+                                <span onClick={handleOpenForgot}>
+                                  Forgot Password?
+                                </span>
+                              </Box>
                             </Box>
                             <Box mt={2}>
                               <Typography variant="h6">
@@ -436,6 +476,36 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
             </Formik>
           </Box>
         </Container>
+        {_forgot_open && (
+          <Forgot
+            _forgot_open={_forgot_open}
+            handleOpenForgot={handleOpenForgot}
+            handleCloseForgot={handleCloseForgot}
+            handleOpenOTP={handleOpenOTP}
+            setSaveForgot={setSaveForgot}
+          />
+        )}
+        {_forotp_open && (
+          <EnterOptScreen
+            _forotp_open={_forotp_open}
+            handleOpenOTP={handleOpenOTP}
+            handleCloseOTP={handleCloseOTP}
+            _saveForgot={_saveForgot}
+            handleOpenReset={handleOpenReset}
+            handleOpenForgot={handleOpenForgot}
+          />
+        )}
+        {_openReset && (
+          <ResetPassword
+            _openReset={_openReset}
+            handleOpenReset={handleOpenReset}
+            handleCloseReset={handleCloseReset}
+            _saveForgot={_saveForgot}
+            handleCloseForgot={handleCloseForgot}
+            handleOpenOTP={handleOpenOTP}
+            handleCloseOTP={handleCloseOTP}
+          />
+        )}
       </Box>
     </LoginStyle>
   );

@@ -172,7 +172,7 @@ const AgreecultureComponent = () => {
                             <img
                               src={data?.coverImage}
                               width={"100%"}
-                              style={{ borderRadius: "15px" }}
+                              style={{ borderRadius: "15px", height: "250px" }}
                             />
                           </Box>
 

@@ -103,7 +103,8 @@ export default function Topbar() {
   const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);
-  const [_accesstoken, setAccessToken] = useState();
+  const [_accesstoken, setAccessToken] = useState(null);
+  console.log("_accesstoken--->", _accesstoken);
   const GetProfileFunction = async () => {
     try {
       const res = await getAPIdata({
@@ -159,6 +160,9 @@ export default function Topbar() {
   useEffect(() => {
     GetProfileFunction();
   }, []);
+  useEffect(() => {
+    setAccessToken(sessionStorage.getItem("token"));
+  }, [sessionStorage.getItem("token")]);
   const femmecubatorLogo = (
     <Box className="LogoBox">
       <Link href="/">
@@ -213,15 +217,24 @@ export default function Topbar() {
             </Box>
           </Box>
           <Box className="flexAlign for-svg-design" p={"0 0 0 30px"}>
-            {_accesstoken == null && (
-              <>
-                <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
-                <span onClick={() => handleClickOpenLogin("Login")}>Login</span>
-                <span onClick={() => handleClickOpenLogin("Sign Up")}>
-                  /Sign Up
-                </span>
-              </>
-            )}
+            <>
+              <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
+              {_accesstoken == null && (
+                <>
+                  <span
+                    onClick={() => {
+                      handleClickOpenLogin("Login");
+                      console.log("nksdnkndsnfk");
+                    }}
+                  >
+                    Login
+                  </span>
+                  <span onClick={() => handleClickOpenLogin("Sign Up")}>
+                    /Sign Up
+                  </span>
+                </>
+              )}
+            </>
           </Box>
           <DialogComponent
             open={_openDialog}
@@ -298,9 +311,9 @@ export default function Topbar() {
                   </Box>
                 </Box>
                 <Box className="flexAlign" p={"0 0 0 30px"}>
+                  <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
                   {_accesstoken == null && (
                     <>
-                      <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
                       <span onClick={() => handleClickOpenLogin("Login")}>
                         Login
                       </span>

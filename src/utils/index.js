@@ -1,5 +1,6 @@
 import axios from "axios";
 import moment from "moment";
+import { PiPlaceholder } from "react-icons/pi";
 import * as Yup from "yup";
 
 export const formFieldValue = {
@@ -7,79 +8,116 @@ export const formFieldValue = {
   formField: {
     listed_name: {
       name: "listed_name",
-      label: "listed name",
-      requiredErrorMsg: `listed name is required.`,
+      label: "Listed name",
+      Placeholder_name: "",
+
+      requiredErrorMsg: `Listed name is required.`,
     },
     furnishing: {
       name: "furnishing",
-      label: "furnishing",
-      requiredErrorMsg: `furnishing is required.`,
+      label: "Furnishing",
+      Placeholder_name: "",
+
+      requiredErrorMsg: `Furnishing is required.`,
     },
     bedrooms: {
       name: "bedrooms",
-      label: "bedrooms",
-      requiredErrorMsg: `bedrooms is required.`,
+      label: "Bedrooms",
+      Placeholder_name: "",
+
+      requiredErrorMsg: `Bedrooms is required.`,
     },
     bathrooms: {
       name: "bathrooms",
-      label: "bathrooms",
-      requiredErrorMsg: `bathrooms is required.`,
+      label: "Bathrooms",
+      Placeholder_name: "",
+
+      requiredErrorMsg: `Bathrooms is required.`,
     },
     super_building: {
       name: "super_building",
-      label: "super building",
-      requiredErrorMsg: `super building is required.`,
+      label: "Super buildup area",
+      Placeholder_name: "Enter super buildup area",
+
+      requiredErrorMsg: `Super buildup area is required.`,
     },
     carpet_area: {
       name: "carpet_area",
-      label: "carpet area",
-      requiredErrorMsg: `carpet area is required.`,
+      label: "Carpet area",
+      Placeholder_name: "Enter carpet area",
+
+      requiredErrorMsg: `Carpet area is required.`,
     },
     // screen 2
     total_floors: {
       name: "total_floors",
-      label: "total floors",
-      requiredErrorMsg: `floors number is required.`,
+      label: "Total floors",
+      Placeholder_name: "Enter total floors",
+
+      requiredErrorMsg: `Total floors number is required.`,
     },
     floors_no: {
       name: "floors_no",
-      label: "floors no",
-      requiredErrorMsg: `floors number is required.`,
+      label: "Floors no.",
+      Placeholder_name: "Enter floors no.",
+
+      requiredErrorMsg: `Floors number is required.`,
     },
     facing: {
       name: "facing",
-      label: "facing",
-      requiredErrorMsg: `facing is required.`,
+      label: "Facing",
+      Placeholder_name: "Enter facing.",
+
+      requiredErrorMsg: `Facing is required.`,
     },
     project_name: {
       name: "project_name",
-      label: "project name",
-      requiredErrorMsg: `project name is required.`,
+      label: "Project name",
+      Placeholder_name: "Enter project name",
+
+      requiredErrorMsg: `Project name is required.`,
     },
     add_title: {
       name: "add_title",
-      label: "add title",
-      requiredErrorMsg: `title is required.`,
+      label: "Add title",
+      Placeholder_name: "Enter title",
+
+      requiredErrorMsg: `Add title is required.`,
     },
     description: {
       name: "description",
-      label: "description",
-      requiredErrorMsg: `description is required.`,
+      label: "Description",
+      Placeholder_name: "Enter description",
+
+      requiredErrorMsg: `Description is required.`,
     },
     price: {
       name: "price",
-      label: "price",
-      requiredErrorMsg: `price is required.`,
+      label: "Price",
+      Placeholder_name: "Enter price",
+
+      requiredErrorMsg: `Price is required.`,
+    },
+    price_breakup: {
+      name: "price breakup",
+      label: "Price breakup",
+      Placeholder_name: "Enter price breakup",
+
+      requiredErrorMsg: `price breakup is required.`,
     },
     location: {
       name: "location",
-      label: "location",
-      requiredErrorMsg: `location is required.`,
+      label: "Address",
+      Placeholder_name: "Enter Address",
+
+      requiredErrorMsg: `Address is required.`,
     },
     landmark: {
       name: "landmark",
-      label: "landmark",
-      requiredErrorMsg: `landmark is required.`,
+      label: "Landmark",
+      Placeholder_name: "Enter landmark",
+
+      requiredErrorMsg: `Landmark is required.`,
     },
   },
 };
@@ -101,6 +139,8 @@ const {
     landmark,
     location,
     coverImage,
+    price_breakup,
+
     typeProperty,
   },
 } = formFieldValue;
@@ -118,6 +158,8 @@ export const initialValue = {
   [add_title?.name]: "",
   [description?.name]: "",
   [price?.name]: "",
+  [price_breakup?.name]: "",
+
   [location?.name]: "",
   [coverImage?.name]: "",
   [typeProperty?.name]: "",
@@ -156,21 +198,32 @@ export const ValidationValue = [
   }),
   Yup.object().shape({
     [price.name]: Yup.string().required(`${price.requiredErrorMsg}`),
+    [price_breakup.name]: Yup.string().required(
+      `${price_breakup.requiredErrorMsg}`
+    ),
     [landmark.name]: Yup.string().required(`${landmark.requiredErrorMsg}`),
+    [location.name]: Yup.string().required(`${location.requiredErrorMsg}`),
   }),
 ];
 export const cityName = [
   { name: "Delhi NCR" },
+
   { name: "Bengaluru" },
   { name: "Kolkata" },
+
   { name: "Hyderabad" },
+
   { name: "Bhubaneswar" },
   { name: "Varanasi" },
   { name: "Lucknow" },
+
   { name: "Panchkula" },
   { name: "Srinagar" },
+
   { name: "Udhampur" },
+
   { name: "Bhatinda" },
+
   { name: "Guwahati" },
 ];
 export const cityObject = [
