@@ -186,36 +186,36 @@ const CardComponent = () => {
       },
     ],
   };
-  const [_getlist, setGetList] = useState([]);
-  console.log("res---->5s645sds6a+d4sa", _getlist);
+  // const [_getlist, setGetList] = useState([]);
+  // console.log("res---->5s645sds6a+d4sa", _getlist);
 
-  const [_isloading, setIsLoading] = useState(false);
+  // const [_isloading, setIsLoading] = useState(false);
 
-  const ResidentialAPI = async () => {
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeId: "65dc4b9cda234100342352b1",
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setIsLoading(false);
+  // const ResidentialAPI = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const res = await PostApiFunction({
+  //       endPoint: Apiconfigs?.listAllPropertyPost,
+  //       data: {
+  //         projectTypeId: "65dc4b9cda234100342352b1",
+  //         page: "1",
+  //         limit: "10",
+  //       },
+  //     });
+  //     if (res?.responseCode == 200) {
+  //       setIsLoading(false);
 
-        setGetList(res?.result?.docs);
-      }
-    } catch (error) {
-      setIsLoading(false);
+  //       setGetList(res?.result?.docs);
+  //     }
+  //   } catch (error) {
+  //     setIsLoading(false);
 
-      console.log("eror", error);
-    }
-  };
-  useEffect(() => {
-    ResidentialAPI();
-  }, []);
+  //     console.log("eror", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   ResidentialAPI();
+  // }, []);
   return (
     <CardComponentStyle>
       <div className="mainSliderDiv">

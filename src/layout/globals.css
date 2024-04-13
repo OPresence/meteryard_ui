@@ -220,3 +220,31 @@ margin-top: 9px;
 .react-tel-input .country-list{
   width: 130px !important;
 }
+.paragraph {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: #818181;
+  font-weight: 500;
+  margin: 5px 5px;
+}
+.paragraph-container {
+  width: 12rem,
+};
+.PropertyPostIndexStyle .MuiSvgIcon-root.MuiStepIcon-root.Mui-active {
+ color: red !important;
+}
+.span-astrick{
+  color: red;
+  font-size: 16px;
+}
+.react-tel-input .country-list{
+  overflow-y: inherit !important;
+}
+.getQnwerontactBtn button:hover{
+  background: #a2d117;
+  
+}

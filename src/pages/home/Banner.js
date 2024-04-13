@@ -24,17 +24,6 @@ const MainComponent = styled("Box")(({ theme }) => ({
       position: "relative",
       marginTop: "18px",
       left: "0",
-      "@media(max-width:900px)": {
-        maxWidth: "753px",
-        maxHeight: "575px",
-        overflow: "hidden",
-        position: "relative",
-        marginTop: "20px",
-      },
-      "@media(max-width:615px)": {
-        marginTop: "40px",
-        left: "40px",
-      },
     },
   },
   "& .bacBox": {
@@ -64,6 +53,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "& .Banner_inputField": {
       background: "#FFFFFF 0% 0% no-repeat padding-box",
       borderRadius: "11px",
+      "@media(max-width:615px)": {
+        padding: "0px",
+        fontSize: "15px",
+      },
       "& ::placeholder": {
         textAlign: "left",
         font: "normal normal medium 23px/30px Samsung Sharp Sans",
@@ -97,9 +90,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
       boxShadow: "0px 3px 27px #68686829",
       borderRadius: "11px",
       opacity: "1",
-      width: "10%",
+      width: "100%",
       transition: "0.8s",
       "@media(max-width:615px)": {
+        margin: "0px",
         marginLeft: "0px",
         marginTop: "30px",
         width: "100% !important",
@@ -108,9 +102,9 @@ const MainComponent = styled("Box")(({ theme }) => ({
 
       "&:hover": {
         transition: "0.8s",
-        width: "80%",
+        width: "100%",
         "@media(max-width:615px)": {
-          width: "85%",
+          width: "100%",
           right: "0",
         },
       },
@@ -153,8 +147,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
           padding: "10px",
           maxWidth: "40px !Important",
           "@media(max-width:615px)": {
-            padding: "5px",
-            maxWidth: "40px !important",
+            padding: "9px",
+            maxWidth: "38px !important",
           },
         },
       },
@@ -217,8 +211,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
           padding: "10px",
           maxWidth: "40px !important",
           "@media(max-width:615px)": {
-            padding: "5px",
-            maxWidth: "40px !important",
+            padding: "9px",
+            maxWidth: "38px !important",
           },
         },
       },
@@ -425,11 +419,11 @@ export default function Home() {
   }, [selectedImages]);
   return (
     <MainComponent>
-      <Box>
-        <Container maxWidth>
+      <Container maxWidth>
+        <Box>
           <Box position={"absolute"} className="contentBox">
             <Box>
-              <Typography variant="h1">
+              <Typography variant="h1" className="banner-heading">
                 <span className="find">Find Your Place</span>
                 <span className="Make">, Make It Home</span>
               </Typography>
@@ -527,64 +521,64 @@ export default function Home() {
               </Box>
             </Box>
           </Box>
-        </Container>
-        <Box className="mainBox">
-          <Box display={"flex"} justifyContent={"end"} className="bacBox">
-            <Box>
-              <Box className="backImage">
-                <img
-                  src="/images/meteryard/Graphics/Path 7886.png"
-                  alt=""
-                  height={"100%"}
-                  width={"100%"}
-                />
-                <Box>
-                  <Box className="handImage">
-                    <img
-                      src="/images/meteryard/Images/home-background-images.png"
-                      alt=""
-                      width={"100%"}
-                    />
+          <Box className="mainBox">
+            <Box display={"flex"} justifyContent={"end"} className="bacBox">
+              <Box>
+                <Box className="backImage">
+                  <img
+                    src="/images/meteryard/Graphics/Path 7886.png"
+                    alt=""
+                    height={"100%"}
+                    width={"100%"}
+                  />
+                  <Box>
+                    <Box className="handImage">
+                      <img
+                        src="/images/meteryard/Images/home-background-images.png"
+                        alt=""
+                        width={"100%"}
+                      />
+                    </Box>
                   </Box>
                 </Box>
               </Box>
             </Box>
           </Box>
         </Box>
-      </Box>
-      <RegisterSeller open={open} setOpen={setOpen} />
-      {_propertyform && (
-        <PropertyForm
-          open={_propertyform}
-          handleClose={handleClose}
-          handleClickOpen={handleClickOpen}
-          AdPropertyFunction={AdPropertyFunction}
-          _isloading={_isloading}
-          selectedImages={selectedImages}
-          setSelectedImages={setSelectedImages}
-          setCoverImage={setCoverImage}
-          imageUploadFunction={imageUploadFunction}
-          _coverImage={_coverImage}
-          address={address}
-          setAddress={setAddress}
-          coordinates={coordinates}
-          setCoordinates={setCoordinates}
-          _checked={_checked}
-          setChecked={setChecked}
-          _consition={_consition}
-          setConsition={setConsition}
-          setGetPropetyType={setGetPropetyType}
-          setGet_Type_Name={setGet_Type_Name}
-          setGetProject_sub_Type={setGetProject_sub_Type}
-          _getproprty_type={_getproprty_type}
-          CoverImageFunction={CoverImageFunction}
-        />
-      )}
-      {/* <PropertyForm
+        <RegisterSeller open={open} setOpen={setOpen} />
+        {_propertyform && (
+          <PropertyForm
+            open={_propertyform}
+            handleClose={handleClose}
+            handleClickOpen={handleClickOpen}
+            AdPropertyFunction={AdPropertyFunction}
+            _isloading={_isloading}
+            selectedImages={selectedImages}
+            setSelectedImages={setSelectedImages}
+            setCoverImage={setCoverImage}
+            imageUploadFunction={imageUploadFunction}
+            _coverImage={_coverImage}
+            address={address}
+            setAddress={setAddress}
+            coordinates={coordinates}
+            setCoordinates={setCoordinates}
+            _checked={_checked}
+            setChecked={setChecked}
+            _consition={_consition}
+            setConsition={setConsition}
+            setGetPropetyType={setGetPropetyType}
+            setGet_Type_Name={setGet_Type_Name}
+            setGetProject_sub_Type={setGetProject_sub_Type}
+            _getproprty_type={_getproprty_type}
+            CoverImageFunction={CoverImageFunction}
+          />
+        )}
+        {/* <PropertyForm
         open={_propertyform}
         handleClose={handleClose}
         handleClickOpen={handleClickOpen}
       /> */}
+      </Container>
     </MainComponent>
   );
 }

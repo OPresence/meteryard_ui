@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Grid, Typography, Box, Container } from "@mui/material";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import styled from "@emotion/styled";
@@ -8,7 +8,7 @@ import { PostApiFunction } from "../utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { AuthContext } from "../context/Auth";
 const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "80px 0px",
@@ -96,49 +96,50 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
   },
 }));
 const AgreecultureComponent = () => {
-  const [_getlist, setGetList] = useState([]);
-  console.log("res---->sndkjfkdkfsd", _getlist);
+  const auth = useContext(AuthContext);
+  // const [_getlist, setGetList] = useState([]);
+  // console.log("res---->sndkjfkdkfsd", _getlist);
 
-  const [_isloading, setIsLoading] = useState(false);
-  const projectDetails = [
-    {
-      image: "/images/meteryard/Images/Image 23.png",
-    },
-    {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100309.png",
-    },
-    {
-      image: "/images/meteryard/Images/Image 23.png",
-    },
-    {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100420.png",
-    },
-  ];
-  const ResidentialAPI = async () => {
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeId: "65dc4c1eda234100342352fc",
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setIsLoading(false);
+  // const [_isloading, setIsLoading] = useState(false);
+  // const projectDetails = [
+  //   {
+  //     image: "/images/meteryard/Images/Image 23.png",
+  //   },
+  //   {
+  //     image: "/images/meteryard/Images/Screenshot 2023-09-02 100309.png",
+  //   },
+  //   {
+  //     image: "/images/meteryard/Images/Image 23.png",
+  //   },
+  //   {
+  //     image: "/images/meteryard/Images/Screenshot 2023-09-02 100420.png",
+  //   },
+  // ];
+  // const ResidentialAPI = async () => {
+  //   try {
+  //     setIsLoading(true);
+  //     const res = await PostApiFunction({
+  //       endPoint: Apiconfigs?.listAllPropertyPost,
+  //       data: {
+  //         projectTypeId: "65dc4c1eda234100342352fc",
+  //         page: "1",
+  //         limit: "10",
+  //       },
+  //     });
+  //     if (res?.responseCode == 200) {
+  //       setIsLoading(false);
 
-        setGetList(res?.result?.docs);
-      }
-    } catch (error) {
-      setIsLoading(false);
+  //       setGetList(res?.result?.docs);
+  //     }
+  //   } catch (error) {
+  //     setIsLoading(false);
 
-      console.log("eror", error);
-    }
-  };
-  useEffect(() => {
-    ResidentialAPI();
-  }, []);
+  //     console.log("eror", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   ResidentialAPI();
+  // }, []);
   return (
     <ResidentStyle>
       <div className="mainSliderDiv">
@@ -153,8 +154,8 @@ const AgreecultureComponent = () => {
           </section>
           <Box mt={5}>
             <Grid container spacing={3}>
-              {_getlist &&
-                _getlist?.map((data, index) => {
+              {auth?._getlistAgreeculture &&
+                auth?._getlistAgreeculture?.map((data, index) => {
                   return (
                     <Grid
                       key={index}
@@ -171,7 +172,7 @@ const AgreecultureComponent = () => {
                             <img
                               src={data?.coverImage}
                               width={"100%"}
-                              style={{ borderRadius: "15px" }}
+                              style={{ borderRadius: "15px", height: "250px" }}
                             />
                           </Box>
 
@@ -231,7 +232,7 @@ const AgreecultureComponent = () => {
                   );
                 })}
             </Grid>
-            {_getlist?.length > 7 && (
+            {auth?._getlistAgreeculture?.length > 7 && (
               <Box
                 display={"flex"}
                 justifyContent={"end"}

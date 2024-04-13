@@ -92,18 +92,6 @@ const MainComponent = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const DrowerComponent = styled("Box")(({ theme }) => ({
-  "& .drowerClass": {
-    width: "260px",
-    height: "100%",
-    display: "flex",
-    padding: "20px 0px 20px 20px",
-    "& .LogoBox": {
-      maxWidth: "190px",
-    },
-  },
-}));
-
 export default function Topbar() {
   const auth = useContext(AuthContext);
 
@@ -115,7 +103,8 @@ export default function Topbar() {
   const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);
-  const [_accesstoken, setAccessToken] = useState();
+  const [_accesstoken, setAccessToken] = useState(null);
+  console.log("_accesstoken--->", _accesstoken);
   const GetProfileFunction = async () => {
     try {
       const res = await getAPIdata({
@@ -123,7 +112,6 @@ export default function Topbar() {
         data: window.sessionStorage.getItem("token"),
       });
       if (res) {
-        console.log("ndfbdkj--->", res);
         auth?.setGetProfile(res?.result);
       }
     } catch (error) {
@@ -172,33 +160,101 @@ export default function Topbar() {
   useEffect(() => {
     GetProfileFunction();
   }, []);
-  const femmecubatorLogo = <Logo className="LogoBox" />;
+  useEffect(() => {
+    setAccessToken(sessionStorage.getItem("token"));
+  }, [sessionStorage.getItem("token")]);
+  const femmecubatorLogo = (
+    <Box className="LogoBox">
+      <Link href="/">
+        <Logo className="logoImg" />
+      </Link>
+    </Box>
+  );
   {
   }
 
   const displayMobile = () => {
     return (
       <Toolbar>
-        <Hidden xsDown>
-          <DrowerComponent>
-            <Drawer
-              anchor="right"
-              open={drawerOpen}
-              onClose={handleDrawerClose}
-              className="drowerClass"
-            >
-              <Container>
-                <Link href="/">
-                  <Box className="LogoBox" maxWidth={170}>
-                    <Link href="/" passHref>
-                      {femmecubatorLogo}
-                    </Link>
-                  </Box>
-                </Link>
-              </Container>
-            </Drawer>
-          </DrowerComponent>
-        </Hidden>
+        <Drawer
+          anchor="right"
+          open={drawerOpen}
+          onClose={handleDrawerClose}
+          style={{
+            width: "260px",
+            height: "100%",
+            display: "flex",
+            padding: "20px 0px 20px 20px",
+          }}
+        >
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "20px",
+            }}
+            className={"forMobileView"}
+          >
+            {femmecubatorLogo}
+          </Box>
+          <Box className="close-icon">
+            <IconButton onClick={handleDrawerClose}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <Box className={"ContentBox"}>
+            <Box className="flexJustify" width={"100%"}>
+              <Box className="flexAlign">
+                <MenuComponent />
+              </Box>
+              {router.pathname == "/" && (
+                <Box p={"10px 25px 0 0"}>
+                  <Button className="rainbowGradient" onClick={handleClickOpen}>
+                    My Citychat
+                  </Button>
+                </Box>
+              )}
+            </Box>
+          </Box>
+          <Box className="flexAlign for-svg-design" p={"0 0 0 30px"}>
+            <>
+              <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
+              {_accesstoken == null && (
+                <>
+                  <span
+                    onClick={() => {
+                      handleClickOpenLogin("Login");
+                      console.log("nksdnkndsnfk");
+                    }}
+                  >
+                    Login
+                  </span>
+                  <span onClick={() => handleClickOpenLogin("Sign Up")}>
+                    /Sign Up
+                  </span>
+                </>
+              )}
+            </>
+          </Box>
+          <DialogComponent
+            open={_openDialog}
+            setOpen={setOpenDialog}
+            handleClickOpen={handleClickOpen}
+            handleClose={handleClose}
+          />
+          {_openDialogLogin && (
+            <LoginDialog
+              open={_openDialogLogin}
+              setOpen={setOpenDialogLogin}
+              handleClickOpen={handleClickOpenLogin}
+              handleClose={handleCloseLogin}
+              _selectScreen={_selectScreen}
+              setSelectScreen={setSelectScreen}
+              setSignUpComplete={setSignUpComplete}
+              _signcomplete={_signcomplete}
+            />
+          )}
+        </Drawer>
         <Box
           className="topbarmainBox"
           display={"flex"}
@@ -206,11 +262,7 @@ export default function Topbar() {
           width={"100%"}
           alignItems="center"
         >
-          <div>
-            <Link href="/" passHref>
-              {femmecubatorLogo}
-            </Link>
-          </div>
+          <div>{femmecubatorLogo}</div>
           <IconButton
             edge="start"
             color="inherit"
@@ -240,13 +292,7 @@ export default function Topbar() {
             style={{ display: "flex", alignItems: "center" }}
           >
             <Box>
-              <Container>
-                <Box maxWidth={230}>
-                  <Link href="/" passHref>
-                    {femmecubatorLogo}
-                  </Link>
-                </Box>
-              </Container>
+              <Container>{femmecubatorLogo}</Container>
             </Box>
           </Grid>
           <Grid item lg={8} md={8}>
@@ -265,9 +311,9 @@ export default function Topbar() {
                   </Box>
                 </Box>
                 <Box className="flexAlign" p={"0 0 0 30px"}>
+                  <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
                   {_accesstoken == null && (
                     <>
-                      <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
                       <span onClick={() => handleClickOpenLogin("Login")}>
                         Login
                       </span>

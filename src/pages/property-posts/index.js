@@ -165,7 +165,7 @@ const StateComponent = () => {
     setIsLoading(false);
   };
 
-  const GetCityList = async () => {
+  const AllPostList = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
@@ -210,7 +210,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          AllPostList();
           setIsLoading(false);
           handleClose();
         } else if (res?.responseCode == 404) {
@@ -267,7 +267,7 @@ const StateComponent = () => {
         },
       });
       if (res) {
-        GetCityList();
+        AllPostList();
         if (res?.responseCode == 200) {
           setIsLoading(false);
           handleViewClose();
@@ -304,7 +304,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          AllPostList();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -339,7 +339,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          AllPostList();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -364,7 +364,7 @@ const StateComponent = () => {
   };
   useEffect(() => {
     if (page) {
-      GetCityList();
+      AllPostList();
     }
   }, [page]);
   return (

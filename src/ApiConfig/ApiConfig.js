@@ -20,6 +20,8 @@ const Apiconfigs = {
   resendOtp: `${user}/resendOtp`,
   uploadImage: `${user}/uploadImage`,
   myProfile: `${user}/myProfile`,
+  forgotPassword: `${user}/forgotPassword`,
+  resetPassword: `${user}/resetPassword`,
 
   listAllDepartment: `${admin}/listAllDepartment`,
   createDepartment: `${admin}/createDepartment`,
@@ -202,6 +204,8 @@ const Apiconfigs = {
   listAllEnquiry: `${user}/listAllEnquiry`,
   deleteEnquiry: `${user}/deleteEnquiry`,
   changePassword: `${user}/changePassword`,
+  likeDislikeProperty: `${user}/likeDislikeProperty`,
+  addComment: `${user}/addComment`,
 };
 
 export default Apiconfigs;

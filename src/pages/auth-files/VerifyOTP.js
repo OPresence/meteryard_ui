@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   Typography,
   Box,
@@ -6,6 +6,7 @@ import {
   FormControl,
   FormHelperText,
 } from "@mui/material";
+import moment from "moment";
 import styled from "@emotion/styled";
 import OtpInput from "react18-input-otp";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
@@ -13,6 +14,7 @@ import { PostApiFunction } from "../../utils";
 import CircularProgressCompoennt from "../../component/CircularProgressComponent";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../context/Auth";
 
 const OTPStyle = styled("Box")(({ theme }) => ({
   "& .mapbox": {
@@ -65,11 +67,17 @@ const OTPStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
+const DisabledSpan = styled("span")({
+  color: "#999", // Change color to gray
+  pointerEvents: "none", // Disable mouse events
+});
 const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
+  const auth = useContext(AuthContext);
   const [_OTP, setOTP] = useState("");
   const [getOtpValidate, setOtpValidate] = useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [isloading_otp, setIsLoadingOTP] = useState(false);
+
   const handleOtpChange = async (enteredOtp) => {
     if (_OTP.length < 4) {
       setOtpValidate(true);
@@ -77,7 +85,6 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
       setOtpValidate(false);
     }
   };
-
   const handleFormSubmit = async () => {
     if (_OTP.length < 4) {
       handleOtpChange();
@@ -99,23 +106,24 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
         if (res?.responseCode == 200) {
           setIsLoading(false);
           toast.success(res?.responseMessage);
-          setSignUpComplete(false);
+          // auth.setEndtime(moment().add(3, "m").unix());
+
           setSelectScreen("Login");
         } else if (res?.responseCode == 409) {
           toast.error(res?.responseMessage);
-          setSignUpComplete(false);
+          // setSignUpComplete(false);
           setIsLoading(false);
         } else if (res?.responseCode == 404) {
           toast.error(res?.responseMessage);
-          setSignUpComplete(false);
+          // setSignUpComplete(false);
           setIsLoading(false);
         } else if (res?.responseCode == 500) {
           toast.error(res?.responseMessage);
-          setSignUpComplete(false);
+          // setSignUpComplete(false);
           setIsLoading(false);
         } else {
           toast.error(res?.responseMessage);
-          setSignUpComplete(false);
+          // setSignUpComplete(false);
           setIsLoading(false);
         }
       }
@@ -137,6 +145,8 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
       if (res) {
         if (res?.responseCode == 200) {
           setIsLoadingOTP(false);
+          auth.setEndtime(moment().add(2, "m").unix());
+
           toast.success(res?.responseMessage);
         } else if (res?.responseCode == 409) {
           toast.error(res?.responseMessage);
@@ -179,32 +189,75 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
             autoComplete="off"
             autoFocus
             OTPLength={4}
-            otpType="number"
+            numInputs={4}
             onChange={setOTP}
             separateAfter={false}
+            otpType="number"
             className="otpBox"
           />
           <sapn
-            style={{ color: "red", fontSize: "14px", paddingBottom: "20px" }}
+            style={{
+              color: "red",
+              fontFamily: "system-ui",
+              fontWeight: "400",
+              fontSize: "0.75rem",
+              lineHeight: "1.66",
+              paddingBottom: "20px",
+            }}
           >
             {getOtpValidate && "Please enter valid OTP."}
           </sapn>
           <Typography variant="h6">
-            OTP will expire in &nbsp; <span style={{}}>2m:10s</span>
+            {auth?.timeLeft &&
+            auth?.timeLeft?.minutes != undefined &&
+            auth?.timeLeft?.seconds != undefined ? (
+              <span
+                style={
+                  auth?.timeLeft?.minutes != undefined &&
+                  auth?.timeLeft?.seconds != undefined
+                    ? { pointerEvents: "none" }
+                    : {
+                        pointerEvents: "block !important",
+                        color: "#0099FF",
+                        textDecoration: "underline",
+                        cursor: "pointer",
+                      }
+                }
+              >
+                OTP will expire in &nbsp; {auth?.timeLeft?.minutes} M :{" "}
+                {auth?.timeLeft?.seconds} S
+              </span>
+            ) : (
+              ""
+            )}
           </Typography>
         </FormControl>
-        <Button className="singup" fullWidth onClick={handleFormSubmit}>
+        <Button
+          className="singup"
+          fullWidth
+          onClick={handleFormSubmit}
+          disabled={isloading}
+        >
           Verify OTP &nbsp;
           {isloading && <CircularProgressCompoennt colorValue={"#fff"} />}
         </Button>
 
-        <Box className={"DontRotp"} display={"flex"}>
+        <Box className={"DontRotp"} display={"flex"} alignItems={"center"}>
           <Typography variant="h6">
             If you don&apos;t receive any OTP? &nbsp;{" "}
-            <span onClick={OTP_Resend_Function}>Resend OTP &nbsp;</span>
           </Typography>
+          <Button
+            disabled={auth?.timeLeft?.seconds == undefined ? false : true}
+            style={{ padding: "0" }}
+            onClick={OTP_Resend_Function}
+          >
+            Resend OTP
+          </Button>
           {isloading_otp && (
-            <CircularProgressCompoennt colorValue={"#0099FF"} />
+            <>
+              &nbsp;
+              <CircularProgressCompoennt colorValue={"#0099FF"} />
+            </>
           )}
         </Box>
       </Box>

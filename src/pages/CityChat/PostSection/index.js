@@ -1,9 +1,10 @@
 import React from "react";
 import PostIndex from "./PostIndex";
+
 const index = () => {
   return (
     <div>
-      <PostIndex />
+      <PostIndex />;
     </div>
   );
 };

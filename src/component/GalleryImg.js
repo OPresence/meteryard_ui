@@ -7,7 +7,7 @@ const GalleryImg = ({ ArrayImage }) => {
       {ArrayImage != undefined && ArrayImage?.length > 0 && (
         <ImageGrid>
           {ArrayImage?.length > 0 &&
-            ArrayImage?.map((data) => {
+            ArrayImage?.map((data, index) => {
               return <img alt="image" src={data} key={index} />;
             })}
         </ImageGrid>

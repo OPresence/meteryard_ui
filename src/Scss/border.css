@@ -44,9 +44,9 @@
 		content: '';
 		position: absolute;
 		z-index: -1;
-		left: 4px;
 		top: 4px;
-		width: calc(100% - 4px);
+		left: 5px;
+		width: calc(100% - 10px);
 		height: calc(100% - 8px);
 		background: white;
 		border-radius: 20px;
@@ -87,9 +87,9 @@
 		content: '';
 		position: absolute;
 		z-index: -1;
-		left: 4px;
 		top: 4px;
-		width: calc(100% - 4px);
+		left: 6px;
+		width: calc(100% - 11px);
 		height: calc(100% - 8px);
 		background: white;
 		border-radius: 20px;
@@ -137,8 +137,8 @@
 		content: '';
     position: absolute;
     z-index: -1;
-    left: 4px;
     top: 3px;
+    left: 4px;
     width: calc(100% - 8px);
     height: calc(105% - 8px);
     background: white;
