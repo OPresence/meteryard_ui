@@ -137,7 +137,7 @@ const ForgotPassword = ({
           handleCloseForgot();
           setIsLoading(false);
           setSaveForgot(res?.result);
-          Auth.setEndtime(moment().add(2, "m").unix());
+          Auth.setEndtime(moment().add(1, "m").unix());
         } else if (res?.responseCode == 409) {
           toast.error(res?.responseMessage);
           setIsLoading(false);

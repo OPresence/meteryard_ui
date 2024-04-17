@@ -13,8 +13,28 @@ export default function InputField(props) {
       return error;
     }
   }
+
+  function handleNameKeyDown(event) {
+    if (props?.name == "price" || props?.name == "price breakup") {
+      if (!(/[0-9\s]/.test(event.key) || event.key === "Backspace")) {
+        event.preventDefault();
+      }
+    }
+  }
+  // function handleChange(event) {
+  //   helpers.setValue(event.target.value);
+  // }
   function handleChange(event) {
-    helpers.setValue(event.target.value);
+    if (props?.name == "price" || props?.name == "price breakup") {
+      const inputValue = event.target.value;
+      const numericValue = inputValue.replace(/[^0-9.]/g, "");
+      const formattedValue = parseFloat(numericValue).toLocaleString("en-IN", {
+        maximumFractionDigits: 2,
+      });
+      helpers.setValue(formattedValue);
+    } else {
+      helpers.setValue(event.target.value);
+    }
   }
   return (
     <>
@@ -29,6 +49,7 @@ export default function InputField(props) {
         placeholder={rest.Placeholder_name}
         error={meta.touched && meta.error && true}
         helperText={_renderHelperText()}
+        onKeyDown={handleNameKeyDown}
         {...field}
         onChange={handleChange} // Add the onChange function
         onFocus={props.handleFocus} // Add the onFocus function=

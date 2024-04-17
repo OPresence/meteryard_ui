@@ -191,7 +191,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
         background: "#A7D325",
       },
       "& .buyerBoxSpan": {
-        padding: "0 90px 0 50px",
+        padding: "0 53px 0 90px",
         "@media(max-width:615px)": {
           padding: "0 20px 1px 50px",
         },

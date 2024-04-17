@@ -84,22 +84,12 @@ const PropertyPost_s_2 = (props) => {
   const {
     _projecttype,
     formField: {
-      listed_name,
-      furnishing,
-      bedrooms,
-      bathrooms,
-      super_building,
-      carpet_area,
       total_floors,
       floors_no,
       facing,
       project_name,
       add_title,
       description,
-      price,
-      location,
-      coverImage,
-      typeProperty,
     },
   } = props;
   const [state, setState] = React.useState(false);

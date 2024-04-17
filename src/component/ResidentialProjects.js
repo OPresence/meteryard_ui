@@ -127,7 +127,7 @@ const ResidentialProjects = () => {
                       key={index}
                       className="GridClassCard"
                     >
-                      <Box height={"100%"} pb={"20px"}>
+                      <Box height={"100%"} pb={"20px"} width={"100%"}>
                         <Box className="cards">
                           <Box
                             // maxWidth={310}

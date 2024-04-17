@@ -22,6 +22,7 @@ const Apiconfigs = {
   myProfile: `${user}/myProfile`,
   forgotPassword: `${user}/forgotPassword`,
   resetPassword: `${user}/resetPassword`,
+  logOut: `${user}/logOut`,
 
   listAllDepartment: `${admin}/listAllDepartment`,
   createDepartment: `${admin}/createDepartment`,

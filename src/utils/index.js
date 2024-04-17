@@ -99,7 +99,7 @@ export const formFieldValue = {
       requiredErrorMsg: `Price is required.`,
     },
     price_breakup: {
-      name: "price breakup",
+      name: "price_breakup",
       label: "Price breakup",
       Placeholder_name: "Enter price breakup",
 
@@ -114,10 +114,15 @@ export const formFieldValue = {
     },
     landmark: {
       name: "landmark",
-      label: "Landmark",
+      label: "Landmark Area",
       Placeholder_name: "Enter landmark",
-
       requiredErrorMsg: `Landmark is required.`,
+    },
+    localArea: {
+      name: "localArea",
+      label: "Local Area",
+      Placeholder_name: "Enter local area",
+      requiredErrorMsg: `Local area is required.`,
     },
   },
 };
@@ -140,8 +145,8 @@ const {
     location,
     coverImage,
     price_breakup,
-
     typeProperty,
+    localArea,
   },
 } = formFieldValue;
 export const initialValue = {
@@ -157,8 +162,9 @@ export const initialValue = {
   [project_name?.name]: "",
   [add_title?.name]: "",
   [description?.name]: "",
-  [price?.name]: "",
-  [price_breakup?.name]: "",
+  [price?.name]: 0,
+  [price_breakup?.name]: 0,
+  [localArea?.name]: "",
 
   [location?.name]: "",
   [coverImage?.name]: "",
@@ -203,6 +209,7 @@ export const ValidationValue = [
     ),
     [landmark.name]: Yup.string().required(`${landmark.requiredErrorMsg}`),
     [location.name]: Yup.string().required(`${location.requiredErrorMsg}`),
+    [localArea.name]: Yup.string().required(`${localArea.requiredErrorMsg}`),
   }),
 ];
 export const cityName = [

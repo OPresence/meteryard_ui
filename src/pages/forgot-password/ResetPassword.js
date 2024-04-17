@@ -169,7 +169,7 @@ const ResetPassword = ({
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
         "Password must contain a uppercase letter, a number & a special character."
       )
-      .required("Password is required.")
+      .required("New password is required.")
 
       .max(16, "You can enter only 16 characters."),
     confirmPassword: yep
@@ -294,10 +294,10 @@ const ResetPassword = ({
                               <Typography variant="h2">
                                 Reset Password
                               </Typography>
-                              <Box mt={2} textAlign={"center"}>
+                              <Box mt={2}>
                                 <Typography variant="h6">
-                                  Please enter password and confirm password to
-                                  reset your password
+                                  Please enter new password and confirm
+                                  password.
                                 </Typography>
                               </Box>
 
@@ -306,6 +306,7 @@ const ResetPassword = ({
                                   <Box mb={1}>
                                     <Typography variant="body2">
                                       New Password
+                                      <span className="span-astrick">*</span>
                                     </Typography>
                                   </Box>
                                   <TextField
@@ -314,7 +315,7 @@ const ResetPassword = ({
                                     id="password"
                                     variant="outlined"
                                     name="password"
-                                    placeholder="Enter Your New Password"
+                                    placeholder="Enter new password"
                                     value={values.password}
                                     inputProps={{ maxLength: "16" }}
                                     error={Boolean(
@@ -326,7 +327,10 @@ const ResetPassword = ({
                                       endAdornment: (
                                         <InputAdornment position="end">
                                           <IconButton
-                                            style={{ color: "#BCBCBC" }}
+                                            style={{
+                                              color: "#a2d117",
+                                              padding: "0 7px",
+                                            }}
                                             onClick={() =>
                                               setShowPassword(!showPassword)
                                             }
@@ -334,9 +338,17 @@ const ResetPassword = ({
                                           >
                                             <Box>
                                               {showPassword ? (
-                                                <Visibility />
+                                                <Visibility
+                                                  style={{
+                                                    marginTop: "5px",
+                                                  }}
+                                                />
                                               ) : (
-                                                <VisibilityOff />
+                                                <VisibilityOff
+                                                  style={{
+                                                    marginTop: "5px",
+                                                  }}
+                                                />
                                               )}
                                             </Box>
                                           </IconButton>
@@ -353,6 +365,7 @@ const ResetPassword = ({
                                   <Box mt={2} mb={1}>
                                     <Typography variant="body2">
                                       Confirm Password
+                                      <span className="span-astrick">*</span>
                                     </Typography>
                                   </Box>
                                   <TextField
@@ -362,7 +375,7 @@ const ResetPassword = ({
                                     }
                                     id="password"
                                     variant="outlined"
-                                    placeholder="Confirm New Password"
+                                    placeholder="Enter confirm password"
                                     name="confirmPassword"
                                     error={Boolean(
                                       touched.confirmPassword &&
@@ -374,7 +387,10 @@ const ResetPassword = ({
                                       endAdornment: (
                                         <InputAdornment position="end">
                                           <IconButton
-                                            style={{ color: "#BCBCBC" }}
+                                            style={{
+                                              color: "#a2d117",
+                                              padding: "0 7px",
+                                            }}
                                             onClick={() =>
                                               setShowConfirmPassword(
                                                 !showConfirmPassword
@@ -384,9 +400,17 @@ const ResetPassword = ({
                                           >
                                             <Box>
                                               {showConfirmPassword ? (
-                                                <Visibility />
+                                                <Visibility
+                                                  style={{
+                                                    marginTop: "5px",
+                                                  }}
+                                                />
                                               ) : (
-                                                <VisibilityOff />
+                                                <VisibilityOff
+                                                  style={{
+                                                    marginTop: "5px",
+                                                  }}
+                                                />
                                               )}
                                             </Box>
                                           </IconButton>

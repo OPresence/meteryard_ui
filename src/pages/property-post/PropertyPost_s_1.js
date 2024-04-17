@@ -18,39 +18,14 @@ import { withStyles } from "@material-ui/core/styles";
 import { AuthContext } from "../../context/Auth";
 import Checkbox from "@material-ui/core/Checkbox";
 import { fontSize } from "@mui/system";
-const StepperStyle = styled("Stepper")(({ theme }) => ({
-  "& .Mui-active .MuiSvgIcon-root": {
-    color: "#badc54",
-    fontSize: "1.8rem",
-  },
-  "& .MuiSvgIcon-root": {
-    fontSize: "1.8rem",
-  },
-  "& .MuiStepConnector-line": {
-    borderTopWidth: "12px",
-    borderColor: " #badc54",
-    borderTopWidth: "9px",
-  },
-  "& .MuiStepLabel-iconContainer": {
-    paddingRight: "0px",
-  },
-  "& .MuiStep-root": {
-    paddingLeft: "0px",
-    paddingRight: "0px",
-  },
-  "& .MuiSvgIcon-root-MuiStepIcon-root.Mui-completed": {
-    color: "red !important",
-  },
-}));
+
 const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
   "& .borderBox": {
     width: "250px",
     height: "350px",
     position: "absolute",
   },
-  // "& .MuiSvgIcon-root": {
-  //   fontSize: "50px !important",
-  // },
+
   "& .mainBoxS1": {
     "& .HeadingBox": {
       padding: "0 20px",
@@ -71,48 +46,15 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
         },
       },
       "& .CheckBox": {
-        // display: "flex",
         alignItems: "center",
       },
-      // "& .stepperBox": {
-      //   display: "none",
-
-      //   "@media(max-width:615px)": {
-      //     width: "100%",
-      //     display: "block",
-      //   },
-      //   "& .h2-class": {
-      //     fontSize: "12px",
-      //     fontWeight: "600",
-      //     position: "absolute",
-      //     top: "-24px",
-      //     left: "-17px",
-      //     width: "106px",
-      //   },
-      //   "& .h2-class1": {
-      //     fontSize: "12px",
-      //     fontWeight: "600",
-      //     position: "absolute",
-      //     top: "-24px",
-      //     left: "-24px",
-      //     width: "106px",
-      //   },
-      //   "& .h2-class2": {
-      //     fontSize: "12px",
-      //     fontWeight: "600",
-      //     position: "absolute",
-      //     top: "-24px",
-      //     left: "-57px",
-      //     width: "130px",
-      //   },
-      // },
     },
   },
   "& .buttonStyle": {
     padding: "5px 20px",
     borderRadius: "26px",
     color: "#000",
-    margin: "0 5px 10px 0",
+    margin: "0 15px 10px 0",
   },
   "& .Property_Type": {
     "& h3": {
@@ -135,21 +77,15 @@ const GreenCheckbox = withStyles({
       // fontSize: "50px !important",
     },
     "& .MuiSvgIcon-root": {
-      // fontSize: "50px !important",
-
       fill: "red !important", // Change the fill color of the SVG icon to green
     },
   },
   checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 const PropertyPost_s_1 = (props) => {
-  console.log("propsZzxzxz---->", props);
   const {
-    // _getproprty_type,
     handleCheckboxChange,
-    // setGetProject_sub_Type,
-    setGetPropetyType,
-    // auth?._getproject_sub_type,
+    _getfurnishing,
     formField: {
       listed_name,
       furnishing,
@@ -160,7 +96,6 @@ const PropertyPost_s_1 = (props) => {
       Placeholder_name,
     },
   } = props;
-  console.log("formField--000>", listed_name);
   const auth = useContext(AuthContext);
 
   const listedData = [
@@ -177,17 +112,7 @@ const PropertyPost_s_1 = (props) => {
       name: "Builder",
     },
   ];
-  const furnishingList = [
-    {
-      name: "Furnished",
-    },
-    {
-      name: "Unfurnished",
-    },
-    {
-      name: "Semi-Furnished",
-    },
-  ];
+
   const badRoomNumberList = [
     {
       name: "1",
@@ -234,141 +159,18 @@ const PropertyPost_s_1 = (props) => {
       value: "5",
     },
   ];
-  // const ProjectType = async () => {
-  //   try {
-  //     setIsLoading(true);
-
-  //     const res = await PostApiFunction({
-  //       endPoint: Apiconfigs?.listAllProjectType,
-  //     });
-  //     if (res) {
-  //       setGetPropetyType(res?.result?.docs[0]?._id);
-  //       if (res?.responseCode == 200) {
-  //         setIsLoading(false);
-
-  //         setPropertyList(res?.result?.docs);
-  //       } else if (res?.responseCode == 404) {
-  //         setIsLoading(false);
-
-  //         setPropertyList([]);
-  //         toast.error(res?.responseMessage);
-  //         setPropertyList([]);
-  //       } else if (res?.responseCode == 404) {
-  //         setIsLoading(false);
-
-  //         setPropertyList([]);
-
-  //         toast.error(res?.responseMessage); // Display error notification
-  //       } else if (res?.responseCode == 500) {
-  //         setIsLoading(false);
-
-  //         setPropertyList([]);
-
-  //         toast.error(res?.responseMessage); // Display error notification
-  //       } else {
-  //         setIsLoading(false);
-
-  //         setPropertyList([]);
-
-  //         toast.error(res?.responseMessage); // Display error notification
-  //       }
-  //     }
-  //   } catch (error) {
-  //     setIsLoading(false);
-
-  //     console.log("error");
-  //     setPropertyList([]);
-  //   }
-  // };
-  // const SubProjectType = async (id) => {
-  //   try {
-  //     const res = await PostApiFunction({
-  //       endPoint: Apiconfigs?.listAllProjectSubType,
-  //       data: {
-  //         projectTypeId: _getproprty_type,
-  //         page: "1",
-  //         limit: "10",
-  //       },
-  //     });
-  //     if (res?.responseCode == 200) {
-  //       setGetProject_sub_Type(res?.result?.docs[0]?._id);
-  //       setSubTypeList(res?.result?.docs);
-  //     } else if (res?.responseCode == 404) {
-  //       setSubTypeList([]);
-  //       toast.error(res?.responseMessage);
-  //       setSubTypeList([]);
-  //     } else if (res?.responseCode == 404) {
-  //       setSubTypeList([]);
-  //       toast.error(res?.responseMessage); // Display error notification
-  //     } else if (res?.responseCode == 500) {
-  //       setSubTypeList([]);
-
-  //       toast.error(res?.responseMessage); // Display error notification
-  //     } else {
-  //       setSubTypeList([]);
-
-  //       toast.error(res?.responseMessage); // Display error notification
-  //     }
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-  // React.useEffect(() => {
-  //   if (_getproprty_type) {
-  //     SubProjectType();
-  //   }
-  // }, [_getproprty_type]);
-  // useEffect(() => {
-  //   ProjectType();
-  // }, []);
 
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBoxS1">
         <Box className="HeadingBox">
           <Typography variant="h2">List Your Property</Typography>
-          {/* <Box display={"flex"} justifyContent={"center"}>
-            <Box mt={6} mb={1} className="stepperBox">
-              <StepperStyle>
-                <Stepper
-                  activeStep={props?.activeStep}
-                  className={"stepper"}
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <Step key={"label"} style={{ position: "relative" }}>
-                    <StepLabel>
-                      <Typography className="h2-class">
-                        {"Property Details"}
-                      </Typography>
-                    </StepLabel>
-                  </Step>
-                  <Step key={"label"} style={{ position: "relative" }}>
-                    <StepLabel>
-                      <Typography className="h2-class1">
-                        {"Area Details"}
-                      </Typography>
-                    </StepLabel>
-                  </Step>
-                  <Step key={"label"} style={{ position: "relative" }}>
-                    <StepLabel>
-                      <Typography className="h2-class2">
-                        {"Images & Location"}
-                      </Typography>
-                    </StepLabel>
-                  </Step>
-                </Stepper>
-              </StepperStyle>
-            </Box>
-          </Box> */}
+
           <Box className="CheckBox">
             {auth?._isloading ? (
               <Box display={"flex"} justifyContent={"center"} mb={2}>
                 &nbsp;&nbsp;{" "}
-                <CircularProgressComponent
-                  colorValue="#BADC54"
-                  size={40}
-                  // className={"buttonProgress"}
-                />
+                <CircularProgressComponent colorValue="#BADC54" size={40} />
               </Box>
             ) : (
               <>
@@ -377,7 +179,11 @@ const PropertyPost_s_1 = (props) => {
                 </Box>
                 <Box>
                   {auth?._propertyList?.map((data, index) => (
-                    <Box display={"inline-flex"} key={index}>
+                    <Box
+                      display={"inline-flex"}
+                      key={index}
+                      style={{ padding: "0 0 0 10px" }}
+                    >
                       <FormControlLabel
                         control={
                           <GreenCheckbox
@@ -421,7 +227,6 @@ const PropertyPost_s_1 = (props) => {
                           >
                             {data?.projectSubType}
                           </Button>
-                          {/* &nbsp; &nbsp; */}
                         </>
                       );
                     })}
@@ -446,7 +251,7 @@ const PropertyPost_s_1 = (props) => {
                   valueName={furnishing.value}
                   label={furnishing.label}
                   fullWidth
-                  data={furnishingList}
+                  data={_getfurnishing}
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={6} xs={6}>

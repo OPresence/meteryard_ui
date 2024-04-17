@@ -161,17 +161,9 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
     background: "transparent",
     padding: "10.5px 40px !important",
   };
-  // const handleNameKeyDown = (event) => {
-  //   // Check if the pressed key is a number
-  //   if (event.key >= "0" && event.key <= "9") {
-  //     // Prevent the default behavior of the key
-  //     event.preventDefault();
-  //   }
-  // };
+
   const handleNameKeyDown = (event) => {
-    // Check if the pressed key is a special character
     if (/[^a-zA-Z\s]/.test(event.key)) {
-      // Prevent the default behavior of the key
       event.preventDefault();
     }
   };
@@ -181,6 +173,8 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
       const res = await PostApiFunction({
         endPoint: Apiconfigs.userSignUp,
         data: {
+          name: values?.name,
+
           email: values?.email,
           password: values?.password,
           phoneNumber: values?.PhoneNumber,
@@ -190,7 +184,8 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
       if (res) {
         console.log("fdfdfd--->", res);
         if (res?.responseCode == 200) {
-          toast.success("SignUp successful!"); // Display success notification
+          // toast.success("SignUp successful!"); // Display success notification
+          toast.success(res?.responseMessage);
           setIsLoading(false);
           auth.setEndtime(moment().add(2, "m").unix());
 
@@ -216,6 +211,12 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
       console.log("error", error);
     }
   };
+  // const handleNameChange = (event, setFieldValue) => {
+  //   const { value } = event.target;
+  //   const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+  //   setFieldValue("name", capitalizedValue);
+  //   return capitalizedValue;
+  // };
   return (
     <LoginStyle>
       <Box className="backgroundBox">
@@ -357,13 +358,19 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                                 name="name"
                                 type="text"
                                 onChange={handleChange}
+                                // onChange={(e) =>
+                                //   handleNameChange(e, setFieldValue)
+                                // }
                                 onBlur={handleBlur}
                                 onKeyDown={handleNameKeyDown}
-                                value={values.name}
+                                value={
+                                  values.name?.charAt(0).toUpperCase() +
+                                  values.name.slice(1)
+                                }
                                 id="outlined-basic"
                                 fullWidth
                                 variant="outlined"
-                                placeholder="Enter Your Name"
+                                placeholder="Enter your name"
                                 disabled={isloading}
                                 inputProps={{
                                   maxLength: 32,

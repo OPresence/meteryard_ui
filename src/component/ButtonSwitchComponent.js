@@ -124,7 +124,7 @@ export default function ButtonSwitchComponent({
                           variant="outlined"
                           className={"Banner_inputField_button"}
                         >
-                          <Typography variant="h6">join city chat</Typography>
+                          <Typography variant="h6">Join city chat</Typography>
                         </Box>
                         <Button className="searchbox_button">
                           <MdOutlineVideoChat
@@ -143,7 +143,7 @@ export default function ButtonSwitchComponent({
                           }}
                         >
                           <Typography variant="h6">
-                            explore more property
+                            Explore more property
                           </Typography>
                         </Box>
                         <Button
@@ -185,7 +185,7 @@ export default function ButtonSwitchComponent({
                             variant="outlined"
                             className={"Banner_inputField_button"}
                           >
-                            <Typography variant="h6">join city chat</Typography>
+                            <Typography variant="h6">Join city chat</Typography>
                           </Box>
                           <Button className="searchbox_button">
                             <MdOutlineVideoChat
@@ -204,7 +204,7 @@ export default function ButtonSwitchComponent({
                             }}
                           >
                             <Typography variant="h6">
-                              property listing
+                              Property listing
                             </Typography>
                           </Box>
                           <Button
@@ -238,7 +238,7 @@ export default function ButtonSwitchComponent({
                             }}
                           >
                             <Typography variant="h6">
-                              register as seller
+                              Register as seller
                             </Typography>
                           </Box>
                           <Button

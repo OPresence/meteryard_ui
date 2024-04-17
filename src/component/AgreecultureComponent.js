@@ -55,6 +55,7 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
       background: "#fff",
       borderRadius: "10px",
       position: "relative",
+      minHeight: "230px",
       "& svg": {
         color: "#000",
         fontSize: "16px",

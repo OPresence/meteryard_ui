@@ -25,9 +25,10 @@ import { useRouter } from "next/router";
 import LoginDialog from "../../component/LoginDialog";
 import "../../Scss/border.css";
 import Apiconfigs from "@/ApiConfig/ApiConfig";
-import { PostApiFunction, getAPIdata } from "@/utils";
+import { getAPIdata } from "@/utils";
 import { AuthContext } from "../../context/Auth";
 import CloseIcon from "@mui/icons-material/Close";
+import ProfileMenu from "../../component/ProfileMenu";
 
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .appbarBox": {
@@ -218,8 +219,8 @@ export default function Topbar() {
           </Box>
           <Box className="flexAlign for-svg-design" p={"0 0 0 30px"}>
             <>
-              <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
-              {_accesstoken == null && (
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              {_accesstoken == null ? (
                 <>
                   <span
                     onClick={() => {
@@ -233,6 +234,8 @@ export default function Topbar() {
                     /Sign Up
                   </span>
                 </>
+              ) : (
+                <ProfileMenu setAccessToken={setAccessToken} />
               )}
             </>
           </Box>
@@ -311,8 +314,8 @@ export default function Topbar() {
                   </Box>
                 </Box>
                 <Box className="flexAlign" p={"0 0 0 30px"}>
-                  <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
-                  {_accesstoken == null && (
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  {_accesstoken == null ? (
                     <>
                       <span onClick={() => handleClickOpenLogin("Login")}>
                         Login
@@ -321,6 +324,8 @@ export default function Topbar() {
                         /Sign Up
                       </span>
                     </>
+                  ) : (
+                    <ProfileMenu setAccessToken={setAccessToken} />
                   )}
                 </Box>
               </Box>

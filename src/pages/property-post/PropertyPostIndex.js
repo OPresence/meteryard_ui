@@ -15,7 +15,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import styled from "@emotion/styled";
-// import validationSchema from "./validationSchema";
+import Logo from "../../component/Logo";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -30,7 +30,7 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    paddingTop: "136px",
+    // paddingTop: "136px",
     "@media(max-width:615px)": {
       background:
         "transparent linear-gradient(113deg, #383838 0%, #4E6407 100%) 0% 0% no-repeat padding-box",
@@ -65,7 +65,7 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
     "& .stepperBox": {
       width: "60%",
       marginTop: "40px",
-      marginBottom: "40px",
+      marginBottom: "20px",
       "@media(max-width:615px)": {
         width: "75%",
         marginBottom: "10px",
@@ -128,6 +128,8 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
     background: "#fff",
     borderRadius: "0 15px 15px 15px",
     position: "relative",
+    maxHeight: "450px",
+    overflowY: "scroll",
     "@media(max-width:615px)": {
       borderRadius: "15px",
     },
@@ -274,7 +276,7 @@ const PropertyPostIndex = () => {
   const [_checked, setChecked] = useState(false);
   const [_imageuploading, setImageUploading] = useState(false);
   const [_videoupload, setVideoUpload] = useState(false);
-  console.log("_coverImage--->", _videoupload);
+  const [_getfurnishing, setGetFurnishing] = useState([]);
   const [coordinates, setCoordinates] = useState({
     lat: 27.1881,
     lng: 77.935,
@@ -414,6 +416,27 @@ const PropertyPostIndex = () => {
     }
   };
 
+  const ProjectFurnishing = async () => {
+    console.log("sdfghjkl;kjhgf");
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllProjectFurnishing,
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setGetFurnishing(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setGetFurnishing([]);
+          toast.error(res?.responseMessage);
+        } else {
+          setGetFurnishing([]);
+          toast.error(res?.responseMessage);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleImageUpload = async () => {
     try {
       const responses = [];
@@ -438,6 +461,9 @@ const PropertyPostIndex = () => {
     }
   };
   useEffect(() => {
+    ProjectFurnishing();
+  }, []);
+  useEffect(() => {
     if (selectedImages.length > 0) {
       handleImageUpload();
     }
@@ -451,11 +477,8 @@ const PropertyPostIndex = () => {
             formField={formField}
             setTrueCaptcha={setTrueCaptcha}
             _isloading={_isloading}
-            // setGetPropetyType={setGetPropetyType}
-            // _getproprty_type={_getproprty_type}
+            _getfurnishing={_getfurnishing}
             handleCheckboxChange={handleCheckboxChange}
-            // _getproject_sub_type={_getproject_sub_type}
-            // setGetProject_sub_Type={setGetProject_sub_Type}
           />
         );
       case 1:
@@ -525,26 +548,30 @@ const PropertyPostIndex = () => {
             bathroom: values?.bathrooms,
             superBuildupArea: values?.super_building,
             carpetArea: values?.carpet_area,
-            totalFloors: values?.floors_no,
+            totalFloors: values?.total_floors,
             floorNumber: values?.floors_no,
             projectName: values?.project_name,
             title: values?.add_title,
             description: values?.description,
             price: values?.price,
-            price_breakup: values?.price_breakup,
             coverImage: _coverImage,
             video: _video_url,
+            projectTypeId: auth?._getproprty_type,
+            projectSubTypeId: auth?._getproject_sub_type,
+            furnishingId: values?.furnishing,
+            facingId: "",
+            termAndConditions: _consition,
+            featuredProperty: _checked,
             type: values?.typeProperty,
             image: imageUploadResponses,
             address: values?.location,
-            termAndConditions: _consition,
-            featuredProperty: _checked,
-            projectTypeId: auth?._getproprty_type,
-            projectSubTypeId: auth?._getproject_sub_type,
             location: {
               type: "Point",
               coordinates: [coordinates?.lat, coordinates?.lng],
             },
+            localAreaName: values?.localArea,
+
+            price_breakup: values?.price_breakup,
           },
         });
         if (res) {
@@ -613,129 +640,147 @@ const PropertyPostIndex = () => {
     <PropertyPostIndexStyle>
       <Box className="MainBoxIndex">
         <Container className="conatinerBox">
-          <Grid container spacing={3}>
-            <Grid item lg={6} md={6} sm={12} xs={12} className="gridClass">
-              <Box maxWidth={500}>
-                <img src="/images/Group 8363.svg" width={"100%"} />
-              </Box>
-            </Grid>
-            <Grid item lg={6} md={6} sm={12} xs={12}>
-              <Typography variant="h3">List Your Property</Typography>
-              <Box mt={2}>
-                <Typography variant="h5">Fill Basic Details</Typography>
-              </Box>
-              <Box display={"flex"} justifyContent={"center"}>
-                <Box className="stepperBox">
-                  <StepperStyle>
-                    <Stepper
-                      activeStep={activeStep}
-                      className={"stepper"}
-                      style={{ display: "flex", justifyContent: "center" }}
-                    >
-                      <Step key={"label"} style={{ position: "relative" }}>
-                        <StepLabel>
-                          <Typography className="h2-class">
-                            {"Property Details"}
-                          </Typography>
-                        </StepLabel>
-                      </Step>
-                      <Step key={"label"} style={{ position: "relative" }}>
-                        <StepLabel>
-                          <Typography className="h2-class1">
-                            {"Area Details"}
-                          </Typography>
-                        </StepLabel>
-                      </Step>
-                      <Step key={"label"} style={{ position: "relative" }}>
-                        <StepLabel>
-                          <Typography className="h2-class2">
-                            {"Images & Location"}
-                          </Typography>
-                        </StepLabel>
-                      </Step>
-                    </Stepper>
-                  </StepperStyle>
+          <Box
+            maxWidth={230}
+            padding={"20px 0 0 0"}
+            position={"relative"}
+            style={{ cursor: "pointer" }}
+            onClick={() => router.push("/")}
+          >
+            <Logo />
+          </Box>
+          <Box mt={"-90px"}>
+            <Grid container spacing={3}>
+              <Grid item lg={6} md={6} sm={12} xs={12} className="gridClass">
+                <Box maxWidth={400}>
+                  <img src="/images/Group 8363.svg" width={"100%"} />
                 </Box>
-              </Box>
+              </Grid>
 
-              <Box>
-                <Formik
-                  initialValues={initialValue}
-                  validationSchema={currentValidationSchema}
-                  onSubmit={_handleSubmit}
-                >
-                  {({ isSubmitting }) => (
-                    <Form id={formId}>
-                      <Box className="Form_main_Box">
-                        {_renderStepContent(activeStep)}
-                        <DialogButtonStyle>
-                          <Box
-                            className={"buttons"}
-                            display={"flex"}
-                            justifyContent={"center"}
-                            mt={4}
-                          >
-                            <Box
-                              className={"wrapper"}
-                              display={"flex"}
-                              justifyContent={"center"}
-                            >
-                              <>
-                                <Button
-                                  disabled={auth?._isloading || _imageuploading}
-                                  onClick={() => {
-                                    if (activeStep !== 0) {
-                                      _handleBack();
-                                    } else {
-                                      router.push("/");
-                                    }
-                                  }}
-                                  className={"button"}
-                                  variant="contained"
-                                  color="primary"
-                                >
-                                  {activeStep !== 0 ? "Back" : "Back Home"}
-                                </Button>
-                              </>
-                            </Box>
-                            &nbsp;&nbsp;{" "}
-                            <Box
-                              className={"wrapper"}
-                              display={"flex"}
-                              justifyContent={"center"}
-                            >
-                              <Button
-                                style={{ background: "#a2d117" }}
-                                disabled={
-                                  _isloading || _videoupload || _imageuploading
-                                }
-                                type="submit"
-                                variant="contained"
-                                color="primary"
-                                className={"button"}
+              <Grid item lg={6} md={6} sm={12} xs={12}>
+                <Box>
+                  <Typography variant="h3">List Your Property</Typography>
+                  <Box mt={2}>
+                    <Typography variant="h5">Fill Basic Details</Typography>
+                  </Box>
+                  <Box display={"flex"} justifyContent={"center"}>
+                    <Box className="stepperBox">
+                      <StepperStyle>
+                        <Stepper
+                          activeStep={activeStep}
+                          className={"stepper"}
+                          style={{ display: "flex", justifyContent: "center" }}
+                        >
+                          <Step key={"label"} style={{ position: "relative" }}>
+                            <StepLabel>
+                              <Typography className="h2-class">
+                                {"Property Details"}
+                              </Typography>
+                            </StepLabel>
+                          </Step>
+                          <Step key={"label"} style={{ position: "relative" }}>
+                            <StepLabel>
+                              <Typography className="h2-class1">
+                                {"Area Details"}
+                              </Typography>
+                            </StepLabel>
+                          </Step>
+                          <Step key={"label"} style={{ position: "relative" }}>
+                            <StepLabel>
+                              <Typography className="h2-class2">
+                                {"Images & Location"}
+                              </Typography>
+                            </StepLabel>
+                          </Step>
+                        </Stepper>
+                      </StepperStyle>
+                    </Box>
+                  </Box>
+
+                  <Box>
+                    <Formik
+                      initialValues={initialValue}
+                      validationSchema={currentValidationSchema}
+                      onSubmit={_handleSubmit}
+                    >
+                      {({ isSubmitting }) => (
+                        <Form id={formId}>
+                          <Box className="Form_main_Box">
+                            {_renderStepContent(activeStep)}
+                            <DialogButtonStyle>
+                              <Box
+                                className={"buttons"}
+                                display={"flex"}
+                                justifyContent={"center"}
+                                mt={4}
                               >
-                                {isLastStep ? "Submit" : "Next"}
-                                {_isloading && (
+                                <Box
+                                  className={"wrapper"}
+                                  display={"flex"}
+                                  justifyContent={"center"}
+                                >
                                   <>
-                                    &nbsp;&nbsp;{" "}
-                                    <CircularProgressComponent
-                                      color="#000"
-                                      size={24}
-                                      className={"buttonProgress"}
-                                    />
+                                    <Button
+                                      disabled={
+                                        auth?._isloading || _imageuploading
+                                      }
+                                      onClick={() => {
+                                        if (activeStep !== 0) {
+                                          _handleBack();
+                                        } else {
+                                          router.push("/");
+                                        }
+                                      }}
+                                      className={"button"}
+                                      variant="contained"
+                                      color="primary"
+                                    >
+                                      {activeStep !== 0 ? "Back" : "Back Home"}
+                                    </Button>
                                   </>
-                                )}
-                              </Button>
-                            </Box>
+                                </Box>
+                                &nbsp;&nbsp;{" "}
+                                <Box
+                                  className={"wrapper"}
+                                  display={"flex"}
+                                  justifyContent={"center"}
+                                >
+                                  <Button
+                                    style={{ background: "#a2d117" }}
+                                    disabled={
+                                      _isloading ||
+                                      _videoupload ||
+                                      _imageuploading
+                                    }
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                    className={"button"}
+                                  >
+                                    {isLastStep ? "Submit" : "Next"}
+                                    {_isloading && (
+                                      <>
+                                        &nbsp;&nbsp;{" "}
+                                        <CircularProgressComponent
+                                          color="#000"
+                                          size={24}
+                                          className={"buttonProgress"}
+                                        />
+                                      </>
+                                    )}
+                                  </Button>
+                                </Box>
+                              </Box>
+                            </DialogButtonStyle>
                           </Box>
-                        </DialogButtonStyle>
-                      </Box>
-                    </Form>
-                  )}
-                </Formik>
-              </Box>
+                        </Form>
+                      )}
+                    </Formik>
+                  </Box>
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Container>
       </Box>
     </PropertyPostIndexStyle>

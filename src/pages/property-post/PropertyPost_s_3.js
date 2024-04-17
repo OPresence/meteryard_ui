@@ -179,7 +179,7 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
 }));
 const PropertyPost_s_3 = (props) => {
   const {
-    formField: { price, location, landmark, price_breakup },
+    formField: { price, location, landmark, price_breakup, localArea },
   } = props;
   const fileInputRef = useRef(null);
 
@@ -501,6 +501,19 @@ const PropertyPost_s_3 = (props) => {
                         Placeholder_name={landmark.Placeholder_name}
                         valueName={landmark.value}
                         label={landmark.label}
+                        fullWidth
+                        yourMaxLengthValue={120}
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
+                    <Box mt={2}>
+                      <InputField
+                        _isloading={props._isloading}
+                        name={localArea.name}
+                        Placeholder_name={localArea.Placeholder_name}
+                        valueName={localArea.value}
+                        label={localArea.label}
                         fullWidth
                         yourMaxLengthValue={120}
                       />

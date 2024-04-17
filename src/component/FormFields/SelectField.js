@@ -147,7 +147,7 @@ function SelectField(props) {
                 key={item?._id || item?.value}
                 value={item?._id || item?.value}
               >
-                {item?.projectType || item?.name}
+                {item?.projectType || item?.name || item?.projectFurnishing}
               </option>
             ))}
         </NativeSelect>
