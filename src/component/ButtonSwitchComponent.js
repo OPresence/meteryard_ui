@@ -82,6 +82,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
     borderRadius: "0px 8px 8px 0px;",
     background: "#444444 0% 0% no-repeat padding-box",
     height: "46px",
+    "& svg": {
+      fontSize: "28px",
+      color: "#FFFF",
+    },
     "@media(max-width:615px)": {
       height: "40px",
     },
@@ -127,9 +131,7 @@ export default function ButtonSwitchComponent({
                           <Typography variant="h6">Join city chat</Typography>
                         </Box>
                         <Button className="searchbox_button">
-                          <MdOutlineVideoChat
-                            style={{ fontSize: "28px", color: "#FFFF" }}
-                          />
+                          <MdOutlineVideoChat />
                         </Button>
                       </Box>
                     </Grid>
@@ -152,9 +154,7 @@ export default function ButtonSwitchComponent({
                             background: "#A7D325 0% 0% no-repeat padding-box",
                           }}
                         >
-                          <HomeIcon
-                            style={{ fontSize: "28px", color: "#FFFF" }}
-                          />
+                          <HomeIcon />
                         </Button>
                       </Box>
                     </Grid>
@@ -188,9 +188,7 @@ export default function ButtonSwitchComponent({
                             <Typography variant="h6">Join city chat</Typography>
                           </Box>
                           <Button className="searchbox_button">
-                            <MdOutlineVideoChat
-                              style={{ fontSize: "28px", color: "#FFFF" }}
-                            />
+                            <MdOutlineVideoChat />
                           </Button>
                         </Box>
                       </Grid>
@@ -222,9 +220,7 @@ export default function ButtonSwitchComponent({
                               background: "#A7D325 0% 0% no-repeat padding-box",
                             }}
                           >
-                            <HomeIcon
-                              style={{ fontSize: "28px", color: "#FFFF" }}
-                            />
+                            <HomeIcon />
                           </Button>
                         </Box>
                       </Grid>
@@ -249,7 +245,7 @@ export default function ButtonSwitchComponent({
                             }}
                           >
                             <PersonAddAltIcon
-                              style={{ fontSize: "28px", color: "#FFFF" }}
+                            // style={{ fontSize: "28px", color: "#FFFF" }}
                             />
                           </Button>
                         </Box>

@@ -137,9 +137,7 @@ function SelectField(props) {
           input={<OutlinedInput label={label} />}
           MenuProps={MenuProps}
         >
-          <option selected disabled>
-            {/* {label} */}
-          </option>
+          <option disabled></option>
 
           {data?.length > 0 &&
             data?.map((item) => (
@@ -147,7 +145,10 @@ function SelectField(props) {
                 key={item?._id || item?.value}
                 value={item?._id || item?.value}
               >
-                {item?.projectType || item?.name || item?.projectFurnishing}
+                {item?.projectType ||
+                  item?.name ||
+                  item?.projectFurnishing ||
+                  item?.propFacing}
               </option>
             ))}
         </NativeSelect>

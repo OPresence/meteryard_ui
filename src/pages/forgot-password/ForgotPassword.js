@@ -33,6 +33,11 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       marginBottom: "80px",
     },
   },
+  "& .imageBox": {
+    "@media(max-width:615px)": {
+      display: "none",
+    },
+  },
   "& .ForgotBox": {
     padding: "0 35px",
     "@media(max-width:615px)": {
@@ -206,7 +211,7 @@ const ForgotPassword = ({
                       xs={12}
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      <Box maxWidth={500}>
+                      <Box maxWidth={500} className="imageBox">
                         <img src="/images/Group 8422.svg" width={"100%"} />
                       </Box>
                     </Grid>

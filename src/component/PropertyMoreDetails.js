@@ -43,7 +43,9 @@ const PropertyMoreDetails = ({ dataArray }) => {
                 <Typography variant="h3">Furnishing</Typography>
               </Box>
               <Box className="moreDetailcontent">
-                <Typography variant="body1">{dataArray?.furnishing}</Typography>
+                <Typography variant="body1">
+                  {dataArray?.furnishingId?.projectFurnishing}
+                </Typography>
               </Box>
             </Box>
             <Box className="contentdiv">

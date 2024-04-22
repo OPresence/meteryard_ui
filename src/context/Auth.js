@@ -81,7 +81,6 @@ export default function Auth(props) {
         },
       });
       if (res?.responseCode == 200) {
-        console.log("cnkjvnknvknkcnkvn", res?.result?.docs);
         // setIsLoading(false);
 
         setGetList(res?.result?.docs);
@@ -103,7 +102,6 @@ export default function Auth(props) {
         },
       });
       if (res?.responseCode == 200) {
-        console.log("sdfdsfjdsfdsbfs--->", res?.result?.docs);
         setGetListCommercial(res?.result?.docs);
       }
     } catch (error) {

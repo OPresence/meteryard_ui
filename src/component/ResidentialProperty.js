@@ -57,6 +57,8 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
       background: "#fff",
       borderRadius: "10px",
       position: "relative",
+      minHeight: "220px",
+      position: "relative",
       "& svg": {
         color: "#000",
         fontSize: "16px",
@@ -209,90 +211,21 @@ const ResidentialProjects = () => {
           </Typography>
         </Box>
         <Box mt={5}>
-          <Grid container spacing={3}>
-            {_getlist?.length > 4 ? (
-              <>
-                <Slider {...settings} ref={sliderRef}>
-                  {_getlist &&
-                    _getlist?.map((data, index) => {
-                      return (
-                        <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
-                          <Box height={"100%"} pb={"20px"}>
-                            <Box className="cards">
-                              <Box>
-                                <img
-                                  src={data?.coverImage}
-                                  width={"100%"}
-                                  style={{ borderRadius: "15px" }}
-                                />
-                              </Box>
-
-                              <Box display={"flex"} justifyContent={"center"}>
-                                <Box className="contentBox" width={"90%"}>
-                                  <Box display={"flex"} alignItems={"center"}>
-                                    <Typography variant="h5">
-                                      {data?.projectName}
-                                    </Typography>
-                                  </Box>
-                                  <Box display={"flex"} mt={1}>
-                                    <FmdGoodIcon />
-                                    &nbsp;
-                                    <Box m={"0 0 0 5px"}>
-                                      <Typography variant="h4">
-                                        {data?.title}
-                                      </Typography>
-                                      <Typography variant="h6">
-                                        {data?.description}
-                                      </Typography>
-                                      <Box m={"10px 0"}>
-                                        <Divider color="#D2D2D2" />
-                                      </Box>
-                                      <Box
-                                        display={"flex"}
-                                        alignItems={"center"}
-                                        justifyContent={"space-between"}
-                                      >
-                                        <Box>
-                                          <Typography variant="h6">
-                                            Property Size
-                                          </Typography>
-                                          <Typography variant="h5">
-                                            {data?.superBuildupArea}
-                                          </Typography>
-                                        </Box>
-                                        <Box>
-                                          <Typography variant="h6">
-                                            Price
-                                          </Typography>
-                                          <Typography variant="h5">
-                                            {data?.price}/-
-                                          </Typography>
-                                        </Box>
-                                      </Box>
-
-                                      {/* <Route path="/view-property" exact> */}
-                                      <ButtonComponent data={data} />
-                                      {/* </Route> */}
-                                    </Box>
-                                  </Box>
-                                </Box>
-                              </Box>
-                            </Box>
-                          </Box>
-                        </Grid>
-                      );
-                    })}
-                </Slider>
-              </>
-            ) : (
-              <>
+          {_getlist?.length > 4 ? (
+            <>
+              <Slider {...settings} ref={sliderRef}>
                 {_getlist &&
                   _getlist?.map((data, index) => {
                     return (
                       <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
                         <Box height={"100%"} pb={"20px"}>
                           <Box className="cards">
-                            <Box>
+                            <Box
+                              maxHeight={220}
+                              minHeight={220}
+                              display={"flex"}
+                              justifyContent={"center"}
+                            >
                               <img
                                 src={data?.coverImage}
                                 width={"100%"}
@@ -314,9 +247,11 @@ const ResidentialProjects = () => {
                                     <Typography variant="h4">
                                       {data?.title}
                                     </Typography>
-                                    <Typography variant="h6">
-                                      {data?.description}
-                                    </Typography>
+                                    <div className="paragraph-container">
+                                      <p className="paragraph">
+                                        {data?.description}
+                                      </p>
+                                    </div>
                                     <Box m={"10px 0"}>
                                       <Divider color="#D2D2D2" />
                                     </Box>
@@ -355,9 +290,81 @@ const ResidentialProjects = () => {
                       </Grid>
                     );
                   })}
-              </>
-            )}
-          </Grid>
+              </Slider>
+            </>
+          ) : (
+            <>
+              {_getlist &&
+                _getlist?.map((data, index) => {
+                  return (
+                    <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
+                      <Box height={"100%"} pb={"20px"}>
+                        <Box className="cards">
+                          <Box>
+                            <img
+                              src={data?.coverImage}
+                              width={"100%"}
+                              style={{ borderRadius: "15px" }}
+                            />
+                          </Box>
+
+                          <Box display={"flex"} justifyContent={"center"}>
+                            <Box className="contentBox" width={"90%"}>
+                              <Box display={"flex"} alignItems={"center"}>
+                                <Typography variant="h5">
+                                  {data?.projectName}
+                                </Typography>
+                              </Box>
+                              <Box display={"flex"} mt={1}>
+                                <FmdGoodIcon />
+                                &nbsp;
+                                <Box m={"0 0 0 5px"}>
+                                  <Typography variant="h4">
+                                    {data?.title}
+                                  </Typography>
+                                  <Typography variant="h6">
+                                    {data?.description}
+                                  </Typography>
+                                  <Box m={"10px 0"}>
+                                    <Divider color="#D2D2D2" />
+                                  </Box>
+                                  <Box
+                                    display={"flex"}
+                                    alignItems={"center"}
+                                    justifyContent={"space-between"}
+                                  >
+                                    <Box>
+                                      <Typography variant="h6">
+                                        Property Size
+                                      </Typography>
+                                      <Typography variant="h5">
+                                        {data?.superBuildupArea}
+                                      </Typography>
+                                    </Box>
+                                    <Box>
+                                      <Typography variant="h6">
+                                        Price
+                                      </Typography>
+                                      <Typography variant="h5">
+                                        {data?.price}/-
+                                      </Typography>
+                                    </Box>
+                                  </Box>
+
+                                  {/* <Route path="/view-property" exact> */}
+                                  <ButtonComponent data={data} />
+                                  {/* </Route> */}
+                                </Box>
+                              </Box>
+                            </Box>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Grid>
+                  );
+                })}
+            </>
+          )}
           {_getlist?.length > 7 && (
             <Box
               display={"flex"}

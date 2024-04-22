@@ -293,15 +293,36 @@ const PropertyPost_s_3 = (props) => {
                                     fileInputRef.current.value = "";
                                   }}
                                 />
+                                {props?._videoupload && (
+                                  <Box
+                                    display={"flex"}
+                                    justifyContent={"center"}
+                                  >
+                                    <CircularProgressComponent />
+                                  </Box>
+                                )}
+                                {props?._video_url && (
+                                  <Box maxWidth={100} maxHeight={50}>
+                                    <img
+                                      src={props?._video_url?.thumbnail}
+                                      alt="Cover Preview"
+                                      style={{
+                                        width: "100px",
+                                        height: "50px",
+                                        marginTop: "0px",
+                                      }}
+                                    />
+                                  </Box>
+                                )}
                                 <VideocamIcon style={{ cursor: "pointer" }} />
                               </Box>
                             </Box>
-                            <Box
-                              display={"flex"}
-                              justifyContent={"center"}
-                              mt={1}
-                            ></Box>
                           </label>{" "}
+                          {console.log(
+                            "00000ssd----->",
+                            props?._imageuploading,
+                            props?._videoupload
+                          )}
                           &nbsp;&nbsp;&nbsp;
                           <label style={{ display: "inline-flex" }}>
                             <Box className="videoBox CoverImage">
@@ -325,7 +346,7 @@ const PropertyPost_s_3 = (props) => {
                                     }
                                   }}
                                 />
-                                {props?._videoupload && (
+                                {props?._imageuploading && (
                                   <Box
                                     display={"flex"}
                                     justifyContent={"center"}
@@ -338,7 +359,11 @@ const PropertyPost_s_3 = (props) => {
                                     <img
                                       src={props?._coverImage}
                                       alt="Cover Preview"
-                                      style={{ width: "100px", height: "50px" }}
+                                      style={{
+                                        width: "100px",
+                                        height: "50px",
+                                        // marginTop: "40px",
+                                      }}
                                     />
                                   </Box>
                                 )}
