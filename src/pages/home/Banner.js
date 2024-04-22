@@ -148,7 +148,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
           maxWidth: "40px !Important",
           "@media(max-width:615px)": {
             padding: "9px",
-            maxWidth: "38px !important",
+            maxWidth: "39px !important",
           },
         },
       },
@@ -200,7 +200,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
         },
       },
       "@media(max-width:433px)": {
-        marginLeft: "0px",
+        marginLeft: "-25px",
         height: "40px",
       },
       "& .buttonIconBox": {

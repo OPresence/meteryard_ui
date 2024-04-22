@@ -894,7 +894,7 @@ const ChatBoat = () => {
             position: "fixed",
             bottom: "0",
             right: "22px",
-            zIndex: 1,
+            zIndex: 999,
           }}
         >
           <Box maxWidth={100}>

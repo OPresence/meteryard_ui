@@ -248,3 +248,14 @@ margin-top: 9px;
   background: #a2d117;
   
 }
+
+/* .slick-prev:hover, .slick-prev:focus, .slick-next:hover, .slick-next:focus{
+  left: -10px !important; 
+} */
+.slick-prev {
+  left:-10px !important; 
+}
+
+.slick-next {
+  right: -10px !important; /* Adjust position from right */
+}

@@ -264,7 +264,7 @@ const CommercialProjects = () => {
                                           Price
                                         </Typography>
                                         <Typography variant="h5">
-                                          {data?.price}/-
+                                          {data?.price?.toLocaleString()}/- Rs
                                         </Typography>
                                       </Box>
                                     </Box>

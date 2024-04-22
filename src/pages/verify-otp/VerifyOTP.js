@@ -10,6 +10,14 @@ const CustomizedDialogContent = styled(DialogContent)({
   borderRadius: "8px",
   padding: "0",
 });
+const OTPstyle = styled("Box")(({ theme }) => ({
+  "& .imageBox": {
+    "@media(max-width:615px)": {
+      display: "none",
+    },
+  },
+}));
+
 const VerifyOTP = ({
   _forotp_open,
   _saveForgot,
@@ -34,45 +42,47 @@ const VerifyOTP = ({
           }}
         >
           <CustomizedDialogContent>
-            <Box className="backgroundBox" p={"56px 0"}>
-              <Container maxWidth>
-                <Box maxWidth={250} p={3}>
-                  <img src="/images/logo.png" width={"100%"} />
-                </Box>
-                <Grid container spacing={3}>
-                  <Grid
-                    item
-                    lg={7}
-                    md={7}
-                    sm={12}
-                    xs={12}
-                    style={{ display: "flex", alignItems: "center" }}
-                  >
-                    <Box maxWidth={500}>
-                      <img src="/images/Group 8422.svg" width={"100%"} />
-                    </Box>
+            <OTPstyle>
+              <Box className="backgroundBox">
+                <Container maxWidth>
+                  <Box maxWidth={250} p={3}>
+                    <img src="/images/logo.png" width={"100%"} />
+                  </Box>
+                  <Grid container spacing={3}>
+                    <Grid
+                      item
+                      lg={7}
+                      md={7}
+                      sm={12}
+                      xs={12}
+                      style={{ display: "flex", alignItems: "center" }}
+                    >
+                      <Box maxWidth={500} className="imageBox">
+                        <img src="/images/Group 8422.svg" width={"100%"} />
+                      </Box>
+                    </Grid>
+                    <Grid
+                      item
+                      lg={5}
+                      md={5}
+                      sm={12}
+                      xs={12}
+                      style={{
+                        padding: "25px",
+                      }}
+                    >
+                      <VerifyOTPF
+                        _saveForgot={_saveForgot}
+                        handleOpenReset={handleOpenReset}
+                        handleCloseOTP={handleCloseOTP}
+                        handleOpenOTP={handleOpenOTP}
+                        handleOpenForgot={handleOpenForgot}
+                      />
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    lg={5}
-                    md={5}
-                    sm={12}
-                    xs={12}
-                    style={{
-                      padding: "25px",
-                    }}
-                  >
-                    <VerifyOTPF
-                      _saveForgot={_saveForgot}
-                      handleOpenReset={handleOpenReset}
-                      handleCloseOTP={handleCloseOTP}
-                      handleOpenOTP={handleOpenOTP}
-                      handleOpenForgot={handleOpenForgot}
-                    />
-                  </Grid>
-                </Grid>
-              </Container>
-            </Box>
+                </Container>
+              </Box>
+            </OTPstyle>
           </CustomizedDialogContent>
         </Dialog>
       </DialogStyleComponent>

@@ -21,11 +21,9 @@ export default function InputField(props) {
       }
     }
   }
-  // function handleChange(event) {
-  //   helpers.setValue(event.target.value);
-  // }
+  console.log("props?.name----<>", props?.name == "price_breakup");
   function handleChange(event) {
-    if (props?.name == "price" || props?.name == "price breakup") {
+    if (props?.name == "price" || props?.name == "price_breakup") {
       const inputValue = event.target.value;
       const numericValue = inputValue.replace(/[^0-9.]/g, "");
       const formattedValue = parseFloat(numericValue).toLocaleString("en-IN", {

@@ -49,11 +49,17 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       padding: "10.5px 14px !important",
     },
   },
+  "& .imageBox": {
+    "@media(max-width:615px)": {
+      display: "none",
+    },
+  },
   "& .loginBox": {
     padding: "0 35px",
     "@media(max-width:615px)": {
       padding: "0 0px",
     },
+
     "& h2": {
       fontWeight: "600",
       color: "#6F6F6F",
@@ -98,6 +104,9 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     width: "100%",
     justifyContent: "center",
     padding: "0 0px 10px 0",
+    "@media(max-width:615px)": {
+      marginTop: "20px",
+    },
     "& button": {
       padding: "8px 40px",
       background: "#0099FF",
@@ -255,7 +264,7 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                       xs={12}
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      <Box maxWidth={500}>
+                      <Box maxWidth={500} className="imageBox">
                         <img src="/images/Group 8422.svg" width={"100%"} />
                       </Box>
                     </Grid>

@@ -11,6 +11,7 @@ import MobileAppComponent from "../component/MobileAppComponent";
 import TestimonialComponent from "../component/TestimonialComponent";
 import ChatBoat from "../component/ChatBoat";
 import AgreecultureComponent from "../component/AgreecultureComponent";
+import TestingComponent from "../component/TestingComponent";
 export default function ClientPage() {
   return (
     <Box>
@@ -25,6 +26,7 @@ export default function ClientPage() {
       <ProjectComponent />
       <MobileAppComponent />
       <TestimonialComponent />
+      {/* <TestingComponent /> */}
       <ChatBoat />
     </Box>
   );

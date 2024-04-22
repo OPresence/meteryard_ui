@@ -94,41 +94,7 @@ const PropertyPost_s_2 = (props) => {
   } = props;
   const [state, setState] = React.useState(false);
   const [_propertyList, setPropertyList] = React.useState([]);
-  const propertyType = [
-    {
-      name: "For Rent",
-      value: "FOR_RENT",
-    },
-    {
-      name: "For Sale",
-      value: "FOR_SALE",
-    },
-  ];
-  const listedData = [
-    {
-      value: "Owner",
-      name: "Owner",
-    },
-    {
-      value: "Dealer",
-      name: "Dealer",
-    },
-    {
-      value: "Builder",
-      name: "Builder",
-    },
-  ];
-  const furnishingList = [
-    {
-      name: "Furnished",
-    },
-    {
-      name: "UnFurnished",
-    },
-    {
-      name: "Semi-Furnished",
-    },
-  ];
+
   const badRoomNumberList = [
     {
       name: "1",
@@ -210,11 +176,7 @@ const PropertyPost_s_2 = (props) => {
   const handleChange = (event) => {
     setState(event.target.value);
   };
-  const [selectedId, setSelectedId] = useState(null);
 
-  const handleCheckboxChange = (id) => {
-    setSelectedId(id);
-  };
   const ProjectType = async () => {
     try {
       const res = await PostApiFunction({
@@ -285,13 +247,14 @@ const PropertyPost_s_2 = (props) => {
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12}>
-                <InputField
+                <SelectField
                   _isloading={props._isloading}
                   name={facing.name}
                   valueName={facing.value}
                   Placeholder_name={facing.Placeholder_name}
                   label={facing.label}
                   fullWidth
+                  data={props?._facinglist}
                   yourMaxLengthValue={120}
                 />
               </Grid>

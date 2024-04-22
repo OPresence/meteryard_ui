@@ -25,6 +25,7 @@ import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { formFieldValue, ValidationValue, initialValue } from "../../utils";
 import { AuthContext } from "../../context/Auth";
+import { useSubmit } from "react-router-dom";
 const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
   "& .MainBoxIndex": {
     height: "100%",
@@ -276,6 +277,7 @@ const PropertyPostIndex = () => {
   const [_checked, setChecked] = useState(false);
   const [_imageuploading, setImageUploading] = useState(false);
   const [_videoupload, setVideoUpload] = useState(false);
+  const [_facinglist, setFacingList] = useState([]);
   const [_getfurnishing, setGetFurnishing] = useState([]);
   const [coordinates, setCoordinates] = useState({
     lat: 27.1881,
@@ -295,7 +297,7 @@ const PropertyPostIndex = () => {
   };
   const imageUploadFunction = async (imageValue) => {
     try {
-      setImageUploading(true);
+      // setImageUploading(true);
       const formdata = new FormData();
       formdata.append("uploaded_file", imageValue);
 
@@ -309,7 +311,7 @@ const PropertyPostIndex = () => {
 
         if (res?.result[0]?.mediaType == "mp4") {
           toast.success("Video uploaded successfully.");
-          setVideoURL(res?.result[0]?.mediaUrl);
+          setVideoURL(res?.result[0]);
           return res;
         } else {
           setImageUploading(false);
@@ -415,6 +417,18 @@ const PropertyPostIndex = () => {
       console.log("error", error);
     }
   };
+  const FurnichingTypeType = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs.listAllPropFacing,
+      });
+      if (res) {
+        setFacingList(res?.result?.docs);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
 
   const ProjectFurnishing = async () => {
     console.log("sdfghjkl;kjhgf");
@@ -462,6 +476,7 @@ const PropertyPostIndex = () => {
   };
   useEffect(() => {
     ProjectFurnishing();
+    FurnichingTypeType();
   }, []);
   useEffect(() => {
     if (selectedImages.length > 0) {
@@ -483,7 +498,11 @@ const PropertyPostIndex = () => {
         );
       case 1:
         return (
-          <PropertyPost_s_2 formField={formField} _isloading={_isloading} />
+          <PropertyPost_s_2
+            formField={formField}
+            _isloading={_isloading}
+            _facinglist={_facinglist}
+          />
         );
       default:
         return (
@@ -491,7 +510,8 @@ const PropertyPostIndex = () => {
             formField={formField}
             _isloading={_isloading}
             _projecttype={_projecttype}
-            _videoupload={_imageuploading}
+            _videoupload={_videoupload}
+            _imageuploading={_imageuploading}
             _coverImage={_coverImage}
             handleFileChange={handleFileChange}
             selectedImages={selectedImages}
@@ -509,6 +529,7 @@ const PropertyPostIndex = () => {
             CoverImageFunction={CoverImageFunction}
             setCoverImage={setCoverImage}
             handleChangeCheck={handleChangeCheck}
+            _video_url={_video_url}
           />
         );
     }
@@ -553,13 +574,13 @@ const PropertyPostIndex = () => {
             projectName: values?.project_name,
             title: values?.add_title,
             description: values?.description,
-            price: values?.price,
+            price: Number(values?.price?.replaceAll(",", "")),
             coverImage: _coverImage,
-            video: _video_url,
+            video: _video_url?.mediaUrl,
             projectTypeId: auth?._getproprty_type,
             projectSubTypeId: auth?._getproject_sub_type,
             furnishingId: values?.furnishing,
-            facingId: "",
+            facingId: values?.facing,
             termAndConditions: _consition,
             featuredProperty: _checked,
             type: values?.typeProperty,
@@ -571,7 +592,7 @@ const PropertyPostIndex = () => {
             },
             localAreaName: values?.localArea,
 
-            price_breakup: values?.price_breakup,
+            price_breakup: Number(values?.price_breakup?.replaceAll(",", "")),
           },
         });
         if (res) {
