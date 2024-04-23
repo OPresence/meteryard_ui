@@ -23,13 +23,14 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 const CityPropertyStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     marginTop: "20px",
-    borderRadius: "15px",
-    boxShadow: "0px 1px 13px #00000026",
-    border:'4px solid blue',
+    boxShadow: "0px 1px 13px #00000026", 
     position: "relative",
     "& .bottomBox": {
       display: "flex",
       justifyContent: "space-between",
+      alignItems:'center',
+      height:'20px',
+   
       "& h6": {
         fontWeight: "600",
         fontSize: "15px",
@@ -178,7 +179,7 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
                   ashok sharma and 560k others
                 </Typography>
               </Box>
-              <Box display={"flex"} alignItems={"center"}>
+              {/* <Box display={"flex"} alignItems={"center"}>
                 <Box display={"flex"} alignItems={"center"}>
                   <Box className="iconBox">
                     <Box>
@@ -213,21 +214,21 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
                     <span>4.5</span>
                   </Box>
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
             <Box m={"15px 0"}>
               <Divider />
             </Box>
-            <Box p={"0 40px"}>
+            <Box >
               <Box className="bottomBox">
                 <Button onClick={handleLike}>
                   <Box
-                    display={"flex"}
-                    alignItems={"center"}
-                    style={{ cursor: "pointer", gap: "5px" }}
+                   
+                 
+                   
                   >
                     {liked ? (
-                      <ThumbUpIcon style={{ color: "blue" }} />
+                      <ThumbUpIcon style={{ color: "blue", }} />
                     ) : (
                       <ThumbUpOffAltIcon />
                     )}
@@ -236,21 +237,26 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
                 </Button>
                 <Button onClick={showComment_function}>
                   <Box
-                    display={"flex"}
-                    alignItems={"center"}
-                    style={{ cursor: "pointer", gap: "5px" }}
+                  
+                   
+                   
                   >
                     <BsChatDots />
                     <Typography variant="h6">comment</Typography>
                   </Box>
                 </Button>
-                <Box display={"flex"} alignItems={"center"}>
+                <Box 
+
+                
+                 >
                   <ShareIcon />
                   &nbsp;
                   <Typography variant="h6">share</Typography>
                 </Box>
               </Box>
             </Box>
+
+
             {_showcomment && (
               <Box p={"0 40px"}>
                 <Box className="comment-section">

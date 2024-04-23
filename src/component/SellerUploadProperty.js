@@ -88,12 +88,12 @@ const SellerUploadProperty = () => {
               className="IconBox"
               mt={2}
             >
-           <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-10px', md: '-15px' } }}>
+           <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-15px' } }}>
                 <VideocamIcon style={{ color: "#EE4A2A" }} /> &nbsp;
                 <span>Shorts/Video</span>
               </Box>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-              <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-10px', md: '-15px' } }}>
+              <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-15px' } }}>
                 <CollectionsIcon style={{ color: "#15D608" }} /> &nbsp;
                 <span>Photo/Brochure</span>
               </Box>
