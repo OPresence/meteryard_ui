@@ -3,7 +3,7 @@ import PostIndex from "./PostIndex";
 
 const index = () => {
   return (
-    <div>
+    <div style={{border:'7px solid purple'}}>
       <PostIndex />;
     </div>
   );

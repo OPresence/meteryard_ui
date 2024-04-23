@@ -289,58 +289,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
     { name: "Fatehabad Road" },
     { name: "Kamla Nagar" },
   ];
-  const SellerList = [
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-  ];
+ 
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();

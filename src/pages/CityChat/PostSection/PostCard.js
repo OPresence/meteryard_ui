@@ -25,6 +25,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
     marginTop: "20px",
     borderRadius: "15px",
     boxShadow: "0px 1px 13px #00000026",
+    border:'4px solid blue',
     position: "relative",
     "& .bottomBox": {
       display: "flex",

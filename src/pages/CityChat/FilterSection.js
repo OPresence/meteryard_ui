@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { Box, Grid, Container, Typography, Button } from "@mui/material";
+import { Box, Grid, Container, Typography, Button , useMediaQuery } from "@mui/material";
 import AccordionComponent from "./AccordionComponent";
 import Divider from "@mui/material/Divider";
 import PriceRangeComponent from "src/component/PriceRangeComponent";
@@ -22,6 +22,7 @@ const BuyerStyle = styled("div")(({ theme }) => ({
       color: "#000",
       borderRadius: "50px",
       padding: "10px 30px",
+     
       "& span": {
         fontSize: "12px",
       },
@@ -61,6 +62,7 @@ const FilterSection = () => {
   const [open, setOpen] = useState("");
   const [sellerList, setSellerList] = useState([]);
   const { BuyerKey } = router.query;
+  const isDesktop = useMediaQuery('(min-width:960px)');
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -200,7 +202,8 @@ const FilterSection = () => {
     <BuyerStyle>
       <Box minHeight={"100vh"} mt={"30px"} className="mainBox">
         <Container maxWidth style={{ padding: "0 0 0 25px" }}>
-          <Grid container spacing={3}>
+          {/* nikita */}
+          <Grid container spacing={3} sx={{width:{xs :'150vw', sm:'70vw'}, marginLeft:{xs:'-65px', sm:'-20px'}}}>
             <Grid
               item
               lg={8}
@@ -229,7 +232,7 @@ const FilterSection = () => {
                 <PostSection />
               </Box>
             </Grid>
-            <Grid item lg={4} md={4} sm={4} xs={4}>
+            <Grid item lg={4} md={4} sm={4} hidden={!isDesktop}>
               <Box>
                 <Box m={"0 0px 10px 0"}>
                   <Typography variant="h6">Sponsored</Typography>
