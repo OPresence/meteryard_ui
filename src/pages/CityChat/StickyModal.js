@@ -4,7 +4,7 @@ import { KeyboardArrowUp, KeyboardArrowDown } from '@mui/icons-material';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import ForumOutlinedIcon from '@mui/icons-material/ForumOutlined';
 import ArrowUpwardOutlinedIcon from '@mui/icons-material/ArrowUpwardOutlined';
-import StateComponentMobile from '@/component/StateComponentMobile';
+import StateComponent from '@/component/StateComponent';
 import PriceRangeComponent from '@/component/PriceRangeComponent';
 import AccordionComponent from "../CityChat/AccordionComponent";
 import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
@@ -184,7 +184,7 @@ const StickyModal = ({ children }) => {
               <Divider className="devider" />
             </Box>
 
-            <StateComponentMobile
+            <StateComponent
               StattName={State_name}
               type="Select State"
               name="State"
@@ -194,7 +194,7 @@ const StickyModal = ({ children }) => {
               <Divider className="devider" />
             </Box>
 
-            <StateComponentMobile
+            <StateComponent
               StattName={City_name}
               type="Select City"
               name="City"   
@@ -204,7 +204,7 @@ const StickyModal = ({ children }) => {
               <Divider className="devider" />
             </Box>
 
-            <StateComponentMobile
+            <StateComponent
               StattName={City_name_LocalArea}
               type="Select Local Area"
               name="Local Area"

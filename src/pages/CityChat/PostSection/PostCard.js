@@ -9,17 +9,16 @@ import {
   IconButton,
 } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import PublicIcon from "@mui/icons-material/Public";
+import { FaShare } from "react-icons/fa6";
 import { BsChatDots } from "react-icons/bs";
 import SendIcon from "@mui/icons-material/Send";
-import TurnRightOutlinedIcon from '@mui/icons-material/TurnRightOutlined';
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import { FaShareAlt, FaShareAltSquare } from "react-icons/fa";
 const CityPropertyStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     marginTop: "20px",
@@ -251,7 +250,7 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
 
                 
                  >
-                  <TurnRightOutlinedIcon />
+                  <FaShare />
                   &nbsp;
                   <Typography variant="h6">SHARE</Typography>
                 </Box>

@@ -216,15 +216,15 @@ const CityProperty = () => {
 
           {projectDetails.map((data, index) => {
             return (
-              <Card className="cards" key={index} sx={{border:"2px solid orange"}}>
+              <Card className="cards" key={index} >
                 <Box className="circleimg">
                   <div className="overlay"></div>
                   <img src={data?.image} alt="img" width={"100%"} />
-                  <Box className="contentBox" sx={{border:"2px solid red"}}>
+                  <Box className="contentBox" >
                     <Typography variant="h6">
                       BLK 7-1005, Vascon Tulips Gold
                     </Typography>
-                    <Box display={"flex"} alignItems={"center"} sx={{border:"2px solid black"}}>
+                    <Box display={"flex"} alignItems={"center"} >
                       <Box>
                         <Typography variant="h5">Property Size</Typography>
                         <Typography variant="h6">900 Sqr Ft.</Typography>
