@@ -57,7 +57,13 @@ const BuyerStyle = styled("Box")(({ theme }) => ({
         },
       },
     },
+
   },
+  "& .UpperSection" :{
+    "@media(max-width:615px)":{
+      // display:'none'
+    }
+  }
 }));
 const MobileDrawer = styled(Drawer)(({ theme }) => ({
   width: 272,
@@ -97,6 +103,11 @@ const LogoutButton = styled(Button)({
   color: "#fff",
   textTransform: "capitalize",
 });
+// const UpperSection = styled(Box)(({ theme }) => ({
+//   [theme.breakpoints.down("sm")]: {
+//     display: "none",
+//   },
+// }));
 const SideMenuBox = styled(Box)({
   "& .MuiCollapse-wrapperInner": {
     marginLeft: "45px",
@@ -227,6 +238,7 @@ const sections1 = [
   },
 ];
 const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
+  console.log("jhgjggh00-->");
   const router = useRouter();
   const [isLogout, setIsLogout] = useState(false);
   const renderedSections = tabView === "Arbitrage" ? sections : sections1;
@@ -289,7 +301,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
     { name: "Fatehabad Road" },
     { name: "Kamla Nagar" },
   ];
- 
+
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
@@ -302,9 +314,15 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
 
   const content = (
     <BuyerStyle>
+     
       <Box minHeight={"100vh"} className="mainBox" pb={"100px"}>
         <Box className="filterBox">
-          <Box display={"flex"} alignItems={"center"}>
+          <Box
+            // display={{ xs: "none", md: "flex" }}
+            // alignItems="center"
+            // className="UpperSection"
+          >
+            {" "}
             <Avatar
               style={{ cursor: "pointer" }}
               onClick={() =>
@@ -318,6 +336,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
             &nbsp;&nbsp;&nbsp;
             <Typography variant="h6">Monu Rajput</Typography>
           </Box>
+
           <Box>
             <Box m={"10px 0"}>
               <Typography variant="h2">property category</Typography>

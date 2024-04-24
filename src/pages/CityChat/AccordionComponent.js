@@ -17,7 +17,7 @@ const Accordionstyle = styled("div")(({ theme }) => ({
     boxShadow: "none",
 
     "& .summary": {
-      height: "40px",
+      height: "70px",
       margin: "0",
       padding: "0",
 
@@ -77,9 +77,8 @@ export default function ControlledAccordions({ data, index, imgURL }) {
                     key={index}
                     sx={{
                       width: '33%',
-                     
-                        display: 'flex',
-                        flexDirection: 'row'
+                      display: 'flex',
+                      flexDirection: 'row'
                      
                     }} 
                   >
