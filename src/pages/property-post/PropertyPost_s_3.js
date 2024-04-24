@@ -179,11 +179,20 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
 }));
 const PropertyPost_s_3 = (props) => {
   const {
-    formField: { price, location, landmark, price_breakup, localArea },
+    formField: {
+      price,
+      location,
+      landmark,
+      price_breakup,
+      localArea,
+      stateId,
+      cityId,
+    },
   } = props;
   const fileInputRef = useRef(null);
-
-  const [_propertyList, setPropertyList] = React.useState([]);
+  const [_stateList, setStateList] = React.useState([]);
+  const [_cityList, setCityList] = React.useState([]);
+  const [_getstate, setState] = useState("");
 
   const termConditionCheck = (event) => {
     if (!props?._consition) {
@@ -192,41 +201,74 @@ const PropertyPost_s_3 = (props) => {
       props?.setConsition(false);
     }
   };
-  const ProjectType = async () => {
+  const StateFunctionList = async () => {
     try {
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.proSubTypeListWithProType,
+        endPoint: Apiconfigs?.listAllState,
       });
       if (res) {
-        console.log("res00-->", res?.result?.docs);
         if (res?.responseCode == 200) {
-          setPropertyList(res?.result?.docs);
+          setStateList(res?.result?.docs);
         } else if (res?.responseCode == 404) {
-          setPropertyList([]);
+          setStateList([]);
           toast.error(res?.responseMessage);
-          setPropertyList([]);
+          setStateList([]);
         } else if (res?.responseCode == 404) {
-          setPropertyList([]);
+          setStateList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         } else if (res?.responseCode == 500) {
-          setPropertyList([]);
+          setStateList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         } else {
-          setPropertyList([]);
+          setStateList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         }
       }
     } catch (error) {
       console.log("error");
-      setPropertyList([]);
+      setStateList([]);
+    }
+  };
+  const CityFunctionList = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllCity,
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setCityList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+          toast.error(res?.responseMessage);
+          setCityList([]);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+
+          toast.error(res?.responseMessage);
+        } else if (res?.responseCode == 500) {
+          setCityList([]);
+
+          toast.error(res?.responseMessage);
+        } else {
+          setCityList([]);
+
+          toast.error(res?.responseMessage);
+        }
+      }
+    } catch (error) {
+      console.log("error");
+      setStateList([]);
     }
   };
   useEffect(() => {
-    ProjectType();
+    StateFunctionList();
   }, []);
+  useEffect(() => {
+    CityFunctionList();
+  }, [_getstate]);
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBox">
@@ -264,6 +306,35 @@ const PropertyPost_s_3 = (props) => {
                               label={price_breakup.label}
                               fullWidth
                               yourMaxLengthValue={10}
+                            />
+                          </Box>
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xs={12}>
+                          <Box mt={2}>
+                            <SelectField
+                              _isloading={props._isloading}
+                              name={stateId.name}
+                              valueName={stateId.value}
+                              Placeholder_name={stateId.Placeholder_name}
+                              label={stateId.label}
+                              fullWidth
+                              yourMaxLengthValue={10}
+                              data={_stateList}
+                              set_State={setState}
+                            />
+                          </Box>
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xs={12}>
+                          <Box mt={2}>
+                            <SelectField
+                              _isloading={props._isloading}
+                              name={cityId.name}
+                              valueName={cityId.value}
+                              Placeholder_name={cityId.Placeholder_name}
+                              label={cityId.label}
+                              fullWidth
+                              yourMaxLengthValue={10}
+                              data={_cityList}
                             />
                           </Box>
                         </Grid>
@@ -318,11 +389,6 @@ const PropertyPost_s_3 = (props) => {
                               </Box>
                             </Box>
                           </label>{" "}
-                          {console.log(
-                            "00000ssd----->",
-                            props?._imageuploading,
-                            props?._videoupload
-                          )}
                           &nbsp;&nbsp;&nbsp;
                           <label style={{ display: "inline-flex" }}>
                             <Box className="videoBox CoverImage">

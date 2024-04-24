@@ -15,17 +15,46 @@ export default function InputField(props) {
   }
 
   function handleNameKeyDown(event) {
-    if (props?.name == "price" || props?.name == "price breakup") {
+    if (
+      props?.name == "price" ||
+      props?.name == "price breakup" ||
+      props?.name == "floors_no" ||
+      props?.name == "total_floors"
+    ) {
       if (!(/[0-9\s]/.test(event.key) || event.key === "Backspace")) {
         event.preventDefault();
       }
     }
   }
-  console.log("props?.name----<>", props?.name == "price_breakup");
+
+  // function handleChange(event) {
+  //   if (props?.name == "price" || props?.name == "price_breakup") {
+  //     const inputValue = event.target.value || 0;
+  //     const numericValue = inputValue.replace(/[^0-9.]/g, "");
+  //     const formattedValue = parseFloat(numericValue).toLocaleString("en-IN", {
+  //       maximumFractionDigits: 2,
+  //     });
+  //     helpers.setValue(formattedValue);
+  //   } else {
+  //     helpers.setValue(event.target.value);
+  //   }
+  // }
   function handleChange(event) {
-    if (props?.name == "price" || props?.name == "price_breakup") {
-      const inputValue = event.target.value;
-      const numericValue = inputValue.replace(/[^0-9.]/g, "");
+    if (props?.name === "price" || props?.name === "price_breakup") {
+      let inputValue = event.target.value;
+      if (inputValue === "0") {
+        inputValue = ""; // Set value to empty string if it's '0'
+      } else {
+        inputValue = inputValue.replace(/^0+/, ""); // Remove leading zeros
+      }
+
+      let numericValue = inputValue.replace(/[^0-9.]/g, "");
+
+      // If numericValue is empty or contains only ".", set it to "0"
+      if (numericValue === "" || numericValue === ".") {
+        numericValue = "0";
+      }
+
       const formattedValue = parseFloat(numericValue).toLocaleString("en-IN", {
         maximumFractionDigits: 2,
       });

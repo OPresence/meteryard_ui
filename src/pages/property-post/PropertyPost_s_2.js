@@ -83,6 +83,7 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
 const PropertyPost_s_2 = (props) => {
   const {
     _projecttype,
+    handleNameKeyDown,
     formField: {
       total_floors,
       floors_no,
@@ -183,7 +184,6 @@ const PropertyPost_s_2 = (props) => {
         endPoint: Apiconfigs?.proSubTypeListWithProType,
       });
       if (res) {
-        console.log("res00-->", res?.result?.docs);
         if (res?.responseCode == 200) {
           setPropertyList(res?.result?.docs);
         } else if (res?.responseCode == 404) {
@@ -212,7 +212,6 @@ const PropertyPost_s_2 = (props) => {
   useEffect(() => {
     ProjectType();
   }, []);
-  console.log("bdhjfds---->", _projecttype);
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBox">
@@ -231,7 +230,7 @@ const PropertyPost_s_2 = (props) => {
                   valueName={total_floors.value}
                   label={total_floors.label}
                   Placeholder_name={total_floors.Placeholder_name}
-                  // yourMaxLengthValue={2}
+                  yourMaxLengthValue={2}
                   fullWidth
                 />
               </Grid>
@@ -244,6 +243,7 @@ const PropertyPost_s_2 = (props) => {
                   label={floors_no.label}
                   fullWidth
                   data={bathroomNumberList}
+                  yourMaxLengthValue={2}
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12}>

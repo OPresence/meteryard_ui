@@ -48,7 +48,7 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
       "@media(max-width:615px)": {
         display: "Block",
         padding: "0 0 0 10px",
-        marginTop: "50px",
+        // marginTop: "50px",
       },
     },
     "& h5": {
@@ -201,6 +201,11 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
       display: "none !important",
     },
   },
+  "& .PropertyBox": {
+    "@media(max-width:615px)": {
+      marginTop: "50px",
+    },
+  },
 }));
 const DialogButtonStyle = styled("Box")(({ theme }) => ({
   "& button": {
@@ -296,6 +301,11 @@ const PropertyPostIndex = () => {
   });
   const [_projecttype, setProjectType] = useState([]);
   const [open, setOpen] = useState(false);
+  const handleNameKeyDown = (event) => {
+    if (/[0-9]/.test(event.key)) {
+      event.preventDefault();
+    }
+  };
   const handleChangeCheck = (event) => {
     if (!_checked) {
       setChecked(true);
@@ -347,7 +357,7 @@ const PropertyPostIndex = () => {
         if (video.duration > 30) {
           alert("Please upload a video that is 30 seconds or shorter.");
           // Optionally, you can clear the file input
-          fileInputRef.current.value = "";
+          // fileInputRef.current.value = "";
         } else {
           try {
             // setImageUploading(true)
@@ -369,7 +379,6 @@ const PropertyPostIndex = () => {
   const CoverImageFunction = async (imageValue) => {
     try {
       setImageUploading(true);
-      console.log("ghavsdjbsab");
       const formdata = new FormData();
       formdata.append("uploaded_file", imageValue);
 
@@ -442,7 +451,6 @@ const PropertyPostIndex = () => {
   };
 
   const ProjectFurnishing = async () => {
-    console.log("sdfghjkl;kjhgf");
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllProjectFurnishing,
@@ -494,6 +502,7 @@ const PropertyPostIndex = () => {
       handleImageUpload();
     }
   }, [selectedImages]);
+
   function _renderStepContent(step) {
     switch (step) {
       case 0:
@@ -566,7 +575,7 @@ const PropertyPostIndex = () => {
     }
   }
   async function PropertyPostFunction(values, actions) {
-    console.log("valueszjzknknisd--->", values);
+    console.log("valuessdsd0000---------->", values);
     if (_coverImage != "") {
       try {
         setIsLoading(true);
@@ -602,14 +611,17 @@ const PropertyPostIndex = () => {
               coordinates: [coordinates?.lat, coordinates?.lng],
             },
             localAreaName: values?.localArea,
-
             price_breakup: Number(values?.price_breakup?.replaceAll(",", "")),
+            stateId: values?.stateId,
+            cityId: values?.cityId,
           },
         });
         if (res) {
           setIsLoading(false);
           if (res?.responseCode == 200) {
-            // toast.success(res?.responseMessage); // Display success notification
+            auth?.ResidentialAPI();
+            auth?.CommercialAPI();
+            auth?.AgreecultureAPIAPI();
             setIsLoading(false);
             setPropertyForm(false);
             setSelectedImages([]);
@@ -691,7 +703,7 @@ const PropertyPostIndex = () => {
               </Grid>
 
               <Grid item lg={6} md={6} sm={12} xs={12}>
-                <Box>
+                <Box className="PropertyBox">
                   <Typography variant="h3">List Your Property</Typography>
                   <Box mt={2}>
                     <Typography variant="h5">Fill Basic Details</Typography>

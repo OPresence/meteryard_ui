@@ -10,7 +10,6 @@ const PropertyMoreDetails = ({ dataArray }) => {
           <Grid item xs={12} lg={4}>
             <Box className="contentdiv">
               <Box className="moreDetailcontent" style={{ width: "150px" }}>
-                {console.log("dataArrays--->", dataArray)}
                 <Typography variant="h3">Price Breakup</Typography>
               </Box>
               <Box className="moreDetailcontent">

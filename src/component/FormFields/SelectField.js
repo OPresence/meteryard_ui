@@ -90,8 +90,7 @@ const BootstrapInput = withStyles((theme) => ({
 
 function SelectField(props) {
   const { label, data, ChangeDropDownValue, ...rest } = props;
-  const [field, meta] = useField(props);
-  console.log("dfsdfdf5d454------->", props?.field);
+  const [field, meta, set_State] = useField(props);
   const { value: selectedValue } = field;
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -106,15 +105,17 @@ function SelectField(props) {
   // onChange Dropdown Function
   const handleChange = (event) => {
     const { value } = event.target;
+    if (label == "State") {
+      props?.set_State(value);
+    }
+
     field.onChange(event); // This is important to update the Formik state
     ChangeDropDownValue && ChangeDropDownValue(value || value?.stateId); // Optional: Call your custom function
   };
-  console.log("fieldh4644648694sjsdas--->", field);
 
   const [touched, error] = at(meta, "touched", "error");
   const isError = touched && error && true;
   function _renderHelperText() {
-    console.log("njczxjjxznbcb---->", error);
     if (isError) {
       return (
         <FormHelperText style={{ color: "#d32f2f" }}>{error}</FormHelperText>
@@ -147,6 +148,8 @@ function SelectField(props) {
               >
                 {item?.projectType ||
                   item?.name ||
+                  item?.cityName ||
+                  item?.stateName ||
                   item?.projectFurnishing ||
                   item?.propFacing}
               </option>

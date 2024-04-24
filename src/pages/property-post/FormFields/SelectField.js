@@ -91,7 +91,6 @@ const BootstrapInput = withStyles((theme) => ({
 function SelectField(props) {
   const { label, data, ChangeDropDownValue, ...rest } = props;
   const [field, meta] = useField(props);
-  console.log("dfsdfdf5d454------->", props?.field);
   const { value: selectedValue } = field;
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -114,7 +113,6 @@ function SelectField(props) {
   const [touched, error] = at(meta, "touched", "error");
   const isError = touched && error && true;
   function _renderHelperText() {
-    console.log("njczxjjxznbcb---->", error);
     if (isError) {
       return (
         <FormHelperText style={{ color: "#d32f2f" }}>{error}</FormHelperText>
