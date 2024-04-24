@@ -9,7 +9,7 @@ import StateComponent from "../../component/StateComponent";
 const MobileModal = () => {
     const CheckBoxName = [
         {
-          name: "residential",
+          name: "Residential",
           valueName: [
             { name: "HOUSE" },
             { name: "VILLA" },
@@ -20,7 +20,7 @@ const MobileModal = () => {
       ];
       const CheckBoxName1 = [
         {
-          name: "commercial",
+          name: "Commercial",
           valueName: [
             { name: "HOUSE" },
             { name: "VILLA" },
@@ -31,7 +31,7 @@ const MobileModal = () => {
       ];
       const CheckBoxName2 = [
         {
-          name: "agriculture",
+          name: "Agriculture",
           valueName: [
             { name: "HOUSE" },
             { name: "VILLA" },
@@ -67,7 +67,7 @@ const MobileModal = () => {
   return (
     <Box>
          <Box m={"10px 0"}>
-              <Typography variant="h2">Property category</Typography>
+              <Typography variant="h2" sx={{textAlign:'center', fontSize:'500', fontSize:'20px'}}>Property category</Typography>
             </Box>
             {CheckBoxName.map((data, index) => {
               return (

@@ -73,7 +73,7 @@ const StickyModal = ({ children }) => {
             </Box>
           )}
           {open && 
-          <Modal open={true} onClose={handleCloseModal}>
+          <Modal open={open} onClose={handleCloseModal}>
           <Slide direction="up" in={open} mountOnEnter unmountOnExit>
             <div
               style={{

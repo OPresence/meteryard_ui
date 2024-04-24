@@ -3,5 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/CityChat": "pages/CityChat.js"
+  "/CityChat": "pages/CityChat.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js"
 }
