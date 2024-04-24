@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { Box, Grid, Container, Typography, Button } from "@mui/material";
+import { Box, Grid, Container, Typography, Button , useMediaQuery } from "@mui/material";
 import AccordionComponent from "./AccordionComponent";
 import Divider from "@mui/material/Divider";
 import PriceRangeComponent from "src/component/PriceRangeComponent";
@@ -12,6 +12,8 @@ import AdvertisementComponent from "../../component/AdvertisementComponent";
 import SellerListComponent from "src/component/SellerListComponent";
 import SellerUploadProperty from "src/component/SellerUploadProperty";
 import EnquiryForm from "./EnquiryForm";
+import axios from 'axios';
+
 const BuyerStyle = styled("div")(({ theme }) => ({
   "& .mainBox": {
     background: theme.palette.background.default,
@@ -20,6 +22,7 @@ const BuyerStyle = styled("div")(({ theme }) => ({
       color: "#000",
       borderRadius: "50px",
       padding: "10px 30px",
+     
       "& span": {
         fontSize: "12px",
       },
@@ -57,7 +60,9 @@ const BuyerStyle = styled("div")(({ theme }) => ({
 const FilterSection = () => {
   const router = useRouter();
   const [open, setOpen] = useState("");
+  const [sellerList, setSellerList] = useState([]);
   const { BuyerKey } = router.query;
+  const isDesktop = useMediaQuery('(min-width:960px)');
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -65,7 +70,25 @@ const FilterSection = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  useEffect(() => {
 
+    const fetchSellerList = async () => {
+      const body = {
+        "search":"SELLER",
+        "page": "1",
+        "limit": "10"
+      }
+      try {
+        // const response = await axios.post('https://lms-api-backend.onrender.com/api/v1/admin/listAllUsers', body);
+        const response = await PostApiFunction('https://lms-api-backend.onrender.com/api/v1/admin/listAllUsers', body)      
+        setSellerList(response.result.docs);
+      } catch (error) {
+        console.error('Error fetching seller list:', error);
+      }
+    };
+
+    fetchSellerList(); 
+  }, []);
   const CheckBoxName = [
     {
       name: "residential",
@@ -179,7 +202,8 @@ const FilterSection = () => {
     <BuyerStyle>
       <Box minHeight={"100vh"} mt={"30px"} className="mainBox">
         <Container maxWidth style={{ padding: "0 0 0 25px" }}>
-          <Grid container spacing={3}>
+          {/* nikita */}
+          <Grid container spacing={3} sx={{width:{xs :'150vw', sm:'70vw'}, marginLeft:{xs:'-65px', sm:'-20px'}}}>
             <Grid
               item
               lg={8}
@@ -208,7 +232,7 @@ const FilterSection = () => {
                 <PostSection />
               </Box>
             </Grid>
-            <Grid item lg={4} md={4} sm={4} xs={4}>
+            <Grid item lg={4} md={4} sm={4} hidden={!isDesktop}>
               <Box>
                 <Box m={"0 0px 10px 0"}>
                   <Typography variant="h6">Sponsored</Typography>
@@ -221,8 +245,10 @@ const FilterSection = () => {
                 </Box>
                 <Box className="SellerBox">
                   {SellerList &&
-                    SellerList?.map((data, index) => {
+                    SellerList?.filter(seller => seller.online)
+                    .map((data, index) => {
                       return (
+                        
                         <Box m={"20px 0"} key={index}>
                           <SellerListComponent data={data} index={index} />
                         </Box>

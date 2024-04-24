@@ -9,32 +9,34 @@ import {
   IconButton,
 } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import PublicIcon from "@mui/icons-material/Public";
+import { FaShare } from "react-icons/fa6";
 import { BsChatDots } from "react-icons/bs";
 import SendIcon from "@mui/icons-material/Send";
-import ShareIcon from "@mui/icons-material/Share";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import { FaShareAlt, FaShareAltSquare } from "react-icons/fa";
 const CityPropertyStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     marginTop: "20px",
-    borderRadius: "15px",
-    boxShadow: "0px 1px 13px #00000026",
+    boxShadow: "0px 13px 13px #00000026", 
+    borderRadius:'20px',
     position: "relative",
     "& .bottomBox": {
       display: "flex",
       justifyContent: "space-between",
+      alignItems:'center',
+      height:'20px',
+   
       "& h6": {
         fontWeight: "600",
-        fontSize: "15px",
+        fontSize: "12px",
       },
       "& svg": {
-        fontSize: "22px",
+        fontSize: "18px",
         color: "#444444",
       },
     },
@@ -77,6 +79,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
     },
     "& .ProfileBox": {
       padding: "15px",
+     
       "& h6": {
         fontSize: "12px",
         fontWeight: "500",
@@ -128,7 +131,7 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
     <CityPropertyStyle>
       <Box className="mainBox">
         <Box maxWidth={280} position={"absolute"} right={-17} top={-13}>
-          <img src="/images/Path 8257.svg" width={"100%"} />
+          <img src="/images/Path 8257.svg" width={"100%"}  />
         </Box>
         <Box>
           <Box className="ProfileBox">
@@ -177,7 +180,7 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
                   ashok sharma and 560k others
                 </Typography>
               </Box>
-              <Box display={"flex"} alignItems={"center"}>
+              {/* <Box display={"flex"} alignItems={"center"}>
                 <Box display={"flex"} alignItems={"center"}>
                   <Box className="iconBox">
                     <Box>
@@ -212,44 +215,49 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
                     <span>4.5</span>
                   </Box>
                 </Box>
-              </Box>
+              </Box> */}
             </Box>
             <Box m={"15px 0"}>
               <Divider />
             </Box>
-            <Box p={"0 40px"}>
+            <Box >
               <Box className="bottomBox">
                 <Button onClick={handleLike}>
                   <Box
-                    display={"flex"}
-                    alignItems={"center"}
-                    style={{ cursor: "pointer", gap: "5px" }}
+                   
+                 
+                   
                   >
                     {liked ? (
-                      <ThumbUpIcon style={{ color: "blue" }} />
+                      <ThumbUpIcon style={{ color: "blue", }} />
                     ) : (
                       <ThumbUpOffAltIcon />
                     )}
-                    <Typography variant="h6">like</Typography>
+                    <Typography variant="h6">Like</Typography>
                   </Box>
                 </Button>
                 <Button onClick={showComment_function}>
                   <Box
-                    display={"flex"}
-                    alignItems={"center"}
-                    style={{ cursor: "pointer", gap: "5px" }}
+                  
+                   
+                   
                   >
                     <BsChatDots />
-                    <Typography variant="h6">comment</Typography>
+                    <Typography variant="h6">Comment</Typography>
                   </Box>
                 </Button>
-                <Box display={"flex"} alignItems={"center"}>
-                  <ShareIcon />
+                <Box 
+
+                
+                 >
+                  <FaShare />
                   &nbsp;
-                  <Typography variant="h6">share</Typography>
+                  <Typography variant="h6">SHARE</Typography>
                 </Box>
               </Box>
             </Box>
+
+
             {_showcomment && (
               <Box p={"0 40px"}>
                 <Box className="comment-section">
