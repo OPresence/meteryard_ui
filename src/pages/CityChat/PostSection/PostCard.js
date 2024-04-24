@@ -13,7 +13,7 @@ import ApartmentIcon from "@mui/icons-material/Apartment";
 import PublicIcon from "@mui/icons-material/Public";
 import { BsChatDots } from "react-icons/bs";
 import SendIcon from "@mui/icons-material/Send";
-import ShareIcon from "@mui/icons-material/Share";
+import TurnRightOutlinedIcon from '@mui/icons-material/TurnRightOutlined';
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -23,7 +23,8 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 const CityPropertyStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     marginTop: "20px",
-    boxShadow: "0px 1px 13px #00000026", 
+    boxShadow: "0px 13px 13px #00000026", 
+    borderRadius:'20px',
     position: "relative",
     "& .bottomBox": {
       display: "flex",
@@ -33,10 +34,10 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
    
       "& h6": {
         fontWeight: "600",
-        fontSize: "15px",
+        fontSize: "12px",
       },
       "& svg": {
-        fontSize: "22px",
+        fontSize: "18px",
         color: "#444444",
       },
     },
@@ -79,6 +80,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
     },
     "& .ProfileBox": {
       padding: "15px",
+     
       "& h6": {
         fontSize: "12px",
         fontWeight: "500",
@@ -130,7 +132,7 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
     <CityPropertyStyle>
       <Box className="mainBox">
         <Box maxWidth={280} position={"absolute"} right={-17} top={-13}>
-          <img src="/images/Path 8257.svg" width={"100%"} />
+          <img src="/images/Path 8257.svg" width={"100%"}  />
         </Box>
         <Box>
           <Box className="ProfileBox">
@@ -232,7 +234,7 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
                     ) : (
                       <ThumbUpOffAltIcon />
                     )}
-                    <Typography variant="h6">like</Typography>
+                    <Typography variant="h6">Like</Typography>
                   </Box>
                 </Button>
                 <Button onClick={showComment_function}>
@@ -242,16 +244,16 @@ const PostCard = ({ data, onLike, AddCommentFunction }) => {
                    
                   >
                     <BsChatDots />
-                    <Typography variant="h6">comment</Typography>
+                    <Typography variant="h6">Comment</Typography>
                   </Box>
                 </Button>
                 <Box 
 
                 
                  >
-                  <ShareIcon />
+                  <TurnRightOutlinedIcon />
                   &nbsp;
-                  <Typography variant="h6">share</Typography>
+                  <Typography variant="h6">SHARE</Typography>
                 </Box>
               </Box>
             </Box>

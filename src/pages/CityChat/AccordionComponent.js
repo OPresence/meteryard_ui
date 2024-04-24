@@ -10,17 +10,22 @@ const Accordionstyle = styled("div")(({ theme }) => ({
   "& .MuiPaper-root": {
     top: "0px !important",
     borderRadius: "5px",
+    
+   
   },
   "& .accordionstyle": {
     boxShadow: "none",
+   
     "& .summary": {
-      height: "60px",
+      height: "40px",
       margin: "0",
       padding: "0",
+     
     },
     "& h6": {
       fontSize: "14px",
       fontWeight: "500",
+      marginBottom:'15px'
     },
     "& .iconBox": {
       "& svg": {
@@ -29,6 +34,7 @@ const Accordionstyle = styled("div")(({ theme }) => ({
         fontSize: "46px",
         padding: "8px",
         borderRadius: "50px",
+       
       },
     },
   },
@@ -62,28 +68,25 @@ export default function ControlledAccordions({ data, index, imgURL }) {
             <Typography variant="h6">{data?.name}</Typography>
           </Box>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{backgroundColor:'red'}}>
           {data?.valueName?.map((data, index) => {
             return (
               <Box
-                key={index}
-                display={"flex"}
-                alignItems={"center"}
-                justifyContent={"center"}
-                mt={"-10px"}
-              >
-                <Typography sx={{ width: "33%", flexShrink: 0 }}>
-                  {data?.name}
-                </Typography>{" "}
-                <Box>
-                  <CheckBoxComponent
-                    data={data}
-                    index={index}
-                    setChecked_Get={setChecked_Get}
-                    // handleChangeCheckBox={handleChangeCheckBox}
-                  />
-                </Box>
-              </Box>
+  key={index}
+  sx={{ mt: "-1px", display: 'flex', flexDirection: 'row', alignItems: 'center' }}
+>
+  {/* First set of data */}
+  <CheckBoxComponent
+    data={data}
+    index={index}
+    setChecked_Get={setChecked_Get}
+  />
+  <Typography sx={{ mt: '10px', ml: '5px' }}>
+    {data?.name}
+  </Typography>{" "}
+</Box>
+
+            
             );
           })}
         </AccordionDetails>

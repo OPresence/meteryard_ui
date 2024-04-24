@@ -114,7 +114,7 @@ export default function PriceRangeComponent({ imgURL }) {
               <img src={imgURL} width={"100%"} />
             </Box>
             &nbsp;
-            <Typography variant="h6">price range</Typography>
+            <Typography variant="h6">Price Range</Typography>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
