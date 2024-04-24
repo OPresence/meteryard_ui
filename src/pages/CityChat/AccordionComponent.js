@@ -10,22 +10,22 @@ const Accordionstyle = styled("div")(({ theme }) => ({
   "& .MuiPaper-root": {
     top: "0px !important",
     borderRadius: "5px",
-    
-   
+
+
   },
   "& .accordionstyle": {
     boxShadow: "none",
-   
+
     "& .summary": {
       height: "40px",
       margin: "0",
       padding: "0",
-     
+
     },
     "& h6": {
       fontSize: "14px",
       fontWeight: "500",
-      marginBottom:'15px'
+      marginBottom: '15px'
     },
     "& .iconBox": {
       "& svg": {
@@ -34,7 +34,7 @@ const Accordionstyle = styled("div")(({ theme }) => ({
         fontSize: "46px",
         padding: "8px",
         borderRadius: "50px",
-       
+
       },
     },
   },
@@ -68,28 +68,39 @@ export default function ControlledAccordions({ data, index, imgURL }) {
             <Typography variant="h6">{data?.name}</Typography>
           </Box>
         </AccordionSummary>
-        <AccordionDetails sx={{backgroundColor:'red'}}>
-          {data?.valueName?.map((data, index) => {
-            return (
-              <Box
-  key={index}
-  sx={{ mt: "-1px", display: 'flex', flexDirection: 'row', alignItems: 'center' }}
->
-  {/* First set of data */}
-  <CheckBoxComponent
-    data={data}
-    index={index}
-    setChecked_Get={setChecked_Get}
-  />
-  <Typography sx={{ mt: '10px', ml: '5px' }}>
-    {data?.name}
-  </Typography>{" "}
-</Box>
+        <Box>
+          <Box sx={{display: 'flex', flexDirection: 'column' }}>
+            <AccordionDetails sx={{ display: 'flex', flexWrap: 'wrap' }}>
+              {data?.valueName?.map((data, index) => {
+                return (
+                  <Box
+                    key={index}
+                    sx={{
+                      width: '33%',
+                     
+                        display: 'flex',
+                        flexDirection: 'row'
+                     
+                    }} 
+                  >
+                    {/* First set of data */}
+                    <Typography sx={{ mt: '10px', ml: '0px' }}>
+                      {data?.name}
+                    </Typography>{" "}
+                    <CheckBoxComponent
+                      data={data}
+                      index={index}
+                      setChecked_Get={setChecked_Get}
+                    />
+                  </Box>
+                );
+              })}
+            </AccordionDetails>
+          </Box>
+        </Box>
 
-            
-            );
-          })}
-        </AccordionDetails>
+
+
       </Accordion>
     </Accordionstyle>
   );
