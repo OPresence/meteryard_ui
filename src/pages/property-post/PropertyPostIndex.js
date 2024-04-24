@@ -12,7 +12,6 @@ import {
   Step,
   StepLabel,
   Typography,
-  CircularProgress,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import Logo from "../../component/Logo";
@@ -31,11 +30,10 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    // paddingTop: "136px",
     "@media(max-width:615px)": {
       background:
         "transparent linear-gradient(113deg, #383838 0%, #4E6407 100%) 0% 0% no-repeat padding-box",
-      paddingTop: "90px",
+      paddingTop: "0",
       "& .conatinerBox": {
         padding: "0",
       },
@@ -50,6 +48,7 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
       "@media(max-width:615px)": {
         display: "Block",
         padding: "0 0 0 10px",
+        marginTop: "50px",
       },
     },
     "& h5": {
@@ -195,6 +194,13 @@ const PropertyPostIndexStyle = styled("Box")(({ theme }) => ({
       },
     },
   },
+  "& .LogoBox": {
+    display: "block",
+
+    "@media(max-width:615px)": {
+      display: "none !important",
+    },
+  },
 }));
 const DialogButtonStyle = styled("Box")(({ theme }) => ({
   "& button": {
@@ -237,6 +243,11 @@ const StepperStyle = styled("Stepper")(({ theme }) => ({
     paddingRight: "0px",
   },
   "& .MuiSvgIcon-root-MuiStepIcon-root.Mui-completed": {
+    color: "red !important",
+  },
+}));
+const StyledStepLabel = styled(StepLabel)(({ theme }) => ({
+  "& .MuiStepLabel-completed": {
     color: "red !important",
   },
 }));
@@ -662,6 +673,7 @@ const PropertyPostIndex = () => {
       <Box className="MainBoxIndex">
         <Container className="conatinerBox">
           <Box
+            className="LogoBox"
             maxWidth={230}
             padding={"20px 0 0 0"}
             position={"relative"}
@@ -670,10 +682,10 @@ const PropertyPostIndex = () => {
           >
             <Logo />
           </Box>
-          <Box mt={"-90px"}>
+          <Box>
             <Grid container spacing={3}>
               <Grid item lg={6} md={6} sm={12} xs={12} className="gridClass">
-                <Box maxWidth={400}>
+                <Box maxWidth={400} p={"0 0 0 20px"}>
                   <img src="/images/Group 8363.svg" width={"100%"} />
                 </Box>
               </Grid>
@@ -693,25 +705,31 @@ const PropertyPostIndex = () => {
                           style={{ display: "flex", justifyContent: "center" }}
                         >
                           <Step key={"label"} style={{ position: "relative" }}>
+                            {/* <StyledStepLabel> */}
                             <StepLabel>
                               <Typography className="h2-class">
                                 {"Property Details"}
                               </Typography>
                             </StepLabel>
+                            {/* </StyledStepLabel> */}
                           </Step>
                           <Step key={"label"} style={{ position: "relative" }}>
+                            {/* <StyledStepLabel> */}
                             <StepLabel>
                               <Typography className="h2-class1">
                                 {"Area Details"}
                               </Typography>
                             </StepLabel>
+                            {/* </StyledStepLabel> */}
                           </Step>
                           <Step key={"label"} style={{ position: "relative" }}>
+                            {/* <StyledStepLabel> */}
                             <StepLabel>
                               <Typography className="h2-class2">
                                 {"Images & Location"}
                               </Typography>
                             </StepLabel>
+                            {/* </StyledStepLabel> */}
                           </Step>
                         </Stepper>
                       </StepperStyle>

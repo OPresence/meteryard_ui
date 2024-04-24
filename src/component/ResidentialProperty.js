@@ -6,7 +6,8 @@ import Divider from "@mui/material/Divider";
 import ButtonComponent from "./ButtonComponent";
 import { PostApiFunction } from "../utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
-import { toast } from "react-toastify";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "react-toastify/dist/ReactToastify.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -98,13 +99,42 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
       fontSize: "18px",
     },
   },
+  "& .ArrowClass": {
+    cursor: "pointer",
+    width: "30px",
+    height: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#a2d117",
+    border: "3px solid #FAF9F6",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    "& svg": {
+      color: "#000 !important",
+      fontSize: "12px",
+    },
+    "&:hover": {
+      background: "rgb(0, 144, 53)",
+      transition: "0.6s",
+      "& svg": {
+        color: "#fff !important",
+      },
+    },
+  },
 }));
 const ResidentialProjects = () => {
   const sliderRef = useRef(null);
   const [_getlist, setGetList] = useState([]);
   const [_isloading, setIsLoading] = useState(false);
+  const next = () => {
+    sliderRef.current.slickNext();
+  };
+
+  const previous = () => {
+    sliderRef.current.slickPrev();
+  };
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     autoplay: false,
     arrows: false,
@@ -204,11 +234,37 @@ const ResidentialProjects = () => {
   return (
     <ResidentStyle>
       <div className="mainSliderDiv">
-        <Box>
-          <Typography variant="h2">Residential Projects</Typography>
-          <Typography variant="h6">
-            Featured Residential Projects Across India
-          </Typography>
+        <Box
+          display={"flex"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Box display={"inline-flex"}>
+            <Box>
+              <Typography variant="h2">Residential Projects</Typography>
+              <Typography variant="h6">
+                Featured Residential Projects Across India
+              </Typography>
+            </Box>
+          </Box>
+          <Box
+            style={{
+              display: "flex",
+              gap: "10px",
+              justifyContent: "flex-end",
+            }}
+          >
+            <Box className={"ArrowClass"} onClick={previous}>
+              <ArrowBackIosIcon
+                style={{
+                  color: "#000",
+                }}
+              />
+            </Box>
+            <Box className={"ArrowClass"} onClick={next}>
+              <ArrowForwardIosIcon style={{ color: "#000" }} />
+            </Box>
+          </Box>
         </Box>
         <Box mt={5}>
           {_getlist?.length > 4 ? (
@@ -365,7 +421,7 @@ const ResidentialProjects = () => {
                 })}
             </>
           )}
-          {_getlist?.length > 7 && (
+          {/* {_getlist?.length > 7 && (
             <Box
               display={"flex"}
               justifyContent={"end"}
@@ -374,7 +430,7 @@ const ResidentialProjects = () => {
             >
               <a href="#">view more</a>
             </Box>
-          )}
+          )} */}
         </Box>
       </div>
     </ResidentStyle>

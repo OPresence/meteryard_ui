@@ -9,6 +9,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../context/Auth";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "80px 0px",
@@ -18,6 +20,28 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
     },
     "& h2": {
       fontWeight: "500",
+    },
+  },
+  "& .ArrowClass": {
+    cursor: "pointer",
+    width: "30px",
+    height: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#a2d117",
+    border: "3px solid #FAF9F6",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    "& svg": {
+      color: "#000 !important",
+      fontSize: "12px",
+    },
+    "&:hover": {
+      background: "rgb(0, 144, 53)",
+      transition: "0.6s",
+      "& svg": {
+        color: "#fff !important",
+      },
     },
   },
   "& .circleimg": {
@@ -54,6 +78,8 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
       background: "#fff",
       borderRadius: "10px",
       position: "relative",
+      minHeight: "220px",
+      height: "100%",
       "& svg": {
         color: "#000",
         fontSize: "16px",
@@ -105,11 +131,18 @@ const ResidentialProjects = () => {
   const auth = useContext(AuthContext);
   const sliderRef = useRef(null);
 
+  const next = () => {
+    sliderRef.current.slickNext();
+  };
+
+  const previous = () => {
+    sliderRef.current.slickPrev();
+  };
   const settings = {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: true,
+    arrows: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -182,11 +215,37 @@ const ResidentialProjects = () => {
     <ResidentStyle>
       <div className="mainSliderDiv">
         <Container maxWidth>
-          <Box>
-            <Typography variant="h2">Residential Projects</Typography>
-            <Typography variant="h6">
-              Featured Residential Projects Across India
-            </Typography>
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Box display={"inline-flex"}>
+              <Box>
+                <Typography variant="h2">Residential Projects</Typography>
+                <Typography variant="h6">
+                  Featured Residential Projects Across India
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              style={{
+                display: "flex",
+                gap: "10px",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Box className={"ArrowClass"} onClick={previous}>
+                <ArrowBackIosIcon
+                  style={{
+                    color: "#000",
+                  }}
+                />
+              </Box>
+              <Box className={"ArrowClass"} onClick={next}>
+                <ArrowForwardIosIcon style={{ color: "#000" }} />
+              </Box>
+            </Box>
           </Box>
           <Box mt={5}>
             <Slider {...settings} ref={sliderRef}>
@@ -267,7 +326,9 @@ const ResidentialProjects = () => {
                                     </Box>
 
                                     {/* <Route path="/view-property" exact> */}
-                                    <ButtonComponent data={data} />
+                                    <Box pt={"30px"}>
+                                      <ButtonComponent data={data} />
+                                    </Box>
                                     {/* </Route> */}
                                   </Box>
                                 </Box>

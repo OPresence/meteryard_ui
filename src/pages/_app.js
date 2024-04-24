@@ -6,6 +6,7 @@ import { createTheme } from "../theme/index";
 import { ToastContainer } from "react-toastify";
 import AuthContext from "../context/Auth";
 import { useEffect, useState } from "react";
+import ChatBoat from "../component/ChatBoat";
 import { Router } from "next/router";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
@@ -48,6 +49,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             <SessionProvider session={session}>
               {getLayout(<Component {...pageProps} />)}
             </SessionProvider>
+            <ChatBoat />
           </AuthContext>
           <ToastContainer />
         </ThemeProvider>

@@ -20,7 +20,7 @@ import HomeLayout from "../../layout/HomeLayout";
 const ViewPropetyStyle = styled("Box")(({ theme }) => ({
   "& .imgBox": {
     "@media(max-width:615px)": {
-      marginTop: "60px",
+      marginTop: "80px",
     },
   },
   "& .joinPrimeButton": {
@@ -100,11 +100,13 @@ const ViewPropertyIndex = () => {
                       </Box>
                     </Grid>
                     <Grid item lg={7} md={6} xs={12}>
-                      <Box display={"flex"} justifyContent={"end"}>
-                        <Box height={"353px"} width={"100%"}>
-                          <GalleryImg ArrayImage={dataArray?.image} />
+                      {dataArray?.image?.length > 0 && (
+                        <Box display={"flex"} justifyContent={"end"}>
+                          <Box height={"353px"} width={"100%"}>
+                            <GalleryImg ArrayImage={dataArray?.image} />
+                          </Box>
                         </Box>
-                      </Box>
+                      )}
                     </Grid>
                   </Grid>
 
