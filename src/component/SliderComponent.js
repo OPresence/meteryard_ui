@@ -33,7 +33,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
   },
   "& .cards": {
     cursor: "pointer",
-    // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    boxShadow: "none !important",
     padding: "10px",
     width: "80%",
 

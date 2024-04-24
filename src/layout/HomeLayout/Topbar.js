@@ -53,7 +53,7 @@ const MenuStyle = styled("Box")(({ theme }) => ({
   },
   "& .LoginButton": {
     marginTop: "20px",
-    padding: "10px 40px",
+    padding: "5px 20px",
     background: "#444444",
     border: "1px solid #fff",
     color: "#fff",
@@ -141,6 +141,7 @@ export default function Topbar() {
     drawerOpen: false,
   });
   const [_openDialog, setOpenDialog] = useState(false);
+  console.log("bkdskfks---->", _openDialog);
   const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);
@@ -211,15 +212,15 @@ export default function Topbar() {
         </Link>
       </Box>
       <Box>
-        {router.pathname == "/" && (
-          <MenuStyle>
-            <Box className="cityChat">
-              <Button className="rainbowGradient" onClick={handleClickOpen}>
-                My Citychat
-              </Button>
-            </Box>
-          </MenuStyle>
-        )}
+        {/* {router.pathname == "/" && ( */}
+        <MenuStyle>
+          <Box className="cityChat">
+            <Button className="rainbowGradient" onClick={handleClickOpen}>
+              My Citychat
+            </Button>
+          </Box>
+        </MenuStyle>
+        {/* )} */}
       </Box>
     </Box>
   );
@@ -276,6 +277,9 @@ export default function Topbar() {
                 {_accesstoken == null ? (
                   <>
                     <Button
+                      style={{
+                        padding: "5px 30px",
+                      }}
                       className="LoginButton"
                       onClick={() => {
                         handleClickOpenLogin("Login");
@@ -284,6 +288,7 @@ export default function Topbar() {
                     >
                       Login
                     </Button>
+                    &nbsp;&nbsp; &nbsp;&nbsp;
                     <Button
                       onClick={() => handleClickOpenLogin("Sign Up")}
                       className="LoginButton"
@@ -292,7 +297,9 @@ export default function Topbar() {
                     </Button>
                   </>
                 ) : (
-                  <ProfileMenu setAccessToken={setAccessToken} />
+                  <Box display={"flex"} justifyContent={"center"} mt={1}>
+                    <ProfileMenu setAccessToken={setAccessToken} />
+                  </Box>
                 )}
               </>
             </Box>
@@ -415,24 +422,6 @@ export default function Topbar() {
             </Box>
           </Grid>
         </Grid>
-        <DialogComponent
-          open={_openDialog}
-          setOpen={setOpenDialog}
-          handleClickOpen={handleClickOpen}
-          handleClose={handleClose}
-        />
-        {_openDialogLogin && (
-          <LoginDialog
-            open={_openDialogLogin}
-            setOpen={setOpenDialogLogin}
-            handleClickOpen={handleClickOpenLogin}
-            handleClose={handleCloseLogin}
-            _selectScreen={_selectScreen}
-            setSelectScreen={setSelectScreen}
-            setSignUpComplete={setSignUpComplete}
-            _signcomplete={_signcomplete}
-          />
-        )}
       </Box>
     );
   };
@@ -441,6 +430,24 @@ export default function Topbar() {
       <AppBar elevation={0} className={"appbarBox"}>
         {mobileView ? displayMobile() : displayDesktop()}
       </AppBar>
+      <DialogComponent
+        open={_openDialog}
+        setOpen={setOpenDialog}
+        handleClickOpen={handleClickOpen}
+        handleClose={handleClose}
+      />
+      {_openDialogLogin && (
+        <LoginDialog
+          open={_openDialogLogin}
+          setOpen={setOpenDialogLogin}
+          handleClickOpen={handleClickOpenLogin}
+          handleClose={handleCloseLogin}
+          _selectScreen={_selectScreen}
+          setSelectScreen={setSelectScreen}
+          setSignUpComplete={setSignUpComplete}
+          _signcomplete={_signcomplete}
+        />
+      )}
     </MainComponent>
   );
 }

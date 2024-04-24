@@ -76,7 +76,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: "15px",
+      borderRadius: "11px",
       "@media(max-width:615px)": {
         width: "40px",
         height: "40px !important",

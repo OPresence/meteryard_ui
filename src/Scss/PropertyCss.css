@@ -258,6 +258,15 @@
   font-size: 18px;
   font-family: system-ui;
   font-weight: 500;
+  white-space: pre;
+
+}
+@media screen and (max-width:615px) {
+  .moreDetailcontent h3 {
+   
+    font-size: 12px;
+
+  }
 }
 
 .moreDetailcontent p {
@@ -266,6 +275,7 @@
   margin-bottom: 0;
   font-family: system-ui;
   font-weight: 500;
+  white-space: pre;
 
 }
 
@@ -281,6 +291,12 @@
   padding-top: 35px;
 }
 
+@media screen and (max-width:615px) {
+  .contentdiv {
+   
+    padding-top: 10px;
+  }
+}
 .SuggestionProperties {
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 0px 21px #8888882e;

@@ -4,8 +4,8 @@ import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import styled from "@emotion/styled";
 import Divider from "@mui/material/Divider";
 import ButtonComponent from "./ButtonComponent";
-import { PostApiFunction } from "../utils";
-import Apiconfigs from "../ApiConfig/ApiConfig";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -47,7 +47,7 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
     position: "relative",
     transition: "0.8s",
     transform: "scale(0.9)",
-    display: "flex",
+    // display: "flex",
 
     "&:hover": {
       transform: "scale(1)",
@@ -65,7 +65,7 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
       paddingBottom: "20px",
 
       "@media(max-width:615px)": {
-        minHeight: "auto",
+        minHeight: "320px",
       },
       "& svg": {
         color: "#000",
@@ -97,17 +97,46 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
       fontSize: "18px",
     },
   },
+  "& .ArrowClass": {
+    cursor: "pointer",
+    width: "30px",
+    height: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#a2d117",
+    border: "3px solid #FAF9F6",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    "& svg": {
+      color: "#000 !important",
+      fontSize: "12px",
+    },
+    "&:hover": {
+      background: "rgb(0, 144, 53)",
+      transition: "0.6s",
+      "& svg": {
+        color: "#fff !important",
+      },
+    },
+  },
 }));
 
 const CommercialProjects = () => {
   const sliderRef = useRef(null);
   const auth = useContext(AuthContext);
   const [_isloading, setIsLoading] = useState(false);
+  const next = () => {
+    sliderRef.current.slickNext();
+  };
+
+  const previous = () => {
+    sliderRef.current.slickPrev();
+  };
   const settings = {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: true,
+    arrows: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -181,11 +210,37 @@ const CommercialProjects = () => {
     <Commercialstyle>
       <div className="mainSliderDiv">
         <Container maxWidth>
-          <Box>
-            <Typography variant="h2">Commercial Projects</Typography>
-            <Typography variant="h6">
-              Featured Residential Projects Across India
-            </Typography>
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Box display={"inline-flex"}>
+              <Box>
+                <Typography variant="h2">Commercial Projects</Typography>
+                <Typography variant="h6">
+                  Featured Residential Projects Across India
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              style={{
+                display: "flex",
+                gap: "10px",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Box className={"ArrowClass"} onClick={previous}>
+                <ArrowBackIosIcon
+                  style={{
+                    color: "#000",
+                  }}
+                />
+              </Box>
+              <Box className={"ArrowClass"} onClick={next}>
+                <ArrowForwardIosIcon style={{ color: "#000" }} />
+              </Box>
+            </Box>
           </Box>
           <Box className="mainBoxCard">
             {auth?._getlist_commercial?.length > 4 ? (
@@ -234,7 +289,7 @@ const CommercialProjects = () => {
                                 <Box display={"flex"} mt={1}>
                                   <FmdGoodIcon />
                                   &nbsp;
-                                  <Box m={"0 0 0 5px"}>
+                                  <Box m={"0 0 0 5px"} width={"100%"}>
                                     <Typography variant="h4">
                                       {data?.title}{" "}
                                     </Typography>
