@@ -339,7 +339,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
 
           <Box>
             <Box m={"10px 0"}>
-              <Typography variant="h2">property category</Typography>
+              <Typography variant="h2">Property Category</Typography>
             </Box>
             {search == "Seller" && (
               <Box maxWidth={150}>

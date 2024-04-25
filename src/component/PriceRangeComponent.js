@@ -43,6 +43,10 @@ const Accordionstyle = styled("dic")(({ theme }) => ({
       },
     },
     "& .iconBox": {
+      height:'50px',
+      width:'50px',
+      textAlign:'center',
+      marginTop:'0.75rem',
       "& svg": {
         background: "#C8F2CD",
         color: "#fff",
@@ -114,11 +118,11 @@ export default function PriceRangeComponent({ imgURL }) {
           id="panel1bh-header"
         >
           <Box display={"flex"} alignItems={"center"} >
-            <Box className="iconBox">
+            <Box className="iconBox" sx={{ display: { xs: 'none', md: 'block' } }}>
               <img src={imgURL} width={"100%"} />
             </Box>
             &nbsp;
-            <Typography variant="h6" sx={{ml:{xs:'1rem',md:''}}}>Price Range</Typography>
+            <Typography variant="h6" sx={{ marginLeft: { xs: '1rem', md: '0px' } }}>Price Range</Typography>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
@@ -129,7 +133,10 @@ export default function PriceRangeComponent({ imgURL }) {
                 xs: '-30px',
                 md: '0px'
               },
-              ml:'2rem'
+              marginLeft: {
+                xs: '2rem',
+                md:'0rem',
+              },
             }}>
               <Slider
               style={{ color: "#A2D117" }}
@@ -140,8 +147,9 @@ export default function PriceRangeComponent({ imgURL }) {
                 },
                 width: {
                   xs: '15rem',
-                  md: '20rem'
+                  md: '25rem'
                 },
+               
               }}
                 getAriaValueText={valuetext}
                 defaultValue={sliderValue}

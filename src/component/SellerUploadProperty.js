@@ -64,20 +64,19 @@ const SellerUploadProperty = () => {
         <Box className="detailsBox">
         <Avatar 
             src={"/images/1567018939360.png"} 
-            sx={{ 
+            sx={{
               width: { xs: '40px' }, 
               height: { xs: '40px' },
-              marginTop: { xs: '8px' } ,
-             
-            }} 
+              marginTop: { xs: '8px', md: '4px' }
+            }}            
           />
-          <Box width={"100%"} sx={{ height:'40px', margin:'4px'}}>
+       <Box width={"100%"} sx={{ height:'40px', margin:'6px', marginTop: {xs: '-4px',md: '-4px'} }}>
+
             <InputBase
               className="input"
               placeholder="Write something here..."
               inputProps={{
-                sx: {fontSize: {xs: '12px',md: '14px'}
-              },
+                sx: {fontSize: {xs: '12px',md: '14px'}},
                 "aria-label": "search in Site..",
               }
             }
@@ -88,12 +87,12 @@ const SellerUploadProperty = () => {
               className="IconBox"
               mt={2}
             >
-           <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-25px' } }}>
+           <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-20px' } }}>
                 <VideocamIcon style={{ color: "#EE4A2A" }} /> &nbsp;
                 <span>Shorts/Video</span>
               </Box>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-              <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-25px' } }}>
+              <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-20px' } }}>
                 <CollectionsIcon style={{ color: "#15D608" }} /> &nbsp;
                 <span>Photo/Brochure</span>
               </Box>

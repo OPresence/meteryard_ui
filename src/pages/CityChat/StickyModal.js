@@ -79,7 +79,7 @@ const StickyModal = ({ children }) => {
                 top: "100%",
                 background: "#f0f0f0",
                 padding: "20px",
-                borderRadius: "50px",
+                borderRadius: "50px 50px 0px 0px",
               }}
             >
               <IconButton

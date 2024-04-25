@@ -11,6 +11,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 const CityPropertyStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     position: "relative",
+   
     "& .ArrowBox": {
       cursor: "pointer",
       width: "30px",
@@ -26,6 +27,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
       zIndex: "1",
       borderRadius: "50px",
       top: "74px",
+    
      
     },
 
@@ -34,6 +36,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
       width: "95% !important",
       overflow: "initial",
       position: "relative",
+      
       // padding: "10px",
       "& .overlay": {
         background: "rgba(0, 0, 0, 0.5)",
@@ -43,6 +46,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
         width: "100%",
         height: "100%",
         borderRadius: "15px",
+       
       },
       "& .circleimg": {
         // width: "100%",
@@ -52,6 +56,7 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
           position: "absolute",
           right: "30px",
           top: "100px",
+         
           "& h6": {
             color: "#fff",
             fontSize: "14px",
@@ -94,7 +99,7 @@ const CityProperty = () => {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: true,
+    arrows: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,

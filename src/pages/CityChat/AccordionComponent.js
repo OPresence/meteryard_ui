@@ -15,7 +15,7 @@ const Accordionstyle = styled("div")(({ theme }) => ({
   },
   "& .accordionstyle": {
     boxShadow: "none",
-  
+   
 
     "& .summary": {
       height: "70px",
@@ -46,6 +46,7 @@ const Accordionstyle = styled("div")(({ theme }) => ({
     
     
   },
+ 
 }));
 export default function ControlledAccordions({ data, index, imgURL }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -74,7 +75,9 @@ export default function ControlledAccordions({ data, index, imgURL }) {
               <img src={imgURL} width={"100%"} />
             </Box>
             &nbsp;
-            <Typography variant="h6" sx={{ marginLeft: { xs: '1rem', md: '0px' } }}>{data?.name}</Typography>
+            <Typography variant="h6" sx={{ marginLeft: { xs: '1rem', md: '0px' },
+            
+           }}>{data?.name}</Typography>
           </Box>
         </AccordionSummary>
         <Box>
