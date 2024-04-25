@@ -15,12 +15,14 @@ const Accordionstyle = styled("div")(({ theme }) => ({
   },
   "& .accordionstyle": {
     boxShadow: "none",
+   
 
     "& .summary": {
       height: "70px",
       margin: "0",
       padding: "0",
-
+     
+   
     },
     "& h6": {
       fontSize: "14px",
@@ -28,16 +30,23 @@ const Accordionstyle = styled("div")(({ theme }) => ({
       marginBottom: '15px'
     },
     "& .iconBox": {
+      height:'50px',
+      width:'50px',
+      textAlign:'center',
+      marginTop:'-1rem',
       "& svg": {
         background: "#C8F2CD",
         color: "#fff",
-        fontSize: "46px",
-        padding: "8px",
+        fontSize: "40px",
+        padding: "6px",
         borderRadius: "50px",
 
       },
     },
+    
+    
   },
+ 
 }));
 export default function ControlledAccordions({ data, index, imgURL }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -59,13 +68,16 @@ export default function ControlledAccordions({ data, index, imgURL }) {
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
           id="panel1bh-header"
+         
         >
-          <Box display={"flex"} alignItems={"center"} mt={2}>
-            <Box className="iconBox">
+          <Box display={"flex"} alignItems={"center"} mt={2} >
+          <Box className="iconBox" sx={{ display: { xs: 'none', md: 'block' } }}>
               <img src={imgURL} width={"100%"} />
             </Box>
             &nbsp;
-            <Typography variant="h6">{data?.name}</Typography>
+            <Typography variant="h6" sx={{ marginLeft: { xs: '1rem', md: '0px' },
+            
+           }}>{data?.name}</Typography>
           </Box>
         </AccordionSummary>
         <Box>
@@ -83,7 +95,7 @@ export default function ControlledAccordions({ data, index, imgURL }) {
                     }} 
                   >
                     {/* First set of data */}
-                    <Typography sx={{ mt: '10px', ml: '0px' }}>
+                    <Typography sx={{ mt: '8px', ml: '-10px' ,}}>
                       {data?.name}
                     </Typography>{" "}
                     <CheckBoxComponent

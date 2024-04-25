@@ -31,27 +31,35 @@ const Accordionstyle = styled("dic")(({ theme }) => ({
   },
   "& .accordionstyle": {
     boxShadow: "none",
+  
     "& .summary": {
-      height: "60px",
+      height: "40px",
       margin: "0",
       padding: "0px !important",
-
+    
       "& h6": {
         fontSize: "14px",
         fontWeight: "550",
       },
     },
     "& .iconBox": {
+      height:'50px',
+      width:'50px',
+      textAlign:'center',
+      marginTop:'0.75rem',
       "& svg": {
         background: "#C8F2CD",
         color: "#fff",
         fontSize: "46px",
         padding: "8px",
         borderRadius: "50px",
+       
       },
     },
   },
+  
 }));
+
 export default function PriceRangeComponent({ imgURL }) {
   const [expanded, setExpanded] = React.useState(false);
   const [sliderValue, setSliderValue] = React.useState([10, 50]); // State to store the Slider's value
@@ -109,24 +117,45 @@ export default function PriceRangeComponent({ imgURL }) {
           aria-controls="panel1bh-content"
           id="panel1bh-header"
         >
-          <Box display={"flex"} alignItems={"center"} mt={2}>
-            <Box className="iconBox">
+          <Box display={"flex"} alignItems={"center"} >
+            <Box className="iconBox" sx={{ display: { xs: 'none', md: 'block' } }}>
               <img src={imgURL} width={"100%"} />
             </Box>
             &nbsp;
-            <Typography variant="h6">Price Range</Typography>
+            <Typography variant="h6" sx={{ marginLeft: { xs: '1rem', md: '0px' } }}>Price Range</Typography>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
           <Box className="mainBox">
-            <Stack spacing={1} direction="row">
+            <Stack spacing={1} direction="row"
+             sx={{
+              mt: {
+                xs: '-30px',
+                md: '0px'
+              },
+              marginLeft: {
+                xs: '2rem',
+                md:'0rem',
+              },
+            }}>
               <Slider
-                style={{ color: "#A2D117", height: "7px" }}
+              style={{ color: "#A2D117" }}
+              sx={{
+                height: {
+                  xs: '3px',
+                  md: '7px'
+                },
+                width: {
+                  xs: '15rem',
+                  md: '25rem'
+                },
+               
+              }}
                 getAriaValueText={valuetext}
                 defaultValue={sliderValue}
                 valueLabelDisplay="auto"
                 marks={marks}
-                onChange={handleSliderChange} // Add onChange event handler
+                onChange={handleSliderChange} 
               />
             </Stack>
           </Box>

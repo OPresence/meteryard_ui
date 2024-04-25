@@ -20,9 +20,9 @@ const SellerUploadStyle = styled("Box")(({ theme }) => ({
      
       //   position: "relative",
       "& .IconBox": {
-      
+        fontSize: "14px",
         "& svg": {
-          fontSize: "20px",
+         
           marginLeft:'10px',
         },
         [theme.breakpoints.down('sm')]: {
@@ -64,20 +64,19 @@ const SellerUploadProperty = () => {
         <Box className="detailsBox">
         <Avatar 
             src={"/images/1567018939360.png"} 
-            sx={{ 
+            sx={{
               width: { xs: '40px' }, 
               height: { xs: '40px' },
-              marginTop: { xs: '8px' } ,
-             
-            }} 
+              marginTop: { xs: '8px', md: '4px' }
+            }}            
           />
-          <Box width={"100%"} sx={{ height:'40px', margin:'4px'}}>
+       <Box width={"100%"} sx={{ height:'40px', margin:'6px', marginTop: {xs: '-4px',md: '-4px'} }}>
+
             <InputBase
               className="input"
               placeholder="Write something here..."
               inputProps={{
-                sx: {fontSize: {xs: '12px',md: '14px'}
-              },
+                sx: {fontSize: {xs: '12px',md: '14px'}},
                 "aria-label": "search in Site..",
               }
             }
@@ -86,15 +85,15 @@ const SellerUploadProperty = () => {
               display={"flex"}
               alignItems={"center"}
               className="IconBox"
-              mt={2}
+            
             >
-           <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-15px' } }}>
-                <VideocamIcon style={{ color: "#EE4A2A" }} /> &nbsp;
+           <Box display="flex" alignItems="center" sx={{ marginTop: '-1px' , p:'8px' }}>
+                <VideocamIcon style={{ color: "#EE4A2A" ,fontSize:'15px'}} /> &nbsp;
                 <span>Shorts/Video</span>
               </Box>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-              <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-15px' } }}>
-                <CollectionsIcon style={{ color: "#15D608" }} /> &nbsp;
+              <Box display="flex" alignItems="center" sx={{ marginTop: '-1px' ,p:'8px'  }}>
+                <CollectionsIcon style={{ color: "#15D608",fontSize:'12px' }} /> &nbsp;
                 <span>Photo/Brochure</span>
               </Box>
             </Box>

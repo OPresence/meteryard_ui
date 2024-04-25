@@ -235,11 +235,11 @@ const FilterSection = () => {
             <Grid item lg={4} md={4} sm={4} hidden={!isDesktop}>
               <Box>
                 <Box m={"0 0px 10px 0"}>
-                  <Typography variant="h6">Sponsored</Typography>
+                  <Typography variant="h6" sx={{fontWeight:'500'}}>Sponsored</Typography>
                 </Box>
                 <AdvertisementComponent />
                 <Box m={"10px 0"}>
-                  <Typography variant="h6">
+                  <Typography variant="h6" sx={{fontWeight:'500'}}>
                     {BuyerKey == "Seller" ? "Seller's" : "Buyer's"}
                   </Typography>
                 </Box>

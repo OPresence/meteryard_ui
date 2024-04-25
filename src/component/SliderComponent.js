@@ -10,6 +10,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
     padding: "60px 0",
     textAlign: "center",
     margin: "0 20px",
+  
     "@media(max-width:615px)": {
       padding: "0px 0 60px 0",
       marginTop: "150px",

@@ -10,11 +10,10 @@ import {
   Divider,
   Icon,
 } from "@mui/material";
-import { KeyboardArrowUp, KeyboardArrowDown } from "@mui/icons-material";
+
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
-import NavBar from "@/layout/DashboardLayout/NavBar";
 import MobileModal from "../CityChat/MobileModal"
 const StickyModal = ({ children }) => {
   const [open, setOpen] = useState(false);
@@ -22,8 +21,7 @@ const StickyModal = ({ children }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [selectedTab, setSelectedTab] = useState("Arbitrage");
-  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  
 
   const handleExpand = () => {
     setExpanded(true);
@@ -81,7 +79,7 @@ const StickyModal = ({ children }) => {
                 top: "100%",
                 background: "#f0f0f0",
                 padding: "20px",
-                borderRadius: "50px",
+                borderRadius: "50px 50px 0px 0px",
               }}
             >
               <IconButton
@@ -92,10 +90,7 @@ const StickyModal = ({ children }) => {
               <Box>
                
                 <MobileModal
-                  // onMobileClose={() => setMobileNavOpen(false)}
-                  // openMobile={isMobileNavOpen}
-                  // setSelectedTab={(item) => setSelectedTab(item)}
-                  // tabView={selectedTab}
+                 
                 />
               </Box>
             </div>
