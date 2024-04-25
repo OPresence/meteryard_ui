@@ -20,9 +20,9 @@ const SellerUploadStyle = styled("Box")(({ theme }) => ({
      
       //   position: "relative",
       "& .IconBox": {
-      
+        fontSize: "14px",
         "& svg": {
-          fontSize: "20px",
+         
           marginLeft:'10px',
         },
         [theme.breakpoints.down('sm')]: {
@@ -85,15 +85,15 @@ const SellerUploadProperty = () => {
               display={"flex"}
               alignItems={"center"}
               className="IconBox"
-              mt={2}
+            
             >
-           <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-20px' } }}>
-                <VideocamIcon style={{ color: "#EE4A2A" }} /> &nbsp;
+           <Box display="flex" alignItems="center" sx={{ marginTop: '-1px' , p:'8px' }}>
+                <VideocamIcon style={{ color: "#EE4A2A" ,fontSize:'15px'}} /> &nbsp;
                 <span>Shorts/Video</span>
               </Box>
               &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-              <Box display="flex" alignItems="center" sx={{ marginTop: { xs: '-15px', md: '-20px' } }}>
-                <CollectionsIcon style={{ color: "#15D608" }} /> &nbsp;
+              <Box display="flex" alignItems="center" sx={{ marginTop: '-1px' ,p:'8px'  }}>
+                <CollectionsIcon style={{ color: "#15D608",fontSize:'12px' }} /> &nbsp;
                 <span>Photo/Brochure</span>
               </Box>
             </Box>
