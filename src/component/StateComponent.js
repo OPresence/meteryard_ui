@@ -51,6 +51,14 @@ const Accordionstyle = styled("dic")(({ theme }) => ({
         borderRadius: "50px",
       },
     },
+    "& .summary": {
+      height: "40px",
+      "& h6": {
+        marginTop:'-1rem',
+        fontSize: "14px",
+        fontWeight: "550",
+      },
+    },
   },
 }));
 export default function StateComponent({ StattName, type, name, imgURL }) {
@@ -110,6 +118,7 @@ export default function StateComponent({ StattName, type, name, imgURL }) {
                 value={_state}
                 onChange={handleChangevalue}
                 MenuProps={menuProps}
+                sx={{ mt:{xs:'-1rem', md:'1rem'}}}
               >
                 <MenuItem value="0" disabled>
                   {type}

@@ -6,6 +6,7 @@ import AccordionComponent from "../CityChat/AccordionComponent";
 import PriceRangeComponent from "../../component/PriceRangeComponent";
 import StateComponent from "../../component/StateComponent";
 
+
 const MobileModal = () => {
     const CheckBoxName = [
         {
@@ -66,8 +67,8 @@ const MobileModal = () => {
       ];
   return (
     <Box>
-         <Box m={"10px 0"}>
-              <Typography variant="h2" sx={{textAlign:'center', fontSize:'500', fontSize:'20px'}}>Property category</Typography>
+            <Box mb={2}>
+              <Typography variant="h2" sx={{textAlign:'center', fontSize:'500', fontSize:'20px',mt:'-1rem' }}>Property category</Typography>
             </Box>
             {CheckBoxName.map((data, index) => {
               return (
@@ -75,11 +76,13 @@ const MobileModal = () => {
                   key={index}
                   data={data}
                   index={index}
-                  imgURL="/images/Group 8163.png"
+                  
+
                 />
+                
               );
             })}
-            <Box m={"10px 0 0 0"}>
+            <Box m={"8px 0 0 0"}>
               <Divider className="devider" />
             </Box>
 
@@ -89,11 +92,11 @@ const MobileModal = () => {
                   key={index}
                   data={data}
                   index={index}
-                  imgURL="/images/Group 8164.png"
+                 
                 />
               );
             })}
-            <Box m={"10px 0 0 0"}>
+            <Box m={"8px 0 0 0"}>
               <Divider className="devider" />
             </Box>
 
@@ -103,17 +106,16 @@ const MobileModal = () => {
                   key={index}
                   data={data}
                   index={index}
-                  imgURL="/images/Group 8165.png"
                 />
               );
             })}
-            <Box m={"10px 0 0 0"}>
+            <Box m={"8px 0 0 0"}>
               <Divider className="devider" />
             </Box>
             <Box>
-              <PriceRangeComponent imgURL="/images/Group 8346.png" />
+              <PriceRangeComponent />
             </Box>
-            <Box m={"10px 0 0 0"}>
+            <Box m={"8px 0 0 0"}>
               <Divider className="devider" />
             </Box>
             <Box>
@@ -121,10 +123,10 @@ const MobileModal = () => {
                 StattName={State_name}
                 type="Select State"
                 name="State"
-                imgURL="/images/Group 8180.png"
+                
               />
             </Box>
-            <Box m={"10px 0 0 0"}>
+            <Box m={"8px 0 0 0"}>
               <Divider className="devider" />
             </Box>
             <Box>
@@ -132,21 +134,20 @@ const MobileModal = () => {
                 StattName={City_name}
                 type="Select City"
                 name="City"
-                imgURL="/images/Group 8179.png"
+                
               />
             </Box>
-            <Box m={"10px 0 0 0"}>
+            <Box m={"8px 0 0 0"}>
               <Divider className="devider" />
             </Box>
             <Box>
               <StateComponent
                 StattName={City_name_LocalArea}
                 type="Select Local Area"
-                imgURL="/images/Group 8180.png"
                 name="Local Area"
               />
             </Box>
-            <Box m={"10px 0 0 0"}>
+            <Box m={"8px 0 0 0"}>
               <Divider className="devider" />
             </Box>
             </Box>

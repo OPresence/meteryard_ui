@@ -246,7 +246,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
 
   const CheckBoxName = [
     {
-      name: "residential",
+      name: "Residential",
       valueName: [
         { name: "HOUSE" },
         { name: "VILLA" },
@@ -257,7 +257,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   ];
   const CheckBoxName1 = [
     {
-      name: "commercial",
+      name: "Commercial",
       valueName: [
         { name: "HOUSE" },
         { name: "VILLA" },
@@ -268,7 +268,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   ];
   const CheckBoxName2 = [
     {
-      name: "agriculture",
+      name: "Agriculture",
       valueName: [
         { name: "HOUSE" },
         { name: "VILLA" },
