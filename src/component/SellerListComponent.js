@@ -8,7 +8,6 @@ const SellerListStyle = styled("Box")(({ theme }) => ({
       display: "flex",
       alignItems: "center",
       position: "relative",
-     
       "& svg": {
         zIndex: "1",
         left: "25px",

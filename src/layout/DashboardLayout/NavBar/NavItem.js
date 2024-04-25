@@ -12,7 +12,6 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
   display: "block",
   paddingTop: 0,
   paddingBottom: 0,
- 
   [theme.breakpoints.up("md")]: {
     display: "flex",
     paddingTop: 0,

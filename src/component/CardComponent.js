@@ -13,11 +13,9 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
     background: "#fff",
-   
     // padding: "50px",
     "& h2": {
       fontWeight: "500",
-     
     },
   },
   "& .circleimg": {

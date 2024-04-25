@@ -34,19 +34,15 @@ const Accordionstyle = styled("dic")(({ theme }) => ({
   "& .accordionstyle": {
     boxShadow: "none",
     "& .summary": {
-      height: "70px",
+      height: "60px",
       margin: "0",
-      padding: "0",
+
       "& h6": {
         fontSize: "14px",
         fontWeight: "550",
       },
     },
     "& .iconBox": {
-      height:'50px',
-      width:'50px',
-      textAlign:'center',
-      marginTop:'0.50rem',
       "& svg": {
         background: "#C8F2CD",
         color: "#fff",
@@ -55,9 +51,7 @@ const Accordionstyle = styled("dic")(({ theme }) => ({
         borderRadius: "50px",
       },
     },
-   
   },
- 
 }));
 export default function StateComponent({ StattName, type, name, imgURL }) {
   const [expanded, setExpanded] = React.useState(false);
@@ -95,12 +89,11 @@ export default function StateComponent({ StattName, type, name, imgURL }) {
           id="panel1bh-header"
         >
           <Box display={"flex"} alignItems={"center"} mt={2}>
-          <Box className="iconBox" sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Box className="iconBox">
               <img src={imgURL} width={"100%"} />
             </Box>
             &nbsp;
-            <Typography variant="h6" sx={{ marginLeft: { xs: '1rem', md: '0px' },
-           }}>{name}</Typography>
+            <Typography variant="h6">{name}</Typography>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
@@ -117,7 +110,6 @@ export default function StateComponent({ StattName, type, name, imgURL }) {
                 value={_state}
                 onChange={handleChangevalue}
                 MenuProps={menuProps}
-                sx={{ mt:{xs:'-1rem', md:'1rem'}}}
               >
                 <MenuItem value="0" disabled>
                   {type}

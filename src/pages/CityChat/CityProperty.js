@@ -1,17 +1,13 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
-import { Card, Typography, Box, Container, Button, Skeleton, CardHeader, Avatar, IconButton, CardMedia, CardContent } from "@mui/material";
+import { Card, Grid, Typography, Box, Container, Button } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-
-
-
 const CityPropertyStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     position: "relative",
-   
     "& .ArrowBox": {
       cursor: "pointer",
       width: "30px",
@@ -27,8 +23,6 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
       zIndex: "1",
       borderRadius: "50px",
       top: "74px",
-    
-     
     },
 
     "& .cards": {
@@ -36,7 +30,6 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
       width: "95% !important",
       overflow: "initial",
       position: "relative",
-      
       // padding: "10px",
       "& .overlay": {
         background: "rgba(0, 0, 0, 0.5)",
@@ -46,7 +39,6 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
         width: "100%",
         height: "100%",
         borderRadius: "15px",
-       
       },
       "& .circleimg": {
         // width: "100%",
@@ -56,7 +48,6 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
           position: "absolute",
           right: "30px",
           top: "100px",
-         
           "& h6": {
             color: "#fff",
             fontSize: "14px",
@@ -79,27 +70,16 @@ const CityPropertyStyle = styled("Box")(({ theme }) => ({
 }));
 
 const CityProperty = () => {
-  const [isMobile, setIsMobile] = useState(false);
   // const sliderRef = useRef(null);
   const sliderRef = useRef(null);
   const next = () => {
     sliderRef.current.slickNext();
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
   const settings = {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: false,
+    arrows: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -205,31 +185,22 @@ const CityProperty = () => {
 
   return (
     <CityPropertyStyle>
-      {isMobile ? (  
-        <Card sx={{ width:'100vw', display: 'flex' , gap:2, boxShadow:'none', marginTop:'-25px' }}>
-        <Skeleton sx={{ width: '100%', height: 95, borderRadius:3 }} animation="wave" variant="rectangular" />
-        <Skeleton sx={{ width: '100%', height: 95, borderRadius:3 }} animation="wave" variant="rectangular" />
-        <Skeleton sx={{ width: '50%', height: 95, borderRadius:3 }} animation="wave" variant="rectangular" />
-      </Card>
- 
-      ) : (
-       <Box className="mainBox">
+      <Box className="mainBox">
         <Box className="ArrowBox" onClick={next}>
           <NavigateNextIcon style={{ color: "#000" }} />
         </Box>
-        <Slider {...settings} ref={sliderRef} style={{ width: "130%" , borderRadius:'10px'}}>
-
+        <Slider {...settings} ref={sliderRef} style={{ width: "130%" }}>
           {projectDetails.map((data, index) => {
             return (
-              <Card className="cards" key={index} >
+              <Card className="cards" key={index}>
                 <Box className="circleimg">
                   <div className="overlay"></div>
                   <img src={data?.image} alt="img" width={"100%"} />
-                  <Box className="contentBox" >
+                  <Box className="contentBox">
                     <Typography variant="h6">
                       BLK 7-1005, Vascon Tulips Gold
                     </Typography>
-                    <Box display={"flex"} alignItems={"center"} >
+                    <Box display={"flex"} alignItems={"center"}>
                       <Box>
                         <Typography variant="h5">Property Size</Typography>
                         <Typography variant="h6">900 Sqr Ft.</Typography>
@@ -246,8 +217,8 @@ const CityProperty = () => {
             );
           })}
         </Slider>
+        {/* </Grid> */}
       </Box>
-      )}
     </CityPropertyStyle>
   );
 };

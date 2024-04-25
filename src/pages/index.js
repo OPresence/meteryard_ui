@@ -10,6 +10,8 @@ import ProjectComponent from "../component/ProjectComponent";
 import MobileAppComponent from "../component/MobileAppComponent";
 import TestimonialComponent from "../component/TestimonialComponent";
 import AgreecultureComponent from "../component/AgreecultureComponent";
+import ChatBoat from "../component/ChatBoat";
+
 import TestingComponent from "../component/TestingComponent";
 export default function ClientPage() {
   return (
@@ -26,6 +28,8 @@ export default function ClientPage() {
       <MobileAppComponent />
       <TestimonialComponent />
       {/* <TestingComponent /> */}
+
+      <ChatBoat />
     </Box>
   );
 }
