@@ -14,14 +14,13 @@ import {
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import ForumOutlinedIcon from "@mui/icons-material/ForumOutlined";
 import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
-import MobileModal from "../CityChat/MobileModal"
+import MobileModal from "../CityChat/MobileModal";
 const StickyModal = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  
 
   const handleExpand = () => {
     setExpanded(true);
@@ -70,33 +69,30 @@ const StickyModal = ({ children }) => {
               </IconButton>
             </Box>
           )}
-          {open && 
-          <Modal open={open} onClose={handleCloseModal}>
-          <Slide direction="up" in={open} mountOnEnter unmountOnExit>
-            <div
-              style={{
-                position: "sticky",
-                top: "100%",
-                background: "#f0f0f0",
-                padding: "20px",
-                borderRadius: "50px 50px 0px 0px",
-              }}
-            >
-              <IconButton
-                onClick={expanded ? handleCollapse : handleExpand}
-                style={{ position: "absolute", top: "10px", right: "10px" }}
-              ></IconButton>
+          {open && (
+            <Modal open={open} onClose={handleCloseModal}>
+              <Slide direction="up" in={open} mountOnEnter unmountOnExit>
+                <div
+                  style={{
+                    position: "sticky",
+                    top: "100%",
+                    background: "#f0f0f0",
+                    padding: "20px",
+                    borderRadius: "50px 50px 0px 0px",
+                  }}
+                >
+                  <IconButton
+                    onClick={expanded ? handleCollapse : handleExpand}
+                    style={{ position: "absolute", top: "10px", right: "10px" }}
+                  ></IconButton>
 
-              <Box>
-               
-                <MobileModal
-                 
-                />
-              </Box>
-            </div>
-          </Slide>
-        </Modal>}
-          
+                  <Box>
+                    <MobileModal />
+                  </Box>
+                </div>
+              </Slide>
+            </Modal>
+          )}
         </>
       )}
     </>
@@ -104,10 +100,3 @@ const StickyModal = ({ children }) => {
 };
 
 export default StickyModal;
-
-
-
-
-
-
-
