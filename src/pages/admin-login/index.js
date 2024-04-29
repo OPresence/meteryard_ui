@@ -211,9 +211,9 @@ const AdminLogin = () => {
         console.log("05444646454--->", res);
         handleClose();
         setIsLoading(false);
+        window.sessionStorage.setItem("adminToken", res?.result?.token);
         router.push("/admin");
         toast.success(res?.responseMessage); // Display success notification
-        window.sessionStorage.setItem("adminToken", res?.result?.token);
       }
     } catch (error) {
       setIsLoading(false);

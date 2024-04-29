@@ -72,7 +72,10 @@ export default function DialogComponent({ open, handleClose }) {
               </Box>
             </DialogTitle>
             <DialogContent>
-              <DialogContentText id="alert-dialog-slide-description" className="chat-now-buyer-seller-btn">
+              <DialogContentText
+                id="alert-dialog-slide-description"
+                className="chat-now-buyer-seller-btn"
+              >
                 <Box>
                   <Button
                     onClick={() =>
@@ -107,7 +110,13 @@ export default function DialogComponent({ open, handleClose }) {
                       </Box>
                     </Box>
                     <Box p={"0px 70px 0 30px"}>
-                      <span>Buyer</span>
+                      <span
+                        style={{
+                          textTransform: "none",
+                        }}
+                      >
+                        Buyer
+                      </span>
                     </Box>
                   </Button>
                   &nbsp;
@@ -133,7 +142,13 @@ export default function DialogComponent({ open, handleClose }) {
                     }}
                   >
                     <Box p={"0px 30px 0 70px"}>
-                      <span>Seller</span>
+                      <span
+                        style={{
+                          textTransform: "none",
+                        }}
+                      >
+                        Seller
+                      </span>
                     </Box>
                     <Box
                       p={"10px"}

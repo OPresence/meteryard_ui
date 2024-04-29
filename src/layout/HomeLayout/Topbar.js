@@ -25,9 +25,46 @@ import { useRouter } from "next/router";
 import LoginDialog from "../../component/LoginDialog";
 import "../../Scss/border.css";
 import Apiconfigs from "@/ApiConfig/ApiConfig";
-import { PostApiFunction, getAPIdata } from "@/utils";
+import { getAPIdata } from "@/utils";
 import { AuthContext } from "../../context/Auth";
 import CloseIcon from "@mui/icons-material/Close";
+import ProfileMenu from "../../component/ProfileMenu";
+import MobilerMenu from "../../component/MobileMenu";
+const MenuStyle = styled("Box")(({ theme }) => ({
+  "& .hidebox": {
+    display: "block",
+    "@media(max-width:615px)": {
+      display: "none !important",
+    },
+  },
+  "& .cityChat": {
+    padding: "0",
+    display: "none",
+    "@media(max-width:615px)": {
+      display: "block !important",
+    },
+  },
+  "& .MobileMenu": {
+    display: "none",
+
+    "@media(max-width:615px)": {
+      display: "block !important",
+    },
+  },
+  "& .LoginButton": {
+    marginTop: "20px",
+    padding: "5px 20px",
+    background: "#444444",
+    border: "1px solid #fff",
+    color: "#fff",
+    clipPath: "polygon(0 0, 130% 0, 82% 99%, 0 100%)",
+    "&:hover": {
+      background: "#fff",
+      color: "#444444",
+      border: "1px solid #fff",
+    },
+  },
+}));
 
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .appbarBox": {
@@ -40,9 +77,13 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "flex",
       justifyContent: "space-between",
     },
+
     "& .flexAlign": {
       display: "flex",
       alignItems: "center",
+      // "@media(max-width:615px)": {
+      //   display: "none",
+      // },
       "& span": {
         color: "#000",
         fontFamily: "system-ui",
@@ -100,11 +141,11 @@ export default function Topbar() {
     drawerOpen: false,
   });
   const [_openDialog, setOpenDialog] = useState(false);
+  console.log("bkdskfks---->", _openDialog);
   const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);
   const [_accesstoken, setAccessToken] = useState(null);
-  console.log("_accesstoken--->", _accesstoken);
   const GetProfileFunction = async () => {
     try {
       const res = await getAPIdata({
@@ -164,14 +205,23 @@ export default function Topbar() {
     setAccessToken(sessionStorage.getItem("token"));
   }, [sessionStorage.getItem("token")]);
   const femmecubatorLogo = (
-    <Box className="LogoBox">
-      <Link href="/">
-        <Logo className="logoImg" />
-      </Link>
+    <Box display={"flex"} alignItems={"center"} gap={"20px"}>
+      <Box className="LogoBox">
+        <Link href="/">
+          <Logo className="logoImg" />
+        </Link>
+      </Box>
+      {/* <Box>
+        <MenuStyle>
+          <Box className="cityChat">
+            <Button className="rainbowGradient" onClick={handleClickOpen}>
+              My Citychat
+            </Button>
+          </Box>
+        </MenuStyle>
+      </Box> */}
     </Box>
   );
-  {
-  }
 
   const displayMobile = () => {
     return (
@@ -195,47 +245,64 @@ export default function Topbar() {
             }}
             className={"forMobileView"}
           >
-            {femmecubatorLogo}
+            <Box className="LogoBox">
+              <Link href="/">
+                <Logo className="logoImg" />
+              </Link>
+            </Box>
           </Box>
           <Box className="close-icon">
             <IconButton onClick={handleDrawerClose}>
               <CloseIcon />
             </IconButton>
           </Box>
-          <Box className={"ContentBox"}>
-            <Box className="flexJustify" width={"100%"}>
-              <Box className="flexAlign">
-                <MenuComponent />
-              </Box>
-              {router.pathname == "/" && (
-                <Box p={"10px 25px 0 0"}>
-                  <Button className="rainbowGradient" onClick={handleClickOpen}>
-                    My Citychat
-                  </Button>
+          <MenuStyle>
+            <Box className={"ContentBox"}>
+              <Box className="flexJustify" width={"100%"}>
+                <Box className="hidebox">
+                  <Box className="flexAlign">
+                    <MenuComponent />
+                  </Box>
                 </Box>
-              )}
+                <Box className="MobileMenu">
+                  <MobilerMenu />
+                </Box>
+              </Box>
             </Box>
-          </Box>
-          <Box className="flexAlign for-svg-design" p={"0 0 0 30px"}>
-            <>
-              <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
-              {_accesstoken == null && (
-                <>
-                  <span
-                    onClick={() => {
-                      handleClickOpenLogin("Login");
-                      console.log("nksdnkndsnfk");
-                    }}
-                  >
-                    Login
-                  </span>
-                  <span onClick={() => handleClickOpenLogin("Sign Up")}>
-                    /Sign Up
-                  </span>
-                </>
-              )}
-            </>
-          </Box>
+            <Box className="flexAlign for-svg-design" p={"0 15px 0px 0px"}>
+              <>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                {_accesstoken == null ? (
+                  <>
+                    <Button
+                      style={{
+                        padding: "5px 30px",
+                      }}
+                      className="LoginButton"
+                      onClick={() => {
+                        handleClickOpenLogin("Login");
+                        console.log("nksdnkndsnfk");
+                      }}
+                    >
+                      Login
+                    </Button>
+                    &nbsp;&nbsp; &nbsp;&nbsp;
+                    <Button
+                      onClick={() => handleClickOpenLogin("Sign Up")}
+                      className="LoginButton"
+                    >
+                      Sign Up
+                    </Button>
+                  </>
+                ) : (
+                  <Box display={"flex"} justifyContent={"center"} mt={1}>
+                    <ProfileMenu setAccessToken={setAccessToken} />
+                  </Box>
+                )}
+              </>
+            </Box>
+          </MenuStyle>
+
           <DialogComponent
             open={_openDialog}
             setOpen={setOpenDialog}
@@ -311,8 +378,8 @@ export default function Topbar() {
                   </Box>
                 </Box>
                 <Box className="flexAlign" p={"0 0 0 30px"}>
-                  <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
-                  {_accesstoken == null && (
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  {_accesstoken == null ? (
                     <>
                       <span onClick={() => handleClickOpenLogin("Login")}>
                         Login
@@ -321,47 +388,38 @@ export default function Topbar() {
                         /Sign Up
                       </span>
                     </>
+                  ) : (
+                    <ProfileMenu setAccessToken={setAccessToken} />
                   )}
                 </Box>
               </Box>
-              <Box className={"ContentBox"}>
-                <Box className="flexJustify" width={"100%"}>
-                  <Box className="flexAlign">
-                    <MenuComponent />
-                  </Box>
-                  {router.pathname == "/" && (
-                    <Box p={"10px 25px 0 0"}>
-                      <Button
-                        className="rainbowGradient"
-                        onClick={handleClickOpen}
-                      >
-                        My Citychat
-                      </Button>
+              <MenuStyle>
+                <Box className={"ContentBox"}>
+                  <Box className="flexJustify" width={"100%"}>
+                    <Box className="hidebox">
+                      <Box className="flexAlign">
+                        <MenuComponent />
+                      </Box>
                     </Box>
-                  )}
+                    <Box className="MobileMenu">
+                      <MobilerMenu />
+                    </Box>
+                    {/* {router.pathname == "/" && (
+                      <Box p={"10px 25px 0 0"}>
+                        <Button
+                          className="rainbowGradient"
+                          onClick={handleClickOpen}
+                        >
+                          My Citychat
+                        </Button>
+                      </Box>
+                    )} */}
+                  </Box>
                 </Box>
-              </Box>
+              </MenuStyle>
             </Box>
           </Grid>
         </Grid>
-        <DialogComponent
-          open={_openDialog}
-          setOpen={setOpenDialog}
-          handleClickOpen={handleClickOpen}
-          handleClose={handleClose}
-        />
-        {_openDialogLogin && (
-          <LoginDialog
-            open={_openDialogLogin}
-            setOpen={setOpenDialogLogin}
-            handleClickOpen={handleClickOpenLogin}
-            handleClose={handleCloseLogin}
-            _selectScreen={_selectScreen}
-            setSelectScreen={setSelectScreen}
-            setSignUpComplete={setSignUpComplete}
-            _signcomplete={_signcomplete}
-          />
-        )}
       </Box>
     );
   };
@@ -370,6 +428,24 @@ export default function Topbar() {
       <AppBar elevation={0} className={"appbarBox"}>
         {mobileView ? displayMobile() : displayDesktop()}
       </AppBar>
+      <DialogComponent
+        open={_openDialog}
+        setOpen={setOpenDialog}
+        handleClickOpen={handleClickOpen}
+        handleClose={handleClose}
+      />
+      {_openDialogLogin && (
+        <LoginDialog
+          open={_openDialogLogin}
+          setOpen={setOpenDialogLogin}
+          handleClickOpen={handleClickOpenLogin}
+          handleClose={handleCloseLogin}
+          _selectScreen={_selectScreen}
+          setSelectScreen={setSelectScreen}
+          setSignUpComplete={setSignUpComplete}
+          _signcomplete={_signcomplete}
+        />
+      )}
     </MainComponent>
   );
 }

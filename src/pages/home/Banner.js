@@ -76,7 +76,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: "15px",
+      borderRadius: "11px",
       "@media(max-width:615px)": {
         width: "40px",
         height: "40px !important",
@@ -148,7 +148,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
           maxWidth: "40px !Important",
           "@media(max-width:615px)": {
             padding: "9px",
-            maxWidth: "38px !important",
+            maxWidth: "39px !important",
           },
         },
       },
@@ -191,7 +191,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
         background: "#A7D325",
       },
       "& .buyerBoxSpan": {
-        padding: "0 90px 0 50px",
+        padding: "0 53px 0 90px",
         "@media(max-width:615px)": {
           padding: "0 20px 1px 50px",
         },
@@ -200,7 +200,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
         },
       },
       "@media(max-width:433px)": {
-        marginLeft: "0px",
+        marginLeft: "-25px",
         height: "40px",
       },
       "& .buttonIconBox": {

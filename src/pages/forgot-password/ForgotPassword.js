@@ -33,6 +33,11 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       marginBottom: "80px",
     },
   },
+  "& .imageBox": {
+    "@media(max-width:615px)": {
+      display: "none",
+    },
+  },
   "& .ForgotBox": {
     padding: "0 35px",
     "@media(max-width:615px)": {
@@ -137,7 +142,7 @@ const ForgotPassword = ({
           handleCloseForgot();
           setIsLoading(false);
           setSaveForgot(res?.result);
-          Auth.setEndtime(moment().add(2, "m").unix());
+          Auth.setEndtime(moment().add(1, "m").unix());
         } else if (res?.responseCode == 409) {
           toast.error(res?.responseMessage);
           setIsLoading(false);
@@ -206,7 +211,7 @@ const ForgotPassword = ({
                       xs={12}
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      <Box maxWidth={500}>
+                      <Box maxWidth={500} className="imageBox">
                         <img src="/images/Group 8422.svg" width={"100%"} />
                       </Box>
                     </Grid>

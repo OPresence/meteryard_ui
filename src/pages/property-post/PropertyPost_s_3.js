@@ -179,11 +179,20 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
 }));
 const PropertyPost_s_3 = (props) => {
   const {
-    formField: { price, location, landmark, price_breakup },
+    formField: {
+      price,
+      location,
+      landmark,
+      price_breakup,
+      localArea,
+      stateId,
+      cityId,
+    },
   } = props;
   const fileInputRef = useRef(null);
-
-  const [_propertyList, setPropertyList] = React.useState([]);
+  const [_stateList, setStateList] = React.useState([]);
+  const [_cityList, setCityList] = React.useState([]);
+  const [_getstate, setState] = useState("");
 
   const termConditionCheck = (event) => {
     if (!props?._consition) {
@@ -192,41 +201,74 @@ const PropertyPost_s_3 = (props) => {
       props?.setConsition(false);
     }
   };
-  const ProjectType = async () => {
+  const StateFunctionList = async () => {
     try {
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.proSubTypeListWithProType,
+        endPoint: Apiconfigs?.listAllState,
       });
       if (res) {
-        console.log("res00-->", res?.result?.docs);
         if (res?.responseCode == 200) {
-          setPropertyList(res?.result?.docs);
+          setStateList(res?.result?.docs);
         } else if (res?.responseCode == 404) {
-          setPropertyList([]);
+          setStateList([]);
           toast.error(res?.responseMessage);
-          setPropertyList([]);
+          setStateList([]);
         } else if (res?.responseCode == 404) {
-          setPropertyList([]);
+          setStateList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         } else if (res?.responseCode == 500) {
-          setPropertyList([]);
+          setStateList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         } else {
-          setPropertyList([]);
+          setStateList([]);
 
           toast.error(res?.responseMessage); // Display error notification
         }
       }
     } catch (error) {
       console.log("error");
-      setPropertyList([]);
+      setStateList([]);
+    }
+  };
+  const CityFunctionList = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllCity,
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          setCityList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+          toast.error(res?.responseMessage);
+          setCityList([]);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+
+          toast.error(res?.responseMessage);
+        } else if (res?.responseCode == 500) {
+          setCityList([]);
+
+          toast.error(res?.responseMessage);
+        } else {
+          setCityList([]);
+
+          toast.error(res?.responseMessage);
+        }
+      }
+    } catch (error) {
+      console.log("error");
+      setStateList([]);
     }
   };
   useEffect(() => {
-    ProjectType();
+    StateFunctionList();
   }, []);
+  useEffect(() => {
+    CityFunctionList();
+  }, [_getstate]);
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBox">
@@ -267,6 +309,35 @@ const PropertyPost_s_3 = (props) => {
                             />
                           </Box>
                         </Grid>
+                        <Grid item lg={6} md={6} sm={6} xs={12}>
+                          <Box mt={2}>
+                            <SelectField
+                              _isloading={props._isloading}
+                              name={stateId.name}
+                              valueName={stateId.value}
+                              Placeholder_name={stateId.Placeholder_name}
+                              label={stateId.label}
+                              fullWidth
+                              yourMaxLengthValue={10}
+                              data={_stateList}
+                              set_State={setState}
+                            />
+                          </Box>
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xs={12}>
+                          <Box mt={2}>
+                            <SelectField
+                              _isloading={props._isloading}
+                              name={cityId.name}
+                              valueName={cityId.value}
+                              Placeholder_name={cityId.Placeholder_name}
+                              label={cityId.label}
+                              fullWidth
+                              yourMaxLengthValue={10}
+                              data={_cityList}
+                            />
+                          </Box>
+                        </Grid>
                       </Grid>
                       <Box
                         display={"flex"}
@@ -293,14 +364,30 @@ const PropertyPost_s_3 = (props) => {
                                     fileInputRef.current.value = "";
                                   }}
                                 />
+                                {props?._videoupload && (
+                                  <Box
+                                    display={"flex"}
+                                    justifyContent={"center"}
+                                  >
+                                    <CircularProgressComponent />
+                                  </Box>
+                                )}
+                                {props?._video_url && (
+                                  <Box maxWidth={100} maxHeight={50}>
+                                    <img
+                                      src={props?._video_url?.thumbnail}
+                                      alt="Cover Preview"
+                                      style={{
+                                        width: "100px",
+                                        height: "50px",
+                                        marginTop: "0px",
+                                      }}
+                                    />
+                                  </Box>
+                                )}
                                 <VideocamIcon style={{ cursor: "pointer" }} />
                               </Box>
                             </Box>
-                            <Box
-                              display={"flex"}
-                              justifyContent={"center"}
-                              mt={1}
-                            ></Box>
                           </label>{" "}
                           &nbsp;&nbsp;&nbsp;
                           <label style={{ display: "inline-flex" }}>
@@ -325,7 +412,7 @@ const PropertyPost_s_3 = (props) => {
                                     }
                                   }}
                                 />
-                                {props?._videoupload && (
+                                {props?._imageuploading && (
                                   <Box
                                     display={"flex"}
                                     justifyContent={"center"}
@@ -338,7 +425,11 @@ const PropertyPost_s_3 = (props) => {
                                     <img
                                       src={props?._coverImage}
                                       alt="Cover Preview"
-                                      style={{ width: "100px", height: "50px" }}
+                                      style={{
+                                        width: "100px",
+                                        height: "50px",
+                                        // marginTop: "40px",
+                                      }}
                                     />
                                   </Box>
                                 )}
@@ -501,6 +592,19 @@ const PropertyPost_s_3 = (props) => {
                         Placeholder_name={landmark.Placeholder_name}
                         valueName={landmark.value}
                         label={landmark.label}
+                        fullWidth
+                        yourMaxLengthValue={120}
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item lg={12} md={12} sm={12} xs={12}>
+                    <Box mt={2}>
+                      <InputField
+                        _isloading={props._isloading}
+                        name={localArea.name}
+                        Placeholder_name={localArea.Placeholder_name}
+                        valueName={localArea.value}
+                        label={localArea.label}
                         fullWidth
                         yourMaxLengthValue={120}
                       />

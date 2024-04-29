@@ -9,8 +9,10 @@ import BannerCompont from "../component/BannerCompont";
 import ProjectComponent from "../component/ProjectComponent";
 import MobileAppComponent from "../component/MobileAppComponent";
 import TestimonialComponent from "../component/TestimonialComponent";
-import ChatBoat from "../component/ChatBoat";
 import AgreecultureComponent from "../component/AgreecultureComponent";
+import ChatBoat from "../component/ChatBoat";
+
+import TestingComponent from "../component/TestingComponent";
 export default function ClientPage() {
   return (
     <Box>
@@ -23,8 +25,10 @@ export default function ClientPage() {
       <AgreecultureComponent />
       {/* <YoutubeComponent /> */}
       <ProjectComponent />
-      <MobileAppComponent />
+      {/* <MobileAppComponent /> */}
       <TestimonialComponent />
+      {/* <TestingComponent /> */}
+
       <ChatBoat />
     </Box>
   );

@@ -83,62 +83,19 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
 const PropertyPost_s_2 = (props) => {
   const {
     _projecttype,
+    handleNameKeyDown,
     formField: {
-      listed_name,
-      furnishing,
-      bedrooms,
-      bathrooms,
-      super_building,
-      carpet_area,
       total_floors,
       floors_no,
       facing,
       project_name,
       add_title,
       description,
-      price,
-      location,
-      coverImage,
-      typeProperty,
     },
   } = props;
   const [state, setState] = React.useState(false);
   const [_propertyList, setPropertyList] = React.useState([]);
-  const propertyType = [
-    {
-      name: "For Rent",
-      value: "FOR_RENT",
-    },
-    {
-      name: "For Sale",
-      value: "FOR_SALE",
-    },
-  ];
-  const listedData = [
-    {
-      value: "Owner",
-      name: "Owner",
-    },
-    {
-      value: "Dealer",
-      name: "Dealer",
-    },
-    {
-      value: "Builder",
-      name: "Builder",
-    },
-  ];
-  const furnishingList = [
-    {
-      name: "Furnished",
-    },
-    {
-      name: "UnFurnished",
-    },
-    {
-      name: "Semi-Furnished",
-    },
-  ];
+
   const badRoomNumberList = [
     {
       name: "1",
@@ -220,18 +177,13 @@ const PropertyPost_s_2 = (props) => {
   const handleChange = (event) => {
     setState(event.target.value);
   };
-  const [selectedId, setSelectedId] = useState(null);
 
-  const handleCheckboxChange = (id) => {
-    setSelectedId(id);
-  };
   const ProjectType = async () => {
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.proSubTypeListWithProType,
       });
       if (res) {
-        console.log("res00-->", res?.result?.docs);
         if (res?.responseCode == 200) {
           setPropertyList(res?.result?.docs);
         } else if (res?.responseCode == 404) {
@@ -260,7 +212,6 @@ const PropertyPost_s_2 = (props) => {
   useEffect(() => {
     ProjectType();
   }, []);
-  console.log("bdhjfds---->", _projecttype);
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBox">
@@ -279,7 +230,7 @@ const PropertyPost_s_2 = (props) => {
                   valueName={total_floors.value}
                   label={total_floors.label}
                   Placeholder_name={total_floors.Placeholder_name}
-                  // yourMaxLengthValue={2}
+                  yourMaxLengthValue={2}
                   fullWidth
                 />
               </Grid>
@@ -292,16 +243,18 @@ const PropertyPost_s_2 = (props) => {
                   label={floors_no.label}
                   fullWidth
                   data={bathroomNumberList}
+                  yourMaxLengthValue={2}
                 />
               </Grid>
               <Grid item lg={6} md={6} sm={12} xs={12}>
-                <InputField
+                <SelectField
                   _isloading={props._isloading}
                   name={facing.name}
                   valueName={facing.value}
                   Placeholder_name={facing.Placeholder_name}
                   label={facing.label}
                   fullWidth
+                  data={props?._facinglist}
                   yourMaxLengthValue={120}
                 />
               </Grid>

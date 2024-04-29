@@ -48,7 +48,7 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
       transition: "0.8s",
     },
     "& .contentBox": {
-      padding: "0 10px 10px",
+      padding: "10px 10px 10px",
       "& h5": {
         fontSize: "14px",
         textAlign: "start",
@@ -273,7 +273,7 @@ const CardComponent = () => {
                               <Typography variant="h5">900 Sqr Ft.</Typography>
                             </Box>
                           </Box>
-                          <ButtonComponent data={data} />
+                          {/* <ButtonComponent data={data} /> */}
                         </Box>
                       </Box>{" "}
                     </Box>

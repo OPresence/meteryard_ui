@@ -107,8 +107,6 @@ const ChatBoat = () => {
                   : {
                       background: "transparent",
                       position: "absolute",
-                      //   width: "200px",
-                      //   height: "300px",
                       left: "-200px",
                       borderRadius: "10px 0 0 10px",
                     }
@@ -132,7 +130,6 @@ const ChatBoat = () => {
                       _view_search_screen
                         ? {
                             position: "absolute",
-                            // background: "#a7d325",
 
                             right: "35px",
                             borderRadius: "10px 0 0 10px",
@@ -892,9 +889,9 @@ const ChatBoat = () => {
         <Box
           style={{
             position: "fixed",
-            bottom: "0",
+            bottom: "70px",
             right: "22px",
-            zIndex: 1,
+            zIndex: 999,
           }}
         >
           <Box maxWidth={100}>

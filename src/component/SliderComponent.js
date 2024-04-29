@@ -4,7 +4,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
-
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
@@ -34,7 +33,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
   },
   "& .cards": {
     cursor: "pointer",
-    // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    boxShadow: "none !important",
     padding: "10px",
     width: "80%",
 
@@ -156,12 +155,12 @@ const SliderComponent = () => {
 
   return (
     <MainComponent>
-      <Container maxWidth>
-        <Box className="mainSliderDiv" mt={"25rem"}>
-          <Slider {...settings} ref={sliderRef}>
-            {projectDetails.map((data, index) => {
-              return (
-                <Grid item lg={3} md={6} sm={12} xs={12} key={index}>
+      <Box className="mainSliderDiv" mt={"25rem"}>
+        <Slider {...settings} ref={sliderRef}>
+          {projectDetails.map((data, index) => {
+            return (
+              <Grid item lg={3} md={6} sm={12} xs={12} key={index}>
+                <Container maxWidth>
                   <Box display={"flex"} justifyContent={"center"} key={index}>
                     <Card className="cards project-slider">
                       <Box>
@@ -186,12 +185,12 @@ const SliderComponent = () => {
                       </Box>
                     </Card>{" "}
                   </Box>
-                </Grid>
-              );
-            })}
-          </Slider>
-        </Box>
-      </Container>
+                </Container>
+              </Grid>
+            );
+          })}
+        </Slider>
+      </Box>
     </MainComponent>
   );
 };

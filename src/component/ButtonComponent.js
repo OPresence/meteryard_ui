@@ -8,6 +8,8 @@ const ButonStyle = styled("Box")(({ theme }) => ({
     "& button": {
       background: "none",
       border: "1px solid black",
+      position: "absolute",
+      bottom: "10px",
     },
     "& span": {
       color: "#000",
@@ -18,7 +20,6 @@ const ButonStyle = styled("Box")(({ theme }) => ({
 
 const ButtonComponent = ({ data }) => {
   const router = useRouter();
-  console.log("datazdjknfnz---->", data);
   return (
     <ButonStyle>
       <Box p={"10px 0 0 0"} className="viewmoreButton">

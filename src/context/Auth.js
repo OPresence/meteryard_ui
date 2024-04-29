@@ -81,7 +81,6 @@ export default function Auth(props) {
         },
       });
       if (res?.responseCode == 200) {
-        console.log("cnkjvnknvknkcnkvn", res?.result?.docs);
         // setIsLoading(false);
 
         setGetList(res?.result?.docs);
@@ -103,7 +102,6 @@ export default function Auth(props) {
         },
       });
       if (res?.responseCode == 200) {
-        console.log("sdfdsfjdsfdsbfs--->", res?.result?.docs);
         setGetListCommercial(res?.result?.docs);
       }
     } catch (error) {
@@ -213,6 +211,7 @@ export default function Auth(props) {
   }, [_getproprty_type]);
   useEffect(() => {
     if (RouterName == "property-post") {
+      console.log("bsjdbsajbjsba---->");
       ProjectType();
     }
   }, []);
@@ -250,6 +249,9 @@ export default function Auth(props) {
     _isloading,
     _getproprty_type,
     _getproject_sub_type,
+    ResidentialAPI: (value) => ResidentialAPI(value),
+    CommercialAPI: (value) => CommercialAPI(value),
+    AgreecultureAPIAPI: (value) => AgreecultureAPIAPI(value),
     setGetProfile: (value) => setGetProfile(value),
     setEndtime: (value) => setEndtime(value),
     PostFunction: () => PostFunction(),

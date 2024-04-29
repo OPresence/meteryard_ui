@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Typography,
@@ -9,12 +9,12 @@ import {
 } from "@mui/material";
 import styled from "@emotion/styled";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import HomeLayout from "../../layout/HomeLayout";
 import { BiLogoLinkedin } from "react-icons/bi";
 import { BiLogoFacebook } from "react-icons/bi";
 import { BsTwitter } from "react-icons/bs";
 import { FaDownload } from "react-icons/fa";
 import { BiUserPlus } from "react-icons/bi";
+import { AuthContext } from "../../context/Auth";
 
 const SellerStyle = styled("div")(({ theme }) => ({
   "& .root": {
@@ -46,7 +46,8 @@ const SellerStyle = styled("div")(({ theme }) => ({
         borderRadius: "5px ",
         overflow: "hidden",
         "& img": {
-          height: "318px",
+          width: "100%",
+
           objectFit: "cover",
           "@media(max-width:767px)": {
             height: "150px",
@@ -169,6 +170,7 @@ const SellerStyle = styled("div")(({ theme }) => ({
   },
 }));
 const ProfileComponent = () => {
+  const auth = useContext(AuthContext);
   return (
     <SellerStyle>
       <Container
@@ -202,9 +204,9 @@ const ProfileComponent = () => {
               <Grid xs={6} sm={3} lg={6} md={8}>
                 <Box className="Username">
                   <Typography color="primary.main" variant="h4">
-                    Monu Rajput
+                    {auth?._getprofile?.name}
                   </Typography>
-                  <span>Customer Relationship Manager</span>
+                  <span>{auth?._getprofile?.userType}</span>
                 </Box>
                 <Grid container spacing={1}>
                   <Grid item lg={3} md={3} sm={3} xs={6}>

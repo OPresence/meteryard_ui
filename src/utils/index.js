@@ -99,7 +99,7 @@ export const formFieldValue = {
       requiredErrorMsg: `Price is required.`,
     },
     price_breakup: {
-      name: "price breakup",
+      name: "price_breakup",
       label: "Price breakup",
       Placeholder_name: "Enter price breakup",
 
@@ -114,10 +114,28 @@ export const formFieldValue = {
     },
     landmark: {
       name: "landmark",
-      label: "Landmark",
+      label: "Landmark Area",
       Placeholder_name: "Enter landmark",
-
       requiredErrorMsg: `Landmark is required.`,
+    },
+    localArea: {
+      name: "localArea",
+      label: "Local Area",
+      Placeholder_name: "Enter local area",
+      requiredErrorMsg: `Local area is required.`,
+    },
+
+    stateId: {
+      name: "stateId",
+      label: "State",
+      Placeholder_name: "",
+      requiredErrorMsg: `Select is required.`,
+    },
+    cityId: {
+      name: "cityId",
+      label: "City",
+      Placeholder_name: "",
+      requiredErrorMsg: `City is required.`,
     },
   },
 };
@@ -140,8 +158,10 @@ const {
     location,
     coverImage,
     price_breakup,
-
     typeProperty,
+    localArea,
+    stateId,
+    cityId,
   },
 } = formFieldValue;
 export const initialValue = {
@@ -157,13 +177,15 @@ export const initialValue = {
   [project_name?.name]: "",
   [add_title?.name]: "",
   [description?.name]: "",
-  [price?.name]: "",
-  [price_breakup?.name]: "",
-
+  [price?.name]: 0,
+  [price_breakup?.name]: 0,
+  [localArea?.name]: "",
   [location?.name]: "",
   [coverImage?.name]: "",
   [typeProperty?.name]: "",
   [landmark?.name]: "",
+  [stateId?.name]: "",
+  [cityId?.name]: "",
 };
 
 export const ValidationValue = [
@@ -203,6 +225,9 @@ export const ValidationValue = [
     ),
     [landmark.name]: Yup.string().required(`${landmark.requiredErrorMsg}`),
     [location.name]: Yup.string().required(`${location.requiredErrorMsg}`),
+    [localArea.name]: Yup.string().required(`${localArea.requiredErrorMsg}`),
+    [stateId.name]: Yup.string().required(`${stateId.requiredErrorMsg}`),
+    [cityId.name]: Yup.string().required(`${cityId.requiredErrorMsg}`),
   }),
 ];
 export const cityName = [

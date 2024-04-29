@@ -238,7 +238,10 @@ const Footer = () => {
                       style={{
                         background: "#FFF",
                         color: "#000",
+                        borderRadius: "4px",
+                        padding: "0 86px 0 0",
                       }}
+                      inputProps={{ maxLength: 120 }}
                       variant="outlined"
                       placeholder="EMAIL ADDRESS"
                     />

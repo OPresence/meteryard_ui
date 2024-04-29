@@ -145,3 +145,11 @@
     border-radius: 44px;
 	}
 }
+@media screen and (max-width:615px) {
+	.rainbowGradient{
+		margin-top: 0px !important;
+
+		height: 35px !important;
+	}
+	
+}

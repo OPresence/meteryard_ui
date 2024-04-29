@@ -21,7 +21,9 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import EnterOptScreen from "../verify-otp/VerifyOTP";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { PostApiFunction } from "../../utils";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Form, Formik } from "formik";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import * as yep from "yup";
 import CircularProgressCompoennt from "../../component/CircularProgressComponent";
 import { toast } from "react-toastify";
@@ -43,10 +45,11 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       marginBottom: "80px",
     },
   },
-  // "& .checkBox": {
-  //   display: "flex",
-  //   alignItems: "center",
-  // },
+  "& .imageBox": {
+    "@media(max-width:615px)": {
+      display: "none",
+    },
+  },
   "& .loginBox": {
     padding: "0 35px",
     "@media(max-width:615px)": {
@@ -92,6 +95,9 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       },
       "& span": {
         color: "#0099FF",
+        "@media(max-width:651px)": {
+          fontSize: "13px",
+        },
       },
     },
     "& .socialIconBox": {
@@ -125,6 +131,9 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     width: "100%",
     justifyContent: "center",
     padding: "0 0px 10px 0",
+    "@media(max-width:615px)": {
+      marginTop: "20px",
+    },
     "& button": {
       padding: "8px 40px",
       background: "#0099FF",
@@ -134,8 +143,16 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       },
     },
   },
+  "& .forgotpassword": {
+    "@media(max-width:615px)": {
+      color: "#a2d117 !important",
+      fontWeight: "600",
+    },
+  },
 }));
 const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
+  const session = useSession();
+  console.log("sessio44546464646n000---->", session);
   const [showPassword, setShowPassword] = React.useState(false);
   const [_forgot_open, setForgot_Open] = useState(false);
   const [_forotp_open, setOTP_Open] = useState(false);
@@ -160,7 +177,6 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
     setOpenReset(false);
   };
 
-  console.log("_forgot_open---------->", _forotp_open);
   const handleOpenOTP = () => {
     setOTP_Open(true);
   };
@@ -237,6 +253,43 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
       console.log("error", error);
     }
   };
+  const handleGoogleSignIn = async () => {
+    console.log("11111111111--->");
+    try {
+      // Call the signIn function with the provider name "google"
+      const result = await signIn("google");
+      console.log("00000000--->", result);
+
+      // Check if the authentication was successful
+      if (!result.error) {
+        // Authentication successful, do something (e.g., redirect)
+      } else {
+        // Authentication failed, handle the error
+        console.error("Authentication failed", result.error);
+      }
+    } catch (error) {
+      // Handle any errors that occur during sign-in
+      console.error("Error signing in with Google:", error);
+    }
+  };
+  const handleGithubSignIn = async (value) => {
+    try {
+      // Call the signIn function with the provider name "google"
+      const result = await signIn(value);
+
+      // Check if the authentication was successful
+      if (!result.error) {
+        // Authentication successful, do something (e.g., redirect)
+        console.log("Authentication successful", result);
+      } else {
+        // Authentication failed, handle the error
+        console.error("Authentication failed", result.error);
+      }
+    } catch (error) {
+      // Handle any errors that occur during sign-in
+      console.error("Error signing in with github:", error);
+    }
+  };
   return (
     <LoginStyle>
       <Box className="backgroundBox">
@@ -281,7 +334,7 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
                       xs={12}
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      <Box maxWidth={500}>
+                      <Box maxWidth={500} className="imageBox">
                         <img src="/images/Group 8422.svg" width={"100%"} />
                       </Box>
                     </Grid>
@@ -436,7 +489,11 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
                               </Box>
                               <Box>
                                 {/* <a href="/forgot-password"> */}
-                                <span onClick={handleOpenForgot}>
+                                <span
+                                  className="forgotpassword"
+                                  onClick={handleOpenForgot}
+                                  // style={{ color: "#a2d117" }}
+                                >
                                   Forgot Password?
                                 </span>
                               </Box>
@@ -454,17 +511,24 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
                           </Box>
 
                           <Box mt={2} className="socialIconBox">
-                            <IconButton className="iconButton">
+                            <IconButton
+                              className="iconButton"
+                              onClick={() => signIn("facebook")}
+                            >
                               <FaFacebookF />
                             </IconButton>
                             <IconButton
+                              onClick={() => signIn("google")}
                               className="iconButton"
                               style={{ border: "1px solid #CA0000" }}
                             >
                               <FaGoogle style={{ color: "#CA0000" }} />
                             </IconButton>
-                            <IconButton className="iconButton">
-                              <FaLinkedinIn />
+                            <IconButton
+                              className="iconButton"
+                              onClick={() => signIn("GitHub")}
+                            >
+                              <GitHubIcon />
                             </IconButton>
                           </Box>
                         </Box>
