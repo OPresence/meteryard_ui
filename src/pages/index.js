@@ -21,7 +21,7 @@ export default function ClientPage() {
       <BannerCompont />
       <ResidentialProjects />
       <CommercialProjects />
-      <AgreecultureComponent />
+      {/* <AgreecultureComponent /> */}
       {/* <YoutubeComponent /> */}
       <ProjectComponent />
       {/* <MobileAppComponent /> */}
