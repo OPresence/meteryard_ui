@@ -20,19 +20,19 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   useEffect(() => {
     setIsClient(true);
   }, []);
-  // useEffect(() => {
-  //   // Check if user is authenticated, e.g., by checking a token in localStorage or cookies
-  //   const isAuthenticated = !!sessionStorage.getItem("token");
+  useEffect(() => {
+    // Check if user is authenticated, e.g., by checking a token in localStorage or cookies
+    const isAuthenticated = !!sessionStorage.getItem("token");
 
-  //   // If the route requires authentication and the user is not authenticated, redirect to login page
-  //   if (
-  //     router.pathname !== "/" && // Exclude login page from redirection loop
-  //     router.pathname !== "/" && // Exclude signup page from redirection loop
-  //     !isAuthenticated
-  //   ) {
-  //     router.push("/");
-  //   }
-  // }, [router.pathname]);
+    // If the route requires authentication and the user is not authenticated, redirect to login page
+    if (
+      router.pathname !== "/" && // Exclude login page from redirection loop
+      router.pathname !== "/" && // Exclude signup page from redirection loop
+      !isAuthenticated
+    ) {
+      router.push("/");
+    }
+  }, [router.pathname]);
   useEffect(() => {
     const startLoading = () => {
       setLoading(true);
