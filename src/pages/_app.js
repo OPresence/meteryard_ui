@@ -4,11 +4,12 @@ import { SessionProvider } from "next-auth/react";
 import "src/layout/globals.css";
 import { createTheme } from "../theme/index";
 import { ToastContainer } from "react-toastify";
+import { Box } from "@mui/material";
 import AuthContext from "../context/Auth";
 import { useEffect, useState } from "react";
 import { Router } from "next/router";
 import { useRouter } from "next/router";
-
+import PageLoading from "../component/PageLoading";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const theme = createTheme();
   const router = useRouter();
@@ -51,22 +52,29 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
     };
   }, []);
   return (
-    <div className="App">
-      <Head>
-        <meta name="description" content="" />
-        <link rel="icon" href="" />
-      </Head>
-      {loading && "Loading"}
-      {!loading && isClient && (
-        <ThemeProvider theme={theme}>
-          <AuthContext>
-            <SessionProvider session={session}>
-              {getLayout(<Component {...pageProps} />)}
-            </SessionProvider>
-          </AuthContext>
-          <ToastContainer />
-        </ThemeProvider>
-      )}
+    <div className="App" style={{ background: "#fff" }}>
+      <Box>
+        <Head>
+          <meta name="description" content="" />
+          <link rel="icon" href="" />
+        </Head>
+        {loading ? (
+          <PageLoading />
+        ) : (
+          <>
+            {!loading && isClient && (
+              <ThemeProvider theme={theme}>
+                <AuthContext>
+                  <SessionProvider session={session}>
+                    {getLayout(<Component {...pageProps} />)}
+                  </SessionProvider>
+                </AuthContext>
+                <ToastContainer />
+              </ThemeProvider>
+            )}
+          </>
+        )}
+      </Box>
     </div>
   );
 }

@@ -25,7 +25,7 @@ export default function ClientPage() {
       <AgreecultureComponent />
       {/* <YoutubeComponent /> */}
       <ProjectComponent />
-      <MobileAppComponent />
+      {/* <MobileAppComponent /> */}
       <TestimonialComponent />
       {/* <TestingComponent /> */}
 

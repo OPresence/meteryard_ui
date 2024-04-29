@@ -211,8 +211,7 @@ export default function Topbar() {
           <Logo className="logoImg" />
         </Link>
       </Box>
-      <Box>
-        {/* {router.pathname == "/" && ( */}
+      {/* <Box>
         <MenuStyle>
           <Box className="cityChat">
             <Button className="rainbowGradient" onClick={handleClickOpen}>
@@ -220,8 +219,7 @@ export default function Topbar() {
             </Button>
           </Box>
         </MenuStyle>
-        {/* )} */}
-      </Box>
+      </Box> */}
     </Box>
   );
 
@@ -406,7 +404,7 @@ export default function Topbar() {
                     <Box className="MobileMenu">
                       <MobilerMenu />
                     </Box>
-                    {router.pathname == "/" && (
+                    {/* {router.pathname == "/" && (
                       <Box p={"10px 25px 0 0"}>
                         <Button
                           className="rainbowGradient"
@@ -415,7 +413,7 @@ export default function Topbar() {
                           My Citychat
                         </Button>
                       </Box>
-                    )}
+                    )} */}
                   </Box>
                 </Box>
               </MenuStyle>

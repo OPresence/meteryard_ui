@@ -77,24 +77,25 @@ const FilterSection = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const fetchSellerList = async () => {
-    const body = {
-      search: "SELLER",
-      page: "1",
-      limit: "10",
-    };
-    try {
-      // const response = await axios.post('https://lms-api-backend.onrender.com/api/v1/admin/listAllUsers', body);
-      const response = await PostApiFunction(
-        "https://lms-api-backend.onrender.com/api/v1/admin/listAllUsers",
-        body
-      );
-      setSellerList(response.result.docs);
-    } catch (error) {
-      console.error("Error fetching seller list:", error);
-    }
-  };
   useEffect(() => {
+    const fetchSellerList = async () => {
+      const body = {
+        search: "SELLER",
+        page: "1",
+        limit: "10",
+      };
+      try {
+        // const response = await axios.post('https://lms-api-backend.onrender.com/api/v1/admin/listAllUsers', body);
+        const response = await PostApiFunction(
+          "https://lms-api-backend.onrender.com/api/v1/admin/listAllUsers",
+          body
+        );
+        setSellerList(response.result.docs);
+      } catch (error) {
+        console.error("Error fetching seller list:", error);
+      }
+    };
+
     fetchSellerList();
   }, []);
 
