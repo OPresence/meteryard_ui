@@ -16,7 +16,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import BlockIcon from "@mui/icons-material/Block";
 import ListPagination from "../../component/ListPagination";
-import ViewDialog from "../admin/component/ViewDialog";
+import ViewDialog from "../../component/ViewDialog";
 import SureModal from "../../component/SureModal";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import LoaderComponent from "../../component/LoaderComponent";

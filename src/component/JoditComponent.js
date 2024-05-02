@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 
 const DynamicJoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
-import CircularProgressCompoennt from "../component/CircularProgressComponent";
+import CircularProgressCompoennt from "./CircularProgressComponent";
 
-// import AdminLayout from "../../../layout/";
+import AdminLayout from "../layout/AdminLayout";
 import {
   Box,
   Typography,

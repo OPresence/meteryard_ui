@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardCard from "./DashboardCard";
+import DashboardCard from "../pages/admin/component/DashboardCard";
 const AccordianComponent = () => {
   return (
     <div>
