@@ -2,7 +2,7 @@ import React from "react";
 import TableList from "../admin/component/TableList";
 import { Box } from "@mui/material";
 import { styled } from "@mui/system";
-import FilterComponent from "../admin/component/FilterComponent";
+import FilterComponent from "../../component/FilterComponent";
 import AdminLayout from "../../layout/AdminLayout";
 
 const Root = styled("Box")(({ theme }) => ({

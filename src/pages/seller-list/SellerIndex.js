@@ -18,10 +18,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TableList from "../admin/component/TableList";
 // import FilterComponent from "../admin/component/FilterComponent";
-import ViewDialog from "../admin/component/ViewDialog";
+import ViewDialog from "../../component/ViewDialog";
 import SureModal from "../../component/SureModal";
 import LoaderComponent from "../../component/LoaderComponent";
-import FilterComponent from "../admin/component/FilterComponent";
+import FilterComponent from "../../component/FilterComponent";
 
 const Root = styled("Box")(({ theme }) => ({
   "& .mainPage": {

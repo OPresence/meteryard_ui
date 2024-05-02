@@ -6,26 +6,27 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { styled } from "@mui/system";
-import DepartmentView from "../../department-list/DepartmentView";
-import ViewCountry from "../../countries/ViewCountry";
-import ViewState from "../../state/ViewState.js";
-import ViewBanner from "../../banner/ViewBanner";
-import ViewAdmin from "@/pages/admin-list/ViewAdmin";
-import ViewUser from "../../seller-list/ViewUser";
-import ViewCity from "@/pages/cities/ViewCity";
-import ViewProjectType from "../../project-type/ViewProjectType";
-import ViewProjectSubType from "../../Project-Sub-Type/ViewProjectType.js";
-import ViewProjectFinishing from "../../project-finishing/ViewProjectFinishing";
-import ViewAminity from "../../amenties/ViewAminity";
-import ViewAreaUnit from "../../area-unites/ViewAreaUnit";
-import ViewPropertyAvailability from "../../property-availabilities/ViewPropertyAvailability";
-import ViewWaterResource from "../../water-resources/ViewWaterResource";
-import ViewOverlooking from "../../overlooking/ViewOverLooking";
-import ViewFeatures from "../../property-other-features/ViewFeatures";
-import ViewFacing from "../../property-facing/ViewFacing";
-import ViewBlog from "../../blog/ViewBlog";
-import ViewTestimonial from "../../testimonial/ViewTestimonial";
-import ViewVideo from "../../property-videos/ViewVideo";
+import DepartmentView from "../pages/department-list/DepartmentView";
+import ViewCountry from "../pages/countries/ViewCountry";
+import ViewState from "../pages/state/ViewState.js";
+import ViewBanner from "../pages/banner/ViewBanner";
+import ViewAdmin from "../pages/admin-list/ViewAdmin";
+import ViewUser from "../pages/seller-list/ViewUser";
+import ViewCity from "../pages/cities/ViewCity.js";
+import ViewProjectType from "../pages/project-type/ViewProjectType";
+import ViewProjectSubType from "../pages/Project-Sub-Type/ViewProjectType.js";
+import ViewProjectFinishing from "../pages/project-finishing/ViewProjectFinishing";
+import ViewAminity from "../pages/amenties/ViewAminity";
+import ViewAreaUnit from "../pages/area-unites/ViewAreaUnit";
+import ViewPropertyAvailability from "../pages/property-availabilities/ViewPropertyAvailability";
+import ViewWaterResource from "../pages/water-resources/ViewWaterResource";
+import ViewOverlooking from "../pages/overlooking/ViewOverLooking";
+import ViewFeatures from "../pages/property-other-features/ViewFeatures";
+import ViewFacing from "../pages/property-facing/ViewFacing";
+import ViewBlog from "../pages/blog/ViewBlog";
+import ViewTestimonial from "../pages/testimonial/ViewTestimonial";
+import ViewVideo from "../pages/property-videos/ViewVideo";
+import ViewArea from "../pages/area/ViewArea";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -77,6 +78,7 @@ export default function ViewDialog({
   onPointerEnter,
   onPointerLeave,
   rating,
+  _departmentlist,
 }) {
   const modalClassStyles = {
     "&::before": {
@@ -144,7 +146,8 @@ export default function ViewDialog({
                           _viewData={_viewData}
                           type={type}
                           AddMoreList={AddMoreList}
-                          _isloadin={_isloading}
+                          _isloading={_isloading}
+                          _departmentlist={_departmentlist}
                         />
                       )}
                     </Box>
@@ -177,6 +180,22 @@ export default function ViewDialog({
                   <Box>
                     {open && (
                       <ViewState
+                        handleClose={handleClose}
+                        ButtonName={ButtonName}
+                        _viewData={_viewData}
+                        type={type}
+                        AddMoreList={AddMoreList}
+                        _isloading={_isloading}
+                        ImageUpload={ImageUpload}
+                        _image_upload={_image_upload}
+                        _getcountrylist={_getcountrylist}
+                      />
+                    )}
+                  </Box>
+                ) : ButtonName == "View Area" ? (
+                  <Box>
+                    {open && (
+                      <ViewArea
                         handleClose={handleClose}
                         ButtonName={ButtonName}
                         _viewData={_viewData}

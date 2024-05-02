@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, Select, Button } from "@mui/material";
 import { styled } from "@mui/system";
 import { PiNoteFill } from "react-icons/pi";
-import DialogComponent from "../component/DialogComponent copy";
+import DialogComponent from "./DialogComponent copy";
 
 const FilterStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -65,7 +65,6 @@ const FilterComponent = ({
   onPointerLeave,
   rating,
   _imageurl,
-  _departmentlist,
 }) => {
   return (
     <FilterStyle>
@@ -94,7 +93,6 @@ const FilterComponent = ({
                   onPointerLeave={onPointerLeave}
                   rating={rating}
                   _imageurl={_imageurl}
-                  _departmentlist={_departmentlist}
                 />
               </>
             ) : (

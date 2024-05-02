@@ -18,7 +18,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import TableList from "../../component/TableList";
 import FilterComponent from "../../component/FilterComponent";
-import ViewDialog from "../admin/component/ViewDialog";
+import ViewDialog from "../../component/ViewDialog";
 import SureModal from "../../component/SureModal";
 import LoaderComponent from "../../component/LoaderComponent";
 
