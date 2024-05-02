@@ -16,7 +16,7 @@ import {
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import TableList from "../admin/component/TableList";
+import TableList from "../../component/TableList";
 // import FilterComponent from "../admin/component/FilterComponent";
 import ViewDialog from "../../component/ViewDialog";
 import SureModal from "../../component/SureModal";
