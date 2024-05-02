@@ -97,7 +97,13 @@ const PropertyPost_s_1 = (props) => {
     },
   } = props;
   const auth = useContext(AuthContext);
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      bottm: 900,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
   const listedData = [
     {
       value: "Owner",
@@ -159,7 +165,9 @@ const PropertyPost_s_1 = (props) => {
       value: "5",
     },
   ];
-
+  useEffect(() => {
+    scrollToTop();
+  }, []);
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBoxS1">

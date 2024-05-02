@@ -193,7 +193,13 @@ const PropertyPost_s_3 = (props) => {
   const [_stateList, setStateList] = React.useState([]);
   const [_cityList, setCityList] = React.useState([]);
   const [_getstate, setState] = useState("");
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      bottm: 900,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
   const termConditionCheck = (event) => {
     if (!props?._consition) {
       props?.setConsition(true);
@@ -265,6 +271,7 @@ const PropertyPost_s_3 = (props) => {
   };
   useEffect(() => {
     StateFunctionList();
+    scrollToTop();
   }, []);
   useEffect(() => {
     CityFunctionList();

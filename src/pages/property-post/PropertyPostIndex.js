@@ -301,11 +301,7 @@ const PropertyPostIndex = () => {
   });
   const [_projecttype, setProjectType] = useState([]);
   const [open, setOpen] = useState(false);
-  const handleNameKeyDown = (event) => {
-    if (/[0-9]/.test(event.key)) {
-      event.preventDefault();
-    }
-  };
+
   const handleChangeCheck = (event) => {
     if (!_checked) {
       setChecked(true);

@@ -159,7 +159,7 @@ const SellerStyle = styled("div")(({ theme }) => ({
         color: "#fff",
         fontWeight: "400",
       },
-      padding: "10px 25px",
+      padding: "12.4px",
 
       fontSize: "16px",
       [theme.breakpoints.down("sm")]: {

@@ -114,10 +114,16 @@ const MainComponent = styled("Box")(({ theme }) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    "@media(max-width:615px)": {
+      display: "initial",
+    },
     "& p": {
       color: "#FFF",
       fontWeight: 400,
       fontSize: "12px",
+      "@media(max-width:615px)": {
+        marginTop: "20px",
+      },
     },
   },
   "& .suscribe": {

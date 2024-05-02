@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled } from "@mui/styles";
 import ImageGrid from "../seller-profile/ImageGrid";
 import Divider from "@mui/material/Divider";
@@ -8,7 +8,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsChatDots } from "react-icons/bs";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-// import PublicIcon from "@mui/icons-material/Public";
+import { AuthContext } from "../../context/Auth";
 
 const PostStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -76,6 +76,9 @@ const PostStyle = styled("Box")(({ theme }) => ({
   },
 }));
 const PostDetails = () => {
+  const auth = useContext(AuthContext);
+  console.log("auth45454----->", auth?._getprofile);
+
   const ArrayJson = [{}, {}, {}, {}];
   return (
     <PostStyle>
@@ -85,7 +88,7 @@ const PostDetails = () => {
             <Avatar src="/images/profile/1567018939360.png" />
           </Box>
           <Box className="contentBox">
-            <Typography variant="h6">Monu Rajput</Typography>
+            <Typography variant="h6">{auth?._getprofile?.name}</Typography>
             <Box display={"flex"} alignItems={"center"} mt={"5px"}>
               <span>2d .</span> &nbsp;
               <PublicIcon />
@@ -116,7 +119,7 @@ const PostDetails = () => {
               <Avatar src="/images/profile/1567018939360.png" />
             </Box>
             <Box className="contentBox1">
-              <Typography variant="h6">Monu Rajput</Typography>
+              <Typography variant="h6">{auth?._getprofile?.name}</Typography>
               <Box display={"flex"} alignItems={"center"} mt={"5px"}>
                 <span>2d .</span> &nbsp;
                 <PublicIcon />
