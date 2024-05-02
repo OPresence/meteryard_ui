@@ -9,6 +9,7 @@ import PostDetails from "./PostDetails";
 import SellerListComponent from "src/component/SellerListComponent";
 import AdvertisementComponent from "../../component/AdvertisementComponent";
 import styled from "@emotion/styled";
+
 const SellerStyle = styled("div")(({ theme }) => ({
   "& .SellerBox": {
     "& .listBox": {
@@ -77,7 +78,7 @@ const index = () => {
   return (
     <HomeLayout>
       <ProfileComponent />
-      <SellerStyle>
+      {/* <SellerStyle>
         <Box
           style={{
             background: "#fff",
@@ -142,7 +143,7 @@ const index = () => {
             </Grid>
           </Container>
         </Box>
-      </SellerStyle>
+      </SellerStyle> */}
     </HomeLayout>
   );
 };

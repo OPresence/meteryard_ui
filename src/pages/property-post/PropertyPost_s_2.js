@@ -95,7 +95,12 @@ const PropertyPost_s_2 = (props) => {
   } = props;
   const [state, setState] = React.useState(false);
   const [_propertyList, setPropertyList] = React.useState([]);
-
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   const badRoomNumberList = [
     {
       name: "1",
@@ -211,6 +216,8 @@ const PropertyPost_s_2 = (props) => {
   };
   useEffect(() => {
     ProjectType();
+    scrollToTop();
+    console.log("bbbbbbbmbmbm");
   }, []);
   return (
     <PropertyPostScreenStyle>
