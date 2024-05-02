@@ -5,7 +5,7 @@ import AdminLayout from "../../layout/AdminLayout";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import BlockIcon from "@mui/icons-material/Block";
-import ListPagination from "../admin/component/ListPagination";
+import ListPagination from "../../component/ListPagination";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {
   PostApiFunction,
