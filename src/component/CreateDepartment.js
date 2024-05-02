@@ -10,7 +10,7 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import CircularProgressCompoennt from "../component/CircularProgressComponent";
+import CircularProgressCompoennt from "./CircularProgressComponent";
 import { Form, Formik } from "formik";
 import * as yep from "yup";
 
