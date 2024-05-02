@@ -6,7 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { styled } from "@mui/system";
-import CreateDepartment from "../pages/admin/component/CreateDepartment";
+import CreateDepartment from "./CreateDepartment";
 import CreateAdmin from "../pages/admin-list/CreateAdmin";
 import AddBanner from "../pages/banner/AddBanner";
 import UpdateCountry from "../pages/countries/UpdateCountry";
