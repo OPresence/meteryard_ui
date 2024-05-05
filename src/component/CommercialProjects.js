@@ -1,15 +1,13 @@
 import React, { useContext, useState, useRef } from "react";
 import { Grid, Typography, Box, Container } from "@mui/material";
-import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import styled from "@emotion/styled";
-import Divider from "@mui/material/Divider";
-import ButtonComponent from "./ButtonComponent";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { AuthContext } from "../context/Auth";
+import CommercialPostCard from "./CommercialPostCard";
 const Commercialstyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     background: "#fff",
@@ -223,30 +221,32 @@ const CommercialProjects = () => {
                 </Typography>
               </Box>
             </Box>
-            <Box
-              style={{
-                display: "flex",
-                gap: "10px",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Box className={"ArrowClass"} onClick={previous}>
-                <ArrowBackIosIcon
-                  style={{
-                    color: "#000",
-                  }}
-                />
-              </Box>
-              <Box className={"ArrowClass"} onClick={next}>
-                <ArrowForwardIosIcon style={{ color: "#000" }} />
-              </Box>
-            </Box>
+            {auth?._getlist_commercial?.length > 4 &&
+             <Box
+             style={{
+               display: "flex",
+               gap: "10px",
+               justifyContent: "flex-end",
+             }}
+           >
+             <Box className={"ArrowClass"} onClick={previous}>
+               <ArrowBackIosIcon
+                 style={{
+                   color: "#000",
+                 }}
+               />
+             </Box>
+             <Box className={"ArrowClass"} onClick={next}>
+               <ArrowForwardIosIcon style={{ color: "#000" }} />
+             </Box>
+           </Box>}
+           
           </Box>
           <Box className="mainBoxCard">
             {auth?._getlist_commercial?.length > 4 ? (
               <>
                 <Slider {...settings} ref={sliderRef}>
-                  {auth?._getlist_commercial.map((data, index) => {
+                  {auth?._getlist_commercial?.map((data, index) => {
                     return (
                       <Grid
                         key={index}
@@ -258,86 +258,15 @@ const CommercialProjects = () => {
                         className="GridClassCard"
                         style={index > 3 ? { marginTop: "60px" } : {}}
                       >
-                        <Box className="cardBox" key={index}>
-                          <Box className="cards">
-                            <Box display={"flex"} justifyContent={"center"}>
-                              <Box className="contentBox" width={"90%"}>
-                                <Box>
-                                  <Box
-                                    // display={"flex"}
-                                    // justifyContent={"center"}
-                                    m={"-95px 0 0 0"}
-                                  >
-                                    <Box>
-                                      <img
-                                        src={data?.coverImage}
-                                        width={"100%"}
-                                        style={{
-                                          borderRadius: "15px",
-                                          height: "180px",
-                                        }}
-                                      />
-                                    </Box>
-                                  </Box>
-                                </Box>
-                                <Typography
-                                  variant="h5"
-                                  style={{ padding: "20px 25px 9px" }}
-                                >
-                                  {data?.projectName}{" "}
-                                </Typography>
-                                <Box display={"flex"} mt={1}>
-                                  <FmdGoodIcon />
-                                  &nbsp;
-                                  <Box m={"0 0 0 5px"} width={"100%"}>
-                                    <Typography variant="h4">
-                                      {data?.title}{" "}
-                                    </Typography>
-                                    <div className="paragraph-container">
-                                      <p className="paragraph">
-                                        {data?.description}
-                                      </p>
-                                    </div>
-                                    <Box m={"10px 0"}>
-                                      <Divider color="#D2D2D2" />
-                                    </Box>
-                                    <Box
-                                      display={"flex"}
-                                      alignItems={"center"}
-                                      justifyContent={"space-between"}
-                                    >
-                                      <Box>
-                                        <Typography variant="h6">
-                                          Property Size
-                                        </Typography>
-                                        <Typography variant="h5">
-                                          {data?.superBuildupArea}
-                                        </Typography>
-                                      </Box>
-                                      <Box>
-                                        <Typography variant="h6">
-                                          Price
-                                        </Typography>
-                                        <Typography variant="h5">
-                                          {data?.price?.toLocaleString()}/- Rs
-                                        </Typography>
-                                      </Box>
-                                    </Box>
-                                    <ButtonComponent data={data} />
-                                  </Box>
-                                </Box>
-                              </Box>
-                            </Box>
-                          </Box>
-                        </Box>
+                       <CommercialPostCard data={data} />
                       </Grid>
                     );
                   })}
                 </Slider>
               </>
             ) : (
-              <>
-                {auth?._getlist_commercial.map((data, index) => {
+              <Grid container spacing={3}>
+                {auth?._getlist_commercial?.map((data, index) => {
                   return (
                     <Grid
                       key={index}
@@ -349,77 +278,12 @@ const CommercialProjects = () => {
                       className="GridClassCard"
                       style={index > 3 ? { marginTop: "60px" } : {}}
                     >
-                      <Box className="cardBox" key={index}>
-                        <Box className="cards">
-                          <Box display={"flex"} justifyContent={"center"}>
-                            <Box className="contentBox" width={"90%"}>
-                              <Box>
-                                <Box
-                                  display={"flex"}
-                                  justifyContent={"center"}
-                                  m={"-95px 0 0 0"}
-                                >
-                                  <Box maxWidth={280}>
-                                    <img
-                                      src={data?.coverImage}
-                                      width={"100%"}
-                                      style={{ borderRadius: "15px" }}
-                                    />
-                                  </Box>
-                                </Box>
-                              </Box>
-                              <Typography
-                                variant="h5"
-                                style={{ padding: "20px 25px 9px" }}
-                              >
-                                {data?.projectName}{" "}
-                              </Typography>
-                              <Box display={"flex"} mt={1}>
-                                <FmdGoodIcon />
-                                &nbsp;
-                                <Box m={"0 0 0 5px"}>
-                                  <Typography variant="h4">
-                                    {data?.title}{" "}
-                                  </Typography>
-                                  <Typography variant="h6">
-                                    {data?.description}
-                                  </Typography>
-                                  <Box m={"10px 0"}>
-                                    <Divider color="#D2D2D2" />
-                                  </Box>
-                                  <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    justifyContent={"space-between"}
-                                  >
-                                    <Box>
-                                      <Typography variant="h6">
-                                        Property Size
-                                      </Typography>
-                                      <Typography variant="h5">
-                                        {data?.superBuildupArea}
-                                      </Typography>
-                                    </Box>
-                                    <Box>
-                                      <Typography variant="h6">
-                                        Price
-                                      </Typography>
-                                      <Typography variant="h5">
-                                        {data?.price}/-
-                                      </Typography>
-                                    </Box>
-                                  </Box>
-                                  <ButtonComponent data={data} />
-                                </Box>
-                              </Box>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
+                       <CommercialPostCard data={data} />
+                     
                     </Grid>
                   );
                 })}
-              </>
+              </Grid>
             )}
 
             {auth?._getlist_commercial?.length > 7 && (

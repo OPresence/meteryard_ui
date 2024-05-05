@@ -1,14 +1,11 @@
+import React, { useContext, useRef } from "react";
 import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Divider from "@mui/material/Divider";
 import styled from "@emotion/styled";
-import ButtonComponent from "./ButtonComponent";
-import React, { useEffect, useState, useRef } from "react";
-import { PostApiFunction } from "../utils";
-import Apiconfigs from "../ApiConfig/ApiConfig";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import FeaturedPostCard from "./FeaturedPostCard";
+import { AuthContext } from "../context/Auth";
 const CardComponentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
@@ -77,42 +74,9 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
 }));
 const CardComponent = () => {
   const sliderRef = useRef(null);
+    const auth = useContext(AuthContext);
 
-  const isMobile = useMediaQuery("(max-width:600px)");
-  const projectDetails = [
-    {
-      name: "It Is A Piece Of Really Soft Tissue That Appears As A Thin Line Between The Gums And Lips. You Can Find It OnThe Top And The Bottom Of Your Oral Cavity.",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Delivered Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Pre - Launched Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Running Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "It Is A Piece Of Really Soft Tissue That Appears As A Thin Line Between The Gums And Lips. You Can Find It OnThe Top And The Bottom Of Your Oral Cavity.",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Delivered Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Pre - Launched Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Running Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-  ];
+
   const settings = {
     dots: true,
     infinite: true,
@@ -186,36 +150,6 @@ const CardComponent = () => {
       },
     ],
   };
-  // const [_getlist, setGetList] = useState([]);
-  // console.log("res---->5s645sds6a+d4sa", _getlist);
-
-  // const [_isloading, setIsLoading] = useState(false);
-
-  // const ResidentialAPI = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const res = await PostApiFunction({
-  //       endPoint: Apiconfigs?.listAllPropertyPost,
-  //       data: {
-  //         projectTypeId: "65dc4b9cda234100342352b1",
-  //         page: "1",
-  //         limit: "10",
-  //       },
-  //     });
-  //     if (res?.responseCode == 200) {
-  //       setIsLoading(false);
-
-  //       setGetList(res?.result?.docs);
-  //     }
-  //   } catch (error) {
-  //     setIsLoading(false);
-
-  //     console.log("eror", error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   ResidentialAPI();
-  // }, []);
   return (
     <CardComponentStyle>
       <div className="mainSliderDiv">
@@ -226,57 +160,12 @@ const CardComponent = () => {
               Featured Residential Projects Across India
             </Typography>
           </Box>
-          <Box mt={isMobile ? 2 : 5}>
+          <Box>
             <Slider {...settings} ref={sliderRef}>
-              {projectDetails.map((data, index) => {
+              {auth?._isFeaturedPost?.map((data, index) => {
                 return (
                   <Grid item lg={3} md={6} sm={6} xs={12} key={index}>
-                    <Box
-                      height={"100%"}
-                      pb={"20px"}
-                      display={"flex"}
-                      justifyContent={"center"}
-                    >
-                      <Box className="cards property-card-style">
-                        <Box>
-                          <img
-                            src="/images/meteryard/Images/Screenshot 2023-09-02 100309.png"
-                            width={"100%"}
-                          />
-                        </Box>
-                        <Box className="contentBox">
-                          <Typography variant="h5">
-                            BLK 7-1005, Vascon Tulips Gold
-                          </Typography>
-                          <Typography variant="h4">
-                            BLK 7-1005, Vascon Tulips Gold
-                          </Typography>
-                          <Typography variant="h6">
-                            It Is A Piece Of Really Soft Tissue That Appears As
-                            A Thin Line Between The Gums And Lips.
-                          </Typography>
-                          <Box m={"10px 0"}>
-                            <Divider color="#D2D2D2" />
-                          </Box>
-                          <Box display={"flex"} alignItems={"center"}>
-                            <Box>
-                              <Typography variant="h4">
-                                Property Size
-                              </Typography>
-                              <Typography variant="h5">900 Sqr Ft.</Typography>
-                            </Box>
-                            &nbsp;&nbsp; &nbsp;&nbsp;
-                            <Box>
-                              <Typography variant="h4">
-                                Property Size
-                              </Typography>
-                              <Typography variant="h5">900 Sqr Ft.</Typography>
-                            </Box>
-                          </Box>
-                          {/* <ButtonComponent data={data} /> */}
-                        </Box>
-                      </Box>{" "}
-                    </Box>
+                   <FeaturedPostCard data={data}/>
                   </Grid>
                 );
               })}

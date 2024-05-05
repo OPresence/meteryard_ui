@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ResidentialPostCard from "../component/ResidentialPostCard";
 
 const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
@@ -247,24 +248,26 @@ const ResidentialProjects = () => {
               </Typography>
             </Box>
           </Box>
-          <Box
-            style={{
-              display: "flex",
-              gap: "10px",
-              justifyContent: "flex-end",
-            }}
-          >
-            <Box className={"ArrowClass"} onClick={previous}>
-              <ArrowBackIosIcon
-                style={{
-                  color: "#000",
-                }}
-              />
-            </Box>
-            <Box className={"ArrowClass"} onClick={next}>
-              <ArrowForwardIosIcon style={{ color: "#000" }} />
-            </Box>
-          </Box>
+          {_getlist?.length > 4 &&
+           <Box
+           style={{
+             display: "flex",
+             gap: "10px",
+             justifyContent: "flex-end",
+           }}
+         >
+           <Box className={"ArrowClass"} onClick={previous}>
+             <ArrowBackIosIcon
+               style={{
+                 color: "#000",
+               }}
+             />
+           </Box>
+           <Box className={"ArrowClass"} onClick={next}>
+             <ArrowForwardIosIcon style={{ color: "#000" }} />
+           </Box>
+         </Box>}
+         
         </Box>
         <Box mt={5}>
           {_getlist?.length > 4 ? (
@@ -274,152 +277,23 @@ const ResidentialProjects = () => {
                   _getlist?.map((data, index) => {
                     return (
                       <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
-                        <Box height={"100%"} pb={"20px"}>
-                          <Box className="cards">
-                            <Box
-                              maxHeight={220}
-                              minHeight={220}
-                              display={"flex"}
-                              justifyContent={"center"}
-                            >
-                              <img
-                                src={data?.coverImage}
-                                width={"100%"}
-                                style={{ borderRadius: "15px" }}
-                              />
-                            </Box>
-
-                            <Box display={"flex"} justifyContent={"center"}>
-                              <Box className="contentBox" width={"90%"}>
-                                <Box display={"flex"} alignItems={"center"}>
-                                  <Typography variant="h5">
-                                    {data?.projectName}
-                                  </Typography>
-                                </Box>
-                                <Box display={"flex"} mt={1}>
-                                  <FmdGoodIcon />
-                                  &nbsp;
-                                  <Box m={"0 0 0 5px"}>
-                                    <Typography variant="h4">
-                                      {data?.title}
-                                    </Typography>
-                                    <div className="paragraph-container">
-                                      <p className="paragraph">
-                                        {data?.description}
-                                      </p>
-                                    </div>
-                                    <Box m={"10px 0"}>
-                                      <Divider color="#D2D2D2" />
-                                    </Box>
-                                    <Box
-                                      display={"flex"}
-                                      alignItems={"center"}
-                                      justifyContent={"space-between"}
-                                    >
-                                      <Box>
-                                        <Typography variant="h6">
-                                          Property Size
-                                        </Typography>
-                                        <Typography variant="h5">
-                                          {data?.superBuildupArea}
-                                        </Typography>
-                                      </Box>
-                                      <Box>
-                                        <Typography variant="h6">
-                                          Price
-                                        </Typography>
-                                        <Typography variant="h5">
-                                          {data?.price}/-
-                                        </Typography>
-                                      </Box>
-                                    </Box>
-
-                                    {/* <Route path="/view-property" exact> */}
-                                    <ButtonComponent data={data} />
-                                    {/* </Route> */}
-                                  </Box>
-                                </Box>
-                              </Box>
-                            </Box>
-                          </Box>
-                        </Box>
+                       <ResidentialPostCard data={data}/>
                       </Grid>
                     );
                   })}
               </Slider>
             </>
           ) : (
-            <>
+            <Grid container spacing={3}>
               {_getlist &&
                 _getlist?.map((data, index) => {
                   return (
                     <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
-                      <Box height={"100%"} pb={"20px"}>
-                        <Box className="cards">
-                          <Box>
-                            <img
-                              src={data?.coverImage}
-                              width={"100%"}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </Box>
-
-                          <Box display={"flex"} justifyContent={"center"}>
-                            <Box className="contentBox" width={"90%"}>
-                              <Box display={"flex"} alignItems={"center"}>
-                                <Typography variant="h5">
-                                  {data?.projectName}
-                                </Typography>
-                              </Box>
-                              <Box display={"flex"} mt={1}>
-                                <FmdGoodIcon />
-                                &nbsp;
-                                <Box m={"0 0 0 5px"}>
-                                  <Typography variant="h4">
-                                    {data?.title}
-                                  </Typography>
-                                  <Typography variant="h6">
-                                    {data?.description}
-                                  </Typography>
-                                  <Box m={"10px 0"}>
-                                    <Divider color="#D2D2D2" />
-                                  </Box>
-                                  <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    justifyContent={"space-between"}
-                                  >
-                                    <Box>
-                                      <Typography variant="h6">
-                                        Property Size
-                                      </Typography>
-                                      <Typography variant="h5">
-                                        {data?.superBuildupArea}
-                                      </Typography>
-                                    </Box>
-                                    <Box>
-                                      <Typography variant="h6">
-                                        Price
-                                      </Typography>
-                                      <Typography variant="h5">
-                                        {data?.price}/-
-                                      </Typography>
-                                    </Box>
-                                  </Box>
-
-                                  {/* <Route path="/view-property" exact> */}
-                                  <ButtonComponent data={data} />
-                                  {/* </Route> */}
-                                </Box>
-                              </Box>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
+                     <ResidentialPostCard data={data}/>
                     </Grid>
                   );
                 })}
-            </>
+            </Grid>
           )}
           {/* {_getlist?.length > 7 && (
             <Box

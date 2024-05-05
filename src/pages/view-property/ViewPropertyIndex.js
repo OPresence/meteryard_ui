@@ -7,7 +7,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import "../../Scss/PropertyCss.css";
+import "./PropertyCss.css";
 import GalleryImg from "../../component/GalleryImg";
 import styled from "@emotion/styled";
 import CollectionsIcon from "@mui/icons-material/Collections";
@@ -257,9 +257,9 @@ const ViewPropertyIndex = () => {
                 <PropertyMoreDetails dataArray={dataArray} />
               </Box>
 
-              <Box className="SuggestionProperties">
+              {/* <Box className="SuggestionProperties">
                 <SuggestionProperties />
-              </Box>
+              </Box> */}
 
               <Box className="ResidentialProperty" style={{ padding: "20px" }}>
                 <ResidentialProperty />

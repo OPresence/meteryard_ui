@@ -1,9 +1,6 @@
 import React, { useContext, useRef } from "react";
 import { Grid, Typography, Box, Container } from "@mui/material";
-import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import styled from "@emotion/styled";
-import Divider from "@mui/material/Divider";
-import ButtonComponent from "./ButtonComponent";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
@@ -11,7 +8,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../context/Auth";
-const ResidentStyle = styled("Box")(({ theme }) => ({
+import AgreeculturePostCard from "./AgreeculturePostCard";
+const AgreecultureStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "80px 0px",
     background: "#fff",
@@ -204,17 +202,10 @@ const AgreecultureComponent = () => {
     ],
   };
   return (
-    <ResidentStyle>
+    <AgreecultureStyle>
       <div className="mainSliderDiv">
         <Container maxWidth>
-          {/* <section> */}
-          {/* <Box>
-              <Typography variant="h2">Agriculture Projects</Typography>
-              <Typography variant="h6">
-                Agriculture Projects Across India.
-              </Typography>
-            </Box> */}
-          {/* </section> */}
+         
           <Box
             display={"flex"}
             justifyContent={"space-between"}
@@ -228,7 +219,7 @@ const AgreecultureComponent = () => {
                 </Typography>
               </Box>
             </Box>
-            <Box
+            {auth?._getlistAgreeculture?.length > 4 &&  <Box
               style={{
                 display: "flex",
                 gap: "10px",
@@ -245,90 +236,48 @@ const AgreecultureComponent = () => {
               <Box className={"ArrowClass"} onClick={next}>
                 <ArrowForwardIosIcon style={{ color: "#000" }} />
               </Box>
-            </Box>
+            </Box>}
+           
           </Box>
           <Box mt={5}>
-            <Slider {...settings} ref={sliderRef}>
-              {auth?._getlistAgreeculture &&
-                auth?._getlistAgreeculture?.map((data, index) => {
-                  return (
-                    <Grid
-                      key={index}
-                      item
-                      lg={3}
-                      md={3}
-                      sm={6}
-                      xs={12}
-                      style={{ display: "flex" }}
-                    >
-                      <Box height={"100%"} pb={"20px"}>
-                        <Box className="cards">
-                          <Box>
-                            <img
-                              src={data?.coverImage}
-                              width={"100%"}
-                              style={{ borderRadius: "15px", height: "250px" }}
-                            />
-                          </Box>
-
-                          <Box display={"flex"} justifyContent={"center"}>
-                            <Box className="contentBox" width={"90%"}>
-                              <Box display={"flex"} alignItems={"center"}>
-                                <Typography variant="h5">
-                                  {data?.projectName}
-                                </Typography>
-                              </Box>
-                              <Box display={"flex"} mt={1}>
-                                <FmdGoodIcon />
-                                &nbsp;
-                                <Box m={"0 0 0 5px"}>
-                                  <Typography variant="h4">
-                                    {data?.title}
-                                  </Typography>
-                                  <div className="paragraph-container">
-                                    <p className="paragraph">
-                                      {data?.description}
-                                    </p>
-                                  </div>
-                                  <Box m={"10px 0"}>
-                                    <Divider color="#D2D2D2" />
-                                  </Box>
-                                  <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    justifyContent={"space-between"}
-                                  >
-                                    <Box>
-                                      <Typography variant="h6">
-                                        Property Size
-                                      </Typography>
-                                      <Typography variant="h5">
-                                        {data?.superBuildupArea}
-                                      </Typography>
-                                    </Box>
-                                    <Box>
-                                      <Typography variant="h6">
-                                        Price
-                                      </Typography>
-                                      <Typography variant="h5">
-                                        {data?.price?.toLocaleString()}/- Rs
-                                      </Typography>
-                                    </Box>
-                                  </Box>
-
-                                  {/* <Route path="/view-property" exact> */}
-                                  <ButtonComponent data={data} />
-                                  {/* </Route> */}
-                                </Box>
-                              </Box>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Grid>
-                  );
-                })}
-            </Slider>
+            {auth?._getlistAgreeculture?.length > 4 ?
+             <Slider {...settings} ref={sliderRef}>
+             {auth?._getlistAgreeculture &&
+               auth?._getlistAgreeculture?.map((data, index) => {
+                 return (
+                   <Grid
+                     key={index}
+                     item
+                     lg={3}
+                     md={3}
+                     sm={6}
+                     xs={12}
+                     style={{ display: "flex" }}
+                   >
+                    <AgreeculturePostCard data={data} />
+                   </Grid>
+                 );
+               })}
+           </Slider> :
+           <Grid container spacing={3}>
+             {auth?._getlistAgreeculture &&
+               auth?._getlistAgreeculture?.map((data, index) => {
+                 return (
+                   <Grid
+                     key={index}
+                     item
+                     lg={3}
+                     md={3}
+                     sm={6}
+                     xs={12}
+                     style={{ display: "flex" }}
+                   >
+                    <AgreeculturePostCard data={data} />
+                   </Grid>
+                 );
+               })}
+           </Grid> }
+           
             {auth?._getlistAgreeculture?.length > 7 && (
               <Box
                 display={"flex"}
@@ -342,7 +291,7 @@ const AgreecultureComponent = () => {
           </Box>
         </Container>
       </div>
-    </ResidentStyle>
+    </AgreecultureStyle>
   );
 };
 
