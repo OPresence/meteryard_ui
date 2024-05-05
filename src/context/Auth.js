@@ -23,7 +23,7 @@ export default function Auth(props) {
   const [_isloading, setIsLoading] = useState(false);
   const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
   const [_getproprty_type, setGetPropetyType] = useState("");
-
+const [_isFeaturedPost,setIsFeatured] = useState([])
   const GetProfileFunction = async () => {
     try {
       const res = await getAPIdata({
@@ -70,6 +70,26 @@ export default function Auth(props) {
       setPostList([]);
     }
   };
+  const FeaturedAPI = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllPropertyPost,
+        data: {
+          page: "1",
+          limit: "10",
+          featuredProperty: "true",
+        },
+      });
+      if (res?.responseCode == 200) {
+
+        setIsFeatured(res?.result?.docs);
+      }
+    } catch (error) {
+      setIsFeatured([]);
+
+      console.log("eror", error);
+    }
+  };
   const ResidentialAPI = async () => {
     try {
       const res = await PostApiFunction({
@@ -78,6 +98,7 @@ export default function Auth(props) {
           projectTypeId: "65dc4b9cda234100342352b1",
           page: "1",
           limit: "10",
+          
         },
       });
       if (res?.responseCode == 200) {
@@ -211,7 +232,6 @@ export default function Auth(props) {
   }, [_getproprty_type]);
   useEffect(() => {
     if (RouterName == "property-post") {
-      console.log("bsjdbsajbjsba---->");
       ProjectType();
     }
   }, []);
@@ -231,6 +251,7 @@ export default function Auth(props) {
   });
 
   useEffect(() => {
+    FeaturedAPI()
     ResidentialAPI();
     CommercialAPI();
     AgreecultureAPIAPI();
@@ -249,6 +270,7 @@ export default function Auth(props) {
     _isloading,
     _getproprty_type,
     _getproject_sub_type,
+    _isFeaturedPost,
     ResidentialAPI: (value) => ResidentialAPI(value),
     CommercialAPI: (value) => CommercialAPI(value),
     AgreecultureAPIAPI: (value) => AgreecultureAPIAPI(value),
