@@ -23,7 +23,81 @@ export default function Auth(props) {
   const [_isloading, setIsLoading] = useState(false);
   const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
   const [_getproprty_type, setGetPropetyType] = useState("");
-const [_isFeaturedPost,setIsFeatured] = useState([])
+  const [statesHome, setStatesHome] = useState([]);
+  const [_citylist, setCityList] = useState([]);
+  const [_isFeaturedPost, setIsFeatured] = useState([]);
+  const [_getCityValue, setGetCityValue] = useState("");
+  console.log("_getCityValue--->", _citylist);
+  const StateApiFunction = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllState,
+        data: {
+          countryId: "65ba9a0fd02a1d3150e299bd",
+        },
+      });
+      if (res) {
+        console.log("niuiinii--->", res);
+        if (res?.responseCode == 200) {
+          setStatesHome(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setStatesHome([]);
+          toast.error(res?.responseMessage);
+          setStatesHome([]);
+        } else if (res?.responseCode == 404) {
+          setStatesHome([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else if (res?.responseCode == 500) {
+          setStatesHome([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else {
+          setStatesHome([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        }
+      }
+    } catch (error) {
+      console.log("error");
+      setPostList([]);
+    }
+  };
+  const CityApiFunction = async () => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllCity,
+        data: {
+          stateId: _getCityValue,
+        },
+      });
+      if (res) {
+        if (res?.responseCode == 200) {
+          console.log("niuiinii--->", res);
+          setCityList(res?.result?.docs);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+          toast.error(res?.responseMessage);
+          setCityList([]);
+        } else if (res?.responseCode == 404) {
+          setCityList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else if (res?.responseCode == 500) {
+          setCityList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else {
+          setCityList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        }
+      }
+    } catch (error) {
+      console.log("error");
+      setPostList([]);
+    }
+  };
   const GetProfileFunction = async () => {
     try {
       const res = await getAPIdata({
@@ -38,10 +112,11 @@ const [_isFeaturedPost,setIsFeatured] = useState([])
       console.log("error", error);
     }
   };
-  const PostFunction = async () => {
+  const PostFunction = async ({ data }) => {
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllPropertyPost,
+        data: data,
       });
       if (res) {
         console.log("niuiinii--->", res);
@@ -81,7 +156,6 @@ const [_isFeaturedPost,setIsFeatured] = useState([])
         },
       });
       if (res?.responseCode == 200) {
-
         setIsFeatured(res?.result?.docs);
       }
     } catch (error) {
@@ -98,7 +172,6 @@ const [_isFeaturedPost,setIsFeatured] = useState([])
           projectTypeId: "65dc4b9cda234100342352b1",
           page: "1",
           limit: "10",
-          
         },
       });
       if (res?.responseCode == 200) {
@@ -235,10 +308,14 @@ const [_isFeaturedPost,setIsFeatured] = useState([])
       ProjectType();
     }
   }, []);
-
   useEffect(() => {
     if (RouterName == "CityChat") {
-      PostFunction();
+      PostFunction({
+        data: {
+          page: 1,
+          limit: 10,
+        },
+      });
     }
   }, []);
   useEffect(() => {
@@ -249,14 +326,17 @@ const [_isFeaturedPost,setIsFeatured] = useState([])
       return () => clearTimeout(timer);
     }
   });
-
   useEffect(() => {
-    FeaturedAPI()
+    StateApiFunction();
+    FeaturedAPI();
     ResidentialAPI();
     CommercialAPI();
     AgreecultureAPIAPI();
+    ProjectType();
   }, []);
-
+  useEffect(() => {
+    CityApiFunction();
+  }, [_getCityValue]);
   let data = {
     _accesstoken,
     _getprofile,
@@ -271,6 +351,8 @@ const [_isFeaturedPost,setIsFeatured] = useState([])
     _getproprty_type,
     _getproject_sub_type,
     _isFeaturedPost,
+    statesHome,
+    _citylist,
     ResidentialAPI: (value) => ResidentialAPI(value),
     CommercialAPI: (value) => CommercialAPI(value),
     AgreecultureAPIAPI: (value) => AgreecultureAPIAPI(value),
@@ -280,6 +362,7 @@ const [_isFeaturedPost,setIsFeatured] = useState([])
     setAccessToken: (value) => setAccessToken(value),
     setGetPropetyType: (value) => setGetPropetyType(value),
     setGetProject_sub_Type: (value) => setGetProject_sub_Type(value),
+    setGetCityValue: (value) => setGetCityValue(value),
   };
   useEffect(() => {
     const storedToken = sessionStorage.getItem("token");

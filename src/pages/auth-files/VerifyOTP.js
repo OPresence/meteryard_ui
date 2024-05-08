@@ -71,13 +71,19 @@ const DisabledSpan = styled("span")({
   color: "#999", // Change color to gray
   pointerEvents: "none", // Disable mouse events
 });
-const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
+const VerifyOTP = ({
+  _signcomplete,
+  setSelectScreen,
+  setSignUpComplete,
+  setOpen,
+  // handleClickOpenLogin,
+}) => {
   const auth = useContext(AuthContext);
   const [_OTP, setOTP] = useState("");
   const [getOtpValidate, setOtpValidate] = useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [isloading_otp, setIsLoadingOTP] = useState(false);
-
+  console.log("dsnfbkdsnkfndskfdsnfnsdjk");
   const handleOtpChange = async (enteredOtp) => {
     if (_OTP.length < 4) {
       setOtpValidate(true);
@@ -106,8 +112,10 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
         if (res?.responseCode == 200) {
           setIsLoading(false);
           toast.success(res?.responseMessage);
+          // handleClickOpenLogin();
           // auth.setEndtime(moment().add(3, "m").unix());
-
+          setOpen(false);
+          console.log("dkfkdfdsjjkkdsf=----->", setOpen);
           setSelectScreen("Login");
         } else if (res?.responseCode == 409) {
           toast.error(res?.responseMessage);
@@ -129,7 +137,7 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
       }
     } catch (error) {
       setIsLoading(false);
-      toast.error(res?.responseMessage);
+      toast.error(error?.responseMessage);
       console.log("error", error);
     }
   };
@@ -168,7 +176,7 @@ const VerifyOTP = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
       }
     } catch (error) {
       setIsLoadingOTP(false);
-      toast.error(res?.responseMessage);
+      toast.error(error?.responseMessage);
       console.log("error", error);
     }
   };

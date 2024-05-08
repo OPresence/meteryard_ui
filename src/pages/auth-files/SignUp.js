@@ -144,7 +144,7 @@ const formValidationSchema = yep.object().shape({
       /^[^@]+@[^@.]+\.[^@.]+$/,
       "Please enter a valid email address with only one '@' and one '.'."
     ),
-  PhoneNumber: yep.string().required("Phone Number is required."),
+  PhoneNumber: yep.string().required("Phone number is required."),
   password: yep
     .string()
     .required("Password is required.")

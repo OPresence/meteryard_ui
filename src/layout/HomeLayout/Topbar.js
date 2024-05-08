@@ -24,12 +24,13 @@ import DialogComponent from "../../component/DialogComponent";
 import { useRouter } from "next/router";
 import LoginDialog from "../../component/LoginDialog";
 import "../../Scss/border.css";
-import Apiconfigs from "@/ApiConfig/ApiConfig";
-import { getAPIdata } from "@/utils";
+import Apiconfigs from "../../ApiConfig/ApiConfig";
+import { getAPIdata } from "../../utils";
 import { AuthContext } from "../../context/Auth";
 import CloseIcon from "@mui/icons-material/Close";
 import ProfileMenu from "../../component/ProfileMenu";
 import MobilerMenu from "../../component/MobileMenu";
+import CityChatDialog from "../../component/CityChatDialog";
 const MenuStyle = styled("Box")(({ theme }) => ({
   "& .hidebox": {
     display: "block",
@@ -146,6 +147,7 @@ export default function Topbar() {
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);
   const [_accesstoken, setAccessToken] = useState(null);
+  const [_open_city_dia,setOpenCity_dia] = useState(false);
   const GetProfileFunction = async () => {
     try {
       const res = await getAPIdata({
@@ -159,6 +161,8 @@ export default function Topbar() {
       console.log("error", error);
     }
   };
+
+
   const router = useRouter();
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -211,15 +215,20 @@ export default function Topbar() {
           <Logo className="logoImg" />
         </Link>
       </Box>
-      {/* <Box>
+      <Box>
         <MenuStyle>
           <Box className="cityChat">
-            <Button className="rainbowGradient" onClick={handleClickOpen}>
+            <Button className="rainbowGradient"  onClick={() =>
+                router.push({
+                  pathname: "/CityChat",
+                  // query: { BuyerKey: "Buyer", search: "Buyer" },
+                })
+              }>
               My Citychat
             </Button>
           </Box>
         </MenuStyle>
-      </Box> */}
+      </Box>
     </Box>
   );
 
@@ -404,16 +413,21 @@ export default function Topbar() {
                     <Box className="MobileMenu">
                       <MobilerMenu />
                     </Box>
-                    {/* {router.pathname == "/" && (
+                    {/* {router.pathname == "/" && ( */}
                       <Box p={"10px 25px 0 0"}>
                         <Button
                           className="rainbowGradient"
-                          onClick={handleClickOpen}
+                          onClick={() =>
+                            router.push({
+                              pathname: "/CityChat",
+                              // query: { BuyerKey: "Buyer", search: "Buyer" },
+                            })
+                          }
                         >
                           My Citychat
                         </Button>
                       </Box>
-                    )} */}
+                    {/* )} */}
                   </Box>
                 </Box>
               </MenuStyle>
@@ -446,6 +460,9 @@ export default function Topbar() {
           _signcomplete={_signcomplete}
         />
       )}
+
+
+
     </MainComponent>
   );
 }

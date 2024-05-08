@@ -1,6 +1,9 @@
 import React from "react";
 import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import styled from "@emotion/styled";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "../Scss/border.css";
 const ProjectStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -15,7 +18,7 @@ const ProjectStyle = styled("Box")(({ theme }) => ({
     },
     "& .shodowBox": {
       background: "#fff",
-      margin: "120px 0 0 0",
+      margin: "40px 0 0 0",
       display: "flex",
       justifyContent: "space-between",
       padding: "0 80px",
@@ -148,6 +151,79 @@ const ProjectStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
+const settings = {
+  dots: false,
+  infinite: true,
+  autoplay: true,
+  arrows: false,
+  speed: 400,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+
+  responsive: [
+    {
+      breakpoint: 1280,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        infinite: true,
+        autoplay: true,
+        dots: false,
+      },
+    },
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+        autoplay: true,
+        dots: false,
+      },
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+        autoplay: true,
+        dots: false,
+      },
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+        autoplay: true,
+        dots: false,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+        autoplay: true,
+        initialSlide: 1,
+      },
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        infinite: true,
+        infinite: true,
+        autoplay: true,
+        initialSlide: 1,
+      },
+    },
+  ],
+};
 const ProjectComponent = () => {
   return (
     <ProjectStyle>
@@ -161,18 +237,14 @@ const ProjectComponent = () => {
           </Box>
           <Box>
             <Box className="shodowBox">
-              <Box width={"100%"} marginTop={"40px"}>
-                <Box
-                // display={"flex"}
-                // justifyContent={"space-between"}
-                // mt={"-70px"}
-                // gap={"5px"}
-                >
-                  <Grid
+              <Box width={"100%"} margin={"40px 0"}>
+                <Box>
+                  {/* <Grid
                     container
                     spacing={3}
                     style={{ justifyContent: "center" }}
-                  >
+                  > */}
+                  <Slider {...settings} >
                     <Grid item lg={3} md={3} sm={6} xs={6}>
                       <Box className="rainbow" maxWidth={180}>
                         <Box className="contentBox" textAlign={"center"}>
@@ -213,28 +285,31 @@ const ProjectComponent = () => {
                         </Box>
                       </Box>
                     </Grid>
-                  </Grid>
+                    <Grid item lg={3} md={3} sm={6} xs={6}>
+                      <Box className="rainbow" maxWidth={180}>
+                        <Box className="contentBox" textAlign={"center"}>
+                          <Typography variant="h1">51</Typography>
+                          <Box mt={2}>
+                            <Typography variant="h3">Total Projects</Typography>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Grid>
+                    <Grid item lg={3} md={3} sm={6} xs={6}>
+                      <Box className="rainbowSecond" maxWidth={180}>
+                        <Box className="contentBox" textAlign={"center"}>
+                          <Typography variant="h1">51</Typography>
+                          <Box mt={2}>
+                            <Typography variant="h3">Total Projects</Typography>
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Grid>
+                 </Slider> 
+
+                  {/* </Grid> */}
                 </Box>
-                <Box
-                  display={"flex"}
-                  justifyContent={"center"}
-                  textAlign={"center"}
-                  m={"20px 0 30px 0"}
-                >
-                  <Box>
-                    <Box mt={1}>
-                      <Typography variant="h2">Counters</Typography>
-                    </Box>
-                    <Box mt={1}>
-                      <Typography
-                        variant="h6"
-                        style={{ color: "#A1A1A1", fontSize: "18px" }}
-                      >
-                        Featured Residential Projects Across India
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
+               
               </Box>
             </Box>
           </Box>

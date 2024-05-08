@@ -7,7 +7,7 @@ const index = () => {
   return (
     <div>
       <PostIndex />
-      <Divider component="li" />
+      <Divider  />
       <StickyModal />
     </div>
   );

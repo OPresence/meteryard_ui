@@ -10,16 +10,25 @@ const OTPstyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-const index = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
+const Otp = ({
+  _signcomplete,
+  setSelectScreen,
+  setSignUpComplete,
+  type,
+  setOpen,
+}) => {
   return (
     <>
       <Box className="backgroundBox">
         <Container maxWidth>
-          <OTPstyle>
-            <Box maxWidth={250} p={3}>
-              <img src="/images/logo.png" width={"100%"} />
-            </Box>
-          </OTPstyle>
+          {type != "HIDE" && (
+            <OTPstyle>
+              <Box maxWidth={250} p={3}>
+                <img src="/images/logo.png" width={"100%"} />
+              </Box>
+            </OTPstyle>
+          )}
+
           <Grid container spacing={3}>
             <Grid
               item
@@ -47,6 +56,8 @@ const index = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
                 setSignUpComplete={setSignUpComplete}
                 _signcomplete={_signcomplete}
                 setSelectScreen={setSelectScreen}
+                setOpen={setOpen}
+                // handleClickOpenLogin={handleClickOpenLogin}
               />
             </Grid>
           </Grid>
@@ -56,4 +67,4 @@ const index = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
   );
 };
 
-export default index;
+export default Otp;

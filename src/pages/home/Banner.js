@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Container, Typography, Box, Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import ButtonSwitchComponent from "../../component/ButtonSwitchComponent";
-import RegisterSeller from "../../component/RegisterSeller";
+import RegisterModal from "../../component/registerSellerModal/RegisterModal";
 import MicIcon from "@mui/icons-material/Mic";
 import PropertyForm from "./PropertyForm";
 import { PostApiFunction } from "../../utils";
@@ -10,6 +10,9 @@ import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import SearchIcon from "@mui/icons-material/Search";
+import LoginDialog from "../../component/LoginDialog";
+
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     height: "100vh",
@@ -258,6 +261,7 @@ export default function Home() {
   const [_propertyform, setPropertyForm] = React.useState(false);
   const [_isloading, setIsLoading] = useState(false);
   const [address, setAddress] = useState("");
+  const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_checked, setChecked] = React.useState(false);
   const [_consition, setConsition] = React.useState(false);
   const [_getproprty_type, setGetPropetyType] = useState("");
@@ -269,6 +273,14 @@ export default function Home() {
   });
   const handleClickOpen = () => {
     setPropertyForm(true);
+  };
+  const handleClickOpenLogin = (value) => {
+    setSelectScreen(value);
+    setOpenDialogLogin(true);
+    setSignUpComplete(false);
+  };
+  const handleCloseLogin = () => {
+    setOpenDialogLogin(false);
   };
   const handleClose = () => {
     setPropertyForm(false);
@@ -334,7 +346,6 @@ export default function Home() {
           setIsLoading(false);
           setPropertyForm(false);
         }
-        console.log("res---->", res);
       }
     } catch (error) {
       setIsLoading(false);
@@ -516,7 +527,7 @@ export default function Home() {
                   className={"Banner_inputField"}
                 />
                 <Button className="searchbox">
-                  <MicIcon style={{ fontSize: "25px", color: "#FFFF" }} />
+                  <SearchIcon style={{ fontSize: "25px", color: "#FFFF" }} />
                 </Button>
               </Box>
             </Box>
@@ -545,7 +556,11 @@ export default function Home() {
             </Box>
           </Box>
         </Box>
-        <RegisterSeller open={open} setOpen={setOpen} />
+        <RegisterModal
+          open={open}
+          setOpen={setOpen}
+          handleClickOpenLogin={handleClickOpenLogin}
+        />
         {_propertyform && (
           <PropertyForm
             open={_propertyform}
@@ -573,11 +588,16 @@ export default function Home() {
             CoverImageFunction={CoverImageFunction}
           />
         )}
-        {/* <PropertyForm
-        open={_propertyform}
-        handleClose={handleClose}
-        handleClickOpen={handleClickOpen}
-      /> */}
+        {/* <LoginDialog
+          open={_openDialogLogin}
+          setOpen={setOpenDialogLogin}
+          handleClickOpen={handleClickOpenLogin}
+          handleClose={handleCloseLogin}
+          _selectScreen={"Login"}
+          // setSelectScreen={""}
+          // setSignUpComplete={setSignUpComplete}
+          // _signcomplete={_signcomplete}
+        /> */}
       </Container>
     </MainComponent>
   );

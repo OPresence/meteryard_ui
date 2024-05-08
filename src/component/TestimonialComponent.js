@@ -1,9 +1,15 @@
-import React, { useRef } from "react";
+
+import React, { useRef , useState, useEffect} from "react";
 import styled from "@emotion/styled";
 import { Box, Card, Container, Typography, Grid } from "@mui/material";
 import Slider from "react-slick";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { PostApiFunction } from "@/utils";
+import Apiconfigs from "../ApiConfig/ApiConfig";
+import { FaStar } from "react-icons/fa";
+
+
 const TestimonialStyle = styled("Box")(({ theme }) => ({
   "& .backgorunClass": {
     backgroundImage: `url("/images/meteryard/Graphics/Rectangle 399.png")`,
@@ -81,6 +87,7 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
       transition: "0.8s",
       transform: "scale(0.9)",
       borderRadius: "20px",
+     
       "&:hover": {
         transform: "scale(1)",
         transition: "0.8s",
@@ -93,6 +100,7 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
         color: "#114A82",
         fontSize: "16px",
         textAlign: "center",
+       
       },
     },
   },
@@ -121,8 +129,29 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
 }));
 
 const TestimonialComponent = () => {
+  const [testimonials, setTestimonials] = useState([]);
   const sliderRef = useRef(null);
 
+
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await PostApiFunction({
+          endPoint: Apiconfigs?.listAllTestimonial,
+        }); 
+        
+        setTestimonials(res.result.docs);  
+      } catch (error) {
+        console.error("Error fetching testimonials:", error);
+      
+      }
+    };
+  
+    fetchTestimonials();
+  }, []);
+
+
+  
   const settings = {
     dots: false,
     infinite: true,
@@ -211,125 +240,47 @@ const TestimonialComponent = () => {
             <Box className="mainBox">
               <Typography variant="h2">Testimonials</Typography>
               <Box>
-                <Grid container>
-                  <Grid item lg={3} md={3} sm={12} xs={12}>
-                    <Box className={"sliderBox"}>
-                      <Typography variant="h6">
-                        Lorem Ipsum is simply dummy text of the printing and
-                        typesetting industry. Lorem Ipsum has been the
-                        industry&apos;s standard dummy text ever since the
-                        1500s, when an unknown printer took a galley of type.
-                      </Typography>
-                    </Box>
+                  <Grid container>
+                    <Grid item lg={3} md={3} sm={12} xs={12}>
+                      <Box className={"sliderBox"}>
+                        <Typography variant="h6">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item lg={9} md={9} sm={9} xs={12} style={{ justifyContent: "end" }}>
+                      <Slider ref={sliderRef} {...settings}>
+                      {testimonials &&
+                        testimonials.map((testimonial, index) => (
+                          <Card key={index} className="Cards">
+                            <Box display={"flex"} justifyContent={"center"} mb={"10px"}>
+                              <Box className="imageBox">
+                                <img  src="\images\meteryard\Images\profile.png" width={"100%"}  />
+                              </Box>
+                            </Box>
+                            <Typography variant="h6"> {testimonial.comments}</Typography>
+                            <Typography variant="h4"> {testimonial.ratings}<FaStar /></Typography>
+                            <Box display={"flex"} justifyContent={"center"} m={"20px 0"}>
+                              <Box className="borderLine"></Box>
+                            </Box>
+                            <Typography variant="h4"> {testimonial.customerName}</Typography>
+                          </Card>
+                        ))}
+                      </Slider>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    lg={9}
-                    md={9}
-                    sm={9}
-                    xs={12}
-                    style={{ justifyContent: "end" }}
-                  >
-                    <Slider ref={sliderRef} {...settings}>
-                      <Card className="Cards">
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          mb={"10px"}
-                        >
-                          <Box className="imageBox">
-                            <img
-                              src="\images\meteryard\Images\profile.png"
-                              width={"100%"}
-                            />
-                          </Box>
-                        </Box>
-                        <Typography variant="h6">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry&apos;s standard dummy text ever since the
-                          1500s, when an unknown printer took a galley of type.
-                        </Typography>
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          m={"20px 0"}
-                        >
-                          <Box className="borderLine"></Box>
-                        </Box>
-                        <Typography variant="h4">DIVYA BAJAJ</Typography>
-                      </Card>
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <Card className="Cards">
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          mt={"10px"}
-                        >
-                          <Box className="imageBox">
-                            <img
-                              src="\images\meteryard\Images\profile.png"
-                              width={"100%"}
-                            />
-                          </Box>
-                        </Box>
-                        <Typography variant="h6">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry&apos;s standard dummy text ever since the
-                          1500s, when an unknown printer took a galley of type.
-                        </Typography>
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          m={"20px 0"}
-                        >
-                          <Box className="borderLine"></Box>
-                        </Box>
-                        <Typography variant="h4">DIVYA BAJAJ</Typography>
-                      </Card>
-                      <Card className="Cards">
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          mt={"10px"}
-                        >
-                          <Box className="imageBox">
-                            <img
-                              src="\images\meteryard\Images\profile.png"
-                              width={"100%"}
-                            />
-                          </Box>
-                        </Box>
-                        <Typography variant="h6">
-                          Lorem Ipsum is simply dummy text of the printing and
-                          typesetting industry. Lorem Ipsum has been the
-                          industry&apos;s standard dummy text ever since the
-                          1500s, when an unknown printer took a galley of type.
-                        </Typography>
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          m={"20px 0"}
-                        >
-                          <Box className="borderLine"></Box>
-                        </Box>
-                        <Typography variant="h4">DIVYA BAJAJ</Typography>
-                      </Card>
-                    </Slider>
-                  </Grid>
-                </Grid>
-              </Box>
+                </Box>
+
 
               {/* <Box > */}
-              <Box className="arrowsBox">
+              {/* <Box className="arrowsBox">
                 <Box className={"ArrowClass ArrowClassprev"} onClick={previous}>
                   <NavigateBeforeIcon />
                 </Box>
                 <Box onClick={next} className={"ArrowClass ArrowClassNext"}>
                   <NavigateNextIcon />
                 </Box>
-              </Box>
+              </Box> */}
               {/* </Box> */}
             </Box>
           </Container>
