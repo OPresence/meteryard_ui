@@ -207,6 +207,7 @@ const Apiconfigs = {
   changePassword: `${user}/changePassword`,
   likeDislikeProperty: `${user}/likeDislikeProperty`,
   addComment: `${user}/addComment`,
+  commentList: `${user}/commentList`,
 };
 
 export default Apiconfigs;

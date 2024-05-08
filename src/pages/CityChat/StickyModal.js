@@ -52,23 +52,37 @@ const StickyModal = ({ children }) => {
                 backgroundColor: "white",
                 color: "gray",
                 width: "100%",
-                height: "60px",
+                height: "40px",
                 position: "fixed",
                 bottom: "0px",
                 left: "0px",
                 borderRadius: "0",
+                zIndex: "9999",
               }}
             >
               <IconButton
                 onClick={handleToggleModal}
-                sx={{ gap: "8rem", left: "25px", borderRadius: "15px" }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
               >
-                <FilterAltIcon />
-                <ForumOutlinedIcon />
-                <ArrowUpwardOutlinedIcon />
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <FilterAltIcon />
+                  <ForumOutlinedIcon />
+                  <ArrowUpwardOutlinedIcon />
+                </Box>
               </IconButton>
             </Box>
           )}
+
           {open && (
             <Modal open={open} onClose={handleCloseModal}>
               <Slide direction="up" in={open} mountOnEnter unmountOnExit>

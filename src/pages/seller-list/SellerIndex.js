@@ -111,7 +111,7 @@ const SellerIndex = () => {
       const res = await PostApiFunction({
         endPoint: Apiconfigs.listAllUsers,
         data: {
-          search: "BUYER",
+          search: "SELLER",
           page: page,
           limit: "10",
         },

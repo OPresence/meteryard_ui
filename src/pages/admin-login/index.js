@@ -208,12 +208,28 @@ const AdminLogin = () => {
         data: data_Login,
       });
       if (res) {
-        console.log("05444646454--->", res);
-        handleClose();
-        setIsLoading(false);
-        window.sessionStorage.setItem("adminToken", res?.result?.token);
-        router.push("/admin");
-        toast.success(res?.responseMessage); // Display success notification
+        if (res?.responseCode == 200) {
+          console.log("05444646454--->", res);
+          handleClose();
+          setIsLoading(false);
+          window.sessionStorage.setItem("adminToken", res?.result?.token);
+          router.push("/admin");
+          toast.success(res?.responseMessage); // Display success notification
+        } else if (res?.responseCode == 400) {
+          setIsLoading(false);
+
+          toast.error(res?.responseMessage);
+        } else if (res?.responseCode == 404) {
+          setIsLoading(false);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else if (res?.responseCode == 500) {
+          setIsLoading(false);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else {
+          toast.error(res?.responseMessage); // Display error notification
+        }
       }
     } catch (error) {
       setIsLoading(false);

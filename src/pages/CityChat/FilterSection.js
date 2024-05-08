@@ -19,7 +19,8 @@ import AdvertisementComponent from "../../component/AdvertisementComponent";
 import SellerListComponent from "src/component/SellerListComponent";
 import SellerUploadProperty from "src/component/SellerUploadProperty";
 import EnquiryForm from "./EnquiryForm";
-import axios from "axios";
+import { PostApiFunction } from "@/utils";
+import Apiconfigs from "../../ApiConfig/ApiConfig";
 
 const BuyerStyle = styled("div")(({ theme }) => ({
   "& .mainBox": {
@@ -81,76 +82,21 @@ const FilterSection = () => {
     const fetchSellerList = async () => {
       const body = {
         search: "SELLER",
-        page: "1",
-        limit: "10",
       };
       try {
-        // const response = await axios.post('https://lms-api-backend.onrender.com/api/v1/admin/listAllUsers', body);
-        const response = await PostApiFunction(
-          "https://lms-api-backend.onrender.com/api/v1/admin/listAllUsers",
+        const response = await PostApiFunction({
+          endPoint: Apiconfigs?.listAllUsers,
           body
-        );
+        });
+
         setSellerList(response.result.docs);
       } catch (error) {
         console.error("Error fetching seller list:", error);
       }
     };
-
     fetchSellerList();
   }, []);
 
-  const SellerList = [
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-  ];
   return (
     <BuyerStyle>
       <Box minHeight={"100vh"} mt={"30px"} className="mainBox">
@@ -206,8 +152,8 @@ const FilterSection = () => {
                   </Typography>
                 </Box>
                 <Box className="SellerBox">
-                  {SellerList &&
-                    SellerList?.filter((seller) => seller.online).map(
+                  {sellerList &&
+                    sellerList?.filter((seller) => seller.isOnline).map(
                       (data, index) => {
                         return (
                           <Box m={"20px 0"} key={index}>

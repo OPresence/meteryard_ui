@@ -14,7 +14,6 @@ import { PostApiFunction } from "@/utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AuthContext } from "../context/Auth";
-import { padding } from "@mui/system";
 const SubMenuStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     // padding: "20px 20px 0 20px  ",
@@ -44,7 +43,7 @@ const SubMenuStyle = styled("Box")(({ theme }) => ({
       },
     },
     "& h6": {
-      fontSize: "14px",
+      fontSize: "16px",
       fontWeight: "600",
     },
     "& .choose-section": {
@@ -54,7 +53,7 @@ const SubMenuStyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-const SubMenuComponent = () => {
+const SubMenu2Component = () => {
   const auth = useContext(AuthContext);
 
   return (
@@ -87,16 +86,16 @@ const SubMenuComponent = () => {
             >
               <Typography variant="h5">Choose your city</Typography>
               <Box mt={1}>
-                {auth?.statesHome &&
-                  auth?.statesHome?.map((data, index) => {
+                {auth?._propertyList &&
+                  auth?._propertyList?.map((data, index) => {
                     return (
                       <Box
                         key={index}
                         style={{ cursor: "pointer", padding: "4px 0" }}
-                        onClick={() => auth?.setGetCityValue(data?._id)}
+                        onClick={() => auth?.setGetPropetyType(data?._id)}
                       >
                         <Typography className="cityname" variant="h6">
-                          {data.stateName}
+                          {data.projectType}
                         </Typography>
                       </Box>
                     );
@@ -111,15 +110,15 @@ const SubMenuComponent = () => {
             </Box>
           </Grid>
           <Grid item lg={3} md={3} sm={3} xs={12}>
-            {auth?._citylist &&
-              auth?._citylist?.map((data, index) => {
+            {auth?._subytypelist &&
+              auth?._subytypelist?.map((data, index) => {
                 return (
                   <Box
-                  key={index}
+                    key={index}
                     style={{ cursor: "pointer", padding: "4px 0" }}
                   >
                     <Typography className="cityname" variant="h6">
-                      {data?.cityName}
+                      {data?.projectSubType}
                     </Typography>
                   </Box>
                 );
@@ -131,4 +130,4 @@ const SubMenuComponent = () => {
   );
 };
 
-export default SubMenuComponent;
+export default SubMenu2Component;

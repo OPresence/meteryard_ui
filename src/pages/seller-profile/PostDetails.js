@@ -10,7 +10,75 @@ import { BsChatDots } from "react-icons/bs";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import { AuthContext } from "../../context/Auth";
 
-const PostStyle = styled("Box")(({ theme }) => ({
+// const PostStyle = styled("Box")(({ theme }) => ({
+//   "& .mainBox": {
+//     "& .moreDetialsBox": {
+//       "& button": {
+//         background: "#fff",
+//         boxShadow: "0px 3px 3px #00000014",
+//       },
+    
+//     },
+//     "& h2": {
+//       fontSize: "13px",
+//       fontWeight: "400",
+//       color: "#444444",
+//       marginTop: "5px",
+//     },
+//     "& .iconBox": {
+//       background: "#444444",
+//       display: "flex",
+//       justifyContent: "center",
+//       // padding: "5px",
+//       borderRadius: "50px",
+//       width: 25,
+//       height: 25,
+//       alignItems: "center",
+//       "& svg": {
+//         fontSize: "15px",
+//         color: "#fff",
+//         background: "#444444",
+//       },
+//     },
+//     "& .viewBox": {
+//       "& h6": {
+//         color: "#838383",
+//         fontSize: "12px",
+//       },
+//       "& span": {
+//         color: "#FBB415",
+//       },
+//     },
+//     "& .bottomBox": {
+//       display: "flex",
+//       alignItems: "center",
+//       gap: "15px",
+//       justifyContent: "space-between",
+//     },
+//     "& .contentBox": {
+//       "& svg": {
+//         fontSize: "16px",
+//         color: "#444444",
+//       },
+      
+//       "& span": {
+//         fontSize: "16px",
+//         color: "#444444",
+//       },
+//       "& .linkBox": {
+//         marginTop: "10px",
+//         lineHeight: "25px",
+
+//         "& a": {
+//           color: "#065AC7",
+//           textDecoration: "none",
+//         },
+//       },
+//     },
+//   },
+// }));
+
+const PostStyle = styled('Box')(({ theme }) => ({
   "& .mainBox": {
     "& .moreDetialsBox": {
       "& button": {
@@ -28,7 +96,6 @@ const PostStyle = styled("Box")(({ theme }) => ({
       background: "#444444",
       display: "flex",
       justifyContent: "center",
-      // padding: "5px",
       borderRadius: "50px",
       width: 25,
       height: 25,
@@ -66,15 +133,54 @@ const PostStyle = styled("Box")(({ theme }) => ({
       "& .linkBox": {
         marginTop: "10px",
         lineHeight: "25px",
-
         "& a": {
           color: "#065AC7",
           textDecoration: "none",
         },
       },
     },
+    // Media query for screens smaller than 600px
+    "@media (max-width: 600px)": {
+      "& .moreDetialsBox": {
+        "& button": {
+          fontSize: "12px", // Smaller font size for button text
+        },
+      },
+      "& h2": {
+        fontSize: "11px", // Smaller font size
+      },
+      "& .iconBox": {
+        width: 20,
+        height: 20,
+        "& svg": {
+          fontSize: "12px", // Smaller icon size
+        },
+      },
+      "& .viewBox": {
+        "& h6": {
+          fontSize: "10px", // Smaller text in viewBox
+        },
+      },
+      "& .bottomBox": {
+        gap: "10px", // Reduced gap between elements
+      },
+      "& .contentBox": {
+        "& svg": {
+          fontSize: "14px",
+        },
+        "& span": {
+          fontSize: "14px",
+        },
+        "& .linkBox": {
+          "& a": {
+            fontSize: "12px", // Smaller font size for links
+          },
+        },
+      },
+    },
   },
 }));
+
 const PostDetails = () => {
   const auth = useContext(AuthContext);
   console.log("auth45454----->", auth?._getprofile);
