@@ -6,7 +6,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 export const authOptions = {
   providers: [
     FacebookProvider({
-      clientId: process.env.FACEBOOK_Id ,
+      clientId: process.env.FACEBOOK_Id  ,
       clientSecret: process.env.FACEBOOK_SECRET ,
     }),
     GitHubProvider({
