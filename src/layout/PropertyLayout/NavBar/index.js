@@ -26,27 +26,25 @@ import { styled } from "@mui/system";
 const BuyerStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     background: theme.palette.background.default,
-   
+    borderRadius: "20px",
+
     // paddingBottom: "100px",
     "& .SellerBox": {
       padding: "20px",
       boxShadow: "0px 1px 13px #00000026",
-    
     },
     "& .filterBox": {
       padding: "20px",
       // boxShadow: theme.shadows[3],
-      boxShadow: "0px 1px 13px #00000026",
-     
+      // boxShadow: "0px 1px 13px #00000026",
+      // border: "2px solid green",
       "& .devider": {
         background: "#00000040",
         position: "relative",
         zIndex: 1,
-       
       },
       "& h2": {
         fontWeight: "600",
-       
       },
       "& .imgBox": {
         background: "#fff",
@@ -73,20 +71,26 @@ const MobileDrawer = styled(Drawer)(({ theme }) => ({
   },
 }));
 const DesktopDrawer = styled(Drawer)(({ theme }) => ({
-  top: "76px",
-  width: "300px",
+  // top: "76px",
+  // width: "300px",
   height: "calc(100% - 115px)",
   margin: "5px 10px 10px 15px",
   borderRadius: "20px",
-  marginTop: "35px",
+
+  // marginTop: "35px",
   position: "relative",
   marginLeft: "13px",
   "& .MuiDrawer-paper": {
-    width: "353px!important",
+    width: "320px!important",
+    boxShadow: "0px 1px 8px #00000026",
+    // border:'2px solid black',
+    borderRadius: "20px",
   },
   "& .MuiPaper-root": {
-    top: 111,
-    borderRadius: "5px",
+    // top: 111,
+    borderRadius: "15px",
+    position: "static !important",
+    overflowY: "hidden",
   },
 }));
 const LogoutButton = styled(Button)({
@@ -358,8 +362,8 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
 
   const content = (
     <BuyerStyle>
-      <Box minHeight={"100vh"} className="mainBox" pb={"100px"} sx={{ border:'4px solid red'}}>
-        <Box className="filterBox" >
+      <Box minHeight={"100vh"} className="mainBox" pb={"100px"}>
+        <Box className="filterBox">
           <Box display={"flex"} alignItems={"center"}>
             <Avatar
               style={{ cursor: "pointer" }}

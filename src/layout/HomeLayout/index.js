@@ -1,4 +1,4 @@
-import Footer from "./Footer";
+import Footer from "../PropertyLayout/Footer";
 import React from "react";
 import Topbar from "./Topbar";
 

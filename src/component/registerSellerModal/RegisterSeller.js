@@ -38,8 +38,7 @@ import CircularProgressCompoennt from "../CircularProgressComponent";
 import { Form, Formik } from "formik";
 import * as yep from "yup";
 import { AuthContext } from "../../context/Auth";
-const DialogStyleInput = styled("Box")({
-});
+const DialogStyleInput = styled("Box")({});
 
 const PhoneINputStyle = styled("Box")(({ theme }) => ({
   "& .phoneInputBox": {
@@ -57,7 +56,6 @@ const RegisterSeller = ({
   index,
 }) => {
   const router = useRouter();
-  console.log("setSignUpCompletebmbj0--->", setSignUpComplete);
   const auth = useContext(AuthContext);
   const [_property_type, setProperty_type] = React.useState("");
   const [_property_category, setPropertyCategory] = React.useState("");
@@ -162,243 +160,242 @@ const RegisterSeller = ({
   };
   return (
     <DialogStyleInput>
-
-    <Formik
-      initialValues={formInitialSchema}
-      enableReinitialize={true}
-      initialStatus={{
-        success: false,
-        successMsg: "",
-      }}
-      validationSchema={formValidationSchema}
-      onSubmit={(values, { resetForm }) => {
-        SignUp_Function(values)
-          .then(() => {
-            resetForm();
-          })
-          .catch((error) => {
-            console.error("API call failed", error);
-          });
-      }}
-    >
-      {({
-        errors,
-        handleBlur,
-        handleChange,
-        touched,
-        values,
-        setFieldValue,
-      }) => (
-        <Form>
-          <Grid container spacing={3}>
-            <Grid
-              item
-              lg={7}
-              md={7}
-              sm={12}
-              xs={12}
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <Box maxWidth={500} className="imageBox">
-                <img src="/images/Group 8422.svg" width={"100%"} />
-              </Box>
-            </Grid>
-            <Grid
-              item
-              lg={5}
-              md={5}
-              sm={12}
-              xs={12}
-              style={{
-                padding: "25px",
-              }}
-            >
-              <Box>
-                <Box className="loginBox">
-                  <Box mt={1}>
-                    <Typography variant="h6">
-                      Enter Your Name
-                      <span className="span-astrick">*</span>
-                    </Typography>
-                    <FormControl fullWidth>
-                      <TextField
-                        name="name"
-                        type="text"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onKeyDown={handleNameKeyDown}
-                        value={
-                          values.name?.charAt(0).toUpperCase() +
-                          values.name.slice(1)
-                        }
-                        id="outlined-basic"
-                        fullWidth
-                        variant="outlined"
-                        placeholder="Enter your name"
-                        disabled={isloading}
-                        inputProps={{
-                          maxLength: 32,
-                        }}
-                      />
-                      <FormHelperText
-                        style={{
-                          marginLeft: "0px",
-                          color: "red",
-                        }}
-                      >
-                        {touched.name && errors.name}
-                      </FormHelperText>
-                    </FormControl>
-                  </Box>
-
-                  <Box mt={1}>
-                    <Typography variant="h6">
-                      Enter Your Email
-                      <span className="span-astrick">*</span>
-                    </Typography>
-                    <FormControl fullWidth>
-                      <TextField
-                        name="email"
-                        type="email"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        disabled={isloading}
-                        value={values.email}
-                        id="outlined-basic"
-                        fullWidth
-                        variant="outlined"
-                        placeholder="Examle11@gmail.com"
-                        inputProps={{
-                          maxLength: 160,
-                        }}
-                      />
-                      <FormHelperText
-                        style={{
-                          marginLeft: "0px",
-                          color: "red",
-                        }}
-                      >
-                        {touched.email && errors.email}
-                      </FormHelperText>
-                    </FormControl>
-                  </Box>
-                  <PhoneINputStyle>
-                    <Box mt={1} className="phoneInputBox">
+      <Formik
+        initialValues={formInitialSchema}
+        enableReinitialize={true}
+        initialStatus={{
+          success: false,
+          successMsg: "",
+        }}
+        validationSchema={formValidationSchema}
+        onSubmit={(values, { resetForm }) => {
+          SignUp_Function(values)
+            .then(() => {
+              resetForm();
+            })
+            .catch((error) => {
+              console.error("API call failed", error);
+            });
+        }}
+      >
+        {({
+          errors,
+          handleBlur,
+          handleChange,
+          touched,
+          values,
+          setFieldValue,
+        }) => (
+          <Form>
+            <Grid container spacing={3}>
+              <Grid
+                item
+                lg={7}
+                md={7}
+                sm={12}
+                xs={12}
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <Box maxWidth={500} className="imageBox">
+                  <img src="/images/Group 8422.svg" width={"100%"} />
+                </Box>
+              </Grid>
+              <Grid
+                item
+                lg={5}
+                md={5}
+                sm={12}
+                xs={12}
+                style={{
+                  padding: "25px",
+                }}
+              >
+                <Box>
+                  <Box className="loginBox">
+                    <Box mt={1}>
                       <Typography variant="h6">
-                        Enter Your Phone
+                        Enter Your Name
                         <span className="span-astrick">*</span>
                       </Typography>
-
-                      <PhoneInput
-                        country={"in"}
-                        onlyCountries={["in"]}
-                        name="PhoneNumber"
-                        inputClass="phoneInputField"
-                        disabled={isloading}
-                        buttonClass="phoneInputButton"
-                        variant="outlined"
-                        value={values.PhoneNumber}
-                        error={Boolean(
-                          touched.PhoneNumber && errors.PhoneNumber
-                        )}
-                        onBlur={handleBlur}
-                        onChange={(phone, e) => {
-                          let formattedPhone = phone;
-                          if (
-                            !phone.startsWith("+91") &&
-                            !phone.startsWith("91")
-                          ) {
-                            formattedPhone = "+91" + phone;
+                      <FormControl fullWidth>
+                        <TextField
+                          name="name"
+                          type="text"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          onKeyDown={handleNameKeyDown}
+                          value={
+                            values.name?.charAt(0).toUpperCase() +
+                            values.name.slice(1)
                           }
-                          setCountryCode(e.dialCode);
-                          setFieldValue("PhoneNumber", formattedPhone);
-                          console.log("formattedPhone--->", formattedPhone);
+                          id="outlined-basic"
+                          fullWidth
+                          variant="outlined"
+                          placeholder="Enter your name"
+                          disabled={isloading}
+                          inputProps={{
+                            maxLength: 32,
+                          }}
+                        />
+                        <FormHelperText
+                          style={{
+                            marginLeft: "0px",
+                            color: "red",
+                          }}
+                        >
+                          {touched.name && errors.name}
+                        </FormHelperText>
+                      </FormControl>
+                    </Box>
+
+                    <Box mt={1}>
+                      <Typography variant="h6">
+                        Enter Your Email
+                        <span className="span-astrick">*</span>
+                      </Typography>
+                      <FormControl fullWidth>
+                        <TextField
+                          name="email"
+                          type="email"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          disabled={isloading}
+                          value={values.email}
+                          id="outlined-basic"
+                          fullWidth
+                          variant="outlined"
+                          placeholder="Examle11@gmail.com"
+                          inputProps={{
+                            maxLength: 160,
+                          }}
+                        />
+                        <FormHelperText
+                          style={{
+                            marginLeft: "0px",
+                            color: "red",
+                          }}
+                        >
+                          {touched.email && errors.email}
+                        </FormHelperText>
+                      </FormControl>
+                    </Box>
+                    <PhoneINputStyle>
+                      <Box mt={1} className="phoneInputBox">
+                        <Typography variant="h6">
+                          Enter Your Phone
+                          <span className="span-astrick">*</span>
+                        </Typography>
+
+                        <PhoneInput
+                          country={"in"}
+                          onlyCountries={["in"]}
+                          name="PhoneNumber"
+                          inputClass="phoneInputField"
+                          disabled={isloading}
+                          buttonClass="phoneInputButton"
+                          variant="outlined"
+                          value={values.PhoneNumber}
+                          error={Boolean(
+                            touched.PhoneNumber && errors.PhoneNumber
+                          )}
+                          onBlur={handleBlur}
+                          onChange={(phone, e) => {
+                            let formattedPhone = phone;
+                            if (
+                              !phone.startsWith("+91") &&
+                              !phone.startsWith("91")
+                            ) {
+                              formattedPhone = "+91" + phone;
+                            }
+                            setCountryCode(e.dialCode);
+                            setFieldValue("PhoneNumber", formattedPhone);
+                            console.log("formattedPhone--->", formattedPhone);
+                          }}
+                          inputStyle={phoneInputStyles}
+                        />
+                        <FormHelperText error>
+                          {touched.PhoneNumber && errors.PhoneNumber}
+                        </FormHelperText>
+                      </Box>
+                    </PhoneINputStyle>
+
+                    <Box mt={1}>
+                      <Typography variant="h6">
+                        Password
+                        <span className="span-astrick">*</span>
+                      </Typography>
+                      <TextField
+                        disabled={isloading}
+                        id="outlined-basic"
+                        fullWidth
+                        variant="outlined"
+                        name="password"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.password}
+                        placeholder="********"
+                        inputProps={{
+                          maxLength: 16,
                         }}
-                        inputStyle={phoneInputStyles}
+                        type={showPassword ? "text" : "password"}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton
+                                onClick={() => setShowPassword(!showPassword)}
+                                edge="end"
+                              >
+                                {showPassword ? (
+                                  <Visibility
+                                    style={{
+                                      fontSize: "18px",
+                                      color: "#A2D117",
+                                    }}
+                                  />
+                                ) : (
+                                  <VisibilityOff
+                                    style={{
+                                      fontSize: "18px",
+                                      color: "#A2D117",
+                                    }}
+                                  />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
                       />
-                      <FormHelperText error>
-                        {touched.PhoneNumber && errors.PhoneNumber}
+                      <FormHelperText
+                        error
+                        style={{ marginLeft: "0px !important" }}
+                      >
+                        {touched.password && errors.password}
                       </FormHelperText>
                     </Box>
-                  </PhoneINputStyle>
 
-                  <Box mt={1}>
-                    <Typography variant="h6">
-                      Password
-                      <span className="span-astrick">*</span>
-                    </Typography>
-                    <TextField
-                      disabled={isloading}
-                      id="outlined-basic"
-                      fullWidth
-                      variant="outlined"
-                      name="password"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                      placeholder="********"
-                      inputProps={{
-                        maxLength: 16,
-                      }}
-                      type={showPassword ? "text" : "password"}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton
-                              onClick={() => setShowPassword(!showPassword)}
-                              edge="end"
-                            >
-                              {showPassword ? (
-                                <Visibility
-                                  style={{
-                                    fontSize: "18px",
-                                    color: "#A2D117",
-                                  }}
-                                />
-                              ) : (
-                                <VisibilityOff
-                                  style={{
-                                    fontSize: "18px",
-                                    color: "#A2D117",
-                                  }}
-                                />
-                              )}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                    <FormHelperText
-                      error
-                      style={{ marginLeft: "0px !important" }}
-                    >
-                      {touched.password && errors.password}
-                    </FormHelperText>
-                  </Box>
-
-                  <Box mt={3} className="loginBox1">
-                    <Button
-                      onClick={() => setOpen(false)}
-                      className="singup"
-                      fullWidth
-                      style={{ background: "#757575" }}
-                    >
-                      Close &nbsp;
-                    </Button>
-                    <Button className="singup" type="submit" fullWidth>
-                      Sign Up &nbsp;
-                      {isloading && (
-                        <CircularProgressCompoennt colorValue={"#fff"} />
-                      )}
-                    </Button>
+                    <Box mt={3} className="loginBox1">
+                      <Button
+                        onClick={() => setOpen(false)}
+                        className="singup"
+                        fullWidth
+                        style={{ background: "#757575" }}
+                      >
+                        Close &nbsp;
+                      </Button>
+                      <Button className="singup" type="submit" fullWidth>
+                        Sign Up &nbsp;
+                        {isloading && (
+                          <CircularProgressCompoennt colorValue={"#fff"} />
+                        )}
+                      </Button>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
+              </Grid>
             </Grid>
-          </Grid>
-        </Form>
-      )}
-    </Formik>
+          </Form>
+        )}
+      </Formik>
     </DialogStyleInput>
   );
 };

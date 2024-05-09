@@ -27,6 +27,9 @@ export default function Auth(props) {
   const [_citylist, setCityList] = useState([]);
   const [_isFeaturedPost, setIsFeatured] = useState([]);
   const [_getCityValue, setGetCityValue] = useState("");
+  const [_getProjectTypeId, setProjectTypeId] = useState("");
+  const [_getproperyPostList, setproperyPostList] = useState([]);
+
   console.log("_getCityValue--->", _citylist);
   const StateApiFunction = async () => {
     try {
@@ -298,6 +301,45 @@ export default function Auth(props) {
       console.log("error", error);
     }
   };
+
+  const PropertyPostAPI = async (property_id) => {
+    console.log("8888888888888--->", property_id);
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllPropertyPost,
+        data: {
+          projectTypeId: property_id,
+          page: "1",
+          limit: "100",
+        },
+      });
+      if (res) {
+        console.log("fetching property post--->", res);
+        if (res?.responseCode == 200) {
+          setproperyPostList(res?.result?.docs);
+        } else if (res?.responseCode == 400) {
+          setproperyPostList([]);
+          toast.error(res?.responseMessage);
+          setproperyPostList([]);
+        } else if (res?.responseCode == 404) {
+          setproperyPostList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else if (res?.responseCode == 500) {
+          setproperyPostList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else {
+          setproperyPostList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        }
+      }
+    } catch (error) {
+      console.log("error");
+      setproperyPostList([]);
+    }
+  };
   useEffect(() => {
     if (_getproprty_type) {
       SubProjectType();
@@ -318,6 +360,7 @@ export default function Auth(props) {
       });
     }
   }, []);
+
   useEffect(() => {
     if (endTime) {
       const timer = setTimeout(() => {
@@ -353,6 +396,9 @@ export default function Auth(props) {
     _isFeaturedPost,
     statesHome,
     _citylist,
+    _getproperyPostList,
+
+    PropertyPostAPI: (value) => PropertyPostAPI(value),
     ResidentialAPI: (value) => ResidentialAPI(value),
     CommercialAPI: (value) => CommercialAPI(value),
     AgreecultureAPIAPI: (value) => AgreecultureAPIAPI(value),
@@ -363,6 +409,7 @@ export default function Auth(props) {
     setGetPropetyType: (value) => setGetPropetyType(value),
     setGetProject_sub_Type: (value) => setGetProject_sub_Type(value),
     setGetCityValue: (value) => setGetCityValue(value),
+    setProjectTypeId: (value) => setProjectTypeId(value),
   };
   useEffect(() => {
     const storedToken = sessionStorage.getItem("token");

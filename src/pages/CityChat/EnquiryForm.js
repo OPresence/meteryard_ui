@@ -18,7 +18,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import CheckBoxComponent from "../../component/CheckBoxComponent";
+import CheckBoxComponent from "src/component/CheckBoxComponent.js";
 import { AuthContext } from "../../context/Auth";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";

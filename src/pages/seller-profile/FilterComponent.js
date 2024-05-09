@@ -1,7 +1,7 @@
 import React from "react";
 import AccordionComponent from "../../pages/CityChat/AccordionComponent";
-import PriceRangeComponent from "../../component/PriceRangeComponent";
-import StateComponent from "../../component/StateComponent";
+import PriceRangeComponent from "src/component/PriceRangeComponent";
+import StateComponent from "src/component/StateComponent";
 import { styled } from "@mui/system";
 import { Box, Divider } from "@mui/material";
 const Filterstyle = styled("div")(({ theme }) => ({

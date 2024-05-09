@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from "react";
-import { Grid, Typography, Box, Container } from "@mui/material";
+import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -9,10 +9,14 @@ import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../context/Auth";
 import AgreeculturePostCard from "./AgreeculturePostCard";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useRouter } from "next/router";
+
 const AgreecultureStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
-    padding: "80px 0px",
+    padding: "40px 0px",
     background: "#fff",
+
     // padding: "50px",
     "@media(max-width:615px)": {
       padding: "20px 0px",
@@ -118,9 +122,10 @@ const AgreecultureStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const AgreecultureComponent = () => {
+const AgreecultureComponent = ({ showViewMore }) => {
   const auth = useContext(AuthContext);
   const sliderRef = useRef(null);
+  const router = useRouter();
   const next = () => {
     sliderRef.current.slickNext();
   };
@@ -201,11 +206,17 @@ const AgreecultureComponent = () => {
       },
     ],
   };
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+      query: { _id: auth?._getlistAgreeculture[0]?.projectTypeId?._id },
+    });
+  };
+
   return (
     <AgreecultureStyle>
       <div className="mainSliderDiv">
         <Container maxWidth>
-         
           <Box
             display={"flex"}
             justifyContent={"space-between"}
@@ -219,65 +230,56 @@ const AgreecultureComponent = () => {
                 </Typography>
               </Box>
             </Box>
-            {auth?._getlistAgreeculture?.length > 4 &&  <Box
-              style={{
-                display: "flex",
-                gap: "10px",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Box className={"ArrowClass"} onClick={previous}>
-                <ArrowBackIosIcon
-                  style={{
-                    color: "#000",
-                  }}
-                />
+            {auth?._getlistAgreeculture?.length > 4 && (
+              <Box
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Box className={"ArrowClass"} onClick={previous}>
+                  <ArrowBackIosIcon
+                    style={{
+                      color: "#000",
+                    }}
+                  />
+                </Box>
+                <Box className={"ArrowClass"} onClick={next}>
+                  <ArrowForwardIosIcon style={{ color: "#000" }} />
+                </Box>
               </Box>
-              <Box className={"ArrowClass"} onClick={next}>
-                <ArrowForwardIosIcon style={{ color: "#000" }} />
-              </Box>
-            </Box>}
-           
+            )}
           </Box>
-          <Box mt={5}>
-            {auth?._getlistAgreeculture?.length > 4 ?
-             <Slider {...settings} ref={sliderRef}>
-             {auth?._getlistAgreeculture &&
-               auth?._getlistAgreeculture?.map((data, index) => {
-                 return (
-                   <Grid
-                     key={index}
-                     item
-                     lg={3}
-                     md={3}
-                     sm={6}
-                     xs={12}
-                     style={{ display: "flex" }}
-                   >
-                    <AgreeculturePostCard data={data} />
-                   </Grid>
-                 );
-               })}
-           </Slider> :
-           <Grid container spacing={3}>
-             {auth?._getlistAgreeculture &&
-               auth?._getlistAgreeculture?.map((data, index) => {
-                 return (
-                   <Grid
-                     key={index}
-                     item
-                     lg={3}
-                     md={3}
-                     sm={6}
-                     xs={12}
-                     style={{ display: "flex" }}
-                   >
-                    <AgreeculturePostCard data={data} />
-                   </Grid>
-                 );
-               })}
-           </Grid> }
-           
+          <Box>
+            {auth?._getlistAgreeculture?.length > 4 ? (
+              <Slider {...settings} ref={sliderRef}>
+                {auth?._getlistAgreeculture &&
+                  auth?._getlistAgreeculture?.map((data, index) => {
+                    return <AgreeculturePostCard data={data} key={index} />;
+                  })}
+              </Slider>
+            ) : (
+              <Grid container>
+                {auth?._getlistAgreeculture &&
+                  auth?._getlistAgreeculture?.map((data, index) => {
+                    return (
+                      <Grid
+                        key={index}
+                        item
+                        lg={3}
+                        md={4}
+                        sm={6}
+                        xs={12}
+                        style={{ display: "flex" }}
+                      >
+                        <AgreeculturePostCard data={data} />
+                      </Grid>
+                    );
+                  })}
+              </Grid>
+            )}
+
             {auth?._getlistAgreeculture?.length > 7 && (
               <Box
                 display={"flex"}
@@ -288,6 +290,26 @@ const AgreecultureComponent = () => {
                 <a href="#">view more</a>
               </Box>
             )}
+            {
+              auth?._getlistAgreeculture &&
+              auth._getlistAgreeculture.length > 1 && (
+                <Button
+                  onClick={handleClick}
+                  // href="/all-property?selectedSection=agreeculture"
+                  variant="contained"
+                  color="success"
+                  sx={{
+                    backgroundColor: "#A7D325",
+                    color: "white",
+                    float: "right",
+                  }}
+                >
+                  View All{" "}
+                  <ArrowForwardIcon
+                    sx={{ fontSize: "18px", marginLeft: "10px" }}
+                  />
+                </Button>
+              )}
           </Box>
         </Container>
       </div>
