@@ -8,8 +8,8 @@ import {
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import AccordionComponent from "../../../pages/CityChat/AccordionComponent";
-import PriceRangeComponent from "src/component/PriceRangeComponent";
-import StateComponent from "src/component/StateComponent";
+import PriceRangeComponent from "../../../component/PriceRangeComponent";
+import StateComponent from "../../../component/StateComponent";
 import {
   Box,
   Drawer,

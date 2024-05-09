@@ -5,7 +5,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import { Typography, Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "@emotion/styled";
-import CheckBoxComponent from "src/component/CheckBoxComponent";
+import CheckBoxComponent from "../../component/CheckBoxComponent";
 const Accordionstyle = styled("div")(({ theme }) => ({
   "& .MuiPaper-root": {
     top: "0px !important",
