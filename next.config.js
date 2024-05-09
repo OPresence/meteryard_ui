@@ -1,16 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  experimental: {
-    appDir: true,
-  },
-  GOOGLE_Id:
-    "483673057994-7rosv664ivrfpb22oqe6docj2lf898nf.apps.googleusercontent.com",
-  GOOGLE_SECRET: "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",
-  GITHUB_Id: "85946d9728d19d8a7316",
-  GITHUB_SECRET: "d646df75f834d7a965dcb58d6d6417cc82fe5f72",
-  FACEBOOK_Id: "393145496885428",
-  FACEBOOK_SECRET: "9ae4ccea9c02cd3a281358f2205ba534",
+  // reactStrictMode: true,
+  // experimental: {
+  //   appDir: true,
+  // },
+
 };
 
 module.exports = nextConfig;
