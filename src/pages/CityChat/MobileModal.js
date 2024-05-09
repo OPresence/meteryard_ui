@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Typography, Divider } from '@mui/material';
 import AccordionComponent from '../CityChat/AccordionComponent';
-import PriceRangeComponent from "../../component/PriceRangeComponent";
-import StateComponent from "../../component/StateComponent";
+import PriceRangeComponent from '../../component/PriceRangeComponent';
+import StateComponent from '../../component/StateComponent';
 
 const MobileModal = () => {
   const CheckBoxName = [

@@ -299,6 +299,7 @@ export const getAPIdata = async ({ endPoint, data }) => {
   }
 };
 export const PostApiFunction = async ({ endPoint, data }) => {
+  console.log("snmdsnadja---->data", data);
   try {
     let res,
       token =

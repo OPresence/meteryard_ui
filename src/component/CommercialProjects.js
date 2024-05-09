@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from "react";
-import { Grid, Typography, Box, Container } from "@mui/material";
+import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -8,11 +8,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { AuthContext } from "../context/Auth";
 import CommercialPostCard from "./CommercialPostCard";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useRouter } from "next/router";
+
 const Commercialstyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     background: "#fff",
+    padding: "40px 0px",
+
     "& .mainBoxCard": {
-      marginTop: "54px",
+      // marginTop: "54px",
+      // border:'2px solid red',
       "@media(max-width:615px)": {
         marginTop: "0",
       },
@@ -55,6 +61,7 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
       boxShadow: "0px 5px 10px 0px rgba(0, 0, 0, 0.5)",
       padding: "10px",
       marginTop: "69px",
+
       background: "#fff",
       borderRadius: "10px",
       position: "relative",
@@ -119,9 +126,10 @@ const Commercialstyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-const CommercialProjects = () => {
+const CommercialProjects = ({ showViewMore }) => {
   const sliderRef = useRef(null);
   const auth = useContext(AuthContext);
+  const router = useRouter();
   const [_isloading, setIsLoading] = useState(false);
   const next = () => {
     sliderRef.current.slickNext();
@@ -203,7 +211,12 @@ const CommercialProjects = () => {
       },
     ],
   };
-
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+      query: { _id: auth?._getlist_commercial[0]?.projectTypeId?._id },
+    });
+  };
   return (
     <Commercialstyle>
       <div className="mainSliderDiv">
@@ -221,80 +234,73 @@ const CommercialProjects = () => {
                 </Typography>
               </Box>
             </Box>
-            {auth?._getlist_commercial?.length > 4 &&
-             <Box
-             style={{
-               display: "flex",
-               gap: "10px",
-               justifyContent: "flex-end",
-             }}
-           >
-             <Box className={"ArrowClass"} onClick={previous}>
-               <ArrowBackIosIcon
-                 style={{
-                   color: "#000",
-                 }}
-               />
-             </Box>
-             <Box className={"ArrowClass"} onClick={next}>
-               <ArrowForwardIosIcon style={{ color: "#000" }} />
-             </Box>
-           </Box>}
-           
+            {auth?._getlist_commercial?.length > 4 && (
+              <Box
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Box className={"ArrowClass"} onClick={previous}>
+                  <ArrowBackIosIcon
+                    style={{
+                      color: "#000",
+                    }}
+                  />
+                </Box>
+                <Box className={"ArrowClass"} onClick={next}>
+                  <ArrowForwardIosIcon style={{ color: "#000" }} />
+                </Box>
+              </Box>
+            )}
           </Box>
           <Box className="mainBoxCard">
             {auth?._getlist_commercial?.length > 4 ? (
               <>
                 <Slider {...settings} ref={sliderRef}>
                   {auth?._getlist_commercial?.map((data, index) => {
-                    return (
-                      <Grid
-                        key={index}
-                        item
-                        lg={3}
-                        md={3}
-                        sm={6}
-                        xs={12}
-                        className="GridClassCard"
-                        style={index > 3 ? { marginTop: "60px" } : {}}
-                      >
-                       <CommercialPostCard data={data} />
-                      </Grid>
-                    );
+                    return <CommercialPostCard data={data} key={index} />;
                   })}
                 </Slider>
               </>
             ) : (
-              <Grid container spacing={3}>
+              <Grid container>
                 {auth?._getlist_commercial?.map((data, index) => {
                   return (
                     <Grid
                       key={index}
                       item
                       lg={3}
-                      md={3}
+                      md={4}
                       sm={6}
                       xs={12}
                       className="GridClassCard"
                       style={index > 3 ? { marginTop: "60px" } : {}}
                     >
-                       <CommercialPostCard data={data} />
-                     
+                      <CommercialPostCard data={data} />
                     </Grid>
                   );
                 })}
               </Grid>
             )}
 
-            {auth?._getlist_commercial?.length > 7 && (
-              <Box
-                display={"flex"}
-                justifyContent={"end"}
-                p={"0 15px"}
-                mt={"-20px"}
+            {auth?._getlist_commercial.length > 0 && (
+              <Button
+                onClick={handleClick}
+                variant="contained"
+                color="success"
+                sx={{
+                  backgroundColor: "#A7D325",
+                  color: "white",
+                  float: "right",
+                }}
               >
-                <a href="#">view more</a>
-              </Box>
+                View All{" "}
+                <ArrowForwardIcon
+                  sx={{ fontSize: "18px", marginLeft: "10px" }}
+                />
+              </Button>
             )}
           </Box>
         </Container>

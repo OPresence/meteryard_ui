@@ -22,6 +22,9 @@ const MainComponent = styled("Box")(({ theme }) => ({
     // position: "relative",
     // zIndex: 1,
     background: "#444444",
+    marginLeft:'0rem',
+    // marginTop:'45rem'
+ 
   },
   "& .footerSection": {
     background: "rgba(0,0,0,0.8)",

@@ -8,12 +8,16 @@ import {
   Button,
   useMediaQuery,
 } from "@mui/material";
+import AccordionComponent from "./AccordionComponent";
+import Divider from "@mui/material/Divider";
+import PriceRangeComponent from "src/component/PriceRangeComponent";
+import StateComponent from "src/component/StateComponent";
 import { useRouter } from "next/router";
 import CityProperty from "./CityProperty";
 import PostSection from "./PostSection/index";
 import AdvertisementComponent from "../../component/AdvertisementComponent";
-import SellerListComponent from "../../component/SellerListComponent";
-import SellerUploadProperty from "../../component/SellerUploadProperty";
+import SellerListComponent from "src/component/SellerListComponent";
+import SellerUploadProperty from "src/component/SellerUploadProperty";
 import EnquiryForm from "./EnquiryForm";
 import { PostApiFunction } from "@/utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";

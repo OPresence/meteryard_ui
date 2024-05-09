@@ -18,11 +18,11 @@ export default function ClientPage() {
     <Box>
       <Banner />
       <SliderComponent />
-      <CardComponent />
+      <CardComponent showViewMore={true} />
       <BannerCompont />
-      <ResidentialProjects />
-      <CommercialProjects />
-      <AgreecultureComponent />
+      <ResidentialProjects showViewMore={true} />
+      <CommercialProjects showViewMore={true} />
+      <AgreecultureComponent showViewMore={true} />
       {/* <YoutubeComponent /> */}
       <ProjectComponent />
       {/* <MobileAppComponent /> */}

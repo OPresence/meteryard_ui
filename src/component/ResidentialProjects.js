@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from "react";
-import { Grid, Typography, Box, Container } from "@mui/material";
+import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import ResidentialPostCard from "./ResidentialPostCard";
 import Slider from "react-slick";
@@ -9,10 +9,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../context/Auth";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useRouter } from "next/router";
+
 const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
-    padding: "80px 0px",
+    padding: "40px 0px",
     background: "#fff",
+
     "@media(max-width:615px)": {
       padding: "20px 0px",
     },
@@ -65,6 +69,7 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
     position: "relative",
     transition: "0.8s",
     transform: "scale(0.9)",
+
     "&:hover": {
       transform: "scale(1)",
       transition: "0.8s",
@@ -125,10 +130,10 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const ResidentialProjects = () => {
+const ResidentialProjects = ({ showViewMore }) => {
   const auth = useContext(AuthContext);
   const sliderRef = useRef(null);
-
+  const router = useRouter();
   const next = () => {
     sliderRef.current.slickNext();
   };
@@ -209,6 +214,16 @@ const ResidentialProjects = () => {
       },
     ],
   };
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+      query: { _id: auth?._getlist[0]?.projectTypeId?._id },
+    });
+  };
+  console.log(
+    "4444444444444444444---->",
+    auth?._getlist[0]?.projectTypeId?._id
+  );
   return (
     <ResidentStyle>
       <div className="mainSliderDiv">
@@ -226,70 +241,52 @@ const ResidentialProjects = () => {
                 </Typography>
               </Box>
             </Box>
-            {auth?._getlist?.length > 4  &&
-             <Box
-             style={{
-               display: "flex",
-               gap: "10px",
-               justifyContent: "flex-end",
-             }}
-           >
-             <Box className={"ArrowClass"} onClick={previous}>
-               <ArrowBackIosIcon
-                 style={{
-                   color: "#000",
-                 }}
-               />
-             </Box>
-             <Box className={"ArrowClass"} onClick={next}>
-               <ArrowForwardIosIcon style={{ color: "#000" }} />
-             </Box>
-           </Box>}
-           
+            {auth?._getlist?.length > 4 && (
+              <Box
+                style={{
+                  display: "flex",
+                  gap: "10px",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Box className={"ArrowClass"} onClick={previous}>
+                  <ArrowBackIosIcon
+                    style={{
+                      color: "#000",
+                    }}
+                  />
+                </Box>
+                <Box className={"ArrowClass"} onClick={next}>
+                  <ArrowForwardIosIcon style={{ color: "#000" }} />
+                </Box>
+              </Box>
+            )}
           </Box>
-          <Box mt={5}>
-            {auth?._getlist?.length > 4 ?
-             <Slider {...settings} ref={sliderRef}>
-             {auth?._getlist &&
-               auth?._getlist?.map((data, index) => {
-                 console.log("indexsdssd--->",index);
-                   return (
-                     <Grid
-                       item
-                       lg={3}
-                       md={3}
-                       sm={6}
-                       xs={12}
-                       key={index}
-                     >
-                    <ResidentialPostCard data={data}/>
-                     </Grid>
-                   );
-               })}
-           </Slider> :
-           <>
-                 <Grid container spacing={3}>
-            {auth?._getlist &&
-               auth?._getlist?.map((data, index) => {
-                   return (
-           <Grid
-           item
-           lg={3}
-           md={3}
-           sm={6}
-           xs={12}
-           key={index}
-         >
-          <ResidentialPostCard data={data}/>
-         </Grid>
-                   )
+          <Box>
+            {auth?._getlist?.length > 4 ? (
+              <Slider {...settings} ref={sliderRef}>
+                {auth?._getlist &&
+                  auth?._getlist?.map((data, index) => {
+                    console.log("indexsdssd--->", index);
+                    return <ResidentialPostCard data={data} key={index} />;
                   })}
-                  </Grid>
-                  </>
-         }
-           
+              </Slider>
+            ) : (
+              <>
+                <Grid container>
+                  {auth?._getlist &&
+                    auth?._getlist?.map((data, index) => {
+                      return (
+                        <Grid item lg={3} md={4} sm={6} xs={12} key={index}>
+                          <ResidentialPostCard data={data} />
+                        </Grid>
+                      );
+                    })}
+                </Grid>
+              </>
+            )}
 
-            {auth?._getlist?.length > 7 && (
+            {/* {auth?._getlist?.length > 7 && (
               <Box
                 display={"flex"}
                 justifyContent={"end"}
@@ -298,6 +295,24 @@ const ResidentialProjects = () => {
               >
                 <a href="#">view more</a>
               </Box>
+            )} */}
+            {auth?._getlist && auth._getlist.length > 1 && (
+              <Button
+                onClick={handleClick}
+                // href="/all-property"
+                variant="contained"
+                color="success"
+                sx={{
+                  backgroundColor: "#A7D325",
+                  color: "white",
+                  float: "right",
+                }}
+              >
+                View All{" "}
+                <ArrowForwardIcon
+                  sx={{ fontSize: "18px", marginLeft: "10px" }}
+                />
+              </Button>
             )}
           </Box>
         </Container>

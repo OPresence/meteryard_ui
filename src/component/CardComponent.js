@@ -6,11 +6,15 @@ import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
 import FeaturedPostCard from "./FeaturedPostCard";
 import { AuthContext } from "../context/Auth";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useRouter } from "next/router";
+
 const CardComponentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
-    padding: "20px 0 30px 0",
+    // padding: "0px 0 0px 0",
     background: "#fff",
     // padding: "50px",
+
     "& h2": {
       fontWeight: "500",
     },
@@ -33,7 +37,7 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
   },
   "& .cards": {
     cursor: "pointer",
-    width: "90%",
+    width: "100%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     borderRadius: "20px",
     transform: "0",
@@ -72,13 +76,13 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const CardComponent = () => {
+const CardComponent = ({ showViewMore }) => {
   const sliderRef = useRef(null);
-    const auth = useContext(AuthContext);
-
+  const auth = useContext(AuthContext);
+  const router = useRouter();
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     autoplay: false,
     arrows: false,
@@ -120,7 +124,7 @@ const CardComponent = () => {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: false,
@@ -150,6 +154,12 @@ const CardComponent = () => {
       },
     ],
   };
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+      query: { _id: "FEATURED" },
+    });
+  };
   return (
     <CardComponentStyle>
       <div className="mainSliderDiv">
@@ -160,16 +170,32 @@ const CardComponent = () => {
               Featured Residential Projects Across India
             </Typography>
           </Box>
+
           <Box>
             <Slider {...settings} ref={sliderRef}>
-              {auth?._isFeaturedPost?.map((data, index) => {
-                return (
-                  <Grid item lg={3} md={6} sm={6} xs={12} key={index}>
-                   <FeaturedPostCard data={data}/>
-                  </Grid>
-                );
-              })}
+              {auth?._isFeaturedPost?.map((data, index) => (
+                <FeaturedPostCard data={data} key={index} />
+              ))}
             </Slider>
+            {
+              auth?._isFeaturedPost &&
+              auth._isFeaturedPost.length > 8 && (
+                <Button
+                  onClick={handleClick}
+                  variant="contained"
+                  color="success"
+                  sx={{
+                    backgroundColor: "#A7D325",
+                    color: "white",
+                    float: "right",
+                  }}
+                >
+                  View All
+                  <ArrowForwardIcon
+                    sx={{ fontSize: "18px", marginLeft: "10px" }}
+                  />
+                </Button>
+              )}
           </Box>
         </Container>
       </div>

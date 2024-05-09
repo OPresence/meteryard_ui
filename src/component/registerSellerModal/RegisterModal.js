@@ -13,14 +13,29 @@ const DialogStyleComponent = styled(Dialog)({
     position: "relative",
     overflow: "initial",
     maxWidth: "850px",
+    "@media(max-width:992px)": {
+      // height: "auto",
+      overflow: "scroll",
+      width:"100%",
+    },
+  },
+  "& .imageBox": {
+   
+    "@media(max-width:425px)": {
+      display: "none",
+    },
+  
+   
   },
   "& .loginBox1": {
     display: "flex",
     gap: "10px",
+ 
     "& button": {
       background: "#A2D117",
       color: "#fff",
       padding: "10px",
+      clipPath: "polygon(0 0, 130% 0, 82% 99%, 0 100%)",
     },
     "& span": {
       color: "red",
@@ -64,7 +79,7 @@ const DialogStyleComponent = styled(Dialog)({
       color: "#fff",
       fontSize: "12px",
       padding: "10px 50px",
-      clipPath: "polygon(0 0, 130% 0, 82% 99%, 0 100%)",
+      // clipPath: "polygon(0 0, 130% 0, 82% 99%, 0 100%)",
     },
 
     "& .checkBox": {
@@ -84,6 +99,7 @@ const DialogStyleComponent = styled(Dialog)({
       justifyContent: "center",
       "& svg": {
         color: "#B8B8B8",
+        
       },
       "& span": {
         textAlign: "center",
