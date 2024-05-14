@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
     "lint": "next lint",
-    "stop": "next stop"
+    "stop": "NODE_ENV=production node stopServer.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
