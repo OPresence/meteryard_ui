@@ -6,7 +6,7 @@ import ResidentialPostCard from "../../component/ResidentialPostCard";
 import CommercialPostCard from "../../component/CommercialPostCard";
 import AgreeculturePostCard from "../../component/AgreeculturePostCard";
 import FeaturedPostCard from "../../component/FeaturedPostCard";
-
+import SkeltonLoader from "../../component/SkeltonLoader";
 import { useRouter } from "next/router";
 
 const AllPropertyIndex = () => {
@@ -15,50 +15,81 @@ const AllPropertyIndex = () => {
   const router = useRouter();
   const { query } = router;
   const property_id = query?._id;
-  console.log("datandsbfmdbmf------->", property_id);
-
+  useEffect(() => {
+    auth?.SubTypeListWithProType_Function();
+  }, []);
   useEffect(() => {
     auth?.PropertyPostAPI(property_id);
   }, [property_id]);
+
   return (
     <Box>
       <PropertyLayout>
         <Grid container spacing={3}>
-          {property_id != "FEATURED" ? (
+          {auth?._isloadingProp ? (
             <>
-              {auth?._getproperyPostList &&
-                auth?._getproperyPostList?.map((data, index) => {
-                  return (
-                    <Grid item lg={4} md={4} sm={12} xs={12} key={index}>
-                      <Box>
-                        {property_id === "65dc4b9cda234100342352b1" && (
-                          <ResidentialPostCard data={data} />
-                        )}
-                        {property_id === "65dc4c11da234100342352f4" && (
-                          <CommercialPostCard data={data} />
-                        )}
-                        {property_id === "65dc4c1eda234100342352fc" && (
-                          <AgreeculturePostCard data={data} />
-                        )}
-                      </Box>
-                    </Grid>
-                  );
-                })}
+              {Array.from({ length: 3 }).map((_, index) => (
+                <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
+                  <SkeltonLoader />
+                </Grid>
+              ))}
             </>
           ) : (
             <>
-              {auth?._isFeaturedPost &&
-                auth?._isFeaturedPost?.map((data, index) => {
-                  return (
-                    <Grid item lg={4} md={4} sm={12} xs={12} key={index}>
-                      <Box>
-                        <FeaturedPostCard data={data} />
-                      </Box>
-                    </Grid>
-                  );
-                })}
+              {auth?._getproperyPostList?.length > 0 ? (
+                <>
+                  {auth?._getproperyPostList?.map((data, index) => {
+                    return (
+                      <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
+                        <Box>
+                          <FeaturedPostCard data={data} index={index} />
+                          {/* {data?.projectTypeId?.projectType == "Residential" && (
+                      <ResidentialPostCard data={data} />
+                    )}
+                    {data?.projectTypeId?.projectType == "Commercial" && (
+                      <CommercialPostCard data={data} />
+                    )}
+                    {data?.projectTypeId?.projectType == "Agriculture" && (
+                      <AgreeculturePostCard data={data} />
+                    )} */}
+                        </Box>
+                      </Grid>
+                    );
+                  })}
+                </>
+              ) : (
+                <Box display={"flex"} justifyContent={"center"} width={"100%"}>
+                  <Box width={"100%"} maxWidth={"500px"}>
+                    <img src="./images/no_property_found.png" width={"100%"} />
+                  </Box>
+                </Box>
+              )}
             </>
           )}
+
+          {/* {property_id != "FEATURED" ? (
+            <>
+            </>
+          ) : (
+            <>
+          {auth?._isFeaturedPost &&
+            auth?._isFeaturedPost?.map((data, index) => {
+              console.log(
+                "auth?._getproperyPostList------->",
+                property_id == data?.projectTypeId?._id,
+                property_id,
+                data?.projectTypeId?._id
+              );
+              return (
+                <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
+                  <Box>
+                    <FeaturedPostCard data={data} />
+                  </Box>
+                </Grid>
+              );
+            })}
+          </>
+          )} */}
         </Grid>
       </PropertyLayout>
     </Box>

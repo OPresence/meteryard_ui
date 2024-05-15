@@ -18,6 +18,7 @@ import { padding } from "@mui/system";
 const SubMenuStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     // padding: "20px 20px 0 20px  ",
+    marginTop: "10px",
 
     boxShadow: "unset",
     "& h5": {
@@ -115,7 +116,7 @@ const SubMenuComponent = () => {
               auth?._citylist?.map((data, index) => {
                 return (
                   <Box
-                  key={index}
+                    key={index}
                     style={{ cursor: "pointer", padding: "4px 0" }}
                   >
                     <Typography className="cityname" variant="h6">

@@ -212,9 +212,13 @@ const CommercialProjects = ({ showViewMore }) => {
     ],
   };
   const handleClick = () => {
+    // router.push({
+    //   pathname: "/all-property",
+    //   query: { _id: auth?._getlist_commercial[0]?.projectTypeId?._id },
+    // });
     router.push({
       pathname: "/all-property",
-      query: { _id: auth?._getlist_commercial[0]?.projectTypeId?._id },
+      // query: { _id: "FEATURED" },
     });
   };
   return (

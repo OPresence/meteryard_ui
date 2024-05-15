@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -11,20 +11,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { Typography, Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import index from "@/pages/CityChat";
-const theme = createTheme({
-  overrides: {
-    MuiSlider: {
-      rail: {
-        height: "40px", // Change the rail height here
-        backgroundColor: "red", // Change the rail background color
-      },
-      markLabel: {
-        fontSize: "16px", // Change the font size of mark labels
-      },
-    },
-  },
-});
+import { AuthContext } from "../context/Auth";
 
 const Accordionstyle = styled("dic")(({ theme }) => ({
   "& .MuiPaper-root": {
@@ -43,10 +30,10 @@ const Accordionstyle = styled("dic")(({ theme }) => ({
       },
     },
     "& .iconBox": {
-      height:'50px',
-      width:'50px',
-      textAlign:'center',
-      marginTop:'0.50rem',
+      height: "50px",
+      width: "50px",
+      textAlign: "center",
+      marginTop: "0.50rem",
       "& svg": {
         background: "#C8F2CD",
         color: "#fff",
@@ -55,13 +42,17 @@ const Accordionstyle = styled("dic")(({ theme }) => ({
         borderRadius: "50px",
       },
     },
-   
   },
- 
 }));
-export default function StateComponent({ StattName, type, name, imgURL }) {
+export default function StateComponent({
+  StattName,
+  type,
+  name,
+  imgURL,
+  stateChange,
+}) {
+  const auth = useContext(AuthContext);
   const [expanded, setExpanded] = React.useState(false);
-  const [_state, setState] = React.useState("0");
   const menuProps = {
     getContentAnchorEl: null,
     disableScrollLock: true,
@@ -77,9 +68,13 @@ export default function StateComponent({ StattName, type, name, imgURL }) {
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
+  console.log("ertyguiop0--->", auth?._cityselect, auth?._getCityValue);
   const handleChangevalue = (event) => {
-    setState(event.target.value);
+    if (type == "Select State") {
+      auth?.setGetCityValue(event.target.value);
+    } else {
+      auth?.setCitySelect(event.target.value);
+    }
   };
   return (
     <Accordionstyle>
@@ -95,40 +90,48 @@ export default function StateComponent({ StattName, type, name, imgURL }) {
           id="panel1bh-header"
         >
           <Box display={"flex"} alignItems={"center"} mt={2}>
-          <Box className="iconBox" sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Box
+              className="iconBox"
+              sx={{ display: { xs: "none", md: "block" } }}
+            >
               <img src={imgURL} width={"100%"} />
             </Box>
             &nbsp;
-            <Typography variant="h6" sx={{ marginLeft: { xs: '1rem', md: '0px' },
-           }}>{name}</Typography>
+            <Typography
+              variant="h6"
+              sx={{ marginLeft: { xs: "15px", md: "0px" } }}
+            >
+              {name}
+            </Typography>
           </Box>
         </AccordionSummary>
         <AccordionDetails>
           <Box className="mainBox">
-            <FormControl sx={{ m: 1, width: "100%" }} size="small">
-              {/* <InputLabel id="demo-select-small-label">
-                  Select State
-                </InputLabel> */}
-
+            <FormControl sx={{ mt: "20px", width: "100%" }} size="small">
               <Select
                 labelId="demo-select-small-label"
                 id="demo-select-small"
                 fullWidth
-                value={_state}
+                value={
+                  type == "Select State"
+                    ? auth?._getCityValue
+                    : auth?._cityselect
+                }
                 onChange={handleChangevalue}
                 MenuProps={menuProps}
-                sx={{ mt:{xs:'-1rem', md:'1rem'}}}
+                sx={{ mt: { xs: "-1rem", md: "1rem" } }}
               >
                 <MenuItem value="0" disabled>
                   {type}
                 </MenuItem>
-                {StattName && StattName?.map((data, index) => {
-                  return (
-                    <MenuItem key={index} value={data?.name}>
-                      {data?.name}
-                    </MenuItem>
-                  );
-                })}
+                {StattName &&
+                  StattName?.map((data, index) => {
+                    return (
+                      <MenuItem key={index} value={data?._id}>
+                        {data?.stateName || data?.cityName}
+                      </MenuItem>
+                    );
+                  })}
               </Select>
             </FormControl>
           </Box>

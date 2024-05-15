@@ -28,6 +28,7 @@ export default function ClientPage() {
       {/* <MobileAppComponent /> */}
       <TestimonialComponent />
       {/* <TestingComponent /> */}
+      
 
       <ChatBoat />
     </Box>

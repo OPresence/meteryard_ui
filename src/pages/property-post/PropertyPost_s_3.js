@@ -192,7 +192,8 @@ const PropertyPost_s_3 = (props) => {
   const fileInputRef = useRef(null);
   const [_stateList, setStateList] = React.useState([]);
   const [_cityList, setCityList] = React.useState([]);
-  const [_getstate, setState] = useState("");
+  const [_getstate, setState] = useState("0");
+  console.log("bjdsbfbds---->", _getstate);
   const scrollToTop = () => {
     window.scrollTo({
       bottm: 900,
@@ -242,6 +243,9 @@ const PropertyPost_s_3 = (props) => {
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllCity,
+        data: {
+          stateId: _getstate,
+        },
       });
       if (res) {
         if (res?.responseCode == 200) {

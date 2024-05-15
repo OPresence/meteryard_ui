@@ -1,22 +1,11 @@
 import React, { useState, useContext } from "react";
 import styled from "@emotion/styled";
-import {
-  Box,
-  Typography,
-  Grid,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Button,
-} from "@mui/material";
-import { cityObject } from "../utils";
-import { PostApiFunction } from "@/utils";
-import Apiconfigs from "../ApiConfig/ApiConfig";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Box, Typography, Grid } from "@mui/material";
+
 import { AuthContext } from "../context/Auth";
 const SubMenuStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
-    // padding: "20px 20px 0 20px  ",
+    marginTop: "10px",
 
     boxShadow: "unset",
     "& h5": {

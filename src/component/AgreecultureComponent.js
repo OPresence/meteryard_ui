@@ -207,9 +207,13 @@ const AgreecultureComponent = ({ showViewMore }) => {
     ],
   };
   const handleClick = () => {
+    // router.push({
+    //   pathname: "/all-property",
+    //   query: { _id: auth?._getlistAgreeculture[0]?.projectTypeId?._id },
+    // });
     router.push({
       pathname: "/all-property",
-      query: { _id: auth?._getlistAgreeculture[0]?.projectTypeId?._id },
+      // query: { _id: "FEATURED" },
     });
   };
 
@@ -280,7 +284,7 @@ const AgreecultureComponent = ({ showViewMore }) => {
               </Grid>
             )}
 
-            {auth?._getlistAgreeculture?.length > 7 && (
+            {/* {auth?._getlistAgreeculture?.length > 7 && (
               <Box
                 display={"flex"}
                 justifyContent={"end"}
@@ -289,9 +293,8 @@ const AgreecultureComponent = ({ showViewMore }) => {
               >
                 <a href="#">view more</a>
               </Box>
-            )}
-            {
-              auth?._getlistAgreeculture &&
+            )} */}
+            {auth?._getlistAgreeculture &&
               auth._getlistAgreeculture.length > 1 && (
                 <Button
                   onClick={handleClick}

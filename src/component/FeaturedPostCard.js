@@ -75,7 +75,7 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const FeaturedPostCard = ({ data }) => {
+const FeaturedPostCard = ({ data, index }) => {
   const router = useRouter();
   return (
     <CardComponentStyle>
@@ -119,7 +119,11 @@ const FeaturedPostCard = ({ data }) => {
                 </Typography>
               </Box>
             </Box>
-            {/* <ButtonComponent data={data} /> */}
+            <Box
+              style={index > 0 ? { marginTop: "30px" } : { marginTop: "45px" }}
+            >
+              <ButtonComponent data={data} />
+            </Box>
           </Box>
         </Box>{" "}
       </Box>
