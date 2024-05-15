@@ -26,27 +26,24 @@ import { styled } from "@mui/system";
 const BuyerStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     background: theme.palette.background.default,
-   
+
     // paddingBottom: "100px",
     "& .SellerBox": {
       padding: "20px",
       boxShadow: "0px 1px 13px #00000026",
-    
     },
     "& .filterBox": {
       padding: "20px",
       // boxShadow: theme.shadows[3],
       boxShadow: "0px 1px 13px #00000026",
-     
+
       "& .devider": {
         background: "#00000040",
         position: "relative",
         zIndex: 1,
-       
       },
       "& h2": {
         fontWeight: "600",
-       
       },
       "& .imgBox": {
         background: "#fff",
@@ -358,8 +355,8 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
 
   const content = (
     <BuyerStyle>
-      <Box minHeight={"100vh"} className="mainBox" pb={"100px"} sx={{ border:'4px solid red'}}>
-        <Box className="filterBox" >
+      <Box minHeight={"100vh"} className="mainBox" pb={"100px"}>
+        <Box className="filterBox">
           <Box display={"flex"} alignItems={"center"}>
             <Avatar
               style={{ cursor: "pointer" }}

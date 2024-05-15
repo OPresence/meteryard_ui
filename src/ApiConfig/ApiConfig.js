@@ -197,6 +197,8 @@ const Apiconfigs = {
   listAllLocalArea: `${masterLink}/listAllLocalArea`,
   deleteLocalArea: `${masterLink}/deleteLocalArea`,
   activeDeactiveLocalArea: `${masterLink}/activeDeactiveLocalArea`,
+  proSubTypeListWithProType: `${masterLink}/proSubTypeListWithProType`,
+
 
   // ENQUIRY MANAGEMENT
   generateEnquiry: `${user}/generateEnquiry`,

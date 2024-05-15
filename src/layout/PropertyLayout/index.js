@@ -6,7 +6,6 @@ import TopBar from "../HomeLayout/Topbar";
 import Footer from "./Footer";
 import { Box, Grid, Typography, Divider } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-// import image from '../../../public/images/meteryard/Images/Modern-4-floor-Building-Design.jpg'
 
 const Root = styled("div")(({ theme }) => ({
   display: "flex",
@@ -57,23 +56,38 @@ const AdvertisementContainer = styled("Box")({
   alignItems: "center",
   marginLeft: "10%",
   borderRadius: "5px",
+  flexDirection: "row",
+
+  "@media screen and (max-width: 600px)": {
+    flexDirection: "column",
+    height: "auto",
+  },
 
   "& .img": {
     width: "50vw",
-
     height: "35vh",
+    "@media screen and (max-width: 600px)": {
+      width: "100%",
+      height: "30vh",
+    },
   },
+
   "& .content": {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-around",
     height: "12rem",
     width: "100%",
-    // marginTop: "3rem",
+    "@media screen and (max-width: 600px)": {
+      height: "auto",
+      padding: "0.50rem",
+    },
   },
-  " & .h4": {
+
+  "& .h4": {
     color: "gray",
   },
+
   "& .below-content": {
     display: "flex",
     height: "2rem",
@@ -81,18 +95,28 @@ const AdvertisementContainer = styled("Box")({
     borderRight: "0px solid transparent",
     borderBottom: "0px solid transparent",
     borderLeft: "0px solid transparent",
-    // marginTop: "2rem",
+    "@media screen and (max-width: 600px)": {
+      fontSize: "12px",
+    },
   },
-  " & .h3": {
-    // marginRight: "7rem",
-    marginTop: "5px",
+
+  "& .h3": {
+    "@media screen and (max-width: 600px)": {
+      fontSize: "12px",
+    },
   },
-  " & .open-link": {
+
+  "& .open-link": {
     display: "flex",
-    marginLeft: "20rem",
+    marginLeft: "auto",
     textAlign: "center",
     marginTop: "0.50rem",
+    "@media screen and (max-width: 600px)": {
+      fontSize: "15px",
+      marginTop: "0.25rem",
+    },
   },
+
   "& a": {
     textDecoration: "none",
     color: "blue",
@@ -123,7 +147,17 @@ const PropertyLayout = ({ children }) => {
         </Box>
 
         <Box className="content">
-          <Typography variant="h4" sx={{ color: "black", marginLeft: "2rem" }}>
+          <Typography
+            variant="h4"
+            sx={{
+              color: "black",
+              marginLeft: "2rem",
+              "@media screen and (max-width: 600px)": {
+                marginLeft: "1rem",
+                padding: "5px",
+              },
+            }}
+          >
             3D Interior Design Made Easy
           </Typography>
           <Typography
@@ -133,6 +167,10 @@ const PropertyLayout = ({ children }) => {
               color: "gray",
               marginLeft: "2rem",
               width: "75%",
+              "@media screen and (max-width: 600px)": {
+                marginLeft: "1rem",
+                padding: "5px",
+              },
             }}
           >
             Design your 3D dream home like a pro, Interior Design & 4k Render
@@ -145,7 +183,14 @@ const PropertyLayout = ({ children }) => {
                 color: "#444444",
                 marginLeft: "2rem",
                 marginTop: "0.50rem",
-                width:'15rem'
+                width: "100%",
+                marginTop: "5px",
+                "@media screen and (max-width: 600px)": {
+                  fontSize: "15px",
+                  marginTop: "0.50rem",
+                  marginLeft: "1rem",
+                  padding: "5px",
+                },
               }}
             >
               Coohom 3D Design Tool
@@ -171,7 +216,7 @@ const PropertyLayout = ({ children }) => {
                 tabView={selectedTab}
               />
             </Grid>
-            <Grid item lg={9} md={8} sm={12} xs={12}>
+            <Grid item lg={9} md={8} sm={12} xs={12} >
               <Content id="main-scroll">{children}</Content>
             </Grid>
           </Grid>

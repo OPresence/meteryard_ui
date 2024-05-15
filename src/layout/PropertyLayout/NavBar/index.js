@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
-import { FaHospitalUser, FaSquarespace, FaWallet } from "react-icons/fa";
-import {
-  AiFillHome,
-  AiFillDashboard,
-  AiOutlineTransaction,
-} from "react-icons/ai";
+// import { FaHospitalUser, FaSquarespace, FaWallet } from "react-icons/fa";
+// import {
+//   AiFillHome,
+//   AiFillDashboard,
+//   AiOutlineTransaction,
+// } from "react-icons/ai";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import AccordionComponent from "../../../pages/CityChat/AccordionComponent";
-import PriceRangeComponent from "src/component/PriceRangeComponent";
-import StateComponent from "src/component/StateComponent";
+import PriceRangeComponent from "../../../component/PriceRangeComponent";
+import StateComponent from "../../../component/StateComponent";
 import {
   Box,
   Drawer,
@@ -23,6 +23,7 @@ import {
 } from "@mui/material";
 import NavItem from "./NavItem";
 import { styled } from "@mui/system";
+import { AuthContext } from "../../../context/Auth";
 const BuyerStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     background: theme.palette.background.default,
@@ -93,30 +94,30 @@ const DesktopDrawer = styled(Drawer)(({ theme }) => ({
     overflowY: "hidden",
   },
 }));
-const LogoutButton = styled(Button)({
-  display: "flex",
-  justifyContent: "start",
-  alignItems: "center",
-  position: "absolute",
-  bottom: "114px",
-  left: "17px",
-  background: "transparent",
-  fontWeight: "400",
-  fontSize: "13px",
-  color: "#fff",
-  textTransform: "capitalize",
-});
-const SideMenuBox = styled(Box)({
-  "& .MuiCollapse-wrapperInner": {
-    marginLeft: "45px",
-  },
-});
-const DialogMainBox = styled("Box")(({ theme }) => ({
-  "& h5": {
-    fontSize: "20px",
-    fontWeight: "600",
-  },
-}));
+// const LogoutButton = styled(Button)({
+//   display: "flex",
+//   justifyContent: "start",
+//   alignItems: "center",
+//   position: "absolute",
+//   bottom: "114px",
+//   left: "17px",
+//   background: "transparent",
+//   fontWeight: "400",
+//   fontSize: "13px",
+//   color: "#fff",
+//   textTransform: "capitalize",
+// });
+// const SideMenuBox = styled(Box)({
+//   "& .MuiCollapse-wrapperInner": {
+//     marginLeft: "45px",
+//   },
+// });
+// const DialogMainBox = styled("Box")(({ theme }) => ({
+//   "& h5": {
+//     fontSize: "20px",
+//     fontWeight: "600",
+//   },
+// }));
 function renderNavItems({ items, pathname, depth = 0, state, setSelectedTab }) {
   return (
     <List disablePadding>
@@ -185,239 +186,144 @@ function reduceChildRoutes({
   }
   return acc;
 }
-const sections = [
-  {
-    items: [
-      {
-        title: "Dashboard",
-        icon: AiFillHome,
-        href: "/dashboard",
-      },
-      {
-        title: "User Management",
-        icon: AiFillDashboard,
-        href: "/user-management",
-      },
-      {
-        title: "Influencer Management",
-        icon: FaHospitalUser,
-        href: "/dashboard/influencer-management",
-      },
-      {
-        title: "Transaction Management",
-        icon: AiOutlineTransaction,
-        href: "/dashboard/transaction-management",
-      },
-    ],
-  },
-];
-const sections1 = [
-  {
-    items: [
-      {
-        title: "Dashboard",
-        icon: AiFillHome,
-        href: "/sniper-dashboard",
-        tabview: "Sniper",
-      },
-      {
-        title: "Bot settings",
-        icon: AiFillDashboard,
-        href: "/bot-setting",
-        tabview: "Sniper",
-      },
-      {
-        title: "Transaction History",
-        icon: FaSquarespace,
-        href: "/sniper-transactions",
-        tabview: "Sniper",
-      },
-    ],
-  },
-];
+// const sections = [
+//   {
+//     items: [
+//       {
+//         title: "Dashboard",
+//         icon: AiFillHome,
+//         href: "/dashboard",
+//       },
+//       {
+//         title: "User Management",
+//         icon: AiFillDashboard,
+//         href: "/user-management",
+//       },
+//       {
+//         title: "Influencer Management",
+//         icon: FaHospitalUser,
+//         href: "/dashboard/influencer-management",
+//       },
+//       {
+//         title: "Transaction Management",
+//         icon: AiOutlineTransaction,
+//         href: "/dashboard/transaction-management",
+//       },
+//     ],
+//   },
+// ];
+// const sections1 = [
+//   {
+//     items: [
+//       {
+//         title: "Dashboard",
+//         icon: AiFillHome,
+//         href: "/sniper-dashboard",
+//         tabview: "Sniper",
+//       },
+//       {
+//         title: "Bot settings",
+//         icon: AiFillDashboard,
+//         href: "/bot-setting",
+//         tabview: "Sniper",
+//       },
+//       {
+//         title: "Transaction History",
+//         icon: FaSquarespace,
+//         href: "/sniper-transactions",
+//         tabview: "Sniper",
+//       },
+//     ],
+//   },
+// ];
 const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   const router = useRouter();
+  const auth = useContext(AuthContext);
   const [isLogout, setIsLogout] = useState(false);
-  const renderedSections = tabView === "Arbitrage" ? sections : sections1;
-  const { search } = router.query;
+  const [sliderValue, setSliderValue] = React.useState([10, 50]); // State to store the Slider's value
+  const [selectedSubTypes, setSelectedSubTypes] = useState([]);
+  const handleCheckboxChange = (parentId, subTypeId) => {
+    console.log("hdhdskjds");
+    setSelectedSubTypes((prevState) => {
+      const isAlreadySelected = prevState.some(
+        (item) => item.parentId === parentId && item.subTypeId === subTypeId
+      );
 
-  const CheckBoxName = [
-    {
-      name: "residential",
-      valueName: [
-        { name: "HOUSE" },
-        { name: "VILLA" },
-        { name: "APARTMENTS" },
-        { name: "PLOTS" },
-      ],
-    },
-  ];
-  const CheckBoxName1 = [
-    {
-      name: "commercial",
-      valueName: [
-        { name: "HOUSE" },
-        { name: "VILLA" },
-        { name: "APARTMENTS" },
-        { name: "PLOTS" },
-      ],
-    },
-  ];
-  const CheckBoxName2 = [
-    {
-      name: "agriculture",
-      valueName: [
-        { name: "HOUSE" },
-        { name: "VILLA" },
-        { name: "APARTMENTS" },
-        { name: "PLOTS" },
-      ],
-    },
-  ];
-  const State_name = [
-    {
-      name: "Uttar Pradesh",
-    },
-    {
-      name: "Delhi",
-    },
-    {
-      name: "Gujarat",
-    },
-  ];
-  const City_name = [
-    { name: "Agra" },
-    { name: "Mumbai" },
-    { name: "Delhi" },
-    { name: "Bangalore" },
-  ];
-  const City_name_LocalArea = [
-    { name: "Pashchim Puri" },
-    { name: "Sikandra" },
-    { name: "Bodla" },
-    { name: "Fatehabad Road" },
-    { name: "Kamla Nagar" },
-  ];
-  const SellerList = [
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/Describe-a-Foreign-Person-You-Are-Interested-In-1.png",
-      online: true,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/images (2).png",
-      online: false,
-    },
-    {
-      name: "Monu Rajput",
-      img: "/images/1567018939360.png",
-      online: false,
-    },
-  ];
+      if (isAlreadySelected) {
+        return prevState.filter(
+          (item) =>
+            !(item.parentId === parentId && item.subTypeId === subTypeId)
+        );
+      } else {
+        return [...prevState, { parentId, subTypeId }];
+      }
+    });
+  };
+  const uniqueParentIds = [];
+  const uniqueSubTypeIds = [];
+  useEffect(() => {
+    selectedSubTypes.forEach((item) => {
+      if (!uniqueParentIds.includes(item.parentId)) {
+        uniqueParentIds.push(item.parentId);
+      }
+      if (!uniqueSubTypeIds.includes(item.subTypeId)) {
+        uniqueSubTypeIds.push(item.subTypeId);
+      }
+    });
+    auth?.setPropertyType(uniqueParentIds);
+    auth?.setPropertySubType(uniqueSubTypeIds);
+    console.log(uniqueParentIds);
+    console.log(uniqueSubTypeIds);
+  }, [selectedSubTypes]);
+
   useEffect(() => {
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
   }, [router.pathname]);
 
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      auth?.setPriceRangeState(sliderValue);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [sliderValue]);
 
   const content = (
     <BuyerStyle>
       <Box minHeight={"100vh"} className="mainBox" pb={"100px"}>
         <Box className="filterBox">
-          <Box display={"flex"} alignItems={"center"}>
-            <Avatar
-              style={{ cursor: "pointer" }}
-              onClick={() =>
-                router.push({
-                  pathname: "/seller-profile",
-                })
-              }
-              src="/images/meteryard/Images/Image 23.png"
-              width={"100%"}
-            />
-            &nbsp;&nbsp;&nbsp;
-            <Typography variant="h6">Monu Rajput</Typography>
-          </Box>
           <Box>
             <Box m={"10px 0"}>
-              <Typography variant="h2">property category</Typography>
+              <Typography variant="h2">Property category filter</Typography>
             </Box>
-            {search == "Seller" && (
-              <Box maxWidth={150}>
-                <img
-                  onClick={() =>
-                    router.push({
-                      pathname: "/Lead-Box",
-                    })
-                  }
-                  src="/images/Group 8327.svg"
-                  width={"100%"}
-                  style={{ cursor: "pointer" }}
-                />
-              </Box>
-            )}
+            {auth?._pro_with_subpro?.length > 0 &&
+              auth?._pro_with_subpro?.map((data, index) => {
+                return (
+                  <Box key={index}>
+                    <AccordionComponent
+                      data={data}
+                      index={index}
+                      imgURL="/images/Group 8163.png"
+                      handleCheckboxChange={handleCheckboxChange}
+                      selectedSubTypes={selectedSubTypes}
+                    />
+                    <Box m={"10px 0 0 0"}>
+                      <Divider className="devider" />
+                    </Box>
+                  </Box>
+                );
+              })}
 
-            {CheckBoxName.map((data, index) => {
-              return (
-                <AccordionComponent
-                  key={index}
-                  data={data}
-                  index={index}
-                  imgURL="/images/Group 8163.png"
-                />
-              );
-            })}
-            <Box m={"10px 0 0 0"}>
-              <Divider className="devider" />
-            </Box>
-
-            {CheckBoxName1.map((data, index) => {
+            {/* {CheckBoxName1.map((data, index) => {
               return (
                 <AccordionComponent
                   key={index}
                   data={data}
                   index={index}
                   imgURL="/images/Group 8164.png"
+        setSelectedTab={(item) => setSelectedTab(item)}
+
                 />
               );
             })}
@@ -432,21 +338,27 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
                   data={data}
                   index={index}
                   imgURL="/images/Group 8165.png"
+                  
+                  setSelectedTab={(item) => setSelectedTab(item)}
+
                 />
               );
             })}
             <Box m={"10px 0 0 0"}>
               <Divider className="devider" />
-            </Box>
+            </Box> */}
             <Box>
-              <PriceRangeComponent imgURL="/images/Group 8346.png" />
+              <PriceRangeComponent imgURL="/images/Group 8346.png"
+              setSliderValue={setSliderValue}
+              sliderValue={sliderValue} />
             </Box>
             <Box m={"10px 0 0 0"}>
               <Divider className="devider" />
             </Box>
             <Box>
               <StateComponent
-                StattName={State_name}
+                StattName={auth?.statesHome}
+                // stateChange={auth?.setGetCityValue}
                 type="Select State"
                 name="State"
                 imgURL="/images/Group 8180.png"
@@ -457,7 +369,8 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
             </Box>
             <Box>
               <StateComponent
-                StattName={City_name}
+                StattName={auth?._citylist}
+                // stateChange={auth?.setCitySelect}
                 type="Select City"
                 name="City"
                 imgURL="/images/Group 8179.png"
@@ -466,9 +379,9 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
             <Box m={"10px 0 0 0"}>
               <Divider className="devider" />
             </Box>
-            <Box>
+            {/* <Box>
               <StateComponent
-                StattName={City_name_LocalArea}
+                // StattName={City_name_LocalArea}
                 type="Select Local Area"
                 imgURL="/images/Group 8180.png"
                 name="Local Area"
@@ -476,7 +389,7 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
             </Box>
             <Box m={"10px 0 0 0"}>
               <Divider className="devider" />
-            </Box>
+            </Box> */}
           </Box>
         </Box>
       </Box>

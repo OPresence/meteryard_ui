@@ -180,7 +180,7 @@ const AdminLogin = () => {
   const router = useRouter();
 
   const formInitialSchema = {
-    email: "anupriyamishra8423@gmail.com",
+    email: "Meteryardindia@gmail.com",
     password: "admin1234",
   };
 

@@ -1,11 +1,12 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { Typography, Box } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import styled from "@emotion/styled";
-import CheckBoxComponent from "src/component/CheckBoxComponent";
+import { AuthContext } from "../../context/Auth";
+import CheckBoxComponent from "../../component/CheckBoxComponent";
 const Accordionstyle = styled("div")(({ theme }) => ({
   "& .MuiPaper-root": {
     top: "0px !important",
@@ -15,9 +16,10 @@ const Accordionstyle = styled("div")(({ theme }) => ({
     boxShadow: "none",
 
     "& .summary": {
-      height: "70px",
+      maxHeight: "20px",
       margin: "0",
       padding: "0",
+      height: "100%",
     },
     "& h6": {
       fontSize: "14px",
@@ -39,11 +41,20 @@ const Accordionstyle = styled("div")(({ theme }) => ({
     },
   },
 }));
-export default function ControlledAccordions({ data, index, imgURL }) {
+export default function ControlledAccordions({
+  data,
+  index,
+  imgURL,
+  handleCheckboxChange,
+  selectedSubTypes,
+}) {
   const [expanded, setExpanded] = React.useState(false);
+  const auth = useContext(AuthContext);
   const [checked_get, setChecked_Get] = React.useState("");
   const handleChange = (panel) => (event, isExpanded) => {
+    console.log("data?.projectType=---->", data?.projectType);
     setExpanded(isExpanded ? panel : false);
+    auth?.setPropertyType(panel);
   };
 
   return (
@@ -51,10 +62,16 @@ export default function ControlledAccordions({ data, index, imgURL }) {
       <Accordion
         key={index}
         className="accordionstyle"
-        expanded={expanded === "panel1"}
-        onChange={handleChange("panel1")}
+        expanded={expanded === data?._id}
+        onChange={handleChange(data?._id)}
       >
         <AccordionSummary
+          sx={{
+            "& .MuiAccordionSummary-content.Mui-expanded": {
+              marginTop: "50px",
+            },
+          }}
+          classes={{ content: expanded ? "Mui-expanded" : "marginTop:50px" }}
           className="summary"
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1bh-content"
@@ -72,32 +89,35 @@ export default function ControlledAccordions({ data, index, imgURL }) {
               variant="h6"
               sx={{ marginLeft: { xs: "1rem", md: "0px" } }}
             >
-              {data?.name}
+              {data?.projectType}
             </Typography>
           </Box>
         </AccordionSummary>
         <Box>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <AccordionDetails sx={{ display: "flex", flexWrap: "wrap" }}>
-              {data?.valueName?.map((data, index) => {
+            <AccordionDetails>
+              {data?.allProjectSubType?.map((value, index) => {
                 return (
-                  <Box
-                    key={index}
-                    sx={{
-                      width: "33%",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    {/* First set of data */}
-                    <Typography sx={{ mt: "8px", ml: "-10px" }}>
-                      {data?.name}
-                    </Typography>{" "}
-                    <CheckBoxComponent
-                      data={data}
-                      index={index}
-                      setChecked_Get={setChecked_Get}
-                    />
+                  <Box key={index}>
+                    <Box
+                      sx={{
+                        display: "inline-flex",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <CheckBoxComponent
+                        data={value}
+                        propName={data}
+                        index={index}
+                        selectedSubTypes={selectedSubTypes}
+                        handleCheckboxChange={handleCheckboxChange}
+                        checked_get={checked_get}
+                        setChecked_Get={setChecked_Get}
+                      />
+                      &nbsp;
+                      <Typography sx={{}}>{value?.projectSubType}</Typography>
+                    </Box>
+                    &nbsp; &nbsp;
                   </Box>
                 );
               })}

@@ -215,9 +215,13 @@ const ResidentialProjects = ({ showViewMore }) => {
     ],
   };
   const handleClick = () => {
+    // router.push({
+    //   pathname: "/all-property",
+    //   query: { _id: auth?._getlist[0]?.projectTypeId?._id },
+    // });
     router.push({
       pathname: "/all-property",
-      query: { _id: auth?._getlist[0]?.projectTypeId?._id },
+      // query: { _id: "FEATURED" },
     });
   };
   console.log(

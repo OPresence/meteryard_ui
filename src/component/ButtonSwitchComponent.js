@@ -100,7 +100,12 @@ export default function ButtonSwitchComponent({
 }) {
   const auth = useContext(AuthContext);
   const router = useRouter();
-
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+      query: { _id: "FEATURED" },
+    });
+  };
   return (
     <MainComponent>
       <Box>
@@ -149,6 +154,7 @@ export default function ButtonSwitchComponent({
                           </Typography>
                         </Box>
                         <Button
+                         onClick={handleClick}
                           className="searchbox_button"
                           style={{
                             background: "#A7D325 0% 0% no-repeat padding-box",
