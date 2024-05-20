@@ -1,46 +1,47 @@
+import { color } from "@mui/system";
+
 export default {
   h1: {
+    fontFamily: "Inter",
+    fontSize: "48px",
     fontWeight: "600",
-    color: "#000",
-    lineHeight: "1.2",
-    fontSize: "42px",
-    fontFamily: "system-ui",
+    lineHeight: "58.09px",
   },
   h2: {
     fontSize: "22px",
     lineHeight: "1.2",
     fontWeight: "400",
     color: "#000",
-    fontFamily: "system-ui",
+    fontFamily: "Inter",
   },
   h3: {
     fontSize: "18px",
     lineHeight: "1.2",
     fontWeight: "400",
     color: "#000",
-    fontFamily: "system-ui",
+    fontFamily: "Inter",
   },
   h4: {
     fontSize: "22px",
     fontWeight: "600",
     color: "#444444",
-    fontFamily: "system-ui",
+    fontFamily: "Inter",
   },
   h5: {
     fontSize: "22px",
     fontWeight: "500",
     color: "#000",
-    fontFamily: "system-ui",
+    fontFamily: "Inter",
   },
   h6: {
     fontSize: "16px",
     fontWeight: "400",
     color: "#000",
-    fontFamily: "system-ui",
+    fontFamily: "Inter",
   },
   overline: {
     fontSize: "8px",
-    fontFamily: "system-ui",
+    fontFamily: "Inter",
   },
 
   button: {
@@ -48,14 +49,14 @@ export default {
     // background: "#ACACAC",
     color: "#000",
     borderRadius: 27,
-    fontFamily: "system-ui",
+    fontFamily: "Inter",
   },
 
-  body1: {
-    fontSize: "14px",
-    fontWeight: "400",
-    color: "#000",
-    textAlign: "justify",
-    fontFamily: "system-ui",
-  },
+  // body1: {
+  //   fontFamily: "Inter",
+  //   fontSize: "24px",
+  //   fontWeight: "400",
+  //   lineHeight: "29.05px",
+  //   color: "#000",
+  // },
 };

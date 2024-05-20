@@ -1,10 +1,10 @@
 import React from 'react'
-import Conditions from './Conditions'
+import Terms from './Terms'
 
 function index() {
   return (
     <div>
-         <Conditions/>
+        <Terms/>
     </div>
   )
 }

@@ -19,6 +19,7 @@ const LoginDialog = ({
   setOpen,
   setSignUpComplete,
   _signcomplete,
+  SignUpDialog,
 }) => {
   return (
     <DialogStyleComponent>
@@ -50,6 +51,8 @@ const LoginDialog = ({
                   setSelectScreen={setSelectScreen}
                   setOpen={setOpen}
                   setSignUpComplete={setSignUpComplete}
+                  SignUpDialog={SignUpDialog}
+                  handleClose={handleClose}
                 />
               ) : (
                 <Otp

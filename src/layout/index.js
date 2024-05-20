@@ -16,6 +16,7 @@ import { createTheme } from "../theme";
 import CallIcon from "@mui/icons-material/Call";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import { color } from "@mui/system";
 
 const layOutcss = styled("Box")(({ theme }) => ({
   "& .appbarBox": {
@@ -28,6 +29,9 @@ const layOutcss = styled("Box")(({ theme }) => ({
     "& .flexAlign": {
       display: "flex",
       alignItems: "center",
+      "& p": {
+        color: "#000",
+      },
     },
   },
   "& .TopIconBox": {
@@ -101,10 +105,10 @@ function PageLayout({ children }) {
                             011-41219999 | 09999-127085
                           </Typography>
                         </Box>
-                        <Box className="flexAlign" p={"0 0 0 30px"}>
+                        {/* <Box className="flexAlign" p={"0 0 0 30px"}>
                           <WhatsAppIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
                           <Typography variant="body1">whatsapp us</Typography>
-                        </Box>
+                        </Box> */}
                       </Box>
                       <Box className="flexAlign" p={"0 0 0 30px"}>
                         <PermIdentityIcon /> &nbsp;&nbsp;&nbsp;&nbsp;

@@ -1,27 +1,49 @@
-import React, { useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import ResidentialPostCard from "./ResidentialPostCard";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
+import Slider from "react-slick";
 import { AuthContext } from "../context/Auth";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/router";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "40px 0px",
     background: "#fff",
-
+    "& p": {
+      fontFamily: "Inter",
+      fontSize: "24px",
+      fontWeight: "400",
+      lineHeight: "29.05px",
+    },
     "@media(max-width:615px)": {
       padding: "20px 0px",
     },
+    // "& h1": {
+    //   fontWeight: "600",
+    //   fontSize: "28px",
+    // },
     "& h2": {
       fontWeight: "500",
+      fontSize: "16px",
+    },
+    "& h4": {
+      fontSize: "14px",
+      fontFamily: "system-ui",
+      marginTop: "5px",
+      fontWeight: "500",
+      color: "#000",
+    },
+    "& h5": {
+      fontSize: "12px",
+      fontFamily: "system-ui",
+      marginTop: "5px",
+      fontWeight: "500",
+      color: "#E0AF00",
     },
   },
   "& .ArrowClass": {
@@ -38,25 +60,26 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
       color: "#000 !important",
       fontSize: "12px",
     },
-    "&:hover": {
-      background: "rgb(0, 144, 53)",
-      transition: "0.6s",
-      "& svg": {
-        color: "#fff !important",
-      },
-    },
+    // "&:hover": {
+    //   background: "rgb(0, 144, 53)",
+    //   transition: "0.6s",
+    //   "& svg": {
+    //     color: "#fff !important",
+    //   },
+    // },
   },
   "& .circleimg": {
     width: "100%",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     height: "265px",
-    "& h6": {
-      color: "#A7D325",
-      fontSize: "14px",
-    },
+    // "& h6": {
+    //   color: "#A7D325",
+    //   fontSize: "14px",
+    // },
     "& svg": {
       color: "#A7D325",
+      display: "none",
     },
   },
   "& .large": {
@@ -65,30 +88,31 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .cards": {
     cursor: "pointer",
     width: "100%",
-    borderRadius: "15px",
+    // borderRadius: "15px",
     position: "relative",
-    transition: "0.8s",
-    transform: "scale(0.9)",
+    // transition: "0.8s",
+    // transform: "scale(0.9)",
+    // display: "flex",
 
     "&:hover": {
-      transform: "scale(1)",
+      // transform: "scale(1)",
       transition: "0.8s",
     },
     "& .contentBox": {
       boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-      padding: "10px",
-      marginTop: "-60px",
+      padding: "0px",
+      marginTop: "0px",
       background: "#fff",
-      borderRadius: "10px",
+      // borderRadius: "10px",
       position: "relative",
-      minHeight: "220px",
+      // minHeight: "220px",
       height: "100%",
       "& svg": {
         color: "#000",
-        fontSize: "16px",
+        fontSize: "6px",
       },
       "& .circleBox": {
-        borderRadius: "50px",
+        // borderRadius: "50px",
         height: "50px",
         width: "50px",
         marginTop: "-35px",
@@ -97,36 +121,73 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
         alignItems: "center",
       },
 
-      "& h5": {
-        fontSize: "12px",
-        textAlign: "start",
-        fontWeight: "bold",
-        padding: "5px",
-        marginTop: "-10px",
-      },
-      "& h4": {
-        fontSize: "12px",
-        color: "#000",
-        fontWeight: "500",
-      },
-      "& h6": {
-        fontSize: "10px",
-        color: "#818181",
-        fontWeight: "500",
-        margin: "5px 5px",
-      },
+      // "& h5": {
+      //   fontSize: "12px",
+      //   textAlign: "start",
+      //   fontWeight: "bold",
+      //   padding: "5px",
+      //   marginTop: "-10px",
+      // },
+      // "& h4": {
+      //   fontSize: "12px",
+      //   color: "#000",
+      //   fontWeight: "500",
+      // },
+      // "& h6": {
+      //   fontSize: "10px",
+      //   color: "#818181",
+      //   fontWeight: "500",
+      //   margin: "5px 5px",
+      // },
     },
 
-    "& h5": {
-      textAlign: "end",
-      fontSize: "18px",
-    },
+    // "& h5": {
+    //   textAlign: "end",
+    //   fontSize: "18px",
+    // },
   },
   "& .GridClassCard": {
     height: "100%",
     display: "flex",
     "@media(max-width:615px)": {
       marginTop: "10px !important",
+    },
+  },
+  "& .viewBtn": {
+    backgroundColor: "#A7D325",
+    color: "white",
+    float: "right",
+  },
+  "& .forwardIcon": {
+    fontSize: "18px",
+    marginLeft: "10px",
+  },
+  // "& .cards":{
+  //   display:"flex",
+  //   // width:"100%",
+
+  //   "& .contentBox":{
+
+  //     marginTop:"0px",
+
+  //   },
+  // },
+  "& .viewmoreButtonShow": {
+    padding: "10px",
+    display: "flex",
+    justifyContent: "end",
+    marginTop: "-10px",
+
+    "& button": {
+      border: "2px solid #a7d325",
+      background: "none",
+      borderRadius: "20px",
+      color: "#000",
+      border: "none",
+
+      "& span": {
+        color: "#a7d325 ",
+      },
     },
   },
 }));
@@ -145,16 +206,26 @@ const ResidentialProjects = ({ showViewMore }) => {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: false,
+    arrows: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
 
     responsive: [
       {
+        breakpoint: 1440,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: true,
+          dots: false,
+        },
+      },
+      {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -164,7 +235,7 @@ const ResidentialProjects = ({ showViewMore }) => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -174,7 +245,7 @@ const ResidentialProjects = ({ showViewMore }) => {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -184,7 +255,7 @@ const ResidentialProjects = ({ showViewMore }) => {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -194,7 +265,7 @@ const ResidentialProjects = ({ showViewMore }) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -224,10 +295,7 @@ const ResidentialProjects = ({ showViewMore }) => {
       // query: { _id: "FEATURED" },
     });
   };
-  console.log(
-    "4444444444444444444---->",
-    auth?._getlist[0]?.projectTypeId?._id
-  );
+
   return (
     <ResidentStyle>
       <div className="mainSliderDiv">
@@ -239,13 +307,13 @@ const ResidentialProjects = ({ showViewMore }) => {
           >
             <Box display={"inline-flex"}>
               <Box>
-                <Typography variant="h2">Residential Projects</Typography>
-                <Typography variant="h6">
-                  Featured Residential Projects Across India
+                <Typography variant="h1">Residential Projects</Typography>
+                <Typography variant="body1">
+                  Residential Projects Across India
                 </Typography>
               </Box>
             </Box>
-            {auth?._getlist?.length > 4 && (
+            {/* {auth?._getlist?.length > 4 && (
               <Box
                 style={{
                   display: "flex",
@@ -264,15 +332,18 @@ const ResidentialProjects = ({ showViewMore }) => {
                   <ArrowForwardIosIcon style={{ color: "#000" }} />
                 </Box>
               </Box>
-            )}
+            )} */}
           </Box>
-          <Box>
+          <Box className="cards" mt={4}>
             {auth?._getlist?.length > 4 ? (
               <Slider {...settings} ref={sliderRef}>
                 {auth?._getlist &&
                   auth?._getlist?.map((data, index) => {
-                    console.log("indexsdssd--->", index);
-                    return <ResidentialPostCard data={data} key={index} />;
+                    return (
+                      <Box key={index}>
+                        <ResidentialPostCard data={data} />
+                      </Box>
+                    );
                   })}
               </Slider>
             ) : (
@@ -281,13 +352,20 @@ const ResidentialProjects = ({ showViewMore }) => {
                   {auth?._getlist &&
                     auth?._getlist?.map((data, index) => {
                       return (
-                        <Grid item lg={3} md={4} sm={6} xs={12} key={index}>
+                        <Grid item lg={6} md={6} sm={6} xs={12} key={index}>
                           <ResidentialPostCard data={data} />
                         </Grid>
                       );
                     })}
                 </Grid>
               </>
+            )}
+            {auth?._getlist_commercial.length > 0 && (
+              <Box className="viewmoreButtonShow">
+                <Button onClick={handleClick}>
+                  View All <ArrowForwardIcon className="forwardIcon" />
+                </Button>
+              </Box>
             )}
 
             {/* {auth?._getlist?.length > 7 && (
@@ -300,24 +378,17 @@ const ResidentialProjects = ({ showViewMore }) => {
                 <a href="#">view more</a>
               </Box>
             )} */}
-            {auth?._getlist && auth._getlist.length > 1 && (
+            {/* {auth?._getlist && auth._getlist.length > 1 && (
               <Button
                 onClick={handleClick}
                 // href="/all-property"
                 variant="contained"
                 color="success"
-                sx={{
-                  backgroundColor: "#A7D325",
-                  color: "white",
-                  float: "right",
-                }}
+                className="viewBtn"
               >
-                View All{" "}
-                <ArrowForwardIcon
-                  sx={{ fontSize: "18px", marginLeft: "10px" }}
-                />
+                View All <ArrowForwardIcon className="forwardIcon" />
               </Button>
-            )}
+            )} */}
           </Box>
         </Container>
       </div>

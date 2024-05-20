@@ -12,7 +12,7 @@
 //     "@media(max-width:615px)": {
 //       padding: "34px 0 100px 0",
 //     },
-   
+
 //     // padding: "50px",
 //     "& h2": {
 //       fontWeight: "500",
@@ -253,7 +253,7 @@
 //                       <Box className="rainbow" maxWidth={180}>
 //                         <Box className="contentBox" textAlign={"center"}>
 //                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
+//                           <Box mt={2} mb={2}>
 //                             <Typography variant="h3">Total Projects</Typography>
 //                           </Box>
 //                         </Box>
@@ -263,7 +263,7 @@
 //                       <Box className="rainbowSecond" maxWidth={180}>
 //                         <Box className="contentBox" textAlign={"center"}>
 //                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
+//                           <Box mt={2} mb={2}>
 //                             <Typography variant="h3">Total Projects</Typography>
 //                           </Box>
 //                         </Box>
@@ -273,7 +273,7 @@
 //                       <Box className="rainbow" maxWidth={180}>
 //                         <Box className="contentBox" textAlign={"center"}>
 //                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
+//                           <Box mt={2} mb={2}>
 //                             <Typography variant="h3">Total Projects</Typography>
 //                           </Box>
 //                         </Box>
@@ -283,7 +283,7 @@
 //                       <Box className="rainbowSecond" maxWidth={180}>
 //                         <Box className="contentBox" textAlign={"center"}>
 //                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
+//                           <Box mt={2} mb={2}>
 //                             <Typography variant="h3">Total Projects</Typography>
 //                           </Box>
 //                         </Box>
@@ -293,7 +293,7 @@
 //                       <Box className="rainbow" maxWidth={180}>
 //                         <Box className="contentBox" textAlign={"center"}>
 //                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
+//                           <Box mt={2} mb={2}>
 //                             <Typography variant="h3">Total Projects</Typography>
 //                           </Box>
 //                         </Box>
@@ -303,7 +303,7 @@
 //                       <Box className="rainbowSecond" maxWidth={180}>
 //                         <Box className="contentBox" textAlign={"center"}>
 //                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
+//                           <Box mt={2} mb={2}>
 //                             <Typography variant="h3">Total Projects</Typography>
 //                           </Box>
 //                         </Box>
@@ -313,17 +313,17 @@
 //                       <Box className="rainbow" maxWidth={180}>
 //                         <Box className="contentBox" textAlign={"center"}>
 //                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
+//                           <Box mt={2} mb={2}>
 //                             <Typography variant="h3">Total Projects</Typography>
 //                           </Box>
 //                         </Box>
 //                       </Box>
 //                     </Grid>
-//                  </Slider> 
+//                  </Slider>
 
 //                   {/* </Grid> */}
 //                 </Box>
-               
+
 //               </Box>
 //             </Box>
 //           </Box>
@@ -335,9 +335,6 @@
 
 // export default ProjectComponent;
 
-
-
-
 import React, { useRef, useContext } from "react";
 import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import styled from "@emotion/styled";
@@ -346,24 +343,34 @@ import { AuthContext } from "../context/Auth";
 import "../Scss/border.css";
 const ProjectStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
-    padding: "80px 0 100px 0",
-    background: "#F7F7F7",
+    padding: "40px 0 40px 0",
     "@media(max-width:615px)": {
       padding: "34px 0 100px 0",
     },
-   
+
     // padding: "50px",
     "& h2": {
       fontWeight: "500",
     },
+    "& .heading": {
+      padding: "10px 45px",
+      "& p": {
+        fontFamily: "Inter",
+        fontSize: "24px",
+        fontWeight: "400",
+        lineHeight: "29.05px",
+      },
+      "@media(max-width:615px)": {
+        padding: "20px 0px",
+      },
+    },
     "& .shodowBox": {
-      background: "#fff",
-      margin: "120px 0 0 0",
+      margin: "40px 0 0 0",
       display: "flex",
       justifyContent: "space-between",
       // padding: "0 80px",
       paddingRight: "75px",
-      boxShadow: "0px 3px 39px #0000000A",
+      // boxSha dow: "0px 3px 39px #0000000A",
       "@media(max-width:1280px)": {
         paddingRight: "75px",
       },
@@ -493,6 +500,7 @@ const ProjectStyle = styled("Box")(({ theme }) => ({
       padding: "10px",
       boxShadow: "0px 3px 39px #0000001C",
       borderRadius: "20px",
+      width: "100%",
     },
   },
 }));
@@ -503,8 +511,8 @@ const ProjectComponent = () => {
   const settings = {
     dots: false,
     infinite: true,
-    autoplay: true,
-    arrows: true,
+    autoplay: false,
+    arrows: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -518,6 +526,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           dots: false,
+          arrows: true,
         },
       },
       {
@@ -528,6 +537,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           dots: false,
+          arrows: true,
         },
       },
       {
@@ -538,6 +548,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           dots: false,
+          arrows: true,
         },
       },
       {
@@ -548,6 +559,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           dots: false,
+          arrows: true,
         },
       },
       {
@@ -558,6 +570,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           initialSlide: 1,
+          arrows: true,
         },
       },
       {
@@ -569,6 +582,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           initialSlide: 1,
+          arrows: true,
         },
       },
     ],
@@ -578,9 +592,9 @@ const ProjectComponent = () => {
     <ProjectStyle>
       <Box className="mainBox">
         <Container maxWidth>
-          <Box>
-            <Typography variant="h2">Projects</Typography>
-            <Typography variant="h6">
+          <Box className="heading">
+            <Typography variant="h1">Projects</Typography>
+            <Typography variant="body1">
               Featured Residential Projects Across India
             </Typography>
           </Box>
@@ -604,7 +618,7 @@ const ProjectComponent = () => {
                         <Box className="rainbow" maxWidth={180}>
                           <Box className="contentBox" textAlign={"center"}>
                             <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
+                            <Box mt={2} mb={2}>
                               <Typography variant="h3">
                                 Total Projects
                               </Typography>
@@ -618,7 +632,7 @@ const ProjectComponent = () => {
                         <Box className="rainbowSecond" maxWidth={180}>
                           <Box className="contentBox" textAlign={"center"}>
                             <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
+                            <Box mt={2} mb={2}>
                               <Typography variant="h3">
                                 Total Projects
                               </Typography>
@@ -632,7 +646,7 @@ const ProjectComponent = () => {
                         <Box className="rainbow" maxWidth={180}>
                           <Box className="contentBox" textAlign={"center"}>
                             <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
+                            <Box mt={2} mb={2}>
                               <Typography variant="h3">
                                 Total Projects
                               </Typography>
@@ -646,7 +660,7 @@ const ProjectComponent = () => {
                         <Box className="rainbowSecond" maxWidth={180}>
                           <Box className="contentBox" textAlign={"center"}>
                             <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
+                            <Box mt={2} mb={2}>
                               <Typography variant="h3">
                                 Total Projects
                               </Typography>
@@ -660,7 +674,7 @@ const ProjectComponent = () => {
                         <Box className="rainbow" maxWidth={180}>
                           <Box className="contentBox" textAlign={"center"}>
                             <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
+                            <Box mt={2} mb={2}>
                               <Typography variant="h3">
                                 Total Projects
                               </Typography>
@@ -674,7 +688,7 @@ const ProjectComponent = () => {
                         <Box className="rainbowSecond" maxWidth={180}>
                           <Box className="contentBox" textAlign={"center"}>
                             <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
+                            <Box mt={2} mb={2}>
                               <Typography variant="h3">
                                 Total Projects
                               </Typography>

@@ -1,21 +1,20 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Container, Typography, Box, Button, TextField } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import { Typography, Box, Button, TextField } from "@mui/material";
 import styled from "@emotion/styled";
 import ButtonSwitchComponent from "../../component/ButtonSwitchComponent";
 import RegisterModal from "../../component/registerSellerModal/RegisterModal";
-import MicIcon from "@mui/icons-material/Mic";
 import PropertyForm from "./PropertyForm";
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
+import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SearchIcon from "@mui/icons-material/Search";
-import LoginDialog from "../../component/LoginDialog";
-
+import { AuthContext } from "../../context/Auth";
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainBox": {
-    height: "100vh",
+    // height: "100vh",
     overflow: "hidden",
     "@media(max-width:615px)": {
       marginBottom: "-140px",
@@ -25,16 +24,13 @@ const MainComponent = styled("Box")(({ theme }) => ({
       maxWidth: "892px",
       overflow: "hidden",
       position: "relative",
-      marginTop: "18px",
+      marginTop: "-10px",
       left: "0",
     },
   },
   "& .bacBox": {
     position: "relative",
-    left: "100px",
-    "@media(max-width:900px)": {
-      left: "0",
-    },
+    left: "0px",
   },
   "& .handImage": {
     left: "50px",
@@ -50,24 +46,36 @@ const MainComponent = styled("Box")(({ theme }) => ({
   "& .contentBox": {
     top: "35%",
     zIndex: "1",
+    left: "80px",
+    width: "100%",
+
     "@media(max-width:615px)": {
       top: "12%",
     },
     "& .Banner_inputField": {
-      background: "#FFFFFF 0% 0% no-repeat padding-box",
-      borderRadius: "11px",
-      "@media(max-width:615px)": {
-        padding: "0px",
-        fontSize: "15px",
+      width: "Fixed (987px)px",
+      height: "Hug (69.4px)px",
+      top: "0",
+      left: "0px",
+      padding: "0px",
+      gap: "10px",
+      borderRadius: "14px 23px 23px 14px",
+      opacity: "0px",
+      borderRadius: "15px",
+      "&:hover": {
+        borderColor: "red",
+        // border:"2px solid red",
       },
       "& ::placeholder": {
+        fontFamily: "Inter",
+        fontSize: "20px",
+        fontWeight: "400",
+        lineHeight: "29.05px",
         textAlign: "left",
-        font: "normal normal medium 23px/30px Samsung Sharp Sans",
-        letterSpacing: "0.23px",
-        fontSize: "18px",
-        fontWeight: 400,
-        color: "#949494",
-        opacity: 1,
+      },
+      "@media(max-width:615px)": {
+        padding: "0px",
+        fontSize: "12px",
       },
     },
 
@@ -95,6 +103,18 @@ const MainComponent = styled("Box")(({ theme }) => ({
       opacity: "1",
       width: "100%",
       transition: "0.8s",
+      // marginLeft: "75%",
+      "& input": {
+        borderRadius: "50px",
+        padding: "16.5px 14px",
+        "&::placeholder": {
+          fontFamily: "Inter",
+          fontSize: "22px",
+          fontWeight: "400",
+          lineHeight: "29.05px",
+          textAlign: "left",
+        },
+      },
       "@media(max-width:615px)": {
         margin: "0px",
         marginLeft: "0px",
@@ -113,42 +133,75 @@ const MainComponent = styled("Box")(({ theme }) => ({
       },
     },
     "& .find": {
-      color: "#444444",
+      color: "black",
+      fontFamily: "Inter",
+      fontSize: "62px",
+      fontWeight: "600",
+      lineHeight: "87.14px",
+      textAlign: "left",
     },
     "& .Make": {
       color: "#A7D325",
+      fontFamily: "Inter",
+      fontSize: "62px",
+      fontWeight: "600",
+      lineHeight: "87.14px",
+      textAlign: "left",
     },
   },
   "& .buttonBox": {
+    width: "191px",
     "& .ButtonClass": {
       borderBottomLeftRadius: "20px",
       padding: 0,
-      clipPath: "polygon(0% 4%, 100% 0%, 70% 123%, 0% 100%, 0 0%)",
-      color: "#fff",
-      background: "rgb(172 172 172)",
+      clipPath: "polygon(0% 0%, 100% 0%, 70% 123%, 0% 100%, 0 0%)",
+      width: "100%",
+      justifyContent: " space-between",
+      background: "#fff",
+      boxShadow: " 0px 4px 4px 0px #0000001A",
+
       "@media(max-width:615px)": {
         height: "40px",
       },
       "& .buyerBoxSpan": {
-        padding: "0 90px 0 50px",
+        // padding: "0 90px 0 50px",
+        // width: "160.67px",
+        left: "208px",
+        gap: "0px",
+        borderRadius: "0px 21.43px 0px 21.43px",
+        border: "2.38px 0px 0px 0px",
+        opacity: "0px",
+        angle: "-180 deg",
+        "& span": {
+          padding: "0 0 0 65px",
+        },
+
         "@media(max-width:615px)": {
           padding: "0 50px 0 20px",
         },
 
         "& span": {
-          color: "#eeeeee",
+          color: "black",
+          fontSize: "12px",
+          fontWeight: "700",
         },
       },
       "& .buttonText": {
         color: "#0000",
+        padding: "0px 66px 0 0px",
       },
       "& .buttonIconBox": {
         background: "#fff",
         borderTopRightRadius: "20px",
         borderBottomLeftRadius: "20px",
+        // border: "2px solid #A7D325",
+        border: "2.38px solid #A9D910",
+        // boxShadow: "0px 3px 27px #68686829",
+
         "& .imageBox": {
           padding: "10px",
           maxWidth: "40px !Important",
+
           "@media(max-width:615px)": {
             padding: "9px",
             maxWidth: "39px !important",
@@ -181,35 +234,49 @@ const MainComponent = styled("Box")(({ theme }) => ({
     },
   },
   "& .buttonBoxSecond": {
+    // boxShadow: "0px 3px 27px #68686829",
+    width: "191px",
     "& .ButtonClass1": {
+      justifyContent: "space-between",
       borderBottomLeftRadius: "20px",
       padding: 0,
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 24% 0%)",
+      clipPath: "polygon(0% 0%, 100% -0%, 100% 548%, 0% 100%, 24% 0%)",
       borderTopRightRadius: "20px",
       borderBottomLeftRadius: "0px",
+      borderBottomRightRadius: "21px",
       marginLeft: "-40px",
-      background: "rgb(172 172 172)",
-      color: "#fff",
+      background: "#fff",
+      width: "100%",
+      boxShadow: " 0px 4px 4px 0px #0000001A",
+
+      "& span": {
+        padding: "0 0 0 65px",
+      },
       "&:hover": {
         background: "#A7D325",
       },
-      "& .buyerBoxSpan": {
-        padding: "0 53px 0 90px",
-        "@media(max-width:615px)": {
-          padding: "0 20px 1px 50px",
-        },
-        "& span": {
-          color: "#eeeeee",
-        },
-      },
+      // "& .buyerBoxSpan": {
+      //   padding: "0 53px 0 90px",
+      //   "@media(max-width:615px)": {
+      //     padding: "0 20px 1px 50px",
+      //   },
+      //   "& span": {
+      //     color: "black",
+      //     fontSize: "12px",
+      //     fontWeight: "700",
+      //   },
+      // },
       "@media(max-width:433px)": {
         marginLeft: "-25px",
         height: "40px",
       },
       "& .buttonIconBox": {
         background: "#fff",
-        borderTopRightRadius: "20px",
-        borderBottomLeftRadius: "20px",
+        borderTopLeftRadius: "20px",
+        borderBottomRightRadius: "20px",
+        // border: "2px solid #A7D325",
+        border: "2.38px solid #A9D910",
+        // boxShadow: "0px 3px 27px #68686829",
         "& .imageBox": {
           padding: "10px",
           maxWidth: "40px !important",
@@ -225,6 +292,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       // display: "block",
       position: "absolute",
       width: "420%",
+
       "@media(max-width:615px)": {
         width: "199%",
         right: "0",
@@ -243,6 +311,12 @@ const MainComponent = styled("Box")(({ theme }) => ({
     },
   },
   "& h4": {
+    color: "black",
+    fontFamily: "Inter",
+    fontSize: "36px",
+    fontWeight: "400",
+    lineHeight: "43.57px",
+    textAlign: "left",
     "@media(max-width:615px)": {
       marginTop: "0px",
       fontSize: "14px",
@@ -252,6 +326,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
 
 export default function Home() {
   const isMobile = useMediaQuery("(max-width:600px)");
+  const Auth = useContext(AuthContext);
   const [selectedImages, setSelectedImages] = useState([]);
   const [imageUploadResponses, setImageUploadResponses] = useState([]);
   const [_video_url, setVideoURL] = useState("");
@@ -266,6 +341,8 @@ export default function Home() {
   const [_consition, setConsition] = React.useState(false);
   const [_getproprty_type, setGetPropetyType] = useState("");
   const [_get_type_name, setGet_Type_Name] = useState("");
+  const router = useRouter();
+
   const [_getproject_sub_type, setGetProject_sub_Type] = React.useState("");
   const [coordinates, setCoordinates] = useState({
     lat: 27.1881,
@@ -430,119 +507,148 @@ export default function Home() {
   }, [selectedImages]);
   return (
     <MainComponent>
-      <Container maxWidth>
-        <Box>
-          <Box position={"absolute"} className="contentBox">
-            <Box>
-              <Typography variant="h1" className="banner-heading">
-                <span className="find">Find Your Place</span>
-                <span className="Make">, Make It Home</span>
-              </Typography>
-              <Box mt={isMobile ? 2 : 3.5}>
-                <Typography variant="h4">
-                  Please Select Your Category
-                </Typography>
-              </Box>
-              <Box display={"flex"} className="buyer-seller-btn">
-                <Box
-                  mt={5}
-                  position={"relative"}
-                  zIndex={1}
-                  className={"buttonBox"}
+      {/* <Container maxWidth style={{ paddingRight: "0px !important;" }}> */}
+      <Box>
+        <Box position={"absolute"} className="contentBox">
+          <Box>
+            <Typography variant="h1" className="banner-heading">
+              <span className="find">Find Your Place,</span>
+              <span className="Make">
+                {" "}
+                Make <br />
+                It Home
+              </span>
+            </Typography>
+            <Box mt={isMobile ? 2 : 1.5}>
+              <Typography variant="h4">Please Select Your Category</Typography>
+            </Box>
+            <Box display={"flex"} className="buyer-seller-btn">
+              <Box
+                mt={5}
+                position={"relative"}
+                zIndex={1}
+                className={"buttonBox"}
+              >
+                <Button
+                  variant="button"
+                  className="ButtonClass"
+                  onMouseEnter={() => handleMouseEnter("Buyer")}
                 >
-                  <Button
-                    variant="button"
-                    className="ButtonClass"
-                    onMouseEnter={() => handleMouseEnter("Buyer")}
-                  >
-                    <Box className={"buttonIconBox"}>
-                      <Box className="imageBox">
-                        <img
-                          src="/images/meteryard/icons/advisory.png"
-                          width={"100%"}
-                        />
-                      </Box>
+                  <Box className={"buttonIconBox"}>
+                    <Box className="imageBox">
+                      <img
+                        src="/images/Administrator Male.png"
+                        width={"100%"}
+                      />
                     </Box>
-                    <Box className="buyerBoxSpan">
-                      <span className="buttonText">Buyer</span>
-                    </Box>
-                  </Button>
-                  &nbsp;
-                  <Box className={"hoverBox"}>
-                    <ButtonSwitchComponent
-                      Type="Buyer"
-                      activeBtn={activeBtn}
-                      setOpen={setOpen}
-                      _propertyform={_propertyform}
-                      handleClickOpen={handleClickOpen}
-                      handleClose={handleClose}
-                    />
                   </Box>
-                </Box>
-                <Box
-                  mt={5}
-                  position={"relative"}
-                  zIndex={1}
-                  className={"buttonBoxSecond"}
-                >
-                  <Button
-                    variant="button"
-                    className="ButtonClass1"
-                    onMouseEnter={() => handleMouseEnter("Seller")}
-                  >
-                    <Box className="buyerBoxSpan">
-                      <span>Seller</span>
-                    </Box>
-                    <Box className={"buttonIconBox"}>
-                      <Box className="imageBox">
-                        <img
-                          src="/images/meteryard/icons/advisory.png"
-                          width={"100%"}
-                        />
-                      </Box>
-                    </Box>
-                  </Button>
-                  <Box className={"hoverBox1"}>
-                    <ButtonSwitchComponent
-                      Type="Seller"
-                      activeBtn={activeBtn}
-                      setOpen={setOpen}
-                      _propertyform={_propertyform}
-                      handleClickOpen={handleClickOpen}
-                      handleClose={handleClose}
-                      AdPropertyFunction={AdPropertyFunction}
-                    />
+                  <Box className="buyerBoxSpan">
+                    <span className="buttonText">Buyer</span>
                   </Box>
+                </Button>
+                &nbsp;
+                <Box className={"hoverBox"}>
+                  <ButtonSwitchComponent
+                    Type="Buyer"
+                    activeBtn={activeBtn}
+                    setOpen={setOpen}
+                    _propertyform={_propertyform}
+                    handleClickOpen={handleClickOpen}
+                    handleClose={handleClose}
+                  />
                 </Box>
               </Box>
-              <Box mt={3} className={"Banner_textFild"}>
+              <Box
+                mt={5}
+                position={"relative"}
+                zIndex={1}
+                className={"buttonBoxSecond"}
+              >
+                <Button
+                  variant="button"
+                  className="ButtonClass1"
+                  onMouseEnter={() => handleMouseEnter("Seller")}
+                >
+                  <Box className="buyerBoxSpan">
+                    <span>Seller</span>
+                  </Box>
+                  <Box className={"buttonIconBox"}>
+                    <Box className="imageBox">
+                      <img
+                        src="/images/Administrator Male.png"
+                        width={"100%"}
+                      />
+                    </Box>
+                  </Box>
+                </Button>
+                <Box className={"hoverBox1"}>
+                  <ButtonSwitchComponent
+                    Type="Seller"
+                    activeBtn={activeBtn}
+                    setOpen={setOpen}
+                    _propertyform={_propertyform}
+                    handleClickOpen={handleClickOpen}
+                    handleClose={handleClose}
+                    AdPropertyFunction={AdPropertyFunction}
+                  />
+                </Box>
+              </Box>
+            </Box>
+            <Box
+              display={"flex"}
+              justifyContent={"center"}
+              padding={"0 150px 0 0"}
+            >
+              <Box mt={10} className={"Banner_textFild"} maxWidth={"60%"}>
                 <TextField
-                  id="outlined-basic"
+                  // id="outlined-basic"
+                  // Auth?.
                   fullWidth
+                  onChange={(e) => Auth?.setSearchProperty(e.target.value)}
                   sx={{
-                    "& fieldset": { border: "none", height: "10px" },
+                    // padding:"0px !impor",
+                    "& .MuiOutlinedInput-root": {
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        border: "none !important",
+                        width: "Fixed (987px)px",
+                        height: "Hug (69.4px)px",
+                        top: "0",
+                        left: "0px",
+                        padding: "0px",
+                        gap: "10px",
+                        borderRadius: "14px 23px 23px 14px",
+                        opacity: "0px",
+                      },
+                    },
                   }}
-                  variant="outlined"
-                  placeholder="Search your property..."
-                  className={"Banner_inputField"}
+                  // variant="outlined"
+                  placeholder="Search, City, Locality, Projects, Landmark"
+                  // className={"Banner_inputField"}
                 />
-                <Button className="searchbox">
+                <Button
+                  className="searchbox"
+                  onClick={() => {
+                    Auth?.PropertySearchPostAPI();
+                    router.push("/search-property");
+                  }}
+                >
                   <SearchIcon style={{ fontSize: "25px", color: "#FFFF" }} />
                 </Button>
               </Box>
             </Box>
           </Box>
-          <Box className="mainBox">
-            <Box display={"flex"} justifyContent={"end"} className="bacBox">
-              <Box>
-                <Box className="backImage">
-                  <img
-                    src="/images/meteryard/Graphics/Path 7886.png"
-                    alt=""
-                    height={"100%"}
-                    width={"100%"}
-                  />
-                  <Box>
+        </Box>
+        <Box className="mainBox">
+          <Box display={"flex"} justifyContent={"end"} className="bacBox">
+            <Box>
+              <Box className="backImage">
+                <img
+                  src="/images/picture.png"
+                  alt=""
+                  height={"100%"}
+                  width={"100%"}
+                />
+                {/* <Box>
                     <Box className="handImage">
                       <img
                         src="/images/meteryard/Images/home-background-images.png"
@@ -550,45 +656,45 @@ export default function Home() {
                         width={"100%"}
                       />
                     </Box>
-                  </Box>
-                </Box>
+                  </Box> */}
               </Box>
             </Box>
           </Box>
         </Box>
-        <RegisterModal
-          open={open}
-          setOpen={setOpen}
-          handleClickOpenLogin={handleClickOpenLogin}
+      </Box>
+      <RegisterModal
+        open={open}
+        setOpen={setOpen}
+        handleClickOpenLogin={handleClickOpenLogin}
+      />
+      {_propertyform && (
+        <PropertyForm
+          open={_propertyform}
+          handleClose={handleClose}
+          handleClickOpen={handleClickOpen}
+          AdPropertyFunction={AdPropertyFunction}
+          _isloading={_isloading}
+          selectedImages={selectedImages}
+          setSelectedImages={setSelectedImages}
+          setCoverImage={setCoverImage}
+          imageUploadFunction={imageUploadFunction}
+          _coverImage={_coverImage}
+          address={address}
+          setAddress={setAddress}
+          coordinates={coordinates}
+          setCoordinates={setCoordinates}
+          _checked={_checked}
+          setChecked={setChecked}
+          _consition={_consition}
+          setConsition={setConsition}
+          setGetPropetyType={setGetPropetyType}
+          setGet_Type_Name={setGet_Type_Name}
+          setGetProject_sub_Type={setGetProject_sub_Type}
+          _getproprty_type={_getproprty_type}
+          CoverImageFunction={CoverImageFunction}
         />
-        {_propertyform && (
-          <PropertyForm
-            open={_propertyform}
-            handleClose={handleClose}
-            handleClickOpen={handleClickOpen}
-            AdPropertyFunction={AdPropertyFunction}
-            _isloading={_isloading}
-            selectedImages={selectedImages}
-            setSelectedImages={setSelectedImages}
-            setCoverImage={setCoverImage}
-            imageUploadFunction={imageUploadFunction}
-            _coverImage={_coverImage}
-            address={address}
-            setAddress={setAddress}
-            coordinates={coordinates}
-            setCoordinates={setCoordinates}
-            _checked={_checked}
-            setChecked={setChecked}
-            _consition={_consition}
-            setConsition={setConsition}
-            setGetPropetyType={setGetPropetyType}
-            setGet_Type_Name={setGet_Type_Name}
-            setGetProject_sub_Type={setGetProject_sub_Type}
-            _getproprty_type={_getproprty_type}
-            CoverImageFunction={CoverImageFunction}
-          />
-        )}
-        {/* <LoginDialog
+      )}
+      {/* <LoginDialog
           open={_openDialogLogin}
           setOpen={setOpenDialogLogin}
           handleClickOpen={handleClickOpenLogin}
@@ -598,7 +704,7 @@ export default function Home() {
           // setSignUpComplete={setSignUpComplete}
           // _signcomplete={_signcomplete}
         /> */}
-      </Container>
+      {/* </Container> */}
     </MainComponent>
   );
 }

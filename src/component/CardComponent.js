@@ -14,7 +14,12 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     // padding: "0px 0 0px 0",
     background: "#fff",
     // padding: "50px",
-
+    "& p": {
+      fontFamily: "Inter",
+      fontSize: "24px",
+      fontWeight: "400",
+      lineHeight: "29.05px",
+    },
     "& h2": {
       fontWeight: "500",
     },
@@ -36,47 +41,66 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     background: "#FFF",
   },
   "& .cards": {
-    cursor: "pointer",
+    // cursor: "pointer",
     width: "100%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     borderRadius: "20px",
     transform: "0",
-    transition: "0.8s",
-    transform: "scale(0.9)",
+    // transition: "0.8s",
+    // transform: "scale(0.8)",
 
     "&:hover": {
-      transform: "scale(1)",
-      transition: "0.8s",
+      // transform: "scale(0.9)",
+      // transition: "0.8s",
     },
     "& .contentBox": {
       padding: "10px 10px 10px",
-      "& h5": {
-        fontSize: "14px",
-        textAlign: "start",
-        fontWeight: "500",
-        padding: "5px",
-      },
-      "& h4": {
-        fontSize: "12px",
-        color: "#000",
-        fontWeight: "500",
-        margin: "5px 5px",
-      },
-      "& h6": {
-        fontSize: "10px",
-        color: "#818181",
-        fontWeight: "500",
-        margin: "5px 5px",
-      },
+      // "& h5": {
+      //   fontSize: "14px",
+      //   textAlign: "start",
+      //   fontWeight: "500",
+      //   padding: "5px",
+      // },
+      // "& h4": {
+      //   fontSize: "12px",
+      //   color: "#000",
+      //   fontWeight: "500",
+      //   margin: "5px 5px",
+      // },
+      // "& h6": {
+      //   fontSize: "10px",
+      //   color: "#818181",
+      //   fontWeight: "500",
+      //   margin: "5px 5px",
+      // },
     },
 
-    "& h5": {
-      textAlign: "end",
-      fontSize: "18px",
+    // "& h5": {
+    //   textAlign: "end",
+    //   fontSize: "18px",
+    //   color: "#fbb415 ",
+    // },
+  },
+  "& .viewmoreButtonShow": {
+    padding: "10px",
+    display: "flex",
+    justifyContent: "end",
+    marginTop: "-40px",
+
+    "& button": {
+      border: "2px solid #a7d325",
+      background: "none",
+      borderRadius: "20px",
+      color: "#000",
+      border: "none",
+
+      "& span": {
+        color: "#a7d325 ",
+      },
     },
   },
 }));
-const CardComponent = ({ showViewMore }) => {
+const CardComponent = () => {
   const sliderRef = useRef(null);
   const auth = useContext(AuthContext);
   const router = useRouter();
@@ -85,7 +109,7 @@ const CardComponent = ({ showViewMore }) => {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: false,
+    arrows: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -165,37 +189,54 @@ const CardComponent = ({ showViewMore }) => {
       <div className="mainSliderDiv">
         <Container maxWidth>
           <Box className="projects-card">
-            <Typography variant="h2">Featured Projects</Typography>
-            <Typography variant="h6">
+            <Typography variant="h1">Featured Projects</Typography>
+            <Typography variant="body1">
               Featured Residential Projects Across India
             </Typography>
           </Box>
 
-          <Box>
-            <Slider {...settings} ref={sliderRef}>
+          <Box mt={4}>
+            {auth?._getlist?.length > 4 ? (
+              <Slider {...settings} ref={sliderRef}>
+                {auth?._isFeaturedPost &&
+                  auth?._isFeaturedPost?.map((data, index) => {
+                    return (
+                      <Box key={index}>
+                        <FeaturedPostCard data={data} index={index} />
+                      </Box>
+                    );
+                  })}
+              </Slider>
+            ) : (
+              <>
+                <Grid container>
+                  {auth?._isFeaturedPost &&
+                    auth?._isFeaturedPost?.map((data, index) => {
+                      return (
+                        <Grid item lg={4} md={4} sm={6} xs={12} key={index}>
+                          <FeaturedPostCard data={data} />
+                        </Grid>
+                      );
+                    })}
+                </Grid>
+              </>
+            )}
+
+            {/* <Slider {...settings} ref={sliderRef}>
               {auth?._isFeaturedPost?.map((data, index) => (
                 <FeaturedPostCard data={data} key={index} />
               ))}
-            </Slider>
-            {
-              auth?._isFeaturedPost &&
-              auth._isFeaturedPost.length > 8 && (
-                <Button
-                  onClick={handleClick}
-                  variant="contained"
-                  color="success"
-                  sx={{
-                    backgroundColor: "#A7D325",
-                    color: "white",
-                    float: "right",
-                  }}
-                >
+            </Slider> */}
+            <Box className="viewmoreButtonShow">
+              {auth._isFeaturedPost.length > 4 && (
+                <Button onClick={handleClick}>
                   View All
                   <ArrowForwardIcon
                     sx={{ fontSize: "18px", marginLeft: "10px" }}
                   />
                 </Button>
               )}
+            </Box>
           </Box>
         </Container>
       </div>

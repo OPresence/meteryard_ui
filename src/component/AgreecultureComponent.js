@@ -14,9 +14,14 @@ import { useRouter } from "next/router";
 
 const AgreecultureStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
-    padding: "40px 0px",
+    // padding: "40px 0px",
     background: "#fff",
-
+    "& p": {
+      fontFamily: "Inter",
+      fontSize: "24px",
+      fontWeight: "400",
+      lineHeight: "29.05px",
+    },
     // padding: "50px",
     "@media(max-width:615px)": {
       padding: "20px 0px",
@@ -25,80 +30,80 @@ const AgreecultureStyle = styled("Box")(({ theme }) => ({
       fontWeight: "500",
     },
   },
-  "& .circleimg": {
-    width: "100%",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: "265px",
-    "& h6": {
-      color: "#A7D325",
-      fontSize: "14px",
-    },
-    "& svg": {
-      color: "#A7D325",
-    },
-  },
-  "& .large": {
-    background: "#FFF",
-  },
-  "& .cards": {
-    cursor: "pointer",
-    width: "100%",
-    borderRadius: "15px",
-    position: "relative",
-    transition: "0.8s",
-    transform: "scale(0.9)",
-    "&:hover": {
-      transform: "scale(1)",
-      transition: "0.8s",
-    },
-    "& .contentBox": {
-      boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-      padding: "10px",
-      marginTop: "-60px",
-      background: "#fff",
-      borderRadius: "10px",
-      position: "relative",
-      minHeight: "230px",
-      "& svg": {
-        color: "#000",
-        fontSize: "16px",
-      },
-      "& .circleBox": {
-        borderRadius: "50px",
-        height: "50px",
-        width: "50px",
-        marginTop: "-35px",
-        background: "darkslategray",
-        display: "flex",
-        alignItems: "center",
-      },
+  // "& .circleimg": {
+  //   width: "100%",
+  //   backgroundSize: "cover",
+  //   backgroundRepeat: "no-repeat",
+  //   height: "265px",
+  //   "& h6": {
+  //     color: "#A7D325",
+  //     fontSize: "14px",
+  //   },
+  //   "& svg": {
+  //     color: "#A7D325",
+  //   },
+  // },
+  // "& .large": {
+  //   background: "#FFF",
+  // },
+  // "& .cards": {
+  //   cursor: "pointer",
+  //   width: "100%",
+  //   borderRadius: "15px",
+  //   position: "relative",
+  //   transition: "0.8s",
+  //   transform: "scale(0.9)",
+  //   "&:hover": {
+  //     transform: "scale(1)",
+  //     transition: "0.8s",
+  //   },
+  //   // "& .contentBox": {
+  //   //   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+  //   //   padding: "10px",
+  //   //   marginTop: "-60px",
+  //   //   background: "#fff",
+  //   //   borderRadius: "10px",
+  //   //   position: "relative",
+  //   //   minHeight: "230px",
+  //   //   "& svg": {
+  //   //     color: "#000",
+  //   //     fontSize: "16px",
+  //   //   },
+  //     // "& .circleBox": {
+  //     //   borderRadius: "50px",
+  //     //   height: "50px",
+  //     //   width: "50px",
+  //     //   marginTop: "-35px",
+  //     //   background: "darkslategray",
+  //     //   display: "flex",
+  //     //   alignItems: "center",
+  //     // },
 
-      "& h5": {
-        fontSize: "12px",
-        textAlign: "start",
-        fontWeight: "bold",
-        padding: "5px",
-        marginTop: "-10px",
-      },
-      "& h4": {
-        fontSize: "12px",
-        color: "#000",
-        fontWeight: "500",
-      },
-      "& h6": {
-        fontSize: "10px",
-        color: "#818181",
-        fontWeight: "500",
-        margin: "5px 5px",
-      },
-    },
+  //     // "& h5": {
+  //     //   fontSize: "12px",
+  //     //   textAlign: "start",
+  //     //   fontWeight: "bold",
+  //     //   padding: "5px",
+  //     //   marginTop: "-10px",
+  //     // },
+  //     // "& h4": {
+  //     //   fontSize: "12px",
+  //     //   color: "#000",
+  //     //   fontWeight: "500",
+  //     // },
+  //     // "& h6": {
+  //     //   fontSize: "10px",
+  //     //   color: "#818181",
+  //     //   fontWeight: "500",
+  //     //   margin: "5px 5px",
+  //     // },
+  //   // },
 
-    "& h5": {
-      textAlign: "end",
-      fontSize: "18px",
-    },
-  },
+  //   // "& h5": {
+  //   //   textAlign: "end",
+  //   //   fontSize: "18px",
+  //   // },
+  // },
   "& .ArrowClass": {
     cursor: "pointer",
     width: "30px",
@@ -118,6 +123,25 @@ const AgreecultureStyle = styled("Box")(({ theme }) => ({
       transition: "0.6s",
       "& svg": {
         color: "#fff !important",
+      },
+    },
+  },
+
+  "& .viewmoreButtonShow": {
+    padding: "10px",
+    display: "flex",
+    justifyContent: "end",
+    marginTop: "-40px",
+
+    "& button": {
+      border: "2px solid #a7d325",
+      background: "none",
+      borderRadius: "20px",
+      color: "#000",
+      border: "none",
+
+      "& span": {
+        color: "#a7d325 ",
       },
     },
   },
@@ -228,8 +252,8 @@ const AgreecultureComponent = ({ showViewMore }) => {
           >
             <Box display={"inline-flex"}>
               <Box>
-                <Typography variant="h2">Agriculture Projects</Typography>
-                <Typography variant="h6">
+                <Typography variant="h1">Agriculture Projects</Typography>
+                <Typography variant="body1">
                   Agriculture Projects Across India.
                 </Typography>
               </Box>
@@ -255,7 +279,7 @@ const AgreecultureComponent = ({ showViewMore }) => {
               </Box>
             )}
           </Box>
-          <Box>
+          <Box mt={2}>
             {auth?._getlistAgreeculture?.length > 4 ? (
               <Slider {...settings} ref={sliderRef}>
                 {auth?._getlistAgreeculture &&
@@ -264,7 +288,7 @@ const AgreecultureComponent = ({ showViewMore }) => {
                   })}
               </Slider>
             ) : (
-              <Grid container>
+              <Grid container spacing={3}>
                 {auth?._getlistAgreeculture &&
                   auth?._getlistAgreeculture?.map((data, index) => {
                     return (
@@ -294,25 +318,13 @@ const AgreecultureComponent = ({ showViewMore }) => {
                 <a href="#">view more</a>
               </Box>
             )} */}
-            {auth?._getlistAgreeculture &&
-              auth._getlistAgreeculture.length > 1 && (
-                <Button
-                  onClick={handleClick}
-                  // href="/all-property?selectedSection=agreeculture"
-                  variant="contained"
-                  color="success"
-                  sx={{
-                    backgroundColor: "#A7D325",
-                    color: "white",
-                    float: "right",
-                  }}
-                >
-                  View All{" "}
-                  <ArrowForwardIcon
-                    sx={{ fontSize: "18px", marginLeft: "10px" }}
-                  />
+            {auth?._getlistAgreeculture.length > 0 && (
+              <Box className="viewmoreButtonShow">
+                <Button onClick={handleClick}>
+                  View All <ArrowForwardIcon className="forwardIcon" />
                 </Button>
-              )}
+              </Box>
+            )}
           </Box>
         </Container>
       </div>

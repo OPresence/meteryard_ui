@@ -1,7 +1,255 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import {
+  Box,
+  Typography,
+  Card,
+  CardMedia,
+  CardContent,
+  styled,
+  Container,
+  Button,
+} from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const videos = [
+  {
+    image: "/images/meteryard/Images/Image 23.png",
+    url: "https://www.youtube.com/watch?v=video1",
+    description:
+      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipisicing Elit. Sed Aliquam Convallis Mauris.",
+  },
+  {
+    image: "/images/meteryard/Images/Image 23.png",
+    url: "https://www.youtube.com/watch?v=video1",
+    description:
+      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipisicing Elit. Sed Aliquam Convallis Mauris.",
+  },
+  {
+    image: "/images/meteryard/Images/Image 23.png",
+    url: "https://www.youtube.com/watch?v=video1",
+    description:
+      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipisicing Elit. Sed Aliquam Convallis Mauris.",
+  },
+  {
+    image: "/images/meteryard/Images/Image 23.png",
+    url: "https://www.youtube.com/watch?v=video1",
+    description:
+      "Lorem Ipsum Dolor Sit Amet, Consectetur Adipisicing Elit. Sed Aliquam Convallis Mauris.",
+  },
+];
+
+const StyledSliderContainer = styled(Box)({
+  // padding: "80px 0px",
+  margin: "0 auto",
+  position: "relative",
+  "& h2": {
+    fontWeight: "500",
+  },
+  "& .heading": {
+    padding: "10px 45px",
+    "& p": {
+      fontFamily: "Inter",
+      fontSize: "24px",
+      fontWeight: "400",
+      lineHeight: "29.05px",
+    },
+    "@media(max-width:615px)": {
+      padding: "20px 0px",
+    },
+  },
+});
+
+const VideoCard = styled(Card)({
+  height: "280px",
+  display: "flex",
+  flexDirection: "column",
+  width: "85%",
+  margin: "10px auto",
+  boxShadow: "none",
+  "@media(max-width:615px)": {
+    width: "95%",
+  },
+});
+
+const DescriptionContent = styled(CardContent)({
+  width: "100%",
+  "& h4": {
+    color: "black",
+    fontSize: "14px",
+  },
+});
+
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
 
 const YoutubeComponent = () => {
-  return <div>YoutubeComponent</div>;
+  const sliderRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
+  const settings = {
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: false,
+        },
+      },
+    ],
+    beforeChange: (current, next) => setCurrentSlide(next),
+  };
+
+  return (
+    <StyledSliderContainer>
+      <Container maxWidth>
+        <Box
+          display={"flex"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Box display={"inline-flex"}>
+            <Box className="heading">
+              <Typography variant="h1">Youtube Videos</Typography>
+              <Typography variant="body1">
+                Featured Residential Projects Across India
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+        <IconButtonLeftContent onClick={handlePrevious}>
+          <ArrowBackIosIcon />
+        </IconButtonLeftContent>
+        <Box mt={4}>
+          <Box
+            sx={{
+              width: "90%",
+              margin: "0 auto",
+              position: "relative",
+            }}
+          >
+            <Slider ref={sliderRef} {...settings}>
+              {videos.map((video, index) => (
+                <div key={index}>
+                  <Box width="100%">
+                    <VideoCard>
+                      <CardMedia
+                        component="img"
+                        height="220"
+                        image={video.image}
+                        alt={video.title}
+                        onClick={() => window.open(video.url, "_blank")}
+                      />
+                      <DescriptionContent>
+                        <Typography variant="h4">
+                          {video.description}
+                        </Typography>
+                      </DescriptionContent>
+                    </VideoCard>
+                  </Box>
+                </div>
+              ))}
+            </Slider>
+          </Box>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+          <Box
+            onClick={() => {
+              setCurrentSlide(0);
+              sliderRef.current.slickGoTo(0);
+            }}
+            style={{
+              minWidth: "10px",
+              minHeight: "10px",
+
+              borderRadius: "50%",
+              border: "1px solid #A7D325",
+              backgroundColor: currentSlide === 0 ? "#A7D325" : "white",
+              marginRight: "4px",
+            }}
+          />
+          <Box
+            onClick={() => {
+              setCurrentSlide(1);
+              sliderRef.current.slickGoTo(1);
+            }}
+            style={{
+              minWidth: "10px",
+              minHeight: "10px",
+
+              borderRadius: "50%",
+              border: "1px solid #A7D325",
+              backgroundColor: currentSlide === 1 ? "#A7D325" : "white",
+              marginRight: "4px",
+            }}
+          />
+        </Box>
+        <IconButtonRightContent onClick={handleNext}>
+          <ArrowForwardIosIcon />
+        </IconButtonRightContent>
+      </Container>
+    </StyledSliderContainer>
+  );
 };
 
 export default YoutubeComponent;

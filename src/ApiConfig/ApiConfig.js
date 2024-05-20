@@ -23,6 +23,7 @@ const Apiconfigs = {
   forgotPassword: `${user}/forgotPassword`,
   resetPassword: `${user}/resetPassword`,
   logOut: `${user}/logOut`,
+  addSubscription: `${user}/addSubscription`,
 
   listAllDepartment: `${admin}/listAllDepartment`,
   createDepartment: `${admin}/createDepartment`,
@@ -54,6 +55,7 @@ const Apiconfigs = {
   viewCountry: `${masterLink}/viewCountry`,
   deleteCountry: `${masterLink}/deleteCountry`,
   activeDeactiveCountry: `${masterLink}/activeDeactiveCountry`,
+  subscribedUserList: `${masterLink}/subscribedUserList`,
 
   // MASTER STATE MANAGEMENT
   createState: `${masterLink}/createState`,
@@ -181,6 +183,7 @@ const Apiconfigs = {
   viewPropertyPost: `${propertyLink}/viewPropertyPost`,
   listAllPropertyPost: `${propertyLink}/listAllPropertyPost`,
   deletePropertyPost: `${propertyLink}/deletePropertyPost`,
+  globalSearch: `${propertyLink}/globalSearch`,
 
   // MASTER AREA_UNIT MANAGEMENT
   createAreaUnit: `${masterLink}/createAreaUnit`,
@@ -198,7 +201,6 @@ const Apiconfigs = {
   deleteLocalArea: `${masterLink}/deleteLocalArea`,
   activeDeactiveLocalArea: `${masterLink}/activeDeactiveLocalArea`,
   proSubTypeListWithProType: `${masterLink}/proSubTypeListWithProType`,
-
 
   // ENQUIRY MANAGEMENT
   generateEnquiry: `${user}/generateEnquiry`,

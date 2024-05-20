@@ -41,15 +41,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       setLoading(false);
     };
 
-    Router.events.on("routeChangeStart", startLoading);
-    Router.events.on("routeChangeComplete", stopLoading);
-    Router.events.on("routeChangeError", stopLoading);
+    // Router.events.on("routeChangeStart", startLoading);
+    // Router.events.on("routeChangeComplete", stopLoading);
+    // Router.events.on("routeChangeError", stopLoading);
 
-    return () => {
-      Router.events.off("routeChangeStart", startLoading);
-      Router.events.off("routeChangeComplete", stopLoading);
-      Router.events.off("routeChangeError", stopLoading);
-    };
+    // return () => {
+    //   Router.events.off("routeChangeStart", startLoading);
+    //   Router.events.off("routeChangeComplete", stopLoading);
+    //   Router.events.off("routeChangeError", stopLoading);
+    // };
   }, []);
   return (
     <div className="App" style={{ background: "#fff" }}>

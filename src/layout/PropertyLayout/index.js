@@ -83,9 +83,23 @@ const AdvertisementContainer = styled("Box")({
       padding: "0.50rem",
     },
   },
-
-  "& .h4": {
+  "& h4": {
+    color: "black",
+    marginLeft: "2rem",
+    "@media screen and (max-width: 600px)": {
+      marginLeft: "1rem",
+      padding: "5px",
+    },
+  },
+  "& h3": {
+    fontWeight: "600",
     color: "gray",
+    marginLeft: "2rem",
+    width: "75%",
+    "@media screen and (max-width: 600px)": {
+      marginLeft: "1rem",
+      padding: "5px",
+    },
   },
 
   "& .below-content": {
@@ -100,9 +114,17 @@ const AdvertisementContainer = styled("Box")({
     },
   },
 
-  "& .h3": {
+  "& .heading3": {
+    color: "#444444",
+    marginLeft: "2rem",
+    marginTop: "0.50rem",
+    width: "100%",
+
     "@media screen and (max-width: 600px)": {
-      fontSize: "12px",
+      fontSize: "15px",
+      marginTop: "0.25rem",
+      marginLeft: "1rem",
+      padding: "5px",
     },
   },
 
@@ -123,6 +145,9 @@ const AdvertisementContainer = styled("Box")({
     fontSize: "15px",
     marginTop: "5px",
   },
+  "& .rightIcon":{
+    color: "blue"
+  }
 });
 
 const FooterContainer = styled("div")({
@@ -147,52 +172,13 @@ const PropertyLayout = ({ children }) => {
         </Box>
 
         <Box className="content">
-          <Typography
-            variant="h4"
-            sx={{
-              color: "black",
-              marginLeft: "2rem",
-              "@media screen and (max-width: 600px)": {
-                marginLeft: "1rem",
-                padding: "5px",
-              },
-            }}
-          >
-            3D Interior Design Made Easy
-          </Typography>
-          <Typography
-            variant="h3"
-            sx={{
-              fontWeight: "600",
-              color: "gray",
-              marginLeft: "2rem",
-              width: "75%",
-              "@media screen and (max-width: 600px)": {
-                marginLeft: "1rem",
-                padding: "5px",
-              },
-            }}
-          >
+          <Typography variant="h4">3D Interior Design Made Easy</Typography>
+          <Typography variant="h3">
             Design your 3D dream home like a pro, Interior Design & 4k Render
           </Typography>
 
           <div className="below-content">
-            <Typography
-              variant="h3"
-              sx={{
-                color: "#444444",
-                marginLeft: "2rem",
-                marginTop: "0.50rem",
-                width: "100%",
-                marginTop: "5px",
-                "@media screen and (max-width: 600px)": {
-                  fontSize: "15px",
-                  marginTop: "0.50rem",
-                  marginLeft: "1rem",
-                  padding: "5px",
-                },
-              }}
-            >
+            <Typography variant="h3" className="heading3">
               Coohom 3D Design Tool
             </Typography>
 
@@ -200,7 +186,7 @@ const PropertyLayout = ({ children }) => {
               <a href="/open" target="_blank">
                 Open
               </a>
-              <ChevronRightIcon sx={{ color: "blue" }} />
+              <ChevronRightIcon  className="rightIcon"/>
             </div>
           </div>
         </Box>
@@ -216,7 +202,7 @@ const PropertyLayout = ({ children }) => {
                 tabView={selectedTab}
               />
             </Grid>
-            <Grid item lg={9} md={8} sm={12} xs={12} >
+            <Grid item lg={9} md={8} sm={12} xs={12}>
               <Content id="main-scroll">{children}</Content>
             </Grid>
           </Grid>

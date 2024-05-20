@@ -10,38 +10,8 @@ import Apiconfigs from "../../ApiConfig/ApiConfig";
 
 import { styled } from "@mui/system";
 const Root = styled("Box")(({ theme }) => ({
-  "& .mainPage": {
-    position: "relative", // Add position relative to enable positioning of ::before pseudo-element
-    background: "#fff",
-    borderRadius: "15px",
-    padding: "20px",
-    height: "100%",
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      borderTop: "9px solid #444444", // Customize the border as needed
-      borderRadius: "20px", // Use the same border radius as the main container
-      pointerEvents: "none", // Ensure the pseudo-element doesn't interfere with interactions
-      boxSizing: "border-box", // Include border in the total width/height
-    },
-    "& .addAbout": {
-      background: "#a2d117",
-      border: "1px solid #a2d117",
-      color: "#fff",
-      padding: "8px 25px",
-      borderRadius: "10px",
-    },
-    "& .headingBox": {
-      padding: "15px 0",
-      "& h1": {
-        fontSize: "16px",
-        fontWeigth: "600",
-      },
-    },
+  "& .mainAboutSection": {
+    padding: "100px  0px",
   },
 }));
 const PrivacyPolicyIndex = () => {
@@ -113,7 +83,7 @@ const PrivacyPolicyIndex = () => {
     <Box>
       <AdminLayout>
         <Root>
-          <Box className="mainPage">
+          <Box className="mainAboutSection">
             <Box mt={2} display={"flex"} justifyContent={"space-between"}>
               <Typography variant="h2">{_about[0]?.title}</Typography>
               <DialogComponent

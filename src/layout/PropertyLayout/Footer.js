@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 import {
   Box,
@@ -8,23 +8,29 @@ import {
   TextField,
   Button,
   IconButton,
+  // Link,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-// import FacebookIcon from "@mui/icons-material/Facebook";
+import Link from "next/link";
 import { BsInstagram } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
 import { FiTwitter } from "react-icons/fi";
 import { BiLogoLinkedin } from "react-icons/bi";
-import { cityName } from "../../utils";
+import { PostApiFunction, cityName } from "../../utils";
+import Apiconfigs from "../../ApiConfig/ApiConfig";
+import CircularIndeterminate from "../../component/CircularProgressComponent";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// PostApiFunction
 const MainComponent = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     // marginTop: "-120px",
     // position: "relative",
     // zIndex: 1,
     background: "#444444",
-    marginLeft:'0rem',
+    marginLeft: "0rem",
     // marginTop:'45rem'
- 
   },
   "& .footerSection": {
     background: "rgba(0,0,0,0.8)",
@@ -43,7 +49,14 @@ const MainComponent = styled("Box")(({ theme }) => ({
 
   "& .textFild": {
     position: "relative",
-
+    "& input": {
+      padding: "10px",
+      height: "30px",
+      fontSize: "18px",
+      "&::placeholder": {
+        fontSize: "18px",
+      },
+    },
     "& button": {
       position: "absolute",
       top: 0,
@@ -68,6 +81,11 @@ const MainComponent = styled("Box")(({ theme }) => ({
       maxWidth: "300px",
       fontWeight: 300,
       color: "#FFFF",
+      "& a": {
+        fontWeight: 300,
+        color: "#FFFF",
+        textDecoration: "none",
+      },
       "@media(max-width:615px)": {
         lineHeight: "31px",
       },
@@ -120,10 +138,16 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "@media(max-width:615px)": {
       display: "initial",
     },
+    "& span": {
+      color: "#fff",
+    },
     "& p": {
       color: "#FFF",
       fontWeight: 400,
       fontSize: "12px",
+      "& a": {
+        color: "#fff",
+      },
       "@media(max-width:615px)": {
         marginTop: "20px",
       },
@@ -173,6 +197,40 @@ const MainComponent = styled("Box")(({ theme }) => ({
 }));
 
 const Footer = () => {
+  const [_changeValue, setChangeValue] = useState("");
+  const [_loading, setLoading] = useState(false);
+  const subsribeFunction = async () => {
+    try {
+      setLoading(true);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.addSubscription,
+        data: {
+          email: _changeValue,
+        },
+      });
+      if (res) {
+        setLoading(false);
+        if (res?.responseCode === 200) {
+          setChangeValue("");
+          toast.success(res?.responseMessage);
+        } else if (res?.responseCode === 400) {
+          setChangeValue("");
+          toast.error(res?.responseMessage);
+        } else if (res?.responseCode === 401) {
+          setChangeValue("");
+          toast.error(res?.responseMessage);
+        } else if (res?.responseCode === 409) {
+          setChangeValue("");
+          toast.error(res?.responseMessage);
+        } else {
+          toast.error(res?.responseMessage);
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error(res?.data?.responseMessage);
+    }
+  };
   return (
     <MainComponent>
       <Box className="mainBox">
@@ -208,7 +266,7 @@ const Footer = () => {
                         {" "}
                         Email: info@meteryard.com
                       </Typography>
-                      <Typography variant="h6"> Phone: 9027659397</Typography>
+                      {/* <Typography variant="h6"> Phone: 9027659397</Typography> */}
                     </Box>
                   </Box>
                 </Grid>
@@ -218,14 +276,30 @@ const Footer = () => {
                     <Typography variant="h5">CONTACT US</Typography>
                   </Box>
                   <Box className={"footersabmenu"}>
-                    <Typography variant="h6">Home</Typography>
+                    <Typography variant="h6">
+                      <Link href="/" target="_blank">
+                        Home
+                      </Link>
+                    </Typography>
 
-                    <Typography variant="h6">About Us</Typography>
-                    <Typography variant="h6">Terms & Conditions</Typography>
-                    <Typography variant="h6">Privacy Policy</Typography>
-                    <Typography variant="h6">Contact Us</Typography>
+                    <Typography variant="h6">
+                      <Link href="/about-us" target="_blank">
+                        About Us
+                      </Link>
+                    </Typography>
+                    <Typography variant="h6">
+                      <Link href="/term-condition" target="_blank">
+                        Terms & Conditions
+                      </Link>
+                    </Typography>
+                    <Typography variant="h6">
+                      <Link href="/privacy" target="_blank">
+                        Privacy Policy
+                      </Link>
+                    </Typography>
+                    {/* <Typography variant="h6">Contact Us</Typography>
                     <Typography variant="h6">Blog</Typography>
-                    <Typography variant="h6"> Properties Listing</Typography>
+                    <Typography variant="h6"> Properties Listing</Typography> */}
                   </Box>
                 </Grid>
 
@@ -244,6 +318,9 @@ const Footer = () => {
                     <TextField
                       id="outlined-basic"
                       fullWidth
+                      type="email"
+                      value={_changeValue}
+                      onChange={(e) => setChangeValue(e.target.value)}
                       style={{
                         background: "#FFF",
                         color: "#000",
@@ -254,8 +331,13 @@ const Footer = () => {
                       variant="outlined"
                       placeholder="EMAIL ADDRESS"
                     />
-                    <Button>
-                      <SendIcon />
+                    <Button onClick={subsribeFunction}>
+                      <SendIcon />{" "}
+                      {_loading && (
+                        <>
+                          &nbsp; <CircularIndeterminate />
+                        </>
+                      )}
                     </Button>
                   </Box>
                   <br />
@@ -265,7 +347,56 @@ const Footer = () => {
                   <Box className={"footer_menu_title"}>
                     <Typography variant="h5">CONTACT US</Typography>
                     <Box className={"socialicon"}>
-                      <IconButton
+                      <a
+                        target="_blank"
+                        href="https://www.facebook.com/meteryard.india.3/"
+                      >
+                        <IconButton
+                          className="iconButton"
+                          style={{
+                            backgroundColor: "#2b4170",
+                            background:
+                              "-webkit-linear-gradient(top, #3b5998, #2b4170)",
+                          }}
+                        >
+                          <BiLogoFacebook className="icon" />
+                        </IconButton>
+                      </a>
+                      <a
+                        target="_blank"
+                        href="https://www.instagram.com/meteryard/"
+                      >
+                        <IconButton
+                          className="iconButton"
+                          style={{
+                            background:
+                              "linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)",
+                            filter:
+                              "progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 )",
+                          }}
+                        >
+                          <BsInstagram className="icon" />
+                        </IconButton>
+                      </a>
+                      <a target="_blank" href="https://x.com/MeterYard">
+                        <IconButton
+                          className="iconButton"
+                          style={{
+                            background: "#1DA1F2",
+                          }}
+                        >
+                          <FiTwitter className="icon" />
+                        </IconButton>
+                      </a>
+                      <a
+                        target="_blank"
+                        href="https://www.linkedin.com/in/meteryard-india-1385221b0/"
+                      >
+                        <IconButton className="iconButton">
+                          <BiLogoLinkedin className="icon" />
+                        </IconButton>
+                      </a>
+                      {/* <IconButton
                         className="iconButton"
                         style={{
                           backgroundColor: "#2b4170",
@@ -274,8 +405,8 @@ const Footer = () => {
                         }}
                       >
                         <BiLogoFacebook className="icon" />
-                      </IconButton>
-                      <IconButton
+                      </IconButton> */}
+                      {/* <IconButton
                         className="iconButton"
                         style={{
                           background:
@@ -285,18 +416,18 @@ const Footer = () => {
                         }}
                       >
                         <BsInstagram className="icon" />
-                      </IconButton>
-                      <IconButton
+                      </IconButton> */}
+                      {/* <IconButton
                         className="iconButton"
                         style={{
                           background: "#1DA1F2",
                         }}
                       >
                         <FiTwitter className="icon" />
-                      </IconButton>
-                      <IconButton className="iconButton">
+                      </IconButton> */}
+                      {/* <IconButton className="iconButton">
                         <BiLogoLinkedin className="icon" />
-                      </IconButton>
+                      </IconButton> */}
                     </Box>
                   </Box>
                 </Grid>
@@ -331,12 +462,24 @@ const Footer = () => {
               <Box className={"bottomFooter"}>
                 <Box className={"lefttext"}>
                   <Typography variant="body1">
-                    © 2023 MeterYard. All Rights Reserved.
+                    © 2024 MeterYard. All Rights Reserved.
                   </Typography>
                 </Box>
-                <Box className={"lefttext"}>
+                <Box
+                  className={"lefttext"}
+                  display={"flex"}
+                  alignItems={"center"}
+                >
                   <Typography variant="body1">
-                    Privacy Policy | Terms and Conditions | Disclaimer
+                    <Link href="/term-condition" target="_blank">
+                      Terms and Conditions
+                    </Link>
+                  </Typography>
+                  &nbsp; <span>|</span> &nbsp;
+                  <Typography variant="body1">
+                    <Link href="/privacy" target="_blank">
+                      Privacy Policy
+                    </Link>
                   </Typography>
                 </Box>
               </Box>

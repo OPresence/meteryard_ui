@@ -39,14 +39,15 @@ const MainComponent = styled("Box")(({ theme }) => ({
 
   "& .buttons": {
     borderRadius: "6px",
-    padding: "20px",
+    padding: "20px 20px 40px 20px",
     background: "#fff",
-    boxShadow: "0px 3px 17px #00000029",
+    // boxShadow: "0px 3px 17px #00000029",
   },
   "& .videoButton": {
     position: "ralative",
     display: "flex",
     alignItems: "center",
+    cursor: "pointer",
     "& p": {
       textAlign: "left",
       font: "normal normal 600 21px/54px Montserrat",
@@ -127,7 +128,7 @@ export default function ButtonSwitchComponent({
                     Please Select Your Category
                   </Typography>
                   <Grid container spacing={4}>
-                    <Grid item xs={12} sm={6} md={6} lg={6}>
+                    <Grid item xs={12} sm={5} md={5} lg={5}>
                       <Box mt={3} className={"videoButton"}>
                         <Box
                           variant="outlined"
@@ -140,8 +141,12 @@ export default function ButtonSwitchComponent({
                         </Button>
                       </Box>
                     </Grid>
-                    <Grid item xs={12} sm={6} md={6} lg={6}>
-                      <Box mt={3} className={"videoButton"}>
+                    <Grid item xs={12} sm={7} md={7} lg={7}>
+                      <Box
+                        mt={3}
+                        className={"videoButton"}
+                        onClick={handleClick}
+                      >
                         <Box
                           variant="outlined"
                           className={"Banner_inputField_button"}
@@ -154,7 +159,6 @@ export default function ButtonSwitchComponent({
                           </Typography>
                         </Box>
                         <Button
-                         onClick={handleClick}
                           className="searchbox_button"
                           style={{
                             background: "#A7D325 0% 0% no-repeat padding-box",
@@ -183,7 +187,7 @@ export default function ButtonSwitchComponent({
                   >
                     Please Select Your Category
                   </Typography>
-                  <Box width={"100%"}>
+                  <Box width={"100%"} p={"0 0 0 40px"}>
                     <Grid container spacing={4}>
                       <Grid item xs={12} sm={6} md={6} lg={4}>
                         <Box mt={3} className={"videoButton"}>
@@ -199,7 +203,19 @@ export default function ButtonSwitchComponent({
                         </Box>
                       </Grid>
                       <Grid item xs={12} sm={6} md={6} lg={4}>
-                        <Box mt={3} className={"videoButton"}>
+                        <Box
+                          mt={3}
+                          className={"videoButton"}
+                          onClick={() => {
+                            if (auth?._getprofile?.userType == "SELLER") {
+                              router.push("property-post");
+                            } else {
+                              toast.error(
+                                "Only Seller post the property please login."
+                              );
+                            }
+                          }}
+                        >
                           <Box
                             variant="outlined"
                             className={"Banner_inputField_button"}
@@ -207,20 +223,18 @@ export default function ButtonSwitchComponent({
                               background: "#EFEFEF 0% 0% no-repeat padding-box",
                             }}
                           >
-                            <Typography variant="h6">
-                              Property listing
-                            </Typography>
+                            <Typography variant="h6">Property Post</Typography>
                           </Box>
                           <Button
-                            onClick={() => {
-                              if (auth?._getprofile?.userType == "SELLER") {
-                                router.push("property-post");
-                              } else {
-                                toast.error(
-                                  "Only Seller post the property please login."
-                                );
-                              }
-                            }}
+                            // onClick={() => {
+                            //   if (auth?._getprofile?.userType == "SELLER") {
+                            //     router.push("property-post");
+                            //   } else {
+                            //     toast.error(
+                            //       "Only Seller post the property please login."
+                            //     );
+                            //   }
+                            // }}
                             className="searchbox_button"
                             style={{
                               background: "#A7D325 0% 0% no-repeat padding-box",
@@ -231,7 +245,11 @@ export default function ButtonSwitchComponent({
                         </Box>
                       </Grid>
                       <Grid item xs={12} sm={6} md={6} lg={4}>
-                        <Box mt={3} className={"videoButton"}>
+                        <Box
+                          mt={3}
+                          className={"videoButton"}
+                          onClick={() => setOpen(true)}
+                        >
                           <Box
                             variant="outlined"
                             className={"Banner_inputField_button"}
@@ -244,7 +262,6 @@ export default function ButtonSwitchComponent({
                             </Typography>
                           </Box>
                           <Button
-                            onClick={() => setOpen(true)}
                             className="searchbox_button"
                             style={{
                               background: "#ACACAC 0% 0% no-repeat padding-box",

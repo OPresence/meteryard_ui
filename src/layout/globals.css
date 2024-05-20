@@ -42,6 +42,8 @@ body {
   font-weight: 400;
   position: relative;
   min-width: 150px;
+  transition: 0.6s;
+
 }
 
 .dropbtn::after {
@@ -64,6 +66,11 @@ body {
   height: 3px;
   background-color: #a2d117;
   transition: 0.3s ease-in-out;
+  
+}
+.dropbtn:hover .rightBtn{
+  transform: rotate(90deg);
+  transition: 0.6s;
 }
 .mainModalClassForm {
   border-radius: 10px;
@@ -254,17 +261,37 @@ body {
 .paragraph {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 3 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  font-size: 16px !important;
+  /* color: #818181 !important; */
+  color: #000 !important;
+  font-weight: 500 !important;
+  /* margin: 5px 0 0 0 !important; */
+  height: 90px !important;
+    /* line-height: 18px !important; */
+}
+.projectHeading {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 12px;
-  color: #818181;
-  font-weight: 500;
-  margin: 5px 5px;
+  font-size: 16px !important;
+  /* color: #818181 !important; */
+  color: #000 !important;
+  font-weight: 600 !important;
+  margin: 5px 0 0 0 !important;
+  height:40px !important;
+    line-height: 18px !important;
 }
 .paragraph-container {
   width: 12rem,
-};
+}
+.projectHeading-container {
+  width: 12rem,
+}
 .PropertyPostIndexStyle .MuiSvgIcon-root.MuiStepIcon-root.Mui-active {
  color: red !important;
 }
@@ -285,6 +312,8 @@ body {
 } */
 .slick-prev {
   left:-10px !important; 
+  z-index: 999;
+
 }
 
 .slick-next {
