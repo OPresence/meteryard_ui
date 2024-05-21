@@ -90,6 +90,7 @@ const IconButtonLeftContent = styled(Box)({
   transform: "translateY(-50%)",
   color: "black",
   cursor: "pointer",
+  zIndex: 1,
   "@media(max-width:615px)": {
     left: "0rem",
   },

@@ -130,9 +130,9 @@ function PageLayout({ children }) {
                             </Typography>
                           </Box>
                         </Box>
-                        <Box p={"0 120px 0 0"} className={"JoinLiveChatBox"}>
+                        {/* <Box p={"0 120px 0 0"} className={"JoinLiveChatBox"}>
                           <Button>Join live chat</Button>
-                        </Box>
+                        </Box> */}
                       </Box>
                     </Box>
                   </Box>

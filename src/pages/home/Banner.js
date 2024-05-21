@@ -291,7 +291,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "none",
       // display: "block",
       position: "absolute",
-      width: "420%",
+      minWidth: "600px",
 
       "@media(max-width:615px)": {
         width: "199%",

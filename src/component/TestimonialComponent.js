@@ -245,6 +245,7 @@ import Apiconfigs from "../ApiConfig/ApiConfig";
 import { PostApiFunction } from "@/utils";
 
 const TestimonialStyle = styled("div")(({ theme }) => ({
+  padding: "4rem",
   "& .Cards": {
     gap: "0px",
     borderRadius: "12.81px",

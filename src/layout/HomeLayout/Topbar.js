@@ -427,7 +427,7 @@ export default function Topbar() {
                       <MobilerMenu />
                     </Box>
                     {/* {router.pathname == "/" && ( */}
-                    <Box
+                    {/* <Box
                       p={"0px 25px 0 0"}
                       display={"flex"}
                       alignItems={"center"}
@@ -443,7 +443,7 @@ export default function Topbar() {
                       >
                         My Citychat
                       </Button>
-                    </Box>
+                    </Box> */}
                     {/* )} */}
                   </Box>
                 </Box>

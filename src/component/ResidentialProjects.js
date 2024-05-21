@@ -1,5 +1,7 @@
-import { useRef, useContext } from "react";
+import { useRef, useContext, useState } from "react";
 import { Grid, Typography, Box, Container, Button } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styled from "@emotion/styled";
 import ResidentialPostCard from "./ResidentialPostCard";
 import "slick-carousel/slick/slick.css";
@@ -14,6 +16,7 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "40px 0px",
     background: "#fff",
+    position: "relative",
     "& p": {
       fontFamily: "Inter",
       fontSize: "24px",
@@ -191,22 +194,56 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
+
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  zIndex: 1,
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
+
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
+
 const ResidentialProjects = ({ showViewMore }) => {
   const auth = useContext(AuthContext);
   const sliderRef = useRef(null);
   const router = useRouter();
-  const next = () => {
-    sliderRef.current.slickNext();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handlePrevious = () => {
+    console.log("handlePrv");
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
   };
 
-  const previous = () => {
-    sliderRef.current.slickPrev();
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
   };
+
   const settings = {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: true,
+    arrows: false,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -334,32 +371,44 @@ const ResidentialProjects = ({ showViewMore }) => {
               </Box>
             )} */}
           </Box>
+          <IconButtonLeftContent onClick={handlePrevious}>
+            <ArrowBackIosIcon />
+          </IconButtonLeftContent>
           <Box className="cards" mt={4}>
-            {auth?._getlist?.length > 4 ? (
-              <Slider {...settings} ref={sliderRef}>
-                {auth?._getlist &&
-                  auth?._getlist?.map((data, index) => {
-                    return (
-                      <Box key={index}>
-                        <ResidentialPostCard data={data} />
-                      </Box>
-                    );
-                  })}
-              </Slider>
-            ) : (
-              <>
-                <Grid container>
+            <Box
+              sx={{
+                width: "90%",
+                margin: "0 auto",
+                position: "relative",
+              }}
+            >
+              {auth?._getlist?.length > 4 ? (
+                <Slider {...settings} ref={sliderRef}>
                   {auth?._getlist &&
                     auth?._getlist?.map((data, index) => {
                       return (
-                        <Grid item lg={6} md={6} sm={6} xs={12} key={index}>
+                        <Box key={index}>
                           <ResidentialPostCard data={data} />
-                        </Grid>
+                        </Box>
                       );
                     })}
-                </Grid>
-              </>
-            )}
+                </Slider>
+              ) : (
+                <>
+                  <Grid container>
+                    {auth?._getlist &&
+                      auth?._getlist?.map((data, index) => {
+                        return (
+                          <Grid item lg={6} md={6} sm={6} xs={12} key={index}>
+                            <ResidentialPostCard data={data} />
+                          </Grid>
+                        );
+                      })}
+                  </Grid>
+                </>
+              )}
+            </Box>
+
             {auth?._getlist_commercial.length > 0 && (
               <Box className="viewmoreButtonShow">
                 <Button onClick={handleClick}>
@@ -390,6 +439,41 @@ const ResidentialProjects = ({ showViewMore }) => {
               </Button>
             )} */}
           </Box>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+            <Box
+              onClick={() => {
+                setCurrentSlide(0);
+                sliderRef.current.slickGoTo(0);
+              }}
+              style={{
+                minWidth: "10px",
+                minHeight: "10px",
+
+                borderRadius: "50%",
+                border: "1px solid #A7D325",
+                backgroundColor: currentSlide === 0 ? "#A7D325" : "white",
+                marginRight: "4px",
+              }}
+            />
+            <Box
+              onClick={() => {
+                setCurrentSlide(1);
+                sliderRef.current.slickGoTo(1);
+              }}
+              style={{
+                minWidth: "10px",
+                minHeight: "10px",
+
+                borderRadius: "50%",
+                border: "1px solid #A7D325",
+                backgroundColor: currentSlide === 1 ? "#A7D325" : "white",
+                marginRight: "4px",
+              }}
+            />
+          </Box>
+          <IconButtonRightContent onClick={handleNext}>
+            <ArrowForwardIosIcon />
+          </IconButtonRightContent>
         </Container>
       </div>
     </ResidentStyle>

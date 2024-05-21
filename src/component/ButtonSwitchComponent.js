@@ -119,7 +119,8 @@ export default function ButtonSwitchComponent({
                     variant="h6"
                     style={{
                       textAlign: "left",
-                      font: "normal normal normal 13px/16px Montserrat",
+                      // font: "normal normal normal 13px/16px Montserrat",
+                      fontSize: "13px",
                       letterSpacing: "0px",
                       color: "#AEAEAE",
                       textTransform: "capitalize",
@@ -128,7 +129,7 @@ export default function ButtonSwitchComponent({
                     Please Select Your Category
                   </Typography>
                   <Grid container spacing={4}>
-                    <Grid item xs={12} sm={5} md={5} lg={5}>
+                    {/* <Grid item xs={12} sm={5} md={5} lg={5}>
                       <Box mt={3} className={"videoButton"}>
                         <Box
                           variant="outlined"
@@ -140,7 +141,7 @@ export default function ButtonSwitchComponent({
                           <MdOutlineVideoChat />
                         </Button>
                       </Box>
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12} sm={7} md={7} lg={7}>
                       <Box
                         mt={3}
@@ -179,7 +180,8 @@ export default function ButtonSwitchComponent({
                     variant="h6"
                     style={{
                       textAlign: "left",
-                      font: "normal normal normal 13px/16px Montserrat",
+                      // font: "normal normal normal 13px/16px Montserrat",
+                      fontSize: "13px",
                       letterSpacing: "0px",
                       color: "#AEAEAE",
                       textTransform: "capitalize",
@@ -188,8 +190,8 @@ export default function ButtonSwitchComponent({
                     Please Select Your Category
                   </Typography>
                   <Box width={"100%"} p={"0 0 0 40px"}>
-                    <Grid container spacing={4}>
-                      <Grid item xs={12} sm={6} md={6} lg={4}>
+                    <Grid container spacing={4} alignItems="center">
+                      {/* <Grid item xs={12} sm={6} md={6} lg={4}>
                         <Box mt={3} className={"videoButton"}>
                           <Box
                             variant="outlined"
@@ -201,8 +203,8 @@ export default function ButtonSwitchComponent({
                             <MdOutlineVideoChat />
                           </Button>
                         </Box>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={6} lg={4}>
+                      </Grid> */}
+                      <Grid item xs={12} sm={6} md={6} lg={5}>
                         <Box
                           mt={3}
                           className={"videoButton"}
@@ -244,7 +246,7 @@ export default function ButtonSwitchComponent({
                           </Button>
                         </Box>
                       </Grid>
-                      <Grid item xs={12} sm={6} md={6} lg={4}>
+                      <Grid item xs={12} sm={8} md={6} lg={6}>
                         <Box
                           mt={3}
                           className={"videoButton"}
@@ -256,6 +258,7 @@ export default function ButtonSwitchComponent({
                             style={{
                               background: "#EFEFEF 0% 0% no-repeat padding-box",
                             }}
+                            padding={"0 0 0 10px"}
                           >
                             <Typography variant="h6">
                               Register as seller
