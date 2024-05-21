@@ -414,6 +414,9 @@ const TestimonialComponent = () => {
 
   return (
     <TestimonialStyle>
+      <Box mb={10} display="flex" justifyContent="center" alignItems="center">
+        <Typography variant="h1">Testimonial</Typography>
+      </Box>
       <Box p={"40px 0"}>
         <Container maxWidth sx={{ display: "flex", justifyContent: "center" }}>
           <Box

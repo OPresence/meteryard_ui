@@ -115,7 +115,7 @@ const AgreeculturePostCard = ({ data }) => {
     <AgreecultureStyle>
       <Box height={"100%"} pb={"20px"}>
         <Box className="cards">
-          <Box>
+          <Box height={"250px"}>
             <img
               src={data?.coverImage}
               width={"100%"}
@@ -123,7 +123,7 @@ const AgreeculturePostCard = ({ data }) => {
             />
           </Box>
 
-          <Box display={"flex"} justifyContent={"center"}>
+          <Box minHeight={"280px"} display={"flex"} justifyContent={"center"}>
             <Box className="contentBox" width={"90%"}>
               <Box className="headingBox">
                 <Typography variant="h5">{data?.projectName}</Typography>
@@ -141,27 +141,48 @@ const AgreeculturePostCard = ({ data }) => {
                   </Box>
                   <Box
                     display={"flex"}
+                    flexDirection={"column"}
                     alignItems={"center"}
                     justifyContent={"space-between"}
+                    gap="5px"
                   >
-                    <Box>
-                      <Typography variant="h3">Property Size</Typography>
-                      <Typography variant="h6">
-                        {data?.superBuildupArea}
-                      </Typography>
-                    </Box>
-                    <Box>
-                      <Typography variant="h3">Price</Typography>
-                      <Typography variant="h6">
+                    <Box
+                      width={"100%"}
+                      display={"flex"}
+                      alignItems={"center"}
+                      justifyContent={"space-between"}
+                      gap={"5px"}
+                    >
+                      <Typography variant="p">Property Size</Typography>
+                      <Typography variant="p">
                         {data?.price?.toLocaleString()}/- Rs
                       </Typography>
                     </Box>
+                    <Box
+                      width={"100%"}
+                      display={"flex"}
+                      alignItems={"center"}
+                      justifyContent={"space-between"}
+                      gap={"5px"}
+                    >
+                      <Typography variant="p">
+                        {data?.superBuildupArea}
+                      </Typography>
+                      <Typography variant="p">Price</Typography>
+                    </Box>
                   </Box>
-
-                  <ButtonComponent data={data} />
                 </Box>
               </Box>
             </Box>
+          </Box>
+          <Box
+            height={"80px"}
+            width={"100%"}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <ButtonComponent data={data} />
           </Box>
         </Box>
       </Box>
