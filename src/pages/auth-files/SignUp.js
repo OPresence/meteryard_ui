@@ -208,7 +208,7 @@ const SignUp = ({
           // toast.success("SignUp successful!"); // Display success notification
           toast.success(res?.responseMessage);
           setIsLoading(false);
-          auth.setEndtime(moment().add(2, "m").unix());
+          auth.setEndtime(moment().add(30, "s").unix());
 
           setSignUpComplete(res?.result);
         } else if (res?.responseCode == 409) {
