@@ -201,6 +201,8 @@ import styled from "@emotion/styled";
 import ButtonComponent from "./ButtonComponent";
 import { useRouter } from "next/router";
 const CardComponentStyle = styled("Box")(({ theme }) => ({
+  borderRadius: 0,
+  width: "350px",
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
     background: "#fff",
@@ -227,20 +229,21 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
   "& .cards": {
     // cursor: "pointer",
     width: "100%",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    borderRadius: "20px",
+    // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     position: "relative",
     margin: "20px",
     "& img": {
-      borderTopRightRadius: "10px",
-      borderTopLeftRadius: "10px",
-      height: "100%",
+      height: "300px",
+      // borderTopRightRadius: "10px",
+      // borderTopLeftRadius: "10px",
+      boxShadow: "#A9D91066 0px 3px 8px",
     },
     "&:hover": {
       // transform: "scale(0.9)",
       transition: "0.8s",
     },
     "& .contentBox": {
+      minHeight: "300px",
       padding: "10px 10px 10px",
       "& .headingBox": {
         display: "flex",
@@ -285,8 +288,8 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
       height: "100%",
       background:
         "linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgb(0 0 0 / 0))",
-      borderTopRightRadius: "10px",
-      borderTopLeftRadius: "10px",
+      // borderTopRightRadius: "10px",
+      // borderTopLeftRadius: "10px",
     },
   },
 }));
@@ -295,54 +298,69 @@ const CommercialPostCard = ({ data, index }) => {
   return (
     <CardComponentStyle>
       <Box
-        // onClick={() =>
-        //   router.push({
-        //     pathname: "/view-property",
-        //     query: {
-        //       data: JSON.stringify(data),
-        //     },
-        //   })
-        // }
         height={"100%"}
         pb={"20px"}
         display={"flex"}
         justifyContent={"center"}
       >
         <Box className="cards">
-          <Box maxHeight={"170px"} height={"100%"}>
+          <Box className="image" height={"300px"}>
             <img src={data?.coverImage} width={"100%"} height={"100%"} />
           </Box>
           <Box className="contentBox">
-            <Box>
-              <Typography variant="h2">{data?.projectName} </Typography>
-            </Box>
-            {/* <Typography variant="h4">{data?.title} </Typography> */}
-            <div className="paragraph-container">
-              <p className="paragraph">{data?.description}</p>
-            </div>
-            <Box m={"10px 0"}>
-              <Divider color="#A9D910" />
-            </Box>
-            <Box
-              display={"flex"}
-              alignItems={"center"}
-              // justifyContent={"space-between"}
-              style={{ gap: "35px" }}
-            >
-              <Box>
-                <Typography variant="h5">Property Size</Typography>
-                <Typography variant="h6">{data?.superBuildupArea}</Typography>
+            <Box width="95%" marginInline="auto">
+              <Typography variant="h2" fontSize={18} fontWeight={500}>
+                {data?.projectName}
+              </Typography>
+              <Typography
+                mt={1.5}
+                variant="p"
+                fontSize={16}
+                fontWeight={300}
+                style={{ textWrap: "pretty" }}
+              >
+                {data?.description}
+              </Typography>
+              <Box mt={1} mb={1}>
+                <Divider color="#A9D910" />
               </Box>
-              {/* &nbsp;&nbsp; &nbsp;&nbsp; */}
-              <Box>
-                <Typography variant="h5">Price</Typography>
-                <Typography variant="h6">
-                  {data?.price?.toLocaleString()}/- Rs
-                </Typography>
+              <Box
+                display={"flex"}
+                alignItems={"center"}
+                justifyContent="flex-start"
+                style={{ gap: "35px" }}
+              >
+                <Box
+                  width="40%"
+                  display="flex"
+                  flexDirection="column"
+                  gap={0.5}
+                >
+                  <Typography variant="p" fontSize={14} fontWeight={400}>
+                    Property Size
+                  </Typography>
+                  <Typography variant="p" color="#E0AF00" fontSize={14}>
+                    {data?.superBuildupArea}
+                  </Typography>
+                </Box>
+                <Box
+                  width="55%"
+                  display="flex"
+                  flexDirection="column"
+                  gap={0.5}
+                >
+                  <Typography variant="p" fontSize={14} fontWeight={400}>
+                    Price
+                  </Typography>
+                  <Typography variant="p" color="#E0AF00" fontSize={14}>
+                    {data?.price?.toLocaleString()}/- Rs
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-            <Box display={"flex"} justifyContent={"start"}>
-              <ButtonComponent data={data} />
+
+              <Box display={"flex"} justifyContent={"start"}>
+                <ButtonComponent data={data} />
+              </Box>
             </Box>
           </Box>
         </Box>{" "}

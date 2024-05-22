@@ -327,6 +327,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/router";
 
 const CommercialProjectsStyle = styled("Box")(({ theme }) => ({
+  margin: "4rem 0",
   "& .mainSliderDiv": {
     // padding: "40px 0px",
     background: "#fff",
@@ -382,7 +383,7 @@ const CommercialProjectsStyle = styled("Box")(({ theme }) => ({
     // cursor: "pointer",
     width: "100%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    borderRadius: "20px",
+    // borderRadius: "20px",
     transform: "0",
     // transition: "0.8s",
     // transform: "scale(0.8)",
@@ -500,16 +501,17 @@ const CommercialProjects = () => {
   };
   return (
     <CommercialProjectsStyle>
-      <div className="mainSliderDiv">
-        <Container maxWidth>
-          <Box className="projects-card">
-            <Typography variant="h1">Commercial Projects</Typography>
-            <Typography variant="body1">
-              Commercial Projects Across India
-            </Typography>
-          </Box>
+      <Container maxWidth>
+        <Box width="95%" marginInline="auto">
+          <Typography variant="h1" fontSize={48} fontWeight={500}>
+            Commercial Projects
+          </Typography>
+          <Typography fontSize={24} fontWeight={300}>
+            Commercial Projects Across India
+          </Typography>
+        </Box>
 
-          {/* <Box mt={4}>
+        {/* <Box mt={4}>
             <Slider {...settings} ref={sliderRef}>
               {auth?._isFeaturedPost?.map((data, index) => (
                 <FeaturedPostCard data={data} key={index} />
@@ -526,46 +528,45 @@ const CommercialProjects = () => {
               )}
             </Box>
           </Box> */}
-          <Box mt={4}>
-            {auth?._getlist_commercial?.length > 4 ? (
-              <>
-                <Slider {...settings} ref={sliderRef}>
-                  {auth?._getlist_commercial?.map((data, index) => {
-                    return <CommercialPostCard data={data} key={index} />;
-                  })}
-                </Slider>
-              </>
-            ) : (
-              <Grid container>
+        <Box mt={4}>
+          {auth?._getlist_commercial?.length > 4 ? (
+            <>
+              <Slider {...settings} ref={sliderRef}>
                 {auth?._getlist_commercial?.map((data, index) => {
-                  return (
-                    <Grid
-                      key={index}
-                      item
-                      lg={3}
-                      md={4}
-                      sm={6}
-                      xs={12}
-                      className="GridClassCard"
-                      style={index > 3 ? { marginTop: "60px" } : {}}
-                    >
-                      <CommercialPostCard data={data} />
-                    </Grid>
-                  );
+                  return <CommercialPostCard data={data} key={index} />;
                 })}
-              </Grid>
-            )}
+              </Slider>
+            </>
+          ) : (
+            <Grid container>
+              {auth?._getlist_commercial?.map((data, index) => {
+                return (
+                  <Grid
+                    key={index}
+                    item
+                    lg={3}
+                    md={4}
+                    sm={6}
+                    xs={12}
+                    className="GridClassCard"
+                    style={index > 3 ? { marginTop: "60px" } : {}}
+                  >
+                    <CommercialPostCard data={data} />
+                  </Grid>
+                );
+              })}
+            </Grid>
+          )}
 
-            {auth?._getlist_commercial.length > 0 && (
-              <Box className="viewmoreButtonShow">
-                <Button onClick={handleClick}>
-                  View All <ArrowForwardIcon className="forwardIcon" />
-                </Button>
-              </Box>
-            )}
-          </Box>
-        </Container>
-      </div>
+          {auth?._getlist_commercial.length > 0 && (
+            <Box className="viewmoreButtonShow">
+              <Button onClick={handleClick}>
+                View All <ArrowForwardIcon className="forwardIcon" />
+              </Button>
+            </Box>
+          )}
+        </Box>
+      </Container>
     </CommercialProjectsStyle>
   );
 };

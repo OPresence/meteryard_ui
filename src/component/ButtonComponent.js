@@ -10,16 +10,21 @@ const ButonStyle = styled("Box")(({ theme }) => ({
       // border: "2px solid #A9D910",
       // padding: "5px 20px",
       // borderRadius: "50px",
-      "width":"158.8px","height":"40.7px","gap":"0px","border":"1.85px 0px 0px 0px","opacity":"0px",
-      "background":"#FFFFFF",
-      "border":"2.85px solid #A9D910",
-      borderRadius:"50px",
+      width: "158.8px",
+      height: "40.7px",
+      gap: "0px",
+      border: "1x 0px 0px 0px",
+      opacity: "0px",
+      background: "#FFFFFF",
+      border: "2px solid #A9D910",
+      borderRadius: "50px",
     },
     "& span": {
-      "fontFamily":"Inter","fontSize":"12px","fontWeight":"600","lineHeight":"16.94px",
-      color:"#A9D910"
-      
-      
+      fontFamily: "Inter",
+      fontSize: "12px",
+      fontWeight: "600",
+      lineHeight: "16.94px",
+      color: "#A9D910",
     },
   },
 }));

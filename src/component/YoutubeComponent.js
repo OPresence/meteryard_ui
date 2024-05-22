@@ -44,7 +44,7 @@ const videos = [
 
 const StyledSliderContainer = styled(Box)({
   // padding: "80px 0px",
-  margin: "0 auto",
+  margin: "4rem auto",
   position: "relative",
   "& h2": {
     fontWeight: "500",
@@ -86,8 +86,8 @@ const DescriptionContent = styled(CardContent)({
 const IconButtonLeftContent = styled(Box)({
   position: "absolute",
   left: "3rem",
-  top: "50%",
-  transform: "translateY(-50%)",
+  top: "60%",
+  transform: "translateY(-60%)",
   color: "black",
   cursor: "pointer",
   zIndex: 1,
@@ -98,8 +98,8 @@ const IconButtonLeftContent = styled(Box)({
 const IconButtonRightContent = styled(Box)({
   position: "absolute",
   right: "3rem",
-  top: "50%",
-  transform: "translateY(-50%)",
+  top: "60%",
+  transform: "translateY(-60%)",
   color: "black",
   cursor: "pointer",
   "@media(max-width:615px)": {
@@ -169,10 +169,12 @@ const YoutubeComponent = () => {
           justifyContent={"space-between"}
           alignItems={"center"}
         >
-          <Box display={"inline-flex"}>
-            <Box className="heading">
-              <Typography variant="h1">Youtube Videos</Typography>
-              <Typography variant="body1">
+          <Box width="95%" marginInline="auto">
+            <Box>
+              <Typography variant="h1" fontWeight={500} fontSize={48}>
+                YOUTUBE VIDEOS
+              </Typography>
+              <Typography mt={1} fontWeight={300} fontSize={24}>
                 Featured Residential Projects Across India
               </Typography>
             </Box>
@@ -201,11 +203,14 @@ const YoutubeComponent = () => {
                         alt={video.title}
                         onClick={() => window.open(video.url, "_blank")}
                       />
-                      <DescriptionContent>
-                        <Typography variant="h4">
-                          {video.description}
-                        </Typography>
-                      </DescriptionContent>
+                      <Typography
+                        mt={2}
+                        variant="h4"
+                        fontSize={18}
+                        fontWeight={300}
+                      >
+                        {video.description}
+                      </Typography>
                     </VideoCard>
                   </Box>
                 </div>
@@ -222,7 +227,6 @@ const YoutubeComponent = () => {
             style={{
               minWidth: "10px",
               minHeight: "10px",
-
               borderRadius: "50%",
               border: "1px solid #A7D325",
               backgroundColor: currentSlide === 0 ? "#A7D325" : "white",

@@ -342,6 +342,7 @@ import Slider from "react-slick";
 import { AuthContext } from "../context/Auth";
 import "../Scss/border.css";
 const ProjectStyle = styled("Box")(({ theme }) => ({
+  margin: "2rem auto",
   "& .mainBox": {
     padding: "40px 0 40px 0",
     "@media(max-width:615px)": {
@@ -592,9 +593,11 @@ const ProjectComponent = () => {
     <ProjectStyle>
       <Box className="mainBox">
         <Container maxWidth>
-          <Box className="heading">
-            <Typography variant="h1">Projects</Typography>
-            <Typography variant="body1">
+          <Box width="95%" marginInline="auto">
+            <Typography variant="h1" fontSize={48} fontWeight={500}>
+              Projects
+            </Typography>
+            <Typography mt={1} fontSize={24} fontWeight={300}>
               Featured Residential Projects Across India
             </Typography>
           </Box>
