@@ -414,8 +414,32 @@ const TestimonialComponent = () => {
 
   return (
     <TestimonialStyle>
-      <Box mb={10} display="flex" justifyContent="center" alignItems="center">
-        <Typography variant="h1">Testimonial</Typography>
+      <Box
+        width="80%"
+        mb={10}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        marginInline="auto"
+        gap={2}
+      >
+        <Typography variant="h1" fontWeight={500}>
+          TESTIMONIAL
+        </Typography>
+        <Typography fontWeight="300" variant="p">
+          Featured Residential Projects Across India
+        </Typography>
+        <Typography
+          variant="h6"
+          textAlign="center"
+          fontWeight="400"
+          style={{ textWrap: "balance" }}
+        >
+          When the age of a person exceeds 50 years, it becomesvery important to
+          take care of one’s health as she enters the senior citizen age. With
+          age, the metabolism and functioning of the body become slow.
+        </Typography>
       </Box>
       <Box p={"40px 0"}>
         <Container maxWidth sx={{ display: "flex", justifyContent: "center" }}>
