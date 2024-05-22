@@ -9,7 +9,6 @@ import {
   IconButton,
 } from "@mui/material";
 
-import * as Style from "./footer.module.css";
 import Link from "next/link";
 
 const Footer = () => {

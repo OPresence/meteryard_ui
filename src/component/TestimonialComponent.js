@@ -415,7 +415,6 @@ const TestimonialComponent = () => {
   return (
     <TestimonialStyle>
       <Box
-        width="80%"
         mb={10}
         display="flex"
         flexDirection="column"
@@ -424,16 +423,18 @@ const TestimonialComponent = () => {
         marginInline="auto"
         gap={2}
       >
-        <Typography variant="h1" fontWeight={500}>
+        <Typography variant="h1" fontWeight={500} fontSize={48}>
           TESTIMONIAL
         </Typography>
-        <Typography fontWeight="300" variant="p">
+        <Typography fontWeight="300" variant="p" fontSize={24}>
           Featured Residential Projects Across India
         </Typography>
         <Typography
-          variant="h6"
+          mt={1}
+          width="100%"
           textAlign="center"
-          fontWeight="400"
+          fontWeight="300"
+          fontSize={28}
           style={{ textWrap: "balance" }}
         >
           When the age of a person exceeds 50 years, it becomesvery important to
