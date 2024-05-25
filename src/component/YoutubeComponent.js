@@ -169,7 +169,7 @@ const YoutubeComponent = () => {
           justifyContent={"space-between"}
           alignItems={"center"}
         >
-          <Box width="95%" marginInline="auto">
+          <Box width="90%" marginInline="auto">
             <Box>
               <Typography variant="h1" fontWeight={500} fontSize={48}>
                 YOUTUBE VIDEOS
@@ -186,7 +186,7 @@ const YoutubeComponent = () => {
         <Box mt={4}>
           <Box
             sx={{
-              width: "90%",
+              width: "95%",
               margin: "0 auto",
               position: "relative",
             }}

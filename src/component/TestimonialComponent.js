@@ -240,11 +240,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { Box, Card, Container, Typography, Avatar } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import Apiconfigs from "../ApiConfig/ApiConfig";
 import { PostApiFunction } from "@/utils";
 
-const TestimonialStyle = styled("div")(({ theme }) => ({
+const TestimonialStyle = styled(Box)(({ theme }) => ({
   padding: "4rem",
   "& .Cards": {
     gap: "0px",
@@ -314,11 +316,35 @@ const TestimonialStyle = styled("div")(({ theme }) => ({
   },
 }));
 
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "0",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  zIndex: 1,
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
+
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "0",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
+
 const TestimonialComponent = () => {
   const [testimonials, setTestimonials] = useState([]);
   const [centerIndex, setCenterIndex] = useState(0);
   const sliderRef = useRef(null);
-  console.log("centerIndex--->", centerIndex);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -340,7 +366,7 @@ const TestimonialComponent = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    arrows: true,
+    arrows: false,
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
@@ -412,8 +438,20 @@ const TestimonialComponent = () => {
     ],
   };
 
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
   return (
-    <TestimonialStyle>
+    <TestimonialStyle position="relative">
       <Box
         mb={10}
         display="flex"
@@ -442,6 +480,7 @@ const TestimonialComponent = () => {
           age, the metabolism and functioning of the body become slow.
         </Typography>
       </Box>
+
       <Box p={"40px 0"}>
         <Container maxWidth sx={{ display: "flex", justifyContent: "center" }}>
           <Box
@@ -460,41 +499,52 @@ const TestimonialComponent = () => {
                 <img src="./images/vector.png" width={"100%"} alt="img" />
               </Box>
             </Box>
-            <Box>
-              <Slider ref={sliderRef} {...settings}>
-                {testimonials &&
-                  testimonials.map((data, index) => (
-                    <Card
-                      className={`Cards ${
-                        index === centerIndex ? "centerCard" : ""
-                      }`}
-                      key={index}
-                    >
-                      <Box
-                        display={"flex"}
-                        justifyContent={"center"}
-                        mb={"10px"}
+
+            <Box width="100%" position="relative">
+              <IconButtonLeftContent onClick={handlePrevious}>
+                <ArrowBackIosIcon />
+              </IconButtonLeftContent>
+              <Box width="100%">
+                <Slider ref={sliderRef} {...settings}>
+                  {testimonials &&
+                    testimonials.map((data, index) => (
+                      <Card
+                        className={`Cards ${
+                          index === centerIndex ? "centerCard" : ""
+                        }`}
+                        key={index}
                       >
-                        <Box className="imageBox">
-                          <Avatar
-                            src={data?.file}
-                            width={"100%"}
-                            style={{ height: "70px", width: "70px" }}
-                          />
+                        <Box
+                          display={"flex"}
+                          justifyContent={"center"}
+                          mb={"10px"}
+                        >
+                          <Box className="imageBox">
+                            <Avatar
+                              src={data?.file}
+                              width={"100%"}
+                              style={{ height: "70px", width: "70px" }}
+                            />
+                          </Box>
                         </Box>
-                      </Box>
-                      <Typography variant="h4">{data?.customerName}</Typography>
-                      <Typography variant="h5">Lorem Ipsum</Typography>
-                      <Box mt={1}>
-                        <Typography variant="h6">
-                          {data?.comments?.length > 120
-                            ? `${data.comments.substring(0, 130)}...`
-                            : data?.comments}
+                        <Typography variant="h4">
+                          {data?.customerName}
                         </Typography>
-                      </Box>
-                    </Card>
-                  ))}
-              </Slider>
+                        <Typography variant="h5">Lorem Ipsum</Typography>
+                        <Box mt={1}>
+                          <Typography variant="h6">
+                            {data?.comments?.length > 120
+                              ? `${data.comments.substring(0, 130)}...`
+                              : data?.comments}
+                          </Typography>
+                        </Box>
+                      </Card>
+                    ))}
+                </Slider>
+              </Box>
+              <IconButtonRightContent onClick={handleNext}>
+                <ArrowForwardIosIcon />
+              </IconButtonRightContent>
             </Box>
           </Box>
         </Container>

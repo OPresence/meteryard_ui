@@ -200,7 +200,7 @@ import Divider from "@mui/material/Divider";
 import styled from "@emotion/styled";
 import ButtonComponent from "./ButtonComponent";
 import { useRouter } from "next/router";
-const CardComponentStyle = styled("Box")(({ theme }) => ({
+const CardComponentStyle = styled(Box)(({ theme }) => ({
   borderRadius: 0,
   width: "350px",
   "& .mainSliderDiv": {
@@ -233,7 +233,6 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     position: "relative",
     margin: "20px",
     "& img": {
-      height: "300px",
       // borderTopRightRadius: "10px",
       // borderTopLeftRadius: "10px",
       boxShadow: "#A9D91066 0px 3px 8px",
@@ -303,24 +302,33 @@ const CommercialPostCard = ({ data, index }) => {
         display={"flex"}
         justifyContent={"center"}
       >
-        <Box className="cards">
-          <Box className="image" height={"300px"}>
+        <Box className="cards" display="flex" flexDirection="column" gap={2}>
+          <Box height={"250px"}>
             <img src={data?.coverImage} width={"100%"} height={"100%"} />
           </Box>
-          <Box className="contentBox">
+          <Box padding={"10px"}>
             <Box width="95%" marginInline="auto">
               <Typography variant="h2" fontSize={18} fontWeight={500}>
                 {data?.projectName}
               </Typography>
-              <Typography
-                mt={1.5}
-                variant="p"
-                fontSize={16}
-                fontWeight={300}
-                style={{ textWrap: "pretty" }}
-              >
-                {data?.description}
-              </Typography>
+
+              <Box>
+                <Typography
+                  mt={1}
+                  variant="p"
+                  fontSize={14}
+                  fontWeight={300}
+                  sx={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: "4",
+                    WebkitBoxOrient: "vertical",
+                  }}
+                >
+                  {data?.description}
+                </Typography>
+              </Box>
               <Box mt={1} mb={1}>
                 <Divider color="#A9D910" />
               </Box>
@@ -363,7 +371,7 @@ const CommercialPostCard = ({ data, index }) => {
               </Box>
             </Box>
           </Box>
-        </Box>{" "}
+        </Box>
       </Box>
     </CardComponentStyle>
   );

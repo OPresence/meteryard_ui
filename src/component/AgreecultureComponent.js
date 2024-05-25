@@ -250,13 +250,13 @@ const AgreecultureComponent = ({ showViewMore }) => {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Box display={"inline-flex"}>
-              <Box>
-                <Typography variant="h1">Agriculture Projects</Typography>
-                <Typography variant="body1">
-                  Agriculture Projects Across India.
-                </Typography>
-              </Box>
+            <Box width="90%" marginInline="auto">
+              <Typography variant="h1" fontSize={48} fontWeight={500}>
+                Agriculture Projects
+              </Typography>
+              <Typography fontSize={24} fontWeight={300}>
+                Agriculture Projects Across India.
+              </Typography>
             </Box>
             {auth?._getlistAgreeculture?.length > 4 && (
               <Box
@@ -279,7 +279,7 @@ const AgreecultureComponent = ({ showViewMore }) => {
               </Box>
             )}
           </Box>
-          <Box mt={2}>
+          <Box mt={2} width="95%" marginInline="auto">
             {auth?._getlistAgreeculture?.length > 4 ? (
               <Slider {...settings} ref={sliderRef}>
                 {auth?._getlistAgreeculture &&

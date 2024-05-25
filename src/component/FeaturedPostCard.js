@@ -4,7 +4,9 @@ import Divider from "@mui/material/Divider";
 import styled from "@emotion/styled";
 import ButtonComponent from "./ButtonComponent";
 import { useRouter } from "next/router";
-const CardComponentStyle = styled("Box")(({ theme }) => ({
+
+const CardComponentStyle = styled(Box)(({ theme }) => ({
+  width: "100%",
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
     background: "#fff",
@@ -32,7 +34,7 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     // cursor: "pointer",
     width: "100%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    borderRadius: "20px",
+    // borderRadius: "20px",
     position: "relative",
     margin: "20px",
     height: "100%",
@@ -42,8 +44,8 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
       height: "170px",
     },
     "& img": {
-      borderTopRightRadius: "10px",
-      borderTopLeftRadius: "10px",
+      // borderTopRightRadius: "10px",
+      // borderTopLeftRadius: "10px",
       height: "100%",
     },
     "&:hover": {
@@ -95,13 +97,12 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
       height: "100%",
       background:
         "linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgb(0 0 0 / 0))",
-      borderTopRightRadius: "10px",
-      borderTopLeftRadius: "10px",
+      // borderTopRightRadius: "10px",
+      // borderTopLeftRadius: "10px",
     },
   },
 }));
 const FeaturedPostCard = ({ data, index }) => {
-  console.log("dnsknsn", index);
   const router = useRouter();
   return (
     <CardComponentStyle>
@@ -129,50 +130,76 @@ const FeaturedPostCard = ({ data, index }) => {
             <img src={data?.coverImage} width={"100%"} height={"100%"} />
             <div class="block-layer"></div>
           </Box>
-          <Box className="contentBox">
-            <Box className="headingBox">
+          <Box
+            padding={"10px"}
+            display="flex"
+            flexDirection="column"
+            justifyContent="space-between"
+            alignItems="flex-start"
+            gap={1}
+            minHeight="250px"
+          >
+            {/* <Box className="headingBox">
               <Typography variant="h5">{data?.projectName} </Typography>
-            </Box>
-            <Typography variant="h3">{data?.title} </Typography>
-            <div className="paragraph-container">
-              <p
-                className="paragraph"
-                style={{ fontSize: "16px", fontWeight: "400" }}
+            </Box> */}
+            <Typography variant="p" fontSize={18} fontWeight={500}>
+              {data?.title}
+            </Typography>
+            {/* <Typography variant="h3">{data?.title} </Typography> */}
+            <Box>
+              <Typography
+                variant="p"
+                fontSize={14}
+                fontWeight={300}
+                sx={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: "5",
+                  WebkitBoxOrient: "vertical",
+                }}
               >
                 {data?.description}
-              </p>
-            </div>
-            <Box m={"10px 0"}>
+              </Typography>
+            </Box>
+            <Box>
               <Divider color="#A9D910" />
             </Box>
             <Box
               display={"flex"}
-              alignItems={"center"}
-              justifyContent={"space-between"}
+              alignItems={"flex-start"}
+              justifyContent="flex-start"
+              style={{ gap: "15px" }}
+              width="100%"
+              padding={"0 10px"}
             >
-              <Box>
-                <Typography variant="h3">Property Size</Typography>
-                <Typography variant="h6">{data?.superBuildupArea}</Typography>
+              <Box width="40%" display="flex" flexDirection="column" gap={0.5}>
+                <Typography
+                  variant="p"
+                  fontSize={14}
+                  fontWeight={400}
+                  style={{ textWrap: "nowrap" }}
+                >
+                  Property Size
+                </Typography>
+                <Typography variant="p" color="#E0AF00" fontSize={14}>
+                  {data?.superBuildupArea}
+                </Typography>
               </Box>
-              &nbsp;&nbsp; &nbsp;&nbsp;
-              <Box>
-                <Typography variant="h3">Price</Typography>
-                <Typography variant="h6">
+              <Box width="55%" display="flex" flexDirection="column" gap={0.5}>
+                <Typography variant="p" fontSize={14} fontWeight={400}>
+                  Price
+                </Typography>
+                <Typography variant="p" color="#E0AF00" fontSize={14}>
                   {data?.price?.toLocaleString()}/- Rs
                 </Typography>
               </Box>
             </Box>
-            <Box
-              display={"flex"}
-              justifyContent={"center"}
-              // style={
-              //   index == 0 ? { paddingBottom: "10px" } : { paddingBottom:"0" }
-              // }
-            >
+            <Box width="100%" display="flex" justifyContent="center">
               <ButtonComponent data={data} />
             </Box>
           </Box>
-        </Box>{" "}
+        </Box>
       </Box>
     </CardComponentStyle>
   );

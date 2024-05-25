@@ -1,4 +1,4 @@
-import { useRef, useContext, useState } from "react";
+import React, { useRef, useContext, useState } from "react";
 import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -227,15 +227,16 @@ const ResidentialProjects = ({ showViewMore }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const handlePrevious = () => {
-    console.log("handlePrv");
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
+      setCurrentSlide(currentSlide - 1);
     }
   };
 
   const handleNext = () => {
     if (sliderRef.current) {
       sliderRef.current.slickNext();
+      setCurrentSlide(currentSlide + 1);
     }
   };
 
@@ -342,42 +343,25 @@ const ResidentialProjects = ({ showViewMore }) => {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Box display={"inline-flex"}>
-              <Box>
-                <Typography variant="h1">Residential Projects</Typography>
-                <Typography variant="body1">
-                  Residential Projects Across India
-                </Typography>
-              </Box>
+            <Box width="90%" marginInline="auto">
+              <Typography variant="h1" fontSize={48} fontWeight={500}>
+                Residential Projects
+              </Typography>
+              <Typography fontSize={24} fontWeight={300}>
+                Residential Projects Across India
+              </Typography>
             </Box>
-            {/* {auth?._getlist?.length > 4 && (
-              <Box
-                style={{
-                  display: "flex",
-                  gap: "10px",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <Box className={"ArrowClass"} onClick={previous}>
-                  <ArrowBackIosIcon
-                    style={{
-                      color: "#000",
-                    }}
-                  />
-                </Box>
-                <Box className={"ArrowClass"} onClick={next}>
-                  <ArrowForwardIosIcon style={{ color: "#000" }} />
-                </Box>
-              </Box>
-            )} */}
           </Box>
-          <IconButtonLeftContent onClick={handlePrevious}>
-            <ArrowBackIosIcon />
-          </IconButtonLeftContent>
+          {currentSlide >= 2 && (
+            <IconButtonLeftContent onClick={handlePrevious}>
+              <ArrowBackIosIcon />
+            </IconButtonLeftContent>
+          )}
+
           <Box className="cards" mt={4}>
             <Box
               sx={{
-                width: "90%",
+                width: "95%",
                 margin: "0 auto",
                 position: "relative",
               }}
@@ -409,71 +393,48 @@ const ResidentialProjects = ({ showViewMore }) => {
               )}
             </Box>
 
+            <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+              <Box
+                sx={{ display: "flex", justifyContent: "center", mt: "10px" }}
+              >
+                {React.Children.toArray(
+                  auth._isFeaturedPost.map((item, index) => {
+                    return (
+                      <Box
+                        onClick={() => {
+                          setCurrentSlide(index);
+                          sliderRef.current.slickGoTo(index);
+                        }}
+                        style={{
+                          minWidth: "10px",
+                          minHeight: "10px",
+                          borderRadius: "50%",
+                          border: "1px solid #A7D325",
+                          backgroundColor:
+                            currentSlide === index ? "#A7D325" : "white",
+                          marginRight: "4px",
+                        }}
+                      />
+                    );
+                  })
+                )}
+              </Box>
+            </Box>
+
             {auth?._getlist_commercial.length > 0 && (
-              <Box className="viewmoreButtonShow">
+              <Box className="viewmoreButtonShow" height="100px">
                 <Button onClick={handleClick}>
                   View All <ArrowForwardIcon className="forwardIcon" />
                 </Button>
               </Box>
             )}
-
-            {/* {auth?._getlist?.length > 7 && (
-              <Box
-                display={"flex"}
-                justifyContent={"end"}
-                p={"0 15px"}
-                mt={"-20px"}
-              >
-                <a href="#">view more</a>
-              </Box>
-            )} */}
-            {/* {auth?._getlist && auth._getlist.length > 1 && (
-              <Button
-                onClick={handleClick}
-                // href="/all-property"
-                variant="contained"
-                color="success"
-                className="viewBtn"
-              >
-                View All <ArrowForwardIcon className="forwardIcon" />
-              </Button>
-            )} */}
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
-            <Box
-              onClick={() => {
-                setCurrentSlide(0);
-                sliderRef.current.slickGoTo(0);
-              }}
-              style={{
-                minWidth: "10px",
-                minHeight: "10px",
 
-                borderRadius: "50%",
-                border: "1px solid #A7D325",
-                backgroundColor: currentSlide === 0 ? "#A7D325" : "white",
-                marginRight: "4px",
-              }}
-            />
-            <Box
-              onClick={() => {
-                setCurrentSlide(1);
-                sliderRef.current.slickGoTo(1);
-              }}
-              style={{
-                minWidth: "10px",
-                minHeight: "10px",
-
-                borderRadius: "50%",
-                border: "1px solid #A7D325",
-                backgroundColor: currentSlide === 1 ? "#A7D325" : "white",
-                marginRight: "4px",
-              }}
-            />
-          </Box>
-          <IconButtonRightContent onClick={handleNext}>
-            <ArrowForwardIosIcon />
-          </IconButtonRightContent>
+          {currentSlide < auth?._getlist_commercial.length && (
+            <IconButtonRightContent onClick={handleNext}>
+              <ArrowForwardIosIcon />
+            </IconButtonRightContent>
+          )}
         </Container>
       </div>
     </ResidentStyle>

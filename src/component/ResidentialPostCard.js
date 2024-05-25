@@ -2,7 +2,9 @@ import styled from "@emotion/styled";
 import { Typography, Box, Grid, Divider } from "@mui/material";
 // import Divider from "@mui/material/Divider";
 import ButtonComponent from "./ButtonComponent";
-const ResidentCardStyle = styled("Box")(({ theme }) => ({
+const ResidentCardStyle = styled(Box)(({ theme }) => ({
+  // width: "500px",
+  height: "250px",
   "& .mainCardBox": {
     maxHeight: "280px",
     // height: "100%",
@@ -15,68 +17,98 @@ const ResidentCardStyle = styled("Box")(({ theme }) => ({
       width: "100%",
       height: "100%",
     },
-    // "& h": {},
   },
 }));
 
 const ResidentialPostCard = ({ data }) => {
   return (
     <ResidentCardStyle>
-      <Box m={"15px"} height={"100%"}>
+      <Box m="15px">
         <Box className="mainCardBox">
-          <Box height={"100%"}>
-            <Grid container style={{ height: "100%" }}>
-              <Grid item lg={6} md={6}>
-                <Box
-                  maxWidth={"190px"}
-                  height={"100%"}
-                  maxHeight={"265px"}
-                  overflow={"hidden"}
+          <Box display="flex" alignItems="center">
+            <Box width="250px" height="280px">
+              <img
+                src={data?.coverImage}
+                width="100%"
+                height="100%"
+                style={{ objectFit: "fill" }}
+              />
+            </Box>
+            <Box
+              width="350px"
+              height="280px"
+              padding="10px 10px 10px 20px"
+              display="flex"
+              flexDirection="column"
+              justifyContent="space-between"
+              alignItems="flex-start"
+              gap={1}
+            >
+              <Typography variant="p" fontSize={18} fontWeight={500}>
+                {data?.projectName}
+              </Typography>
+              <Box>
+                <Typography
+                  variant="p"
+                  fontSize={14}
+                  fontWeight={300}
+                  sx={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: "4",
+                    WebkitBoxOrient: "vertical",
+                  }}
                 >
-                  <img src={data?.coverImage} />
-                </Box>
-              </Grid>
-              <Grid item lg={6} md={6}>
-                <Box p={"15px 10px 0 0"}>
-                  <div className="projectHeading-container">
-                    {/* <p className="paragraph">{data?.description}</p> */}
-                    <Typography className="projectHeading">
-                      {data?.projectName}
-                    </Typography>
-                  </div>
-                  <div className="paragraph-container">
-                    <p className="paragraph">{data?.description}</p>
-                  </div>
-                  <Box m={"10px 0 5px 0"}>
-                    <Divider color="#A9D910" />
-                  </Box>
-                  <Box
-                    display={"flex"}
-                    alignItems={"center"}
-                    justifyContent={"space-between"}
+                  {data?.description}
+                </Typography>
+              </Box>
+              <Box width="100%" height="2px">
+                <Divider color="#A9D910" />
+              </Box>
+              <Box
+                display={"flex"}
+                alignItems={"flex-start"}
+                justifyContent="flex-start"
+                style={{ gap: "15px" }}
+                width="100%"
+              >
+                <Box
+                  width="40%"
+                  display="flex"
+                  flexDirection="column"
+                  gap={0.5}
+                >
+                  <Typography
+                    variant="p"
+                    fontSize={14}
+                    fontWeight={400}
+                    style={{ textWrap: "nowrap" }}
                   >
-                    <Box>
-                      <Typography variant="h4">Property Size</Typography>
-                      <Typography variant="h5">
-                        {data?.superBuildupArea}
-                      </Typography>
-                      {/* <Typography variant="h5">900 Sqr Ft.</Typography> */}
-                    </Box>
-                    &nbsp;&nbsp; &nbsp;&nbsp;
-                    <Box>
-                      <Typography variant="h4">Price</Typography>
-                      <Typography variant="h5">
-                        {data?.price?.toLocaleString()}/- Rs
-                      </Typography>
-                      {/* <Typography variant="h5">2,75000/-</Typography> */}
-                    </Box>
-                  </Box>
-                  <Box m={"10px 0 10px 0"}>
-                    <ButtonComponent data={data} />
-                  </Box>
+                    Property Size
+                  </Typography>
+                  <Typography variant="p" color="#E0AF00" fontSize={14}>
+                    {data?.superBuildupArea}
+                  </Typography>
                 </Box>
-              </Grid>
-            </Grid>
+                <Box
+                  width="55%"
+                  display="flex"
+                  flexDirection="column"
+                  gap={0.5}
+                >
+                  <Typography variant="p" fontSize={14} fontWeight={400}>
+                    Price
+                  </Typography>
+                  <Typography variant="p" color="#E0AF00" fontSize={14}>
+                    {data?.price?.toLocaleString()}/- Rs
+                  </Typography>
+                </Box>
+              </Box>
+              <Box>
+                <ButtonComponent data={data} />
+              </Box>
+            </Box>
           </Box>
         </Box>
       </Box>

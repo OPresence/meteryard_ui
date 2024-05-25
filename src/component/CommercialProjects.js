@@ -315,7 +315,7 @@
 
 // export default CommercialProjects;
 
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Grid, Typography, Box, Container, Button } from "@mui/material";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -420,6 +420,8 @@ const CommercialProjects = () => {
   const auth = useContext(AuthContext);
   const router = useRouter();
 
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -502,7 +504,7 @@ const CommercialProjects = () => {
   return (
     <CommercialProjectsStyle>
       <Container maxWidth>
-        <Box width="95%" marginInline="auto">
+        <Box width="90%" marginInline="auto">
           <Typography variant="h1" fontSize={48} fontWeight={500}>
             Commercial Projects
           </Typography>
@@ -510,25 +512,7 @@ const CommercialProjects = () => {
             Commercial Projects Across India
           </Typography>
         </Box>
-
-        {/* <Box mt={4}>
-            <Slider {...settings} ref={sliderRef}>
-              {auth?._isFeaturedPost?.map((data, index) => (
-                <FeaturedPostCard data={data} key={index} />
-              ))}
-            </Slider>
-            <Box className="viewmoreButton">
-              {auth._isFeaturedPost.length > 4 && (
-                <Button onClick={handleClick}>
-                  View All
-                  <ArrowForwardIcon
-                    sx={{ fontSize: "18px", marginLeft: "10px" }}
-                  />
-                </Button>
-              )}
-            </Box>
-          </Box> */}
-        <Box mt={4}>
+        <Box mt={4} width="95%">
           {auth?._getlist_commercial?.length > 4 ? (
             <>
               <Slider {...settings} ref={sliderRef}>
@@ -557,6 +541,33 @@ const CommercialProjects = () => {
               })}
             </Grid>
           )}
+
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+            <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+              {auth?._getlist_commercial.length > 4 &&
+                React.Children.toArray(
+                  auth?._getlist_commercial.map((item, index) => {
+                    return (
+                      <Box
+                        onClick={() => {
+                          setCurrentSlide(index);
+                          sliderRef?.current?.slickGoTo(index);
+                        }}
+                        style={{
+                          minWidth: "10px",
+                          minHeight: "10px",
+                          borderRadius: "50%",
+                          border: "1px solid #A7D325",
+                          backgroundColor:
+                            currentSlide === index ? "#A7D325" : "white",
+                          marginRight: "4px",
+                        }}
+                      />
+                    );
+                  })
+                )}
+            </Box>
+          </Box>
 
           {auth?._getlist_commercial.length > 0 && (
             <Box className="viewmoreButtonShow">

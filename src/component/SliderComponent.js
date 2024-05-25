@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
 import { Card, Grid, Typography, Box, Container } from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
     textAlign: "center",
     width: "85%",
@@ -27,7 +29,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       color: "orange",
       fontSize: "16px",
       marginTop: "2rem",
-      fontWeight:"400"
+      fontWeight: "400",
       // marginLeft: "-4rem",
     },
 
@@ -50,13 +52,17 @@ const MainComponent = styled("Box")(({ theme }) => ({
     height: "230px",
     borderRadius: "10px",
     marginTop: "2rem",
-    position:"relative",
+    position: "relative",
 
     "& h5": {
       marginTop: "1rem",
 
       // "fontFamily":"Inter","fontSize":"22px","fontWeight":"700","lineHeight":"26.31px","textAlign":"center"
-      "fontFamily":"Inter","fontSize":"22px","fontWeight":"600","lineHeight":"26.31px","textAlign":"center"
+      fontFamily: "Inter",
+      fontSize: "22px",
+      fontWeight: "600",
+      lineHeight: "26.31px",
+      textAlign: "center",
     },
     "& .rightIcon": {
       textAlign: "center",
@@ -68,6 +74,31 @@ const MainComponent = styled("Box")(({ theme }) => ({
     height: "310px",
   },
 }));
+
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  zIndex: 1,
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
+
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
 
 const SliderComponent = () => {
   const sliderRef = useRef(null);
@@ -109,7 +140,7 @@ const SliderComponent = () => {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: true,
+    arrows: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -179,8 +210,23 @@ const SliderComponent = () => {
     ],
   };
 
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
   return (
-    <MainComponent>
+    <MainComponent position="relative" m={"2rem 0"}>
+      <IconButtonLeftContent onClick={handlePrevious}>
+        <ArrowBackIosIcon />
+      </IconButtonLeftContent>
       <Box className="mainSliderDiv" mt={"25rem"}>
         <Slider {...settings} ref={sliderRef}>
           {projectDetails.map((data, index) => {
@@ -198,22 +244,26 @@ const SliderComponent = () => {
                   <Box display={"flex"} justifyContent={"center"} key={index}>
                     <Card className="cards project-slider">
                       <Box className="circleimg">
-                        <Box
-                          className="img"
-                        >
+                        <Box className="img">
                           <img src={data?.image} alt="img" width={"100%"} />
                         </Box>
                         <Box>
                           <Typography variant="h5">{data?.name}</Typography>
                         </Box>
-                        <Box display={"flex"} position={"absolute"} bottom={"0"} width={"100%"} left={"20px"}>
+                        <Box
+                          display={"flex"}
+                          position={"absolute"}
+                          bottom={"0"}
+                          width={"100%"}
+                          left={"20px"}
+                        >
                           <Typography variant="h6">View all</Typography>
                           <span className="rightIcon">
                             <ChevronRightIcon />
                           </span>
                         </Box>
                       </Box>
-                    </Card>{" "}
+                    </Card>
                   </Box>
                 </Container>
               </Grid>
@@ -221,6 +271,9 @@ const SliderComponent = () => {
           })}
         </Slider>
       </Box>
+      <IconButtonRightContent onClick={handleNext}>
+        <ArrowForwardIosIcon />
+      </IconButtonRightContent>
     </MainComponent>
   );
 };
