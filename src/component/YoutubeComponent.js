@@ -14,6 +14,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import VideoPlayer from "./VideoPlayer";
 
 const videos = [
   {
@@ -64,7 +65,7 @@ const StyledSliderContainer = styled(Box)({
 });
 
 const VideoCard = styled(Card)({
-  height: "280px",
+  height: "380px",
   display: "flex",
   flexDirection: "column",
   width: "85%",
@@ -196,21 +197,34 @@ const YoutubeComponent = () => {
                 <div key={index}>
                   <Box width="100%">
                     <VideoCard>
-                      <CardMedia
+                      {/* <CardMedia
                         component="img"
-                        height="220"
+                        height="300"
                         image={video.image}
                         alt={video.title}
                         onClick={() => window.open(video.url, "_blank")}
-                      />
-                      <Typography
-                        mt={2}
-                        variant="h4"
-                        fontSize={18}
-                        fontWeight={300}
+                      /> */}
+                      {console.log({ video })}
+                      <VideoPlayer src={video.url} poster={video.image} />
+
+                      <Box
+                        sx={{
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          display: "-webkit-box",
+                          WebkitLineClamp: "2",
+                          WebkitBoxOrient: "vertical",
+                        }}
                       >
-                        {video.description}
-                      </Typography>
+                        <Typography
+                          mt={2}
+                          variant="h4"
+                          fontSize={18}
+                          fontWeight={300}
+                        >
+                          {video.description}
+                        </Typography>
+                      </Box>
                     </VideoCard>
                   </Box>
                 </div>

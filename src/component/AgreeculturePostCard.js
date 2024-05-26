@@ -123,68 +123,100 @@ const AgreeculturePostCard = ({ data }) => {
             />
           </Box>
 
-          <Box minHeight={"280px"} display={"flex"} justifyContent={"center"}>
-            <Box className="contentBox" width={"90%"}>
-              <Box className="headingBox">
-                <Typography variant="h5">{data?.projectName}</Typography>
-              </Box>
-              <Box display={"flex"} mt={1}>
+          <Box minHeight={"200px"} padding={"15px 10px"}>
+            <Box width={"95%"} display="flex" flexDirection="column" gap={1}>
+              <Typography
+                variant="p"
+                fontSize={18}
+                fontWeight={500}
+                paddingBottom={1}
+              >
+                {data?.projectName}
+              </Typography>
+              <Box
+                display="flex"
+                justifyContent="flex-start"
+                alignItems="flex-start"
+                gap={1}
+              >
                 <FmdGoodIcon />
-                &nbsp;
-                <Box m={"0 0 0 5px"}>
-                  <Typography variant="h3">{data?.title}</Typography>
-                  <div className="paragraph-container">
-                    <p className="paragraph">{data?.description}</p>
-                  </div>
-                  <Box m={"10px 0"}>
-                    <Divider color="#D2D2D2" />
-                  </Box>
-                  <Box
-                    display={"flex"}
-                    flexDirection={"column"}
-                    alignItems={"center"}
-                    justifyContent={"space-between"}
-                    gap="5px"
+                <Typography variant="p" fontSize={16} fontWeight={500}>
+                  {data?.title}
+                </Typography>
+              </Box>
+              <Box width="89%" alignSelf="flex-end">
+                <Typography
+                  variant="p"
+                  fontSize={14}
+                  fontWeight={300}
+                  textWrap="pretty"
+                  sx={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    display: "-webkit-box",
+                    WebkitLineClamp: "5",
+                    WebkitBoxOrient: "vertical",
+                  }}
+                >
+                  {data?.description}
+                </Typography>
+              </Box>
+              <Box>
+                <Divider color="#A9D910" />
+              </Box>
+              <Box
+                display={"flex"}
+                alignItems={"flex-start"}
+                justifyContent="flex-start"
+                style={{ gap: "15px" }}
+                width="90%"
+                padding={"0 10px"}
+                alignSelf="flex-end"
+              >
+                <Box
+                  width="45%"
+                  display="flex"
+                  flexDirection="column"
+                  gap={0.5}
+                >
+                  <Typography
+                    variant="p"
+                    fontSize={14}
+                    fontWeight={400}
+                    style={{ textWrap: "nowrap" }}
                   >
-                    <Box
-                      width={"100%"}
-                      display={"flex"}
-                      alignItems={"center"}
-                      justifyContent={"space-between"}
-                      gap={"5px"}
-                    >
-                      <Typography variant="p">Property Size</Typography>
-                      <Typography variant="p">
-                        {data?.price?.toLocaleString()}/- Rs
-                      </Typography>
-                    </Box>
-                    <Box
-                      width={"100%"}
-                      display={"flex"}
-                      alignItems={"center"}
-                      justifyContent={"space-between"}
-                      gap={"5px"}
-                    >
-                      <Typography variant="p">
-                        {data?.superBuildupArea}
-                      </Typography>
-                      <Typography variant="p">Price</Typography>
-                    </Box>
-                  </Box>
+                    Property Size
+                  </Typography>
+                  <Typography variant="p" color="#E0AF00" fontSize={14}>
+                    {data?.superBuildupArea}
+                  </Typography>
+                </Box>
+                <Box
+                  width="55%"
+                  display="flex"
+                  flexDirection="column"
+                  gap={0.5}
+                >
+                  <Typography variant="p" fontSize={14} fontWeight={400}>
+                    Price
+                  </Typography>
+                  <Typography variant="p" color="#E0AF00" fontSize={14}>
+                    {data?.price?.toLocaleString()}/- Rs
+                  </Typography>
                 </Box>
               </Box>
             </Box>
           </Box>
-          <Box
-            height={"80px"}
-            width={"100%"}
-            display={"flex"}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            <ButtonComponent data={data} />
-          </Box>
         </Box>
+      </Box>
+      <Box
+        height={"80px"}
+        width={"100%"}
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <ButtonComponent data={data} />
       </Box>
     </AgreecultureStyle>
   );
