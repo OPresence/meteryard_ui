@@ -1,6 +1,7 @@
 FROM node:18-alpine AS base
 
-ENV AUTH_SECRET = ""
+ARG NEXTAUTH_SECRET=default_key_id
+ENV NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
 
 # Install dependencies only when needed
 FROM base AS deps
