@@ -61,5 +61,10 @@
     "web3": "^4.0.3",
     "yep": "^0.1.0",
     "yup": "^1.3.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.24.6",
+    "@babel/preset-react": "^7.24.6",
+    "babel-plugin-transform-remove-console": "^6.9.4"
   }
 }

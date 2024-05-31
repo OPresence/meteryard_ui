@@ -1,5 +1,5 @@
 import * as React from "react";
-import Pagination from "@mui/material/Pagination";
+import { Box, Pagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/system";
 
