@@ -30,7 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const DialogStyle = styled("Box")(({ theme }) => ({
+const DialogStyle = styled(Box)(({ theme }) => ({
   "& button": {
     background: "#A2D117",
     padding: "8px 25px",
@@ -85,7 +85,7 @@ const modalClassStyles = {
     height: "278px",
   },
 };
-const LoginStyle = styled("Box")(({ theme }) => ({
+const LoginStyle = styled(Box)(({ theme }) => ({
   "& .loginBox1": {
     "& button": {
       background: "#A2D117",

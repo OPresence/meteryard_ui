@@ -73,7 +73,7 @@ const PropertyMobileModal = ({
   tabView,
   setSelectedTab,
 }) => {
-  const ContainerStyle = styled("Box")({
+  const ContainerStyle = styled(Box)({
     maxHeight: "calc(80vh - 100px)",
     overflowY: "auto",
     "&::-webkit-scrollbar": {

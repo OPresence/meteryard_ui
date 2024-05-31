@@ -12,7 +12,7 @@ import { cityObject } from "../utils";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const MenuComponentStyle = styled("Box")(({ theme }) => ({
+const MenuComponentStyle = styled(Box)(({ theme }) => ({
   "& .submenueTab": {
     "& h5": {
       fontSize: "18px",

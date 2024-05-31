@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 // PostApiFunction
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     // marginTop: "-120px",
     // position: "relative",

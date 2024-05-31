@@ -4,7 +4,7 @@ import { borderRadius } from "@mui/system";
 
 const VideoPlayer = ({ src, poster }) => {
   return (
-    <Container>
+    <Box>
       <Box
         display="flex"
         flexDirection="column"
@@ -16,7 +16,7 @@ const VideoPlayer = ({ src, poster }) => {
           Your browser does not support the video tag.
         </video>
       </Box>
-    </Container>
+    </Box>
   );
 };
 

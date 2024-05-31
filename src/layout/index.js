@@ -18,7 +18,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import { color } from "@mui/system";
 
-const layOutcss = styled("Box")(({ theme }) => ({
+const layOutcss = styled(Box)(({ theme }) => ({
   "& .appbarBox": {
     background: "#fff ",
     boxShadow: "none ",

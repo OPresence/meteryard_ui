@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { styled } from "@mui/system";
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
     background: "#fff",

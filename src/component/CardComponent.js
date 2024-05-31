@@ -1,5 +1,13 @@
 import React, { useContext, useRef, useState } from "react";
-import { Grid, Typography, Box, Container, Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import {
+  Grid,
+  Typography,
+  Box,
+  Container,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
@@ -11,7 +19,7 @@ import { AuthContext } from "../context/Auth";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/router";
 
-const CardComponentStyle = styled("Box")(({ theme }) => ({
+const CardComponentStyle = styled(Box)(({ theme }) => ({
   position: "relative",
   "& .mainSliderDiv": {
     // padding: "0px 0 0px 0",
@@ -59,7 +67,6 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     padding: "10px",
     display: "flex",
     justifyContent: "end",
-    marginTop: "-40px",
 
     "& button": {
       border: "2px solid #a7d325",
@@ -101,6 +108,9 @@ const IconButtonRightContent = styled(Box)({
 });
 
 const CardComponent = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const sliderRef = useRef(null);
   const auth = useContext(AuthContext);
   const router = useRouter();
@@ -203,14 +213,25 @@ const CardComponent = () => {
       <div className="mainSliderDiv">
         <Container maxWidth>
           <Box width="90%" marginInline="auto">
-            <Typography variant="h1" fontSize={48} fontWeight={500}>
+            <Typography
+              variant="h1"
+              fontSize={isMobile ? 28 : 48}
+              fontWeight={500}
+              lineHeight={isMobile && 1.5}
+            >
               Featured Projects
             </Typography>
-            <Typography fontSize={24} fontWeight={300}>
+            <Typography
+              variant="p"
+              fontSize={isMobile ? 20 : 24}
+              pl={0.3}
+              fontWeight={300}
+            >
               Featured Residential Projects Across India
             </Typography>
           </Box>
-          {auth._isFeaturedPost.length > 4 && (
+
+          {auth._isFeaturedPost.length > 4 && !isMobile && (
             <IconButtonLeftContent onClick={handlePrevious}>
               <ArrowBackIosIcon />
             </IconButtonLeftContent>
@@ -267,12 +288,12 @@ const CardComponent = () => {
             )}
           </Box>
 
-          {auth._isFeaturedPost.length > 4 && (
+          {auth._isFeaturedPost.length > 4 && !isMobile && (
             <IconButtonRightContent onClick={handleNext}>
               <ArrowForwardIosIcon />
             </IconButtonRightContent>
           )}
-          <Box className="viewmoreButtonShow">
+          <Box className="viewmoreButtonShow" style={{ marginTop: "1rem" }}>
             {auth._isFeaturedPost.length > 4 && (
               <Button onClick={handleClick}>
                 View All

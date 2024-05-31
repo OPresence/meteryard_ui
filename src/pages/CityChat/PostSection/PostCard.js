@@ -30,7 +30,7 @@ import SliderImage from "./SliderImage";
 import { PostApiFunction } from "@/utils";
 import Apiconfigs from "../../../ApiConfig/ApiConfig";
 
-const CityPropertyStyle = styled("Box")(({ theme }) => ({
+const CityPropertyStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     marginTop: "20px",
     boxShadow: "0px 13px 13px #00000026",
@@ -132,9 +132,9 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const [comments, setComments] = useState([]);
-  const [page, setPage] = useState(1); 
-  const [_addReply, setAddReply] = useState(""); 
-  const [replyingTo, setReplyingTo] = useState(null); 
+  const [page, setPage] = useState(1);
+  const [_addReply, setAddReply] = useState("");
+  const [replyingTo, setReplyingTo] = useState(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -224,24 +224,24 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
           };
         })
       );
-      const new_comments = comments.concat(commentsWithReplies)
-      console.log("new comments", new_comments)
+      const new_comments = comments.concat(commentsWithReplies);
+      console.log("new comments", new_comments);
       setComments(new_comments);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      await fetchComments()
-    }
-    fetchData()
-  }, [page])
+      await fetchComments();
+    };
+    fetchData();
+  }, [page]);
 
   const handleAddReply = async (commentId) => {
     try {
-      await AddReplyFunction(commentId, _addReply)
+      await AddReplyFunction(commentId, _addReply);
 
       try {
         const res = await PostApiFunction({
@@ -273,12 +273,10 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
         console.error("Error fetching comments:", error);
       }
       setAddReply("");
-
     } catch (error) {
       console.error("Error adding reply:", error);
     }
   };
-
 
   const getTimeDifference = (submittedAt) => {
     const currentDate = new Date();
@@ -291,11 +289,11 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
     const days = Math.floor(hours / 24);
 
     if (days > 0) {
-      return `${days} ${days === 1 ? 'day' : 'days'} ago`;
+      return `${days} ${days === 1 ? "day" : "days"} ago`;
     } else if (hours > 0) {
-      return `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+      return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
     } else {
-      return `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+      return `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
     }
   };
 
@@ -340,7 +338,6 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
       console.error("Error fetching more comments:", error);
     }
   };
-
 
   return (
     <CityPropertyStyle>
@@ -481,7 +478,6 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
 
             {_showcomment && (
               <Box>
-
                 <Box className="comment-section">
                   <Stack direction="row" spacing={2}>
                     <Avatar alt="Remy Sharp" src="/images/1567018939360.png" />
@@ -503,182 +499,230 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
                   </Button>
                 </Box>
                 <Box className="comment-details">
-                  {comments && comments?.map((comment, index) =>{
-                    return(
-                      <Box key={index}>
-                      <Stack
-                        direction="row"
-                        spacing={2}
-                        className="comment-details-below"
-                      >
-                        <Avatar
-                          sx={{ width: "20px", height: "20px" }}
-                          alt="Remy Sharp"
-                          src="/images/1567018939360.png"
-                        />
-                        <Typography variant="h6">{comment.comment}</Typography>
-                      </Stack>
-                      {comment && comment?.replies?.map((reply, index) => (
-                        <Box className="sub-comment-section" key={index}>
+                  {comments &&
+                    comments?.map((comment, index) => {
+                      return (
+                        <Box key={index}>
                           <Stack
                             direction="row"
                             spacing={2}
                             className="comment-details-below"
                           >
                             <Avatar
-                              sx={{ width: "15px", height: "15px" }}
+                              sx={{ width: "20px", height: "20px" }}
                               alt="Remy Sharp"
                               src="/images/1567018939360.png"
                             />
-                            <Typography sx={{ mt: "4px" }}>
-                              <span>{reply.reply}</span>
+                            <Typography variant="h6">
+                              {comment.comment}
                             </Typography>
                           </Stack>
-                          <Box
-                            className="iconBox activity-icon-comments"
-                            sx={{
-                              fontSize: { xs: "12px", md: "13px" },
-                              mt: "3px",
-                              display: "flex",
-                              justifyContent: "space-center",
-                            }}
-                          >
-                            <span>{getTimeDifference(reply.createdAt)}</span>
-                            <FavoriteBorderIcon />
-                            <Button onClick={handleEdit}>
-                              <EditIcon style={{ color: "black" }} />
-                            </Button>
-                            <Modal open={editModal} onClose={handleClose}>
-                              <Box
-                                sx={{
-                                  position: "absolute",
-                                  top: "50%",
-                                  left: "50%",
-                                  transform: "translate(-50%, -50%)",
-                                  width: 400,
-                                  bgcolor: "background.paper",
-                                  padding: "15px",
-                                  boxShadow: 24,
-                                  borderRadius: "10px ",
-                                }}
-                              >
-                                <Typography variant="h6" sx={{ textAlign: "center" }}>
-                                  <Box className="comment-section">
-                                    <Stack direction="row" spacing={2}>
-                                      <Avatar
-                                        alt="Remy Sharp"
-                                        src="/images/1567018939360.png"
-                                      />
-                                    </Stack>
-                                    <Box sx={{ width: { xs: "60%", md: "60%" } }}>
-                                      <TextField
-                                        fullWidth
-                                        value={_addcomment}
-                                        placeholder="Comments...."
-                                        onChange={(e) =>
-                                          setAddComment(e.target.value)
-                                        }
-                                      />
-                                    </Box>
-                                    <Button
-                                      disabled={
-                                        _addcomment?.length > 0 ? false : true
-                                      }
-                                      className="sendButton"
-                                      onClick={() => {
-                                        AddCommentFunction(data?._id, _addcomment);
-                                        setAddComment("");
+                          {comment &&
+                            comment?.replies?.map((reply, index) => (
+                              <Box className="sub-comment-section" key={index}>
+                                <Stack
+                                  direction="row"
+                                  spacing={2}
+                                  className="comment-details-below"
+                                >
+                                  <Avatar
+                                    sx={{ width: "15px", height: "15px" }}
+                                    alt="Remy Sharp"
+                                    src="/images/1567018939360.png"
+                                  />
+                                  <Typography sx={{ mt: "4px" }}>
+                                    <span>{reply.reply}</span>
+                                  </Typography>
+                                </Stack>
+                                <Box
+                                  className="iconBox activity-icon-comments"
+                                  sx={{
+                                    fontSize: { xs: "12px", md: "13px" },
+                                    mt: "3px",
+                                    display: "flex",
+                                    justifyContent: "space-center",
+                                  }}
+                                >
+                                  <span>
+                                    {getTimeDifference(reply.createdAt)}
+                                  </span>
+                                  <FavoriteBorderIcon />
+                                  <Button onClick={handleEdit}>
+                                    <EditIcon style={{ color: "black" }} />
+                                  </Button>
+                                  <Modal open={editModal} onClose={handleClose}>
+                                    <Box
+                                      sx={{
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%, -50%)",
+                                        width: 400,
+                                        bgcolor: "background.paper",
+                                        padding: "15px",
+                                        boxShadow: 24,
+                                        borderRadius: "10px ",
                                       }}
                                     >
-                                      <SendIcon />
-                                    </Button>
-                                  </Box>
-                                </Typography>
-                                <ButtonGroup
-                                  sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    textAlign: "center",
-                                    gap: "50px",
-                                    padding: "2px",
-                                    margin: "10px",
-                                  }}
-                                >
-                                  <Button variant="contained" color="info">
-                                    Yes
-                                  </Button>
-                                  <Button variant="contained" color="error">
-                                    No
-                                  </Button>
-                                </ButtonGroup>
-                              </Box>
-                            </Modal>
+                                      <Typography
+                                        variant="h6"
+                                        sx={{ textAlign: "center" }}
+                                      >
+                                        <Box className="comment-section">
+                                          <Stack direction="row" spacing={2}>
+                                            <Avatar
+                                              alt="Remy Sharp"
+                                              src="/images/1567018939360.png"
+                                            />
+                                          </Stack>
+                                          <Box
+                                            sx={{
+                                              width: { xs: "60%", md: "60%" },
+                                            }}
+                                          >
+                                            <TextField
+                                              fullWidth
+                                              value={_addcomment}
+                                              placeholder="Comments...."
+                                              onChange={(e) =>
+                                                setAddComment(e.target.value)
+                                              }
+                                            />
+                                          </Box>
+                                          <Button
+                                            disabled={
+                                              _addcomment?.length > 0
+                                                ? false
+                                                : true
+                                            }
+                                            className="sendButton"
+                                            onClick={() => {
+                                              AddCommentFunction(
+                                                data?._id,
+                                                _addcomment
+                                              );
+                                              setAddComment("");
+                                            }}
+                                          >
+                                            <SendIcon />
+                                          </Button>
+                                        </Box>
+                                      </Typography>
+                                      <ButtonGroup
+                                        sx={{
+                                          display: "flex",
+                                          justifyContent: "center",
+                                          textAlign: "center",
+                                          gap: "50px",
+                                          padding: "2px",
+                                          margin: "10px",
+                                        }}
+                                      >
+                                        <Button
+                                          variant="contained"
+                                          color="info"
+                                        >
+                                          Yes
+                                        </Button>
+                                        <Button
+                                          variant="contained"
+                                          color="error"
+                                        >
+                                          No
+                                        </Button>
+                                      </ButtonGroup>
+                                    </Box>
+                                  </Modal>
 
-                            <Button onClick={handleDelete}>
-                              <DeleteIcon style={{ color: "black" }} />
+                                  <Button onClick={handleDelete}>
+                                    <DeleteIcon style={{ color: "black" }} />
+                                  </Button>
+                                  <Modal
+                                    open={deleteModal}
+                                    onClose={handleClose}
+                                  >
+                                    <Box
+                                      sx={{
+                                        position: "absolute",
+                                        top: "50%",
+                                        left: "50%",
+                                        transform: "translate(-50%, -50%)",
+                                        width: 400,
+                                        bgcolor: "background.paper",
+                                        padding: "15px",
+                                        boxShadow: 24,
+                                        borderRadius: "10px ",
+                                      }}
+                                    >
+                                      <Typography
+                                        variant="h6"
+                                        sx={{ textAlign: "center" }}
+                                      >
+                                        Are you sure you want to Delete?
+                                      </Typography>
+                                      <ButtonGroup
+                                        sx={{
+                                          display: "flex",
+                                          justifyContent: "center",
+                                          textAlign: "center",
+                                          gap: "50px",
+                                          padding: "2px",
+                                          margin: "10px",
+                                        }}
+                                      >
+                                        <Button
+                                          variant="contained"
+                                          color="info"
+                                        >
+                                          Yes
+                                        </Button>
+                                        <Button
+                                          variant="contained"
+                                          color="error"
+                                        >
+                                          No
+                                        </Button>
+                                      </ButtonGroup>
+                                    </Box>
+                                  </Modal>
+                                </Box>
+                              </Box>
+                            ))}
+                          <Box className="sub-comment-section">
+                            <Button
+                              sx={{ color: "black", fontSize: "12px" }}
+                              onClick={() => handleReply(comment._id)}
+                            >
+                              Reply
                             </Button>
-                            <Modal open={deleteModal} onClose={handleClose}>
+
+                            {replyingTo === comment._id && (
                               <Box
                                 sx={{
-                                  position: "absolute",
-                                  top: "50%",
-                                  left: "50%",
-                                  transform: "translate(-50%, -50%)",
-                                  width: 400,
-                                  bgcolor: "background.paper",
-                                  padding: "15px",
-                                  boxShadow: 24,
-                                  borderRadius: "10px ",
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  alignItems: "center",
                                 }}
                               >
-                                <Typography variant="h6" sx={{ textAlign: "center" }}>
-                                  Are you sure you want to Delete?
-                                </Typography>
-                                <ButtonGroup
-                                  sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    textAlign: "center",
-                                    gap: "50px",
-                                    padding: "2px",
-                                    margin: "10px",
-                                  }}
+                                <TextField
+                                  fullWidth
+                                  value={_addReply}
+                                  placeholder="Add a reply..."
+                                  onChange={(e) => setAddReply(e.target.value)}
+                                />
+
+                                <IconButton
+                                  sx={{ height: "10px" }}
+                                  onClick={() => handleAddReply(comment._id)}
                                 >
-                                  <Button variant="contained" color="info">
-                                    Yes
-                                  </Button>
-                                  <Button variant="contained" color="error">
-                                    No
-                                  </Button>
-                                </ButtonGroup>
+                                  <SendIcon style={{ fontSize: "18px" }} />
+                                </IconButton>
                               </Box>
-                            </Modal>
+                            )}
                           </Box>
                         </Box>
-                      ))}
-                      <Box className="sub-comment-section">
-                        <Button sx={{ color: "black", fontSize: "12px" }} onClick={() => handleReply(comment._id)}>
-                          Reply
-                        </Button>
-                     
-                        {replyingTo === comment._id && (
-                          <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                            <TextField
-                              fullWidth
-                              value={_addReply}
-                              placeholder="Add a reply..."
-                              onChange={(e) => setAddReply(e.target.value)}
-                            />
-                           
-                            <IconButton sx={{ height: "10px" }} onClick={() => handleAddReply(comment._id)}>
-                              <SendIcon style={{ fontSize: "18px" }} />
-                            </IconButton>
-                          </Box>
-                        )}
-                      </Box>
-                    </Box>
-                    )
-                  })}
+                      );
+                    })}
                 </Box>
                 <Button onClick={handleLoadMore}>Load More</Button>
               </Box>

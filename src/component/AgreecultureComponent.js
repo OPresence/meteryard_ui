@@ -1,5 +1,13 @@
 import React, { useContext, useRef } from "react";
-import { Grid, Typography, Box, Container, Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import {
+  Grid,
+  Typography,
+  Box,
+  Container,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import styled from "@emotion/styled";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -30,80 +38,6 @@ const AgreecultureStyle = styled("Box")(({ theme }) => ({
       fontWeight: "500",
     },
   },
-  // "& .circleimg": {
-  //   width: "100%",
-  //   backgroundSize: "cover",
-  //   backgroundRepeat: "no-repeat",
-  //   height: "265px",
-  //   "& h6": {
-  //     color: "#A7D325",
-  //     fontSize: "14px",
-  //   },
-  //   "& svg": {
-  //     color: "#A7D325",
-  //   },
-  // },
-  // "& .large": {
-  //   background: "#FFF",
-  // },
-  // "& .cards": {
-  //   cursor: "pointer",
-  //   width: "100%",
-  //   borderRadius: "15px",
-  //   position: "relative",
-  //   transition: "0.8s",
-  //   transform: "scale(0.9)",
-  //   "&:hover": {
-  //     transform: "scale(1)",
-  //     transition: "0.8s",
-  //   },
-  //   // "& .contentBox": {
-  //   //   boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-  //   //   padding: "10px",
-  //   //   marginTop: "-60px",
-  //   //   background: "#fff",
-  //   //   borderRadius: "10px",
-  //   //   position: "relative",
-  //   //   minHeight: "230px",
-  //   //   "& svg": {
-  //   //     color: "#000",
-  //   //     fontSize: "16px",
-  //   //   },
-  //     // "& .circleBox": {
-  //     //   borderRadius: "50px",
-  //     //   height: "50px",
-  //     //   width: "50px",
-  //     //   marginTop: "-35px",
-  //     //   background: "darkslategray",
-  //     //   display: "flex",
-  //     //   alignItems: "center",
-  //     // },
-
-  //     // "& h5": {
-  //     //   fontSize: "12px",
-  //     //   textAlign: "start",
-  //     //   fontWeight: "bold",
-  //     //   padding: "5px",
-  //     //   marginTop: "-10px",
-  //     // },
-  //     // "& h4": {
-  //     //   fontSize: "12px",
-  //     //   color: "#000",
-  //     //   fontWeight: "500",
-  //     // },
-  //     // "& h6": {
-  //     //   fontSize: "10px",
-  //     //   color: "#818181",
-  //     //   fontWeight: "500",
-  //     //   margin: "5px 5px",
-  //     // },
-  //   // },
-
-  //   // "& h5": {
-  //   //   textAlign: "end",
-  //   //   fontSize: "18px",
-  //   // },
-  // },
   "& .ArrowClass": {
     cursor: "pointer",
     width: "30px",
@@ -131,7 +65,6 @@ const AgreecultureStyle = styled("Box")(({ theme }) => ({
     padding: "10px",
     display: "flex",
     justifyContent: "end",
-    marginTop: "-40px",
 
     "& button": {
       border: "2px solid #a7d325",
@@ -147,6 +80,9 @@ const AgreecultureStyle = styled("Box")(({ theme }) => ({
   },
 }));
 const AgreecultureComponent = ({ showViewMore }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const auth = useContext(AuthContext);
   const sliderRef = useRef(null);
   const router = useRouter();
@@ -249,36 +185,47 @@ const AgreecultureComponent = ({ showViewMore }) => {
             display={"flex"}
             justifyContent={"space-between"}
             alignItems={"center"}
+            mb={5}
           >
-            <Box width="90%" marginInline="auto">
-              <Typography variant="h1" fontSize={48} fontWeight={500}>
+            <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
+              >
                 Agriculture Projects
               </Typography>
-              <Typography fontSize={24} fontWeight={300}>
+              <Typography
+                variant="p"
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+                fontWeight={300}
+              >
                 Agriculture Projects Across India.
               </Typography>
             </Box>
-            {auth?._getlistAgreeculture?.length > 4 && (
-              <Box
-                style={{
-                  display: "flex",
-                  gap: "10px",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <Box className={"ArrowClass"} onClick={previous}>
-                  <ArrowBackIosIcon
-                    style={{
-                      color: "#000",
-                    }}
-                  />
-                </Box>
-                <Box className={"ArrowClass"} onClick={next}>
-                  <ArrowForwardIosIcon style={{ color: "#000" }} />
-                </Box>
-              </Box>
-            )}
           </Box>
+          {auth?._getlistAgreeculture?.length > 4 && (
+            <Box
+              style={{
+                display: "flex",
+                gap: "10px",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Box className={"ArrowClass"} onClick={previous}>
+                <ArrowBackIosIcon
+                  style={{
+                    color: "#000",
+                  }}
+                />
+              </Box>
+              <Box className={"ArrowClass"} onClick={next}>
+                <ArrowForwardIosIcon style={{ color: "#000" }} />
+              </Box>
+            </Box>
+          )}
           <Box mt={2} width="95%" marginInline="auto">
             {auth?._getlistAgreeculture?.length > 4 ? (
               <Slider {...settings} ref={sliderRef}>
@@ -307,25 +254,14 @@ const AgreecultureComponent = ({ showViewMore }) => {
                   })}
               </Grid>
             )}
-
-            {/* {auth?._getlistAgreeculture?.length > 7 && (
-              <Box
-                display={"flex"}
-                justifyContent={"end"}
-                p={"0 15px"}
-                mt={"-20px"}
-              >
-                <a href="#">view more</a>
-              </Box>
-            )} */}
-            {auth?._getlistAgreeculture.length > 0 && (
-              <Box className="viewmoreButtonShow">
-                <Button onClick={handleClick}>
-                  View All <ArrowForwardIcon className="forwardIcon" />
-                </Button>
-              </Box>
-            )}
           </Box>
+          {auth?._getlistAgreeculture.length > 0 && (
+            <Box className="viewmoreButtonShow" m={1}>
+              <Button onClick={handleClick}>
+                View All <ArrowForwardIcon className="forwardIcon" />
+              </Button>
+            </Box>
+          )}
         </Container>
       </div>
     </AgreecultureStyle>

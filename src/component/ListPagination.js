@@ -3,7 +3,7 @@ import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/system";
 
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .Mui-selected": {
     backgroundColor: "#A2D117 !important",
     color: "white",

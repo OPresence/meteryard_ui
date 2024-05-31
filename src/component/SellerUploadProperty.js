@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import { fontSize } from "@mui/system";
-const SellerUploadStyle = styled("Box")(({ theme }) => ({
+const SellerUploadStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     boxShadow: "0px 1px 13px #00000026",
     padding: "20px 20px 40px 20px",

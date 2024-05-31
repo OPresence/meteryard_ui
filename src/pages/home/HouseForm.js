@@ -28,7 +28,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { FlareSharp } from "@mui/icons-material";
 import { AiFillWarning } from "react-icons/ai";
-const DialogButtonStyle = styled("Box")(({ theme }) => ({
+const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
     background: "#444444",
@@ -46,7 +46,7 @@ const DialogButtonStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const PriceBox = styled("Box")(({ theme }) => ({
+const PriceBox = styled(Box)(({ theme }) => ({
   "& .mainPriceBox": {
     padding: "10px",
     borderRadius: "5px",

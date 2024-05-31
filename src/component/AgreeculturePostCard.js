@@ -5,7 +5,7 @@ import ButtonComponent from "./ButtonComponent";
 import Divider from "@mui/material/Divider";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 
-const AgreecultureStyle = styled("Box")(({ theme }) => ({
+const AgreecultureStyle = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "80px 0px",
     background: "#fff",
@@ -40,6 +40,10 @@ const AgreecultureStyle = styled("Box")(({ theme }) => ({
     position: "relative",
     margin: "20px",
     transform: "scalse(0.8)",
+
+    "@media(max-width:615px)": {
+      margin: 0,
+    },
 
     "&:hover": {
       // transform: "scalse(1)",
@@ -207,16 +211,16 @@ const AgreeculturePostCard = ({ data }) => {
               </Box>
             </Box>
           </Box>
+          <Box
+            width={"100%"}
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            pb={2}
+          >
+            <ButtonComponent data={data} />
+          </Box>
         </Box>
-      </Box>
-      <Box
-        height={"80px"}
-        width={"100%"}
-        display={"flex"}
-        alignItems={"center"}
-        justifyContent={"center"}
-      >
-        <ButtonComponent data={data} />
       </Box>
     </AgreecultureStyle>
   );

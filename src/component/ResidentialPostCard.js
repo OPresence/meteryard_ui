@@ -12,7 +12,9 @@ const ResidentCardStyle = styled(Box)(({ theme }) => ({
     // boxShadow:
     //   "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px",
     boxShadow: "0px 0px 7.2px 0px #00000024",
-
+    "@media(max-width:615px)": {
+      boxShadow: "#A9D91066 0px 3px 8px",
+    },
     "& img": {
       width: "100%",
       height: "100%",

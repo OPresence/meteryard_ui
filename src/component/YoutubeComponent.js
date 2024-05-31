@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useTheme } from "@mui/material/styles";
 import {
   Box,
   Typography,
@@ -8,6 +9,7 @@ import {
   styled,
   Container,
   Button,
+  useMediaQuery,
 } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -15,6 +17,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import VideoPlayer from "./VideoPlayer";
+import { height } from "@mui/system";
 
 const videos = [
   {
@@ -73,6 +76,7 @@ const VideoCard = styled(Card)({
   boxShadow: "none",
   "@media(max-width:615px)": {
     width: "95%",
+    height: "100%",
   },
 });
 
@@ -109,6 +113,9 @@ const IconButtonRightContent = styled(Box)({
 });
 
 const YoutubeComponent = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const sliderRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -170,20 +177,33 @@ const YoutubeComponent = () => {
           justifyContent={"space-between"}
           alignItems={"center"}
         >
-          <Box width="90%" marginInline="auto">
+          <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
             <Box>
-              <Typography variant="h1" fontWeight={500} fontSize={48}>
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
+              >
                 YOUTUBE VIDEOS
               </Typography>
-              <Typography mt={1} fontWeight={300} fontSize={24}>
+              <Typography
+                mt={1}
+                variant="p"
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+                fontWeight={300}
+              >
                 Featured Residential Projects Across India
               </Typography>
             </Box>
           </Box>
         </Box>
-        <IconButtonLeftContent onClick={handlePrevious}>
-          <ArrowBackIosIcon />
-        </IconButtonLeftContent>
+        {!isMobile && (
+          <IconButtonLeftContent onClick={handlePrevious}>
+            <ArrowBackIosIcon />
+          </IconButtonLeftContent>
+        )}
         <Box mt={4}>
           <Box
             sx={{
@@ -204,7 +224,6 @@ const YoutubeComponent = () => {
                         alt={video.title}
                         onClick={() => window.open(video.url, "_blank")}
                       /> */}
-                      {console.log({ video })}
                       <VideoPlayer src={video.url} poster={video.image} />
 
                       <Box
@@ -232,15 +251,15 @@ const YoutubeComponent = () => {
             </Slider>
           </Box>
         </Box>
-        <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+        <Box m={5} sx={{ display: "flex", justifyContent: "center" }}>
           <Box
             onClick={() => {
               setCurrentSlide(0);
               sliderRef.current.slickGoTo(0);
             }}
             style={{
-              minWidth: "10px",
-              minHeight: "10px",
+              minWidth: "12px",
+              minHeight: "12px",
               borderRadius: "50%",
               border: "1px solid #A7D325",
               backgroundColor: currentSlide === 0 ? "#A7D325" : "white",
@@ -252,20 +271,21 @@ const YoutubeComponent = () => {
               setCurrentSlide(1);
               sliderRef.current.slickGoTo(1);
             }}
+            width="12px"
+            height="12px"
+            borderRadius="50%"
             style={{
-              minWidth: "10px",
-              minHeight: "10px",
-
-              borderRadius: "50%",
               border: "1px solid #A7D325",
               backgroundColor: currentSlide === 1 ? "#A7D325" : "white",
               marginRight: "4px",
             }}
           />
         </Box>
-        <IconButtonRightContent onClick={handleNext}>
-          <ArrowForwardIosIcon />
-        </IconButtonRightContent>
+        {!isMobile && (
+          <IconButtonRightContent onClick={handleNext}>
+            <ArrowForwardIosIcon />
+          </IconButtonRightContent>
+        )}
       </Container>
     </StyledSliderContainer>
   );

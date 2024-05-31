@@ -5,7 +5,7 @@ import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { PostApiFunction } from "../../utils";
 
 import { Container, styled } from "@mui/system";
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainAboutSection": {
     padding: "30px 0px",
     "& h2": {

@@ -3,7 +3,7 @@ import { Box, Typography, Divider } from "@mui/material";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { Container, styled } from "@mui/system";
 import { PostApiFunction } from "../../utils";
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainAboutSection": {
     padding: "30px 0px",
   },

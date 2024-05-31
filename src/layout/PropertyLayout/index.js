@@ -46,7 +46,7 @@ const Content = styled("div")(({ theme }) => ({
   },
 }));
 
-const AdvertisementContainer = styled("Box")({
+const AdvertisementContainer = styled(Box)({
   marginTop: "8rem",
   width: "80vw",
   height: "35vh",
@@ -145,9 +145,9 @@ const AdvertisementContainer = styled("Box")({
     fontSize: "15px",
     marginTop: "5px",
   },
-  "& .rightIcon":{
-    color: "blue"
-  }
+  "& .rightIcon": {
+    color: "blue",
+  },
 });
 
 const FooterContainer = styled("div")({
@@ -186,7 +186,7 @@ const PropertyLayout = ({ children }) => {
               <a href="/open" target="_blank">
                 Open
               </a>
-              <ChevronRightIcon  className="rightIcon"/>
+              <ChevronRightIcon className="rightIcon" />
             </div>
           </div>
         </Box>

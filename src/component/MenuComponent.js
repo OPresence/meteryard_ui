@@ -5,7 +5,7 @@ import SubMenuComponent from "./SubMenuComponent";
 import SubMenu2Component from "./SubMenu2Component";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-const MenuComponentStyle = styled("Box")(({ theme }) => ({
+const MenuComponentStyle = styled(Box)(({ theme }) => ({
   "& .submenueTab": {
     display: "flex",
     "@media(max-width:615px)": {

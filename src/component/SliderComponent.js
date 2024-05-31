@@ -1,5 +1,13 @@
 import React, { useRef } from "react";
-import { Card, Grid, Typography, Box, Container } from "@mui/material";
+import {
+  Card,
+  Grid,
+  Typography,
+  Box,
+  Container,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
@@ -16,7 +24,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
     marginTop: "-90px",
     "@media(max-width:615px)": {
       padding: "0px 0 60px 0",
-      marginTop: "150px",
+      marginTop: "4rem",
     },
   },
   "& .circleimg": {
@@ -101,6 +109,9 @@ const IconButtonRightContent = styled(Box)({
 });
 
 const SliderComponent = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const sliderRef = useRef(null);
   const projectDetails = [
     {
@@ -169,7 +180,7 @@ const SliderComponent = () => {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -179,7 +190,7 @@ const SliderComponent = () => {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -189,7 +200,7 @@ const SliderComponent = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -199,7 +210,7 @@ const SliderComponent = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           infinite: true,
@@ -224,9 +235,12 @@ const SliderComponent = () => {
 
   return (
     <MainComponent position="relative" m={"2rem 0"}>
-      <IconButtonLeftContent onClick={handlePrevious}>
-        <ArrowBackIosIcon />
-      </IconButtonLeftContent>
+      {!isMobile && (
+        <IconButtonLeftContent onClick={handlePrevious}>
+          <ArrowBackIosIcon />
+        </IconButtonLeftContent>
+      )}
+
       <Box className="mainSliderDiv" mt={"25rem"}>
         <Slider {...settings} ref={sliderRef}>
           {projectDetails.map((data, index) => {
@@ -247,15 +261,19 @@ const SliderComponent = () => {
                         <Box className="img">
                           <img src={data?.image} alt="img" width={"100%"} />
                         </Box>
-                        <Box>
-                          <Typography variant="h5">{data?.name}</Typography>
+                        <Box mt={3}>
+                          <Typography variant="p" fontSize={isMobile ? 16 : 24}>
+                            {data?.name}
+                          </Typography>
                         </Box>
                         <Box
                           display={"flex"}
                           position={"absolute"}
                           bottom={"0"}
-                          width={"100%"}
+                          // width={"100%"}
                           left={"20px"}
+                          // backgroundColor={isMobile && "#E0AF00"}
+                          // color={isMobile && ""}
                         >
                           <Typography variant="h6">View all</Typography>
                           <span className="rightIcon">
@@ -271,9 +289,11 @@ const SliderComponent = () => {
           })}
         </Slider>
       </Box>
-      <IconButtonRightContent onClick={handleNext}>
-        <ArrowForwardIosIcon />
-      </IconButtonRightContent>
+      {!isMobile && (
+        <IconButtonRightContent onClick={handleNext}>
+          <ArrowForwardIosIcon />
+        </IconButtonRightContent>
+      )}
     </MainComponent>
   );
 };

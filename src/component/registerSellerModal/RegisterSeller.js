@@ -28,7 +28,7 @@ import CircularProgressCompoennt from "../CircularProgressComponent";
 import { Form, Formik } from "formik";
 import * as yep from "yup";
 import { AuthContext } from "../../context/Auth";
-const DialogStyleInput = styled("Box")({
+const DialogStyleInput = styled(Box)({
   "& .loginBox": {
     padding: "0 60px",
     maxHeight: "410px",
@@ -114,7 +114,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
     border: "none !important",
   },
 }));
-const PhoneINputStyle = styled("Box")(({ theme }) => ({
+const PhoneINputStyle = styled(Box)(({ theme }) => ({
   "& .phoneInputBox": {
     "& input": {
       padding: "0px 0px 0 5px !important",

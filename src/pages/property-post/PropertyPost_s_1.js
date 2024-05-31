@@ -19,7 +19,7 @@ import { AuthContext } from "../../context/Auth";
 import Checkbox from "@material-ui/core/Checkbox";
 import { fontSize } from "@mui/system";
 
-const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
+const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .borderBox": {
     width: "250px",
     height: "350px",

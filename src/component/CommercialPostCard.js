@@ -5,7 +5,7 @@
 // import Divider from "@mui/material/Divider";
 // import ButtonComponent from "./ButtonComponent";
 
-// const Commercialstyle = styled("Box")(({ theme }) => ({
+// const Commercialstyle = styled(Box)(({ theme }) => ({
 //   "& .mainSliderDiv": {
 //     background: "#fff",
 
@@ -195,14 +195,15 @@
 // export default CommercialPostCard;
 
 import React from "react";
-import { Typography, Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { Typography, Box, useMediaQuery } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import styled from "@emotion/styled";
 import ButtonComponent from "./ButtonComponent";
 import { useRouter } from "next/router";
 const CardComponentStyle = styled(Box)(({ theme }) => ({
   borderRadius: 0,
-  width: "350px",
+  marginInline: "auto",
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
     background: "#fff",
@@ -232,10 +233,14 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
     // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     position: "relative",
     margin: "20px",
-    "& img": {
-      // borderTopRightRadius: "10px",
-      // borderTopLeftRadius: "10px",
+    "@media(max-width:615px)": {
       boxShadow: "#A9D91066 0px 3px 8px",
+    },
+    "& img": {
+      boxShadow: "#A9D91066 0px 3px 8px",
+      "@media(max-width:615px)": {
+        boxShadow: "none",
+      },
     },
     "&:hover": {
       // transform: "scale(0.9)",
@@ -294,8 +299,11 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
 }));
 const CommercialPostCard = ({ data, index }) => {
   const router = useRouter();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
-    <CardComponentStyle>
+    <CardComponentStyle width={isMobile ? "100%" : 350}>
       <Box
         height={"100%"}
         pb={"20px"}

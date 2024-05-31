@@ -23,7 +23,7 @@ import {
 } from "@mui/material";
 import NavItem from "./NavItem";
 import { styled } from "@mui/system";
-const BuyerStyle = styled("Box")(({ theme }) => ({
+const BuyerStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     background: theme.palette.background.default,
 
@@ -104,7 +104,7 @@ const SideMenuBox = styled(Box)({
     marginLeft: "45px",
   },
 });
-const DialogMainBox = styled("Box")(({ theme }) => ({
+const DialogMainBox = styled(Box)(({ theme }) => ({
   "& h5": {
     fontSize: "20px",
     fontWeight: "600",

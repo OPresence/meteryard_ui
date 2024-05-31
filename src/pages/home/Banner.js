@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Typography, Box, Button, TextField } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import styled from "@emotion/styled";
 import ButtonSwitchComponent from "../../component/ButtonSwitchComponent";
 import RegisterModal from "../../component/registerSellerModal/RegisterModal";
@@ -12,12 +13,12 @@ import "react-toastify/dist/ReactToastify.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SearchIcon from "@mui/icons-material/Search";
 import { AuthContext } from "../../context/Auth";
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     // height: "100vh",
     overflow: "hidden",
     "@media(max-width:615px)": {
-      marginBottom: "-140px",
+      marginBottom: "0",
       height: "auto",
     },
     "& .backImage": {
@@ -26,6 +27,11 @@ const MainComponent = styled("Box")(({ theme }) => ({
       position: "relative",
       marginTop: "-10px",
       left: "0",
+      "@media(max-width:615px)": {
+        maxWidth: "100%",
+        top: "-2%",
+        left: "10% !important",
+      },
     },
   },
   "& .bacBox": {
@@ -50,7 +56,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
     width: "100%",
 
     "@media(max-width:615px)": {
-      top: "12%",
+      top: "15%",
+      left: "0",
     },
     "& .Banner_inputField": {
       width: "Fixed (987px)px",
@@ -89,7 +96,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       alignItems: "center",
       borderRadius: "11px",
       "@media(max-width:615px)": {
-        width: "40px",
+        width: "80px",
         height: "40px !important",
         margin: "5px 8px",
         minWidth: "unset",
@@ -98,7 +105,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "& .Banner_textFild": {
       position: "relative",
       background: "#FFFFFF 0% 0% no-repeat padding-box",
-      boxShadow: "0px 3px 27px #68686829",
+      boxShadow: "-1px 2px 8px 0px #00000024",
+      marginInline: "auto",
       borderRadius: "11px",
       opacity: "1",
       width: "100%",
@@ -113,14 +121,20 @@ const MainComponent = styled("Box")(({ theme }) => ({
           fontWeight: "400",
           lineHeight: "29.05px",
           textAlign: "left",
+          "@media(max-width:615px)": {
+            fontSize: "16px",
+          },
         },
       },
       "@media(max-width:615px)": {
         margin: "0px",
         marginLeft: "0px",
-        marginTop: "30px",
+        // marginTop: "30px",
         width: "100% !important",
         margin: "auto",
+        "& input": {
+          fontSize: "16px",
+        },
       },
 
       "&:hover": {
@@ -139,6 +153,11 @@ const MainComponent = styled("Box")(({ theme }) => ({
       fontWeight: "600",
       lineHeight: "87.14px",
       textAlign: "left",
+
+      "@media(max-width:615px)": {
+        fontSize: "28px",
+        lineHeight: "17.14px",
+      },
     },
     "& .Make": {
       color: "#A7D325",
@@ -147,10 +166,18 @@ const MainComponent = styled("Box")(({ theme }) => ({
       fontWeight: "600",
       lineHeight: "87.14px",
       textAlign: "left",
+
+      "@media(max-width:615px)": {
+        fontSize: "28px",
+        lineHeight: "17.14px",
+      },
     },
   },
   "& .buttonBox": {
     width: "191px",
+    "@media(max-width:615px)": {
+      width: "150px",
+    },
     "& .ButtonClass": {
       borderBottomLeftRadius: "20px",
       padding: 0,
@@ -159,13 +186,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
       justifyContent: " space-between",
       background: "#fff",
       boxShadow: " 0px 4px 4px 0px #0000001A",
-
       "@media(max-width:615px)": {
         height: "40px",
       },
       "& .buyerBoxSpan": {
-        // padding: "0 90px 0 50px",
-        // width: "160.67px",
         left: "208px",
         gap: "0px",
         borderRadius: "0px 21.43px 0px 21.43px",
@@ -173,24 +197,43 @@ const MainComponent = styled("Box")(({ theme }) => ({
         opacity: "0px",
         angle: "-180 deg",
         "& span": {
+          minWidth: "60%",
           padding: "0 0 0 65px",
+          "@media(max-width:615px)": {
+            padding: 0,
+            width: "80%",
+            marginInline: "auto",
+          },
         },
 
         "@media(max-width:615px)": {
-          padding: "0 50px 0 20px",
+          // padding: "0 50px 0 20px",
+          paddingLeft: "10px",
         },
 
         "& span": {
           color: "black",
           fontSize: "12px",
-          fontWeight: "700",
+          fontWeight: "600",
         },
       },
       "& .buttonText": {
-        color: "#0000",
+        width: "100%",
+        fontFamily: "Inter",
+        fontSize: "12px",
+        fontWeight: 600,
+        color: "#000000",
         padding: "0px 66px 0 0px",
+        "@media(max-width:615px)": {
+          paddingRight: "50px",
+        },
       },
       "& .buttonIconBox": {
+        width: "60px",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         background: "#fff",
         borderTopRightRadius: "20px",
         borderBottomLeftRadius: "20px",
@@ -198,13 +241,23 @@ const MainComponent = styled("Box")(({ theme }) => ({
         border: "2.38px solid #A9D910",
         // boxShadow: "0px 3px 27px #68686829",
 
+        "@media(max-width:615px)": {
+          width: "40px",
+        },
+
         "& .imageBox": {
           padding: "10px",
           maxWidth: "40px !Important",
 
           "@media(max-width:615px)": {
-            padding: "9px",
-            maxWidth: "39px !important",
+            padding: "0",
+            maxWidth: "100%",
+            width: "100% !important",
+
+            "& img": {
+              width: "70%",
+              height: "70%",
+            },
           },
         },
       },
@@ -224,7 +277,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
       width: "280%",
 
       "@media(max-width:615px)": {
-        width: "200%",
+        width: "300px",
+        left: "35%",
       },
     },
     "&:hover": {
@@ -236,6 +290,9 @@ const MainComponent = styled("Box")(({ theme }) => ({
   "& .buttonBoxSecond": {
     // boxShadow: "0px 3px 27px #68686829",
     width: "191px",
+    "@media(max-width:433px)": {
+      width: "150px",
+    },
     "& .ButtonClass1": {
       justifyContent: "space-between",
       borderBottomLeftRadius: "20px",
@@ -248,29 +305,34 @@ const MainComponent = styled("Box")(({ theme }) => ({
       background: "#fff",
       width: "100%",
       boxShadow: " 0px 4px 4px 0px #0000001A",
-
       "& span": {
         padding: "0 0 0 65px",
+        fontFamily: "Inter",
+        fontSize: "12px",
+        fontWeight: 600,
+        color: "#000000",
+        "@media(max-width:433px)": {
+          padding: 0,
+          paddingLeft: "25px",
+        },
       },
       "&:hover": {
         background: "#A7D325",
       },
-      // "& .buyerBoxSpan": {
-      //   padding: "0 53px 0 90px",
-      //   "@media(max-width:615px)": {
-      //     padding: "0 20px 1px 50px",
-      //   },
-      //   "& span": {
-      //     color: "black",
-      //     fontSize: "12px",
-      //     fontWeight: "700",
-      //   },
-      // },
       "@media(max-width:433px)": {
         marginLeft: "-25px",
         height: "40px",
+        "& .buyerBoxSpan": {
+          paddingLeft: "20px",
+        },
       },
+
       "& .buttonIconBox": {
+        width: "60px",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         background: "#fff",
         borderTopLeftRadius: "20px",
         borderBottomRightRadius: "20px",
@@ -281,9 +343,19 @@ const MainComponent = styled("Box")(({ theme }) => ({
           padding: "10px",
           maxWidth: "40px !important",
           "@media(max-width:615px)": {
-            padding: "9px",
-            maxWidth: "38px !important",
+            padding: "0",
+            maxWidth: "100%",
+            width: "100% !important",
+
+            "& img": {
+              width: "70%",
+              height: "70%",
+            },
           },
+        },
+        "@media(max-width:615px)": {
+          height: "100%",
+          width: "40px",
         },
       },
     },
@@ -294,8 +366,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
       minWidth: "600px",
 
       "@media(max-width:615px)": {
-        width: "199%",
-        right: "0",
+        minWidth: "300px",
+        width: "300px",
+        top: "50px",
+        right: "-50%",
       },
     },
     "&:hover": {
@@ -325,8 +399,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
 }));
 
 export default function Home() {
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const Auth = useContext(AuthContext);
+
   const [selectedImages, setSelectedImages] = useState([]);
   const [imageUploadResponses, setImageUploadResponses] = useState([]);
   const [_video_url, setVideoURL] = useState("");
@@ -510,21 +586,30 @@ export default function Home() {
       {/* <Container maxWidth style={{ paddingRight: "0px !important;" }}> */}
       <Box>
         <Box position={"absolute"} className="contentBox">
-          <Box>
-            <Typography variant="h1" className="banner-heading">
+          <Box
+            width={isMobile ? "85%" : "100%"}
+            padding={isMobile && "10px 20px"}
+          >
+            <Typography
+              variant="h1"
+              className="banner-heading"
+              lineHeight={isMobile && "2rem"}
+            >
               <span className="find">Find Your Place,</span>
+              {isMobile && <br />}
               <span className="Make">
-                {" "}
-                Make <br />
+                Make {!isMobile && <br />}
                 It Home
               </span>
             </Typography>
-            <Box mt={isMobile ? 2 : 1.5}>
-              <Typography variant="h4">Please Select Your Category</Typography>
+            <Box mt={1.5} mb={1.5}>
+              <Typography variant="h3" fontSize={18}>
+                Please Select Your Category
+              </Typography>
             </Box>
             <Box display={"flex"} className="buyer-seller-btn">
               <Box
-                mt={5}
+                mt={isMobile ? 2 : 5}
                 position={"relative"}
                 zIndex={1}
                 className={"buttonBox"}
@@ -559,7 +644,7 @@ export default function Home() {
                 </Box>
               </Box>
               <Box
-                mt={5}
+                mt={isMobile ? 2 : 5}
                 position={"relative"}
                 zIndex={1}
                 className={"buttonBoxSecond"}
@@ -570,7 +655,7 @@ export default function Home() {
                   onMouseEnter={() => handleMouseEnter("Seller")}
                 >
                   <Box className="buyerBoxSpan">
-                    <span>Seller</span>
+                    <span className="buttonText">Seller</span>
                   </Box>
                   <Box className={"buttonIconBox"}>
                     <Box className="imageBox">
@@ -597,9 +682,19 @@ export default function Home() {
             <Box
               display={"flex"}
               justifyContent={"center"}
-              padding={"0 150px 0 0"}
+              padding={isMobile ? "0" : "0 150px 0 0"}
+              position={isMobile && "absolute"}
+              width={isMobile ? "80%" : "100%"}
+              top="140%"
+              left="50%"
+              style={{ transform: isMobile && "translate(-50%,-50%)" }}
             >
-              <Box mt={10} className={"Banner_textFild"} maxWidth={"60%"}>
+              <Box
+                mt={10}
+                className={"Banner_textFild"}
+                maxWidth={isMobile ? "100%" : "60%"}
+                borderRadius={isMobile ? "14px" : "11px"}
+              >
                 <TextField
                   // id="outlined-basic"
                   // Auth?.

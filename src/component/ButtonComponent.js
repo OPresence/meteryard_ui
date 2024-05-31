@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Box, Button } from "@mui/material";
 import { useRouter } from "next/router";
 
-const ButonStyle = styled("Box")(({ theme }) => ({
+const ButonStyle = styled(Box)(({ theme }) => ({
   "& .viewmoreButton": {
     "& button": {
       // background: "none",

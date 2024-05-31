@@ -19,7 +19,7 @@ import { useRouter } from "next/router";
 import HomeLayout from "../../layout/HomeLayout";
 import ContactOwnerModal from "../../component/ContactOwnerModal";
 import ResidentialProjects from "../../component/ResidentialProjects";
-const ViewPropetyStyle = styled("Box")(({ theme }) => ({
+const ViewPropetyStyle = styled(Box)(({ theme }) => ({
   "& .imgBox": {
     "@media(max-width:615px)": {
       marginTop: "80px",

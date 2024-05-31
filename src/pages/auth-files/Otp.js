@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Box, Container, Grid } from "@mui/material";
 import VerifyOTP from "./VerifyOTP";
-const OTPstyle = styled("Box")(({ theme }) => ({
+const OTPstyle = styled(Box)(({ theme }) => ({
   "& .imageBox": {
     "@media(max-width:615px)": {
       display: "none",

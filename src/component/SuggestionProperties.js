@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import styled from "@emotion/styled";
 // import ButtonComponent from "./ButtonComponent";
 
-const CardComponentStyle = styled("Box")(({ theme }) => ({
+const CardComponentStyle = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
     background: "#fff",

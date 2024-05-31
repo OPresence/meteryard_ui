@@ -16,7 +16,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../context/Auth";
 
-const OTPStyle = styled("Box")(({ theme }) => ({
+const OTPStyle = styled(Box)(({ theme }) => ({
   "& .mapbox": {
     "& .otpSendBox": {
       "& h6": {

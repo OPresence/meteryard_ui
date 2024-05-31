@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import ForgotPassword from "./ForgotPassword";
-const DialogStyleComponent = styled("Box")(({ theme }) => ({}));
+const DialogStyleComponent = styled(Box)(({ theme }) => ({}));
 const CustomizedDialogContent = styled(DialogContent)({
   borderRadius: "8px",
   padding: "0",

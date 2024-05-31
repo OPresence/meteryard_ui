@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
-const CityPropertyStyle = styled("Box")(({ theme }) => ({
+const CityPropertyStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     position: "relative",
 

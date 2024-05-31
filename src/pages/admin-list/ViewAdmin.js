@@ -19,7 +19,7 @@ import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { PostApiFunction } from "../../utils";
 import CircularProgressCompoennt from "../../component/CircularProgressComponent";
 
-const DialogButtonStyle = styled("Box")(({ theme }) => ({
+const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
     background: "#444444",

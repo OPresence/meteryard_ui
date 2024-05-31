@@ -15,7 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .MuiOutlinedInput-input": {
     height: "15px",
   },
@@ -129,19 +129,6 @@ export default function ButtonSwitchComponent({
                     Please Select Your Category
                   </Typography>
                   <Grid container spacing={4}>
-                    {/* <Grid item xs={12} sm={5} md={5} lg={5}>
-                      <Box mt={3} className={"videoButton"}>
-                        <Box
-                          variant="outlined"
-                          className={"Banner_inputField_button"}
-                        >
-                          <Typography variant="h6">Join city chat</Typography>
-                        </Box>
-                        <Button className="searchbox_button">
-                          <MdOutlineVideoChat />
-                        </Button>
-                      </Box>
-                    </Grid> */}
                     <Grid item xs={12} sm={7} md={7} lg={7}>
                       <Box
                         mt={3}
@@ -189,21 +176,8 @@ export default function ButtonSwitchComponent({
                   >
                     Please Select Your Category
                   </Typography>
-                  <Box width={"100%"} p={"0 0 0 40px"}>
+                  <Box width={"100%"}>
                     <Grid container spacing={4} alignItems="center">
-                      {/* <Grid item xs={12} sm={6} md={6} lg={4}>
-                        <Box mt={3} className={"videoButton"}>
-                          <Box
-                            variant="outlined"
-                            className={"Banner_inputField_button"}
-                          >
-                            <Typography variant="h6">Join city chat</Typography>
-                          </Box>
-                          <Button className="searchbox_button">
-                            <MdOutlineVideoChat />
-                          </Button>
-                        </Box>
-                      </Grid> */}
                       <Grid item xs={12} sm={6} md={6} lg={5}>
                         <Box
                           mt={3}

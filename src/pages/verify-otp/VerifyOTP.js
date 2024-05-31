@@ -5,12 +5,12 @@ import styled from "@emotion/styled";
 // import VerifyOTP from "./VerifyOTP";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-const DialogStyleComponent = styled("Box")(({ theme }) => ({}));
+const DialogStyleComponent = styled(Box)(({ theme }) => ({}));
 const CustomizedDialogContent = styled(DialogContent)({
   borderRadius: "8px",
   padding: "0",
 });
-const OTPstyle = styled("Box")(({ theme }) => ({
+const OTPstyle = styled(Box)(({ theme }) => ({
   "& .imageBox": {
     "@media(max-width:615px)": {
       display: "none",

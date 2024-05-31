@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import CircularProgressComponent from "../component/CircularProgressComponent";
-const DialogButtonStyle = styled("Box")(({ theme }) => ({
+const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
     background: "#a0cf17",

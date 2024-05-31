@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
 import styled from "@emotion/styled";
-import Dialog from "@mui/material/Dialog";
+import { Box, Dialog } from "@mui/material";
 import DialogContent from "@mui/material/DialogContent";
 import Login from "../pages/auth-files/Login";
 import SignUp from "../pages/auth-files/SignUp";
 import Otp from "../pages/auth-files/Otp";
-const DialogStyleComponent = styled("Box")(({ theme }) => ({}));
+const DialogStyleComponent = styled(Box)(({ theme }) => ({}));
 const CustomizedDialogContent = styled(DialogContent)({
   borderRadius: "8px",
   padding: "0",

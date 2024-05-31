@@ -1,5 +1,13 @@
 import React, { useRef, useContext, useState } from "react";
-import { Grid, Typography, Box, Container, Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import {
+  Grid,
+  Typography,
+  Box,
+  Container,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styled from "@emotion/styled";
@@ -12,7 +20,7 @@ import { AuthContext } from "../context/Auth";
 import { useRouter } from "next/router";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
-const ResidentStyle = styled("Box")(({ theme }) => ({
+const ResidentStyle = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "40px 0px",
     background: "#fff",
@@ -221,6 +229,9 @@ const IconButtonRightContent = styled(Box)({
 });
 
 const ResidentialProjects = ({ showViewMore }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const auth = useContext(AuthContext);
   const sliderRef = useRef(null);
   const router = useRouter();
@@ -343,16 +354,26 @@ const ResidentialProjects = ({ showViewMore }) => {
             justifyContent={"space-between"}
             alignItems={"center"}
           >
-            <Box width="90%" marginInline="auto">
-              <Typography variant="h1" fontSize={48} fontWeight={500}>
+            <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
+              >
                 Residential Projects
               </Typography>
-              <Typography fontSize={24} fontWeight={300}>
+              <Typography
+                variant="p"
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+                fontWeight={300}
+              >
                 Residential Projects Across India
               </Typography>
             </Box>
           </Box>
-          {currentSlide >= 2 && (
+          {currentSlide >= 2 && !isMobile && (
             <IconButtonLeftContent onClick={handlePrevious}>
               <ArrowBackIosIcon />
             </IconButtonLeftContent>
@@ -393,10 +414,8 @@ const ResidentialProjects = ({ showViewMore }) => {
               )}
             </Box>
 
-            <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
-              <Box
-                sx={{ display: "flex", justifyContent: "center", mt: "10px" }}
-              >
+            <Box mt={"2rem"} sx={{ display: "flex", justifyContent: "center" }}>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
                 {React.Children.toArray(
                   auth._isFeaturedPost.map((item, index) => {
                     return (
@@ -430,7 +449,7 @@ const ResidentialProjects = ({ showViewMore }) => {
             )}
           </Box>
 
-          {currentSlide < auth?._getlist_commercial.length && (
+          {currentSlide < auth?._getlist_commercial.length && !isMobile && (
             <IconButtonRightContent onClick={handleNext}>
               <ArrowForwardIosIcon />
             </IconButtonRightContent>

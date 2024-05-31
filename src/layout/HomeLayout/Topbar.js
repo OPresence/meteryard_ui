@@ -28,7 +28,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import ProfileMenu from "../../component/ProfileMenu";
 import MobilerMenu from "../../component/MobileMenu";
 import RegisterModal from "../../component/registerSellerModal/RegisterModal";
-const MenuStyle = styled("Box")(({ theme }) => ({
+const MenuStyle = styled(Box)(({ theme }) => ({
   "& .hidebox": {
     display: "block",
     "@media(max-width:615px)": {
@@ -65,8 +65,10 @@ const MenuStyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .appbarBox": {
+    width: "100vw",
+    left: "0 !important",
     background: "#fff ",
     // boxShadow:
     //   "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
@@ -228,7 +230,7 @@ export default function Topbar() {
         </Link>
       </Box>
       <Box>
-        <MenuStyle>
+        {/* <MenuStyle>
           <Box className="cityChat">
             <Button
               className="rainbowGradient"
@@ -242,7 +244,7 @@ export default function Topbar() {
               My Citychat
             </Button>
           </Box>
-        </MenuStyle>
+        </MenuStyle> */}
       </Box>
     </Box>
   );

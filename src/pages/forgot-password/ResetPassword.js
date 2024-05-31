@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
-const DialogStyleComponent = styled("Box")(({ theme }) => ({}));
+const DialogStyleComponent = styled(Box)(({ theme }) => ({}));
 import { FaFacebookF } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -35,7 +35,7 @@ const CustomizedDialogContent = styled(DialogContent)({
   padding: "0",
 });
 
-const ResetPasswordStyle = styled("Box")(({ theme }) => ({
+const ResetPasswordStyle = styled(Box)(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
     backgroundPosition: "right",
@@ -130,7 +130,7 @@ const ResetPasswordStyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-const ButtonStyle = styled("Box")(({ theme }) => ({
+const ButtonStyle = styled(Box)(({ theme }) => ({
   "& .loginBox1": {
     "& button": {
       background: "#A2D117",

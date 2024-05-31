@@ -6,7 +6,7 @@ import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { SelectField, InputField } from "../../component/FormFields";
 
-const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
+const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .borderBox": {
     width: "250px",
     height: "350px",

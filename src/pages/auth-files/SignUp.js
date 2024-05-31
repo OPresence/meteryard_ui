@@ -33,7 +33,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { AuthContext } from "../../context/Auth";
-const LoginStyle = styled("Box")(({ theme }) => ({
+const LoginStyle = styled(Box)(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
     backgroundPosition: "right",
@@ -117,7 +117,7 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const PhoneINputStyle = styled("Box")(({ theme }) => ({
+const PhoneINputStyle = styled(Box)(({ theme }) => ({
   "& .phoneInputBox": {
     "& input": {
       padding: "10.5px 40px !important",

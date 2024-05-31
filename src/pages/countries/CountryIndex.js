@@ -22,7 +22,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import TableList from "../../component/TableList";
 import FilterComponent from "../../component/FilterComponent";
 // import FilterComponent from "../admin/component/FilterComponent";
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
     background: "#fff",

@@ -18,7 +18,7 @@ import LocationDialog from "../../component/LocationDialog";
 
 import { SelectField, InputField } from "../../component/FormFields";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
-const PriceBox = styled("Box")(({ theme }) => ({
+const PriceBox = styled(Box)(({ theme }) => ({
   "& .mainPriceBox": {
     padding: "10px",
     borderRadius: "5px",
@@ -84,7 +84,7 @@ const PriceBox = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
+const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .borderBox": {
     width: "250px",
     height: "350px",
@@ -159,7 +159,7 @@ const PropertyPostScreenStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const DialogButtonStyle = styled("Box")(({ theme }) => ({
+const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
     background: "#444444",

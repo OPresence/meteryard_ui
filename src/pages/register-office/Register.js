@@ -20,7 +20,7 @@ import {
   TextareaAutosize,
 } from "@mui/material";
 
-const Registers = styled("Box")(({ theme }) => ({
+const Registers = styled(Box)(({ theme }) => ({
   "& .registerpara": {
     height: "670px",
     width: "100%",

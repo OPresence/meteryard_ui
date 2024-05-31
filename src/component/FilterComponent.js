@@ -4,7 +4,7 @@ import { styled } from "@mui/system";
 import { PiNoteFill } from "react-icons/pi";
 import DialogComponent from "./DialogComponent copy";
 
-const FilterStyle = styled("Box")(({ theme }) => ({
+const FilterStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     "& button": {
       background: "#A2D117",

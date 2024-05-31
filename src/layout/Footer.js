@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     padding: "80px 0px 50px",
     background: `url('images/footerBg.png')`,

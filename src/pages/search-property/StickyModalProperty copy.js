@@ -14,7 +14,7 @@ import ArrowUpwardOutlinedIcon from "@mui/icons-material/ArrowUpwardOutlined";
 import PropertyMobileModal from "./PropertyMobileModal";
 
 const StickyModalProperty = ({ children }) => {
-  const StickyModalPropertyContainer = styled("Box")({
+  const StickyModalPropertyContainer = styled(Box)({
     backgroundColor: "white",
     color: "gray",
     width: "100%",

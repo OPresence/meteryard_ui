@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 
 import { styled } from "@mui/system";
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainAboutSection": {
     padding: "100px  0px",
   },
