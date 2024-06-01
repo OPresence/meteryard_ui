@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ResidentialPostCard from "../component/ResidentialPostCard";
 
-const ResidentStyle = styled("Box")(({ theme }) => ({
+const ResidentStyle = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "80px 0px 0px 0px",
     background: "#fff",
@@ -248,26 +248,26 @@ const ResidentialProjects = () => {
               </Typography>
             </Box>
           </Box>
-          {_getlist?.length > 4 &&
-           <Box
-           style={{
-             display: "flex",
-             gap: "10px",
-             justifyContent: "flex-end",
-           }}
-         >
-           <Box className={"ArrowClass"} onClick={previous}>
-             <ArrowBackIosIcon
-               style={{
-                 color: "#000",
-               }}
-             />
-           </Box>
-           <Box className={"ArrowClass"} onClick={next}>
-             <ArrowForwardIosIcon style={{ color: "#000" }} />
-           </Box>
-         </Box>}
-         
+          {_getlist?.length > 4 && (
+            <Box
+              style={{
+                display: "flex",
+                gap: "10px",
+                justifyContent: "flex-end",
+              }}
+            >
+              <Box className={"ArrowClass"} onClick={previous}>
+                <ArrowBackIosIcon
+                  style={{
+                    color: "#000",
+                  }}
+                />
+              </Box>
+              <Box className={"ArrowClass"} onClick={next}>
+                <ArrowForwardIosIcon style={{ color: "#000" }} />
+              </Box>
+            </Box>
+          )}
         </Box>
         <Box mt={5}>
           {_getlist?.length > 4 ? (
@@ -277,7 +277,7 @@ const ResidentialProjects = () => {
                   _getlist?.map((data, index) => {
                     return (
                       <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
-                       <ResidentialPostCard data={data}/>
+                        <ResidentialPostCard data={data} />
                       </Grid>
                     );
                   })}
@@ -289,7 +289,7 @@ const ResidentialProjects = () => {
                 _getlist?.map((data, index) => {
                   return (
                     <Grid item lg={3} md={3} sm={6} xs={12} key={index}>
-                     <ResidentialPostCard data={data}/>
+                      <ResidentialPostCard data={data} />
                     </Grid>
                   );
                 })}

@@ -58,4 +58,5 @@ img {
 
 .slick-prev:before, .slick-next:before{
   color: #a7d325 !important;
+  z-index: 999;
 }

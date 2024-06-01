@@ -18,14 +18,14 @@ import {
 import { styled } from "@mui/system";
 import { Form, Formik } from "formik";
 import * as yep from "yup";
-const PageStyle = styled("Box")(({ theme }) => ({
+const PageStyle = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     display: "flex",
     justifyContent: "center",
   },
 }));
 
-const ButtonStyle = styled("Box")(({ theme }) => ({
+const ButtonStyle = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     display: "flex",
     justifyContent: "center",

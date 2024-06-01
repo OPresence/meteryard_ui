@@ -1,116 +1,93 @@
-
-import React, { useRef , useState, useEffect} from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
-import { Box, Card, Container, Typography, Grid } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import {
+  Box,
+  Card,
+  Container,
+  Typography,
+  Avatar,
+  useMediaQuery,
+} from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { PostApiFunction } from "@/utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
-import { FaStar } from "react-icons/fa";
+import { PostApiFunction } from "@/utils";
 
-
-const TestimonialStyle = styled("Box")(({ theme }) => ({
-  "& .backgorunClass": {
-    backgroundImage: `url("/images/meteryard/Graphics/Rectangle 399.png")`,
-    backgroundPosition: "center",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    // height: "735px",
+const TestimonialStyle = styled(Box)(({ theme }) => ({
+  "& .Cards": {
+    gap: "0px",
+    borderRadius: "12.81px",
+    boxShadow: "0px 0px 7.79px 0px #00000026",
     position: "relative",
-    left: "-190px",
-
-    "@media(max-width:1080px)": {
-      left: "0",
+    overflow: "initial !important",
+    padding: "10px 10px 23px 10px",
+    margin: "60px 23px",
+    maxWidth: "320px",
+    transition: "transform 0.8s, opacity 0.8s",
+    "@media(max-width:615px)": {
+      maxWidth: "240px",
+      marginInline: "auto",
     },
-    "& h2": {
-      color: "#fff",
-    },
-    "& .sliderBox": {
-      maxWidth: "250px",
-      marginTop: "40px",
-      "@media(max-width:615px)": {
-        maxWidth: "100%",
-        marginTop: "20px",
-      },
-
-      "& h6": {
-        color: "#fff",
-        fontSize: "14px",
-        marginBottom: "20px",
-      },
-    },
-    "& .ArrowClass": {
+    "&:hover": {
+      transform: "scale(1.05)",
       cursor: "pointer",
-      width: "30px",
-      height: "30px",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      "&:hover": {
-        background: "rgb(162 209 23)",
-        transition: "0.6s",
-      },
-      "& svg": {
-        color: "#fff !important",
-        fontSize: "25px",
-      },
     },
-    "& .arrowsBox": {
+    "& h6": {
+      fontFamily: "Inter",
+      fontSize: "16px",
+      fontWeight: "400",
+      lineHeight: "19.36px",
       textAlign: "center",
-      display: "flex",
-      gap: "10px",
-      position: "relative",
-      zIndex: "1",
-      marginTop: "-50px",
-      "@media(max-width:1080px)": {
-        marginTop: "0px",
-        top: "-150px",
-      },
-      "& .ArrowClassprev": {
-        "@media(max-width:1080px)": {
-          position: "absolute",
-          left: "-9px",
-        },
-      },
-      "& .ArrowClassNext": {
-        "@media(max-width:1080px)": {
-          position: "absolute",
-          right: "-9px",
-        },
+    },
+    "& h4": {
+      fontFamily: "Inter",
+      fontSize: "24px",
+      fontWeight: "600",
+      lineHeight: "43.57px",
+      textAlign: "center",
+      "@media(max-width:615px)": {
+        fontSize: "18px",
       },
     },
-    "& .Cards": {
-      // height: "250px",
-      // width: "200px",
-      padding: "20px",
-      transition: "0.8s",
-      transform: "scale(0.9)",
-      borderRadius: "20px",
-     
-      "&:hover": {
-        transform: "scale(1)",
-        transition: "0.8s",
-      },
-      "& h6": {
-        textAlign: "center",
-        fontSize: "12px",
-      },
-      "& h4": {
-        color: "#114A82",
-        fontSize: "16px",
-        textAlign: "center",
-       
+    "& h5": {
+      fontFamily: "Inter",
+      fontSize: "20px",
+      fontWeight: "400",
+      lineHeight: "29.05px",
+      textAlign: "center",
+      "@media(max-width:615px)": {
+        fontSize: "18px",
       },
     },
+    "& h6": {
+      fontFamily: "Inter",
+      fontSize: "18px",
+      fontWeight: "400",
+      lineHeight: "1.3rem",
+      textAlign: "center",
+      "@media(max-width:615px)": {
+        fontSize: "14px",
+      },
+    },
+  },
+  "& .centerCard": {
+    transform: "scale(1.20) !important",
+    opacity: "1 !important",
+    marginLeft: "10px",
   },
   "& .imageBox": {
     background: "#dce1e4",
     maxWidth: "70px",
-    minHeight: "70px",
     display: "flex",
     alignItems: "center",
     borderRadius: "50px",
+    marginTop: "-40px",
+    "& img": {
+      height: "70px",
+      width: "70px",
+    },
   },
   "& .borderLine": {
     borderBottom: "2px solid #707070",
@@ -128,43 +105,72 @@ const TestimonialStyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-const TestimonialComponent = () => {
-  const [testimonials, setTestimonials] = useState([]);
-  const sliderRef = useRef(null);
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "0",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  zIndex: 1,
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
 
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "0",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
+
+const TestimonialComponent = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const [testimonials, setTestimonials] = useState([]);
+  const [centerIndex, setCenterIndex] = useState(0);
+  const sliderRef = useRef(null);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
       try {
         const res = await PostApiFunction({
           endPoint: Apiconfigs?.listAllTestimonial,
-        }); 
-        
-        setTestimonials(res.result.docs);  
+        });
+
+        setTestimonials(res.result.docs);
       } catch (error) {
         console.error("Error fetching testimonials:", error);
-      
       }
     };
-  
+
     fetchTestimonials();
   }, []);
 
-
-  
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     arrows: false,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
+    centerMode: true,
+    centerPadding: "0",
+    beforeChange: (current, next) => setCenterIndex(next),
+    afterChange: (current) => setCenterIndex(current),
     responsive: [
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -174,7 +180,7 @@ const TestimonialComponent = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -184,7 +190,7 @@ const TestimonialComponent = () => {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -194,7 +200,7 @@ const TestimonialComponent = () => {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: true,
@@ -219,72 +225,174 @@ const TestimonialComponent = () => {
           infinite: true,
           autoplay: true,
           initialSlide: 1,
+          centerPadding: "5px",
         },
       },
     ],
   };
 
-  const next = () => {
-    sliderRef.current.slickNext();
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
   };
 
-  const previous = () => {
-    sliderRef.current.slickPrev();
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
   };
-  const CardJson = [{}, {}, {}, {}];
+
+  const data = testimonials[0];
+  const index = 0;
+
   return (
-    <TestimonialStyle>
-      <Box position={"relative"}>
-        <Box className="backgorunClass">
-          <Container maxWidth>
-            <Box className="mainBox">
-              <Typography variant="h2">Testimonials</Typography>
-              <Box>
-                  <Grid container>
-                    <Grid item lg={3} md={3} sm={12} xs={12}>
-                      <Box className={"sliderBox"}>
-                        <Typography variant="h6">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type.
-                        </Typography>
-                      </Box>
-                    </Grid>
-                    <Grid item lg={9} md={9} sm={9} xs={12} style={{ justifyContent: "end" }}>
-                      <Slider ref={sliderRef} {...settings}>
-                      {testimonials &&
-                        testimonials.map((testimonial, index) => (
-                          <Card key={index} className="Cards">
-                            <Box display={"flex"} justifyContent={"center"} mb={"10px"}>
-                              <Box className="imageBox">
-                                <img  src="\images\meteryard\Images\profile.png" width={"100%"}  />
-                              </Box>
-                            </Box>
-                            <Typography variant="h6"> {testimonial.comments}</Typography>
-                            <Typography variant="h4"> {testimonial.ratings}<FaStar /></Typography>
-                            <Box display={"flex"} justifyContent={"center"} m={"20px 0"}>
-                              <Box className="borderLine"></Box>
-                            </Box>
-                            <Typography variant="h4"> {testimonial.customerName}</Typography>
-                          </Card>
-                        ))}
-                      </Slider>
-                    </Grid>
-                  </Grid>
-                </Box>
+    <TestimonialStyle position="relative" p={isMobile ? 2.5 : 4}>
+      <Box
+        mb={10}
+        display="flex"
+        flexDirection="column"
+        justifyContent={isMobile ? "flex-start" : "center"}
+        alignItems={isMobile ? "flex-start" : "center"}
+        marginInline="auto"
+        gap={2}
+      >
+        <Typography
+          variant="h1"
+          fontSize={isMobile ? 28 : 48}
+          fontWeight={500}
+          lineHeight={isMobile && 1.5}
+        >
+          TESTIMONIAL
+        </Typography>
+        <Typography
+          variant="p"
+          fontWeight={300}
+          fontSize={isMobile ? 20 : 24}
+          pl={0.3}
+        >
+          Featured Residential Projects Across India
+        </Typography>
+        {!isMobile && (
+          <Typography
+            mt={1}
+            width="100%"
+            textAlign="center"
+            fontWeight="300"
+            fontSize={28}
+            style={{ textWrap: "balance" }}
+          >
+            When the age of a person exceeds 50 years, it becomesvery important
+            to take care of one’s health as she enters the senior citizen age.
+            With age, the metabolism and functioning of the body become slow.
+          </Typography>
+        )}
+      </Box>
 
-
-              {/* <Box > */}
-              {/* <Box className="arrowsBox">
-                <Box className={"ArrowClass ArrowClassprev"} onClick={previous}>
-                  <NavigateBeforeIcon />
-                </Box>
-                <Box onClick={next} className={"ArrowClass ArrowClassNext"}>
-                  <NavigateNextIcon />
-                </Box>
-              </Box> */}
-              {/* </Box> */}
+      <Box p={"40px 0"}>
+        <Container maxWidth sx={{ display: "flex", justifyContent: "center" }}>
+          <Box
+            sx={{
+              width: "90%",
+              position: "relative",
+            }}
+          >
+            <Box display={"flex"} justifyContent={"center"}>
+              <Box
+                maxWidth={420}
+                position={"absolute"}
+                top={"-20px"}
+                marginLeft={"-20px"}
+                transform={isMobile && "scale(1.3)"}
+              >
+                <img src="./images/vector.png" width={"100%"} alt="img" />
+              </Box>
             </Box>
-          </Container>
-        </Box>
+
+            <Box width="100%" position="relative">
+              {!isMobile && (
+                <IconButtonLeftContent onClick={handlePrevious}>
+                  <ArrowBackIosIcon />
+                </IconButtonLeftContent>
+              )}
+
+              <Box width="100%">
+                <Slider ref={sliderRef} {...settings} className="slider">
+                  {testimonials &&
+                    testimonials.map((data, index) => (
+                      <Card
+                        className={`Cards ${
+                          index === centerIndex ? "centerCard" : ""
+                        }`}
+                        key={index}
+                      >
+                        <Box
+                          display={"flex"}
+                          justifyContent={"center"}
+                          mb={"10px"}
+                        >
+                          <Box className="imageBox">
+                            <Avatar
+                              src={data?.file}
+                              width={"100%"}
+                              style={{ height: "70px", width: "70px" }}
+                            />
+                          </Box>
+                        </Box>
+                        <Typography variant="h4" fontWeight={300}>
+                          {data?.customerName}
+                        </Typography>
+                        <Typography variant="h5">Lorem Ipsum</Typography>
+                        <Box mt={1}>
+                          <Typography variant="h6">
+                            {data?.comments?.length > 120
+                              ? `${data.comments.substring(0, 130)}...`
+                              : data?.comments}
+                          </Typography>
+                        </Box>
+                      </Card>
+                    ))}
+                </Slider>
+              </Box>
+
+              {/* <Box width="100%">
+                <Card
+                  className={`Cards ${
+                    index === centerIndex ? "centerCard" : ""
+                  }`}
+                  key={index}
+                >
+                  <Box display={"flex"} justifyContent={"center"} mb={"10px"}>
+                    <Box className="imageBox">
+                      <Avatar
+                        src={data?.file}
+                        width={"100%"}
+                        style={{ height: "70px", width: "70px" }}
+                      />
+                    </Box>
+                  </Box>
+                  <Typography variant="h4" fontWeight={300}>
+                    {data?.customerName}
+                  </Typography>
+                  <Typography variant="h5">Lorem Ipsum</Typography>
+                  <Box mt={1}>
+                    <Typography variant="h6">
+                      {data?.comments?.length > 120
+                        ? `${data.comments.substring(0, 130)}...`
+                        : data?.comments}
+                    </Typography>
+                  </Box>
+                </Card>
+              </Box> */}
+
+              {!isMobile && (
+                <IconButtonRightContent onClick={handleNext}>
+                  <ArrowForwardIosIcon />
+                </IconButtonRightContent>
+              )}
+            </Box>
+          </Box>
+        </Container>
       </Box>
     </TestimonialStyle>
   );

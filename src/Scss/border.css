@@ -100,7 +100,17 @@
 		transform: rotate(1turn);
 	}
 }
-
+.rainbowGradient_new{
+	background-color: #fff  !important;
+	border: none;
+    padding: 5px 11px !important;
+    border-radius: 10px !important;
+    color: #a9d910 !important;
+    font-family: system-ui !important;
+    text-transform: none !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+}
 .rainbowGradient {
 	position: relative;
     z-index: 0;
@@ -125,12 +135,12 @@
     top: -150%;
     width: 188%;
     height: 424%;
-		background-color: #399953;
+		/* background-color: #399953; */
 		background-repeat: no-repeat;
 		background-size: 50% 50%, 50% 50%;
 		background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-		background-image: linear-gradient(#c716d1, #be0e92), linear-gradient(#399953, #399953), linear-gradient(#fbb300, #fbb300), linear-gradient(#5f3fb6, #3f43c0),linear-gradient(#d53e33, #d53e33);
-		animation: rotate1 4s linear infinite;
+		/* background-image: linear-gradient(#c716d1, #be0e92), linear-gradient(#399953, #399953), linear-gradient(#fbb300, #fbb300), linear-gradient(#5f3fb6, #3f43c0),linear-gradient(#d53e33, #d53e33); */
+		/* animation: rotate1 4s linear infinite; */
 	}
 	
 	&::after {
@@ -143,6 +153,7 @@
     height: calc(105% - 8px);
     background: white;
     border-radius: 44px;
+	
 	}
 }
 @media screen and (max-width:615px) {

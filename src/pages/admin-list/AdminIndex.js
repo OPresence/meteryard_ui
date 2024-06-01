@@ -22,7 +22,7 @@ import ViewDialog from "../../component/ViewDialog";
 import SureModal from "../../component/SureModal";
 import LoaderComponent from "../../component/LoaderComponent";
 
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
     background: "#fff",

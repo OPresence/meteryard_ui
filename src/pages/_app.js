@@ -41,15 +41,15 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
       setLoading(false);
     };
 
-    Router.events.on("routeChangeStart", startLoading);
-    Router.events.on("routeChangeComplete", stopLoading);
-    Router.events.on("routeChangeError", stopLoading);
+    // Router.events.on("routeChangeStart", startLoading);
+    // Router.events.on("routeChangeComplete", stopLoading);
+    // Router.events.on("routeChangeError", stopLoading);
 
-    return () => {
-      Router.events.off("routeChangeStart", startLoading);
-      Router.events.off("routeChangeComplete", stopLoading);
-      Router.events.off("routeChangeError", stopLoading);
-    };
+    // return () => {
+    //   Router.events.off("routeChangeStart", startLoading);
+    //   Router.events.off("routeChangeComplete", stopLoading);
+    //   Router.events.off("routeChangeError", stopLoading);
+    // };
   }, []);
   return (
     <div className="App" style={{ background: "#fff" }}>
@@ -57,6 +57,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <Head>
           <meta name="description" content="" />
           <link rel="icon" href="" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         {loading ? (
           <PageLoading />

@@ -5,7 +5,7 @@ import { FaCircleArrowRight } from "react-icons/fa6";
 import { IoSpeedometer } from "react-icons/io5";
 import Divider from "@mui/material/Divider";
 
-const DashboardStyle = styled("Box")(({ theme }) => ({
+const DashboardStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     "& .cardBox": {
       borderRadius: "10px",
@@ -39,7 +39,7 @@ const DashboardStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const DashboardStyleTop = styled("Box")(({ theme }) => ({
+const DashboardStyleTop = styled(Box)(({ theme }) => ({
   "& .dashboardBox": {
     margin: "0 0 20px 0",
     display: "flex",

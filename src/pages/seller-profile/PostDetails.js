@@ -10,14 +10,14 @@ import { BsChatDots } from "react-icons/bs";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import { AuthContext } from "../../context/Auth";
 
-// const PostStyle = styled("Box")(({ theme }) => ({
+// const PostStyle = styled(Box)(({ theme }) => ({
 //   "& .mainBox": {
 //     "& .moreDetialsBox": {
 //       "& button": {
 //         background: "#fff",
 //         boxShadow: "0px 3px 3px #00000014",
 //       },
-    
+
 //     },
 //     "& h2": {
 //       fontSize: "13px",
@@ -60,7 +60,7 @@ import { AuthContext } from "../../context/Auth";
 //         fontSize: "16px",
 //         color: "#444444",
 //       },
-      
+
 //       "& span": {
 //         fontSize: "16px",
 //         color: "#444444",
@@ -78,7 +78,7 @@ import { AuthContext } from "../../context/Auth";
 //   },
 // }));
 
-const PostStyle = styled('Box')(({ theme }) => ({
+const PostStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
     "& .moreDetialsBox": {
       "& button": {

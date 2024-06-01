@@ -3,7 +3,9 @@ import styled from "@emotion/styled";
 import { Box, Container, IconButton, Grid, Typography } from "@mui/material";
 import SubMenuComponent from "./SubMenuComponent";
 import SubMenu2Component from "./SubMenu2Component";
-const MenuComponentStyle = styled("Box")(({ theme }) => ({
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+
+const MenuComponentStyle = styled(Box)(({ theme }) => ({
   "& .submenueTab": {
     display: "flex",
     "@media(max-width:615px)": {
@@ -11,6 +13,13 @@ const MenuComponentStyle = styled("Box")(({ theme }) => ({
       justifyContent: "start",
     },
     "& button": {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: "-4px",
+      fontSize: "14px",
+      fontWeight: "600",
+      textTransform: "uppercase",
       "@media(max-width:615px)": {
         padding: "10px",
         width: "100%",
@@ -18,6 +27,9 @@ const MenuComponentStyle = styled("Box")(({ theme }) => ({
         boxShadow: "0px 3px 46px #00000029",
         margin: "5px",
       },
+    },
+    "& .rightBtn": {
+      // marginTop: "4px",
     },
   },
 }));
@@ -27,8 +39,10 @@ const MenuComponent = () => {
     <MenuComponentStyle>
       <Box className="submenueTab" justifyContent={"space-between"}>
         <div class={"dropdown"} style={{ width: "100%" }}>
-          <Box style={{}}>
-            <button class="dropbtn">cities</button>
+          <Box>
+            <button class="dropbtn">
+              Cities <ChevronRightIcon className="rightBtn" />
+            </button>
           </Box>
 
           <div class="dropdown-content" style={{ width: "100%" }}>
@@ -36,8 +50,10 @@ const MenuComponent = () => {
           </div>
         </div>
         <div class={"dropdown"} style={{ width: "100%" }}>
-          <Box style={{}}>
-            <button class="dropbtn">Property Type</button>
+          <Box>
+            <button class="dropbtn">
+              Property Type <ChevronRightIcon className="rightBtn" />
+            </button>
           </Box>
 
           <div class="dropdown-content" style={{ width: "100%" }}>

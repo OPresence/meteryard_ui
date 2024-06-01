@@ -5,7 +5,7 @@ import { styled } from "@mui/system";
 import FilterComponent from "../../component/FilterComponent";
 import AdminLayout from "../../layout/AdminLayout";
 
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
     background: "#fff",

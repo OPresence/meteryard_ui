@@ -32,7 +32,7 @@ import { AuthContext } from "../../context/Auth";
 import Forgot from "../forgot-password";
 import ResetPassword from "../forgot-password/ResetPassword";
 
-const LoginStyle = styled("Box")(({ theme }) => ({
+const LoginStyle = styled(Box)(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
     backgroundPosition: "right",
@@ -56,7 +56,11 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       padding: "0 0px",
     },
     "& input": {
-      padding: "10.5px 14px !important",
+      padding: "12px 14px !important",
+      fontSize: "18px",
+      "&::placeholder": {
+        fontSize: "18px",
+      },
     },
     "& h2": {
       fontWeight: "600",

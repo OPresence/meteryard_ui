@@ -13,24 +13,24 @@ import AgreecultureComponent from "../component/AgreecultureComponent";
 import ChatBoat from "../component/ChatBoat";
 
 import TestingComponent from "../component/TestingComponent";
+import YoutubeComponent from "../component/YoutubeComponent";
 export default function ClientPage() {
   return (
     <Box>
       <Banner />
       <SliderComponent />
-      <CardComponent showViewMore={true} />
+      <CardComponent />
       <BannerCompont />
-      <ResidentialProjects showViewMore={true} />
-      <CommercialProjects showViewMore={true} />
-      <AgreecultureComponent showViewMore={true} />
-      {/* <YoutubeComponent /> */}
+      <ResidentialProjects />
+      <CommercialProjects />
+      <AgreecultureComponent />
+      <YoutubeComponent />
       <ProjectComponent />
       {/* <MobileAppComponent /> */}
       <TestimonialComponent />
       {/* <TestingComponent /> */}
-      
 
-      <ChatBoat />
+      {/* <ChatBoat /> */}
     </Box>
   );
 }

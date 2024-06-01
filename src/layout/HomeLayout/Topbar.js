@@ -1,11 +1,10 @@
 "use client";
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   AppBar,
   Toolbar,
   Button,
   Drawer,
-  Hidden,
   Box,
   Container,
   IconButton,
@@ -13,8 +12,6 @@ import {
   Typography,
 } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
 import Logo from "../../component/Logo";
@@ -30,8 +27,8 @@ import { AuthContext } from "../../context/Auth";
 import CloseIcon from "@mui/icons-material/Close";
 import ProfileMenu from "../../component/ProfileMenu";
 import MobilerMenu from "../../component/MobileMenu";
-import CityChatDialog from "../../component/CityChatDialog";
-const MenuStyle = styled("Box")(({ theme }) => ({
+import RegisterModal from "../../component/registerSellerModal/RegisterModal";
+const MenuStyle = styled(Box)(({ theme }) => ({
   "& .hidebox": {
     display: "block",
     "@media(max-width:615px)": {
@@ -41,6 +38,7 @@ const MenuStyle = styled("Box")(({ theme }) => ({
   "& .cityChat": {
     padding: "0",
     display: "none",
+
     "@media(max-width:615px)": {
       display: "block !important",
     },
@@ -67,8 +65,10 @@ const MenuStyle = styled("Box")(({ theme }) => ({
   },
 }));
 
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .appbarBox": {
+    width: "100vw",
+    left: "0 !important",
     background: "#fff ",
     // boxShadow:
     //   "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
@@ -82,6 +82,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "& .flexAlign": {
       display: "flex",
       alignItems: "center",
+      "& p": {
+        fontSize: "16px !important",
+        color: "#000",
+      },
       // "@media(max-width:615px)": {
       //   display: "none",
       // },
@@ -90,6 +94,12 @@ const MainComponent = styled("Box")(({ theme }) => ({
         fontFamily: "system-ui",
         fontWeight: "500",
         cursor: "pointer",
+      },
+      "& .icon1": {
+        backgroundColor: "#00008B",
+      },
+      "& .icon2": {
+        backgroundColor: "#A7D325",
       },
     },
   },
@@ -100,7 +110,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       justifyContent: "space-between",
       "& svg": {
         color: "#fff ",
-        background: "#343A40 ",
+
         padding: "5px ",
         fontSize: "28px ",
         borderRadius: "50px ",
@@ -147,7 +157,12 @@ export default function Topbar() {
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);
   const [_accesstoken, setAccessToken] = useState(null);
-  const [_open_city_dia,setOpenCity_dia] = useState(false);
+  const [_open_city_dia, setOpenCity_dia] = useState(false);
+  const [_signup_dia, setSignUpDia] = useState(false);
+
+  const SignUpDialog = (value) => {
+    setSignUpDia(true);
+  };
   const GetProfileFunction = async () => {
     try {
       const res = await getAPIdata({
@@ -161,7 +176,6 @@ export default function Topbar() {
       console.log("error", error);
     }
   };
-
 
   const router = useRouter();
   const handleClickOpen = () => {
@@ -216,18 +230,21 @@ export default function Topbar() {
         </Link>
       </Box>
       <Box>
-        <MenuStyle>
+        {/* <MenuStyle>
           <Box className="cityChat">
-            <Button className="rainbowGradient"  onClick={() =>
+            <Button
+              className="rainbowGradient"
+              onClick={() =>
                 router.push({
                   pathname: "/CityChat",
                   // query: { BuyerKey: "Buyer", search: "Buyer" },
                 })
-              }>
+              }
+            >
               My Citychat
             </Button>
           </Box>
-        </MenuStyle>
+        </MenuStyle> */}
       </Box>
     </Box>
   );
@@ -297,7 +314,7 @@ export default function Topbar() {
                     </Button>
                     &nbsp;&nbsp; &nbsp;&nbsp;
                     <Button
-                      onClick={() => handleClickOpenLogin("Sign Up")}
+                      onClick={() => SignUpDialog()}
                       className="LoginButton"
                     >
                       Sign Up
@@ -376,15 +393,15 @@ export default function Topbar() {
               <Box className={"TopIconBoxChild"} alignItems={"enter"}>
                 <Box display={"flex"} alignItems={"enter"}>
                   <Box className="flexAlign">
-                    <CallIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <CallIcon className="icon1" /> &nbsp;&nbsp;&nbsp;&nbsp;
                     <Typography variant="body1">
                       011-41219999 | 09999-127085
                     </Typography>
                   </Box>
-                  <Box className="flexAlign" p={"0 0 0 30px"}>
-                    <WhatsAppIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
+                  {/* <Box className="flexAlign" p={"0 0 0 30px"}>
+                    <WhatsAppIcon className="icon2" /> &nbsp;&nbsp;&nbsp;&nbsp;
                     <Typography variant="body1">whatsapp us</Typography>
-                  </Box>
+                  </Box> */}
                 </Box>
                 <Box className="flexAlign" p={"0 0 0 30px"}>
                   &nbsp;&nbsp;&nbsp;&nbsp;
@@ -393,9 +410,7 @@ export default function Topbar() {
                       <span onClick={() => handleClickOpenLogin("Login")}>
                         Login
                       </span>
-                      <span onClick={() => handleClickOpenLogin("Sign Up")}>
-                        /Sign Up
-                      </span>
+                      <span onClick={() => SignUpDialog()}>/Sign Up</span>
                     </>
                   ) : (
                     <ProfileMenu setAccessToken={setAccessToken} />
@@ -414,19 +429,23 @@ export default function Topbar() {
                       <MobilerMenu />
                     </Box>
                     {/* {router.pathname == "/" && ( */}
-                      <Box p={"10px 25px 0 0"}>
-                        <Button
-                          className="rainbowGradient"
-                          onClick={() =>
-                            router.push({
-                              pathname: "/CityChat",
-                              // query: { BuyerKey: "Buyer", search: "Buyer" },
-                            })
-                          }
-                        >
-                          My Citychat
-                        </Button>
-                      </Box>
+                    {/* <Box
+                      p={"0px 25px 0 0"}
+                      display={"flex"}
+                      alignItems={"center"}
+                    >
+                      <Button
+                        className="rainbowGradient_new"
+                        onClick={() =>
+                          router.push({
+                            pathname: "/CityChat",
+                            // query: { BuyerKey: "Buyer", search: "Buyer" },
+                          })
+                        }
+                      >
+                        My Citychat
+                      </Button>
+                    </Box> */}
                     {/* )} */}
                   </Box>
                 </Box>
@@ -448,6 +467,14 @@ export default function Topbar() {
         handleClickOpen={handleClickOpen}
         handleClose={handleClose}
       />
+      {_signup_dia && (
+        <RegisterModal
+          open={_signup_dia}
+          handleClickOpenLogin={SignUpDialog}
+          setOpen={setSignUpDia}
+        />
+      )}
+
       {_openDialogLogin && (
         <LoginDialog
           open={_openDialogLogin}
@@ -458,11 +485,9 @@ export default function Topbar() {
           setSelectScreen={setSelectScreen}
           setSignUpComplete={setSignUpComplete}
           _signcomplete={_signcomplete}
+          SignUpDialog={SignUpDialog}
         />
       )}
-
-
-
     </MainComponent>
   );
 }

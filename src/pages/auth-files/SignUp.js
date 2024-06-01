@@ -33,7 +33,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { AuthContext } from "../../context/Auth";
-const LoginStyle = styled("Box")(({ theme }) => ({
+const LoginStyle = styled(Box)(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
     backgroundPosition: "right",
@@ -117,7 +117,7 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
-const PhoneINputStyle = styled("Box")(({ theme }) => ({
+const PhoneINputStyle = styled(Box)(({ theme }) => ({
   "& .phoneInputBox": {
     "& input": {
       padding: "10.5px 40px !important",
@@ -154,15 +154,27 @@ const formValidationSchema = yep.object().shape({
     ),
 });
 
-const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
+const SignUp = ({
+  _selectScreen,
+  setSelectScreen,
+  setSignUpComplete,
+  SignUpDialog,
+  handleClose,
+}) => {
   const [isloading, setIsLoading] = useState(false);
   const auth = useContext(AuthContext);
   const [showPassword, setShowPassword] = React.useState(false);
   const [_isSignup, setIsSignUp] = useState(false);
   const [_countrycode, setCountryCode] = useState("");
   const [selectedValue, setSelectedValue] = useState("BUYER"); // Initial selected value
+  console.log("selectedValue00-->", selectedValue);
   const handleChangeType = (event) => {
-    setSelectedValue(event.target.value);
+    if (event.target.value == "SELLER") {
+      SignUpDialog();
+      handleClose();
+    } else {
+      setSelectedValue(event.target.value);
+    }
   };
   const phoneInputStyles = {
     width: "100%",
@@ -196,7 +208,7 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
           // toast.success("SignUp successful!"); // Display success notification
           toast.success(res?.responseMessage);
           setIsLoading(false);
-          auth.setEndtime(moment().add(2, "m").unix());
+          auth.setEndtime(moment().add(30, "s").unix());
 
           setSignUpComplete(res?.result);
         } else if (res?.responseCode == 409) {
@@ -343,14 +355,14 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                                   />
                                 </Box>
 
-                                <Box>
+                                {/* <Box>
                                   <FormControlLabel
                                     value="GUEST"
                                     disabled={isloading}
                                     control={<Radio />}
                                     label="GUEST"
                                   />
-                                </Box>
+                                </Box> */}
                               </RadioGroup>
                             </Box>
                           </FormControl>

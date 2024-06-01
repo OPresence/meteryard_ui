@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 
-const MainFormStyle = styled("Box")(({ theme }) => ({
+const MainFormStyle = styled(Box)(({ theme }) => ({
   "& .mainBoxStyle": {
     borderLeft: "3px solid rgb(162, 209, 23)",
     paddingLeft: "10px",

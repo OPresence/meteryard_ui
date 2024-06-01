@@ -18,7 +18,7 @@ import {
   Icon,
 } from "@mui/material";
 import { styled } from "@mui/system";
-const LocationStyle = styled("Box")(({ theme }) => ({
+const LocationStyle = styled(Box)(({ theme }) => ({
   "& .mainBoxLocation": {
     position: "relative",
   },

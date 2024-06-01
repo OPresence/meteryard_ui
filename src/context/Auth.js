@@ -30,14 +30,18 @@ export default function Auth(props) {
   const [_getCityValue, setGetCityValue] = useState("0");
   const [_getProjectTypeId, setProjectTypeId] = useState("");
   const [_getproperyPostList, setproperyPostList] = useState([]);
+  const [_getproperFilteryPostList, setproperyFilterPostList] = useState([]);
   const [_pro_with_subpro, setPro_With_Subpro] = useState([]);
+  const [_getstate, setGetState] = useState("");
+
   // filter state
   const [_isloadingProp, setIsloadingProp] = useState(false);
   const [_priceRange, setPriceRangeState] = useState("");
   const [_propertyType, setPropertyType] = useState("");
   const [_propertySubType, setPropertySubType] = useState("");
   const [_cityselect, setCitySelect] = useState("0");
-  console.log("_getCityValue--->",_priceRange);
+  const [_searchproperty, setSearchProperty] = useState("");
+  console.log("_getCityValue--->", _priceRange);
   const StateApiFunction = async () => {
     try {
       const res = await PostApiFunction({
@@ -179,8 +183,7 @@ export default function Auth(props) {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllPropertyPost,
         data: {
-       
-          projectTypeIds: ["65dc4b9cda234100342352b1"],
+          projectTypeId: ["65dc4b9cda234100342352b1"],
           page: "1",
           limit: "10",
         },
@@ -201,7 +204,6 @@ export default function Auth(props) {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllPropertyPost,
         data: {
-
           projectTypeIds: ["65dc4c11da234100342352f4"],
           page: "1",
           limit: "10",
@@ -349,7 +351,6 @@ export default function Auth(props) {
       setIsloadingProp(true);
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllPropertyPost,
-
         data: {
           projectTypeIds: _propertyType != "" ? _propertyType : "",
           projectSubTypeIds: _propertySubType != "" ? _propertySubType : "",
@@ -399,6 +400,62 @@ export default function Auth(props) {
       setproperyPostList([]);
     }
   };
+  const PropertySearchPostAPI = async (property_id) => {
+    console.log("8888888888888--->", property_id);
+    try {
+      setIsloadingProp(true);
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.globalSearch,
+        data: {
+          search: _searchproperty,
+          projectTypeIds: _propertyType != "" ? _propertyType : "",
+          projectSubTypeIds: _propertySubType != "" ? _propertySubType : "",
+          stateIds: _getCityValue != "0" ? [_getCityValue] : [],
+          cityIds: _cityselect != "0" ? [_cityselect] : [],
+          minPrice: _priceRange[0],
+          maxPrice: _priceRange[1],
+          page: "1",
+          limit: "20",
+        },
+      });
+      if (res) {
+        console.log("sbjdhskandad4sa69879rt->", res);
+        if (res?.responseCode == 200) {
+          setIsloadingProp(false);
+
+          setproperyFilterPostList(res?.result?.property);
+        } else if (res?.responseCode == 400) {
+          setIsloadingProp(false);
+
+          setproperyFilterPostList([]);
+          toast.error(res?.responseMessage);
+          setproperyFilterPostList([]);
+        } else if (res?.responseCode == 404) {
+          setIsloadingProp(false);
+
+          setproperyFilterPostList([]);
+          toast.error(res?.responseMessage); // Display error notification
+        } else if (res?.responseCode == 500) {
+          setIsloadingProp(false);
+
+          setproperyFilterPostList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else {
+          setIsloadingProp(false);
+
+          setproperyFilterPostList([]);
+
+          toast.error(res?.responseMessage); // Display error notification
+        }
+      }
+    } catch (error) {
+      setIsloadingProp(false);
+
+      console.log("error");
+      setproperyFilterPostList([]);
+    }
+  };
   useEffect(() => {
     if (_getproprty_type) {
       SubProjectType();
@@ -439,11 +496,22 @@ export default function Auth(props) {
   useEffect(() => {
     CityApiFunction();
   }, [_getCityValue]);
+  useEffect(() => {
+    StateApiFunction();
+  }, [_getCityValue]);
 
   useEffect(() => {
     PropertyPostAPI();
-  }, [_propertySubType, _getCityValue, _cityselect,_priceRange]);
-
+  }, [_propertySubType, _getCityValue, _cityselect, _priceRange]);
+  useEffect(() => {
+    PropertySearchPostAPI();
+  }, [
+    _propertySubType,
+    _getCityValue,
+    _cityselect,
+    _priceRange,
+    // _searchproperty,
+  ]);
   let data = {
     _accesstoken,
     _getprofile,
@@ -461,11 +529,14 @@ export default function Auth(props) {
     statesHome,
     _citylist,
     _getproperyPostList,
+    _getproperFilteryPostList,
     _pro_with_subpro,
     _isloadingProp,
     _getCityValue,
     _cityselect,
     PropertyPostAPI: (value) => PropertyPostAPI(value),
+    PropertySearchPostAPI: (value) => PropertySearchPostAPI(value),
+
     ResidentialAPI: (value) => ResidentialAPI(value),
     CommercialAPI: (value) => CommercialAPI(value),
     AgreecultureAPIAPI: (value) => AgreecultureAPIAPI(value),
@@ -483,6 +554,8 @@ export default function Auth(props) {
       SubTypeListWithProType_Function(value),
     setPropertySubType: (value) => setPropertySubType(value),
     setCitySelect: (value) => setCitySelect(value),
+    setSearchProperty: (value) => setSearchProperty(value),
+    PropertySearchPostAPI: (value) => PropertySearchPostAPI(value),
   };
   useEffect(() => {
     const storedToken = sessionStorage.getItem("token");

@@ -15,7 +15,7 @@ import Apiconfigs from "../ApiConfig/ApiConfig";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { AuthContext } from "../context/Auth";
 import { padding } from "@mui/system";
-const SubMenuStyle = styled("Box")(({ theme }) => ({
+const SubMenuStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     // padding: "20px 20px 0 20px  ",
     marginTop: "10px",

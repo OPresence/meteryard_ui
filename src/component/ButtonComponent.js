@@ -3,17 +3,28 @@ import styled from "@emotion/styled";
 import { Box, Button } from "@mui/material";
 import { useRouter } from "next/router";
 
-const ButonStyle = styled("Box")(({ theme }) => ({
+const ButonStyle = styled(Box)(({ theme }) => ({
   "& .viewmoreButton": {
     "& button": {
-      background: "none",
-      border: "1px solid black",
-      position: "absolute",
-      bottom: "10px",
+      // background: "none",
+      // border: "2px solid #A9D910",
+      // padding: "5px 20px",
+      // borderRadius: "50px",
+      width: "158.8px",
+      height: "40.7px",
+      gap: "0px",
+      border: "1x 0px 0px 0px",
+      opacity: "0px",
+      background: "#FFFFFF",
+      border: "2px solid #A9D910",
+      borderRadius: "50px",
     },
     "& span": {
-      color: "#000",
-      fontSize: "10px",
+      fontFamily: "Inter",
+      fontSize: "12px",
+      fontWeight: "600",
+      lineHeight: "16.94px",
+      color: "#A9D910",
     },
   },
 }));
@@ -33,7 +44,7 @@ const ButtonComponent = ({ data }) => {
             })
           }
         >
-          <span>Get View More</span>
+          <span>View More</span>
         </Button>
       </Box>
     </ButonStyle>

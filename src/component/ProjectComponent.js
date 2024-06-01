@@ -1,375 +1,50 @@
-// import React from "react";
-// import { Grid, Typography, Box, Container, Button } from "@mui/material";
-// import styled from "@emotion/styled";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-// import "../Scss/border.css";
-// const ProjectStyle = styled("Box")(({ theme }) => ({
-//   "& .mainBox": {
-//     padding: "80px 0 100px 0",
-//     background: "#F7F7F7",
-//     "@media(max-width:615px)": {
-//       padding: "34px 0 100px 0",
-//     },
-   
-//     // padding: "50px",
-//     "& h2": {
-//       fontWeight: "500",
-//     },
-//     "& .shodowBox": {
-//       background: "#fff",
-//       margin: "40px 0 0 0",
-//       display: "flex",
-//       justifyContent: "space-between",
-//       padding: "0 80px",
-//       boxShadow: "0px 3px 39px #0000000A",
-//       "@media(max-width:460px)": {
-//         padding: "0 10px",
-//       },
-//       "@media(max-width:615px)": {
-//         margin: "34px 0 0 0",
-//       },
-//       "@media(max-width:425px)": {
-//         margin: "34px 0 0 0",
-//       },
-//       "& .smallBox": {
-//         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-//         borderRadius: "20px",
-//         textAlign: "center",
-//         width: "150px",
-//         height: "150px",
-//         alignItems: "center",
-//         display: "flex",
-//         background: "#fff",
-//         justifyContent: "center",
-//         position: "relative" /* Added position relative */,
-//         border: "5px solid #A7D325",
-//         "& .contentBox": {
-//           padding: "10px",
-//           boxShadow: "0px 3px 39px #0000001C",
-//           borderRadius: "20px",
-//         },
-//         "&::before": {
-//           content: '""',
-//           position: "absolute",
-//           bottom: "-4px",
-//           left: "-6px",
-//           height: "90px",
-//           border: "5px solid #a7d325",
-//           borderRadius: "0 0 10 76px",
-//           borderTopRightRadius: "25px",
-//           borderTopLeftRadius: "20px",
-//           borderBottomRightRadius: "25px",
-//           borderBottomLeftRadius: "20px",
-//         },
-//         "&::after": {
-//           background: "#a7d325",
-//           content: '""',
-//           position: "absolute",
-//           bottom: "-20px",
-//           left: "10px",
-//           height: "30px",
-//           border: "5px solid #a7d325",
-//           borderRadius: "0 0 10 76px",
-//           borderTopRightRadius: "25px",
-//           borderTopLeftRadius: "20px",
-//           borderBottomRightRadius: "25px",
-//           borderBottomLeftRadius: "20px",
-//           transform: "rotateZ(271deg)",
-//         },
-//         "& h1": {
-//           "@media(max-width:540px)": {
-//             fontSize: "16px",
-//           },
-//         },
-//         "& h3": {
-//           fontSize: "16px",
-//           fontWeight: "600",
-//         },
-//       },
-//       "& .smallBox1": {
-//         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-//         // padding: "20px",
-//         borderRadius: "20px",
-//         textAlign: "center",
-//         width: "150px",
-//         height: "150px",
-//         alignItems: "center",
-//         display: "flex",
-//         background: "#fff",
-//         justifyContent: "center",
-//         position: "relative" /* Added position relative */,
-//         border: "5px solid #444444",
-//         "& .contentBox": {
-//           padding: "10px 35px",
-//           boxShadow: "0px 3px 39px #0000001C",
-//           borderRadius: "20px",
-//         },
-//         "&::before": {
-//           content: '""',
-//           position: "absolute",
-//           bottom: "43px",
-//           right: "-6px",
-//           height: "90px",
-//           border: "5px solid #444444",
-//           borderRadius: "0 0 10 76px",
-//           borderTopRightRadius: "25px",
-//           borderTopLeftRadius: "20px",
-//           borderBottomRightRadius: "25px",
-//           borderBottomLeftRadius: "20px",
-//         },
-//         "&::after": {
-//           background: "#444444",
-//           content: '""',
-//           position: "absolute",
-//           top: "-21px",
-//           right: "10px",
-//           height: "30px",
-//           border: "5px solid #444444",
-//           borderRadius: "0 0 10 76px",
-//           borderTopRightRadius: "25px",
-//           borderTopLeftRadius: "20px",
-//           borderBottomRightRadius: "25px",
-//           borderBottomLeftRadius: "20px",
-//           WebkitTransform: "rotateZ(280deg)",
-//           MozTransform: "rotateZ(269deg)",
-//           MsTransform: "rotateZ(269deg)",
-//           transform: "rotateZ(271deg)",
-//         },
-//         "& h1": {
-//           "@media(max-width:540px)": {
-//             fontSize: "16px",
-//           },
-//         },
-//         "& h3": {
-//           fontSize: "16px",
-//           fontWeight: "600",
-//         },
-//       },
-//     },
-//     "& .contentBox": {
-//       padding: "10px",
-//       boxShadow: "0px 3px 39px #0000001C",
-//       borderRadius: "20px",
-//     },
-//   },
-// }));
-// const settings = {
-//   dots: false,
-//   infinite: true,
-//   autoplay: true,
-//   arrows: true,
-//   speed: 400,
-//   slidesToShow: 4,
-//   slidesToScroll: 1,
-
-//   responsive: [
-//     {
-//       breakpoint: 1280,
-//       settings: {
-//         slidesToShow: 4,
-//         slidesToScroll: 1,
-//         infinite: true,
-//         autoplay: true,
-//         dots: false,
-//       },
-//     },
-//     {
-//       breakpoint: 1024,
-//       settings: {
-//         slidesToShow: 3,
-//         slidesToScroll: 1,
-//         infinite: true,
-//         autoplay: true,
-//         dots: false,
-//       },
-//     },
-//     {
-//       breakpoint: 991,
-//       settings: {
-//         slidesToShow: 3,
-//         slidesToScroll: 1,
-//         infinite: true,
-//         autoplay: true,
-//         dots: false,
-//       },
-//     },
-//     {
-//       breakpoint: 767,
-//       settings: {
-//         slidesToShow: 3,
-//         slidesToScroll: 1,
-//         infinite: true,
-//         autoplay: true,
-//         dots: false,
-//       },
-//     },
-//     {
-//       breakpoint: 600,
-//       settings: {
-//         slidesToShow: 2,
-//         slidesToScroll: 1,
-//         infinite: true,
-//         autoplay: true,
-//         initialSlide: 1,
-//       },
-//     },
-//     {
-//       breakpoint: 480,
-//       settings: {
-//         slidesToShow: 1,
-//         slidesToScroll: 1,
-//         infinite: true,
-//         infinite: true,
-//         autoplay: true,
-//         initialSlide: 1,
-//       },
-//     },
-//   ],
-// };
-// const ProjectComponent = () => {
-//   return (
-//     <ProjectStyle>
-//       <Box className="mainBox">
-//         <Container maxWidth>
-//           <Box>
-//             <Typography variant="h2">Projects</Typography>
-//             <Typography variant="h6">
-//               Featured Residential Projects Across India
-//             </Typography>
-//           </Box>
-//           <Box>
-//             <Box className="shodowBox">
-//               <Box width={"100%"} margin={"40px 0"}>
-//                 <Box>
-//                   {/* <Grid
-//                     container
-//                     spacing={3}
-//                     style={{ justifyContent: "center" }}
-//                   > */}
-//                   <Slider {...settings} >
-//                     <Grid item lg={3} md={3} sm={6} xs={6}>
-//                       <Box className="rainbow" maxWidth={180}>
-//                         <Box className="contentBox" textAlign={"center"}>
-//                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
-//                             <Typography variant="h3">Total Projects</Typography>
-//                           </Box>
-//                         </Box>
-//                       </Box>
-//                     </Grid>
-//                     <Grid item lg={3} md={3} sm={6} xs={6}>
-//                       <Box className="rainbowSecond" maxWidth={180}>
-//                         <Box className="contentBox" textAlign={"center"}>
-//                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
-//                             <Typography variant="h3">Total Projects</Typography>
-//                           </Box>
-//                         </Box>
-//                       </Box>
-//                     </Grid>
-//                     <Grid item lg={3} md={3} sm={6} xs={6}>
-//                       <Box className="rainbow" maxWidth={180}>
-//                         <Box className="contentBox" textAlign={"center"}>
-//                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
-//                             <Typography variant="h3">Total Projects</Typography>
-//                           </Box>
-//                         </Box>
-//                       </Box>
-//                     </Grid>
-//                     <Grid item lg={3} md={3} sm={6} xs={6}>
-//                       <Box className="rainbowSecond" maxWidth={180}>
-//                         <Box className="contentBox" textAlign={"center"}>
-//                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
-//                             <Typography variant="h3">Total Projects</Typography>
-//                           </Box>
-//                         </Box>
-//                       </Box>
-//                     </Grid>
-//                     <Grid item lg={3} md={3} sm={6} xs={6}>
-//                       <Box className="rainbow" maxWidth={180}>
-//                         <Box className="contentBox" textAlign={"center"}>
-//                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
-//                             <Typography variant="h3">Total Projects</Typography>
-//                           </Box>
-//                         </Box>
-//                       </Box>
-//                     </Grid>
-//                     <Grid item lg={3} md={3} sm={6} xs={6}>
-//                       <Box className="rainbowSecond" maxWidth={180}>
-//                         <Box className="contentBox" textAlign={"center"}>
-//                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
-//                             <Typography variant="h3">Total Projects</Typography>
-//                           </Box>
-//                         </Box>
-//                       </Box>
-//                     </Grid>
-//                     <Grid item lg={3} md={3} sm={6} xs={6}>
-//                       <Box className="rainbow" maxWidth={180}>
-//                         <Box className="contentBox" textAlign={"center"}>
-//                           <Typography variant="h1">51</Typography>
-//                           <Box mt={2}>
-//                             <Typography variant="h3">Total Projects</Typography>
-//                           </Box>
-//                         </Box>
-//                       </Box>
-//                     </Grid>
-//                  </Slider> 
-
-//                   {/* </Grid> */}
-//                 </Box>
-               
-//               </Box>
-//             </Box>
-//           </Box>
-//         </Container>
-//       </Box>
-//     </ProjectStyle>
-//   );
-// };
-
-// export default ProjectComponent;
-
-
-
-
 import React, { useRef, useContext } from "react";
-import { Grid, Typography, Box, Container, Button } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import {
+  Grid,
+  Typography,
+  Box,
+  Container,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import styled from "@emotion/styled";
 import Slider from "react-slick";
 import { AuthContext } from "../context/Auth";
 import "../Scss/border.css";
-const ProjectStyle = styled("Box")(({ theme }) => ({
+const ProjectStyle = styled(Box)(({ theme }) => ({
+  margin: "2rem auto",
   "& .mainBox": {
-    padding: "80px 0 100px 0",
-    background: "#F7F7F7",
+    padding: "40px 0 40px 0",
     "@media(max-width:615px)": {
       padding: "34px 0 100px 0",
     },
-   
+
     // padding: "50px",
     "& h2": {
       fontWeight: "500",
     },
+    "& .heading": {
+      padding: "10px 45px",
+      "& p": {
+        fontFamily: "Inter",
+        fontSize: "24px",
+        fontWeight: "400",
+        lineHeight: "29.05px",
+      },
+      "@media(max-width:615px)": {
+        padding: "20px 0px",
+      },
+    },
     "& .shodowBox": {
-      background: "#fff",
-      margin: "120px 0 0 0",
+      margin: "40px 0 0 0",
       display: "flex",
       justifyContent: "space-between",
       // padding: "0 80px",
-      paddingRight: "75px",
-      boxShadow: "0px 3px 39px #0000000A",
-      "@media(max-width:1280px)": {
-        paddingRight: "75px",
-      },
+      // boxSha dow: "0px 3px 39px #0000000A",
+      "@media(max-width:1280px)": {},
       "@media(max-width:460px)": {
-        padding: "0 10px",
-        paddingRight: "75px",
+        padding: "0",
       },
       "@media(max-width:615px)": {
         margin: "34px 0 0 0",
@@ -493,18 +168,22 @@ const ProjectStyle = styled("Box")(({ theme }) => ({
       padding: "10px",
       boxShadow: "0px 3px 39px #0000001C",
       borderRadius: "20px",
+      width: "100%",
     },
   },
 }));
 const ProjectComponent = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const sliderRef = useRef(null);
   const auth = useContext(AuthContext);
 
   const settings = {
     dots: false,
     infinite: true,
-    autoplay: true,
-    arrows: true,
+    autoplay: false,
+    arrows: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -518,6 +197,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           dots: false,
+          arrows: true,
         },
       },
       {
@@ -528,6 +208,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           dots: false,
+          arrows: true,
         },
       },
       {
@@ -538,6 +219,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           dots: false,
+          arrows: true,
         },
       },
       {
@@ -548,6 +230,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           dots: false,
+          arrows: true,
         },
       },
       {
@@ -558,6 +241,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           initialSlide: 1,
+          arrows: true,
         },
       },
       {
@@ -569,6 +253,7 @@ const ProjectComponent = () => {
           infinite: true,
           autoplay: false,
           initialSlide: 1,
+          arrows: true,
         },
       },
     ],
@@ -578,134 +263,109 @@ const ProjectComponent = () => {
     <ProjectStyle>
       <Box className="mainBox">
         <Container maxWidth>
-          <Box>
-            <Typography variant="h2">Projects</Typography>
-            <Typography variant="h6">
+          <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
+            <Typography
+              variant="h1"
+              fontSize={isMobile ? 28 : 48}
+              fontWeight={500}
+              lineHeight={isMobile && 1.5}
+            >
+              Projects
+            </Typography>
+            <Typography
+              mt={1}
+              variant="p"
+              fontSize={isMobile ? 20 : 24}
+              pl={0.3}
+              fontWeight={300}
+            >
               Featured Residential Projects Across India
             </Typography>
           </Box>
           <Box>
             <Box className="shodowBox">
-              <Box width={"100%"} marginTop={"40px"} marginLeft={"40px"}>
+              <Box width={"100%"}>
                 <Box
-                // display={"flex"}
-                // justifyContent={"space-between"}
-                // mt={"-70px"}
-                // gap={"5px"}
+                  display="flex"
+                  justifyContent="space-around"
+                  alignItems="center"
+                  flexWrap="wrap"
+                  gap={3}
                 >
-                  {/* <Grid
-                    container
-                    spacing={3}
-                    style={{ justifyContent: "center" }}
-                  > */}
-                  <Slider {...settings} ref={sliderRef}>
-                    <Grid item lg={3} md={3} sm={6} xs={6}>
-                      <Box align="center">
-                        <Box className="rainbow" maxWidth={180}>
-                          <Box className="contentBox" textAlign={"center"}>
-                            <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
-                              <Typography variant="h3">
-                                Total Projects
-                              </Typography>
-                            </Box>
-                          </Box>
+                  <Box align="center">
+                    <Box
+                      className="rainbow"
+                      width={isMobile ? 140 : 200}
+                      height="100%"
+                    >
+                      <Box className="contentBox" textAlign={"center"}>
+                        <Typography variant="h1" fontSize={isMobile ? 28 : 48}>
+                          51
+                        </Typography>
+                        <Box mt={isMobile ? 0 : 2} mb={2}>
+                          <Typography variant="h3" fontSize={isMobile && 16}>
+                            Buyers Online
+                          </Typography>
                         </Box>
                       </Box>
-                    </Grid>
-                    <Grid item lg={3} md={3} sm={6} xs={6}>
-                      <Box align="center">
-                        <Box className="rainbowSecond" maxWidth={180}>
-                          <Box className="contentBox" textAlign={"center"}>
-                            <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
-                              <Typography variant="h3">
-                                Total Projects
-                              </Typography>
-                            </Box>
-                          </Box>
+                    </Box>
+                  </Box>
+                  <Box align="center">
+                    <Box
+                      className="rainbowSecond"
+                      width={isMobile ? 140 : 200}
+                      height="100%"
+                    >
+                      <Box className="contentBox" textAlign={"center"}>
+                        <Typography variant="h1" fontSize={isMobile ? 28 : 48}>
+                          150
+                        </Typography>
+                        <Box mt={isMobile ? 0 : 2} mb={2}>
+                          <Typography variant="h3" fontSize={isMobile && 16}>
+                            Sellers Online
+                          </Typography>
                         </Box>
                       </Box>
-                    </Grid>
-                    <Grid item lg={3} md={3} sm={6} xs={6}>
-                      <Box align="center">
-                        <Box className="rainbow" maxWidth={180}>
-                          <Box className="contentBox" textAlign={"center"}>
-                            <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
-                              <Typography variant="h3">
-                                Total Projects
-                              </Typography>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Grid>
-                    <Grid item lg={3} md={3} sm={6} xs={6}>
-                      <Box align="center">
-                        <Box className="rainbowSecond" maxWidth={180}>
-                          <Box className="contentBox" textAlign={"center"}>
-                            <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
-                              <Typography variant="h3">
-                                Total Projects
-                              </Typography>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Grid>
-                    <Grid item lg={3} md={3} sm={6} xs={6}>
-                      <Box align="center">
-                        <Box className="rainbow" maxWidth={180}>
-                          <Box className="contentBox" textAlign={"center"}>
-                            <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
-                              <Typography variant="h3">
-                                Total Projects
-                              </Typography>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Grid>
-                    <Grid item lg={3} md={3} sm={6} xs={6}>
-                      <Box align="center">
-                        <Box className="rainbowSecond" maxWidth={180}>
-                          <Box className="contentBox" textAlign={"center"}>
-                            <Typography variant="h1">51</Typography>
-                            <Box mt={2}>
-                              <Typography variant="h3">
-                                Total Projects
-                              </Typography>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Grid>
-                  </Slider>
+                    </Box>
+                  </Box>
 
-                  {/* </Grid> */}
-                </Box>
-                <Box
-                  display={"flex"}
-                  justifyContent={"center"}
-                  textAlign={"center"}
-                  m={"20px 0 30px 0"}
-                >
-                  {/* <Box>
-                    <Box mt={1}>
-                      <Typography variant="h2">Counters</Typography>
+                  <Box align="center">
+                    <Box
+                      className={isMobile ? "rainbowSecond" : "rainbow"}
+                      width={isMobile ? 140 : 200}
+                      height="100%"
+                    >
+                      <Box className="contentBox" textAlign={"center"}>
+                        <Typography variant="h1" fontSize={isMobile ? 28 : 48}>
+                          51
+                        </Typography>
+                        <Box mt={isMobile ? 0 : 2} mb={2}>
+                          <Typography variant="h3" fontSize={isMobile && 16}>
+                            Visiters
+                          </Typography>
+                        </Box>
+                      </Box>
                     </Box>
-                    <Box mt={1}>
-                      <Typography
-                        variant="h6"
-                        style={{ color: "#A1A1A1", fontSize: "18px" }}
-                      >
-                        Featured Residential Projects Across India
-                      </Typography>
+                  </Box>
+
+                  <Box align="center">
+                    <Box
+                      className={isMobile ? "rainbow" : "rainbowSecond"}
+                      width={isMobile ? 140 : 200}
+                      height="100%"
+                    >
+                      <Box className="contentBox" textAlign={"center"}>
+                        <Typography variant="h1" fontSize={isMobile ? 28 : 48}>
+                          150
+                        </Typography>
+                        <Box mt={isMobile ? 0 : 2} mb={2}>
+                          <Typography variant="h3" fontSize={isMobile && 16}>
+                            Listed Projects
+                          </Typography>
+                        </Box>
+                      </Box>
                     </Box>
-                  </Box> */}
+                  </Box>
                 </Box>
               </Box>
             </Box>

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Box, Container, Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-const MobileComponentCss = styled("Box")(({ theme }) => ({
+const MobileComponentCss = styled(Box)(({ theme }) => ({
   "& .backgorunClass": {
     backgroundImage: `url("/images/image.png")`,
     backgroundPosition: "center",
@@ -28,7 +28,7 @@ const MobileAppComponent = () => {
         <Container maxWidth>
           <Box>
             <Box className="backgorunClass">
-              <Box className="download-app-section" >
+              <Box className="download-app-section">
                 <Typography variant="h1">
                   Download 99acres Mobile App
                 </Typography>

@@ -24,7 +24,7 @@ import {
 import NavItem from "./NavItem";
 import { styled } from "@mui/system";
 import { AuthContext } from "../../../context/Auth";
-const BuyerStyle = styled("Box")(({ theme }) => ({
+const BuyerStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     background: theme.palette.background.default,
     borderRadius: "20px",
@@ -112,7 +112,7 @@ const DesktopDrawer = styled(Drawer)(({ theme }) => ({
 //     marginLeft: "45px",
 //   },
 // });
-// const DialogMainBox = styled("Box")(({ theme }) => ({
+// const DialogMainBox = styled(Box)(({ theme }) => ({
 //   "& h5": {
 //     fontSize: "20px",
 //     fontWeight: "600",
@@ -348,9 +348,11 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
               <Divider className="devider" />
             </Box> */}
             <Box>
-              <PriceRangeComponent imgURL="/images/Group 8346.png"
-              setSliderValue={setSliderValue}
-              sliderValue={sliderValue} />
+              <PriceRangeComponent
+                imgURL="/images/Group 8346.png"
+                setSliderValue={setSliderValue}
+                sliderValue={sliderValue}
+              />
             </Box>
             <Box m={"10px 0 0 0"}>
               <Divider className="devider" />

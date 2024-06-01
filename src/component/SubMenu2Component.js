@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Box, Typography, Grid } from "@mui/material";
 
 import { AuthContext } from "../context/Auth";
-const SubMenuStyle = styled("Box")(({ theme }) => ({
+const SubMenuStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     marginTop: "10px",
 

@@ -17,7 +17,9 @@ import SuggestionProperties from "../../component/SuggestionProperties";
 import ResidentialProperty from "../../component/ResidentialProperty";
 import { useRouter } from "next/router";
 import HomeLayout from "../../layout/HomeLayout";
-const ViewPropetyStyle = styled("Box")(({ theme }) => ({
+import ContactOwnerModal from "../../component/ContactOwnerModal";
+import ResidentialProjects from "../../component/ResidentialProjects";
+const ViewPropetyStyle = styled(Box)(({ theme }) => ({
   "& .imgBox": {
     "@media(max-width:615px)": {
       marginTop: "80px",
@@ -46,8 +48,15 @@ const ViewPropetyStyle = styled("Box")(({ theme }) => ({
 const ViewPropertyIndex = () => {
   const router = useRouter();
   const dataArray = router.query.data ? JSON.parse(router.query.data) : null;
+  const [open, setOpen] = React.useState(false);
 
-  console.log("receivedData---->", dataArray);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <HomeLayout>
       <ViewPropetyStyle>
@@ -249,7 +258,7 @@ const ViewPropertyIndex = () => {
                 </Box>
 
                 <Box className="getQnwerontactBtn">
-                  <Button>Get ONWER Contact</Button>
+                  <Button onClick={handleClickOpen}>Get ONWER Contact</Button>
                 </Box>
               </Box>
 
@@ -262,11 +271,16 @@ const ViewPropertyIndex = () => {
               </Box> */}
 
               <Box className="ResidentialProperty" style={{ padding: "20px" }}>
-                <ResidentialProperty />
+                <ResidentialProjects />
               </Box>
             </Box>
           </Container>
         </Box>
+        <ContactOwnerModal
+          open={open}
+          handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+        />
       </ViewPropetyStyle>
     </HomeLayout>
   );

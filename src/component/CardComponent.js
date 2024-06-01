@@ -1,5 +1,15 @@
-import React, { useContext, useRef } from "react";
-import { Grid, Typography, Box, Container, Button } from "@mui/material";
+import React, { useContext, useRef, useState } from "react";
+import { useTheme } from "@mui/material/styles";
+import {
+  Grid,
+  Typography,
+  Box,
+  Container,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,12 +19,18 @@ import { AuthContext } from "../context/Auth";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/router";
 
-const CardComponentStyle = styled("Box")(({ theme }) => ({
+const CardComponentStyle = styled(Box)(({ theme }) => ({
+  position: "relative",
   "& .mainSliderDiv": {
     // padding: "0px 0 0px 0",
     background: "#fff",
     // padding: "50px",
-
+    "& p": {
+      fontFamily: "Inter",
+      fontSize: "24px",
+      fontWeight: "400",
+      lineHeight: "29.05px",
+    },
     "& h2": {
       fontWeight: "500",
     },
@@ -36,50 +52,69 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
     background: "#FFF",
   },
   "& .cards": {
-    cursor: "pointer",
-    width: "100%",
+    // cursor: "pointer",
+    // width: "60%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    borderRadius: "20px",
+    // borderRadius: "20px",
     transform: "0",
-    transition: "0.8s",
-    transform: "scale(0.9)",
 
-    "&:hover": {
-      transform: "scale(1)",
-      transition: "0.8s",
-    },
+    "&:hover": {},
     "& .contentBox": {
       padding: "10px 10px 10px",
-      "& h5": {
-        fontSize: "14px",
-        textAlign: "start",
-        fontWeight: "500",
-        padding: "5px",
-      },
-      "& h4": {
-        fontSize: "12px",
-        color: "#000",
-        fontWeight: "500",
-        margin: "5px 5px",
-      },
-      "& h6": {
-        fontSize: "10px",
-        color: "#818181",
-        fontWeight: "500",
-        margin: "5px 5px",
-      },
     },
+  },
+  "& .viewmoreButtonShow": {
+    padding: "10px",
+    display: "flex",
+    justifyContent: "end",
 
-    "& h5": {
-      textAlign: "end",
-      fontSize: "18px",
+    "& button": {
+      border: "2px solid #a7d325",
+      background: "none",
+      borderRadius: "20px",
+      color: "#000",
+      border: "none",
+
+      "& span": {
+        color: "#a7d325 ",
+      },
     },
   },
 }));
-const CardComponent = ({ showViewMore }) => {
+
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "3rem",
+  top: "60%",
+  transform: "translateY(-60%)",
+  color: "black",
+  zIndex: 1,
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
+
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "3rem",
+  top: "60%",
+  transform: "translateY(-60%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
+
+const CardComponent = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const sliderRef = useRef(null);
   const auth = useContext(AuthContext);
   const router = useRouter();
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const settings = {
     dots: false,
@@ -154,6 +189,19 @@ const CardComponent = ({ showViewMore }) => {
       },
     ],
   };
+
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
   const handleClick = () => {
     router.push({
       pathname: "/all-property",
@@ -164,38 +212,96 @@ const CardComponent = ({ showViewMore }) => {
     <CardComponentStyle>
       <div className="mainSliderDiv">
         <Container maxWidth>
-          <Box className="projects-card">
-            <Typography variant="h2">Featured Projects</Typography>
-            <Typography variant="h6">
+          <Box width="90%" marginInline="auto">
+            <Typography
+              variant="h1"
+              fontSize={isMobile ? 28 : 48}
+              fontWeight={500}
+              lineHeight={isMobile && 1.5}
+            >
+              Featured Projects
+            </Typography>
+            <Typography
+              variant="p"
+              fontSize={isMobile ? 20 : 24}
+              pl={0.3}
+              fontWeight={300}
+            >
               Featured Residential Projects Across India
             </Typography>
           </Box>
 
-          <Box>
-            <Slider {...settings} ref={sliderRef}>
-              {auth?._isFeaturedPost?.map((data, index) => (
-                <FeaturedPostCard data={data} key={index} />
-              ))}
-            </Slider>
-            {
-              auth?._isFeaturedPost &&
-              auth._isFeaturedPost.length > 8 && (
-                <Button
-                  onClick={handleClick}
-                  variant="contained"
-                  color="success"
-                  sx={{
-                    backgroundColor: "#A7D325",
-                    color: "white",
-                    float: "right",
-                  }}
-                >
-                  View All
-                  <ArrowForwardIcon
-                    sx={{ fontSize: "18px", marginLeft: "10px" }}
+          {auth._isFeaturedPost.length > 4 && !isMobile && (
+            <IconButtonLeftContent onClick={handlePrevious}>
+              <ArrowBackIosIcon />
+            </IconButtonLeftContent>
+          )}
+
+          <Box mt={4} width="95%" marginInline="auto">
+            {auth?._getlist?.length > 4 ? (
+              <Slider {...settings} ref={sliderRef}>
+                {auth?._isFeaturedPost &&
+                  auth?._isFeaturedPost?.map((data, index) => {
+                    return (
+                      <Box key={index}>
+                        <FeaturedPostCard data={data} index={index} />
+                      </Box>
+                    );
+                  })}
+              </Slider>
+            ) : (
+              <>
+                <Grid container>
+                  {auth?._isFeaturedPost &&
+                    auth?._isFeaturedPost?.map((data, index) => {
+                      return (
+                        <Grid item lg={4} md={4} sm={6} xs={12} key={index}>
+                          <FeaturedPostCard data={data} />
+                        </Grid>
+                      );
+                    })}
+                </Grid>
+              </>
+            )}
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+            {React.Children.toArray(
+              auth._isFeaturedPost.map((item, index) => {
+                return (
+                  <Box
+                    onClick={() => {
+                      setCurrentSlide(index);
+                      sliderRef.current.slickGoTo(index);
+                    }}
+                    style={{
+                      minWidth: "10px",
+                      minHeight: "10px",
+                      borderRadius: "50%",
+                      border: "1px solid #A7D325",
+                      backgroundColor:
+                        currentSlide === index ? "#A7D325" : "white",
+                      marginRight: "4px",
+                    }}
                   />
-                </Button>
-              )}
+                );
+              })
+            )}
+          </Box>
+
+          {auth._isFeaturedPost.length > 4 && !isMobile && (
+            <IconButtonRightContent onClick={handleNext}>
+              <ArrowForwardIosIcon />
+            </IconButtonRightContent>
+          )}
+          <Box className="viewmoreButtonShow" style={{ marginTop: "1rem" }}>
+            {auth._isFeaturedPost.length > 4 && (
+              <Button onClick={handleClick}>
+                View All
+                <ArrowForwardIcon
+                  sx={{ fontSize: "18px", marginLeft: "10px" }}
+                />
+              </Button>
+            )}
           </Box>
         </Container>
       </div>
