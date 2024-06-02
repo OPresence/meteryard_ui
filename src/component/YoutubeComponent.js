@@ -144,7 +144,7 @@ const YoutubeComponent = () => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: false,
           dots: false,
         },
       },
@@ -252,34 +252,30 @@ const YoutubeComponent = () => {
           </Box>
         </Box>
         <Box m={5} sx={{ display: "flex", justifyContent: "center" }}>
-          <Box
-            onClick={() => {
-              setCurrentSlide(0);
-              sliderRef.current.slickGoTo(0);
-            }}
-            style={{
-              minWidth: "12px",
-              minHeight: "12px",
-              borderRadius: "50%",
-              border: "1px solid #A7D325",
-              backgroundColor: currentSlide === 0 ? "#A7D325" : "white",
-              marginRight: "4px",
-            }}
-          />
-          <Box
-            onClick={() => {
-              setCurrentSlide(1);
-              sliderRef.current.slickGoTo(1);
-            }}
-            width="12px"
-            height="12px"
-            borderRadius="50%"
-            style={{
-              border: "1px solid #A7D325",
-              backgroundColor: currentSlide === 1 ? "#A7D325" : "white",
-              marginRight: "4px",
-            }}
-          />
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+            {React.Children.toArray(
+              videos.map((item, index) => {
+                if (index == videos.length - 1) return null;
+                return (
+                  <Box
+                    onClick={() => {
+                      setCurrentSlide(index);
+                      sliderRef.current.slickGoTo(index);
+                    }}
+                    style={{
+                      minWidth: "10px",
+                      minHeight: "10px",
+                      borderRadius: "50%",
+                      border: "1px solid #A7D325",
+                      backgroundColor:
+                        currentSlide === index ? "#A7D325" : "white",
+                      marginRight: "4px",
+                    }}
+                  />
+                );
+              })
+            )}
+          </Box>
         </Box>
         {!isMobile && (
           <IconButtonRightContent onClick={handleNext}>

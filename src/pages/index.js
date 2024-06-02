@@ -20,14 +20,14 @@ export default function ClientPage() {
       <Banner />
       <SliderComponent />
       <CardComponent />
-      <BannerCompont />
+      {/* <BannerCompont /> */}
       <ResidentialProjects />
       <CommercialProjects />
       <AgreecultureComponent />
       <YoutubeComponent />
       <ProjectComponent />
       {/* <MobileAppComponent /> */}
-      <TestimonialComponent />
+      {/* <TestimonialComponent /> */}
       {/* <TestingComponent /> */}
 
       {/* <ChatBoat /> */}

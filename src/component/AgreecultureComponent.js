@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import {
   Grid,
@@ -23,6 +23,7 @@ import { useRouter } from "next/router";
 const AgreecultureStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
     // padding: "40px 0px",
+    position: "relative",
     background: "#fff",
     "& p": {
       fontFamily: "Inter",
@@ -79,6 +80,33 @@ const AgreecultureStyle = styled("Box")(({ theme }) => ({
     },
   },
 }));
+
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "4rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  zIndex: 2,
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
+
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "4rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  zIndex: 2,
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
+
 const AgreecultureComponent = ({ showViewMore }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -86,20 +114,33 @@ const AgreecultureComponent = ({ showViewMore }) => {
   const auth = useContext(AuthContext);
   const sliderRef = useRef(null);
   const router = useRouter();
-  const next = () => {
-    sliderRef.current.slickNext();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      if (currentSlide >= 1) {
+        setCurrentSlide(currentSlide - 1);
+      }
+      sliderRef.current.slickPrev();
+    }
   };
 
-  const previous = () => {
-    sliderRef.current.slickPrev();
+  const handleNext = () => {
+    if (sliderRef.current) {
+      if (currentSlide <= auth?._getlistAgreeculture.length - 3) {
+        setCurrentSlide(currentSlide + 1);
+      }
+      sliderRef.current.slickNext();
+    }
   };
+
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     autoplay: false,
     arrows: false,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: 3,
     slidesToScroll: 1,
 
     responsive: [
@@ -108,8 +149,7 @@ const AgreecultureComponent = ({ showViewMore }) => {
         settings: {
           slidesToShow: 4,
           slidesToScroll: 1,
-          infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -118,8 +158,7 @@ const AgreecultureComponent = ({ showViewMore }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -128,18 +167,16 @@ const AgreecultureComponent = ({ showViewMore }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -148,8 +185,7 @@ const AgreecultureComponent = ({ showViewMore }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
@@ -158,9 +194,7 @@ const AgreecultureComponent = ({ showViewMore }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
-          infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
@@ -206,55 +240,55 @@ const AgreecultureComponent = ({ showViewMore }) => {
               </Typography>
             </Box>
           </Box>
-          {auth?._getlistAgreeculture?.length > 4 && (
-            <Box
-              style={{
-                display: "flex",
-                gap: "10px",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Box className={"ArrowClass"} onClick={previous}>
-                <ArrowBackIosIcon
-                  style={{
-                    color: "#000",
-                  }}
-                />
-              </Box>
-              <Box className={"ArrowClass"} onClick={next}>
-                <ArrowForwardIosIcon style={{ color: "#000" }} />
-              </Box>
-            </Box>
+          {!isMobile && auth?._getlistAgreeculture?.length > 4 && (
+            <IconButtonLeftContent onClick={handlePrevious}>
+              <ArrowBackIosIcon />
+            </IconButtonLeftContent>
           )}
-          <Box mt={2} width="95%" marginInline="auto">
-            {auth?._getlistAgreeculture?.length > 4 ? (
+          <Box>
+            <Box
+              mt={2}
+              width="93.9%"
+              marginInline="auto"
+              paddingLeft={!isMobile && 4}
+            >
               <Slider {...settings} ref={sliderRef}>
-                {auth?._getlistAgreeculture &&
+                {!!auth?._getlistAgreeculture &&
                   auth?._getlistAgreeculture?.map((data, index) => {
                     return <AgreeculturePostCard data={data} key={index} />;
                   })}
               </Slider>
-            ) : (
-              <Grid container spacing={3}>
-                {auth?._getlistAgreeculture &&
-                  auth?._getlistAgreeculture?.map((data, index) => {
-                    return (
-                      <Grid
-                        key={index}
-                        item
-                        lg={3}
-                        md={4}
-                        sm={6}
-                        xs={12}
-                        style={{ display: "flex" }}
-                      >
-                        <AgreeculturePostCard data={data} />
-                      </Grid>
-                    );
-                  })}
-              </Grid>
+            </Box>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+            {React.Children.toArray(
+              auth?._getlistAgreeculture.map((item, index) => {
+                if (index >= auth?._getlistAgreeculture.length - 2) return null;
+                return (
+                  <Box
+                    onClick={() => {
+                      setCurrentSlide(index);
+                      sliderRef.current.slickGoTo(index);
+                    }}
+                    style={{
+                      minWidth: "10px",
+                      minHeight: "10px",
+                      borderRadius: "50%",
+                      border: "1px solid #A7D325",
+                      backgroundColor:
+                        currentSlide === index ? "#A7D325" : "white",
+                      marginRight: "4px",
+                    }}
+                  />
+                );
+              })
             )}
           </Box>
+          {!isMobile && auth?._getlistAgreeculture?.length > 4 && (
+            <IconButtonRightContent onClick={handleNext}>
+              <ArrowForwardIosIcon />
+            </IconButtonRightContent>
+          )}
           {auth?._getlistAgreeculture.length > 0 && (
             <Box className="viewmoreButtonShow" m={1}>
               <Button onClick={handleClick}>

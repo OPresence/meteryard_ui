@@ -240,20 +240,23 @@ const ResidentialProjects = ({ showViewMore }) => {
   const handlePrevious = () => {
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
-      setCurrentSlide(currentSlide - 1);
+      if (currentSlide != 0) {
+        setCurrentSlide(currentSlide - 1);
+      }
     }
   };
 
   const handleNext = () => {
     if (sliderRef.current) {
       sliderRef.current.slickNext();
-      setCurrentSlide(currentSlide + 1);
+      if (currentSlide < auth?._getlist.length - 3)
+        setCurrentSlide(currentSlide + 1);
     }
   };
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     autoplay: false,
     arrows: false,
     speed: 500,
@@ -276,7 +279,6 @@ const ResidentialProjects = ({ showViewMore }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
           autoplay: true,
           dots: false,
         },
@@ -286,7 +288,6 @@ const ResidentialProjects = ({ showViewMore }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: true,
           autoplay: true,
           dots: false,
         },
@@ -296,7 +297,6 @@ const ResidentialProjects = ({ showViewMore }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: true,
           autoplay: true,
           dots: false,
         },
@@ -306,7 +306,6 @@ const ResidentialProjects = ({ showViewMore }) => {
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: true,
           autoplay: true,
           dots: false,
         },
@@ -316,7 +315,6 @@ const ResidentialProjects = ({ showViewMore }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
           autoplay: true,
           initialSlide: 1,
         },
@@ -326,8 +324,6 @@ const ResidentialProjects = ({ showViewMore }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
-          infinite: true,
           autoplay: true,
           initialSlide: 1,
         },
@@ -373,7 +369,7 @@ const ResidentialProjects = ({ showViewMore }) => {
               </Typography>
             </Box>
           </Box>
-          {currentSlide >= 2 && !isMobile && (
+          {!isMobile && (
             <IconButtonLeftContent onClick={handlePrevious}>
               <ArrowBackIosIcon />
             </IconButtonLeftContent>
@@ -414,31 +410,37 @@ const ResidentialProjects = ({ showViewMore }) => {
               )}
             </Box>
 
-            <Box mt={"2rem"} sx={{ display: "flex", justifyContent: "center" }}>
-              <Box sx={{ display: "flex", justifyContent: "center" }}>
-                {React.Children.toArray(
-                  auth._isFeaturedPost.map((item, index) => {
-                    return (
-                      <Box
-                        onClick={() => {
-                          setCurrentSlide(index);
-                          sliderRef.current.slickGoTo(index);
-                        }}
-                        style={{
-                          minWidth: "10px",
-                          minHeight: "10px",
-                          borderRadius: "50%",
-                          border: "1px solid #A7D325",
-                          backgroundColor:
-                            currentSlide === index ? "#A7D325" : "white",
-                          marginRight: "4px",
-                        }}
-                      />
-                    );
-                  })
-                )}
+            {!isMobile && (
+              <Box
+                mt={"2rem"}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                  {React.Children.toArray(
+                    auth?._getlist.map((item, index) => {
+                      if (index >= auth?._getlist.length - 2) return null;
+                      return (
+                        <Box
+                          onClick={() => {
+                            setCurrentSlide(index);
+                            sliderRef.current.slickGoTo(index);
+                          }}
+                          style={{
+                            minWidth: "10px",
+                            minHeight: "10px",
+                            borderRadius: "50%",
+                            border: "1px solid #A7D325",
+                            backgroundColor:
+                              currentSlide === index ? "#A7D325" : "white",
+                            marginRight: "4px",
+                          }}
+                        />
+                      );
+                    })
+                  )}
+                </Box>
               </Box>
-            </Box>
+            )}
 
             {auth?._getlist_commercial.length > 0 && (
               <Box className="viewmoreButtonShow" height="100px">
@@ -449,7 +451,7 @@ const ResidentialProjects = ({ showViewMore }) => {
             )}
           </Box>
 
-          {currentSlide < auth?._getlist_commercial.length && !isMobile && (
+          {auth?._getlist_commercial.length && !isMobile && (
             <IconButtonRightContent onClick={handleNext}>
               <ArrowForwardIosIcon />
             </IconButtonRightContent>

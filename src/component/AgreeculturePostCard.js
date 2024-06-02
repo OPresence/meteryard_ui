@@ -6,6 +6,7 @@ import Divider from "@mui/material/Divider";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 
 const AgreecultureStyle = styled(Box)(({ theme }) => ({
+  maxWidth: "360px",
   "& .mainSliderDiv": {
     padding: "80px 0px",
     background: "#fff",
@@ -118,7 +119,7 @@ const AgreeculturePostCard = ({ data }) => {
   return (
     <AgreecultureStyle>
       <Box height={"100%"} pb={"20px"}>
-        <Box className="cards">
+        <Box className="cards" height={540}>
           <Box height={"250px"}>
             <img
               src={data?.coverImage}
@@ -127,7 +128,7 @@ const AgreeculturePostCard = ({ data }) => {
             />
           </Box>
 
-          <Box minHeight={"200px"} padding={"15px 10px"}>
+          <Box minHeight={"200px"} padding={"15px 10px"} height={231}>
             <Box width={"95%"} display="flex" flexDirection="column" gap={1}>
               <Typography
                 variant="p"
@@ -148,7 +149,7 @@ const AgreeculturePostCard = ({ data }) => {
                   {data?.title}
                 </Typography>
               </Box>
-              <Box width="89%" alignSelf="flex-end">
+              <Box width="89%" alignSelf="flex-end" height={80}>
                 <Typography
                   variant="p"
                   fontSize={14}

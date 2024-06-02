@@ -85,8 +85,8 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
 const IconButtonLeftContent = styled(Box)({
   position: "absolute",
   left: "3rem",
-  top: "60%",
-  transform: "translateY(-60%)",
+  top: "50%",
+  transform: "translateY(-50%)",
   color: "black",
   zIndex: 1,
   cursor: "pointer",
@@ -98,8 +98,8 @@ const IconButtonLeftContent = styled(Box)({
 const IconButtonRightContent = styled(Box)({
   position: "absolute",
   right: "3rem",
-  top: "60%",
-  transform: "translateY(-60%)",
+  top: "50%",
+  transform: "translateY(-50%)",
   color: "black",
   cursor: "pointer",
   "@media(max-width:615px)": {
@@ -124,7 +124,6 @@ const CardComponent = () => {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-
     responsive: [
       {
         breakpoint: 1280,
@@ -191,6 +190,7 @@ const CardComponent = () => {
   };
 
   const handlePrevious = () => {
+    console.log("aadasdd");
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
     }
@@ -208,6 +208,7 @@ const CardComponent = () => {
       query: { _id: "FEATURED" },
     });
   };
+
   return (
     <CardComponentStyle>
       <div className="mainSliderDiv">
@@ -264,29 +265,33 @@ const CardComponent = () => {
               </>
             )}
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
-            {React.Children.toArray(
-              auth._isFeaturedPost.map((item, index) => {
-                return (
-                  <Box
-                    onClick={() => {
-                      setCurrentSlide(index);
-                      sliderRef.current.slickGoTo(index);
-                    }}
-                    style={{
-                      minWidth: "10px",
-                      minHeight: "10px",
-                      borderRadius: "50%",
-                      border: "1px solid #A7D325",
-                      backgroundColor:
-                        currentSlide === index ? "#A7D325" : "white",
-                      marginRight: "4px",
-                    }}
-                  />
-                );
-              })
-            )}
-          </Box>
+
+          {!isMobile && (
+            <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+              {React.Children.toArray(
+                auth._isFeaturedPost.map((item, index) => {
+                  if (index >= auth._isFeaturedPost.length - 2) return null;
+                  return (
+                    <Box
+                      onClick={() => {
+                        setCurrentSlide(index);
+                        sliderRef.current.slickGoTo(index);
+                      }}
+                      style={{
+                        minWidth: "10px",
+                        minHeight: "10px",
+                        borderRadius: "50%",
+                        border: "1px solid #A7D325",
+                        backgroundColor:
+                          currentSlide === index ? "#A7D325" : "white",
+                        marginRight: "4px",
+                      }}
+                    />
+                  );
+                })
+              )}
+            </Box>
+          )}
 
           {auth._isFeaturedPost.length > 4 && !isMobile && (
             <IconButtonRightContent onClick={handleNext}>

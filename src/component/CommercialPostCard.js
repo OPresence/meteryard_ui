@@ -310,12 +310,25 @@ const CommercialPostCard = ({ data, index }) => {
         display={"flex"}
         justifyContent={"center"}
       >
-        <Box className="cards" display="flex" flexDirection="column" gap={2}>
-          <Box height={"250px"}>
+        <Box
+          className="cards"
+          height={483}
+          display="flex"
+          flexDirection="column"
+          gap={2}
+        >
+          <Box minHeight={"223px"}>
             <img src={data?.coverImage} width={"100%"} height={"100%"} />
           </Box>
-          <Box padding={"10px"}>
-            <Box width="95%" marginInline="auto">
+          <Box padding={"10px"} height={271}>
+            <Box
+              width="95%"
+              height="100%"
+              marginInline="auto"
+              display="flex"
+              flexDirection="column"
+              justifyContent="space-between"
+            >
               <Typography variant="h2" fontSize={18} fontWeight={500}>
                 {data?.projectName}
               </Typography>
