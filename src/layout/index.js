@@ -102,9 +102,18 @@ function PageLayout({ children }) {
                         <Box className="flexAlign">
                           <CallIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
                           <Typography variant="body1">
-                            011-41219999 | 09999-127085
+                            <a
+                              href="tel:7060604604"
+                              style={{
+                                textDecoration: "none",
+                                color: "inherit",
+                              }}
+                            >
+                              7060604604
+                            </a>
                           </Typography>
                         </Box>
+
                         {/* <Box className="flexAlign" p={"0 0 0 30px"}>
                           <WhatsAppIcon /> &nbsp;&nbsp;&nbsp;&nbsp;
                           <Typography variant="body1">whatsapp us</Typography>

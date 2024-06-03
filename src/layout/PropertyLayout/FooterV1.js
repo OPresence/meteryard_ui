@@ -166,12 +166,12 @@ const Footer = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <Typography fontSize="12px" color="#ffffff">
-                      Email: info@meteryard.com
+                      Email: contact@meteryard.com
                     </Typography>
                   </Link>
                   <Link href="" style={{ textDecoration: "none" }}>
                     <Typography fontSize="12px" color="#ffffff">
-                      Phone: 9027659397
+                      Phone: 7060604604
                     </Typography>
                   </Link>
                   <Box mt={2}>
@@ -255,7 +255,7 @@ const Footer = () => {
         >
           <Box>
             <Typography fontSize="12px" fontWeight={300} textAlign="center">
-              © 2023 MeterYard. All Rights Reserved.
+              © 2024 MeterYard. All Rights Reserved.
             </Typography>
           </Box>
           <Box display="flex" gap={0.5} justifyContent={isMobile && "center"}>
