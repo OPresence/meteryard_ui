@@ -146,6 +146,8 @@ const RegisterSeller = ({
   const [_getwhatsapp_check, setWhatsapp_CheckBox] = useState(false);
   const [_getemail_check, setEmail_CheckBox] = useState(false);
   const [_image_upload, setImageUpload] = useState(false);
+  const fileInputRef = useRef(null);
+
   console.log("_image_uploadj-->", _image_type);
   const phoneInputStyles = {
     width: "100%",
@@ -166,7 +168,6 @@ const RegisterSeller = ({
   //   getAlert1: false,
   //   getAlert2: false,
   // });
-  const fileInputRef = useRef(null);
 
   const handleButtonClick = () => {
     console.log("Button clicked");
@@ -213,10 +214,7 @@ const RegisterSeller = ({
     email: yep
       .string()
       .required("Email is required.")
-      .matches(
-        /^[^@]+@[^@.]+\.[^@.]+$/,
-        "Please enter a valid email address with only one '@' and one '.'."
-      ),
+      .matches(/^[^@]+@[^@.]+\.[^@.]+$/, "Please enter a valid email address"),
     PhoneNumber: yep.string().required("Phone number is required."),
     stateName: yep.string().required("State is required."),
     cityName: yep.string().required("City is required."),
@@ -343,12 +341,13 @@ const RegisterSeller = ({
                       <FormControl fullWidth style={{ borderRadius: "15px" }}>
                         <label className="labelstyle">
                           <Typography variant="h5">
-                            {_image_type == ""
+                            {_image_type === ""
                               ? "Upload Picture"
                               : _image_type?.name}
                           </Typography>
                           <Box textAlign={"center"}>
                             <input
+                              ref={fileInputRef}
                               onChange={(e) => {
                                 ImageUpload(e.target.files[0]);
                                 setFieldValue("imageValue", e.target.value);
@@ -359,23 +358,13 @@ const RegisterSeller = ({
                               style={{ display: "none" }}
                             />
                           </Box>
-                          {/* <label htmlFor="fileInput">
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              component="span"
-                              className="labelStyle"
-                              >
-                              Upload
-                              </Button>
-                            </label> */}
                           <Button
                             className="labelStyle"
                             onClick={handleButtonClick}
                           >
                             Upload
                           </Button>
-                        </label>{" "}
+                        </label>
                       </FormControl>
                     </Box>
                   </Grid>
