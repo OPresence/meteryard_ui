@@ -303,7 +303,7 @@ const CommercialPostCard = ({ data, index }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <CardComponentStyle width={isMobile ? "100%" : 350}>
+    <CardComponentStyle width={isMobile ? "100%" : 330}>
       <Box
         height={"100%"}
         pb={"20px"}
