@@ -249,7 +249,7 @@ const RegisterSeller = ({
         setImageUpload(res?.result[0]?.mediaUrl);
       }
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
   const SignUp_Function = async (values) => {
@@ -453,6 +453,7 @@ const RegisterSeller = ({
                           disabled={isloading}
                           buttonClass="phoneInputButton"
                           variant="outlined"
+                          placeholder="+91 9999999999"
                           value={values.PhoneNumber}
                           error={Boolean(
                             touched.PhoneNumber && errors.PhoneNumber
@@ -471,6 +472,9 @@ const RegisterSeller = ({
                             console.log("formattedPhone--->", formattedPhone);
                           }}
                           inputStyle={phoneInputStyles}
+                          inputProps={{
+                            placeholder: "+91 9999999999",
+                          }}
                         />
                         <FormHelperText error>
                           {touched.PhoneNumber && errors.PhoneNumber}
