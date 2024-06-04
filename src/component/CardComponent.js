@@ -213,7 +213,7 @@ const CardComponent = () => {
     <CardComponentStyle>
       <div className="mainSliderDiv">
         <Container maxWidth>
-          <Box width="90%" marginInline="auto">
+          <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
             <Typography
               variant="h1"
               fontSize={isMobile ? 28 : 48}

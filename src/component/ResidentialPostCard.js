@@ -5,6 +5,9 @@ import ButtonComponent from "./ButtonComponent";
 const ResidentCardStyle = styled(Box)(({ theme }) => ({
   // width: "500px",
   height: "250px",
+  "@media(max-width:615px)": {
+    height: "100%",
+  },
   "& .mainCardBox": {
     maxHeight: "280px",
     // height: "100%",
@@ -14,6 +17,7 @@ const ResidentCardStyle = styled(Box)(({ theme }) => ({
     boxShadow: "0px 0px 7.2px 0px #00000024",
     "@media(max-width:615px)": {
       boxShadow: "#A9D91066 0px 3px 8px",
+      maxHeight: "100%",
     },
     "& img": {
       width: "100%",
@@ -34,7 +38,7 @@ const ResidentialPostCard = ({ data, isMobile }) => {
           >
             <Box
               width={isMobile ? "100%" : "250px"}
-              height={!isMobile ? "60px" : "280px"}
+              height={isMobile ? "280px" : "280px"}
             >
               <img
                 src={data?.coverImage}
