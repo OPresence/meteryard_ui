@@ -54,6 +54,7 @@ const ResidentialPostCard = ({ data }) => {
                   variant="p"
                   fontSize={14}
                   fontWeight={300}
+                  width={"14lh"}
                   sx={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",

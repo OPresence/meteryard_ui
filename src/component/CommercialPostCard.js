@@ -339,6 +339,7 @@ const CommercialPostCard = ({ data, index }) => {
                   variant="p"
                   fontSize={14}
                   fontWeight={300}
+                  width={"18lh"}
                   sx={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
