@@ -324,7 +324,7 @@ const ResidentialProjects = ({ showViewMore }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          autoplay: true,
+          autoplay: !true,
           initialSlide: 1,
         },
       },
@@ -369,7 +369,7 @@ const ResidentialProjects = ({ showViewMore }) => {
               </Typography>
             </Box>
           </Box>
-          {!isMobile && (
+          {!isMobile && !!auth?._getlist_commercial.length && (
             <IconButtonLeftContent onClick={handlePrevious}>
               <ArrowBackIosIcon />
             </IconButtonLeftContent>
@@ -385,11 +385,14 @@ const ResidentialProjects = ({ showViewMore }) => {
             >
               {auth?._getlist?.length > 4 ? (
                 <Slider {...settings} ref={sliderRef}>
-                  {auth?._getlist &&
+                  {!!auth?._getlist &&
                     auth?._getlist?.map((data, index) => {
                       return (
                         <Box key={index}>
-                          <ResidentialPostCard data={data} />
+                          <ResidentialPostCard
+                            data={data}
+                            isMobile={isMobile}
+                          />
                         </Box>
                       );
                     })}
@@ -397,7 +400,7 @@ const ResidentialProjects = ({ showViewMore }) => {
               ) : (
                 <>
                   <Grid container>
-                    {auth?._getlist &&
+                    {!!auth?._getlist &&
                       auth?._getlist?.map((data, index) => {
                         return (
                           <Grid item lg={6} md={6} sm={6} xs={12} key={index}>
@@ -442,7 +445,7 @@ const ResidentialProjects = ({ showViewMore }) => {
               </Box>
             )}
 
-            {auth?._getlist_commercial.length > 0 && (
+            {!!auth?._getlist_commercial.length && (
               <Box className="viewmoreButtonShow" height="100px">
                 <Button onClick={handleClick}>
                   View All <ArrowForwardIcon className="forwardIcon" />
@@ -451,7 +454,7 @@ const ResidentialProjects = ({ showViewMore }) => {
             )}
           </Box>
 
-          {auth?._getlist_commercial.length && !isMobile && (
+          {!!auth?._getlist_commercial.length && !isMobile && (
             <IconButtonRightContent onClick={handleNext}>
               <ArrowForwardIosIcon />
             </IconButtonRightContent>

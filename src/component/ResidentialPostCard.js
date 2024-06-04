@@ -22,13 +22,20 @@ const ResidentCardStyle = styled(Box)(({ theme }) => ({
   },
 }));
 
-const ResidentialPostCard = ({ data }) => {
+const ResidentialPostCard = ({ data, isMobile }) => {
   return (
     <ResidentCardStyle>
       <Box m="15px">
         <Box className="mainCardBox">
-          <Box display="flex" alignItems="center">
-            <Box width="250px" height="280px">
+          <Box
+            display="flex"
+            flexDirection={isMobile ? "column" : "row"}
+            alignItems="center"
+          >
+            <Box
+              width={isMobile ? "100%" : "250px"}
+              height={!isMobile ? "60px" : "280px"}
+            >
               <img
                 src={data?.coverImage}
                 width="100%"
@@ -37,7 +44,7 @@ const ResidentialPostCard = ({ data }) => {
               />
             </Box>
             <Box
-              width="350px"
+              width={isMobile ? "100%" : "350px"}
               height="280px"
               padding="10px 10px 10px 20px"
               display="flex"
