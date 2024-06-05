@@ -128,7 +128,7 @@ const CommercialProjects = () => {
       {
         breakpoint: 1280,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           autoplay: false,
@@ -138,7 +138,7 @@ const CommercialProjects = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: false,
@@ -148,7 +148,7 @@ const CommercialProjects = () => {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: false,
@@ -210,8 +210,8 @@ const CommercialProjects = () => {
             Commercial Projects Across India
           </Typography>
         </Box>
-        <Box mt={4} width="95%">
-          {auth?._getlist_commercial?.length > 4 ? (
+        <Box mt={4} width="95%" marginInline="auto">
+          {auth?._getlist_commercial?.length > 4 || isMobile ? (
             <Slider {...settings} ref={sliderRef}>
               {React.Children.toArray(
                 auth?._getlist_commercial?.map((data, index) => {
@@ -240,32 +240,36 @@ const CommercialProjects = () => {
             </Grid>
           )}
 
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+          {!isMobile && (
             <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
-              {isMobile &&
-                React.Children.toArray(
-                  auth?._getlist_commercial.map((item, index) => {
-                    return (
-                      <Box
-                        onClick={() => {
-                          setCurrentSlide(index);
-                          sliderRef?.current?.slickGoTo(index);
-                        }}
-                        style={{
-                          minWidth: "10px",
-                          minHeight: "10px",
-                          borderRadius: "50%",
-                          border: "1px solid #A7D325",
-                          backgroundColor:
-                            currentSlide === index ? "#A7D325" : "white",
-                          marginRight: "4px",
-                        }}
-                      />
-                    );
-                  })
-                )}
+              <Box
+                sx={{ display: "flex", justifyContent: "center", mt: "10px" }}
+              >
+                {isMobile &&
+                  React.Children.toArray(
+                    auth?._getlist_commercial.map((item, index) => {
+                      return (
+                        <Box
+                          onClick={() => {
+                            setCurrentSlide(index);
+                            sliderRef?.current?.slickGoTo(index);
+                          }}
+                          style={{
+                            minWidth: "10px",
+                            minHeight: "10px",
+                            borderRadius: "50%",
+                            border: "1px solid #A7D325",
+                            backgroundColor:
+                              currentSlide === index ? "#A7D325" : "white",
+                            marginRight: "4px",
+                          }}
+                        />
+                      );
+                    })
+                  )}
+              </Box>
             </Box>
-          </Box>
+          )}
 
           {auth?._getlist_commercial.length > 0 && (
             <Box className="viewmoreButtonShow">

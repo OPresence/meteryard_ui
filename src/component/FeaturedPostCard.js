@@ -151,6 +151,7 @@ const FeaturedPostCard = ({ data, index }) => {
                 variant="p"
                 fontSize={14}
                 fontWeight={300}
+                width={"15lh"}
                 sx={{
                   overflow: "hidden",
                   textOverflow: "ellipsis",

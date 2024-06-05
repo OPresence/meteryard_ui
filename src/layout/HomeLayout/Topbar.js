@@ -394,9 +394,12 @@ export default function Topbar() {
                 <Box display={"flex"} alignItems={"enter"}>
                   <Box className="flexAlign">
                     <CallIcon className="icon1" /> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Typography variant="body1">
-                      011-41219999 | 09999-127085
-                    </Typography>
+                    <a
+                      href="tel:7060604604"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      <Typography variant="body1">7060604604</Typography>
+                    </a>
                   </Box>
                   {/* <Box className="flexAlign" p={"0 0 0 30px"}>
                     <WhatsAppIcon className="icon2" /> &nbsp;&nbsp;&nbsp;&nbsp;

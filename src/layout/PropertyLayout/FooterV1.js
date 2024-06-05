@@ -166,36 +166,36 @@ const Footer = () => {
                     style={{ textDecoration: "none" }}
                   >
                     <Typography fontSize="12px" color="#ffffff">
-                      Email: info@meteryard.com
+                      Email: contact@meteryard.com
                     </Typography>
                   </Link>
                   <Link href="" style={{ textDecoration: "none" }}>
                     <Typography fontSize="12px" color="#ffffff">
-                      Phone: 9027659397
+                      Phone: 7060604604
                     </Typography>
                   </Link>
                   <Box mt={2}>
                     <Typography fontSize="14px">FOLLOW US</Typography>
                     <Box display="flex" gap={2} mt={1.5}>
-                      <Link href="">
+                      <Link href="https://www.facebook.com/meteryard.india.3/">
                         <img
                           src="/images/meteryard/icons/facebook.svg"
                           alt="facebook icon"
                         />
                       </Link>
-                      <Link href="">
+                      <Link href="https://www.instagram.com/meteryard/">
                         <img
                           src="/images/meteryard/icons/instagram.svg"
                           alt="instragram icon"
                         />
                       </Link>
-                      <Link href="">
+                      <Link href="https://x.com/MeterYard">
                         <img
                           src="/images/meteryard/icons/twitter.svg"
                           alt="twitter icon"
                         />
                       </Link>
-                      <Link href="">
+                      <Link href="https://www.linkedin.com/in/meteryard-india-1385221b0/">
                         <img
                           src="/images/meteryard/icons/linkedin.svg"
                           alt="linkedin"
@@ -255,7 +255,7 @@ const Footer = () => {
         >
           <Box>
             <Typography fontSize="12px" fontWeight={300} textAlign="center">
-              © 2023 MeterYard. All Rights Reserved.
+              © 2024 MeterYard. All Rights Reserved.
             </Typography>
           </Box>
           <Box display="flex" gap={0.5} justifyContent={isMobile && "center"}>

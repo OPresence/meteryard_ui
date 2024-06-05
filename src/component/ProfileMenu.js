@@ -41,7 +41,9 @@ export default function ProfileMenu({ setAccessToken }) {
   return (
     <Dropdown>
       <MenuButton>
-        <PermIdentityIcon />
+        <PermIdentityIcon
+          style={{ backgroundColor: "black", borderRadius: "50%" }}
+        />
       </MenuButton>
       <Menu slots={{ listbox: AnimatedListbox }} style={{ zIndex: "9999" }}>
         <MenuItem onClick={() => router.push("/seller-profile")}>
@@ -180,12 +182,3 @@ const MenuButton = styled(BaseMenuButton)(
   }
   `
 );
-// import React from 'react'
-
-// const ProfileMenu = () => {
-//   return (
-//     <div>ProfileMenu</div>
-//   )
-// }
-
-// export default ProfileMenu

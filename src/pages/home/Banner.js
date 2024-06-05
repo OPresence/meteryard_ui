@@ -717,7 +717,7 @@ export default function Home() {
                     },
                   }}
                   // variant="outlined"
-                  placeholder="Search, City, Locality, Projects, Landmark"
+                  placeholder="City, Locality, Projects, Landmark"
                   // className={"Banner_inputField"}
                 />
                 <Button

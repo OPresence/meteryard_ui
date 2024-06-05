@@ -5,6 +5,9 @@ import ButtonComponent from "./ButtonComponent";
 const ResidentCardStyle = styled(Box)(({ theme }) => ({
   // width: "500px",
   height: "250px",
+  "@media(max-width:615px)": {
+    height: "100%",
+  },
   "& .mainCardBox": {
     maxHeight: "280px",
     // height: "100%",
@@ -14,6 +17,7 @@ const ResidentCardStyle = styled(Box)(({ theme }) => ({
     boxShadow: "0px 0px 7.2px 0px #00000024",
     "@media(max-width:615px)": {
       boxShadow: "#A9D91066 0px 3px 8px",
+      maxHeight: "100%",
     },
     "& img": {
       width: "100%",
@@ -22,13 +26,20 @@ const ResidentCardStyle = styled(Box)(({ theme }) => ({
   },
 }));
 
-const ResidentialPostCard = ({ data }) => {
+const ResidentialPostCard = ({ data, isMobile }) => {
   return (
     <ResidentCardStyle>
       <Box m="15px">
         <Box className="mainCardBox">
-          <Box display="flex" alignItems="center">
-            <Box width="250px" height="280px">
+          <Box
+            display="flex"
+            flexDirection={isMobile ? "column" : "row"}
+            alignItems="center"
+          >
+            <Box
+              width={isMobile ? "100%" : "250px"}
+              height={isMobile ? "280px" : "280px"}
+            >
               <img
                 src={data?.coverImage}
                 width="100%"
@@ -37,7 +48,7 @@ const ResidentialPostCard = ({ data }) => {
               />
             </Box>
             <Box
-              width="350px"
+              width={isMobile ? "100%" : "350px"}
               height="280px"
               padding="10px 10px 10px 20px"
               display="flex"
@@ -54,6 +65,7 @@ const ResidentialPostCard = ({ data }) => {
                   variant="p"
                   fontSize={14}
                   fontWeight={300}
+                  width={"14lh"}
                   sx={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",

@@ -26,6 +26,7 @@ const Apiconfigs = {
   addSubscription: `${user}/addSubscription`,
 
   listAllDepartment: `${admin}/listAllDepartment`,
+  
   createDepartment: `${admin}/createDepartment`,
   deleteDeparment: `${admin}/deleteDeparment`,
   editDeparment: `${admin}/editDeparment`,
