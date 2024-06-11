@@ -171,13 +171,13 @@ const YoutubeComponent = () => {
 
   return (
     <StyledSliderContainer>
-      <Container maxWidth>
+      <Container>
         <Box
           display={"flex"}
           justifyContent={"space-between"}
           alignItems={"center"}
         >
-          <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
+          <Box>
             <Box>
               <Typography
                 variant="h1"
@@ -199,90 +199,91 @@ const YoutubeComponent = () => {
             </Box>
           </Box>
         </Box>
-        {!isMobile && (
-          <IconButtonLeftContent onClick={handlePrevious}>
-            <ArrowBackIosIcon />
-          </IconButtonLeftContent>
-        )}
-        <Box mt={4}>
-          <Box
-            sx={{
-              width: "95%",
-              margin: "0 auto",
-              position: "relative",
-            }}
-          >
-            <Slider ref={sliderRef} {...settings}>
-              {videos.map((video, index) => (
-                <div key={index}>
-                  <Box width="100%">
-                    <VideoCard>
-                      {/* <CardMedia
+      </Container>
+
+      {!isMobile && (
+        <IconButtonLeftContent onClick={handlePrevious}>
+          <ArrowBackIosIcon />
+        </IconButtonLeftContent>
+      )}
+      <Box mt={4}>
+        <Box
+          sx={{
+            width: "95%",
+            margin: "0 auto",
+            position: "relative",
+          }}
+        >
+          <Slider ref={sliderRef} {...settings}>
+            {videos.map((video, index) => (
+              <div key={index}>
+                <Box width="100%">
+                  <VideoCard>
+                    {/* <CardMedia
                         component="img"
                         height="300"
                         image={video.image}
                         alt={video.title}
                         onClick={() => window.open(video.url, "_blank")}
                       /> */}
-                      <VideoPlayer src={video.url} poster={video.image} />
+                    <VideoPlayer src={video.url} poster={video.image} />
 
-                      <Box
-                        sx={{
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          display: "-webkit-box",
-                          WebkitLineClamp: "2",
-                          WebkitBoxOrient: "vertical",
-                        }}
+                    <Box
+                      sx={{
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        display: "-webkit-box",
+                        WebkitLineClamp: "2",
+                        WebkitBoxOrient: "vertical",
+                      }}
+                    >
+                      <Typography
+                        mt={2}
+                        variant="h4"
+                        fontSize={18}
+                        fontWeight={300}
                       >
-                        <Typography
-                          mt={2}
-                          variant="h4"
-                          fontSize={18}
-                          fontWeight={300}
-                        >
-                          {video.description}
-                        </Typography>
-                      </Box>
-                    </VideoCard>
-                  </Box>
-                </div>
-              ))}
-            </Slider>
-          </Box>
+                        {video.description}
+                      </Typography>
+                    </Box>
+                  </VideoCard>
+                </Box>
+              </div>
+            ))}
+          </Slider>
         </Box>
-        <Box m={5} sx={{ display: "flex", justifyContent: "center" }}>
-          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
-            {React.Children.toArray(
-              videos.map((item, index) => {
-                if (index == videos.length - 1) return null;
-                return (
-                  <Box
-                    onClick={() => {
-                      setCurrentSlide(index);
-                      sliderRef.current.slickGoTo(index);
-                    }}
-                    style={{
-                      minWidth: "10px",
-                      minHeight: "10px",
-                      borderRadius: "50%",
-                      border: "1px solid #A7D325",
-                      backgroundColor:
-                        currentSlide === index ? "#A7D325" : "white",
-                      marginRight: "4px",
-                    }}
-                  />
-                );
-              })
-            )}
-          </Box>
+      </Box>
+      <Box m={5} sx={{ display: "flex", justifyContent: "center" }}>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+          {React.Children.toArray(
+            videos.map((item, index) => {
+              if (index == videos.length - 1) return null;
+              return (
+                <Box
+                  onClick={() => {
+                    setCurrentSlide(index);
+                    sliderRef.current.slickGoTo(index);
+                  }}
+                  style={{
+                    minWidth: "10px",
+                    minHeight: "10px",
+                    borderRadius: "50%",
+                    border: "1px solid #A7D325",
+                    backgroundColor:
+                      currentSlide === index ? "#A7D325" : "white",
+                    marginRight: "4px",
+                  }}
+                />
+              );
+            })
+          )}
         </Box>
-        {!isMobile && (
-          <IconButtonRightContent onClick={handleNext}>
-            <ArrowForwardIosIcon />
-          </IconButtonRightContent>
-        )}
-      </Container>
+      </Box>
+      {!isMobile && (
+        <IconButtonRightContent onClick={handleNext}>
+          <ArrowForwardIosIcon />
+        </IconButtonRightContent>
+      )}
     </StyledSliderContainer>
   );
 };

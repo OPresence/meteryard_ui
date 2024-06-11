@@ -27,23 +27,18 @@ const TestimonialStyle = styled(Box)(({ theme }) => ({
     maxWidth: "320px",
     transition: "transform 0.8s, opacity 0.8s",
     "@media(max-width:615px)": {
-      maxWidth: "240px",
+      maxWidth: "80%",
       marginInline: "auto",
+      display: "inherit !important",
     },
     "&:hover": {
       transform: "scale(1.05)",
       cursor: "pointer",
     },
-    "& h6": {
-      fontFamily: "Inter",
-      fontSize: "16px",
-      fontWeight: "400",
-      lineHeight: "19.36px",
-      textAlign: "center",
-    },
+
     "& h4": {
       fontFamily: "Inter",
-      fontSize: "24px",
+      fontSize: "16px",
       fontWeight: "600",
       lineHeight: "43.57px",
       textAlign: "center",
@@ -63,7 +58,7 @@ const TestimonialStyle = styled(Box)(({ theme }) => ({
     },
     "& h6": {
       fontFamily: "Inter",
-      fontSize: "18px",
+      fontSize: "14px",
       fontWeight: "400",
       lineHeight: "1.3rem",
       textAlign: "center",
@@ -75,7 +70,7 @@ const TestimonialStyle = styled(Box)(({ theme }) => ({
   "& .centerCard": {
     transform: "scale(1.20) !important",
     opacity: "1 !important",
-    marginLeft: "10px",
+    marginLeft: "20px",
   },
   "& .imageBox": {
     background: "#dce1e4",
@@ -161,7 +156,7 @@ const TestimonialComponent = () => {
     arrows: false,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     centerMode: true,
     centerPadding: "0",
     beforeChange: (current, next) => setCenterIndex(next),
@@ -173,7 +168,7 @@ const TestimonialComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -183,7 +178,7 @@ const TestimonialComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -193,7 +188,7 @@ const TestimonialComponent = () => {
           slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -203,7 +198,7 @@ const TestimonialComponent = () => {
           slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -213,7 +208,7 @@ const TestimonialComponent = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
@@ -223,7 +218,7 @@ const TestimonialComponent = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
           centerPadding: "5px",
         },
@@ -247,53 +242,33 @@ const TestimonialComponent = () => {
   const index = 0;
 
   return (
-    <TestimonialStyle position="relative" p={isMobile ? 2.5 : 4}>
-      <Box
-        mb={10}
-        display="flex"
-        flexDirection="column"
-        justifyContent={isMobile ? "flex-start" : "center"}
-        alignItems={isMobile ? "flex-start" : "center"}
-        marginInline="auto"
-        gap={2}
-      >
-        <Typography
-          variant="h1"
-          fontSize={isMobile ? 28 : 48}
-          fontWeight={500}
-          lineHeight={isMobile && 1.5}
-        >
-          TESTIMONIAL
-        </Typography>
-        <Typography
-          variant="p"
-          fontWeight={300}
-          fontSize={isMobile ? 20 : 24}
-          pl={0.3}
-        >
-          Featured Residential Projects Across India
-        </Typography>
-        {!isMobile && (
+    <TestimonialStyle position="relative">
+      <Container>
+        <Box mb={10}>
           <Typography
-            mt={1}
-            width="100%"
-            textAlign="center"
-            fontWeight="300"
-            fontSize={28}
-            style={{ textWrap: "balance" }}
+            variant="h1"
+            fontSize={isMobile ? 28 : 48}
+            fontWeight={500}
+            lineHeight={isMobile && 1.5}
           >
-            When the age of a person exceeds 50 years, it becomesvery important
-            to take care of one’s health as she enters the senior citizen age.
-            With age, the metabolism and functioning of the body become slow.
+            TESTIMONIAL
           </Typography>
-        )}
-      </Box>
+          <Typography
+            variant="p"
+            fontWeight={300}
+            fontSize={isMobile ? 20 : 24}
+            pl={0.3}
+          >
+            Featured Residential Projects Across India
+          </Typography>
+        </Box>
+      </Container>
 
       <Box p={"40px 0"}>
         <Container maxWidth sx={{ display: "flex", justifyContent: "center" }}>
           <Box
             sx={{
-              width: "90%",
+              width: "100%",
               position: "relative",
             }}
           >
@@ -316,7 +291,7 @@ const TestimonialComponent = () => {
                 </IconButtonLeftContent>
               )}
 
-              <Box width="100%">
+              <Box width="105%">
                 <Slider ref={sliderRef} {...settings} className="slider">
                   {testimonials &&
                     testimonials.map((data, index) => (
@@ -354,36 +329,6 @@ const TestimonialComponent = () => {
                     ))}
                 </Slider>
               </Box>
-
-              {/* <Box width="100%">
-                <Card
-                  className={`Cards ${
-                    index === centerIndex ? "centerCard" : ""
-                  }`}
-                  key={index}
-                >
-                  <Box display={"flex"} justifyContent={"center"} mb={"10px"}>
-                    <Box className="imageBox">
-                      <Avatar
-                        src={data?.file}
-                        width={"100%"}
-                        style={{ height: "70px", width: "70px" }}
-                      />
-                    </Box>
-                  </Box>
-                  <Typography variant="h4" fontWeight={300}>
-                    {data?.customerName}
-                  </Typography>
-                  <Typography variant="h5">Lorem Ipsum</Typography>
-                  <Box mt={1}>
-                    <Typography variant="h6">
-                      {data?.comments?.length > 120
-                        ? `${data.comments.substring(0, 130)}...`
-                        : data?.comments}
-                    </Typography>
-                  </Box>
-                </Card>
-              </Box> */}
 
               {!isMobile && (
                 <IconButtonRightContent onClick={handleNext}>

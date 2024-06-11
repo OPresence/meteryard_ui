@@ -12,46 +12,32 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
-import CommercialPostCard from "./CommercialPostCard";
+import CommercialPostCard from "./FeaturedPostCard";
 import { AuthContext } from "../context/Auth";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/router";
 
 const CommercialProjectsStyle = styled(Box)(({ theme }) => ({
-  margin: "4rem 0",
   "& .mainSliderDiv": {
-    // padding: "40px 0px",
+    padding: "0 40px",
+    position: "relative",
+
     background: "#fff",
-    "& p": {
-      fontFamily: "Inter",
-      fontSize: "24px",
-      fontWeight: "400",
-      lineHeight: "29.05px",
-    },
     "@media(max-width:615px)": {
-      padding: "20px 0px",
+      padding: "0",
+      marginTop: "5rem",
     },
-    // "& h1": {
-    //   fontWeight: "600",
-    //   fontSize: "28px",
+    "& container": {
+      padding: "0px",
+    },
+    // "& p": {
+    //   fontFamily: "Inter",
+    //   fontSize: "24px",
+    //   fontWeight: "400",
+    //   lineHeight: "29.05px",
     // },
     // "& h2": {
     //   fontWeight: "500",
-    //   fontSize: "16px",
-    // },
-    // "& h4": {
-    //   fontSize: "14px",
-    //   fontFamily: "system-ui",
-    //   marginTop: "5px",
-    //   fontWeight: "500",
-    //   color: "#000",
-    // },
-    // "& h5": {
-    //   fontSize: "12px",
-    //   fontFamily: "system-ui",
-    //   marginTop: "5px",
-    //   fontWeight: "500",
-    //   color: "#E0AF00",
     // },
   },
   "& .circleimg": {
@@ -59,10 +45,10 @@ const CommercialProjectsStyle = styled(Box)(({ theme }) => ({
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     height: "250px",
-    // "& h6": {
-    //   color: "#A7D325",
-    //   fontSize: "14px",
-    // },
+    "& h6": {
+      color: "#A7D325",
+      fontSize: "14px",
+    },
     "& svg": {
       color: "#A7D325",
     },
@@ -70,28 +56,17 @@ const CommercialProjectsStyle = styled(Box)(({ theme }) => ({
   "& .large": {
     background: "#FFF",
   },
-  "& .cards": {
-    // cursor: "pointer",
-    width: "100%",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    // borderRadius: "20px",
-    transform: "0",
-    // transition: "0.8s",
-    // transform: "scale(0.8)",
 
-    "&:hover": {
-      // transform: "scale(0.9)",
-      // transition: "0.8s",
-    },
-    "& .contentBox": {
-      padding: "10px 10px 10px",
-    },
-  },
   "& .viewmoreButtonShow": {
     padding: "10px",
-    display: "flex",
-    justifyContent: "end",
-
+    position: "absolute",
+    right: "55px",
+    bottom: "0",
+    zIndex: "999",
+    "@media(max-width:615px)": {
+      right: "0px",
+      bottom: "-20px",
+    },
     "& button": {
       border: "2px solid #a7d325",
       background: "none",
@@ -196,26 +171,45 @@ const CommercialProjects = () => {
   };
   return (
     <CommercialProjectsStyle>
-      <Container maxWidth>
-        <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
-          <Typography
-            variant="h1"
-            fontSize={isMobile ? 28 : 48}
-            fontWeight={500}
-            lineHeight={isMobile && 1.5}
+      <Box className="mainSliderDiv">
+        <Container>
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
           >
-            Commercial Projects
-          </Typography>
-          <Typography fontSize={isMobile ? 20 : 24} pl={0.3} fontWeight={300}>
-            Commercial Projects Across India
-          </Typography>
-        </Box>
+            <Box>
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
+              >
+                Commercial Projects
+              </Typography>
+              <Typography
+                variant="p"
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+                fontWeight={300}
+              >
+                Commercial Projects Across India
+              </Typography>
+            </Box>
+          </Box>
+        </Container>
         <Box mt={4} width="95%" marginInline="auto">
           {auth?._getlist_commercial?.length > 4 || isMobile ? (
             <Slider {...settings} ref={sliderRef}>
               {React.Children.toArray(
                 auth?._getlist_commercial?.map((data, index) => {
-                  return <CommercialPostCard data={data} key={index} />;
+                  return (
+                    <CommercialPostCard
+                      data={data}
+                      key={index}
+                      type="COMMERCIAL"
+                    />
+                  );
                 })
               )}
             </Slider>
@@ -233,7 +227,7 @@ const CommercialProjects = () => {
                     className="GridClassCard"
                     style={index > 3 ? { marginTop: "60px" } : {}}
                   >
-                    <CommercialPostCard data={data} />
+                    <CommercialPostCard data={data} type="COMMERCIAL" />
                   </Grid>
                 );
               })}
@@ -279,7 +273,7 @@ const CommercialProjects = () => {
             </Box>
           )}
         </Box>
-      </Container>
+      </Box>
     </CommercialProjectsStyle>
   );
 };

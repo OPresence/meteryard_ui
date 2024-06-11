@@ -262,7 +262,7 @@ const ProjectComponent = () => {
   return (
     <ProjectStyle>
       <Box className="mainBox">
-        <Container maxWidth>
+        <Container>
           <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
             <Typography
               variant="h1"
@@ -287,7 +287,7 @@ const ProjectComponent = () => {
               <Box width={"100%"}>
                 <Box
                   display="flex"
-                  justifyContent="space-around"
+                  justifyContent="space-between"
                   alignItems="center"
                   flexWrap="wrap"
                   gap={3}

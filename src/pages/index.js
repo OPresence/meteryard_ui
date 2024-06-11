@@ -5,32 +5,23 @@ import SliderComponent from "../component/SliderComponent";
 import CardComponent from "../component/CardComponent";
 import ResidentialProjects from "../component/ResidentialProjects";
 import CommercialProjects from "../component/CommercialProjects";
-import BannerCompont from "../component/BannerCompont";
 import ProjectComponent from "../component/ProjectComponent";
-import MobileAppComponent from "../component/MobileAppComponent";
-import TestimonialComponent from "../component/TestimonialComponent";
 import AgreecultureComponent from "../component/AgreecultureComponent";
-import ChatBoat from "../component/ChatBoat";
-
-import TestingComponent from "../component/TestingComponent";
 import YoutubeComponent from "../component/YoutubeComponent";
+import TESTIMONIAL from "../component/TestimonialComponent";
+
 export default function ClientPage() {
   return (
     <Box>
       <Banner />
       <SliderComponent />
       <CardComponent />
-      {/* <BannerCompont /> */}
       <ResidentialProjects />
       <CommercialProjects />
       <AgreecultureComponent />
       <YoutubeComponent />
       <ProjectComponent />
-      {/* <MobileAppComponent /> */}
-      {/* <TestimonialComponent /> */}
-      {/* <TestingComponent /> */}
-
-      {/* <ChatBoat /> */}
+      <TESTIMONIAL />
     </Box>
   );
 }

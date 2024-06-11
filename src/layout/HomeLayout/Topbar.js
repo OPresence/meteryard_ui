@@ -312,13 +312,13 @@ export default function Topbar() {
                     >
                       Login
                     </Button>
-                    &nbsp;&nbsp; &nbsp;&nbsp;
+                    {/* &nbsp;&nbsp; &nbsp;&nbsp;
                     <Button
                       onClick={() => SignUpDialog()}
                       className="LoginButton"
                     >
                       Sign Up
-                    </Button>
+                    </Button> */}
                   </>
                 ) : (
                   <Box display={"flex"} justifyContent={"center"} mt={1}>
@@ -410,10 +410,22 @@ export default function Topbar() {
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   {_accesstoken == null ? (
                     <>
-                      <span onClick={() => handleClickOpenLogin("Login")}>
+                      {/* <span onClick={() => handleClickOpenLogin("Login")}>
                         Login
-                      </span>
-                      <span onClick={() => SignUpDialog()}>/Sign Up</span>
+                      </span> */}
+                      <Button
+                        style={{
+                          padding: "5px 30px",
+                        }}
+                        className="LoginButton"
+                        onClick={() => {
+                          handleClickOpenLogin("Login");
+                          console.log("nksdnkndsnfk");
+                        }}
+                      >
+                        Login
+                      </Button>
+                      {/* <span onClick={() => SignUpDialog()}>/Sign Up</span> */}
                     </>
                   ) : (
                     <ProfileMenu setAccessToken={setAccessToken} />

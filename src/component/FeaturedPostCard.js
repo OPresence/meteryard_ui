@@ -34,7 +34,7 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
     width: "90%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     position: "relative",
-    margin: "20px",
+    margin: "20px 0",
     height: "100%",
     "& .CardImgBox": {
       width: "100%",
@@ -69,13 +69,11 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
         textAlign: "start",
         fontWeight: "500",
         padding: "5px",
-        "@media(max-width:1280px)":{
-        fontSize: "14px",
+        "@media(max-width:1280px)": {
+          fontSize: "14px",
           fontWeight: "600",
           padding: "0px",
-
-
-        }
+        },
       },
       "& h4": {
         fontSize: "12px",
@@ -105,21 +103,18 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
     },
   },
 }));
-const FeaturedPostCard = ({ data, index }) => {
+const FeaturedPostCard = ({ data, index, type }) => {
+  console.log("type898---->", type);
   const router = useRouter();
   return (
     <CardComponentStyle>
       <Box
-        
         height={"100%"}
         pb={"20px"}
         display={"flex"}
         justifyContent={"center"}
       >
-        <Box
-          className="cards"
-         
-        >
+        <Box className="cards">
           <Box class="CardImgBox">
             <img src={data?.coverImage} width={"100%"} height={"100%"} />
             <div class="block-layer"></div>
@@ -133,29 +128,23 @@ const FeaturedPostCard = ({ data, index }) => {
             gap={1}
             minHeight="250px"
           >
-            {/* <Box className="headingBox">
-              <Typography variant="h5">{data?.projectName} </Typography>
-            </Box> */}
-              {/* <Typography variant="p" fontSize={18} fontWeight={500}>
-                {data?.title}
-              </Typography> */}
-              <Box className="contentBox">
-            <Typography variant="h3">{data?.title} </Typography>
-              </Box>
+            <Box className="paragraph">
+              <Typography variant="h3">{data?.title} </Typography>
+            </Box>
             <Box>
               <Typography
-                variant="p"
+                className="paragraph"
                 fontSize={14}
                 fontWeight={300}
-                width={"13lh"}
-                sx={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box",
-                  WebkitLineClamp: "5",
-                  WebkitBoxOrient: "vertical",
-                  height:"105px"
-                }}
+                // width={"12lh"}
+                // sx={{
+                //   overflow: "hidden",
+                //   textOverflow: "ellipsis",
+                //   display: "-webkit-box",
+                //   WebkitLineClamp: "5",
+                //   WebkitBoxOrient: "vertical",
+                //   height: "105px",
+                // }}
               >
                 {data?.description}
               </Typography>
@@ -193,7 +182,15 @@ const FeaturedPostCard = ({ data, index }) => {
                 </Typography>
               </Box>
             </Box>
-            <Box width="100%" display="flex" justifyContent="center">
+            <Box
+              style={
+                type == "COMMERCIAL"
+                  ? { justifyContent: "start" }
+                  : { justifyContent: "center" }
+              }
+              width="100%"
+              display="flex"
+            >
               <ButtonComponent data={data} />
             </Box>
           </Box>

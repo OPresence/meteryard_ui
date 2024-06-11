@@ -85,7 +85,21 @@ const MainComponent = styled(Box)(({ theme }) => ({
         fontSize: "12px",
       },
     },
-
+    "& .ContainerSearchBox": {
+      display: "flex",
+      justifyContent: "center",
+      padding: "0 150px 0 0",
+      // position: "absolute",
+      width: "100%",
+      top: "140%",
+      left: "50%",
+      "@media(max-width:615px)": {
+        padding: "0",
+        left: "0%",
+        top: "100%",
+        margin: "0 20px",
+      },
+    },
     "& .searchbox": {
       background: "#A9D910 0% 0% no-repeat padding-box;",
       position: "absolute",
@@ -680,14 +694,8 @@ export default function Home() {
               </Box>
             </Box>
             <Box
-              display={"flex"}
-              justifyContent={"center"}
-              padding={isMobile ? "0" : "0 150px 0 0"}
-              position={isMobile && "absolute"}
-              width={isMobile ? "80%" : "100%"}
-              top="140%"
-              left="50%"
-              style={{ transform: isMobile && "translate(-50%,-50%)" }}
+              className="ContainerSearchBox"
+              // style={{ transform: isMobile && "translate(-50%,-50%)" }}
             >
               <Box
                 mt={10}

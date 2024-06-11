@@ -1,5 +1,3 @@
-// export const baseurl = "http://192.168.1.30:8000"; //local
-// export const baseurl = "http://192.168.1.18:8000"; //local
 export const baseurlUser = "https://lms-api-backend.onrender.com/api/v1/user"; //local
 export const baseurlAdmin = "https://lms-api-backend.onrender.com/api/v1/admin"; //local
 export const masterURL = "https://lms-api-backend.onrender.com/api/v1/master"; //local

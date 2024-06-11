@@ -14,17 +14,24 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
+import SkeltonLoader from "../component/SkeltonLoader";
 import FeaturedPostCard from "./FeaturedPostCard";
 import { AuthContext } from "../context/Auth";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useRouter } from "next/router";
 
 const CardComponentStyle = styled(Box)(({ theme }) => ({
-  position: "relative",
   "& .mainSliderDiv": {
-    // padding: "0px 0 0px 0",
+    padding: "0 40px",
+    position: "relative",
     background: "#fff",
-    // padding: "50px",
+    "@media(max-width:615px)": {
+      padding: "0",
+      marginTop: "2rem",
+    },
+    "& container": {
+      padding: "0px",
+    },
     "& p": {
       fontFamily: "Inter",
       fontSize: "24px",
@@ -54,9 +61,14 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
 
   "& .viewmoreButtonShow": {
     padding: "10px",
-    display: "flex",
-    justifyContent: "end",
-
+    position: "absolute",
+    right: "55px",
+    bottom: "0",
+    zIndex: "999",
+    "@media(max-width:615px)": {
+      right: "0px",
+      bottom: "-20px",
+    },
     "& button": {
       border: "2px solid #a7d325",
       background: "none",
@@ -137,7 +149,7 @@ const CardComponent = () => {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: false,
@@ -147,7 +159,7 @@ const CardComponent = () => {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
           autoplay: false,
@@ -200,9 +212,9 @@ const CardComponent = () => {
 
   return (
     <CardComponentStyle>
-      <div className="mainSliderDiv">
-        <Container maxWidth>
-          <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
+      <Box className="mainSliderDiv">
+        <Container>
+          <Box>
             <Typography
               variant="h1"
               fontSize={isMobile ? 28 : 48}
@@ -220,85 +232,97 @@ const CardComponent = () => {
               Featured Residential Projects Across India
             </Typography>
           </Box>
+        </Container>
 
-          {auth._isFeaturedPost.length > 4 && !isMobile && (
-            <IconButtonLeftContent onClick={handlePrevious}>
-              <ArrowBackIosIcon />
-            </IconButtonLeftContent>
-          )}
+        {auth._isFeaturedPost.length > 4 && !isMobile && (
+          <IconButtonLeftContent onClick={handlePrevious}>
+            <ArrowBackIosIcon />
+          </IconButtonLeftContent>
+        )}
 
-          <Box mt={4} >
-            {auth?._getlist?.length > 4 ? (
-              <Slider {...settings} ref={sliderRef}>
+        <Box mt={4} width={"95%"} margin={"0 auto"}>
+          <Grid container spacing={3}>
+            {auth?._isloadingProp ? (
+              <>
+                {Array.from({ length: 3 }).map((_, index) => (
+                  <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
+                    <SkeltonLoader />
+                  </Grid>
+                ))}
+              </>
+            ) : (
+              <></>
+            )}
+          </Grid>
+
+          {auth?._getlist?.length > 4 ? (
+            <Slider {...settings} ref={sliderRef}>
+              {auth?._isFeaturedPost &&
+                auth?._isFeaturedPost?.map((data, index) => {
+                  return (
+                    <Box key={index}>
+                      <FeaturedPostCard data={data} index={index} />
+                    </Box>
+                  );
+                })}
+            </Slider>
+          ) : (
+            <>
+              <Grid container>
                 {auth?._isFeaturedPost &&
                   auth?._isFeaturedPost?.map((data, index) => {
                     return (
-                      <Box key={index}>
-                        <FeaturedPostCard data={data} index={index} />
-                      </Box>
+                      <Grid item lg={4} md={4} sm={6} xs={12} key={index}>
+                        <FeaturedPostCard data={data} />
+                      </Grid>
                     );
                   })}
-              </Slider>
-            ) : (
-              <>
-                <Grid container>
-                  {auth?._isFeaturedPost &&
-                    auth?._isFeaturedPost?.map((data, index) => {
-                      return (
-                        <Grid item lg={4} md={4} sm={6} xs={12} key={index}>
-                          <FeaturedPostCard data={data} />
-                        </Grid>
-                      );
-                    })}
-                </Grid>
-              </>
+              </Grid>
+            </>
+          )}
+        </Box>
+
+        {!isMobile && (
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+            {React.Children.toArray(
+              auth._isFeaturedPost.map((item, index) => {
+                if (index >= auth._isFeaturedPost.length - 2) return null;
+                return (
+                  <Box
+                    onClick={() => {
+                      setCurrentSlide(index);
+                      sliderRef.current.slickGoTo(index);
+                    }}
+                    style={{
+                      minWidth: "10px",
+                      minHeight: "10px",
+                      borderRadius: "50%",
+                      border: "1px solid #A7D325",
+                      backgroundColor:
+                        currentSlide === index ? "#A7D325" : "white",
+                      marginRight: "4px",
+                    }}
+                  />
+                );
+              })
             )}
           </Box>
+        )}
 
-          {!isMobile && (
-            <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
-              {React.Children.toArray(
-                auth._isFeaturedPost.map((item, index) => {
-                  if (index >= auth._isFeaturedPost.length - 2) return null;
-                  return (
-                    <Box
-                      onClick={() => {
-                        setCurrentSlide(index);
-                        sliderRef.current.slickGoTo(index);
-                      }}
-                      style={{
-                        minWidth: "10px",
-                        minHeight: "10px",
-                        borderRadius: "50%",
-                        border: "1px solid #A7D325",
-                        backgroundColor:
-                          currentSlide === index ? "#A7D325" : "white",
-                        marginRight: "4px",
-                      }}
-                    />
-                  );
-                })
-              )}
-            </Box>
+        {auth._isFeaturedPost.length > 4 && !isMobile && (
+          <IconButtonRightContent onClick={handleNext}>
+            <ArrowForwardIosIcon />
+          </IconButtonRightContent>
+        )}
+        <Box className="viewmoreButtonShow" style={{ marginTop: "1rem" }}>
+          {auth._isFeaturedPost.length > 4 && (
+            <Button onClick={handleClick}>
+              View All
+              <ArrowForwardIcon sx={{ fontSize: "18px", marginLeft: "10px" }} />
+            </Button>
           )}
-
-          {auth._isFeaturedPost.length > 4 && !isMobile && (
-            <IconButtonRightContent onClick={handleNext}>
-              <ArrowForwardIosIcon />
-            </IconButtonRightContent>
-          )}
-          <Box className="viewmoreButtonShow" style={{ marginTop: "1rem" }}>
-            {auth._isFeaturedPost.length > 4 && (
-              <Button onClick={handleClick}>
-                View All
-                <ArrowForwardIcon
-                  sx={{ fontSize: "18px", marginLeft: "10px" }}
-                />
-              </Button>
-            )}
-          </Box>
-        </Container>
-      </div>
+        </Box>
+      </Box>
     </CardComponentStyle>
   );
 };
