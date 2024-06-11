@@ -266,7 +266,7 @@ const SliderComponent = () => {
                             {data?.name}
                           </Typography>
                         </Box>
-                        <Box
+                        {/* <Box
                           display={"flex"}
                           position={"absolute"}
                           bottom={"0"}
@@ -279,7 +279,7 @@ const SliderComponent = () => {
                           <span className="rightIcon">
                             <ChevronRightIcon />
                           </span>
-                        </Box>
+                        </Box> */}
                       </Box>
                     </Card>
                   </Box>

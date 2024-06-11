@@ -270,7 +270,7 @@ const ResidentialProjects = ({ showViewMore }) => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -279,7 +279,7 @@ const ResidentialProjects = ({ showViewMore }) => {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },

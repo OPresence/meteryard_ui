@@ -32,8 +32,8 @@ const ResidentialPostCard = ({ data, isMobile }) => {
       <Box m="15px">
         <Box className="mainCardBox">
           <Box
-            display="flex"
-            flexDirection={isMobile ? "column" : "row"}
+            // display="flex"
+            // flexDirection={isMobile ? "column" : "row"}
             alignItems="center"
           >
             <Box

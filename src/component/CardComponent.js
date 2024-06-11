@@ -51,18 +51,7 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
   "& .large": {
     background: "#FFF",
   },
-  "& .cards": {
-    // cursor: "pointer",
-    // width: "60%",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    // borderRadius: "20px",
-    transform: "0",
 
-    "&:hover": {},
-    "& .contentBox": {
-      padding: "10px 10px 10px",
-    },
-  },
   "& .viewmoreButtonShow": {
     padding: "10px",
     display: "flex",
@@ -238,7 +227,7 @@ const CardComponent = () => {
             </IconButtonLeftContent>
           )}
 
-          <Box mt={4} width="95%" marginInline="auto">
+          <Box mt={4} >
             {auth?._getlist?.length > 4 ? (
               <Slider {...settings} ref={sliderRef}>
                 {auth?._isFeaturedPost &&

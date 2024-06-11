@@ -31,10 +31,8 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
     background: "#FFF",
   },
   "& .cards": {
-    // cursor: "pointer",
-    width: "100%",
+    width: "90%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    // borderRadius: "20px",
     position: "relative",
     margin: "20px",
     height: "100%",
@@ -44,8 +42,6 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
       height: "170px",
     },
     "& img": {
-      // borderTopRightRadius: "10px",
-      // borderTopLeftRadius: "10px",
       height: "100%",
     },
     "&:hover": {
@@ -53,7 +49,7 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
       transition: "0.8s",
     },
     "& .contentBox": {
-      padding: "10px 10px 10px",
+      // padding: "10px 10px 10px",
       "& .headingBox": {
         display: "flex",
         justifyContent: "center",
@@ -73,6 +69,13 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
         textAlign: "start",
         fontWeight: "500",
         padding: "5px",
+        "@media(max-width:1280px)":{
+        fontSize: "14px",
+          fontWeight: "600",
+          padding: "0px",
+
+
+        }
       },
       "& h4": {
         fontSize: "12px",
@@ -107,14 +110,7 @@ const FeaturedPostCard = ({ data, index }) => {
   return (
     <CardComponentStyle>
       <Box
-        // onClick={() =>
-        //   router.push({
-        //     pathname: "/view-property",
-        //     query: {
-        //       data: JSON.stringify(data),
-        //     },
-        //   })
-        // }
+        
         height={"100%"}
         pb={"20px"}
         display={"flex"}
@@ -122,9 +118,7 @@ const FeaturedPostCard = ({ data, index }) => {
       >
         <Box
           className="cards"
-          // style={
-          //   index == 0 ? { paddingBottom: "auto" } : { paddingBottom: "10px" }
-          // }
+         
         >
           <Box class="CardImgBox">
             <img src={data?.coverImage} width={"100%"} height={"100%"} />
@@ -142,22 +136,25 @@ const FeaturedPostCard = ({ data, index }) => {
             {/* <Box className="headingBox">
               <Typography variant="h5">{data?.projectName} </Typography>
             </Box> */}
-            <Typography variant="p" fontSize={18} fontWeight={500}>
-              {data?.title}
-            </Typography>
-            {/* <Typography variant="h3">{data?.title} </Typography> */}
+              {/* <Typography variant="p" fontSize={18} fontWeight={500}>
+                {data?.title}
+              </Typography> */}
+              <Box className="contentBox">
+            <Typography variant="h3">{data?.title} </Typography>
+              </Box>
             <Box>
               <Typography
                 variant="p"
                 fontSize={14}
                 fontWeight={300}
-                width={"15lh"}
+                width={"13lh"}
                 sx={{
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   display: "-webkit-box",
                   WebkitLineClamp: "5",
                   WebkitBoxOrient: "vertical",
+                  height:"105px"
                 }}
               >
                 {data?.description}

@@ -7,6 +7,7 @@ export const propertyURL =
   "https://lms-api-backend.onrender.com/api/v1/property"; //local
 export const staticContent =
   "https://lms-api-backend.onrender.com/api/v1/static"; //local
+  // const nodeUrl =  process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://staging.yourdomain.com';
 
 let user = `${baseurlUser}`;
 let admin = `${baseurlAdmin}`;
