@@ -68,7 +68,7 @@ const StyledSliderContainer = styled(Box)({
 });
 
 const VideoCard = styled(Card)({
-  height: "380px",
+  height: "395px",
   display: "flex",
   flexDirection: "column",
   width: "85%",
@@ -219,13 +219,6 @@ const YoutubeComponent = () => {
               <div key={index}>
                 <Box width="100%">
                   <VideoCard>
-                    {/* <CardMedia
-                        component="img"
-                        height="300"
-                        image={video.image}
-                        alt={video.title}
-                        onClick={() => window.open(video.url, "_blank")}
-                      /> */}
                     <VideoPlayer src={video.url} poster={video.image} />
 
                     <Box
@@ -242,6 +235,7 @@ const YoutubeComponent = () => {
                         variant="h4"
                         fontSize={18}
                         fontWeight={300}
+                        lineHeight={"auto"}
                       >
                         {video.description}
                       </Typography>

@@ -110,7 +110,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       alignItems: "center",
       borderRadius: "11px",
       "@media(max-width:615px)": {
-        width: "80px",
+        width: "40px",
         height: "40px !important",
         margin: "5px 8px",
         minWidth: "unset",

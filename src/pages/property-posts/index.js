@@ -197,7 +197,7 @@ const StateComponent = () => {
     }
   };
 
-  const Add_Country = async (value) => {
+  const PropertyPostFunction = async (value) => {
     console.log("valuenxnncx---->", value);
     try {
       setIsLoading(true);
@@ -382,7 +382,7 @@ const StateComponent = () => {
               handleClose={handleClose}
               handleClickOpen={handleOpen}
               // ImageUpload={ImageUpload}
-              AddMoreList={Add_Country}
+              AddMoreList={PropertyPostFunction}
               _isloading={_isloading}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}

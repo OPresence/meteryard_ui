@@ -128,24 +128,11 @@ const FeaturedPostCard = ({ data, index, type }) => {
             gap={1}
             minHeight="250px"
           >
-            <Box className="paragraph">
-              <Typography variant="h3">{data?.title} </Typography>
+            <Box>
+              <Typography className="projectHeading">{data?.title} </Typography>
             </Box>
             <Box>
-              <Typography
-                className="paragraph"
-                fontSize={14}
-                fontWeight={300}
-                // width={"12lh"}
-                // sx={{
-                //   overflow: "hidden",
-                //   textOverflow: "ellipsis",
-                //   display: "-webkit-box",
-                //   WebkitLineClamp: "5",
-                //   WebkitBoxOrient: "vertical",
-                //   height: "105px",
-                // }}
-              >
+              <Typography className="paragraph" fontSize={14} fontWeight={300}>
                 {data?.description}
               </Typography>
             </Box>

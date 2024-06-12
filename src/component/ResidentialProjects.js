@@ -22,10 +22,11 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 const ResidentStyle = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
-    padding: "40px 0px",
     background: "#fff",
     position: "relative",
     padding: "0 40px",
+    marginTop: "4rem",
+
     "@media(max-width:615px)": {
       padding: "0",
       marginTop: "5rem",
@@ -95,7 +96,8 @@ const IconButtonRightContent = styled(Box)({
   },
 });
 
-const ResidentialProjects = ({ showViewMore }) => {
+const ResidentialProjects = ({ showViewMore, ProductData }) => {
+  console.log("ProductData---->", ProductData);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -116,7 +118,7 @@ const ResidentialProjects = ({ showViewMore }) => {
   const handleNext = () => {
     if (sliderRef.current) {
       sliderRef.current.slickNext();
-      if (currentSlide < auth?._getlist.length - 3)
+      if (currentSlide < ProductData?.allProperty?.length.length - 3)
         setCurrentSlide(currentSlide + 1);
     }
   };
@@ -198,13 +200,8 @@ const ResidentialProjects = ({ showViewMore }) => {
     ],
   };
   const handleClick = () => {
-    // router.push({
-    //   pathname: "/all-property",
-    //   query: { _id: auth?._getlist[0]?.projectTypeId?._id },
-    // });
     router.push({
       pathname: "/all-property",
-      // query: { _id: "FEATURED" },
     });
   };
 
@@ -224,7 +221,7 @@ const ResidentialProjects = ({ showViewMore }) => {
                 fontWeight={500}
                 lineHeight={isMobile && 1.5}
               >
-                Residential Projects
+                {ProductData?.projectType} Projects
               </Typography>
               <Typography
                 variant="p"
@@ -232,13 +229,13 @@ const ResidentialProjects = ({ showViewMore }) => {
                 pl={0.3}
                 fontWeight={300}
               >
-                Residential Projects Across India
+                {ProductData?.projectType} Projects Across India
               </Typography>
             </Box>
           </Box>
         </Container>
 
-        {!isMobile && !!auth?._getlist_commercial.length && (
+        {ProductData?.allProperty?.length > 0 && (
           <IconButtonLeftContent onClick={handlePrevious}>
             <ArrowBackIosIcon />
           </IconButtonLeftContent>
@@ -252,10 +249,10 @@ const ResidentialProjects = ({ showViewMore }) => {
               position: "relative",
             }}
           >
-            {auth?._getlist?.length > 4 ? (
+            {ProductData?.allProperty?.length > 4 ? (
               <Slider {...settings} ref={sliderRef}>
-                {!!auth?._getlist &&
-                  auth?._getlist?.map((data, index) => {
+                {ProductData?.allProperty?.length &&
+                  ProductData?.allProperty?.map((data, index) => {
                     return (
                       <Box key={index}>
                         <ResidentialPostCard data={data} />
@@ -266,8 +263,8 @@ const ResidentialProjects = ({ showViewMore }) => {
             ) : (
               <>
                 <Grid container>
-                  {!!auth?._getlist &&
-                    auth?._getlist?.map((data, index) => {
+                  {!!ProductData?.allProperty?.length &&
+                    ProductData?.allProperty?.map((data, index) => {
                       return (
                         <Grid item lg={6} md={6} sm={6} xs={12} key={index}>
                           <ResidentialPostCard data={data} />
@@ -283,8 +280,9 @@ const ResidentialProjects = ({ showViewMore }) => {
             <Box mt={"2rem"} sx={{ display: "flex", justifyContent: "center" }}>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 {React.Children.toArray(
-                  auth?._getlist.map((item, index) => {
-                    if (index >= auth?._getlist.length - 2) return null;
+                  ProductData?.allProperty.map((item, index) => {
+                    if (index >= ProductData?.allProperty?.length - 2)
+                      return null;
                     return (
                       <Box
                         onClick={() => {
@@ -308,7 +306,7 @@ const ResidentialProjects = ({ showViewMore }) => {
             </Box>
           )}
           <Box className="viewmoreButtonShow">
-            {auth._getlist_commercial.length > 3 && (
+            {ProductData?.allProperty?.length > 3 && (
               <Button onClick={handleClick}>
                 View All
                 <ArrowForwardIcon
@@ -319,7 +317,7 @@ const ResidentialProjects = ({ showViewMore }) => {
           </Box>
         </Box>
 
-        {!!auth?._getlist_commercial.length && !isMobile && (
+        {ProductData?.allProperty?.length && !isMobile && (
           <IconButtonRightContent onClick={handleNext}>
             <ArrowForwardIosIcon />
           </IconButtonRightContent>

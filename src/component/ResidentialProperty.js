@@ -123,7 +123,7 @@ const ResidentStyle = styled(Box)(({ theme }) => ({
     },
   },
 }));
-const ResidentialProjects = () => {
+const ResidentialProperty = () => {
   const sliderRef = useRef(null);
   const [_getlist, setGetList] = useState([]);
   const [_isloading, setIsLoading] = useState(false);
@@ -230,7 +230,7 @@ const ResidentialProjects = () => {
     }
   };
   useEffect(() => {
-    ResidentialAPI();
+    // ResidentialAPI();
   }, []);
   return (
     <ResidentStyle>
@@ -311,4 +311,4 @@ const ResidentialProjects = () => {
   );
 };
 
-export default ResidentialProjects;
+export default ResidentialProperty;

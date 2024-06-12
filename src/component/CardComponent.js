@@ -108,7 +108,8 @@ const IconButtonRightContent = styled(Box)({
   },
 });
 
-const CardComponent = () => {
+const CardComponent = ({ ProductData }) => {
+  console.log("jnjjbsjdjsdk00---->", ProductData);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -214,51 +215,43 @@ const CardComponent = () => {
     <CardComponentStyle>
       <Box className="mainSliderDiv">
         <Container>
-          <Box>
-            <Typography
-              variant="h1"
-              fontSize={isMobile ? 28 : 48}
-              fontWeight={500}
-              lineHeight={isMobile && 1.5}
-            >
-              Featured Projects
-            </Typography>
-            <Typography
-              variant="p"
-              fontSize={isMobile ? 20 : 24}
-              pl={0.3}
-              fontWeight={300}
-            >
-              Featured Residential Projects Across India
-            </Typography>
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Box>
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
+              >
+                {ProductData?.projectType} Projects
+              </Typography>
+              <Typography
+                variant="p"
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+                fontWeight={300}
+              >
+                {ProductData?.projectType} Projects Across India
+              </Typography>
+            </Box>
           </Box>
         </Container>
 
-        {auth._isFeaturedPost.length > 4 && !isMobile && (
+        {ProductData?.allProperty?.length > 4 && (
           <IconButtonLeftContent onClick={handlePrevious}>
             <ArrowBackIosIcon />
           </IconButtonLeftContent>
         )}
 
         <Box mt={4} width={"95%"} margin={"0 auto"}>
-          <Grid container spacing={3}>
-            {auth?._isloadingProp ? (
-              <>
-                {Array.from({ length: 3 }).map((_, index) => (
-                  <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
-                    <SkeltonLoader />
-                  </Grid>
-                ))}
-              </>
-            ) : (
-              <></>
-            )}
-          </Grid>
-
-          {auth?._getlist?.length > 4 ? (
+          {ProductData?.allProperty?.length > 4 ? (
             <Slider {...settings} ref={sliderRef}>
-              {auth?._isFeaturedPost &&
-                auth?._isFeaturedPost?.map((data, index) => {
+              {ProductData?.allProperty?.length &&
+                ProductData?.allProperty?.map((data, index) => {
                   return (
                     <Box key={index}>
                       <FeaturedPostCard data={data} index={index} />
@@ -269,10 +262,10 @@ const CardComponent = () => {
           ) : (
             <>
               <Grid container>
-                {auth?._isFeaturedPost &&
-                  auth?._isFeaturedPost?.map((data, index) => {
+                {ProductData?.allProperty?.length &&
+                  ProductData?.allProperty?.map((data, index) => {
                     return (
-                      <Grid item lg={4} md={4} sm={6} xs={12} key={index}>
+                      <Grid item lg={3} md={4} sm={6} xs={12} key={index}>
                         <FeaturedPostCard data={data} />
                       </Grid>
                     );
@@ -286,7 +279,7 @@ const CardComponent = () => {
           <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
             {React.Children.toArray(
               auth._isFeaturedPost.map((item, index) => {
-                if (index >= auth._isFeaturedPost.length - 2) return null;
+                if (index >= ProductData?.allProperty?.length - 2) return null;
                 return (
                   <Box
                     onClick={() => {
@@ -309,13 +302,13 @@ const CardComponent = () => {
           </Box>
         )}
 
-        {auth._isFeaturedPost.length > 4 && !isMobile && (
+        {ProductData?.allProperty?.length > 4 && !isMobile && (
           <IconButtonRightContent onClick={handleNext}>
             <ArrowForwardIosIcon />
           </IconButtonRightContent>
         )}
         <Box className="viewmoreButtonShow" style={{ marginTop: "1rem" }}>
-          {auth._isFeaturedPost.length > 4 && (
+          {ProductData?.allProperty?.length > 4 && (
             <Button onClick={handleClick}>
               View All
               <ArrowForwardIcon sx={{ fontSize: "18px", marginLeft: "10px" }} />

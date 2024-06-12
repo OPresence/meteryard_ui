@@ -251,16 +251,16 @@ export const cityName = [
 
   { name: "Guwahati" },
 ];
-export const cityObject = [
-  //   {
-  "Bengaluru",
-  "Kolkata",
-  "Hyderabad",
-  "Bhubaneswar",
-  "Varanasi",
-  "Lucknow",
-  "Panchkula",
-];
+// export const cityObject = [
+//   //   {
+//   "Bengaluru",
+//   "Kolkata",
+//   "Hyderabad",
+//   "Bhubaneswar",
+//   "Varanasi",
+//   "Lucknow",
+//   "Panchkula",
+// ];
 export const convertDateTime = (val) => {
   var tempDate = new Date(val);
   const toDateFormat = moment(tempDate).format("DD-MMM-yyyy");

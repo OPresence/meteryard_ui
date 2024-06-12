@@ -184,6 +184,8 @@ const Apiconfigs = {
   listAllPropertyPost: `${propertyLink}/listAllPropertyPost`,
   deletePropertyPost: `${propertyLink}/deletePropertyPost`,
   globalSearch: `${propertyLink}/globalSearch`,
+  proTypeAccordingPropertyList: `${propertyLink}/proTypeAccordingPropertyList`,
+
 
   // MASTER AREA_UNIT MANAGEMENT
   createAreaUnit: `${masterLink}/createAreaUnit`,

@@ -615,9 +615,9 @@ const PropertyPostIndex = () => {
         if (res) {
           setIsLoading(false);
           if (res?.responseCode == 200) {
-            auth?.ResidentialAPI();
-            auth?.CommercialAPI();
-            auth?.AgreecultureAPIAPI();
+            auth?.AllCategoryProduct();
+            // auth?.CommercialAPI();
+            // auth?.AgreecultureAPIAPI();
             setIsLoading(false);
             setPropertyForm(false);
             setSelectedImages([]);

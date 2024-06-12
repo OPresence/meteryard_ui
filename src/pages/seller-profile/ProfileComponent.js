@@ -6,6 +6,7 @@ import {
   Grid,
   Avatar,
   Container,
+  // Avatar
 } from "@mui/material";
 import styled from "@emotion/styled";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -197,7 +198,13 @@ const ProfileComponent = () => {
               <Grid item xs={12} sm={4} lg={3} md={2}>
                 <Box className="UserProfile">
                   <figure className="User">
-                    <Avatar src={"/images/profile/1567018939360.png"} />
+                    <Avatar
+                      src={
+                        auth?.profilePicture == ""
+                          ? "/images/profile/user-placeholder.png"
+                          : auth?.profilePicture
+                      }
+                    />
                   </figure>
                 </Box>
               </Grid>
@@ -291,18 +298,6 @@ const ProfileComponent = () => {
                     </Box>
                   </Grid>
                 </Grid>
-              </Grid>
-              <Grid item xs={6} sm={5} lg={3} md={2}>
-                <Box className={"pricetext"}>
-                  <Box display={"flex"} alignItems={"center"}>
-                    <Box className="IconBox">
-                      <FaDownload />
-                    </Box>
-                    <Button className={"btn1"}>
-                      <span>CATALOGOU</span>
-                    </Button>
-                  </Box>
-                </Box>
               </Grid>
             </Grid>
           </Box>

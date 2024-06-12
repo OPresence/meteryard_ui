@@ -9,17 +9,15 @@ import ProjectComponent from "../component/ProjectComponent";
 import AgreecultureComponent from "../component/AgreecultureComponent";
 import YoutubeComponent from "../component/YoutubeComponent";
 import TESTIMONIAL from "../component/TestimonialComponent";
+import MasterCardProduct from "../component/MasterCardProduct";
 
 export default function ClientPage() {
   return (
     <Box>
       <Banner />
       <SliderComponent />
-      <CardComponent />
-      <ResidentialProjects />
-      <CommercialProjects />
-      <AgreecultureComponent />
-      <YoutubeComponent />
+      <MasterCardProduct />
+      {/* <YoutubeComponent /> */}
       <ProjectComponent />
       <TESTIMONIAL />
     </Box>

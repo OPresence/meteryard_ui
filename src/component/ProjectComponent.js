@@ -13,9 +13,9 @@ import Slider from "react-slick";
 import { AuthContext } from "../context/Auth";
 import "../Scss/border.css";
 const ProjectStyle = styled(Box)(({ theme }) => ({
-  margin: "2rem auto",
+  // margin: "2rem auto",
   "& .mainBox": {
-    padding: "40px 0 40px 0",
+    marginTop: "3rem",
     "@media(max-width:615px)": {
       padding: "34px 0 100px 0",
     },
@@ -263,24 +263,29 @@ const ProjectComponent = () => {
     <ProjectStyle>
       <Box className="mainBox">
         <Container>
-          <Box width={isMobile ? "100%" : "90%"} marginInline="auto">
-            <Typography
-              variant="h1"
-              fontSize={isMobile ? 28 : 48}
-              fontWeight={500}
-              lineHeight={isMobile && 1.5}
-            >
-              Projects
-            </Typography>
-            <Typography
-              mt={1}
-              variant="p"
-              fontSize={isMobile ? 20 : 24}
-              pl={0.3}
-              fontWeight={300}
-            >
-              Featured Residential Projects Across India
-            </Typography>
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Box>
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
+              >
+                Projects
+              </Typography>
+              <Typography
+                variant="p"
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+                fontWeight={300}
+              >
+                Projects Across India
+              </Typography>
+            </Box>
           </Box>
           <Box>
             <Box className="shodowBox">
@@ -371,6 +376,7 @@ const ProjectComponent = () => {
             </Box>
           </Box>
         </Container>
+        {/* </Container> */}
       </Box>
     </ProjectStyle>
   );

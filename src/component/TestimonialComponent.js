@@ -16,6 +16,7 @@ import Apiconfigs from "../ApiConfig/ApiConfig";
 import { PostApiFunction } from "@/utils";
 
 const TestimonialStyle = styled(Box)(({ theme }) => ({
+  marginTop: "6rem",
   "& .Cards": {
     gap: "0px",
     borderRadius: "12.81px",
@@ -243,102 +244,109 @@ const TestimonialComponent = () => {
 
   return (
     <TestimonialStyle position="relative">
-      <Container>
-        <Box mb={10}>
-          <Typography
-            variant="h1"
-            fontSize={isMobile ? 28 : 48}
-            fontWeight={500}
-            lineHeight={isMobile && 1.5}
-          >
-            TESTIMONIAL
-          </Typography>
-          <Typography
-            variant="p"
-            fontWeight={300}
-            fontSize={isMobile ? 20 : 24}
-            pl={0.3}
-          >
-            Featured Residential Projects Across India
-          </Typography>
-        </Box>
-      </Container>
-
-      <Box p={"40px 0"}>
-        <Container maxWidth sx={{ display: "flex", justifyContent: "center" }}>
-          <Box
-            sx={{
-              width: "100%",
-              position: "relative",
-            }}
-          >
-            <Box display={"flex"} justifyContent={"center"}>
-              <Box
-                maxWidth={420}
-                position={"absolute"}
-                top={"-20px"}
-                marginLeft={"-20px"}
-                transform={isMobile && "scale(1.3)"}
+      {testimonials?.length > 0 && (
+        <Box>
+          <Container>
+            <Box mb={10}>
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
               >
-                <img src="./images/vector.png" width={"100%"} alt="img" />
-              </Box>
+                TESTIMONIAL
+              </Typography>
+              <Typography
+                variant="p"
+                fontWeight={300}
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+              >
+                Featured Residential Projects Across India
+              </Typography>
             </Box>
+          </Container>
 
-            <Box width="100%" position="relative">
-              {!isMobile && (
-                <IconButtonLeftContent onClick={handlePrevious}>
-                  <ArrowBackIosIcon />
-                </IconButtonLeftContent>
-              )}
+          <Box p={"40px 0"}>
+            <Container
+              maxWidth
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <Box
+                sx={{
+                  width: "100%",
+                  position: "relative",
+                }}
+              >
+                <Box display={"flex"} justifyContent={"center"}>
+                  <Box
+                    maxWidth={420}
+                    position={"absolute"}
+                    top={"-20px"}
+                    marginLeft={"-20px"}
+                    transform={isMobile && "scale(1.3)"}
+                  >
+                    <img src="./images/vector.png" width={"100%"} alt="img" />
+                  </Box>
+                </Box>
 
-              <Box width="105%">
-                <Slider ref={sliderRef} {...settings} className="slider">
-                  {testimonials &&
-                    testimonials.map((data, index) => (
-                      <Card
-                        className={`Cards ${
-                          index === centerIndex ? "centerCard" : ""
-                        }`}
-                        key={index}
-                      >
-                        <Box
-                          display={"flex"}
-                          justifyContent={"center"}
-                          mb={"10px"}
-                        >
-                          <Box className="imageBox">
-                            <Avatar
-                              src={data?.file}
-                              width={"100%"}
-                              style={{ height: "70px", width: "70px" }}
-                            />
-                          </Box>
-                        </Box>
-                        <Typography variant="h4" fontWeight={300}>
-                          {data?.customerName}
-                        </Typography>
-                        <Typography variant="h5">Lorem Ipsum</Typography>
-                        <Box mt={1}>
-                          <Typography variant="h6">
-                            {data?.comments?.length > 120
-                              ? `${data.comments.substring(0, 130)}...`
-                              : data?.comments}
-                          </Typography>
-                        </Box>
-                      </Card>
-                    ))}
-                </Slider>
+                <Box width="100%" position="relative">
+                  {!isMobile && (
+                    <IconButtonLeftContent onClick={handlePrevious}>
+                      <ArrowBackIosIcon />
+                    </IconButtonLeftContent>
+                  )}
+
+                  <Box width="105%">
+                    <Slider ref={sliderRef} {...settings} className="slider">
+                      {testimonials &&
+                        testimonials.map((data, index) => (
+                          <Card
+                            className={`Cards ${
+                              index === centerIndex ? "centerCard" : ""
+                            }`}
+                            key={index}
+                          >
+                            <Box
+                              display={"flex"}
+                              justifyContent={"center"}
+                              mb={"10px"}
+                            >
+                              <Box className="imageBox">
+                                <Avatar
+                                  src={data?.file}
+                                  width={"100%"}
+                                  style={{ height: "70px", width: "70px" }}
+                                />
+                              </Box>
+                            </Box>
+                            <Typography variant="h4" fontWeight={300}>
+                              {data?.customerName}
+                            </Typography>
+                            <Typography variant="h5">Lorem Ipsum</Typography>
+                            <Box mt={1}>
+                              <Typography variant="h6">
+                                {data?.comments?.length > 120
+                                  ? `${data.comments.substring(0, 130)}...`
+                                  : data?.comments}
+                              </Typography>
+                            </Box>
+                          </Card>
+                        ))}
+                    </Slider>
+                  </Box>
+
+                  {!isMobile && (
+                    <IconButtonRightContent onClick={handleNext}>
+                      <ArrowForwardIosIcon />
+                    </IconButtonRightContent>
+                  )}
+                </Box>
               </Box>
-
-              {!isMobile && (
-                <IconButtonRightContent onClick={handleNext}>
-                  <ArrowForwardIosIcon />
-                </IconButtonRightContent>
-              )}
-            </Box>
+            </Container>
           </Box>
-        </Container>
-      </Box>
+        </Box>
+      )}
     </TestimonialStyle>
   );
 };
