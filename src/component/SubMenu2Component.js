@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import styled from "@emotion/styled";
 import { Box, Typography, Grid } from "@mui/material";
-
+import Link from "next/link";
 import { AuthContext } from "../context/Auth";
 const SubMenuStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
@@ -106,9 +106,11 @@ const SubMenu2Component = () => {
                     key={index}
                     style={{ cursor: "pointer", padding: "4px 0" }}
                   >
-                    <Typography className="cityname" variant="h6">
-                      {data?.projectSubType}
-                    </Typography>
+                    <Link href="/all-property">
+                      <Typography className="cityname" variant="h6">
+                        {data?.projectSubType}
+                      </Typography>
+                    </Link>
                   </Box>
                 );
               })}
