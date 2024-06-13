@@ -27,7 +27,7 @@ import { AuthContext } from "../../context/Auth";
 import { useSubmit } from "react-router-dom";
 const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
   "& .MainBoxIndex": {
-    height: "100%",
+    height: "100vh",
     display: "flex",
     alignItems: "center",
     "@media(max-width:615px)": {
@@ -63,7 +63,7 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
       },
     },
     "& .stepperBox": {
-      width: "60%",
+      width: "80%",
       marginTop: "40px",
       marginBottom: "20px",
       "@media(max-width:615px)": {
@@ -85,36 +85,38 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
       fontWeight: "600",
     },
     "& .h2-class": {
-      fontSize: "14px",
+      fontSize: "20px",
       fontWeight: "600",
-      position: "absolute",
-      top: "-24px",
-      left: "-30px",
-      width: "106px",
+      color:"#444",
+      marginLeft:"10px",
       "@media(max-width:615px)": {
         color: "#fff",
         fontSize: "12px",
       },
     },
     "& .h2-class1": {
-      fontSize: "14px",
+      fontSize: "20px",
       fontWeight: "600",
-      position: "absolute",
-      top: "-24px",
-      left: "-20px",
-      width: "106px",
+      marginLeft:"10px",
+      // position: "absolute",
+      // top: "-24px",
+      // left: "-20px",
+      // width: "106px",
+      color:"#444",
       "@media(max-width:615px)": {
         color: "#fff",
         fontSize: "12px",
       },
     },
     "& .h2-class2": {
-      fontSize: "14px",
+      fontSize: "20px",
       fontWeight: "600",
-      position: "absolute",
-      top: "-24px",
-      left: "-40px",
-      width: "130px",
+      color:"#444",
+      marginLeft:"10px",
+      // position: "absolute",
+      // top: "-24px",
+      // left: "-40px",
+      // width: "130px",
       "@media(max-width:615px)": {
         color: "#fff",
         fontSize: "12px",
@@ -128,53 +130,53 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
     background: "#fff",
     borderRadius: "0 15px 15px 15px",
     position: "relative",
-    maxHeight: "450px",
-    overflowY: "scroll",
+    // maxHeight: "450px",
+    // overflowY: "scroll",
     "@media(max-width:615px)": {
       borderRadius: "15px",
     },
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: "-1px",
-      left: "-12px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "0px",
-      borderTopLeftRadius: "0px",
-      borderBottomLeftRadius: "63px",
-      "@media(max-width:615px)": {
-        left: "-1000px",
-      },
-    },
-    "&::after": {
-      background: "#b8db53",
-      content: '""',
-      position: "absolute",
-      top: "-153px",
-      left: "129px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "25px",
-      borderTopLeftRadius: "0px",
-      borderBottomRightRadius: "77px",
-      borderBottomLeftRadius: "0px",
-      WebkitTransform: "rotateZ(271deg)",
-      MozTransform: "rotateZ(271deg)",
-      MsTransform: "rotateZ(271deg)",
-      transform: "rotateZ(270deg)",
-      borderTopRightRadius: "90px",
-      "@media(max-width:615px)": {
-        left: "-1000px",
-      },
-    },
+    // "&::before": {
+    //   content: '""',
+    //   position: "absolute",
+    //   top: "-1px",
+    //   left: "-12px",
+    //   height: "282px",
+    //   border: "6px solid #b8db53",
+    //   borderRadius: "0 0 10 76px",
+    //   borderTopRightRadius: "0px",
+    //   borderTopLeftRadius: "0px",
+    //   borderBottomLeftRadius: "63px",
+    //   "@media(max-width:615px)": {
+    //     left: "-1000px",
+    //   },
+    // },
+    // "&::after": {
+    //   background: "#b8db53",
+    //   content: '""',
+    //   position: "absolute",
+    //   top: "-153px",
+    //   left: "129px",
+    //   height: "282px",
+    //   border: "6px solid #b8db53",
+    //   borderRadius: "0 0 10 76px",
+    //   borderTopRightRadius: "25px",
+    //   borderTopLeftRadius: "0px",
+    //   borderBottomRightRadius: "77px",
+    //   borderBottomLeftRadius: "0px",
+    //   WebkitTransform: "rotateZ(271deg)",
+    //   MozTransform: "rotateZ(271deg)",
+    //   MsTransform: "rotateZ(271deg)",
+    //   transform: "rotateZ(270deg)",
+    //   borderTopRightRadius: "90px",
+    //   "@media(max-width:615px)": {
+    //     left: "-1000px",
+    //   },
+    // },
     "& .HeadingBox": {
       padding: "0 20px",
       "& h2": {
         textAlign: "center",
-        color: "#444444",
+        color: "#000",
         fontSize: "28px",
         fontWeight: "600",
         padding: "20px 0",
@@ -206,6 +208,13 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
       marginTop: "50px",
     },
   },
+  "& .vectorImg":{
+    width: "1222px",
+    position: "absolute",
+    bottom: "0",
+    left: "-205px",
+    height: "655px",
+  }
 }));
 const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
@@ -275,7 +284,7 @@ const PropertyPostIndex = () => {
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  const steps = ["Property Details", "Area Details", "Images & Location"];
+  const steps = ["Enter Your Property Details", "Enter Your Area Details", "Enter Location & Import Images"];
   const { formField, formId } = formFieldValue;
   const [activeStep, setActiveStep] = useState(0);
   const currentValidationSchema = ValidationValue[activeStep];
@@ -678,7 +687,7 @@ const PropertyPostIndex = () => {
 
   return (
     <PropertyPostIndexStyle>
-      <Box className="MainBoxIndex">
+      <Box className="MainBoxIndex" >
         <Container className="conatinerBox">
           <Box
             className="LogoBox"
@@ -693,9 +702,56 @@ const PropertyPostIndex = () => {
           <Box>
             <Grid container spacing={3}>
               <Grid item lg={6} md={6} sm={12} xs={12} className="gridClass">
-                <Box maxWidth={400} p={"0 0 0 20px"}>
-                  <img src="/images/Group 8363.svg" width={"100%"} />
+                <Box p={"0 0 0 20px"}>
+                  <img src="/images/property-post/vector_propery_post.svg" width={"100%"} className="vectorImg"/>
                 </Box>
+                <Box display={"flex"} justifyContent={"center"} flexDirection={"column"}>
+                    <Box className="stepperBox">
+                      <StepperStyle>
+                        <Stepper
+                          activeStep={activeStep}
+                          className={"stepper"}
+                          style={{ display: "flex", justifyContent: "center",flexDirection:"column"}}
+                        >
+                          
+                          <Step key={"Enter Your Property Details"} style={{ position: "relative", display: "flex", justifyContent: "center",alignItems:"center" }}>
+                            {/* <StyledStepLabel> */}
+                            
+                            <img src="/images/property-post/step_one.svg" width={60}  /> 
+                              <Typography className="h2-class">
+                                {"Enter Your Property Details"}
+                              </Typography>
+                           
+                            {/* </StyledStepLabel> */}
+                          </Step>
+                          <Step key={"Enter Your Area Details"} style={{ position: "relative", display: "flex", justifyContent: "center",alignItems:"center" }}>
+                            {/* <StyledStepLabel> */}
+                            
+                            {activeStep >= 1 ? <img src="/images/property-post/step_2 copy.svg" width={60} fill={"#badc54"}/> :
+                            <img src="/images/property-post/step_2.svg" width={60} fill={"#fff"}/> 
+                            }
+                              <Typography className="h2-class1">
+                                {"Enter Your Area Details"}
+                              </Typography>
+                            
+                            {/* </StyledStepLabel> */}
+                          </Step>
+                          <Step key={"Enter Location & Import Images"} style={{ position: "relative", display: "flex", justifyContent: "center",alignItems:"center" }}>
+                            {/* <StyledStepLabel> */}
+                            {activeStep >= 2 ? <img src="/images/property-post/step_3 copy.svg" width={60} fill={"#badc54"}/> :
+                            <img src="/images/property-post/step_3.svg" width={60} fill={"#fff"}/> 
+                            }
+                            
+                              <Typography className="h2-class2">
+                                {"Enter Location & Import Images"}
+                              </Typography>
+                            
+                            {/* </StyledStepLabel> */}
+                          </Step>
+                        </Stepper>
+                      </StepperStyle>
+                    </Box>
+                  </Box>
               </Grid>
 
               <Grid item lg={6} md={6} sm={12} xs={12}>
@@ -704,45 +760,7 @@ const PropertyPostIndex = () => {
                   <Box mt={2}>
                     <Typography variant="h5">Fill Basic Details</Typography>
                   </Box>
-                  <Box display={"flex"} justifyContent={"center"}>
-                    <Box className="stepperBox">
-                      <StepperStyle>
-                        <Stepper
-                          activeStep={activeStep}
-                          className={"stepper"}
-                          style={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <Step key={"label"} style={{ position: "relative" }}>
-                            {/* <StyledStepLabel> */}
-                            <StepLabel>
-                              <Typography className="h2-class">
-                                {"Property Details"}
-                              </Typography>
-                            </StepLabel>
-                            {/* </StyledStepLabel> */}
-                          </Step>
-                          <Step key={"label"} style={{ position: "relative" }}>
-                            {/* <StyledStepLabel> */}
-                            <StepLabel>
-                              <Typography className="h2-class1">
-                                {"Area Details"}
-                              </Typography>
-                            </StepLabel>
-                            {/* </StyledStepLabel> */}
-                          </Step>
-                          <Step key={"label"} style={{ position: "relative" }}>
-                            {/* <StyledStepLabel> */}
-                            <StepLabel>
-                              <Typography className="h2-class2">
-                                {"Images & Location"}
-                              </Typography>
-                            </StepLabel>
-                            {/* </StyledStepLabel> */}
-                          </Step>
-                        </Stepper>
-                      </StepperStyle>
-                    </Box>
-                  </Box>
+                  
 
                   <Box>
                     <Formik

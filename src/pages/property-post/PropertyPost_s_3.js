@@ -14,6 +14,7 @@ import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import AddIcon from '@mui/icons-material/Add';
 import LocationDialog from "../../component/LocationDialog";
 
 import { SelectField, InputField } from "../../component/FormFields";
@@ -90,13 +91,10 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     height: "350px",
     position: "absolute",
   },
-  //   "& .mainBox": {
-  //     height: "500px",
-  //     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-  //     background: "#fff",
-  //     borderRadius: "15px",
-  //     position: "relative",
-  //   },
+    // "& .mainBox": {
+    //   MaxHeight: "500px",
+    //   overflow:"auto"
+    // },
   "& .mainBox": {
     // height: "500px",
     // paddingBottom: "50px",
@@ -282,7 +280,7 @@ const PropertyPost_s_3 = (props) => {
   }, [_getstate]);
   return (
     <PropertyPostScreenStyle>
-      <Box className="mainBox">
+      <Box className="mainBox"maxHeight={490} overflow={"auto"}>
         <Box className="HeadingBox3">
           <Typography variant="h2">List Your Property</Typography>
 
@@ -532,6 +530,8 @@ const PropertyPost_s_3 = (props) => {
                                   (_, index) => (
                                     <Box key={index} className="cameraBox">
                                       <CameraAltIcon />
+                                      <FaPlus />
+
                                     </Box>
                                   )
                                 )}
@@ -562,7 +562,7 @@ const PropertyPost_s_3 = (props) => {
                                   },
                                   (_, index) => (
                                     <Box key={index} className="cameraBox">
-                                      <CameraAltIcon />
+                                      <AddIcon />
                                     </Box>
                                   )
                                 )}
