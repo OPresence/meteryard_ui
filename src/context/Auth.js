@@ -42,7 +42,6 @@ export default function Auth(props) {
   const [_propertySubType, setPropertySubType] = useState("");
   const [_cityselect, setCitySelect] = useState("0");
   const [_searchproperty, setSearchProperty] = useState("");
-
   
   const StateApiFunction = async () => {
     try {
@@ -399,9 +398,9 @@ export default function Auth(props) {
     ProjectType();
     AllCategoryProduct();
   }, []);
-  // useEffect(() => {
-  //   CityApiFunction();
-  // }, [_getCityValue]);
+  useEffect(() => {
+    CityApiFunction();
+  }, [_getCityValue]);
 
   useEffect(() => {
     if (

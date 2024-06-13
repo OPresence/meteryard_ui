@@ -20,73 +20,73 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { withStyles } from "@mui/styles";
 
-import { createTheme } from "@mui/material";
-// import { useTheme } from "@mui/material/styles";
-// import { unstable_createMuiStrictModeTheme } from "@mui/material/styles";
+// import { createTheme } from "@mui/material/styles";
+// // import { useTheme } from "@mui/material/styles";
+// // import { unstable_createMuiStrictModeTheme } from "@mui/material/styles";
 
-const theme = createTheme({
-  overrides: {
-    MuiInputBase: {
-      root: {
-        height: "47px",
-        lineHeight: "23px",
-      },
-      input: {
-        height: "23px",
-      },
-    },
-    // .MuiInputBase-root-503
-    MuiOutlinedInput: {
-      input: {
-        padding: "12.5px 14px !important",
-      },
-      root: {
-        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-          // Add your custom styles here
-          borderColor: "red !important", // Example style
-        },
-      },
-    },
-    MuiInputLabel: {
-      formControl: {
-        top: "-7px !important",
-        left: "14px !important",
-      },
-    },
-    MuiTypography: {
-      h6: {
-        color: "#000",
-        fontSize: "16px",
-        fontFamily: "system-ui",
-        fontWeight: "400",
-        lineHeight: "20px",
-      },
-    },
-  },
-});
-const BootstrapInput = withStyles((theme) => ({
-  root: {
-    "label + &": {
-      marginTop: theme.spacing(3),
-    },
-  },
-  input: {
-    borderRadius: 4,
-    position: "relative",
-    backgroundColor: theme.palette.background.paper,
-    border: "1px solid #ced4da",
-    fontSize: 16,
-    padding: "7px 26px 7px 12px",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    // Use the system font instead of the default Roboto font.
-    fontFamily: "system-ui",
-    "&:focus": {
-      borderRadius: 4,
-      borderColor: "#80bdff",
-      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
-    },
-  },
-}))(InputBase);
+// const theme = createTheme({
+//   overrides: {
+//     MuiInputBase: {
+//       root: {
+//         height: "47px",
+//         lineHeight: "23px",
+//       },
+//       input: {
+//         height: "23px",
+//       },
+//     },
+//     // .MuiInputBase-root-503
+//     MuiOutlinedInput: {
+//       input: {
+//         padding: "12.5px 14px !important",
+//       },
+//       root: {
+//         "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+//           // Add your custom styles here
+//           borderColor: "red !important", // Example style
+//         },
+//       },
+//     },
+//     MuiInputLabel: {
+//       formControl: {
+//         top: "-7px !important",
+//         left: "14px !important",
+//       },
+//     },
+//     MuiTypography: {
+//       h6: {
+//         color: "#000",
+//         fontSize: "16px",
+//         fontFamily: "system-ui",
+//         fontWeight: "400",
+//         lineHeight: "20px",
+//       },
+//     },
+//   },
+// });
+// const BootstrapInput = withStyles((theme) => ({
+//   root: {
+//     "label + &": {
+//       marginTop: theme.spacing(3),
+//     },
+//   },
+//   input: {
+//     borderRadius: 4,
+//     position: "relative",
+//     backgroundColor: theme.palette.background.paper,
+//     border: "1px solid #ced4da",
+//     fontSize: 16,
+//     padding: "7px 26px 7px 12px",
+//     transition: theme.transitions.create(["border-color", "box-shadow"]),
+//     // Use the system font instead of the default Roboto font.
+//     fontFamily: "system-ui",
+//     "&:focus": {
+//       borderRadius: 4,
+//       borderColor: "#80bdff",
+//       boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+//     },
+//   },
+// }))(InputBase);
 
 function SelectField(props) {
   const { label, data, ChangeDropDownValue, ...rest } = props;
