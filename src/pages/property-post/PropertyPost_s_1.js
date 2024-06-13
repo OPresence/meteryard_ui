@@ -51,10 +51,11 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     },
   },
   "& .buttonStyle": {
-    padding: "5px 20px",
-    borderRadius: "26px",
+    padding: "3px 25px",
+    borderRadius: "10px",
     color: "#000",
     margin: "0 15px 10px 0",
+    textTransform: "capitalize",
   },
   "& .Property_Type": {
     "& h3": {
@@ -182,9 +183,9 @@ const PropertyPost_s_1 = (props) => {
               </Box>
             ) : (
               <>
-                <Box mb={1} className="Property_Type">
+                {/* <Box mb={1} className="Property_Type">
                   <Typography variant="h3">Property Type</Typography>
-                </Box>
+                </Box> */}
                 <Box>
                   {auth?._propertyList?.map((data, index) => (
                     <Box
@@ -206,7 +207,7 @@ const PropertyPost_s_1 = (props) => {
                   ))}
                 </Box>
                 <Box className="Property_Type">
-                  <Typography variant="h3">Property Category</Typography>
+                  {/* <Typography variant="h3">Property Category</Typography> */}
                 </Box>
                 <Box mb={2} mt={1}>
                   {auth?._subytypelist &&
@@ -224,9 +225,9 @@ const PropertyPost_s_1 = (props) => {
                                   }
                                 : {
                                     background: "#fff",
-                                    border: "1px solid #000",
+                                    border: "1px solid #badc54",
 
-                                    color: "#000",
+                                    color: "#badc54",
                                   }
                             }
                             onClick={() =>
