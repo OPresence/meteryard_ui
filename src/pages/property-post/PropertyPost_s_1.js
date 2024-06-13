@@ -27,6 +27,8 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   },
 
   "& .mainBoxS1": {
+    // maxHeight:"500px",
+    // overflow:"auto",
     "& .HeadingBox": {
       padding: "0 20px",
       "& h2": {

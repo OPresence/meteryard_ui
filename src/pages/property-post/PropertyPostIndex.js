@@ -135,43 +135,43 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
     "@media(max-width:615px)": {
       borderRadius: "15px",
     },
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: "-1px",
-      left: "-12px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "0px",
-      borderTopLeftRadius: "0px",
-      borderBottomLeftRadius: "63px",
-      "@media(max-width:615px)": {
-        left: "-1000px",
-      },
-    },
-    "&::after": {
-      background: "#b8db53",
-      content: '""',
-      position: "absolute",
-      top: "-153px",
-      left: "129px",
-      height: "282px",
-      border: "6px solid #b8db53",
-      borderRadius: "0 0 10 76px",
-      borderTopRightRadius: "25px",
-      borderTopLeftRadius: "0px",
-      borderBottomRightRadius: "77px",
-      borderBottomLeftRadius: "0px",
-      WebkitTransform: "rotateZ(271deg)",
-      MozTransform: "rotateZ(271deg)",
-      MsTransform: "rotateZ(271deg)",
-      transform: "rotateZ(270deg)",
-      borderTopRightRadius: "90px",
-      "@media(max-width:615px)": {
-        left: "-1000px",
-      },
-    },
+    // "&::before": {
+    //   content: '""',
+    //   position: "absolute",
+    //   top: "-1px",
+    //   left: "-12px",
+    //   height: "282px",
+    //   border: "6px solid #b8db53",
+    //   borderRadius: "0 0 10 76px",
+    //   borderTopRightRadius: "0px",
+    //   borderTopLeftRadius: "0px",
+    //   borderBottomLeftRadius: "63px",
+    //   "@media(max-width:615px)": {
+    //     left: "-1000px",
+    //   },
+    // },
+    // "&::after": {
+    //   background: "#b8db53",
+    //   content: '""',
+    //   position: "absolute",
+    //   top: "-153px",
+    //   left: "129px",
+    //   height: "282px",
+    //   border: "6px solid #b8db53",
+    //   borderRadius: "0 0 10 76px",
+    //   borderTopRightRadius: "25px",
+    //   borderTopLeftRadius: "0px",
+    //   borderBottomRightRadius: "77px",
+    //   borderBottomLeftRadius: "0px",
+    //   WebkitTransform: "rotateZ(271deg)",
+    //   MozTransform: "rotateZ(271deg)",
+    //   MsTransform: "rotateZ(271deg)",
+    //   transform: "rotateZ(270deg)",
+    //   borderTopRightRadius: "90px",
+    //   "@media(max-width:615px)": {
+    //     left: "-1000px",
+    //   },
+    // },
     "& .HeadingBox": {
       padding: "0 20px",
       "& h2": {
@@ -717,10 +717,7 @@ const PropertyPostIndex = () => {
                           <Step key={"Enter Your Property Details"} style={{ position: "relative", display: "flex", justifyContent: "center",alignItems:"center" }}>
                             {/* <StyledStepLabel> */}
                             
-                            {activeStep === 0 ? <img src="/images/property-post/step_one.svg" width={60} /> :
-                            <img src="/images/property-post/step_one.svg" width={60} fill="#fff"/> 
-                            }
-
+                            <img src="/images/property-post/step_one.svg" width={60}  /> 
                               <Typography className="h2-class">
                                 {"Enter Your Property Details"}
                               </Typography>
@@ -730,8 +727,8 @@ const PropertyPostIndex = () => {
                           <Step key={"Enter Your Area Details"} style={{ position: "relative", display: "flex", justifyContent: "center",alignItems:"center" }}>
                             {/* <StyledStepLabel> */}
                             
-                            {activeStep === 1 ? <img src="/images/property-post/step3.svg" width={60} fill="#badc54"/> :
-                            <img src="/images/property-post/step_one.svg" width={60} fill="#fff"/> 
+                            {activeStep >= 1 ? <img src="/images/property-post/step_2 copy.svg" width={60} fill={"#badc54"}/> :
+                            <img src="/images/property-post/step_2.svg" width={60} fill={"#fff"}/> 
                             }
                               <Typography className="h2-class1">
                                 {"Enter Your Area Details"}
@@ -741,8 +738,8 @@ const PropertyPostIndex = () => {
                           </Step>
                           <Step key={"Enter Location & Import Images"} style={{ position: "relative", display: "flex", justifyContent: "center",alignItems:"center" }}>
                             {/* <StyledStepLabel> */}
-                            {isLastStep ? <img src="/images/property-post/step2.svg" width={60} fill="#badc54"/> :
-                            <img src="/images/property-post/step_one.svg" width={60} fill="#fff"/> 
+                            {activeStep >= 2 ? <img src="/images/property-post/step_3 copy.svg" width={60} fill={"#badc54"}/> :
+                            <img src="/images/property-post/step_3.svg" width={60} fill={"#fff"}/> 
                             }
                             
                               <Typography className="h2-class2">
