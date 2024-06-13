@@ -109,7 +109,6 @@ const IconButtonRightContent = styled(Box)({
 });
 
 const CardComponent = ({ ProductData }) => {
-  console.log("jnjjbsjdjsdk00---->", ProductData);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 

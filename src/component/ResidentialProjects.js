@@ -97,7 +97,6 @@ const IconButtonRightContent = styled(Box)({
 });
 
 const ResidentialProjects = ({ showViewMore, ProductData }) => {
-  console.log("ProductData---->", ProductData);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 

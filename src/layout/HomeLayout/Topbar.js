@@ -151,7 +151,6 @@ export default function Topbar() {
     drawerOpen: false,
   });
   const [_openDialog, setOpenDialog] = useState(false);
-  console.log("bkdskfks---->", _openDialog);
   const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);

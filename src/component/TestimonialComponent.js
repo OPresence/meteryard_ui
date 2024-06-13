@@ -269,7 +269,6 @@ const TestimonialComponent = () => {
 
           <Box p={"40px 0"}>
             <Container
-              maxWidth
               sx={{ display: "flex", justifyContent: "center" }}
             >
               <Box

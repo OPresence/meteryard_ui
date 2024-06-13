@@ -42,6 +42,8 @@ export default function Auth(props) {
   const [_propertySubType, setPropertySubType] = useState("");
   const [_cityselect, setCitySelect] = useState("0");
   const [_searchproperty, setSearchProperty] = useState("");
+
+  
   const StateApiFunction = async () => {
     try {
       const res = await PostApiFunction({
@@ -51,7 +53,6 @@ export default function Auth(props) {
         },
       });
       if (res) {
-        console.log("daddsad-a--->", res);
         if (res?.responseCode == 200) {
           setStatesHome(res?.result?.docs);
         } else if (res?.responseCode == 404) {
@@ -398,9 +399,9 @@ export default function Auth(props) {
     ProjectType();
     AllCategoryProduct();
   }, []);
-  useEffect(() => {
-    CityApiFunction();
-  }, [_getCityValue]);
+  // useEffect(() => {
+  //   CityApiFunction();
+  // }, [_getCityValue]);
 
   useEffect(() => {
     if (

@@ -29,7 +29,6 @@ const MasterCardProduct = () => {
             {!auth?._loadingAllProduct &&
               auth?._getallProduct?.length > 0 &&
               auth?._getallProduct?.map((ProductData, _id) => {
-                console.log("ProductData8989--->", ProductData);
                 if (ProductData?.projectType == "Residential") {
                   return (
                     <Box key={_id}>

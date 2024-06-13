@@ -104,7 +104,6 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
   },
 }));
 const FeaturedPostCard = ({ data, index, type }) => {
-  console.log("type898---->", type);
   const router = useRouter();
   return (
     <CardComponentStyle>
@@ -115,9 +114,9 @@ const FeaturedPostCard = ({ data, index, type }) => {
         justifyContent={"center"}
       >
         <Box className="cards">
-          <Box class="CardImgBox">
+          <Box className="CardImgBox">
             <img src={data?.coverImage} width={"100%"} height={"100%"} />
-            <div class="block-layer"></div>
+            <div className="block-layer"></div>
           </Box>
           <Box
             padding={"10px"}

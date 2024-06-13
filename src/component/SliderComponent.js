@@ -264,7 +264,7 @@ const SliderComponent = () => {
                 key={index}
                 style={{ padding: "800px" }}
               >
-                <Container maxWidth className="container">
+                <Container className="container">
                   <Box display={"flex"} justifyContent={"center"} key={index}>
                     <Card className="cards project-slider">
                       <Box className="circleimg">

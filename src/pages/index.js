@@ -10,8 +10,8 @@ import AgreecultureComponent from "../component/AgreecultureComponent";
 import YoutubeComponent from "../component/YoutubeComponent";
 import TESTIMONIAL from "../component/TestimonialComponent";
 import MasterCardProduct from "../component/MasterCardProduct";
-
 export default function ClientPage() {
+
   return (
     <Box>
       <Banner />

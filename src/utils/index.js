@@ -251,22 +251,16 @@ export const cityName = [
 
   { name: "Guwahati" },
 ];
-// export const cityObject = [
-//   //   {
-//   "Bengaluru",
-//   "Kolkata",
-//   "Hyderabad",
-//   "Bhubaneswar",
-//   "Varanasi",
-//   "Lucknow",
-//   "Panchkula",
-// ];
 export const convertDateTime = (val) => {
   var tempDate = new Date(val);
   const toDateFormat = moment(tempDate).format("DD-MMM-yyyy");
   // const toDateFormat = moment(tempDate).format("DD-MMM-yyyy hh:mm a");
   return toDateFormat;
 };
+
+const apiUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
+
 export const getAPIdata = async ({ endPoint, data }) => {
   try {
     let res;
@@ -299,13 +293,11 @@ export const getAPIdata = async ({ endPoint, data }) => {
   }
 };
 export const PostApiFunction = async ({ endPoint, data }) => {
-  console.log("snmdsnadja---->data", data);
   try {
     let res,
       token =
         sessionStorage.getItem("adminToken") || sessionStorage.getItem("token");
 
-    console.log("gjgjgjhgjghjg5656", token);
     res = await axios({
       url: endPoint,
       method: "POST",
@@ -340,7 +332,6 @@ export const PutApiFunction = async ({ endPoint, data, params }) => {
     let res,
       token = sessionStorage.getItem("adminToken");
 
-    console.log("gjgjgjhgjghjg5656", token);
     res = await axios({
       url: endPoint,
       method: "PUT",
