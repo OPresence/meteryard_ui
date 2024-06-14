@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Grid, Typography, Box, Container } from "@mui/material";
-import FmdGoodIcon from "@mui/icons-material/FmdGood";
+import { useEffect, useState, useRef } from "react";
+import { Grid, Typography, Box } from "@mui/material";
 import styled from "@emotion/styled";
-import Divider from "@mui/material/Divider";
-import ButtonComponent from "./ButtonComponent";
 import { PostApiFunction } from "../utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";

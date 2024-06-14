@@ -1,4 +1,3 @@
-import { color } from "@mui/system";
 
 export default {
   h1: {

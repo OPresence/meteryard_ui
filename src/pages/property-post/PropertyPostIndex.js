@@ -24,7 +24,6 @@ import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { formFieldValue, ValidationValue, initialValue } from "../../utils";
 import { AuthContext } from "../../context/Auth";
-import { useSubmit } from "react-router-dom";
 const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
   "& .MainBoxIndex": {
     height: "100vh",

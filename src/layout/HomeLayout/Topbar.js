@@ -26,7 +26,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import ProfileMenu from "../../component/ProfileMenu";
 import MobilerMenu from "../../component/MobileMenu";
 import RegisterModal from "../../component/registerSellerModal/RegisterModal";
-import EmailIcon from "@material-ui/icons/Email";
 const MenuStyle = styled(Box)(({ theme }) => ({
   "& .hidebox": {
     display: "block",
@@ -392,7 +391,7 @@ export default function Topbar() {
                     </a>
                   </Box>
                   <Box className="flexAlign" p={"0 0 0 30px"}>
-                    <EmailIcon className="icon2" /> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <CallIcon className="icon2" /> &nbsp;&nbsp;&nbsp;&nbsp;
                     <Typography variant="body1">
                       contact@meteryard.com
                     </Typography>

@@ -2,18 +2,17 @@ import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
 import "src/layout/globals.css";
+import '../Scss/main.scss';
 import { createTheme } from "../theme/index";
 import { ToastContainer } from "react-toastify";
 import { Box } from "@mui/material";
 import AuthContext from "../context/Auth";
 import { useEffect, useState } from "react";
-import { Router } from "next/router";
 import { useRouter } from "next/router";
 import PageLoading from "../component/PageLoading";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const theme = createTheme();
   const router = useRouter();
-
   const getLayout = Component.getLayout || ((page) => page);
   const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(false);
