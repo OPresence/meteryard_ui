@@ -31,12 +31,10 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
     background: "#FFF",
   },
   "& .cards": {
-    // cursor: "pointer",
-    width: "100%",
+    width: "90%",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    // borderRadius: "20px",
     position: "relative",
-    margin: "20px",
+    margin: "20px 0",
     height: "100%",
     "& .CardImgBox": {
       width: "100%",
@@ -44,8 +42,6 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
       height: "170px",
     },
     "& img": {
-      // borderTopRightRadius: "10px",
-      // borderTopLeftRadius: "10px",
       height: "100%",
     },
     "&:hover": {
@@ -53,7 +49,7 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
       transition: "0.8s",
     },
     "& .contentBox": {
-      padding: "10px 10px 10px",
+      // padding: "10px 10px 10px",
       "& .headingBox": {
         display: "flex",
         justifyContent: "center",
@@ -73,6 +69,11 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
         textAlign: "start",
         fontWeight: "500",
         padding: "5px",
+        "@media(max-width:1280px)": {
+          fontSize: "14px",
+          fontWeight: "600",
+          padding: "0px",
+        },
       },
       "& h4": {
         fontSize: "12px",
@@ -102,33 +103,20 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
     },
   },
 }));
-const FeaturedPostCard = ({ data, index }) => {
+const FeaturedPostCard = ({ data, index, type }) => {
   const router = useRouter();
   return (
     <CardComponentStyle>
       <Box
-        // onClick={() =>
-        //   router.push({
-        //     pathname: "/view-property",
-        //     query: {
-        //       data: JSON.stringify(data),
-        //     },
-        //   })
-        // }
         height={"100%"}
         pb={"20px"}
         display={"flex"}
         justifyContent={"center"}
       >
-        <Box
-          className="cards"
-          // style={
-          //   index == 0 ? { paddingBottom: "auto" } : { paddingBottom: "10px" }
-          // }
-        >
-          <Box class="CardImgBox">
+        <Box className="cards">
+          <Box className="CardImgBox">
             <img src={data?.coverImage} width={"100%"} height={"100%"} />
-            <div class="block-layer"></div>
+            <div className="block-layer"></div>
           </Box>
           <Box
             padding={"10px"}
@@ -139,27 +127,11 @@ const FeaturedPostCard = ({ data, index }) => {
             gap={1}
             minHeight="250px"
           >
-            {/* <Box className="headingBox">
-              <Typography variant="h5">{data?.projectName} </Typography>
-            </Box> */}
-            <Typography variant="p" fontSize={18} fontWeight={500}>
-              {data?.title}
-            </Typography>
-            {/* <Typography variant="h3">{data?.title} </Typography> */}
             <Box>
-              <Typography
-                variant="p"
-                fontSize={14}
-                fontWeight={300}
-                width={"15lh"}
-                sx={{
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  display: "-webkit-box",
-                  WebkitLineClamp: "5",
-                  WebkitBoxOrient: "vertical",
-                }}
-              >
+              <Typography className="projectHeading">{data?.title} </Typography>
+            </Box>
+            <Box>
+              <Typography className="paragraph" fontSize={14} fontWeight={300}>
                 {data?.description}
               </Typography>
             </Box>
@@ -196,7 +168,15 @@ const FeaturedPostCard = ({ data, index }) => {
                 </Typography>
               </Box>
             </Box>
-            <Box width="100%" display="flex" justifyContent="center">
+            <Box
+              style={
+                type == "COMMERCIAL"
+                  ? { justifyContent: "start" }
+                  : { justifyContent: "center" }
+              }
+              width="100%"
+              display="flex"
+            >
               <ButtonComponent data={data} />
             </Box>
           </Box>

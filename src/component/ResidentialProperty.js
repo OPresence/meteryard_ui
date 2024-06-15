@@ -1,9 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Grid, Typography, Box, Container } from "@mui/material";
-import FmdGoodIcon from "@mui/icons-material/FmdGood";
+import { useEffect, useState, useRef } from "react";
+import { Grid, Typography, Box } from "@mui/material";
 import styled from "@emotion/styled";
-import Divider from "@mui/material/Divider";
-import ButtonComponent from "./ButtonComponent";
 import { PostApiFunction } from "../utils";
 import Apiconfigs from "../ApiConfig/ApiConfig";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -123,7 +120,7 @@ const ResidentStyle = styled(Box)(({ theme }) => ({
     },
   },
 }));
-const ResidentialProjects = () => {
+const ResidentialProperty = () => {
   const sliderRef = useRef(null);
   const [_getlist, setGetList] = useState([]);
   const [_isloading, setIsLoading] = useState(false);
@@ -230,7 +227,7 @@ const ResidentialProjects = () => {
     }
   };
   useEffect(() => {
-    ResidentialAPI();
+    // ResidentialAPI();
   }, []);
   return (
     <ResidentStyle>
@@ -311,4 +308,4 @@ const ResidentialProjects = () => {
   );
 };
 
-export default ResidentialProjects;
+export default ResidentialProperty;

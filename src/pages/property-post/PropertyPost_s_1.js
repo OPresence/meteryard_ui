@@ -17,7 +17,7 @@ import { SelectField, InputField } from "../../component/FormFields";
 import { withStyles } from "@material-ui/core/styles";
 import { AuthContext } from "../../context/Auth";
 import Checkbox from "@material-ui/core/Checkbox";
-import { fontSize } from "@mui/system";
+import { color, fontSize } from "@mui/system";
 
 const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .borderBox": {
@@ -27,6 +27,8 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   },
 
   "& .mainBoxS1": {
+    // maxHeight:"500px",
+    // overflow:"auto",
     "& .HeadingBox": {
       padding: "0 20px",
       "& h2": {
@@ -51,10 +53,11 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     },
   },
   "& .buttonStyle": {
-    padding: "5px 20px",
-    borderRadius: "26px",
+    padding: "3px 25px",
+    borderRadius: "10px",
     color: "#000",
     margin: "0 15px 10px 0",
+    textTransform: "capitalize",
   },
   "& .Property_Type": {
     "& h3": {
@@ -78,6 +81,7 @@ const GreenCheckbox = withStyles({
     },
     "& .MuiSvgIcon-root": {
       fill: "red !important", // Change the fill color of the SVG icon to green
+      // color: "black",
     },
   },
   checked: {},
@@ -182,15 +186,15 @@ const PropertyPost_s_1 = (props) => {
               </Box>
             ) : (
               <>
-                <Box mb={1} className="Property_Type">
+                {/* <Box mb={1} className="Property_Type">
                   <Typography variant="h3">Property Type</Typography>
-                </Box>
+                </Box> */}
                 <Box>
                   {auth?._propertyList?.map((data, index) => (
                     <Box
                       display={"inline-flex"}
                       key={index}
-                      style={{ padding: "0 0 0 10px" }}
+                      style={{ padding: "0 0 0 10px", color: "#000" }}
                     >
                       <FormControlLabel
                         control={
@@ -206,7 +210,7 @@ const PropertyPost_s_1 = (props) => {
                   ))}
                 </Box>
                 <Box className="Property_Type">
-                  <Typography variant="h3">Property Category</Typography>
+                  {/* <Typography variant="h3">Property Category</Typography> */}
                 </Box>
                 <Box mb={2} mt={1}>
                   {auth?._subytypelist &&
@@ -224,9 +228,9 @@ const PropertyPost_s_1 = (props) => {
                                   }
                                 : {
                                     background: "#fff",
-                                    border: "1px solid #000",
+                                    border: "1px solid #badc54",
 
-                                    color: "#000",
+                                    color: "#badc54",
                                   }
                             }
                             onClick={() =>

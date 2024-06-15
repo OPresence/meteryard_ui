@@ -38,28 +38,28 @@ const MenuComponent = () => {
   return (
     <MenuComponentStyle>
       <Box className="submenueTab" justifyContent={"space-between"}>
-        <div class={"dropdown"} style={{ width: "100%" }}>
+        <Box className={"dropdown"} style={{ width: "100%" }}>
           <Box>
-            <button class="dropbtn">
+            <button className="dropbtn">
               Cities <ChevronRightIcon className="rightBtn" />
             </button>
           </Box>
 
-          <div class="dropdown-content" style={{ width: "100%" }}>
+          <Box className="dropdown-content" style={{ width: "100%" }}>
             <SubMenuComponent />
-          </div>
-        </div>
-        <div class={"dropdown"} style={{ width: "100%" }}>
+          </Box>
+        </Box>
+        <Box className={"dropdown"} style={{ width: "100%" }}>
           <Box>
-            <button class="dropbtn">
+            <button className="dropbtn">
               Property Type <ChevronRightIcon className="rightBtn" />
             </button>
           </Box>
 
-          <div class="dropdown-content" style={{ width: "100%" }}>
+          <Box className="dropdown-content" style={{ width: "100%" }}>
             <SubMenu2Component />
-          </div>
-        </div>
+          </Box>
+        </Box>
       </Box>
     </MenuComponentStyle>
   );

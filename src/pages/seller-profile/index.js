@@ -1,13 +1,5 @@
-import React from "react";
-import { Box, Grid, Container, Typography } from "@mui/material";
 import HomeLayout from "../../layout/HomeLayout";
 import ProfileComponent from "./ProfileComponent";
-import SellerDetails from "./SellerDetails";
-import FilterComponent from "./FilterComponent";
-import FilterButton from "./FilterButton";
-import PostDetails from "./PostDetails";
-import SellerListComponent from "src/component/SellerListComponent";
-import AdvertisementComponent from "../../component/AdvertisementComponent";
 import styled from "@emotion/styled";
 
 const SellerStyle = styled("div")(({ theme }) => ({

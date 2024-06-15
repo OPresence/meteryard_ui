@@ -14,10 +14,13 @@ import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import AddIcon from "@mui/icons-material/Add";
 import LocationDialog from "../../component/LocationDialog";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { SelectField, InputField } from "../../component/FormFields";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
+import { margin } from "@mui/system";
 const PriceBox = styled(Box)(({ theme }) => ({
   "& .mainPriceBox": {
     padding: "10px",
@@ -49,15 +52,19 @@ const PriceBox = styled(Box)(({ theme }) => ({
     },
     "& .cameraBox": {
       border: "1px solid  #676767",
-      padding: "10px",
+      padding: "9px",
       borderRadius: "10px",
       display: "flex",
+      flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
+      gap: "10px",
+      width: "94px",
+      padding: "9px",
       cursor: "pointer",
       "& svg": {
         color: "#676767",
-        fontSize: "16px",
+        fontSize: "22px",
       },
     },
     "& .main-upload-file": {
@@ -70,6 +77,11 @@ const PriceBox = styled(Box)(({ theme }) => ({
         },
       },
       "& .multipleImageBox": {
+        // display: "flex",
+        // flexWrap: "wrap",
+        display: "block",
+        maxWidth: "50%",
+        padding: "0",
         "@media(max-width:615px)": {
           alignItems: "start",
         },
@@ -79,8 +91,25 @@ const PriceBox = styled(Box)(({ theme }) => ({
   "& .checkboxStyle span": {
     "@media(max-width:615px)": {
       fontSize: "13px",
+      color: "black",
       padding: "0px !important",
       margin: "0px",
+    },
+  },
+  "& .uploadedImg": {
+    padding: "2px",
+    background: "#ddd",
+    borderRadius: "4px",
+    marginRight: "7px",
+  },
+  "& .ImgcloseBtn": {
+    position: "absolute",
+    top: "-8px",
+    right: "0px",
+    cursor: "pointer",
+    "& svg": {
+      fontSize: "16px",
+      color: "black",
     },
   },
 }));
@@ -90,13 +119,10 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     height: "350px",
     position: "absolute",
   },
-  //   "& .mainBox": {
-  //     height: "500px",
-  //     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-  //     background: "#fff",
-  //     borderRadius: "15px",
-  //     position: "relative",
-  //   },
+  // "& .mainBox": {
+  //   MaxHeight: "500px",
+  //   overflow:"auto"
+  // },
   "& .mainBox": {
     // height: "500px",
     // paddingBottom: "50px",
@@ -177,7 +203,7 @@ const DialogButtonStyle = styled(Box)(({ theme }) => ({
     },
   },
 }));
-const PropertyPost_s_3 = (props) => {
+const PropertyPost_s_3 = (props, handleFileChangeImage) => {
   const {
     formField: {
       price,
@@ -193,6 +219,19 @@ const PropertyPost_s_3 = (props) => {
   const [_stateList, setStateList] = React.useState([]);
   const [_cityList, setCityList] = React.useState([]);
   const [_getstate, setState] = useState("0");
+  const [images, setImages] = useState([]);
+  const imgRef = useRef();
+
+  const onImageChange = (e) => {
+    if (images.length >= 10) return;
+    const files = Array.from(e.target.files);
+    const newImages = files.map((file) => URL.createObjectURL(file));
+    setImages((prevImages) => [...prevImages, ...newImages].slice(0, 10));
+  };
+
+  const removeImage = (image) => {
+    setImages(images.filter((img) => img !== image));
+  };
   console.log("bjdsbfbds---->", _getstate);
   const scrollToTop = () => {
     window.scrollTo({
@@ -282,7 +321,7 @@ const PropertyPost_s_3 = (props) => {
   }, [_getstate]);
   return (
     <PropertyPostScreenStyle>
-      <Box className="mainBox">
+      <Box className="mainBox" maxHeight={490} overflow={"auto"}>
         <Box className="HeadingBox3">
           <Typography variant="h2">List Your Property</Typography>
 
@@ -389,7 +428,7 @@ const PropertyPost_s_3 = (props) => {
                                       src={props?._video_url?.thumbnail}
                                       alt="Cover Preview"
                                       style={{
-                                        width: "100px",
+                                        width: "80px",
                                         height: "50px",
                                         marginTop: "0px",
                                       }}
@@ -399,12 +438,12 @@ const PropertyPost_s_3 = (props) => {
                                 <VideocamIcon style={{ cursor: "pointer" }} />
                               </Box>
                             </Box>
-                          </label>{" "}
+                          </label>
                           &nbsp;&nbsp;&nbsp;
                           <label style={{ display: "inline-flex" }}>
                             <Box className="videoBox CoverImage">
                               <Typography variant="h2">Cover Image</Typography>
-                              <Box textAlign={"center"} mt={"17px"}>
+                              <Box textAlign={"center"}>
                                 <input
                                   type="file"
                                   accept="image/*"
@@ -437,7 +476,7 @@ const PropertyPost_s_3 = (props) => {
                                       src={props?._coverImage}
                                       alt="Cover Preview"
                                       style={{
-                                        width: "100px",
+                                        width: "80px",
                                         height: "50px",
                                         // marginTop: "40px",
                                       }}
@@ -447,129 +486,89 @@ const PropertyPost_s_3 = (props) => {
                                 <CameraAltIcon style={{ cursor: "pointer" }} />
                               </Box>
                             </Box>
-                          </label>{" "}
+                          </label>
                         </Box>
-                        <Box
-                          display={"flex"}
-                          flexDirection={"column"}
-                          alignItems={"center"}
-                          gap={"6px"}
+                        <span
                           className="multipleImageBox"
+                          onClick={() => fileInputRef.current.click()}
                         >
-                          <label>
-                            <input
-                              type="file"
-                              accept="image/*"
-                              style={{ display: "none" }}
-                              ref={fileInputRef}
-                              onChange={props?.handleFileChangeImage}
-                              multiple
-                            />
-
-                            <Box
-                              display={"flex"}
-                              alignItems={"center"}
-                              justifyContent={"center"} // Center items horizontally
-                              gap={"6px"}
+                          {images.length == 0 ? (
+                            <span
+                              className="cameraBox"
+                              onChange={handleFileChangeImage}
                             >
-                              {props?.selectedImages1
-                                .slice(0, 4)
-                                .map((image, index) => (
-                                  <Box key={index} maxWidth={50}>
-                                    <img
-                                      style={{ width: "45px", height: "45px" }}
-                                      width={"100%"}
-                                      src={image}
-                                      alt={`Selected Image ${index}`}
-                                    />
-                                  </Box>
-                                ))}
-                              {Array.from(
-                                {
-                                  length: Math.max(
-                                    0,
-                                    4 - props?.selectedImages1.length
-                                  ),
-                                },
-                                (_, index) => (
-                                  <Box key={index} className="cameraBox">
-                                    <CameraAltIcon />
-                                  </Box>
-                                )
+                              <Typography
+                                variant="h6"
+                                style={{
+                                  fontWeight: "600",
+                                  textAlign: "center",
+                                  fontSize: "13px",
+                                }}
+                              >
+                                Property Images
+                              </Typography>
+                              <CameraAltIcon />
+                            </span>
+                          ) : (
+                            <>
+                              {images.length == 10 ? (
+                                <span style={{ display: "none" }}></span>
+                              ) : (
+                                <span
+                                  className="cameraBox"
+                                  onClick={() => fileInputRef.current.click()}
+                                  onChange={handleFileChangeImage}
+                                >
+                                  <Typography
+                                    variant="h6"
+                                    style={{
+                                      fontWeight: "600",
+                                      textAlign: "center",
+                                      fontSize: "13px",
+                                    }}
+                                  >
+                                    Add More Images
+                                  </Typography>
+                                  <AddIcon />
+                                </span>
                               )}
-                            </Box>
-                            {props?.selectedImages1?.length >= 4 ? (
-                              <Box
-                                mt={1}
-                                display={"flex"}
-                                alignItems={"center"}
-                                justifyContent={"center"} // Center items horizontally
-                                gap={"6px"}
-                              >
-                                {props?.selectedImages1
-                                  .slice(4, 8)
-                                  .map((image, index) => (
-                                    <Box key={index} maxWidth={50}>
-                                      <img
-                                        style={{
-                                          width: "45px",
-                                          height: "45px",
-                                        }}
-                                        width={"100%"}
-                                        src={image}
-                                        alt={`Selected Image ${index}`}
-                                      />
-                                    </Box>
-                                  ))}
-
-                                {Array.from(
-                                  {
-                                    length: Math.max(
-                                      0,
-                                      8 - props?.selectedImages1.length
-                                    ),
-                                  },
-                                  (_, index) => (
-                                    <Box key={index} className="cameraBox">
-                                      <CameraAltIcon />
-                                    </Box>
-                                  )
-                                )}
-                              </Box>
-                            ) : (
-                              <Box
-                                display={"flex"}
-                                alignItems={"center"}
-                                justifyContent={"center"} // Center items horizontally
-                                gap={"6px"}
-                                mt={1}
-                              >
-                                {props?.selectedImages1
-                                  .slice(4, 8)
-                                  .map((image, index) => (
-                                    <Box key={index} maxWidth={50}>
-                                      <img
-                                        width={"100%"}
-                                        src={image}
-                                        alt={`Selected Image ${index}`}
-                                      />
-                                    </Box>
-                                  ))}
-
-                                {Array.from(
-                                  {
-                                    length: Math.max(0, 4),
-                                  },
-                                  (_, index) => (
-                                    <Box key={index} className="cameraBox">
-                                      <CameraAltIcon />
-                                    </Box>
-                                  )
-                                )}
-                              </Box>
-                            )}
-                          </label>{" "}
-                        </Box>
+                            </>
+                          )}
+                          {images.length > 0 && (
+                            <span>
+                              {images.map((image, index) => (
+                                <span
+                                  key={index}
+                                  style={{
+                                    position: "relative",
+                                    display: "inline-block",
+                                  }}
+                                >
+                                  <img
+                                    src={image}
+                                    alt={`Uploaded ${index}`}
+                                    style={{ width: "40px", height: "40px" }}
+                                    className="uploadedImg"
+                                  />
+                                  <span
+                                    onClick={() => removeImage(image)}
+                                    className="ImgcloseBtn"
+                                  >
+                                    <CloseIcon />
+                                  </span>
+                                </span>
+                              ))}
+                            </span>
+                          )}
+                        </span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          ref={fileInputRef}
+                          onChange={onImageChange}
+                          style={{ display: "none" }}
+                          multiple
+                        />
                       </Box>
                     </Box>
                   </Box>
@@ -629,7 +628,9 @@ const PropertyPost_s_3 = (props) => {
                         alignItems={"center"}
                         className="checkboxStyle"
                       >
-                        <span>Terms & Conditions</span>
+                        <span style={{ color: "black" }}>
+                          Terms & Conditions
+                        </span>
                         <Checkbox
                           required
                           checked={props?._consition}
@@ -641,7 +642,9 @@ const PropertyPost_s_3 = (props) => {
                         alignItems={"center"}
                         className="checkboxStyle"
                       >
-                        <span>Featured Property</span>
+                        <span style={{ color: "black" }}>
+                          Featured Property
+                        </span>
                         <Checkbox
                           checked={props?._checked}
                           onClick={props?.handleChangeCheck}

@@ -13,11 +13,12 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     position: "absolute",
   },
   "& .mainBox": {
-    height: "500px",
+  
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     background: "#fff",
     borderRadius: "15px",
     position: "relative",
+ 
   },
   "& .mainBox": {
     // height: "500px",
@@ -221,7 +222,7 @@ const PropertyPost_s_2 = (props) => {
   }, []);
   return (
     <PropertyPostScreenStyle>
-      <Box className="mainBox">
+      <Box className="mainBox"maxHeight={490}>
         <Box className="HeadingBox">
           <Typography variant="h2">List Your Property</Typography>
           <Box className="CheckBox">

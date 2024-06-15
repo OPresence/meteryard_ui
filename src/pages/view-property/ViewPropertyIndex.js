@@ -79,7 +79,7 @@ const ViewPropertyIndex = () => {
             </Box>
             <Box mt={"50px"}>
               <Box className="galleryCardInfo">
-                <Box className="galleryTopCard">
+                {/* <Box className="galleryTopCard">
                   <Box
                     style={{
                       display: "flex",
@@ -93,13 +93,11 @@ const ViewPropertyIndex = () => {
                       <span>MB Prime</span>
                     </Typography>
 
-                    <Typography variant="body1">
-                      Save Time & money sdasd cacasdsa asdad
-                    </Typography>
+                    <Typography variant="body1">Save Time & money</Typography>
 
                     <Button className="joinPrimeButton">Join prime</Button>
                   </Box>
-                </Box>
+                </Box> */}
 
                 <Box className="gallery">
                   <Grid container>
@@ -266,10 +264,6 @@ const ViewPropertyIndex = () => {
                 <PropertyMoreDetails dataArray={dataArray} />
               </Box>
 
-              {/* <Box className="SuggestionProperties">
-                <SuggestionProperties />
-              </Box> */}
-
               <Box className="ResidentialProperty" style={{ padding: "20px" }}>
                 <ResidentialProjects />
               </Box>
@@ -278,6 +272,7 @@ const ViewPropertyIndex = () => {
         </Box>
         <ContactOwnerModal
           open={open}
+          dataArray={dataArray}
           handleClickOpen={handleClickOpen}
           handleClose={handleClose}
         />

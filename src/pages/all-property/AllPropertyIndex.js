@@ -66,30 +66,6 @@ const AllPropertyIndex = () => {
               )}
             </>
           )}
-
-          {/* {property_id != "FEATURED" ? (
-            <>
-            </>
-          ) : (
-            <>
-          {auth?._isFeaturedPost &&
-            auth?._isFeaturedPost?.map((data, index) => {
-              console.log(
-                "auth?._getproperyPostList------->",
-                property_id == data?.projectTypeId?._id,
-                property_id,
-                data?.projectTypeId?._id
-              );
-              return (
-                <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
-                  <Box>
-                    <FeaturedPostCard data={data} />
-                  </Box>
-                </Grid>
-              );
-            })}
-          </>
-          )} */}
         </Grid>
       </PropertyLayout>
     </Box>

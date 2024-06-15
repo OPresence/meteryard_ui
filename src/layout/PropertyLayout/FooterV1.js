@@ -79,7 +79,11 @@ const Footer = () => {
                         Home
                       </Typography>
                     </Link>
-                    <Link href="/about-us" style={{ textDecoration: "none" }}>
+                    <Link
+                      href="/about-us"
+                      style={{ textDecoration: "none" }}
+                      target="_blank"
+                    >
                       <Typography
                         fontSize="14px"
                         color="#ffffff"
@@ -89,7 +93,8 @@ const Footer = () => {
                       </Typography>
                     </Link>
                     <Link
-                      href="/terms-conditions"
+                      href="/term-condition"
+                      target="_blank"
                       style={{ textDecoration: "none" }}
                     >
                       <Typography
@@ -101,8 +106,9 @@ const Footer = () => {
                       </Typography>
                     </Link>
                     <Link
-                      href="/privacy-policy"
+                      href="/privacy"
                       style={{ textDecoration: "none" }}
+                      target="_blank"
                     >
                       <Typography
                         fontSize="14px"
@@ -112,7 +118,7 @@ const Footer = () => {
                         Privacy Policy
                       </Typography>
                     </Link>
-                    <Link href="/blog" style={{ textDecoration: "none" }}>
+                    {/* <Link href="/blog" style={{ textDecoration: "none" }}>
                       <Typography
                         fontSize="14px"
                         color="#ffffff"
@@ -120,10 +126,11 @@ const Footer = () => {
                       >
                         Blog
                       </Typography>
-                    </Link>
+                    </Link> */}
                     <Link
-                      href="/property-posts"
+                      href="/all-property"
                       style={{ textDecoration: "none" }}
+                      target="_blank"
                     >
                       <Typography
                         fontSize="14px"
@@ -177,25 +184,34 @@ const Footer = () => {
                   <Box mt={2}>
                     <Typography fontSize="14px">FOLLOW US</Typography>
                     <Box display="flex" gap={2} mt={1.5}>
-                      <Link href="https://www.facebook.com/meteryard.india.3/">
+                      <Link
+                        href="https://www.facebook.com/meteryard.india.3/"
+                        target="_blank"
+                      >
                         <img
                           src="/images/meteryard/icons/facebook.svg"
                           alt="facebook icon"
                         />
                       </Link>
-                      <Link href="https://www.instagram.com/meteryard/">
+                      <Link
+                        href="https://www.instagram.com/meteryard/"
+                        target="_blank"
+                      >
                         <img
                           src="/images/meteryard/icons/instagram.svg"
                           alt="instragram icon"
                         />
                       </Link>
-                      <Link href="https://x.com/MeterYard">
+                      <Link href="https://x.com/MeterYard" target="_blank">
                         <img
                           src="/images/meteryard/icons/twitter.svg"
                           alt="twitter icon"
                         />
                       </Link>
-                      <Link href="https://www.linkedin.com/in/meteryard-india-1385221b0/">
+                      <Link
+                        href="https://www.linkedin.com/in/meteryard-india-1385221b0/"
+                        target="_blank"
+                      >
                         <img
                           src="/images/meteryard/icons/linkedin.svg"
                           alt="linkedin"
@@ -259,23 +275,23 @@ const Footer = () => {
             </Typography>
           </Box>
           <Box display="flex" gap={0.5} justifyContent={isMobile && "center"}>
-            <Link href="/privacy-policy" style={{ textDecoration: "none" }}>
+            <Link href="/privacy" style={{ textDecoration: "none" }}>
               <Typography fontSize="12px" color="#ffffff" fontWeight={300}>
                 Privacy Policy
               </Typography>
             </Link>
             |
-            <Link href="/terms-conditions" style={{ textDecoration: "none" }}>
+            <Link href="/term-condition" style={{ textDecoration: "none" }}>
               <Typography fontSize="12px" color="#ffffff" fontWeight={300}>
                 Terms and Conditions
               </Typography>
             </Link>
-            |
+            {/* |
             <Link href="/disclaimer" style={{ textDecoration: "none" }}>
               <Typography fontSize="12px" color="#ffffff">
                 Disclaimer
               </Typography>
-            </Link>
+            </Link> */}
           </Box>
         </Box>
       </Box>
