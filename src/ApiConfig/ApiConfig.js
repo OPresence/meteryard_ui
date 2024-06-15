@@ -1,12 +1,12 @@
 
   const API_Production = process.env.NEXT_PUBLIC_API_URL;
   const API_STAGING = process.env.NEXT_PUBLIC_SITE_URL;
-  var URL_ENDPOINT;
-  if (process.env.NODE_ENV === 'production') {
-    URL_ENDPOINT = API_Production;
-  } else {
-    URL_ENDPOINT = API_STAGING;
-    }
+  var URL_ENDPOINT="https://lms-api-backend.onrender.com/api/v1";
+  // if (process.env.NODE_ENV === 'production') {
+  //   URL_ENDPOINT = API_Production;
+  // } else {
+  //   URL_ENDPOINT = API_STAGING;
+  //   }
   const Apiconfigs = {
     userSignUp: `${URL_ENDPOINT}/user/userSignUp`,
     login: `${URL_ENDPOINT}/user/login`,

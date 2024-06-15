@@ -52,15 +52,19 @@ const PriceBox = styled(Box)(({ theme }) => ({
     },
     "& .cameraBox": {
       border: "1px solid  #676767",
-      padding: "10px",
+      padding: "9px",
       borderRadius: "10px",
-      // display: "flex",
-      // alignItems: "center",
-      // justifyContent: "center",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "10px",
+      width: "94px",
+      padding: "9px",
       cursor: "pointer",
       "& svg": {
         color: "#676767",
-        fontSize: "16px",
+        fontSize: "22px",
       },
     },
     "& .main-upload-file": {
@@ -87,6 +91,7 @@ const PriceBox = styled(Box)(({ theme }) => ({
   "& .checkboxStyle span": {
     "@media(max-width:615px)": {
       fontSize: "13px",
+      color: "black",
       padding: "0px !important",
       margin: "0px",
     },
@@ -104,6 +109,7 @@ const PriceBox = styled(Box)(({ theme }) => ({
     cursor: "pointer",
     "& svg": {
       fontSize: "16px",
+      color: "black",
     },
   },
 }));
@@ -197,7 +203,7 @@ const DialogButtonStyle = styled(Box)(({ theme }) => ({
     },
   },
 }));
-const PropertyPost_s_3 = (props) => {
+const PropertyPost_s_3 = (props, handleFileChangeImage) => {
   const {
     formField: {
       price,
@@ -432,7 +438,7 @@ const PropertyPost_s_3 = (props) => {
                                 <VideocamIcon style={{ cursor: "pointer" }} />
                               </Box>
                             </Box>
-                          </label>{" "}
+                          </label>
                           &nbsp;&nbsp;&nbsp;
                           <label style={{ display: "inline-flex" }}>
                             <Box className="videoBox CoverImage">
@@ -482,14 +488,61 @@ const PropertyPost_s_3 = (props) => {
                             </Box>
                           </label>
                         </Box>
-                        <span className="multipleImageBox">
+                        <span
+                          className="multipleImageBox"
+                          onClick={() => fileInputRef.current.click()}
+                        >
+                          {images.length == 0 ? (
+                            <span
+                              className="cameraBox"
+                              onChange={handleFileChangeImage}
+                            >
+                              <Typography
+                                variant="h6"
+                                style={{
+                                  fontWeight: "600",
+                                  textAlign: "center",
+                                  fontSize: "13px",
+                                }}
+                              >
+                                Property Images
+                              </Typography>
+                              <CameraAltIcon />
+                            </span>
+                          ) : (
+                            <>
+                              {images.length == 10 ? (
+                                <span style={{ display: "none" }}></span>
+                              ) : (
+                                <span
+                                  className="cameraBox"
+                                  onClick={() => fileInputRef.current.click()}
+                                  onChange={handleFileChangeImage}
+                                >
+                                  <Typography
+                                    variant="h6"
+                                    style={{
+                                      fontWeight: "600",
+                                      textAlign: "center",
+                                      fontSize: "13px",
+                                    }}
+                                  >
+                                    Add More Images
+                                  </Typography>
+                                  <AddIcon />
+                                </span>
+                              )}
+                            </>
+                          )}
                           {images.length > 0 && (
                             <span>
                               {images.map((image, index) => (
                                 <span
                                   key={index}
-                                  position="relative"
-                                  display="inline-block"
+                                  style={{
+                                    position: "relative",
+                                    display: "inline-block",
+                                  }}
                                 >
                                   <img
                                     src={image}
@@ -506,28 +559,6 @@ const PropertyPost_s_3 = (props) => {
                                 </span>
                               ))}
                             </span>
-                          )}
-                          {images.length == 0 ? (
-                            <span
-                              className="cameraBox"
-                              onClick={() => fileInputRef.current.click()}
-                            >
-                              <Typography variant="h2">Cover Image</Typography>
-                              <CameraAltIcon />
-                            </span>
-                          ) : (
-                            <>
-                              {images.length == 10 ? (
-                                <span style={{ display: "none" }}></span>
-                              ) : (
-                                <span
-                                  className="cameraBox"
-                                  onClick={() => fileInputRef.current.click()}
-                                >
-                                  <AddIcon />
-                                </span>
-                              )}
-                            </>
                           )}
                         </span>
                         <input
@@ -597,7 +628,9 @@ const PropertyPost_s_3 = (props) => {
                         alignItems={"center"}
                         className="checkboxStyle"
                       >
-                        <span>Terms & Conditions</span>
+                        <span style={{ color: "black" }}>
+                          Terms & Conditions
+                        </span>
                         <Checkbox
                           required
                           checked={props?._consition}
@@ -609,7 +642,9 @@ const PropertyPost_s_3 = (props) => {
                         alignItems={"center"}
                         className="checkboxStyle"
                       >
-                        <span>Featured Property</span>
+                        <span style={{ color: "black" }}>
+                          Featured Property
+                        </span>
                         <Checkbox
                           checked={props?._checked}
                           onClick={props?.handleChangeCheck}

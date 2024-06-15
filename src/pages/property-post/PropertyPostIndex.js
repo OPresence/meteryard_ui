@@ -309,6 +309,7 @@ const PropertyPostIndex = () => {
   });
   const [_projecttype, setProjectType] = useState([]);
   const [open, setOpen] = useState(false);
+  
 
   const handleChangeCheck = (event) => {
     if (!_checked) {
@@ -407,7 +408,7 @@ const PropertyPostIndex = () => {
     const files = e.target.files;
     const images = [];
     const selectedImagesInfo = [];
-    for (let i = 0; i < Math.min(files.length, 8); i++) {
+    for (let i = 0; i < Math.min(files.length, 10); i++) {
       const file = files[i];
       const url = URL.createObjectURL(files[i]);
       images.push(url);
@@ -419,11 +420,16 @@ const PropertyPostIndex = () => {
         size: file.size,
       };
       selectedImagesInfo.push(file);
+
     }
-    setSelectedImages(selectedImagesInfo);
+    setSelectedImages(selectedImagesInfo)
+    console.log(images)
+  console.log(selectedImagesInfo)
 
     setSelectedImages1(images);
+    
   };
+
 
   const handleClose = () => {
     setOpen(false);

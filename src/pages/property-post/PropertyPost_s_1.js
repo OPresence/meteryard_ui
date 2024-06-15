@@ -17,7 +17,7 @@ import { SelectField, InputField } from "../../component/FormFields";
 import { withStyles } from "@material-ui/core/styles";
 import { AuthContext } from "../../context/Auth";
 import Checkbox from "@material-ui/core/Checkbox";
-import { fontSize } from "@mui/system";
+import { color, fontSize } from "@mui/system";
 
 const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .borderBox": {
@@ -81,6 +81,7 @@ const GreenCheckbox = withStyles({
     },
     "& .MuiSvgIcon-root": {
       fill: "red !important", // Change the fill color of the SVG icon to green
+      // color: "black",
     },
   },
   checked: {},
@@ -193,7 +194,7 @@ const PropertyPost_s_1 = (props) => {
                     <Box
                       display={"inline-flex"}
                       key={index}
-                      style={{ padding: "0 0 0 10px" }}
+                      style={{ padding: "0 0 0 10px", color: "#000" }}
                     >
                       <FormControlLabel
                         control={
