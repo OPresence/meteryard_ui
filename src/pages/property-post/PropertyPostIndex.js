@@ -123,12 +123,13 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
     },
   },
   "& .Form_main_Box": {
-    marginBottom: "30px",
     paddingBottom: "30px",
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     background: "#fff",
-    borderRadius: "0 15px 15px 15px",
+    borderRadius: "15px 15px 15px 15px",
     position: "relative",
+    maxHeight: "520px",
+    overflow: "auto",
     // maxHeight: "450px",
     // overflowY: "scroll",
     "@media(max-width:615px)": {
@@ -406,13 +407,15 @@ const PropertyPostIndex = () => {
   };
   const handleFileChangeImage = (e) => {
     const files = e.target.files;
+    console.log(files)
     const images = [];
     const selectedImagesInfo = [];
     for (let i = 0; i < Math.min(files.length, 10); i++) {
       const file = files[i];
       const url = URL.createObjectURL(files[i]);
+      console.log(url)
       images.push(url);
-      const fileInfo = {
+      const fileInfo = {  
         file,
         url,
         name: file.name,
@@ -615,6 +618,7 @@ const PropertyPostIndex = () => {
             featuredProperty: _checked,
             type: values?.typeProperty,
             image: imageUploadResponses,
+           
             address: values?.location,
             location: {
               type: "Point",
@@ -700,11 +704,12 @@ const PropertyPostIndex = () => {
             padding={"20px 0 0 0"}
             position={"relative"}
             style={{ cursor: "pointer" }}
+            marginTop={"0px"}
             onClick={() => router.push("/")}
           >
             <Logo />
           </Box>
-          <Box>
+          <Box height={"85vh"} display={"flex"}> 
             <Grid container spacing={3}>
               <Grid item lg={6} md={6} sm={12} xs={12} className="gridClass">
                 <Box p={"0 0 0 20px"}>
@@ -732,8 +737,8 @@ const PropertyPostIndex = () => {
                           <Step key={"Enter Your Area Details"} style={{ position: "relative", display: "flex", justifyContent: "center",alignItems:"center" }}>
                             {/* <StyledStepLabel> */}
                             
-                            {activeStep >= 1 ? <img src="/images/property-post/step_2 copy.svg" width={60} fill={"#badc54"}/> :
-                            <img src="/images/property-post/step_2.svg" width={60} fill={"#fff"}/> 
+                            {activeStep >= 1 ? <img src="/images/property-post/step_2 copy.svg" width={60} fill={"#badc54"} style={{marginLeft: "-11px"}}/> :
+                            <img src="/images/property-post/step_2.svg" width={60} fill={"#fff"} style={{marginLeft: "-11px"}}/> 
                             }
                               <Typography className="h2-class1">
                                 {"Enter Your Area Details"}

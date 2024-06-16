@@ -62,6 +62,7 @@ const PriceBox = styled(Box)(({ theme }) => ({
       width: "94px",
       padding: "9px",
       cursor: "pointer",
+      marginBottom:"10px",
       "& svg": {
         color: "#676767",
         fontSize: "22px",
@@ -82,6 +83,7 @@ const PriceBox = styled(Box)(({ theme }) => ({
         display: "block",
         maxWidth: "50%",
         padding: "0",
+        
         "@media(max-width:615px)": {
           alignItems: "start",
         },
@@ -213,24 +215,26 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
       localArea,
       stateId,
       cityId,
+      Image,
     },
   } = props;
   const fileInputRef = useRef(null);
   const [_stateList, setStateList] = React.useState([]);
   const [_cityList, setCityList] = React.useState([]);
   const [_getstate, setState] = useState("0");
-  const [images, setImages] = useState([]);
+  const [_images, setImages] = useState([]);
   const imgRef = useRef();
 
   const onImageChange = (e) => {
-    if (images.length >= 10) return;
+    if (_images.length >= 10) return;
     const files = Array.from(e.target.files);
     const newImages = files.map((file) => URL.createObjectURL(file));
     setImages((prevImages) => [...prevImages, ...newImages].slice(0, 10));
+    
   };
 
   const removeImage = (image) => {
-    setImages(images.filter((img) => img !== image));
+    setImages(_images.filter((img) => img !== image));
   };
   console.log("bjdsbfbds---->", _getstate);
   const scrollToTop = () => {
@@ -321,7 +325,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
   }, [_getstate]);
   return (
     <PropertyPostScreenStyle>
-      <Box className="mainBox" maxHeight={490} overflow={"auto"}>
+      <Box className="mainBox">
         <Box className="HeadingBox3">
           <Typography variant="h2">List Your Property</Typography>
 
@@ -488,14 +492,15 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                             </Box>
                           </label>
                         </Box>
-                        <span
+                        <div
                           className="multipleImageBox"
-                          onClick={() => fileInputRef.current.click()}
+                          
                         >
-                          {images.length == 0 ? (
+                          {_images.length == 0 ? (
                             <span
                               className="cameraBox"
                               onChange={handleFileChangeImage}
+                              onClick={() => fileInputRef.current.click()}
                             >
                               <Typography
                                 variant="h6"
@@ -511,7 +516,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                             </span>
                           ) : (
                             <>
-                              {images.length == 10 ? (
+                              {_images.length == 10 ? (
                                 <span style={{ display: "none" }}></span>
                               ) : (
                                 <span
@@ -534,9 +539,9 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                               )}
                             </>
                           )}
-                          {images.length > 0 && (
+                          {_images.length > 0 && (
                             <span>
-                              {images.map((image, index) => (
+                              {_images.map((image, index) => (
                                 <span
                                   key={index}
                                   style={{
@@ -560,7 +565,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                               ))}
                             </span>
                           )}
-                        </span>
+                        </div>
                         <input
                           type="file"
                           accept="image/*"
