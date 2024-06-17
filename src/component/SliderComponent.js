@@ -23,8 +23,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
     margin: "0 auto",
     marginTop: "-90px",
     "@media(max-width:615px)": {
-      // padding: "0px 0 60px 0",
-      // marginTop: "2rem",
+      marginTop: "80px",
     },
   },
   "& .circleimg": {
@@ -32,14 +31,6 @@ const MainComponent = styled(Box)(({ theme }) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-
-    "& h6": {
-      color: "orange",
-      fontSize: "16px",
-      marginTop: "2rem",
-      fontWeight: "400",
-      // marginLeft: "-4rem",
-    },
 
     "& svg": {
       color: "orange",
@@ -272,24 +263,13 @@ const SliderComponent = () => {
                           <img src={data?.image} alt="img" width={"100%"} />
                         </Box>
                         <Box mt={3}>
-                          <Typography variant="p" fontSize={isMobile ? 16 : 24}>
+                          <Typography
+                            variant="h6"
+                            fontSize={isMobile ? 16 : 24}
+                          >
                             {data?.name}
                           </Typography>
                         </Box>
-                        {/* <Box
-                          display={"flex"}
-                          position={"absolute"}
-                          bottom={"0"}
-                          // width={"100%"}
-                          left={"20px"}
-                          // backgroundColor={isMobile && "#E0AF00"}
-                          // color={isMobile && ""}
-                        >
-                          <Typography variant="h6">View all</Typography>
-                          <span className="rightIcon">
-                            <ChevronRightIcon />
-                          </span>
-                        </Box> */}
                       </Box>
                     </Card>
                   </Box>

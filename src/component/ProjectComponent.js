@@ -1,47 +1,23 @@
-import React, { useRef, useContext } from "react";
+import { useRef, useContext } from "react";
 import { useTheme } from "@mui/material/styles";
-import {
-  Grid,
-  Typography,
-  Box,
-  Container,
-  Button,
-  useMediaQuery,
-} from "@mui/material";
+import { Typography, Box, Container, useMediaQuery } from "@mui/material";
 import styled from "@emotion/styled";
-import Slider from "react-slick";
 import { AuthContext } from "../context/Auth";
 import "../Scss/border.css";
 const ProjectStyle = styled(Box)(({ theme }) => ({
-  // margin: "2rem auto",
   "& .mainBox": {
     marginTop: "3rem",
     "@media(max-width:615px)": {
       padding: "34px 0 100px 0",
     },
 
-    // padding: "50px",
-    "& h2": {
-      fontWeight: "500",
-    },
     "& .heading": {
       padding: "10px 45px",
-      "& p": {
-        fontFamily: "Inter",
-        fontSize: "24px",
-        fontWeight: "400",
-        lineHeight: "29.05px",
-      },
-      "@media(max-width:615px)": {
-        padding: "20px 0px",
-      },
     },
     "& .shodowBox": {
       margin: "40px 0 0 0",
       display: "flex",
       justifyContent: "space-between",
-      // padding: "0 80px",
-      // boxSha dow: "0px 3px 39px #0000000A",
       "@media(max-width:1280px)": {},
       "@media(max-width:460px)": {
         padding: "0",
@@ -59,7 +35,7 @@ const ProjectStyle = styled(Box)(({ theme }) => ({
         display: "flex",
         background: "#fff",
         justifyContent: "center",
-        position: "relative" /* Added position relative */,
+        position: "relative",
         border: "5px solid #A7D325",
         "& .contentBox": {
           padding: "10px",
@@ -94,19 +70,9 @@ const ProjectStyle = styled(Box)(({ theme }) => ({
           borderBottomLeftRadius: "20px",
           transform: "rotateZ(271deg)",
         },
-        "& h1": {
-          "@media(max-width:540px)": {
-            fontSize: "16px",
-          },
-        },
-        "& h3": {
-          fontSize: "16px",
-          fontWeight: "600",
-        },
       },
       "& .smallBox1": {
         boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-        // padding: "20px",
         borderRadius: "20px",
         textAlign: "center",
         width: "150px",
@@ -115,7 +81,7 @@ const ProjectStyle = styled(Box)(({ theme }) => ({
         display: "flex",
         background: "#fff",
         justifyContent: "center",
-        position: "relative" /* Added position relative */,
+        position: "relative",
         border: "5px solid #444444",
         "& .contentBox": {
           padding: "10px 35px",
@@ -152,15 +118,6 @@ const ProjectStyle = styled(Box)(({ theme }) => ({
           MozTransform: "rotateZ(269deg)",
           MsTransform: "rotateZ(269deg)",
           transform: "rotateZ(271deg)",
-        },
-        "& h1": {
-          "@media(max-width:540px)": {
-            fontSize: "16px",
-          },
-        },
-        "& h3": {
-          fontSize: "16px",
-          fontWeight: "600",
         },
       },
     },
@@ -278,7 +235,7 @@ const ProjectComponent = () => {
                 Projects
               </Typography>
               <Typography
-                variant="p"
+                variant="h6"
                 fontSize={isMobile ? 20 : 24}
                 pl={0.3}
                 fontWeight={300}

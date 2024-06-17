@@ -32,15 +32,6 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
     "& container": {
       padding: "0px",
     },
-    "& p": {
-      fontFamily: "Inter",
-      fontSize: "24px",
-      fontWeight: "400",
-      lineHeight: "29.05px",
-    },
-    "& h2": {
-      fontWeight: "500",
-    },
   },
   "& .circleimg": {
     width: "100%",
@@ -229,7 +220,7 @@ const CardComponent = ({ ProductData }) => {
                 {ProductData?.projectType} Projects
               </Typography>
               <Typography
-                variant="p"
+                variant="h6"
                 fontSize={isMobile ? 20 : 24}
                 pl={0.3}
                 fontWeight={300}
@@ -301,7 +292,7 @@ const CardComponent = ({ ProductData }) => {
           </Box>
         )}
 
-        {ProductData?.allProperty?.length > 4 && !isMobile && (
+        {ProductData?.allProperty?.length > 4 && (
           <IconButtonRightContent onClick={handleNext}>
             <ArrowForwardIosIcon />
           </IconButtonRightContent>

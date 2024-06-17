@@ -15,8 +15,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AuthContext } from "../../context/Auth";
 const MainComponent = styled(Box)(({ theme }) => ({
   "& .mainBox": {
-    // height: "100vh",
     overflow: "hidden",
+    "& .backImageBox": {
+      "@media(max-width:615px)": {
+        display: "flex",
+        justifyContent: "end",
+      },
+    },
     "@media(max-width:615px)": {
       marginBottom: "0",
       height: "auto",
@@ -28,9 +33,9 @@ const MainComponent = styled(Box)(({ theme }) => ({
       marginTop: "-10px",
       left: "0",
       "@media(max-width:615px)": {
-        maxWidth: "100%",
+        maxWidth: "70%",
         top: "-2%",
-        left: "10% !important",
+        // left: "20% !important",
       },
     },
   },
@@ -56,7 +61,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
     width: "100%",
 
     "@media(max-width:615px)": {
-      top: "15%",
+      top: "13%",
       left: "0",
     },
     "& .Banner_inputField": {
@@ -169,7 +174,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       textAlign: "left",
 
       "@media(max-width:615px)": {
-        fontSize: "28px",
+        fontSize: "20px",
         lineHeight: "17.14px",
       },
     },
@@ -182,7 +187,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       textAlign: "left",
 
       "@media(max-width:615px)": {
-        fontSize: "28px",
+        fontSize: "20px",
         lineHeight: "17.14px",
       },
     },
@@ -321,7 +326,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       boxShadow: " 0px 4px 4px 0px #0000001A",
       "& span": {
         padding: "0 0 0 65px",
-        fontFamily: "Inter",
+        // fontFamily: "Inter",
         fontSize: "12px",
         fontWeight: 600,
         color: "#000000",
@@ -743,7 +748,7 @@ export default function Home() {
         </Box>
         <Box className="mainBox">
           <Box display={"flex"} justifyContent={"end"} className="bacBox">
-            <Box>
+            <Box className="backImageBox">
               <Box className="backImage">
                 <img
                   src="/images/picture.png"
