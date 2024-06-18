@@ -65,6 +65,7 @@ const ProjectStyle = styled(Box)(({ theme }) => ({
           padding: "10px",
           boxShadow: "0px 3px 39px #0000001C",
           borderRadius: "20px",
+         
         },
         "&::before": {
           content: '""',
@@ -169,6 +170,10 @@ const ProjectStyle = styled(Box)(({ theme }) => ({
       boxShadow: "0px 3px 39px #0000001C",
       borderRadius: "20px",
       width: "100%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
     },
   },
 }));
@@ -295,16 +300,16 @@ const ProjectComponent = () => {
                   justifyContent="space-between"
                   alignItems="center"
                   flexWrap="wrap"
-                  gap={3}
+                  gap={2}
                 >
                   <Box align="center">
                     <Box
                       className="rainbow"
-                      width={isMobile ? 140 : 200}
+                      width={isMobile ? 160 : 200}
                       height="100%"
                     >
-                      <Box className="contentBox" textAlign={"center"}>
-                        <Typography variant="h1" fontSize={isMobile ? 28 : 48}>
+                      <Box className="contentBox" textAlign={"center"} minHeight={"135px"}>
+                        <Typography variant="h1" fontSize={isMobile ? 28 : 48} color={"#000000"}>
                           51
                         </Typography>
                         <Box mt={isMobile ? 0 : 2} mb={2}>
@@ -318,11 +323,11 @@ const ProjectComponent = () => {
                   <Box align="center">
                     <Box
                       className="rainbowSecond"
-                      width={isMobile ? 140 : 200}
+                      width={isMobile ? 160 : 200}
                       height="100%"
                     >
-                      <Box className="contentBox" textAlign={"center"}>
-                        <Typography variant="h1" fontSize={isMobile ? 28 : 48}>
+                      <Box className="contentBox" textAlign={"center"} minHeight={"135px"}>
+                        <Typography variant="h1" fontSize={isMobile ? 28 : 48} color={"#000000"}>
                           150
                         </Typography>
                         <Box mt={isMobile ? 0 : 2} mb={2}>
@@ -337,11 +342,11 @@ const ProjectComponent = () => {
                   <Box align="center">
                     <Box
                       className={isMobile ? "rainbowSecond" : "rainbow"}
-                      width={isMobile ? 140 : 200}
+                      width={isMobile ? 160 : 200}
                       height="100%"
                     >
-                      <Box className="contentBox" textAlign={"center"}>
-                        <Typography variant="h1" fontSize={isMobile ? 28 : 48}>
+                      <Box className="contentBox" textAlign={"center"} minHeight={"135px"}>
+                        <Typography variant="h1" fontSize={isMobile ? 28 : 48} color={"#000000"}>
                           51
                         </Typography>
                         <Box mt={isMobile ? 0 : 2} mb={2}>
@@ -356,11 +361,11 @@ const ProjectComponent = () => {
                   <Box align="center">
                     <Box
                       className={isMobile ? "rainbow" : "rainbowSecond"}
-                      width={isMobile ? 140 : 200}
+                      width={isMobile ? 160 : 200}
                       height="100%"
                     >
-                      <Box className="contentBox" textAlign={"center"}>
-                        <Typography variant="h1" fontSize={isMobile ? 28 : 48}>
+                      <Box className="contentBox" textAlign={"center"} minHeight={"135px"}>
+                        <Typography variant="h1" fontSize={isMobile ? 28 : 48} color={"#000000"}>
                           150
                         </Typography>
                         <Box mt={isMobile ? 0 : 2} mb={2}>

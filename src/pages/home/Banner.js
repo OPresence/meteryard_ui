@@ -97,7 +97,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
         padding: "0",
         left: "0%",
         top: "100%",
-        margin: "0 20px",
+        margin: "0 0px",
       },
     },
     "& .searchbox": {
@@ -169,7 +169,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       textAlign: "left",
 
       "@media(max-width:615px)": {
-        fontSize: "28px",
+        fontSize: "20px",
         lineHeight: "17.14px",
       },
     },
@@ -182,7 +182,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       textAlign: "left",
 
       "@media(max-width:615px)": {
-        fontSize: "28px",
+        fontSize: "20px",
         lineHeight: "17.14px",
       },
     },
@@ -601,13 +601,16 @@ export default function Home() {
       <Box>
         <Box position={"absolute"} className="contentBox">
           <Box
-            width={isMobile ? "85%" : "100%"}
+            width={isMobile ? "100%" : "100%"}
             padding={isMobile && "10px 20px"}
           >
+            <Box>
             <Typography
               variant="h1"
               className="banner-heading"
               lineHeight={isMobile && "2rem"}
+              marginTop={isMobile && "20px"}
+              justifyContent= {isMobile && "flex-start"}
             >
               <span className="find">Find Your Place,</span>
               {isMobile && <br />}
@@ -617,11 +620,11 @@ export default function Home() {
               </span>
             </Typography>
             <Box mt={1.5} mb={1.5}>
-              <Typography variant="h3" fontSize={18}>
+              <Typography variant="h3" width={isMobile ? "68%" :"100%"} fontSize={isMobile ? "14px":"18px"}>
                 Please Select Your Category
               </Typography>
             </Box>
-            <Box display={"flex"} className="buyer-seller-btn">
+            <Box display={"flex"} className="buyer-seller-btn" justifyContent={isMobile && "flex-start"}>
               <Box
                 mt={isMobile ? 2 : 5}
                 position={"relative"}
@@ -693,6 +696,8 @@ export default function Home() {
                 </Box>
               </Box>
             </Box>
+            </Box>
+
             <Box
               className="ContainerSearchBox"
               // style={{ transform: isMobile && "translate(-50%,-50%)" }}
