@@ -99,7 +99,6 @@ const IconButtonRightContent = styled(Box)({
 const ResidentialProjects = ({ showViewMore, ProductData }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   const auth = useContext(AuthContext);
   const sliderRef = useRef(null);
   const router = useRouter();
@@ -223,7 +222,7 @@ const ResidentialProjects = ({ showViewMore, ProductData }) => {
                 {ProductData?.projectType} Projects
               </Typography>
               <Typography
-                variant="p"
+                variant="h6"
                 fontSize={isMobile ? 20 : 24}
                 pl={0.3}
                 fontWeight={300}
@@ -234,7 +233,7 @@ const ResidentialProjects = ({ showViewMore, ProductData }) => {
           </Box>
         </Container>
 
-        {ProductData?.allProperty?.length > 0 && (
+        {ProductData?.allProperty?.length > 4 && (
           <IconButtonLeftContent onClick={handlePrevious}>
             <ArrowBackIosIcon />
           </IconButtonLeftContent>
@@ -316,7 +315,7 @@ const ResidentialProjects = ({ showViewMore, ProductData }) => {
           </Box>
         </Box>
 
-        {ProductData?.allProperty?.length && !isMobile && (
+        {ProductData?.allProperty?.length > 4 && (
           <IconButtonRightContent onClick={handleNext}>
             <ArrowForwardIosIcon />
           </IconButtonRightContent>

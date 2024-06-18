@@ -25,6 +25,7 @@ export default function Auth(props) {
   const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
   const [_getproprty_type, setGetPropetyType] = useState("");
   const [statesHome, setStatesHome] = useState([]);
+  console.log("statesHome000-->",statesHome);
   const [_citylist, setCityList] = useState([]);
   const [_isFeaturedPost, setIsFeatured] = useState([]);
   const [_getCityValue, setGetCityValue] = useState("0");
@@ -42,18 +43,20 @@ export default function Auth(props) {
   const [_propertySubType, setPropertySubType] = useState("");
   const [_cityselect, setCitySelect] = useState("0");
   const [_searchproperty, setSearchProperty] = useState("");
-  
+
   const StateApiFunction = async () => {
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllState,
         data: {
-          countryId: "65ba9a0fd02a1d3150e299bd",
+          countryCode: "IN",
         },
       });
       if (res) {
+        console.log("67676674444---->",res?.result);
         if (res?.responseCode == 200) {
-          setStatesHome(res?.result?.docs);
+          setGetCityValue(res?.result[0]?.stateCode)
+          setStatesHome(res?.result);
         } else if (res?.responseCode == 404) {
           setStatesHome([]);
           toast.error(res?.responseMessage);
@@ -78,16 +81,18 @@ export default function Auth(props) {
     }
   };
   const CityApiFunction = async () => {
+    console.log("_getCityValue000-->",_getCityValue);
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllCity,
         data: {
-          stateId: _getCityValue,
+          stateCode: _getCityValue,
+          countryCode: "IN",
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setCityList(res?.result?.docs);
+          setCityList(res?.result);
         } else if (res?.responseCode == 400) {
           setCityList([]);
           toast.error(res?.responseMessage);
@@ -394,6 +399,7 @@ export default function Auth(props) {
     }
   });
   useEffect(() => {
+    console.log("6666666666");
     StateApiFunction();
     ProjectType();
     AllCategoryProduct();

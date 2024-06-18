@@ -14,9 +14,12 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import Apiconfigs from "../ApiConfig/ApiConfig";
 import { PostApiFunction } from "@/utils";
+import axios from "axios";
 
 const TestimonialStyle = styled(Box)(({ theme }) => ({
-  marginTop: "6rem",
+  "& .mainBox": {
+    marginTop: "80px",
+  },
   "& .Cards": {
     gap: "0px",
     borderRadius: "12.81px",
@@ -35,37 +38,6 @@ const TestimonialStyle = styled(Box)(({ theme }) => ({
     "&:hover": {
       transform: "scale(1.05)",
       cursor: "pointer",
-    },
-
-    "& h4": {
-      fontFamily: "Inter",
-      fontSize: "16px",
-      fontWeight: "600",
-      lineHeight: "43.57px",
-      textAlign: "center",
-      "@media(max-width:615px)": {
-        fontSize: "18px",
-      },
-    },
-    "& h5": {
-      fontFamily: "Inter",
-      fontSize: "20px",
-      fontWeight: "400",
-      lineHeight: "29.05px",
-      textAlign: "center",
-      "@media(max-width:615px)": {
-        fontSize: "18px",
-      },
-    },
-    "& h6": {
-      fontFamily: "Inter",
-      fontSize: "14px",
-      fontWeight: "400",
-      lineHeight: "1.3rem",
-      textAlign: "center",
-      "@media(max-width:615px)": {
-        fontSize: "14px",
-      },
     },
   },
   "& .centerCard": {
@@ -89,15 +61,6 @@ const TestimonialStyle = styled(Box)(({ theme }) => ({
     borderBottom: "2px solid #707070",
     width: "75px",
     height: "3px",
-  },
-  "& .mainBox": {
-    padding: "190px 90px 190px 190px",
-    "@media(max-width:1080px)": {
-      padding: "140px 0 0 0",
-    },
-    "@media(max-width:615px)": {
-      paddingBottom: "40px",
-    },
   },
 }));
 
@@ -245,7 +208,7 @@ const TestimonialComponent = () => {
   return (
     <TestimonialStyle position="relative">
       {testimonials?.length > 0 && (
-        <Box>
+        <Box className="mainBox">
           <Container>
             <Box mb={10}>
               <Typography
@@ -256,21 +219,14 @@ const TestimonialComponent = () => {
               >
                 TESTIMONIAL
               </Typography>
-              <Typography
-                variant="p"
-                fontWeight={300}
-                fontSize={isMobile ? 20 : 24}
-                pl={0.3}
-              >
+              <Typography variant="h6">
                 Featured Residential Projects Across India
               </Typography>
             </Box>
           </Container>
 
           <Box p={"40px 0"}>
-            <Container
-              sx={{ display: "flex", justifyContent: "center" }}
-            >
+            <Container sx={{ display: "flex", justifyContent: "center" }}>
               <Box
                 sx={{
                   width: "100%",
@@ -324,7 +280,7 @@ const TestimonialComponent = () => {
                             </Typography>
                             <Typography variant="h5">Lorem Ipsum</Typography>
                             <Box mt={1}>
-                              <Typography variant="h6">
+                              <Typography variant="h5">
                                 {data?.comments?.length > 120
                                   ? `${data.comments.substring(0, 130)}...`
                                   : data?.comments}
