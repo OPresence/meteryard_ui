@@ -52,12 +52,27 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
       },
     },
   },
+  "& .Properties-categories": {
+    "@media(max-width:615px)": {
+      display: "flex",
+      "& span":{
+        fontSize: "12px",
+      },
+      "& svg":{
+        fontSize: "14px",
+      },
+    },
+  },
   "& .buttonStyle": {
     padding: "3px 25px",
     borderRadius: "10px",
     color: "#000",
     margin: "0 15px 10px 0",
     textTransform: "capitalize",
+    "@media(max-width:615px)": {
+      margin: "5px",
+      fontSize: "10px",
+    },
   },
   "& .Property_Type": {
     "& h3": {
@@ -65,6 +80,7 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     },
     "@media(max-width:615px)": {
       paddingTop: "15px",
+      display: "flex",
     },
   },
 }));
@@ -82,6 +98,9 @@ const GreenCheckbox = withStyles({
     "& .MuiSvgIcon-root": {
       fill: "red !important", // Change the fill color of the SVG icon to green
       // color: "black",
+      "@media(max-width:615px)": {
+        padding: "0",
+      },
     },
   },
   checked: {},
@@ -189,7 +208,7 @@ const PropertyPost_s_1 = (props) => {
                 {/* <Box mb={1} className="Property_Type">
                   <Typography variant="h3">Property Type</Typography>
                 </Box> */}
-                <Box>
+                <Box className="Properties-categories">
                   {auth?._propertyList?.map((data, index) => (
                     <Box
                       display={"inline-flex"}
@@ -209,10 +228,7 @@ const PropertyPost_s_1 = (props) => {
                     </Box>
                   ))}
                 </Box>
-                <Box className="Property_Type">
-                  {/* <Typography variant="h3">Property Category</Typography> */}
-                </Box>
-                <Box mb={2} mt={1}>
+                <Box className="Property_Type" mb={2} mt={1}>
                   {auth?._subytypelist &&
                     auth?._subytypelist?.map((data, index) => {
                       return (

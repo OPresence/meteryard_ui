@@ -17,7 +17,8 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import AddIcon from "@mui/icons-material/Add";
 import LocationDialog from "../../component/LocationDialog";
 import CloseIcon from "@mui/icons-material/Close";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 import { SelectField, InputField } from "../../component/FormFields";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
 import { margin } from "@mui/system";
@@ -86,6 +87,7 @@ const PriceBox = styled(Box)(({ theme }) => ({
         
         "@media(max-width:615px)": {
           alignItems: "start",
+          maxWidth: "100%",
         },
       },
     },
@@ -224,6 +226,8 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
   const [_getstate, setState] = useState("0");
   const [_images, setImages] = useState([]);
   const imgRef = useRef();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const onImageChange = (e) => {
     if (_images.length >= 10) return;
@@ -627,7 +631,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                   </Grid>
 
                   <Box>
-                    <Box display={"flex"} gap={"20px"} mt={2}>
+                    <Box display={"flex"} gap={"20px"} mt={2} flexDirection={isMobile?"column":"row"}>
                       <Box
                         display={"inline-flex"}
                         alignItems={"center"}
