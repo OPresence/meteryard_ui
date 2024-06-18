@@ -44,6 +44,7 @@ export default {
     fontWeight: "400",
     lineHeight: "29.05px",
     textAlign: "center",
+    color:"#000",
     "@media(max-width:615px)": {
       fontSize: "18px",
     },
@@ -56,11 +57,11 @@ export default {
     color: "#000",
     "@media(max-width:615px)": {
       fontSize: "14px",
-      // fontWeight: "500",
     },
   },
   overline: {
-    fontSize: "8px",
+    fontWeight: "600 !important",
+    fontSize: "16px",
     fontFamily: "Inter",
     color: "#000",
   },

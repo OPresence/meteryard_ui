@@ -102,7 +102,7 @@ const ViewCity = ({
           limit: "10",
         },
         params: {
-          stateId: _countrycode,
+          countryCode: _countrycode,
         },
       });
       if (res) {

@@ -1,23 +1,12 @@
-import React, { useEffect, useContext } from "react";
-import {
-  Box,
-  Grid,
-  Typography,
-  FormControlLabel,
-  Button,
-  Stepper,
-  Step,
-  StepLabel,
-} from "@mui/material";
+import { useEffect, useContext } from "react";
+import { Box, Grid, Typography, FormControlLabel, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
-import { PostApiFunction } from "../../utils";
-import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { SelectField, InputField } from "../../component/FormFields";
-import { withStyles } from "@material-ui/core/styles";
+// import { withStyles } from "@material-ui/styles";
+import { withStyles } from "@mui/styles";
 import { AuthContext } from "../../context/Auth";
-import Checkbox from "@material-ui/core/Checkbox";
-import { color, fontSize } from "@mui/system";
+import Checkbox from "@mui/material/Checkbox";
 
 const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .borderBox": {
@@ -25,10 +14,7 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     height: "350px",
     position: "absolute",
   },
-
   "& .mainBoxS1": {
-    // maxHeight:"500px",
-    // overflow:"auto",
     "& .HeadingBox": {
       padding: "0 20px",
       "& h2": {
@@ -80,7 +66,7 @@ const GreenCheckbox = withStyles({
       // fontSize: "50px !important",
     },
     "& .MuiSvgIcon-root": {
-      fill: "red !important", // Change the fill color of the SVG icon to green
+      fill: "rgb(186, 220, 84) !important", // Change the fill color of the SVG icon to green
       // color: "black",
     },
   },

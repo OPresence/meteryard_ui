@@ -89,6 +89,7 @@ export default function MobilerMenu() {
             <Typography variant="h5">Cities</Typography>
           </AccordionSummary>
           <AccordionDetails>
+            {console.log("98988--->",auth?.statesHome)}
             {auth?.statesHome &&
               auth?.statesHome?.map((data, index) => {
                 return (
@@ -100,7 +101,7 @@ export default function MobilerMenu() {
                         data?._id,
                         router.push({
                           pathname: "/all-property",
-                          query: data?._id,
+                          query: data?.stateCode,
                         })
                       );
                     }}

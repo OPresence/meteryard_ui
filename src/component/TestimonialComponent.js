@@ -17,6 +17,9 @@ import { PostApiFunction } from "@/utils";
 import axios from "axios";
 
 const TestimonialStyle = styled(Box)(({ theme }) => ({
+  "& .mainBox": {
+    marginTop: "80px",
+  },
   "& .Cards": {
     gap: "0px",
     borderRadius: "12.81px",
@@ -216,12 +219,7 @@ const TestimonialComponent = () => {
               >
                 TESTIMONIAL
               </Typography>
-              <Typography
-                variant="h6"
-                fontWeight={300}
-                fontSize={isMobile ? 20 : 24}
-                pl={0.3}
-              >
+              <Typography variant="h6">
                 Featured Residential Projects Across India
               </Typography>
             </Box>
@@ -282,7 +280,7 @@ const TestimonialComponent = () => {
                             </Typography>
                             <Typography variant="h5">Lorem Ipsum</Typography>
                             <Box mt={1}>
-                              <Typography variant="h6">
+                              <Typography variant="h5">
                                 {data?.comments?.length > 120
                                   ? `${data.comments.substring(0, 130)}...`
                                   : data?.comments}
