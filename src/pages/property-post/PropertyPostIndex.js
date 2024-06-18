@@ -75,7 +75,7 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
       "@media(max-width:615px)": {
         width: "100%",
         marginBottom: "10px",
-
+        marginTop: "60px",
         // display: "none",
       },
     },
@@ -144,7 +144,8 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
       borderRadius: "15px",
       maxHeight: "unset",
       boxShadow: "none",
-      marginTop: "0px",
+      marginTop: "-20px",
+      background:"transparent"
     },
     // "&::before": {
     //   content: '""',
@@ -228,7 +229,7 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
     "@media(max-width:615px)": {
       width: "100%",
       position: "absolute",
-      top: "-80px",
+      top: "-30px",
       right: "0",
       height: "320px",
       left: "unset",
@@ -758,7 +759,7 @@ const PropertyPostIndex = () => {
                           display: "flex",
                           justifyContent: "center",
                           flexDirection: isMobile ? "row" : "column",
-                          gap: "30px",
+                          gap: isMobile? "20px":"30px",
                         }}
                       >
                         <Step
