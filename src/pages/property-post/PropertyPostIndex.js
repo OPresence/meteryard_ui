@@ -31,6 +31,7 @@ import { AuthContext } from "../../context/Auth";
 import { display } from "@mui/system";
 
 const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
+  "& input, select, fieldset": {background:"#fff"},
   "& .MainBoxIndex": {
     height: "100vh",
     display: "flex",
@@ -185,16 +186,19 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
     //   },
     // },
     "& .HeadingBox": {
-      padding: "0 20px",
+      padding: "20 0px",
+      "@media(max-width:615px)": {
+          padding: "0px 0px",
+        },
       "& h2": {
         textAlign: "center",
         color: "#000",
         fontSize: "28px",
         fontWeight: "600",
         padding: "20px 0",
-        // "@media(max-width:615px)": {
-        //   display: "none",
-        // },
+        "@media(max-width:615px)": {
+          padding: "0px 0px",
+        },
       },
       "& h3": {
         color: "#444444",
@@ -231,7 +235,7 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
       position: "absolute",
       top: "-30px",
       right: "0",
-      height: "320px",
+      height: "350px",
       left: "unset",
     },
   },
@@ -769,15 +773,15 @@ const PropertyPostIndex = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            marginRight: isMobile ? "20px" : "0px",
+                            marginRight: isMobile ? "0px" : "0px",
                           }}
                         >
                           {/* <StyledStepLabel> */}
 
                           <img
                             src="/images/property-post/step_one.svg"
-                            width={60}
-                            marginRight={isMobile ? "20px" : "0px"}
+                            width={isMobile?"50":"60"}
+                            marginRight={isMobile ? "0px" : "0px"}
                           />
                           <Typography
                             className="h2-class"
@@ -795,7 +799,7 @@ const PropertyPostIndex = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            marginRight: isMobile ? "20px" : "0px",
+                            marginRight: isMobile ? "0px" : "0px",
                           }}
                         >
                           {/* <StyledStepLabel> */}
@@ -803,14 +807,14 @@ const PropertyPostIndex = () => {
                           {activeStep >= 1 ? (
                             <img
                               src="/images/property-post/step_2 copy.svg"
-                              width={60}
+                              width={isMobile?"50":"60"}
                               fill={"#badc54"}
                               style={{ marginLeft: "-11px" }}
                             />
                           ) : (
                             <img
                               src="/images/property-post/step_2.svg"
-                              width={60}
+                              width={isMobile?"50":"60"}
                               fill={"#fff"}
                               style={{ marginLeft: "-11px" }}
                             />
@@ -831,20 +835,20 @@ const PropertyPostIndex = () => {
                             display: "flex",
                             justifyContent: "center",
                             alignItems: "center",
-                            marginRight: isMobile ? "20px" : "0px",
+                            marginRight: isMobile ? "0px" : "0px",
                           }}
                         >
                           {/* <StyledStepLabel> */}
                           {activeStep >= 2 ? (
                             <img
                               src="/images/property-post/step_3 copy.svg"
-                              width={60}
+                              width={isMobile?"50":"60"}
                               fill={"#badc54"}
                             />
                           ) : (
                             <img
                               src="/images/property-post/step_3.svg"
-                              width={60}
+                              width={isMobile?"50":"60"}
                               fill={"#fff"}
                             />
                           )}
