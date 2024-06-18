@@ -4,7 +4,7 @@ import PropertyPost_s_2 from "./PropertyPost_s_2";
 import PropertyPost_s_3 from "./PropertyPost_s_3";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
 import MobilerMenu from "@/component/MobileMenu";
-import "../../Scss/Propertyindex.scss"
+
 import {
   Box,
   Grid,
@@ -758,6 +758,7 @@ const PropertyPostIndex = () => {
                           display: "flex",
                           justifyContent: "center",
                           flexDirection: isMobile ? "row" : "column",
+                          gap: "30px",
                         }}
                       >
                         <Step
