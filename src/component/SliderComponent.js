@@ -23,7 +23,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
     margin: "0 auto",
     marginTop: "-90px",
     "@media(max-width:615px)": {
-      marginTop: "80px",
+      marginTop: "40px",
     },
   },
   "& .circleimg": {
