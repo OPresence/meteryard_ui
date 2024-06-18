@@ -19,7 +19,7 @@ export default function ClientPage() {
       <MasterCardProduct />
       {/* <YoutubeComponent /> */}
       <ProjectComponent />
-      <TESTIMONIAL />
+      {/* <TESTIMONIAL /> */}
     </Box>
   );
 }

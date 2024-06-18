@@ -15,6 +15,7 @@ const Footer = () => {
         backgroundColor: "#444444",
         color: "#FFFFFF",
         padding: "60px 0",
+        marginTop:"80px"
       }}
     >
       <Box
