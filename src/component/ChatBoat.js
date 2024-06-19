@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Avatar, Box, IconButton, Typography } from "@mui/material";
-import "../Scss/scroll.css";
 import SendIcon from "@mui/icons-material/Send";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import MinimizeIcon from "@mui/icons-material/Minimize";

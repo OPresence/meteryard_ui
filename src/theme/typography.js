@@ -1,5 +1,3 @@
-import { color, textAlign } from "@mui/system";
-
 export default {
   h1: {
     fontFamily: "Inter",

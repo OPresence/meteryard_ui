@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/system";
 import NavBar from "./NavBar";
-import TopBar from "../HomeLayout/Topbar";
-import Footer from "./Footer";
+import TopBar from "../Topbar";
+import Footer from "../Footer";
 import { Box, Grid, Typography, Divider } from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 

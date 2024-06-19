@@ -14,18 +14,17 @@ import {
 import CallIcon from "@mui/icons-material/Call";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
-import Logo from "../../component/Logo";
+import Logo from "../component/Logo";
 import styled from "@emotion/styled";
-import MenuComponent from "../../component/MenuComponent";
-import DialogComponent from "../../component/DialogComponent";
+import MenuComponent from "../component/MenuComponent";
+import DialogComponent from "../component/DialogComponent";
 import { useRouter } from "next/router";
-import LoginDialog from "../../component/LoginDialog";
-import "../../Scss/border.css";
-import { AuthContext } from "../../context/Auth";
+import LoginDialog from "../component/LoginDialog";
+import { AuthContext } from "../context/Auth";
 import CloseIcon from "@mui/icons-material/Close";
-import ProfileMenu from "../../component/ProfileMenu";
-import MobilerMenu from "../../component/MobileMenu";
-import RegisterModal from "../../component/registerSellerModal/RegisterModal";
+import ProfileMenu from "../component/ProfileMenu";
+import MobilerMenu from "../component/MobileMenu";
+import RegisterModal from "../component/registerSellerModal/RegisterModal";
 const MenuStyle = styled(Box)(({ theme }) => ({
   "& .hidebox": {
     display: "block",

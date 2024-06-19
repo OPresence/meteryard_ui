@@ -1,10 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Box, Grid } from "@mui/material";
 import PropertyLayout from "../../layout/PropertyLayout";
 import { AuthContext } from "../../context/Auth";
-import ResidentialPostCard from "../../component/ResidentialPostCard";
-import CommercialPostCard from "../../component/CommercialPostCard";
-import AgreeculturePostCard from "../../component/AgreeculturePostCard";
 import FeaturedPostCard from "../../component/FeaturedPostCard";
 import SkeltonLoader from "../../component/SkeltonLoader";
 import { useRouter } from "next/router";

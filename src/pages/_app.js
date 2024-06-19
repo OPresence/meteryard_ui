@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
-import "src/layout/globals.css";
+import "../Scss/main.css";
 import '../Scss/main.scss';
 import { createTheme } from "../theme/index";
 import { ToastContainer } from "react-toastify";

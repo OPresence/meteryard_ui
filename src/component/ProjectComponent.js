@@ -3,7 +3,6 @@ import { useTheme } from "@mui/material/styles";
 import { Typography, Box, Container, useMediaQuery } from "@mui/material";
 import styled from "@emotion/styled";
 import { AuthContext } from "../context/Auth";
-import "../Scss/border.css";
 const ProjectStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     marginTop: "3rem",
