@@ -1,30 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
+import { AuthContext } from "../context/Auth";
 
 const CheckBoxComponent = ({
-  //   checked,
+  propName,
   setChecked_Get,
-  handleChangeCheckBox,
+  handleCheckboxChange,
   data,
-  index,
+  selectedSubTypes,
 }) => {
+  const auth = useContext(AuthContext);
   const [checked, setChecked] = useState(false);
-
+  console.log("data000--->", data);
   useEffect(() => {
     if (checked) {
       setChecked_Get(checked);
+      console.log("11111111111111111111");
+    } else {
+      console.log("000000000000000000000");
     }
   }, [checked]);
 
   const handleChange = () => {
     setChecked(!checked); // Toggle the checked state
+    auth?.setPropertySubType(data?._id);
   };
 
   return (
     <div>
       <Checkbox
-        checked={checked}
-        onChange={handleChange}
+        sx={{ padding: "0px" }}
+        // checked={checked}
+        // onChange={handleChange}
+        checked={selectedSubTypes?.some(
+          (item) =>
+            item.parentId === propName._id && item.subTypeId === data._id
+        )}
+        onChange={() => {
+          // handleChange();
+          handleCheckboxChange(propName?._id, data._id);
+        }}
         inputProps={{ "aria-label": "controlled" }}
       />
     </div>

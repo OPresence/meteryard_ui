@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { styled } from "@mui/system";
 import NavBar from "./NavBar";
 import { useRouter } from "next/router";
-import TopBar from "./TopBar";
+import TopBar from "../Topbar";
 
 const Root = styled("div")(({ theme }) => ({
   display: "flex",

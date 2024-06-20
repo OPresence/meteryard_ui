@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { styled } from "@mui/system";
 import NavBar from "./NavBar";
-import TopBar from "../HomeLayout/Topbar";
+import TopBar from "../Topbar";
 
 const Root = styled("div")(({ theme }) => ({
   display: "flex",

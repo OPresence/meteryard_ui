@@ -10,11 +10,11 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import CircularProgressCompoennt from "../component/CircularProgressComponent";
+import CircularProgressCompoennt from "./CircularProgressComponent";
 import { Form, Formik } from "formik";
 import * as yep from "yup";
 
-const DialogButtonStyle = styled("Box")(({ theme }) => ({
+const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
     background: "#444444",

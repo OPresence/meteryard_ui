@@ -1,5 +1,4 @@
-// Import necessary components and styles
-import * as React from "react";
+import React, { useEffect, useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import { Box, Grid, IconButton } from "@mui/material";
@@ -12,7 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 
-const MainFormStyle = styled("Box")(({ theme }) => ({
+const MainFormStyle = styled(Box)(({ theme }) => ({
   "& .mainBoxStyle": {
     borderLeft: "3px solid rgb(162, 209, 23)",
     paddingLeft: "10px",
@@ -43,7 +42,7 @@ export default function PropertyForm({
   setConsition,
   CoverImageFunction,
 }) {
-  // const [_propertyList, setPropertyList] = React.useState([
+  // const [_propertyList, setPropertyList] = useState([
   //   {
   //     Type: "Residential",
   //     image: "/images/Group 8163.png",
@@ -99,8 +98,8 @@ export default function PropertyForm({
   //     ],
   //   },
   // ]);
-  const [_propertyList, setPropertyList] = React.useState([]);
-  const [_subtypelist, setSubTypeList] = React.useState([]);
+  const [_propertyList, setPropertyList] = useState([]);
+  const [_subtypelist, setSubTypeList] = useState([]);
   const ProjectType = async () => {
     try {
       const res = await PostApiFunction({
@@ -170,13 +169,11 @@ export default function PropertyForm({
       console.log("error", error);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     ProjectType();
   }, []);
-  React.useEffect(() => {
-    if (_getproprty_type) {
-      SubProjectType();
-    }
+  useEffect(() => {
+    SubProjectType();
   }, [_getproprty_type]);
   return (
     <Dialog

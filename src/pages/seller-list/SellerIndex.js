@@ -5,7 +5,7 @@ import AdminLayout from "../../layout/AdminLayout";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import BlockIcon from "@mui/icons-material/Block";
-import ListPagination from "../admin/component/ListPagination";
+import ListPagination from "../../component/ListPagination";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {
   PostApiFunction,
@@ -16,14 +16,14 @@ import {
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import TableList from "../admin/component/TableList";
+import TableList from "../../component/TableList";
 // import FilterComponent from "../admin/component/FilterComponent";
-import ViewDialog from "../admin/component/ViewDialog";
+import ViewDialog from "../../component/ViewDialog";
 import SureModal from "../../component/SureModal";
 import LoaderComponent from "../../component/LoaderComponent";
-import FilterComponent from "../admin/component/FilterComponent";
+import FilterComponent from "../../component/FilterComponent";
 
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
     background: "#fff",
@@ -111,7 +111,7 @@ const SellerIndex = () => {
       const res = await PostApiFunction({
         endPoint: Apiconfigs.listAllUsers,
         data: {
-          search: "BUYER",
+          search: "SELLER",
           page: page,
           limit: "10",
         },

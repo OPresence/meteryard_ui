@@ -5,7 +5,7 @@
 // import FilterComponent from "../admin/component/FilterComponent";
 // import AdminLayout from "../../layout/AdminLayout";
 
-// const Root = styled("Box")(({ theme }) => ({
+// const Root = styled(Box)(({ theme }) => ({
 //   "& .mainPage": {
 //     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
 //     background: "#fff",
@@ -65,15 +65,15 @@ import Apiconfigs from "../../ApiConfig/ApiConfig";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import CreateIcon from "@mui/icons-material/Create";
 import BlockIcon from "@mui/icons-material/Block";
-import ListPagination from "../admin/component/ListPagination";
-import ViewDialog from "../admin/component/ViewDialog";
+import ListPagination from "../../component/ListPagination";
+import ViewDialog from "../../component/ViewDialog";
 import SureModal from "../../component/SureModal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import TableList from "../admin/component/TableList";
-import FilterComponent from "../admin/component/FilterComponent";
-const Root = styled("Box")(({ theme }) => ({
+import TableList from "../../component/TableList";
+import FilterComponent from "../../component/FilterComponent";
+const Root = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
     background: "#fff",
@@ -136,6 +136,7 @@ const StateComponent = () => {
   const [_imageurl, setImageURL] = useState("");
   const [openView, setOpenView] = useState(false);
   const [_getcountrylist, setCountryList] = useState([]);
+
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -165,7 +166,7 @@ const StateComponent = () => {
     setIsLoading(false);
   };
 
-  const GetCityList = async () => {
+  const AllPostList = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
@@ -196,7 +197,7 @@ const StateComponent = () => {
     }
   };
 
-  const Add_Country = async (value) => {
+  const PropertyPostFunction = async (value) => {
     console.log("valuenxnncx---->", value);
     try {
       setIsLoading(true);
@@ -210,7 +211,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          AllPostList();
           setIsLoading(false);
           handleClose();
         } else if (res?.responseCode == 404) {
@@ -267,7 +268,7 @@ const StateComponent = () => {
         },
       });
       if (res) {
-        GetCityList();
+        AllPostList();
         if (res?.responseCode == 200) {
           setIsLoading(false);
           handleViewClose();
@@ -304,7 +305,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          AllPostList();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -339,7 +340,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          AllPostList();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -364,7 +365,7 @@ const StateComponent = () => {
   };
   useEffect(() => {
     if (page) {
-      GetCityList();
+      AllPostList();
     }
   }, [page]);
   return (
@@ -381,7 +382,7 @@ const StateComponent = () => {
               handleClose={handleClose}
               handleClickOpen={handleOpen}
               // ImageUpload={ImageUpload}
-              AddMoreList={Add_Country}
+              AddMoreList={PropertyPostFunction}
               _isloading={_isloading}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}

@@ -1,18 +1,40 @@
-import React, { useEffect, useState } from "react";
-import { Grid, Typography, Box, Container } from "@mui/material";
-import FmdGoodIcon from "@mui/icons-material/FmdGood";
+import React, { useContext, useRef, useState } from "react";
+import { useTheme } from "@mui/material/styles";
+import {
+  Grid,
+  Typography,
+  Box,
+  Container,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
 import styled from "@emotion/styled";
-import Divider from "@mui/material/Divider";
-import ButtonComponent from "./ButtonComponent";
-import { PostApiFunction } from "../utils";
-import Apiconfigs from "../ApiConfig/ApiConfig";
-import { toast } from "react-toastify";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../context/Auth";
+import AgreeculturePostCard from "./FeaturedPostCard";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useRouter } from "next/router";
 
-const ResidentStyle = styled("Box")(({ theme }) => ({
+const AgreecultureStyle = styled("Box")(({ theme }) => ({
   "& .mainSliderDiv": {
-    padding: "80px 0px",
+    padding: "0 40px",
+    position: "relative",
     background: "#fff",
+    "@media(max-width:615px)": {
+      padding: "0",
+      marginTop: "5rem",
+    },
+    "& p": {
+      fontFamily: "Inter",
+      fontSize: "24px",
+      fontWeight: "400",
+      lineHeight: "29.05px",
+    },
     // padding: "50px",
     "@media(max-width:615px)": {
       padding: "20px 0px",
@@ -21,230 +43,267 @@ const ResidentStyle = styled("Box")(({ theme }) => ({
       fontWeight: "500",
     },
   },
-  "& .circleimg": {
-    width: "100%",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: "265px",
-    "& h6": {
-      color: "#A7D325",
-      fontSize: "14px",
-    },
-    "& svg": {
-      color: "#A7D325",
-    },
-  },
-  "& .large": {
-    background: "#FFF",
-  },
-  "& .cards": {
+  "& .ArrowClass": {
     cursor: "pointer",
-    width: "100%",
-    borderRadius: "15px",
-    position: "relative",
-    transition: "0.8s",
-    transform: "scale(0.9)",
+    width: "30px",
+    height: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#a2d117",
+    border: "3px solid #FAF9F6",
+    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    "& svg": {
+      color: "#000 !important",
+      fontSize: "12px",
+    },
     "&:hover": {
-      transform: "scale(1)",
-      transition: "0.8s",
-    },
-    "& .contentBox": {
-      boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-      padding: "10px",
-      marginTop: "-60px",
-      background: "#fff",
-      borderRadius: "10px",
-      position: "relative",
+      background: "rgb(0, 144, 53)",
+      transition: "0.6s",
       "& svg": {
-        color: "#000",
-        fontSize: "16px",
-      },
-      "& .circleBox": {
-        borderRadius: "50px",
-        height: "50px",
-        width: "50px",
-        marginTop: "-35px",
-        background: "darkslategray",
-        display: "flex",
-        alignItems: "center",
-      },
-
-      "& h5": {
-        fontSize: "12px",
-        textAlign: "start",
-        fontWeight: "bold",
-        padding: "5px",
-        marginTop: "-10px",
-      },
-      "& h4": {
-        fontSize: "12px",
-        color: "#000",
-        fontWeight: "500",
-      },
-      "& h6": {
-        fontSize: "10px",
-        color: "#818181",
-        fontWeight: "500",
-        margin: "5px 5px",
+        color: "#fff !important",
       },
     },
+  },
 
-    "& h5": {
-      textAlign: "end",
-      fontSize: "18px",
+  "& .viewmoreButtonShow": {
+    padding: "10px",
+    position: "absolute",
+    right: "60px",
+    bottom: "0",
+    zIndex: "999",
+    "@media(max-width:615px)": {
+      right: "0px",
+      bottom: "0px",
+    },
+    "& button": {
+      border: "2px solid #a7d325",
+      background: "none",
+      borderRadius: "20px",
+      color: "#000",
+      border: "none",
+
+      "& span": {
+        color: "#a7d325 ",
+      },
     },
   },
 }));
-const AgreecultureComponent = () => {
-  const [_getlist, setGetList] = useState([]);
-  console.log("res---->sndkjfkdkfsd", _getlist);
 
-  const [_isloading, setIsLoading] = useState(false);
-  const projectDetails = [
-    {
-      image: "/images/meteryard/Images/Image 23.png",
-    },
-    {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100309.png",
-    },
-    {
-      image: "/images/meteryard/Images/Image 23.png",
-    },
-    {
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100420.png",
-    },
-  ];
-  const ResidentialAPI = async () => {
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeId: "65dc4c1eda234100342352fc",
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setIsLoading(false);
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "3rem",
+  top: "60%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  zIndex: 2,
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
 
-        setGetList(res?.result?.docs);
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "3rem",
+  top: "60%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  zIndex: 2,
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
+
+const AgreecultureComponent = ({ showViewMore }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const auth = useContext(AuthContext);
+  const sliderRef = useRef(null);
+  const router = useRouter();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      if (currentSlide >= 1) {
+        setCurrentSlide(currentSlide - 1);
       }
-    } catch (error) {
-      setIsLoading(false);
-
-      console.log("eror", error);
+      sliderRef.current.slickPrev();
     }
   };
-  useEffect(() => {
-    ResidentialAPI();
-  }, []);
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      if (currentSlide <= auth?._getlistAgreeculture.length - 3) {
+        setCurrentSlide(currentSlide + 1);
+      }
+      sliderRef.current.slickNext();
+    }
+  };
+  const settings = {
+    dots: false,
+    infinite: true,
+    autoplay: false,
+    arrows: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          infinite: true,
+          autoplay: false,
+          initialSlide: 1,
+        },
+      },
+    ],
+  };
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+    });
+  };
+
   return (
-    <ResidentStyle>
-      <div className="mainSliderDiv">
-        <Container maxWidth>
-          <section>
+    <AgreecultureStyle>
+      <Box className="mainSliderDiv">
+        <Container>
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            mb={5}
+          >
             <Box>
-              <Typography variant="h2">Agriculture Projects</Typography>
-              <Typography variant="h6">
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
+              >
+                Agriculture Projects
+              </Typography>
+              <Typography
+                variant="p"
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+                fontWeight={300}
+              >
                 Agriculture Projects Across India.
               </Typography>
             </Box>
-          </section>
-          <Box mt={5}>
-            <Grid container spacing={3}>
-              {_getlist &&
-                _getlist?.map((data, index) => {
-                  return (
-                    <Grid
-                      key={index}
-                      item
-                      lg={3}
-                      md={3}
-                      sm={6}
-                      xs={12}
-                      style={{ display: "flex" }}
-                    >
-                      <Box height={"100%"} pb={"20px"}>
-                        <Box className="cards">
-                          <Box>
-                            <img
-                              src={data?.coverImage}
-                              width={"100%"}
-                              style={{ borderRadius: "15px" }}
-                            />
-                          </Box>
-
-                          <Box display={"flex"} justifyContent={"center"}>
-                            <Box className="contentBox" width={"90%"}>
-                              <Box display={"flex"} alignItems={"center"}>
-                                <Typography variant="h5">
-                                  {data?.projectName}
-                                </Typography>
-                              </Box>
-                              <Box display={"flex"} mt={1}>
-                                <FmdGoodIcon />
-                                &nbsp;
-                                <Box m={"0 0 0 5px"}>
-                                  <Typography variant="h4">
-                                    {data?.title}
-                                  </Typography>
-                                  <Typography variant="h6">
-                                    {data?.description}
-                                  </Typography>
-                                  <Box m={"10px 0"}>
-                                    <Divider color="#D2D2D2" />
-                                  </Box>
-                                  <Box
-                                    display={"flex"}
-                                    alignItems={"center"}
-                                    justifyContent={"space-between"}
-                                  >
-                                    <Box>
-                                      <Typography variant="h6">
-                                        Property Size
-                                      </Typography>
-                                      <Typography variant="h5">
-                                        {data?.superBuildupArea}
-                                      </Typography>
-                                    </Box>
-                                    <Box>
-                                      <Typography variant="h6">
-                                        Price
-                                      </Typography>
-                                      <Typography variant="h5">
-                                        {data?.price}/-
-                                      </Typography>
-                                    </Box>
-                                  </Box>
-
-                                  {/* <Route path="/view-property" exact> */}
-                                  <ButtonComponent data={data} />
-                                  {/* </Route> */}
-                                </Box>
-                              </Box>
-                            </Box>
-                          </Box>
-                        </Box>
-                      </Box>
-                    </Grid>
-                  );
-                })}
-            </Grid>
-            {_getlist?.length > 7 && (
-              <Box
-                display={"flex"}
-                justifyContent={"end"}
-                p={"0 15px"}
-                mt={"-20px"}
-              >
-                <a href="#">view more</a>
-              </Box>
-            )}
           </Box>
         </Container>
-      </div>
-    </ResidentStyle>
+
+        {!isMobile && auth?._getlistAgreeculture?.length > 4 && (
+          <IconButtonLeftContent onClick={handlePrevious}>
+            <ArrowBackIosIcon />
+          </IconButtonLeftContent>
+        )}
+        <Box>
+          <Box mt={4} width="95%" marginInline="auto">
+            <Slider {...settings} ref={sliderRef}>
+              {auth?._getlistAgreeculture &&
+                auth?._getlistAgreeculture?.map((data, index) => {
+                  return <AgreeculturePostCard data={data} key={index} />;
+                })}
+            </Slider>
+          </Box>
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+          {React.Children.toArray(
+            auth?._getlistAgreeculture.map((item, index) => {
+              if (index >= auth?._getlistAgreeculture.length - 2) return null;
+              return (
+                <Box
+                  onClick={() => {
+                    setCurrentSlide(index);
+                    sliderRef.current.slickGoTo(index);
+                  }}
+                  style={{
+                    minWidth: "10px",
+                    minHeight: "10px",
+                    borderRadius: "50%",
+                    border: "1px solid #A7D325",
+                    backgroundColor:
+                      currentSlide === index ? "#A7D325" : "white",
+                    marginRight: "4px",
+                  }}
+                />
+              );
+            })
+          )}
+        </Box>
+        {!isMobile && auth?._getlistAgreeculture?.length > 4 && (
+          <IconButtonRightContent onClick={handleNext}>
+            <ArrowForwardIosIcon />
+          </IconButtonRightContent>
+        )}
+        {auth?._getlistAgreeculture.length > 0 && (
+          <Box className="viewmoreButtonShow">
+            <Button onClick={handleClick}>
+              View All <ArrowForwardIcon className="forwardIcon" />
+            </Button>
+          </Box>
+        )}
+      </Box>
+    </AgreecultureStyle>
   );
 };
 

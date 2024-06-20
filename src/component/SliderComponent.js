@@ -1,32 +1,47 @@
 import React, { useRef } from "react";
-import { Card, Grid, Typography, Box, Container } from "@mui/material";
+import {
+  Card,
+  Grid,
+  Typography,
+  Box,
+  Container,
+  useMediaQuery,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styled from "@emotion/styled";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
-    padding: "60px 0",
     textAlign: "center",
-    margin: "0 20px",
+    width: "85%",
+    margin: "0 auto",
+    marginTop: "-90px",
     "@media(max-width:615px)": {
-      padding: "0px 0 60px 0",
-      marginTop: "150px",
+      marginTop: "40px",
     },
   },
   "& .circleimg": {
     width: "100%",
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-between",
-    "& h6": {
-      color: "#A7D325",
-      fontSize: "14px",
-    },
+
     "& svg": {
-      color: "#A7D325",
+      color: "orange",
+    },
+    "& .img": {
+      height: "100px",
+      width: "120px",
+      "@media(max-width:615px)": {
+        height: "60px",
+        width: "70px",
+      },
     },
   },
   "& .large": {
@@ -34,17 +49,70 @@ const MainComponent = styled("Box")(({ theme }) => ({
   },
   "& .cards": {
     cursor: "pointer",
-    // boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)!important",
     padding: "10px",
-    width: "80%",
+    width: "100%",
+    height: "230px",
+    borderRadius: "10px",
+    marginTop: "2rem",
+    position: "relative",
+    "@media(max-width:615px)": {
+      height: "150px",
+    },
 
     "& h5": {
-      textAlign: "end",
+      marginTop: "1rem",
+
+      // "fontFamily":"Inter","fontSize":"22px","fontWeight":"700","lineHeight":"26.31px","textAlign":"center"
+      fontFamily: "Inter",
+      fontSize: "22px",
+      fontWeight: "600",
+      lineHeight: "26.31px",
+      textAlign: "center",
+    },
+    "& .rightIcon": {
+      textAlign: "center",
       fontSize: "18px",
+      marginTop: "2rem",
+    },
+  },
+  "& .container": {
+    height: "310px",
+    "@media(max-width:615px)": {
+      height: "200px",
     },
   },
 }));
+
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  zIndex: 1,
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
+
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
+
 const SliderComponent = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
   const sliderRef = useRef(null);
   const projectDetails = [
     {
@@ -84,7 +152,7 @@ const SliderComponent = () => {
     dots: false,
     infinite: true,
     autoplay: false,
-    arrows: true,
+    arrows: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
@@ -96,7 +164,7 @@ const SliderComponent = () => {
           slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -106,92 +174,116 @@ const SliderComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
     ],
   };
 
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
   return (
-    <MainComponent>
-      <Container maxWidth>
-        <Box className="mainSliderDiv" mt={"25rem"}>
-          <Slider {...settings} ref={sliderRef}>
-            {projectDetails.map((data, index) => {
-              return (
-                <Grid item lg={3} md={6} sm={12} xs={12} key={index}>
+    <MainComponent position="relative" m={"2rem 0"}>
+      {!isMobile && (
+        <IconButtonLeftContent onClick={handlePrevious}>
+          <ArrowBackIosIcon />
+        </IconButtonLeftContent>
+      )}
+
+      <Box className="mainSliderDiv" mt={"25rem"}>
+        <Slider {...settings} ref={sliderRef}>
+          {projectDetails.map((data, index) => {
+            return (
+              <Grid
+                item
+                lg={3}
+                md={6}
+                sm={12}
+                xs={12}
+                key={index}
+                style={{ padding: "800px" }}
+              >
+                <Container className="container">
                   <Box display={"flex"} justifyContent={"center"} key={index}>
                     <Card className="cards project-slider">
-                      <Box>
-                        <Typography variant="h5">{data?.name}</Typography>
-                      </Box>
                       <Box className="circleimg">
-                        <Box
-                          maxWidth={115}
-                          minHeight={85}
-                          maxHeight={85}
-                          display={"flex"}
-                          alignItems={"center"}
-                        >
+                        <Box className="img">
                           <img src={data?.image} alt="img" width={"100%"} />
                         </Box>
-                        <Box display={"flex"}>
-                          <Typography variant="h6">View all</Typography>
-                          <span>
-                            <ArrowRightAltIcon />
-                          </span>
+                        <Box mt={3}>
+                          <Typography
+                            variant="h6"
+                            fontSize={isMobile ? 16 : 24}
+                          >
+                            {data?.name}
+                          </Typography>
                         </Box>
                       </Box>
-                    </Card>{" "}
+                    </Card>
                   </Box>
-                </Grid>
-              );
-            })}
-          </Slider>
-        </Box>
-      </Container>
+                </Container>
+              </Grid>
+            );
+          })}
+        </Slider>
+      </Box>
+      {!isMobile && (
+        <IconButtonRightContent onClick={handleNext}>
+          <ArrowForwardIosIcon />
+        </IconButtonRightContent>
+      )}
     </MainComponent>
   );
 };

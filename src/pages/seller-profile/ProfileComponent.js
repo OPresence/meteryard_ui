@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Typography,
@@ -6,15 +6,16 @@ import {
   Grid,
   Avatar,
   Container,
+  // Avatar
 } from "@mui/material";
 import styled from "@emotion/styled";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import HomeLayout from "../../layout/HomeLayout";
 import { BiLogoLinkedin } from "react-icons/bi";
 import { BiLogoFacebook } from "react-icons/bi";
 import { BsTwitter } from "react-icons/bs";
 import { FaDownload } from "react-icons/fa";
 import { BiUserPlus } from "react-icons/bi";
+import { AuthContext } from "../../context/Auth";
 
 const SellerStyle = styled("div")(({ theme }) => ({
   "& .root": {
@@ -46,7 +47,8 @@ const SellerStyle = styled("div")(({ theme }) => ({
         borderRadius: "5px ",
         overflow: "hidden",
         "& img": {
-          height: "318px",
+          width: "100%",
+
           objectFit: "cover",
           "@media(max-width:767px)": {
             height: "150px",
@@ -158,7 +160,7 @@ const SellerStyle = styled("div")(({ theme }) => ({
         color: "#fff",
         fontWeight: "400",
       },
-      padding: "10px 25px",
+      padding: "12.4px",
 
       fontSize: "16px",
       [theme.breakpoints.down("sm")]: {
@@ -169,6 +171,7 @@ const SellerStyle = styled("div")(({ theme }) => ({
   },
 }));
 const ProfileComponent = () => {
+  const auth = useContext(AuthContext);
   return (
     <SellerStyle>
       <Container
@@ -195,16 +198,22 @@ const ProfileComponent = () => {
               <Grid item xs={12} sm={4} lg={3} md={2}>
                 <Box className="UserProfile">
                   <figure className="User">
-                    <Avatar src={"/images/profile/1567018939360.png"} />
+                    <Avatar
+                      src={
+                        auth?.profilePicture == ""
+                          ? "/images/profile/user-placeholder.png"
+                          : auth?.profilePicture
+                      }
+                    />
                   </figure>
                 </Box>
               </Grid>
               <Grid xs={6} sm={3} lg={6} md={8}>
                 <Box className="Username">
                   <Typography color="primary.main" variant="h4">
-                    Monu Rajput
+                    {auth?._getprofile?.name}
                   </Typography>
-                  <span>Customer Relationship Manager</span>
+                  <span>{auth?._getprofile?.userType}</span>
                 </Box>
                 <Grid container spacing={1}>
                   <Grid item lg={3} md={3} sm={3} xs={6}>
@@ -289,18 +298,6 @@ const ProfileComponent = () => {
                     </Box>
                   </Grid>
                 </Grid>
-              </Grid>
-              <Grid item xs={6} sm={5} lg={3} md={2}>
-                <Box className={"pricetext"}>
-                  <Box display={"flex"} alignItems={"center"}>
-                    <Box className="IconBox">
-                      <FaDownload />
-                    </Box>
-                    <Button className={"btn1"}>
-                      <span>CATALOGOU</span>
-                    </Button>
-                  </Box>
-                </Box>
               </Grid>
             </Grid>
           </Box>

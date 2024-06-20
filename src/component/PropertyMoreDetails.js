@@ -8,53 +8,68 @@ const PropertyMoreDetails = ({ dataArray }) => {
       <Box className="cardContent">
         <Grid container spaceing={2}>
           <Grid item xs={12} lg={4}>
-            <Box className="contentdiv">
-              <Box className="moreDetailcontent" style={{ width: "150px" }}>
-                <Typography variant="h3">Price Breakup</Typography>
-              </Box>
-              <Box className="moreDetailcontent">
-                <Typography variant="body1">{dataArray?.price}/- Rs</Typography>
-              </Box>
-            </Box>
-
-            <Box className="contentdiv">
-              <Box className="moreDetailcontent" style={{ width: "150px" }}>
-                <Typography variant="h3">Booking Amount</Typography>
-              </Box>
-              <Box className="moreDetailcontent">
-                <Typography variant="body1">{dataArray?.price}</Typography>
-              </Box>
-            </Box>
-            <Box className="contentdiv">
-              <Box className="moreDetailcontent" style={{ width: "150px" }}>
-                <Typography variant="h3">Address</Typography>
-              </Box>
-              <Box className="moreDetailcontent">
-                <Typography variant="body1">{dataArray?.address}</Typography>
-              </Box>
-            </Box>
-            <Box className="contentdiv">
-              <Box className="moreDetailcontent" style={{ width: "150px" }}>
-                <Typography variant="h3">Furnishing</Typography>
-              </Box>
-              <Box className="moreDetailcontent">
-                <Typography variant="body1">
-                  {dataArray?.projectName}
-                </Typography>
-              </Box>
-            </Box>
-            <Box className="contentdiv">
-              <Box className="moreDetailcontent" style={{ width: "150px" }}>
-                <Typography variant="h3">Type Of Ownership</Typography>
-              </Box>
-              <Box className="moreDetailcontent">
-                <Typography variant="body1">{dataArray?.listedBy}</Typography>
-              </Box>
-            </Box>
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent" style={{ width: "150px" }}>
+                  <Typography variant="h3">Price Breakup</Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent">
+                  <Typography variant="body1">
+                    {dataArray?.price?.toLocaleString()}/- Rs
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent" style={{ width: "150px" }}>
+                  <Typography variant="h3">Booking Amount</Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent">
+                  <Typography variant="body1">
+                    {dataArray?.price?.toLocaleString()}/- Rs
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent" style={{ width: "150px" }}>
+                  <Typography variant="h3">Address</Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent">
+                  <Typography variant="body1">{dataArray?.address}</Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent" style={{ width: "150px" }}>
+                  <Typography variant="h3">Furnishing</Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent">
+                  <Typography variant="body1">
+                    {dataArray?.furnishingId?.projectFurnishing}
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent" style={{ width: "150px" }}>
+                  <Typography variant="h3">Type Of Ownership</Typography>
+                </Box>
+              </Grid>{" "}
+              <Grid item xs={6}>
+                <Box className="moreDetailcontent">
+                  <Typography variant="body1">{dataArray?.listedBy}</Typography>
+                </Box>
+              </Grid>
+            </Grid>
           </Grid>
 
           <Grid item xs={12} lg={8}>
-            <Box align={"right"}>
+            <Box className="ImageBox">
               <Box className="" maxWidth={300}>
                 <img
                   src="/images/DrawKit_Vector_Illustration_Real_Estate___Homeowner_Illustrations__5__2x-removebg-preview.png"

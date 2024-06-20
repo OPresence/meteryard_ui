@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled } from "@mui/styles";
 import ImageGrid from "../seller-profile/ImageGrid";
 import Divider from "@mui/material/Divider";
@@ -8,7 +8,75 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { AiOutlineLike } from "react-icons/ai";
 import { BsChatDots } from "react-icons/bs";
 import ApartmentIcon from "@mui/icons-material/Apartment";
-// import PublicIcon from "@mui/icons-material/Public";
+import { AuthContext } from "../../context/Auth";
+
+// const PostStyle = styled(Box)(({ theme }) => ({
+//   "& .mainBox": {
+//     "& .moreDetialsBox": {
+//       "& button": {
+//         background: "#fff",
+//         boxShadow: "0px 3px 3px #00000014",
+//       },
+
+//     },
+//     "& h2": {
+//       fontSize: "13px",
+//       fontWeight: "400",
+//       color: "#444444",
+//       marginTop: "5px",
+//     },
+//     "& .iconBox": {
+//       background: "#444444",
+//       display: "flex",
+//       justifyContent: "center",
+//       // padding: "5px",
+//       borderRadius: "50px",
+//       width: 25,
+//       height: 25,
+//       alignItems: "center",
+//       "& svg": {
+//         fontSize: "15px",
+//         color: "#fff",
+//         background: "#444444",
+//       },
+//     },
+//     "& .viewBox": {
+//       "& h6": {
+//         color: "#838383",
+//         fontSize: "12px",
+//       },
+//       "& span": {
+//         color: "#FBB415",
+//       },
+//     },
+//     "& .bottomBox": {
+//       display: "flex",
+//       alignItems: "center",
+//       gap: "15px",
+//       justifyContent: "space-between",
+//     },
+//     "& .contentBox": {
+//       "& svg": {
+//         fontSize: "16px",
+//         color: "#444444",
+//       },
+
+//       "& span": {
+//         fontSize: "16px",
+//         color: "#444444",
+//       },
+//       "& .linkBox": {
+//         marginTop: "10px",
+//         lineHeight: "25px",
+
+//         "& a": {
+//           color: "#065AC7",
+//           textDecoration: "none",
+//         },
+//       },
+//     },
+//   },
+// }));
 
 const PostStyle = styled("Box")(({ theme }) => ({
   "& .mainBox": {
@@ -28,7 +96,6 @@ const PostStyle = styled("Box")(({ theme }) => ({
       background: "#444444",
       display: "flex",
       justifyContent: "center",
-      // padding: "5px",
       borderRadius: "50px",
       width: 25,
       height: 25,
@@ -66,16 +133,58 @@ const PostStyle = styled("Box")(({ theme }) => ({
       "& .linkBox": {
         marginTop: "10px",
         lineHeight: "25px",
-
         "& a": {
           color: "#065AC7",
           textDecoration: "none",
         },
       },
     },
+    // Media query for screens smaller than 600px
+    "@media (max-width: 600px)": {
+      "& .moreDetialsBox": {
+        "& button": {
+          fontSize: "12px", // Smaller font size for button text
+        },
+      },
+      "& h2": {
+        fontSize: "11px", // Smaller font size
+      },
+      "& .iconBox": {
+        width: 20,
+        height: 20,
+        "& svg": {
+          fontSize: "12px", // Smaller icon size
+        },
+      },
+      "& .viewBox": {
+        "& h6": {
+          fontSize: "10px", // Smaller text in viewBox
+        },
+      },
+      "& .bottomBox": {
+        gap: "10px", // Reduced gap between elements
+      },
+      "& .contentBox": {
+        "& svg": {
+          fontSize: "14px",
+        },
+        "& span": {
+          fontSize: "14px",
+        },
+        "& .linkBox": {
+          "& a": {
+            fontSize: "12px", // Smaller font size for links
+          },
+        },
+      },
+    },
   },
 }));
+
 const PostDetails = () => {
+  const auth = useContext(AuthContext);
+  console.log("auth45454----->", auth?._getprofile);
+
   const ArrayJson = [{}, {}, {}, {}];
   return (
     <PostStyle>
@@ -85,7 +194,7 @@ const PostDetails = () => {
             <Avatar src="/images/profile/1567018939360.png" />
           </Box>
           <Box className="contentBox">
-            <Typography variant="h6">Monu Rajput</Typography>
+            <Typography variant="h6">{auth?._getprofile?.name}</Typography>
             <Box display={"flex"} alignItems={"center"} mt={"5px"}>
               <span>2d .</span> &nbsp;
               <PublicIcon />
@@ -116,7 +225,7 @@ const PostDetails = () => {
               <Avatar src="/images/profile/1567018939360.png" />
             </Box>
             <Box className="contentBox1">
-              <Typography variant="h6">Monu Rajput</Typography>
+              <Typography variant="h6">{auth?._getprofile?.name}</Typography>
               <Box display={"flex"} alignItems={"center"} mt={"5px"}>
                 <span>2d .</span> &nbsp;
                 <PublicIcon />

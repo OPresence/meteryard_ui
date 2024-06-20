@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography, Divider } from "@mui/material";
 import AdminLayout from "../../layout/AdminLayout";
-import DialogComponent from "../admin/component/DialogComponent";
+import DialogComponent from "../../component/DialogComponent";
 import { PostApiFunction, PutApiFunction } from "../../utils/index";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { styled } from "@mui/system";
-const Root = styled("Box")(({ theme }) => ({
+const Root = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     position: "relative", // Add position relative to enable positioning of ::before pseudo-element
     background: "#fff",

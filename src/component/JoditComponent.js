@@ -3,9 +3,9 @@ import React, { useEffect, useRef, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 
 const DynamicJoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
-import CircularProgressCompoennt from "../component/CircularProgressComponent";
+import CircularProgressCompoennt from "./CircularProgressComponent";
 
-// import AdminLayout from "../../../layout/";
+import AdminLayout from "../layout/AdminLayout";
 import {
   Box,
   Typography,
@@ -18,14 +18,14 @@ import {
 import { styled } from "@mui/system";
 import { Form, Formik } from "formik";
 import * as yep from "yup";
-const PageStyle = styled("Box")(({ theme }) => ({
+const PageStyle = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     display: "flex",
     justifyContent: "center",
   },
 }));
 
-const ButtonStyle = styled("Box")(({ theme }) => ({
+const ButtonStyle = styled(Box)(({ theme }) => ({
   "& .mainPage": {
     display: "flex",
     justifyContent: "center",

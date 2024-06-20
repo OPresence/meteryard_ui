@@ -30,7 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const DialogStyle = styled("Box")(({ theme }) => ({
+const DialogStyle = styled(Box)(({ theme }) => ({
   "& button": {
     background: "#A2D117",
     padding: "8px 25px",
@@ -85,7 +85,7 @@ const modalClassStyles = {
     height: "278px",
   },
 };
-const LoginStyle = styled("Box")(({ theme }) => ({
+const LoginStyle = styled(Box)(({ theme }) => ({
   "& .loginBox1": {
     "& button": {
       background: "#A2D117",
@@ -180,7 +180,7 @@ const AdminLogin = () => {
   const router = useRouter();
 
   const formInitialSchema = {
-    email: "anupriyamishra8423@gmail.com",
+    email: "Meteryardindia@gmail.com",
     password: "admin1234",
   };
 
@@ -208,12 +208,28 @@ const AdminLogin = () => {
         data: data_Login,
       });
       if (res) {
-        console.log("05444646454--->", res);
-        handleClose();
-        setIsLoading(false);
-        router.push("/admin");
-        toast.success(res?.responseMessage); // Display success notification
-        window.sessionStorage.setItem("adminToken", res?.result?.token);
+        if (res?.responseCode == 200) {
+          console.log("05444646454--->", res);
+          handleClose();
+          setIsLoading(false);
+          window.sessionStorage.setItem("adminToken", res?.result?.token);
+          router.push("/admin");
+          toast.success(res?.responseMessage); // Display success notification
+        } else if (res?.responseCode == 400) {
+          setIsLoading(false);
+
+          toast.error(res?.responseMessage);
+        } else if (res?.responseCode == 404) {
+          setIsLoading(false);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else if (res?.responseCode == 500) {
+          setIsLoading(false);
+
+          toast.error(res?.responseMessage); // Display error notification
+        } else {
+          toast.error(res?.responseMessage); // Display error notification
+        }
       }
     } catch (error) {
       setIsLoading(false);

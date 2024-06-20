@@ -3,9 +3,9 @@ import { Box, Typography, Grid } from "@mui/material";
 // import CardComponent from "./CardComponent";
 import Divider from "@mui/material/Divider";
 import styled from "@emotion/styled";
-import ButtonComponent from "./ButtonComponent";
+// import ButtonComponent from "./ButtonComponent";
 
-const CardComponentStyle = styled("Box")(({ theme }) => ({
+const CardComponentStyle = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
     padding: "20px 0 30px 0",
     background: "#fff",
@@ -120,7 +120,7 @@ const SuggestionProperties = () => {
                       <Typography variant="h5">900 Sqr Ft.</Typography>
                     </Box>
                   </Box>
-                  <ButtonComponent />
+                  {/* <ButtonComponent /> */}
                 </Box>
               </Box>
             </Grid>
@@ -159,7 +159,7 @@ const SuggestionProperties = () => {
                       <Typography variant="h5">900 Sqr Ft.</Typography>
                     </Box>
                   </Box>
-                  <ButtonComponent />
+                  {/* <ButtonComponent /> */}
                 </Box>
               </Box>{" "}
             </Grid>
@@ -198,7 +198,7 @@ const SuggestionProperties = () => {
                       <Typography variant="h5">900 Sqr Ft.</Typography>
                     </Box>
                   </Box>
-                  <ButtonComponent />
+                  {/* <ButtonComponent /> */}
                 </Box>
               </Box>{" "}
             </Grid>
@@ -237,7 +237,7 @@ const SuggestionProperties = () => {
                       <Typography variant="h5">900 Sqr Ft.</Typography>
                     </Box>
                   </Box>
-                  <ButtonComponent />
+                  {/* <ButtonComponent /> */}
                 </Box>
               </Box>
             </Grid>

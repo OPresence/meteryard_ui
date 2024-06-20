@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "@emotion/styled";
 import { Box, Button, Typography } from "@mui/material";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
 import ChatIcon from "@mui/icons-material/Chat";
+import { AuthContext } from "../../context/Auth";
+
 const SellerDtailsStyle = styled("div")(({ theme }) => ({
   "& .mainBox": {
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -55,18 +57,20 @@ const SellerDtailsStyle = styled("div")(({ theme }) => ({
   },
 }));
 const SellerDetails = () => {
+  const auth = useContext(AuthContext);
+  console.log("auth45454----->", auth?._getprofile);
   return (
     <SellerDtailsStyle>
       <Box className="mainBox">
         <Box className="callBox">
           <PhoneIcon /> &nbsp;&nbsp;&nbsp;
           <Typography variant="h6">
-            +91 7900589437 <span>(Office)</span>
+            +91&nbsp; {auth?._getprofile?.phoneNumber}
           </Typography>
         </Box>
         <Box className="callBox" mt={3}>
           <MailIcon /> &nbsp;&nbsp;&nbsp;
-          <Typography variant="h6">Kevinsmith55@Gmail.Com</Typography>
+          <Typography variant="h6">{auth?._getprofile?.email}</Typography>
         </Box>
         <Box className="buttonBox" mt={3}>
           <Button>

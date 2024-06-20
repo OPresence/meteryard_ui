@@ -3,22 +3,30 @@ import styled from "@emotion/styled";
 import { Box, Button } from "@mui/material";
 import { useRouter } from "next/router";
 
-const ButonStyle = styled("Box")(({ theme }) => ({
+const ButonStyle = styled(Box)(({ theme }) => ({
   "& .viewmoreButton": {
     "& button": {
-      background: "none",
-      border: "1px solid black",
+      width: "158.8px",
+      height: "40.7px",
+      gap: "0px",
+      border: "1x 0px 0px 0px",
+      opacity: "0px",
+      background: "#A9D910",
+      border: "2px solid #A9D910",
+      borderRadius: "50px",
     },
     "& span": {
+      fontFamily: "Inter",
+      fontSize: "12px",
+      fontWeight: "600",
+      lineHeight: "16.94px",
       color: "#000",
-      fontSize: "10px",
     },
   },
 }));
 
 const ButtonComponent = ({ data }) => {
   const router = useRouter();
-  console.log("datazdjknfnz---->", data);
   return (
     <ButonStyle>
       <Box p={"10px 0 0 0"} className="viewmoreButton">
@@ -32,7 +40,7 @@ const ButtonComponent = ({ data }) => {
             })
           }
         >
-          <span>Get View More</span>
+          <span>View More</span>
         </Button>
       </Box>
     </ButonStyle>

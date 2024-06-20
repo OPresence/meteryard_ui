@@ -13,6 +13,14 @@
   color: #444444;
   font-family: system-ui;
 }
+@media screen and (max-width:615px) {
+.topHeading h2 {
+  font: normal normal 600 25px/8px Segoe UI;
+  padding-top: 20px;
+
+}
+  
+}
 .ViewPropertyBanner {
   /* padding-bottom: 40px; */
   min-height: 365px;
@@ -24,6 +32,12 @@
   text-align: left;
   font: normal normal 600 40px/88px Segoe UI;
   font-family: system-ui;
+}
+@media screen and (max-width:615px) {
+  .topHeading h2 span {
+    font: normal normal 600 25px/50px Segoe UI;
+  
+  }
 }
 
 .topHeading p {
@@ -81,7 +95,12 @@
   color: #ffffff;
   font-family: system-ui;
 }
-
+@media screen and (max-width:615px) {
+  .galleryTopCard p {
+    display: none;
+  
+  }
+}
 .galleryTopCard span {
   color: orange;
 }
@@ -92,10 +111,15 @@
 }
 
 .detailsHeading {
-  /* border-right: 1px solid #000; */
   text-align: left;
 }
-
+/* @media screen and (max-width:615px) {
+  .detailsHeading {
+    display: flex;
+    justify-content: space-between;
+  
+  }
+} */
 .detailsHeading h3 {
   color: #747474;
   font-size: 18px;
@@ -153,9 +177,13 @@
   position: absolute;
   bottom: -20px;
   width: 100%;
-  /* margin: 0px 50px; */
 }
-
+@media screen and (max-width:615px) {
+  .detailsOFRoom {
+  background-color: #fff;
+  padding: 10px;
+  }
+}
 .detailsOFRoomContent {
   width: 95%;
   display: flex;
@@ -166,17 +194,34 @@
   border-radius: 20px;
   padding: 9px;
 }
-
+@media screen and (max-width:615px) {
+  .detailsOFRoomContent {
+   gap: 10px;
+   display: initial;
+   padding: 10px 0 0 0;
+   
+  }
+}
 .contextDetails {
   text-align: center;
   width: 100%;
 }
-
+@media screen and (max-width:615px) {
+  .contextDetails {
+   border-right: none !important;
+  
+  }
+}
 .contextDetails h4 {
   color: #444444 !important;
   font-size: 14px;
 }
-
+@media screen and (max-width:615px) {
+  .contextDetails h4 {
+    margin-right: 15px;
+  
+  }
+}
 .socialMediaIcons {
   display: flex;
   align-items: center;
@@ -224,6 +269,15 @@
   font-size: 18px;
   font-family: system-ui;
   font-weight: 500;
+  white-space: pre;
+
+}
+@media screen and (max-width:615px) {
+  .moreDetailcontent h3 {
+   
+    font-size: 12px;
+
+  }
 }
 
 .moreDetailcontent p {
@@ -241,12 +295,14 @@
 
 .contentdiv {
   width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 80px;
-  padding-top: 35px;
 }
 
+@media screen and (max-width:615px) {
+  .contentdiv {
+   
+    padding-top: 10px;
+  }
+}
 .SuggestionProperties {
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 0px 21px #8888882e;
@@ -273,4 +329,14 @@
   box-shadow: 0px 0px 21px #8888882e;
   border-radius: 13px 0px 0px 0px;
   margin-top: 20px;
+}
+.ImageBox{
+ display: flex;
+ justify-content: end;
+}
+@media screen and (max-width:615px) {
+  .ImageBox {
+   
+   display: none;
+  }
 }

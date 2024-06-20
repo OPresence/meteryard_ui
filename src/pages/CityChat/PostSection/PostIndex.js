@@ -1,226 +1,184 @@
-import React, { useContext } from "react";
-import styled from "@emotion/styled";
-import { Divider, Typography, Box } from "@mui/material";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import PublicIcon from "@mui/icons-material/Public";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import { AiOutlineLike } from "react-icons/ai";
-import { BsChatDots } from "react-icons/bs";
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
+import PostCard from "./PostCard";
 import { AuthContext } from "../../../context/Auth";
-
-const CityPropertyStyle = styled("Box")(({ theme }) => ({
-  "& .mainBox": {
-    marginTop: "20px",
-    borderRadius: "15px",
-    boxShadow: "0px 1px 13px #00000026",
-    position: "relative",
-    "& .bottomBox": {
-      display: "flex",
-      justifyContent: "space-between",
-      "& svg": {
-        fontSize: "30px",
-        color: "#444444",
-      },
-    },
-    "& .commentBox": {
-      "& .iconBox": {
-        background: "#444444",
-        display: "flex",
-        justifyContent: "center",
-        // padding: "5px",
-        borderRadius: "50px",
-        width: 40,
-        height: 40,
-        alignItems: "center",
-        "& svg": {
-          fontSize: "30px",
-          color: "#fff",
-          background: "#444444",
-        },
-      },
-      "& .viewBox": {
-        "& h6": {
-          color: "#838383",
-          fontSize: "12px",
-          paddingBottom: "10px",
-        },
-        "& span": {
-          color: "#FBB415",
-        },
-      },
-      "& svg": {
-        color: "#fff",
-        padding: "5px",
-        background: "blue",
-        borderRadius: "50px",
-      },
-      "& h6": {
-        fontSize: "12px",
-        color: "#838383",
-      },
-    },
-    "& .ProfileBox": {
-      padding: "15px",
-      "& h6": {
-        fontSize: "12px",
-        fontWeight: "500",
-      },
-      "& .imgBox": {
-        background: "#fff",
-        borderRadius: "100px",
-        maxWidth: 60,
-        minHeight: 60,
-        maxHeight: 60,
-        boxShadow: theme.shadows[2],
-        overflow: "hidden",
-        "& img": {
-          width: "100%",
-        },
-      },
-      "& .contentBox": {
-        "& h6": {
-          fontSize: "14px",
-          fontWeight: "500",
-        },
-        "& h5": {
-          fontSize: "13px",
-          fontWeight: "400",
-          color: "#444444",
-          marginTop: "5px",
-        },
-      },
-    },
-  },
-}));
+import { Box, Divider, Skeleton } from "@mui/material";
+import { PostApiFunction } from "../../../utils";
+import Apiconfigs from "../../../ApiConfig/ApiConfig";
 
 const PostIndex = () => {
   const auth = useContext(AuthContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [posts, setPosts] = useState([]);
+  const observer = useRef(null);
+
+  const fetchPosts = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.listAllPropertyPost,
+        data: {
+          page: currentPage,
+          limit: 10,
+        },
+      });
+      if (res?.responseCode === 200) {
+        const newPosts = res?.result?.docs;
+        if (newPosts.length === 0) {
+          setHasMore(false);
+        } else {
+          setPosts((prevPosts) => [...prevPosts, ...newPosts]);
+          setCurrentPage((prevPage) => prevPage + 1);
+        }
+      } else {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.log("Error fetching posts:", error);
+    }
+    setLoading(false);
+  }, [currentPage]);
+
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+
+    const observerCallback = (entries) => {
+      const target = entries[0];
+      if (target.isIntersecting && !loading && hasMore) {
+        fetchPosts();
+      }
+    };
+
+    observer.current = new IntersectionObserver(observerCallback, options);
+
+    const targetElement = document.getElementById("last-post-card");
+    if (targetElement && observer.current) {
+      observer.current.observe(targetElement);
+    }
+
+    return () => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+    };
+  }, [loading, hasMore]);
+
+  const handleLike = async (postId) => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.likeDislikeProperty,
+        data: {
+          propertyPostId: postId,
+        },
+      });
+      if (res) {
+        auth?.PostFunction();
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const AddCommentFunction = async (postId, usercomment) => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.addComment,
+        data: {
+          postType: "POST",
+          propertyPostId: postId,
+          comment: usercomment,
+        },
+      });
+      if (res?.responseCode === 200) {
+      } else {
+        console.error("Error adding comment:", res);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
+  const AddReplyFunction = async (commentId, userreply) => {
+    try {
+      const res = await PostApiFunction({
+        endPoint: Apiconfigs?.addComment,
+        data: {
+          commentId: commentId,
+          reply: userreply,
+        },
+      });
+      if (res?.responseCode === 200) {
+        fetchPosts();
+      } else {
+        console.error("Error adding comment:", res);
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  };
+
   return (
-    <CityPropertyStyle>
-      {auth?._postlist?.map((data, index) => {
-        return (
-          <Box className="mainBox" key={index}>
-            <Box maxWidth={280} position={"absolute"} right={-17} top={-13}>
-              <img src="/images/Path 8257.svg" width={"100%"} />
-            </Box>
-            <Box>
-              <Box className="ProfileBox">
-                <Box display={"flex"} alignItems={"center"}>
-                  <Box className="imgBox">
-                    {data?.sellerId?.profilePicture == "" ? (
-                      <img
-                        src="https://res.cloudinary.com/mobiloitteblockchain/image/upload/v1710956640/h7dhmg9pquip3assdqz3.jpg"
-                        width={"100%"}
-                      />
-                    ) : (
-                      <img
-                        src={data?.sellerId?.profilePicture}
-                        width={"100%"}
-                      />
-                    )}
+    <Box>
+      {posts.map((data, index) => (
+        <Box key={index}>
+          <PostCard
+            data={data}
+            onLike={handleLike}
+            AddCommentFunction={AddCommentFunction}
+            AddReplyFunction={AddReplyFunction}
+          />
+        </Box>
+      ))}
+      {loading && (
+        <div>
+          {Array.from({ length: 3 }).map((_, index) => (
+            <React.Fragment key={index}>
+              <Skeleton
+                animation="wave"
+                variant="circular"
+                width={40}
+                height={40}
+                sx={{ marginTop: "4rem" }}
+              />
+              <Box display="flex" alignItems="center">
+                <Skeleton animation="wave" width={100} height={40} />
+              </Box>
+              <Box mt={1} className="contentBox">
+                <Skeleton
+                  animation="wave"
+                  height={40}
+                  style={{ marginBottom: 6 }}
+                />
+                <Skeleton animation="wave" height={40} width="80%" />
+                <Box display="flex" alignItems="center" mt={1}>
+                  <Box>
+                    <Skeleton animation="wave" height={120} width={900} />
                   </Box>
-                  &nbsp;&nbsp;&nbsp;
-                  <Typography variant="h6">{data?.sellerId?.name}</Typography>
-                </Box>
-                <Box mt={1} className="contentBox">
-                  <Typography variant="h6">{data?.title}</Typography>
-                  <Typography variant="h5">{data?.description}</Typography>
-                  <Box display={"flex"} alignItems={"center"} mt={1}>
-                    <Box>
-                      <Typography variant="h6">Property Size</Typography>
-                      <Typography variant="h5">
-                        {data?.superBuildupArea}
-                      </Typography>
-                    </Box>
-                    &nbsp;&nbsp; &nbsp;&nbsp;
-                    <Box>
-                      <Typography variant="h6">Project Name</Typography>
-                      <Typography variant="h5">{data?.projectName} </Typography>
-                    </Box>
+                  &nbsp;&nbsp; &nbsp;&nbsp;
+                  <Box>
+                    <Skeleton animation="wave" height={40} width={100} />
                   </Box>
                 </Box>
               </Box>
-              <Box>
-                <img src={data?.coverImage} width={"100%"} />
-              </Box>
-              <Box padding={"15px"}>
-                <Box
-                  className="commentBox"
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                >
-                  <Box display={"flex"} alignItems={"center"}>
-                    <ThumbUpIcon /> &nbsp;&nbsp;&nbsp;
-                    <Typography variant="h6">
-                      ashok sharma and 560k others
-                    </Typography>
-                  </Box>
-                  <Box display={"flex"} alignItems={"center"}>
-                    <Box display={"flex"} alignItems={"center"}>
-                      <Box className="iconBox">
-                        <Box>
-                          <img src="/images/Group 4144.png" width={"100%"} />
-                        </Box>
-                      </Box>
-                      &nbsp;&nbsp;&nbsp;
-                      <Box className="viewBox">
-                        <Typography variant="h6">reviews</Typography>
-                        <span>4.5</span>
-                      </Box>
-                    </Box>
-                    &nbsp;&nbsp;&nbsp;
-                    <Box display={"flex"} alignItems={"center"}>
-                      <Box className="iconBox">
-                        <ApartmentIcon />
-                      </Box>
-                      &nbsp;&nbsp;&nbsp;
-                      <Box className="viewBox">
-                        <Typography variant="h6">ranking</Typography>
-                        <span>4.5</span>
-                      </Box>
-                    </Box>
-                    &nbsp;&nbsp;&nbsp;
-                    <Box display={"flex"} alignItems={"center"}>
-                      <Box className="iconBox">
-                        <PublicIcon />
-                      </Box>
-                      &nbsp;&nbsp;&nbsp;
-                      <Box className="viewBox">
-                        <Typography variant="h6">City</Typography>
-                        <span>4.5</span>
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box m={"15px 0"}>
-                  <Divider />
-                </Box>
-                <Box p={"0 40px"}>
-                  <Box className="bottomBox">
-                    <Box display={"flex"} alignItems={"center"}>
-                      <AiOutlineLike />
-                      &nbsp;&nbsp;&nbsp;
-                      <Typography variant="h6">ratings</Typography>
-                    </Box>
-                    <Box display={"flex"} alignItems={"center"}>
-                      <BsChatDots />
-                      &nbsp;&nbsp;&nbsp;
-                      <Typography variant="h6">ratings</Typography>
-                    </Box>
-                    <Box display={"flex"} alignItems={"center"}>
-                      <ThumbUpOffAltIcon />
-                      &nbsp;&nbsp;&nbsp;
-                      <Typography variant="h6">ratings</Typography>
-                    </Box>
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-        );
-      })}
-    </CityPropertyStyle>
+              <Divider sx={{ marginTop: "2rem" }} />
+            </React.Fragment>
+          ))}
+        </div>
+      )}
+      {!loading && !hasMore && <div>No more posts</div>}
+      <div id="last-post-card" style={{ height: "10px" }} />
+    </Box>
   );
 };
 

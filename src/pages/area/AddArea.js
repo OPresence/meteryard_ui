@@ -25,7 +25,7 @@ import { Form, Formik } from "formik";
 import * as yep from "yup";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
 
-const DialogButtonStyle = styled("Box")(({ theme }) => ({
+const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
     background: "#444444",
@@ -111,7 +111,7 @@ const AddArea = ({
         data: {
           limit: "10",
           page: "1",
-          countryId: _countrycode,
+          countryCode: _countrycode,
         },
         // params: {
         //   stateId: _countrycode,

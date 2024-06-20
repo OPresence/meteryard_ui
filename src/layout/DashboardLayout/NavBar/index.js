@@ -23,9 +23,10 @@ import {
 } from "@mui/material";
 import NavItem from "./NavItem";
 import { styled } from "@mui/system";
-const BuyerStyle = styled("Box")(({ theme }) => ({
+const BuyerStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     background: theme.palette.background.default,
+
     // paddingBottom: "100px",
     "& .SellerBox": {
       padding: "20px",
@@ -35,6 +36,7 @@ const BuyerStyle = styled("Box")(({ theme }) => ({
       padding: "20px",
       // boxShadow: theme.shadows[3],
       boxShadow: "0px 1px 13px #00000026",
+
       "& .devider": {
         background: "#00000040",
         position: "relative",
@@ -102,7 +104,7 @@ const SideMenuBox = styled(Box)({
     marginLeft: "45px",
   },
 });
-const DialogMainBox = styled("Box")(({ theme }) => ({
+const DialogMainBox = styled(Box)(({ theme }) => ({
   "& h5": {
     fontSize: "20px",
     fontWeight: "600",
