@@ -1,17 +1,8 @@
-import { useEffect, useState } from "react";
-
-const API_Production = process.env.NEXT_PUBLIC_API_URL;
-const API_STAGING = process.env.NEXT_PUBLIC_SITE_URL;
-// var URL_ENDPOINT = "https://lms-api-backend.onrender.com/api/v1";
-// var URL_ENDPOINT = "http://3.1.213.161:3020/api/v1";
-
 var URL_ENDPOINT;
 if (process.env.NODE_ENV !== "production") {
-  URL_ENDPOINT = API_Production;
-  console.log("2222---->", URL_ENDPOINT);
+  URL_ENDPOINT = process.env.NEXT_PUBLIC_SITE_URL;
 } else {
-  URL_ENDPOINT = API_STAGING;
-  console.log("API_STAGING---->", URL_ENDPOINT);
+  URL_ENDPOINT =  process.env.NEXT_PUBLIC_SITE_URL;
 }
 
 const Apiconfigs = {

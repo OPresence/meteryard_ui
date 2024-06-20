@@ -610,97 +610,105 @@ export default function Home() {
             padding={isMobile && "10px 20px"}
           >
             <Box>
-            <Typography
-              variant="h1"
-              className="banner-heading"
-              lineHeight={isMobile && "2rem"}
-              marginTop={isMobile && "20px"}
-              justifyContent= {isMobile && "flex-start"}
-            >
-              <span className="find">Find Your Place,</span>
-              {isMobile && <br />}
-              <span className="Make">
-                Make {!isMobile && <br />}
-                It Home
-              </span>
-            </Typography>
-            <Box mt={1.5} mb={1.5}>
-              <Typography variant="h3" width={isMobile ? "68%" :"100%"} fontSize={isMobile ? "14px":"18px"}>
-                Please Select Your Category
+              <Typography
+                variant="h1"
+                className="banner-heading"
+                lineHeight={isMobile && "2rem"}
+                marginTop={isMobile && "20px"}
+                justifyContent={isMobile && "flex-start"}
+              >
+                <span className="find">Find Your Place,</span>
+                {isMobile && <br />}
+                <span className="Make">
+                  Make {!isMobile && <br />}
+                  It Home
+                </span>
               </Typography>
-            </Box>
-            <Box display={"flex"} className="buyer-seller-btn" justifyContent={isMobile && "flex-start"}>
-              <Box
-                mt={isMobile ? 2 : 5}
-                position={"relative"}
-                zIndex={1}
-                className={"buttonBox"}
-              >
-                <Button
-                  variant="button"
-                  className="ButtonClass"
-                  onMouseEnter={() => handleMouseEnter("Buyer")}
+              <Box mt={1.5} mb={1.5}>
+                <Typography
+                  variant="h3"
+                  width={isMobile ? "68%" : "100%"}
+                  fontSize={isMobile ? "14px" : "18px"}
                 >
-                  <Box className={"buttonIconBox"}>
-                    <Box className="imageBox">
-                      <img
-                        src="/images/Administrator Male.png"
-                        width={"100%"}
-                      />
-                    </Box>
-                  </Box>
-                  <Box className="buyerBoxSpan">
-                    <span className="buttonText">Buyer</span>
-                  </Box>
-                </Button>
-                &nbsp;
-                <Box className={"hoverBox"}>
-                  <ButtonSwitchComponent
-                    Type="Buyer"
-                    activeBtn={activeBtn}
-                    setOpen={setOpen}
-                    _propertyform={_propertyform}
-                    handleClickOpen={handleClickOpen}
-                    handleClose={handleClose}
-                  />
-                </Box>
+                  Please Select Your Category
+                </Typography>
               </Box>
               <Box
-                mt={isMobile ? 2 : 5}
-                position={"relative"}
-                zIndex={1}
-                className={"buttonBoxSecond"}
+                display={"flex"}
+                className="buyer-seller-btn"
+                justifyContent={isMobile && "flex-start"}
               >
-                <Button
-                  variant="button"
-                  className="ButtonClass1"
-                  onMouseEnter={() => handleMouseEnter("Seller")}
+                <Box
+                  mt={isMobile ? 2 : 5}
+                  position={"relative"}
+                  zIndex={1}
+                  className={"buttonBox"}
                 >
-                  <Box className="buyerBoxSpan">
-                    <span className="buttonText">Seller</span>
-                  </Box>
-                  <Box className={"buttonIconBox"}>
-                    <Box className="imageBox">
-                      <img
-                        src="/images/Administrator Male.png"
-                        width={"100%"}
-                      />
+                  <Button
+                    variant="button"
+                    className="ButtonClass"
+                    onMouseEnter={() => handleMouseEnter("Buyer")}
+                  >
+                    <Box className={"buttonIconBox"}>
+                      <Box className="imageBox">
+                        <img
+                          src="/images/Administrator Male.png"
+                          width={"100%"}
+                        />
+                      </Box>
                     </Box>
+                    <Box className="buyerBoxSpan">
+                      <span className="buttonText">Buyer</span>
+                    </Box>
+                  </Button>
+                  &nbsp;
+                  <Box className={"hoverBox"}>
+                    <ButtonSwitchComponent
+                      Type="Buyer"
+                      activeBtn={activeBtn}
+                      setOpen={setOpen}
+                      _propertyform={_propertyform}
+                      handleClickOpen={handleClickOpen}
+                      handleClose={handleClose}
+                    />
                   </Box>
-                </Button>
-                <Box className={"hoverBox1"}>
-                  <ButtonSwitchComponent
-                    Type="Seller"
-                    activeBtn={activeBtn}
-                    setOpen={setOpen}
-                    _propertyform={_propertyform}
-                    handleClickOpen={handleClickOpen}
-                    handleClose={handleClose}
-                    AdPropertyFunction={AdPropertyFunction}
-                  />
+                </Box>
+                <Box
+                  mt={isMobile ? 2 : 5}
+                  position={"relative"}
+                  zIndex={1}
+                  className={"buttonBoxSecond"}
+                >
+                  <Button
+                    variant="button"
+                    className="ButtonClass1"
+                    onMouseEnter={() => handleMouseEnter("Seller")}
+                  >
+                    <Box className="buyerBoxSpan">
+                      <span className="buttonText">Seller</span>
+                    </Box>
+                    <Box className={"buttonIconBox"}>
+                      <Box className="imageBox">
+                        <img
+                          src="/images/Administrator Male.png"
+                          width={"100%"}
+                        />
+                      </Box>
+                    </Box>
+                  </Button>
+                  <Box className={"hoverBox1"}>
+                    <ButtonSwitchComponent
+                      Type="Seller"
+                      activeBtn={activeBtn}
+                      setOpen={setOpen}
+                      _propertyform={_propertyform}
+                      handleClickOpen={handleClickOpen}
+                      handleClose={handleClose}
+                      AdPropertyFunction={AdPropertyFunction}
+                    />
+                  </Box>
                 </Box>
               </Box>
-            </Box>
             </Box>
 
             <Box
@@ -761,15 +769,6 @@ export default function Home() {
                   height={"100%"}
                   width={"100%"}
                 />
-                {/* <Box>
-                    <Box className="handImage">
-                      <img
-                        src="/images/meteryard/Images/home-background-images.png"
-                        alt=""
-                        width={"100%"}
-                      />
-                    </Box>
-                  </Box> */}
               </Box>
             </Box>
           </Box>
