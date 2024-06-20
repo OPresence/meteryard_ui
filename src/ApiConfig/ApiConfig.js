@@ -1,10 +1,8 @@
 var URL_ENDPOINT;
 if (process.env.NODE_ENV !== "production") {
-  URL_ENDPOINT = API_Production;
-  console.log("2222---->", URL_ENDPOINT);
+  URL_ENDPOINT = process.env.NEXT_PUBLIC_SITE_URL;
 } else {
-  URL_ENDPOINT = API_STAGING;
-  console.log("API_STAGING---->", URL_ENDPOINT);
+  URL_ENDPOINT = process.env.NEXT_PUBLIC_SITE_URL;
 }
 
 const Apiconfigs = {
