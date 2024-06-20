@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import styled from "@emotion/styled";
 import {
   Box,
@@ -10,8 +10,14 @@ import {
   IconButton,
   FormControl,
   FormHelperText,
+  InputAdornment,
 } from "@mui/material";
-import Checkbox from "@mui/material/Checkbox";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import moment from "moment";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import GoogleProvider from "next-auth/providers/facebook";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -26,8 +32,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
-const LoginStyle = styled("Box")(({ theme }) => ({
+import { AuthContext } from "../../context/Auth";
+const LoginStyle = styled(Box)(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
     backgroundPosition: "right",
@@ -37,18 +43,23 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     backgroundRepeat: "no-repeat",
     backgroundImage: 'url("/images/Path 8365.svg")',
     "@media(max-width:615px)": {
-		  marginBottom: "80px",
-		},
+      marginBottom: "80px",
+    },
     "& input": {
       padding: "10.5px 14px !important",
+    },
+  },
+  "& .imageBox": {
+    "@media(max-width:615px)": {
+      display: "none",
     },
   },
   "& .loginBox": {
     padding: "0 35px",
     "@media(max-width:615px)": {
-		  padding: "0 0px",
-		},
-	
+      padding: "0 0px",
+    },
+
     "& h2": {
       fontWeight: "600",
       color: "#6F6F6F",
@@ -93,6 +104,9 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     width: "100%",
     justifyContent: "center",
     padding: "0 0px 10px 0",
+    "@media(max-width:615px)": {
+      marginTop: "20px",
+    },
     "& button": {
       padding: "8px 40px",
       background: "#0099FF",
@@ -101,12 +115,15 @@ const LoginStyle = styled("Box")(({ theme }) => ({
         padding: "8px 19px",
       },
     },
-   
-	
   },
 }));
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const PhoneINputStyle = styled(Box)(({ theme }) => ({
+  "& .phoneInputBox": {
+    "& input": {
+      padding: "10.5px 40px !important",
+    },
+  },
+}));
 
 const formInitialSchema = {
   name: "",
@@ -116,29 +133,60 @@ const formInitialSchema = {
 };
 
 const formValidationSchema = yep.object().shape({
-  name: yep.string().required("Name is required."),
-  email: yep.string().required("Email is required."),
-  PhoneNumber: yep
+  name: yep
     .string()
-    .required("Phone Number is required.")
-    .min(10, "too short")
-    .max(10, "too long")
-    .matches(phoneRegExp, "Phone number is not valid"),
+    .required("Name is required.")
+    .min(2, "Please enter min 2 charector."),
+  email: yep
+    .string()
+    .required("Email is required.")
+    .matches(
+      /^[^@]+@[^@.]+\.[^@.]+$/,
+      "Please enter a valid email address with only one '@' and one '.'."
+    ),
+  PhoneNumber: yep.string().required("Phone number is required."),
   password: yep
     .string()
     .required("Password is required.")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character."
     ),
 });
 
-const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
+const SignUp = ({
+  _selectScreen,
+  setSelectScreen,
+  setSignUpComplete,
+  SignUpDialog,
+  handleClose,
+}) => {
   const [isloading, setIsLoading] = useState(false);
+  const auth = useContext(AuthContext);
+  const [showPassword, setShowPassword] = React.useState(false);
   const [_isSignup, setIsSignUp] = useState(false);
+  const [_countrycode, setCountryCode] = useState("");
   const [selectedValue, setSelectedValue] = useState("BUYER"); // Initial selected value
+  console.log("selectedValue00-->", selectedValue);
   const handleChangeType = (event) => {
-    setSelectedValue(event.target.value);
+    if (event.target.value == "SELLER") {
+      SignUpDialog();
+      handleClose();
+    } else {
+      setSelectedValue(event.target.value);
+    }
+  };
+  const phoneInputStyles = {
+    width: "100%",
+    height: "44px",
+    background: "transparent",
+    padding: "10.5px 40px !important",
+  };
+
+  const handleNameKeyDown = (event) => {
+    if (/[^a-zA-Z\s]/.test(event.key)) {
+      event.preventDefault();
+    }
   };
   const SignUp_Function = async (values) => {
     try {
@@ -146,6 +194,8 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
       const res = await PostApiFunction({
         endPoint: Apiconfigs.userSignUp,
         data: {
+          name: values?.name,
+
           email: values?.email,
           password: values?.password,
           phoneNumber: values?.PhoneNumber,
@@ -155,8 +205,10 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
       if (res) {
         console.log("fdfdfd--->", res);
         if (res?.responseCode == 200) {
-          toast.success("SignUp successful!"); // Display success notification
+          // toast.success("SignUp successful!"); // Display success notification
+          toast.success(res?.responseMessage);
           setIsLoading(false);
+          auth.setEndtime(moment().add(30, "s").unix());
 
           setSignUpComplete(res?.result);
         } else if (res?.responseCode == 409) {
@@ -180,6 +232,86 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
       console.log("error", error);
     }
   };
+  // const handleNameChange = (event, setFieldValue) => {
+  //   const { value } = event.target;
+  //   const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+  //   setFieldValue("name", capitalizedValue);
+  //   return capitalizedValue;
+  // }; 
+
+  function facebookSignup() {
+    const facebookAppId = 'YOUR_FACEBOOK_APP_ID';
+    const facebookRedirectUri = 'http://localhost:3000/';
+  
+    const facebookAuthUrl = `https://www.facebook.com/v3.3/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${facebookRedirectUri}&scope=email&response_type=code`;
+  
+    window.location.href = facebookAuthUrl;
+  }
+  function googleSignup() {
+    const googleClientId = 'YOUR_GOOGLE_CLIENT_ID';
+    const googleRedirectUri = 'http://localhost:3000/';
+  
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${googleRedirectUri}&scope=profile email&response_type=code`;
+  
+    window.location.href = googleAuthUrl;
+  }
+  function linkedinSignup() {
+    const linkedinClientId = 'YOUR_LINKEDIN_CLIENT_ID';
+    const linkedinRedirectUri = 'http://localhost:3000/';
+    const linkedinScope = 'r_liteprofile r_emailaddress';
+  
+    const linkedinAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?client_id=${linkedinClientId}&redirect_uri=${linkedinRedirectUri}&scope=${linkedinScope}&response_type=code&state=${generateRandomState()}`;
+  
+    window.location.href = linkedinAuthUrl;
+  }
+  function generateRandomState() {
+    return Math.random().toString(36).substr(2, 10);
+  }
+  function handleSocialRedirect() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+  
+    if (code) {
+      // Exchange authorization code for access token
+      fetch('/api/social-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code, provider: getProviderFromUrl() })
+      })
+     .then(response => response.json())
+     .then(data => {
+        // Use access token to sign up or log in user
+        console.log(data);
+      })
+     .catch(error => {
+      console.error(error);
+    });
+  }
+}
+
+// Get provider from URL
+function getProviderFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const provider = urlParams.get('provider');
+
+  return provider;
+}
+
+// Add event listeners to social media buttons
+document.addEventListener('DOMContentLoaded', () => {
+  const facebookButton = document.getElementById('facebook-button');
+  const googleButton = document.getElementById('google-button');
+  const LinkedInButton = document.getElementById('LinkedIn-button');
+  
+  facebookButton.addEventListener('click', facebookSignup);
+  googleButton.addEventListener('click', googleSignup);
+  LinkedInButton.addEventListener('click', linkedinSignup);
+
+  // Handle redirect from social media providers
+  handleSocialRedirect();
+});
   return (
     <LoginStyle>
       <Box className="backgroundBox">
@@ -218,7 +350,7 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                       xs={12}
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      <Box maxWidth={500}>
+                      <Box maxWidth={500} className="imageBox">
                         <img src="/images/Group 8422.svg" width={"100%"} />
                       </Box>
                     </Grid>
@@ -283,45 +415,61 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                                 <Box>
                                   <FormControlLabel
                                     value="BUYER"
+                                    disabled={isloading}
                                     control={<Radio />}
                                     label="BUYER"
                                   />
                                 </Box>
                                 <Box>
                                   <FormControlLabel
+                                    disabled={isloading}
                                     value="SELLER"
                                     control={<Radio />}
                                     label="SELLER"
                                   />
                                 </Box>
 
-                                <Box>
+                                {/* <Box>
                                   <FormControlLabel
                                     value="GUEST"
+                                    disabled={isloading}
                                     control={<Radio />}
                                     label="GUEST"
                                   />
-                                </Box>
+                                </Box> */}
                               </RadioGroup>
                             </Box>
                           </FormControl>
                         </Box>
                         <Box className="loginBox">
                           <Typography variant="h2">Please Sign Up</Typography>
-                          <Box mt={3}>
+                          <Box mt={1}>
                             <Typography variant="h6">
                               Enter Your Name
+                              <span className="span-astrick">*</span>
                             </Typography>
                             <FormControl fullWidth>
                               <TextField
                                 name="name"
+                                type="text"
                                 onChange={handleChange}
+                                // onChange={(e) =>
+                                //   handleNameChange(e, setFieldValue)
+                                // }
                                 onBlur={handleBlur}
-                                value={values.name}
+                                onKeyDown={handleNameKeyDown}
+                                value={
+                                  values.name?.charAt(0).toUpperCase() +
+                                  values.name.slice(1)
+                                }
                                 id="outlined-basic"
                                 fullWidth
                                 variant="outlined"
-                                placeholder="Enter Your Name"
+                                placeholder="Enter your name"
+                                disabled={isloading}
+                                inputProps={{
+                                  maxLength: 32,
+                                }}
                               />
                               <FormHelperText
                                 style={{
@@ -334,24 +482,28 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                             </FormControl>
                           </Box>
 
-                          <Box mt={2}>
+                          <Box mt={1}>
                             <Typography variant="h6">
-                              Enter Your E-Mail
+                              Enter Your Email
+                              <span className="span-astrick">*</span>
                             </Typography>
                             <FormControl fullWidth>
                               <TextField
                                 name="email"
+                                type="email"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                disabled={isloading}
                                 value={values.email}
                                 id="outlined-basic"
                                 fullWidth
                                 variant="outlined"
                                 placeholder="Examle11@gmail.com"
-                                // className="emailText"
+                                inputProps={{
+                                  maxLength: 160,
+                                }}
                               />
                               <FormHelperText
-                                // className="emailText"
                                 style={{
                                   marginLeft: "0px",
                                   color: "red",
@@ -361,33 +513,57 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                               </FormHelperText>
                             </FormControl>
                           </Box>
-                          <Box mt={2}>
+                          <PhoneINputStyle>
+                            <Box mt={1} className="phoneInputBox">
+                              <Typography variant="h6">
+                                Enter Your Phone
+                                <span className="span-astrick">*</span>
+                              </Typography>
+
+                              <PhoneInput
+                                country={"in"}
+                                onlyCountries={["in"]}
+                                name="PhoneNumber"
+                                inputClass="phoneInputField"
+                                disabled={isloading}
+                                buttonClass="phoneInputButton"
+                                variant="outlined"
+                                value={values.PhoneNumber}
+                                error={Boolean(
+                                  touched.PhoneNumber && errors.PhoneNumber
+                                )}
+                                onBlur={handleBlur}
+                                onChange={(phone, e) => {
+                                  let formattedPhone = phone;
+                                  // Check if the phone number doesn't start with "+91" or "91", then add it
+                                  if (
+                                    !phone.startsWith("+91") &&
+                                    !phone.startsWith("91")
+                                  ) {
+                                    formattedPhone = "+91" + phone;
+                                  }
+                                  setCountryCode(e.dialCode);
+                                  setFieldValue("PhoneNumber", formattedPhone);
+                                  console.log(
+                                    "formattedPhone--->",
+                                    formattedPhone
+                                  );
+                                }}
+                                inputStyle={phoneInputStyles}
+                              />
+                              <FormHelperText error>
+                                {touched.PhoneNumber && errors.PhoneNumber}
+                              </FormHelperText>
+                            </Box>
+                          </PhoneINputStyle>
+
+                          <Box mt={1}>
                             <Typography variant="h6">
-                              Enter Your Phone
+                              Password
+                              <span className="span-astrick">*</span>
                             </Typography>
                             <TextField
-                              id="outlined-basic"
-                              fullWidth
-                              type="number"
-                              variant="outlined"
-                              name="PhoneNumber"
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                              value={values.PhoneNumber}
-                              inputProps={{ maxLength: 10 }}
-                              placeholder="000 000 0000"
-                            />
-                            <FormHelperText
-                              error
-                              style={{ marginLeft: "0px !important" }}
-                            >
-                              {touched.PhoneNumber && errors.PhoneNumber}
-                            </FormHelperText>
-                          </Box>
-
-                          <Box mt={2}>
-                            <Typography variant="h6">Password</Typography>
-                            <TextField
+                              disabled={isloading}
                               id="outlined-basic"
                               fullWidth
                               variant="outlined"
@@ -396,6 +572,38 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                               onBlur={handleBlur}
                               value={values.password}
                               placeholder="********"
+                              inputProps={{
+                                maxLength: 16,
+                              }}
+                              type={showPassword ? "text" : "password"}
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      onClick={() =>
+                                        setShowPassword(!showPassword)
+                                      }
+                                      edge="end"
+                                    >
+                                      {showPassword ? (
+                                        <Visibility
+                                          style={{
+                                            fontSize: "18px",
+                                            color: "#A2D117",
+                                          }}
+                                        />
+                                      ) : (
+                                        <VisibilityOff
+                                          style={{
+                                            fontSize: "18px",
+                                            color: "#A2D117",
+                                          }}
+                                        />
+                                      )}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }}
                             />
                             <FormHelperText
                               error
@@ -415,21 +623,22 @@ const SignUp = ({ _selectScreen, setSelectScreen, setSignUpComplete }) => {
                               )}
                             </Button>
                           </Box>
-                          {/* <Box className="checkBox" mt={2}>
+                          {/* <Box className="checkBox" mt={1}>
                             <Checkbox {...label} />
                             <span>Remember Me</span>
                           </Box> */}
-                          <Box mt={2} className="socialIconBox">
-                            <IconButton className="iconButton">
+                          <Box mt={1} className="socialIconBox">
+                            <IconButton className="iconButton" onClick={facebookSignup}>
                               <FaFacebookF />
                             </IconButton>
                             <IconButton
                               className="iconButton"
                               style={{ border: "1px solid #CA0000" }}
+                              onClick={googleSignup}
                             >
                               <FaGoogle style={{ color: "#CA0000" }} />
                             </IconButton>
-                            <IconButton className="iconButton">
+                            <IconButton className="iconButton" onClick={linkedinSignup}>
                               <FaLinkedinIn />
                             </IconButton>
                           </Box>

@@ -12,9 +12,10 @@ import { AuthContext } from "../context/Auth";
 import { MdOutlineVideoChat } from "react-icons/md";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router";
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-const MainComponent = styled("Box")(({ theme }) => ({
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .MuiOutlinedInput-input": {
     height: "15px",
   },
@@ -38,14 +39,15 @@ const MainComponent = styled("Box")(({ theme }) => ({
 
   "& .buttons": {
     borderRadius: "6px",
-    padding: "20px",
+    padding: "20px 20px 40px 20px",
     background: "#fff",
-    boxShadow: "0px 3px 17px #00000029",
+    // boxShadow: "0px 3px 17px #00000029",
   },
   "& .videoButton": {
     position: "ralative",
     display: "flex",
     alignItems: "center",
+    cursor: "pointer",
     "& p": {
       textAlign: "left",
       font: "normal normal 600 21px/54px Montserrat",
@@ -81,6 +83,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
     borderRadius: "0px 8px 8px 0px;",
     background: "#444444 0% 0% no-repeat padding-box",
     height: "46px",
+    "& svg": {
+      fontSize: "28px",
+      color: "#FFFF",
+    },
     "@media(max-width:615px)": {
       height: "40px",
     },
@@ -94,6 +100,13 @@ export default function ButtonSwitchComponent({
   Type,
 }) {
   const auth = useContext(AuthContext);
+  const router = useRouter();
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+      query: { _id: "FEATURED" },
+    });
+  };
   return (
     <MainComponent>
       <Box>
@@ -106,7 +119,8 @@ export default function ButtonSwitchComponent({
                     variant="h6"
                     style={{
                       textAlign: "left",
-                      font: "normal normal normal 13px/16px Montserrat",
+                      // font: "normal normal normal 13px/16px Montserrat",
+                      fontSize: "13px",
                       letterSpacing: "0px",
                       color: "#AEAEAE",
                       textTransform: "capitalize",
@@ -115,23 +129,12 @@ export default function ButtonSwitchComponent({
                     Please Select Your Category
                   </Typography>
                   <Grid container spacing={4}>
-                    <Grid item xs={12} sm={6} md={6} lg={6}>
-                      <Box mt={3} className={"videoButton"}>
-                        <Box
-                          variant="outlined"
-                          className={"Banner_inputField_button"}
-                        >
-                          <Typography variant="h6">join city chat</Typography>
-                        </Box>
-                        <Button className="searchbox_button">
-                          <MdOutlineVideoChat
-                            style={{ fontSize: "28px", color: "#FFFF" }}
-                          />
-                        </Button>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={6} lg={6}>
-                      <Box mt={3} className={"videoButton"}>
+                    <Grid item xs={12} sm={7} md={7} lg={7}>
+                      <Box
+                        mt={3}
+                        className={"videoButton"}
+                        onClick={handleClick}
+                      >
                         <Box
                           variant="outlined"
                           className={"Banner_inputField_button"}
@@ -140,7 +143,7 @@ export default function ButtonSwitchComponent({
                           }}
                         >
                           <Typography variant="h6">
-                            explore more property
+                            Explore more property
                           </Typography>
                         </Box>
                         <Button
@@ -149,9 +152,7 @@ export default function ButtonSwitchComponent({
                             background: "#A7D325 0% 0% no-repeat padding-box",
                           }}
                         >
-                          <HomeIcon
-                            style={{ fontSize: "28px", color: "#FFFF" }}
-                          />
+                          <HomeIcon />
                         </Button>
                       </Box>
                     </Grid>
@@ -166,7 +167,8 @@ export default function ButtonSwitchComponent({
                     variant="h6"
                     style={{
                       textAlign: "left",
-                      font: "normal normal normal 13px/16px Montserrat",
+                      // font: "normal normal normal 13px/16px Montserrat",
+                      fontSize: "13px",
                       letterSpacing: "0px",
                       color: "#AEAEAE",
                       textTransform: "capitalize",
@@ -175,24 +177,21 @@ export default function ButtonSwitchComponent({
                     Please Select Your Category
                   </Typography>
                   <Box width={"100%"}>
-                    <Grid container spacing={4}>
-                      <Grid item xs={12} sm={6} md={6} lg={4}>
-                        <Box mt={3} className={"videoButton"}>
-                          <Box
-                            variant="outlined"
-                            className={"Banner_inputField_button"}
-                          >
-                            <Typography variant="h6">join city chat</Typography>
-                          </Box>
-                          <Button className="searchbox_button">
-                            <MdOutlineVideoChat
-                              style={{ fontSize: "28px", color: "#FFFF" }}
-                            />
-                          </Button>
-                        </Box>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={6} lg={4}>
-                        <Box mt={3} className={"videoButton"}>
+                    <Grid container spacing={4} alignItems="center">
+                      <Grid item xs={12} sm={6} md={6} lg={5}>
+                        <Box
+                          mt={3}
+                          className={"videoButton"}
+                          onClick={() => {
+                            if (auth?._getprofile?.userType == "SELLER") {
+                              router.push("property-post");
+                            } else {
+                              toast.error(
+                                "Only Seller post the property please login."
+                              );
+                            }
+                          }}
+                        >
                           <Box
                             variant="outlined"
                             className={"Banner_inputField_button"}
@@ -200,53 +199,53 @@ export default function ButtonSwitchComponent({
                               background: "#EFEFEF 0% 0% no-repeat padding-box",
                             }}
                           >
-                            <Typography variant="h6">
-                              property listing
-                            </Typography>
+                            <Typography variant="h6">Property Post</Typography>
                           </Box>
                           <Button
-                            onClick={() => {
-                              if (auth?._getprofile?.userType == "SELLER") {
-                                handleClickOpen();
-                              } else {
-                                toast.error(
-                                  "Only Seller post the property please login."
-                                );
-                              }
-                            }}
+                            // onClick={() => {
+                            //   if (auth?._getprofile?.userType == "SELLER") {
+                            //     router.push("property-post");
+                            //   } else {
+                            //     toast.error(
+                            //       "Only Seller post the property please login."
+                            //     );
+                            //   }
+                            // }}
                             className="searchbox_button"
                             style={{
                               background: "#A7D325 0% 0% no-repeat padding-box",
                             }}
                           >
-                            <HomeIcon
-                              style={{ fontSize: "28px", color: "#FFFF" }}
-                            />
+                            <HomeIcon />
                           </Button>
                         </Box>
                       </Grid>
-                      <Grid item xs={12} sm={6} md={6} lg={4}>
-                        <Box mt={3} className={"videoButton"}>
+                      <Grid item xs={12} sm={8} md={6} lg={6}>
+                        <Box
+                          mt={3}
+                          className={"videoButton"}
+                          onClick={() => setOpen(true)}
+                        >
                           <Box
                             variant="outlined"
                             className={"Banner_inputField_button"}
                             style={{
                               background: "#EFEFEF 0% 0% no-repeat padding-box",
                             }}
+                            padding={"0 0 0 10px"}
                           >
                             <Typography variant="h6">
-                              register as seller
+                              Register as seller
                             </Typography>
                           </Box>
                           <Button
-                            onClick={() => setOpen(true)}
                             className="searchbox_button"
                             style={{
                               background: "#ACACAC 0% 0% no-repeat padding-box",
                             }}
                           >
                             <PersonAddAltIcon
-                              style={{ fontSize: "28px", color: "#FFFF" }}
+                            // style={{ fontSize: "28px", color: "#FFFF" }}
                             />
                           </Button>
                         </Box>

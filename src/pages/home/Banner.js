@@ -1,48 +1,47 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Container, Typography, Box, Button, TextField } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import { Typography, Box, Button, TextField } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import styled from "@emotion/styled";
 import ButtonSwitchComponent from "../../component/ButtonSwitchComponent";
-import RegisterSeller from "../../component/RegisterSeller";
-import MicIcon from "@mui/icons-material/Mic";
+import RegisterModal from "../../component/registerSellerModal/RegisterModal";
 import PropertyForm from "./PropertyForm";
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
+import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
-const MainComponent = styled("Box")(({ theme }) => ({
+import SearchIcon from "@mui/icons-material/Search";
+import { AuthContext } from "../../context/Auth";
+const MainComponent = styled(Box)(({ theme }) => ({
   "& .mainBox": {
-    height: "100vh",
     overflow: "hidden",
+    "& .backImageBox": {
+      "@media(max-width:615px)": {
+        display: "flex",
+        justifyContent: "end",
+      },
+    },
     "@media(max-width:615px)": {
-      marginBottom: "-140px",
+      marginBottom: "0",
       height: "auto",
     },
     "& .backImage": {
       maxWidth: "892px",
       overflow: "hidden",
       position: "relative",
-      marginTop: "18px",
+      marginTop: "-10px",
       left: "0",
-      "@media(max-width:900px)": {
-        maxWidth: "753px",
-        maxHeight: "575px",
-        overflow: "hidden",
-        position: "relative",
-        marginTop: "20px",
-      },
       "@media(max-width:615px)": {
-        marginTop: "40px",
-        left: "40px",
+        maxWidth: "70%",
+        top: "-2%",
+        // left: "20% !important",
       },
     },
   },
   "& .bacBox": {
     position: "relative",
-    left: "100px",
-    "@media(max-width:900px)": {
-      left: "0",
-    },
+    left: "0px",
   },
   "& .handImage": {
     left: "50px",
@@ -58,23 +57,54 @@ const MainComponent = styled("Box")(({ theme }) => ({
   "& .contentBox": {
     top: "35%",
     zIndex: "1",
+    left: "80px",
+    width: "100%",
+
     "@media(max-width:615px)": {
-      top: "12%",
+      top: "13%",
+      left: "0",
     },
     "& .Banner_inputField": {
-      background: "#FFFFFF 0% 0% no-repeat padding-box",
-      borderRadius: "11px",
+      width: "Fixed (987px)px",
+      height: "Hug (69.4px)px",
+      top: "0",
+      left: "0px",
+      padding: "0px",
+      gap: "10px",
+      borderRadius: "14px 23px 23px 14px",
+      opacity: "0px",
+      borderRadius: "15px",
+      "&:hover": {
+        borderColor: "red",
+        // border:"2px solid red",
+      },
       "& ::placeholder": {
+        fontFamily: "Inter",
+        fontSize: "20px",
+        fontWeight: "400",
+        lineHeight: "29.05px",
         textAlign: "left",
-        font: "normal normal medium 23px/30px Samsung Sharp Sans",
-        letterSpacing: "0.23px",
-        fontSize: "18px",
-        fontWeight: 400,
-        color: "#949494",
-        opacity: 1,
+      },
+      "@media(max-width:615px)": {
+        padding: "0px",
+        fontSize: "12px",
       },
     },
-
+    "& .ContainerSearchBox": {
+      display: "flex",
+      justifyContent: "center",
+      padding: "0 150px 0 0",
+      // position: "absolute",
+      width: "100%",
+      top: "140%",
+      left: "50%",
+      "@media(max-width:615px)": {
+        padding: "0",
+        left: "0%",
+        top: "100%",
+        margin: "0 0px",
+      },
+    },
     "& .searchbox": {
       background: "#A9D910 0% 0% no-repeat padding-box;",
       position: "absolute",
@@ -83,7 +113,7 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: "15px",
+      borderRadius: "11px",
       "@media(max-width:615px)": {
         width: "40px",
         height: "40px !important",
@@ -94,67 +124,159 @@ const MainComponent = styled("Box")(({ theme }) => ({
     "& .Banner_textFild": {
       position: "relative",
       background: "#FFFFFF 0% 0% no-repeat padding-box",
-      boxShadow: "0px 3px 27px #68686829",
+      boxShadow: "-1px 2px 8px 0px #00000024",
+      marginInline: "auto",
       borderRadius: "11px",
       opacity: "1",
-      width: "10%",
+      width: "100%",
       transition: "0.8s",
+      // marginLeft: "75%",
+      "& input": {
+        borderRadius: "50px",
+        padding: "16.5px 14px",
+        "&::placeholder": {
+          fontFamily: "Inter",
+          fontSize: "22px",
+          fontWeight: "400",
+          lineHeight: "29.05px",
+          textAlign: "left",
+          "@media(max-width:615px)": {
+            fontSize: "16px",
+          },
+        },
+      },
       "@media(max-width:615px)": {
+        margin: "0px",
         marginLeft: "0px",
-        marginTop: "30px",
+        // marginTop: "30px",
         width: "100% !important",
         margin: "auto",
+        "& input": {
+          fontSize: "16px",
+        },
       },
 
       "&:hover": {
         transition: "0.8s",
-        width: "80%",
+        width: "100%",
         "@media(max-width:615px)": {
-          width: "85%",
+          width: "100%",
           right: "0",
         },
       },
     },
     "& .find": {
-      color: "#444444",
+      color: "black",
+      fontFamily: "Inter",
+      fontSize: "62px",
+      fontWeight: "600",
+      lineHeight: "87.14px",
+      textAlign: "left",
+
+      "@media(max-width:615px)": {
+        fontSize: "20px",
+        lineHeight: "17.14px",
+      },
     },
     "& .Make": {
       color: "#A7D325",
+      fontFamily: "Inter",
+      fontSize: "62px",
+      fontWeight: "600",
+      lineHeight: "87.14px",
+      textAlign: "left",
+
+      "@media(max-width:615px)": {
+        fontSize: "20px",
+        lineHeight: "17.14px",
+      },
     },
   },
   "& .buttonBox": {
+    width: "191px",
+    "@media(max-width:615px)": {
+      width: "150px",
+    },
     "& .ButtonClass": {
       borderBottomLeftRadius: "20px",
       padding: 0,
-      clipPath: "polygon(0% 4%, 100% 0%, 70% 123%, 0% 100%, 0 0%)",
-      color: "#fff",
-      background: "rgb(172 172 172)",
+      clipPath: "polygon(0% 0%, 100% 0%, 70% 123%, 0% 100%, 0 0%)",
+      width: "100%",
+      justifyContent: " space-between",
+      background: "#fff",
+      boxShadow: " 0px 4px 4px 0px #0000001A",
       "@media(max-width:615px)": {
         height: "40px",
       },
       "& .buyerBoxSpan": {
-        padding: "0 90px 0 50px",
+        left: "208px",
+        gap: "0px",
+        borderRadius: "0px 21.43px 0px 21.43px",
+        border: "2.38px 0px 0px 0px",
+        opacity: "0px",
+        angle: "-180 deg",
+        "& span": {
+          minWidth: "60%",
+          padding: "0 0 0 65px",
+          "@media(max-width:615px)": {
+            padding: 0,
+            width: "80%",
+            marginInline: "auto",
+          },
+        },
+
         "@media(max-width:615px)": {
-          padding: "0 50px 0 20px",
+          // padding: "0 50px 0 20px",
+          paddingLeft: "10px",
         },
 
         "& span": {
-          color: "#eeeeee",
+          color: "black",
+          fontSize: "12px",
+          fontWeight: "600",
         },
       },
       "& .buttonText": {
-        color: "#0000",
+        width: "100%",
+        fontFamily: "Inter",
+        fontSize: "12px",
+        fontWeight: 600,
+        color: "#000000",
+        padding: "0px 66px 0 0px",
+        "@media(max-width:615px)": {
+          paddingRight: "50px",
+        },
       },
       "& .buttonIconBox": {
+        width: "60px",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         background: "#fff",
         borderTopRightRadius: "20px",
         borderBottomLeftRadius: "20px",
+        // border: "2px solid #A7D325",
+        border: "2.38px solid #A9D910",
+        // boxShadow: "0px 3px 27px #68686829",
+
+        "@media(max-width:615px)": {
+          width: "40px",
+        },
+
         "& .imageBox": {
           padding: "10px",
           maxWidth: "40px !Important",
+
           "@media(max-width:615px)": {
-            padding: "5px",
-            maxWidth: "40px !important",
+            padding: "0",
+            maxWidth: "100%",
+            width: "100% !important",
+
+            "& img": {
+              width: "70%",
+              height: "70%",
+            },
           },
         },
       },
@@ -174,7 +296,8 @@ const MainComponent = styled("Box")(({ theme }) => ({
       width: "280%",
 
       "@media(max-width:615px)": {
-        width: "200%",
+        width: "300px",
+        left: "35%",
       },
     },
     "&:hover": {
@@ -184,42 +307,74 @@ const MainComponent = styled("Box")(({ theme }) => ({
     },
   },
   "& .buttonBoxSecond": {
+    // boxShadow: "0px 3px 27px #68686829",
+    width: "191px",
+    "@media(max-width:433px)": {
+      width: "150px",
+    },
     "& .ButtonClass1": {
+      justifyContent: "space-between",
       borderBottomLeftRadius: "20px",
       padding: 0,
-      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%, 24% 0%)",
+      clipPath: "polygon(0% 0%, 100% -0%, 100% 548%, 0% 100%, 24% 0%)",
       borderTopRightRadius: "20px",
       borderBottomLeftRadius: "0px",
+      borderBottomRightRadius: "21px",
       marginLeft: "-40px",
-      background: "rgb(172 172 172)",
-      color: "#fff",
+      background: "#fff",
+      width: "100%",
+      boxShadow: " 0px 4px 4px 0px #0000001A",
+      "& span": {
+        padding: "0 0 0 65px",
+        // fontFamily: "Inter",
+        fontSize: "12px",
+        fontWeight: 600,
+        color: "#000000",
+        "@media(max-width:433px)": {
+          padding: 0,
+          paddingLeft: "25px",
+        },
+      },
       "&:hover": {
         background: "#A7D325",
       },
-      "& .buyerBoxSpan": {
-        padding: "0 90px 0 50px",
-        "@media(max-width:615px)": {
-          padding: "0 20px 1px 50px",
-        },
-        "& span": {
-          color: "#eeeeee",
-        },
-      },
       "@media(max-width:433px)": {
-        marginLeft: "0px",
+        marginLeft: "-25px",
         height: "40px",
+        "& .buyerBoxSpan": {
+          paddingLeft: "20px",
+        },
       },
+
       "& .buttonIconBox": {
+        width: "60px",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         background: "#fff",
-        borderTopRightRadius: "20px",
-        borderBottomLeftRadius: "20px",
+        borderTopLeftRadius: "20px",
+        borderBottomRightRadius: "20px",
+        // border: "2px solid #A7D325",
+        border: "2.38px solid #A9D910",
+        // boxShadow: "0px 3px 27px #68686829",
         "& .imageBox": {
           padding: "10px",
           maxWidth: "40px !important",
           "@media(max-width:615px)": {
-            padding: "5px",
-            maxWidth: "40px !important",
+            padding: "0",
+            maxWidth: "100%",
+            width: "100% !important",
+
+            "& img": {
+              width: "70%",
+              height: "70%",
+            },
           },
+        },
+        "@media(max-width:615px)": {
+          height: "100%",
+          width: "40px",
         },
       },
     },
@@ -227,10 +382,13 @@ const MainComponent = styled("Box")(({ theme }) => ({
       display: "none",
       // display: "block",
       position: "absolute",
-      width: "420%",
+      minWidth: "600px",
+
       "@media(max-width:615px)": {
-        width: "199%",
-        right: "0",
+        minWidth: "300px",
+        width: "300px",
+        top: "50px",
+        right: "-50%",
       },
     },
     "&:hover": {
@@ -246,6 +404,12 @@ const MainComponent = styled("Box")(({ theme }) => ({
     },
   },
   "& h4": {
+    color: "black",
+    fontFamily: "Inter",
+    fontSize: "36px",
+    fontWeight: "400",
+    lineHeight: "43.57px",
+    textAlign: "left",
     "@media(max-width:615px)": {
       marginTop: "0px",
       fontSize: "14px",
@@ -254,7 +418,10 @@ const MainComponent = styled("Box")(({ theme }) => ({
 }));
 
 export default function Home() {
-  const isMobile = useMediaQuery("(max-width:600px)");
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const Auth = useContext(AuthContext);
+
   const [selectedImages, setSelectedImages] = useState([]);
   const [imageUploadResponses, setImageUploadResponses] = useState([]);
   const [_video_url, setVideoURL] = useState("");
@@ -264,10 +431,13 @@ export default function Home() {
   const [_propertyform, setPropertyForm] = React.useState(false);
   const [_isloading, setIsLoading] = useState(false);
   const [address, setAddress] = useState("");
+  const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_checked, setChecked] = React.useState(false);
   const [_consition, setConsition] = React.useState(false);
   const [_getproprty_type, setGetPropetyType] = useState("");
   const [_get_type_name, setGet_Type_Name] = useState("");
+  const router = useRouter();
+
   const [_getproject_sub_type, setGetProject_sub_Type] = React.useState("");
   const [coordinates, setCoordinates] = useState({
     lat: 27.1881,
@@ -275,6 +445,14 @@ export default function Home() {
   });
   const handleClickOpen = () => {
     setPropertyForm(true);
+  };
+  const handleClickOpenLogin = (value) => {
+    setSelectScreen(value);
+    setOpenDialogLogin(true);
+    setSignUpComplete(false);
+  };
+  const handleCloseLogin = () => {
+    setOpenDialogLogin(false);
   };
   const handleClose = () => {
     setPropertyForm(false);
@@ -340,7 +518,6 @@ export default function Home() {
           setIsLoading(false);
           setPropertyForm(false);
         }
-        console.log("res---->", res);
       }
     } catch (error) {
       setIsLoading(false);
@@ -425,22 +602,44 @@ export default function Home() {
   }, [selectedImages]);
   return (
     <MainComponent>
+      {/* <Container maxWidth style={{ paddingRight: "0px !important;" }}> */}
       <Box>
-        <Container maxWidth>
-          <Box position={"absolute"} className="contentBox">
+        <Box position={"absolute"} className="contentBox">
+          <Box
+            width={isMobile ? "100%" : "100%"}
+            padding={isMobile && "10px 20px"}
+          >
             <Box>
-              <Typography variant="h1">
-                <span className="find">Find Your Place</span>
-                <span className="Make">, Make It Home</span>
+              <Typography
+                variant="h1"
+                className="banner-heading"
+                lineHeight={isMobile && "2rem"}
+                marginTop={isMobile && "20px"}
+                justifyContent={isMobile && "flex-start"}
+              >
+                <span className="find">Find Your Place,</span>
+                {isMobile && <br />}
+                <span className="Make">
+                  Make {!isMobile && <br />}
+                  It Home
+                </span>
               </Typography>
-              <Box mt={isMobile ? 2 : 3.5}>
-                <Typography variant="h4">
+              <Box mt={1.5} mb={1.5}>
+                <Typography
+                  variant="h3"
+                  width={isMobile ? "68%" : "100%"}
+                  fontSize={isMobile ? "14px" : "18px"}
+                >
                   Please Select Your Category
                 </Typography>
               </Box>
-              <Box display={"flex"} className="buyer-seller-btn">
+              <Box
+                display={"flex"}
+                className="buyer-seller-btn"
+                justifyContent={isMobile && "flex-start"}
+              >
                 <Box
-                  mt={5}
+                  mt={isMobile ? 2 : 5}
                   position={"relative"}
                   zIndex={1}
                   className={"buttonBox"}
@@ -453,7 +652,7 @@ export default function Home() {
                     <Box className={"buttonIconBox"}>
                       <Box className="imageBox">
                         <img
-                          src="/images/meteryard/icons/advisory.png"
+                          src="/images/Administrator Male.png"
                           width={"100%"}
                         />
                       </Box>
@@ -475,7 +674,7 @@ export default function Home() {
                   </Box>
                 </Box>
                 <Box
-                  mt={5}
+                  mt={isMobile ? 2 : 5}
                   position={"relative"}
                   zIndex={1}
                   className={"buttonBoxSecond"}
@@ -486,12 +685,12 @@ export default function Home() {
                     onMouseEnter={() => handleMouseEnter("Seller")}
                   >
                     <Box className="buyerBoxSpan">
-                      <span>Seller</span>
+                      <span className="buttonText">Seller</span>
                     </Box>
                     <Box className={"buttonIconBox"}>
                       <Box className="imageBox">
                         <img
-                          src="/images/meteryard/icons/advisory.png"
+                          src="/images/Administrator Male.png"
                           width={"100%"}
                         />
                       </Box>
@@ -510,49 +709,76 @@ export default function Home() {
                   </Box>
                 </Box>
               </Box>
-              <Box mt={3} className={"Banner_textFild"}>
+            </Box>
+
+            <Box
+              className="ContainerSearchBox"
+              // style={{ transform: isMobile && "translate(-50%,-50%)" }}
+            >
+              <Box
+                mt={10}
+                className={"Banner_textFild"}
+                maxWidth={isMobile ? "100%" : "60%"}
+                borderRadius={isMobile ? "14px" : "11px"}
+              >
                 <TextField
-                  id="outlined-basic"
+                  // id="outlined-basic"
+                  // Auth?.
                   fullWidth
+                  onChange={(e) => Auth?.setSearchProperty(e.target.value)}
                   sx={{
-                    "& fieldset": { border: "none", height: "10px" },
+                    // padding:"0px !impor",
+                    "& .MuiOutlinedInput-root": {
+                      "& .MuiOutlinedInput-notchedOutline": {
+                        border: "none !important",
+                        width: "Fixed (987px)px",
+                        height: "Hug (69.4px)px",
+                        top: "0",
+                        left: "0px",
+                        padding: "0px",
+                        gap: "10px",
+                        borderRadius: "14px 23px 23px 14px",
+                        opacity: "0px",
+                      },
+                    },
                   }}
-                  variant="outlined"
-                  placeholder="Search your property..."
-                  className={"Banner_inputField"}
+                  // variant="outlined"
+                  placeholder="City, Locality, Projects, Landmark"
+                  // className={"Banner_inputField"}
                 />
-                <Button className="searchbox">
-                  <MicIcon style={{ fontSize: "25px", color: "#FFFF" }} />
+                <Button
+                  className="searchbox"
+                  onClick={() => {
+                    Auth?.PropertySearchPostAPI();
+                    router.push("/search-property");
+                  }}
+                >
+                  <SearchIcon style={{ fontSize: "25px", color: "#FFFF" }} />
                 </Button>
               </Box>
             </Box>
           </Box>
-        </Container>
+        </Box>
         <Box className="mainBox">
           <Box display={"flex"} justifyContent={"end"} className="bacBox">
-            <Box>
+            <Box className="backImageBox">
               <Box className="backImage">
                 <img
-                  src="/images/meteryard/Graphics/Path 7886.png"
+                  src="/images/picture.png"
                   alt=""
                   height={"100%"}
                   width={"100%"}
                 />
-                <Box>
-                  <Box className="handImage">
-                    <img
-                      src="/images/meteryard/Images/home-background-images.png"
-                      alt=""
-                      width={"100%"}
-                    />
-                  </Box>
-                </Box>
               </Box>
             </Box>
           </Box>
         </Box>
       </Box>
-      <RegisterSeller open={open} setOpen={setOpen} />
+      <RegisterModal
+        open={open}
+        setOpen={setOpen}
+        handleClickOpenLogin={handleClickOpenLogin}
+      />
       {_propertyform && (
         <PropertyForm
           open={_propertyform}
@@ -580,11 +806,17 @@ export default function Home() {
           CoverImageFunction={CoverImageFunction}
         />
       )}
-      {/* <PropertyForm
-        open={_propertyform}
-        handleClose={handleClose}
-        handleClickOpen={handleClickOpen}
-      /> */}
+      {/* <LoginDialog
+          open={_openDialogLogin}
+          setOpen={setOpenDialogLogin}
+          handleClickOpen={handleClickOpenLogin}
+          handleClose={handleCloseLogin}
+          _selectScreen={"Login"}
+          // setSelectScreen={""}
+          // setSignUpComplete={setSignUpComplete}
+          // _signcomplete={_signcomplete}
+        /> */}
+      {/* </Container> */}
     </MainComponent>
   );
 }

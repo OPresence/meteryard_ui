@@ -30,7 +30,7 @@ const Textarea = styled(BaseTextareaAutosize)(
     }
   `
 );
-const DialogButtonStyle = styled("Box")(({ theme }) => ({
+const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
     background: "#444444",

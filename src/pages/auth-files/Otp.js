@@ -1,14 +1,34 @@
 import React from "react";
+import styled from "@emotion/styled";
 import { Box, Container, Grid } from "@mui/material";
 import VerifyOTP from "./VerifyOTP";
-const index = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
+const OTPstyle = styled(Box)(({ theme }) => ({
+  "& .imageBox": {
+    "@media(max-width:615px)": {
+      display: "none",
+    },
+  },
+}));
+
+const Otp = ({
+  _signcomplete,
+  setSelectScreen,
+  setSignUpComplete,
+  type,
+  setOpen,
+}) => {
   return (
     <>
       <Box className="backgroundBox">
         <Container maxWidth>
-          <Box maxWidth={250} p={3}>
-            <img src="/images/logo.png" width={"100%"} />
-          </Box>
+          {type != "HIDE" && (
+            <OTPstyle>
+              <Box maxWidth={250} p={3}>
+                <img src="/images/logo.png" width={"100%"} />
+              </Box>
+            </OTPstyle>
+          )}
+
           <Grid container spacing={3}>
             <Grid
               item
@@ -18,7 +38,7 @@ const index = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
               xs={12}
               style={{ display: "flex", alignItems: "center" }}
             >
-              <Box maxWidth={500}>
+              <Box maxWidth={500} className="imageBox">
                 <img src="/images/Group 8422.svg" width={"100%"} />
               </Box>
             </Grid>
@@ -36,6 +56,8 @@ const index = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
                 setSignUpComplete={setSignUpComplete}
                 _signcomplete={_signcomplete}
                 setSelectScreen={setSelectScreen}
+                setOpen={setOpen}
+                // handleClickOpenLogin={handleClickOpenLogin}
               />
             </Grid>
           </Grid>
@@ -45,4 +67,4 @@ const index = ({ _signcomplete, setSelectScreen, setSignUpComplete }) => {
   );
 };
 
-export default index;
+export default Otp;

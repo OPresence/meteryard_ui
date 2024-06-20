@@ -1,25 +1,7 @@
-import React, { useState } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from "react-places-autocomplete";
-import {
-  Button,
-  Grid,
-  Box,
-  TextField,
-  Select,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  FormHelperText,
-  Typography,
-  Icon,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/system";
-const LocationStyle = styled("Box")(({ theme }) => ({
-  "& .mainBox": {
+const LocationStyle = styled(Box)(({ theme }) => ({
+  "& .mainBoxLocation": {
     position: "relative",
   },
   "& .locationStyleShow": {
@@ -43,13 +25,13 @@ const LocationDialog = ({
   type,
 }) => {
   const mapStyles = {
-    height: "250px",
+    // height: "250px",
     width: "100%",
   };
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
-    const latLng = await getLatLng(results[0]);
+    // const latLng = await getLatLng(results[0]);
     setAddress(value);
     setCoordinates(latLng);
   };
@@ -57,8 +39,8 @@ const LocationDialog = ({
 
   return (
     <LocationStyle>
-      <Box mt={2} className="mainBox">
-        <PlacesAutocomplete
+      <Box mt={2} className="mainBoxLocation">
+        {/* <PlacesAutocomplete
           value={address}
           onChange={setAddress}
           onSelect={handleSelect}
@@ -111,10 +93,10 @@ const LocationDialog = ({
               )}
             </div>
           )}
-        </PlacesAutocomplete>
+        </PlacesAutocomplete> */}
       </Box>
       {console.log("coordinates--->", coordinates)}
-      {type != "Area" && (
+      {/* {type != "Area" && (
         <Box mt={2} zIndex={0}>
           <GoogleMap
             mapContainerStyle={mapStyles}
@@ -124,7 +106,7 @@ const LocationDialog = ({
             <Marker position={coordinates} />
           </GoogleMap>
         </Box>
-      )}
+      )} */}
     </LocationStyle>
   );
 };

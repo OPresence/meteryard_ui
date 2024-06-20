@@ -20,7 +20,7 @@ const FilterButton = () => {
   return (
     <FilterButtonStyle>
       <Box className="mainBoxButton" display={"flex"}>
-        {ButtonArray.map((data) => {
+        {ButtonArray.map((data, index) => {
           return (
             <Box key={index}>
               <Button>{data}</Button>

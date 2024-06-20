@@ -2,30 +2,20 @@ import HomeLayout from "@/layout/HomeLayout";
 import { Box } from "@mui/material";
 import Banner from "../pages/home/Banner";
 import SliderComponent from "../component/SliderComponent";
-import CardComponent from "../component/CardComponent";
-import ResidentialProjects from "../component/ResidentialProjects";
-import CommercialProjects from "../component/CommercialProjects";
-import BannerCompont from "../component/BannerCompont";
 import ProjectComponent from "../component/ProjectComponent";
-import MobileAppComponent from "../component/MobileAppComponent";
-import TestimonialComponent from "../component/TestimonialComponent";
-import ChatBoat from "../component/ChatBoat";
-import AgreecultureComponent from "../component/AgreecultureComponent";
+import MasterCardProduct from "../component/MasterCardProduct";
+import FeatureProperty from "../component/FeatureProperty";
 export default function ClientPage() {
+
   return (
     <Box>
       <Banner />
       <SliderComponent />
-      <CardComponent />
-      <BannerCompont />
-      <ResidentialProjects />
-      <CommercialProjects />
-      <AgreecultureComponent />
+      <FeatureProperty/>
+      <MasterCardProduct />
       {/* <YoutubeComponent /> */}
       <ProjectComponent />
-      <MobileAppComponent />
-      <TestimonialComponent />
-      <ChatBoat />
+      {/* <TESTIMONIAL /> */}
     </Box>
   );
 }

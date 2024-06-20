@@ -19,20 +19,20 @@ const DynamicJoditEditor = dynamic(() => import("jodit-react"), { ssr: false });
 import dynamic from "next/dynamic";
 const Textarea = styled(BaseTextareaAutosize)(
   ({ theme }) => `
-    box-sizing: border-box;
-    width: 320px;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    padding: 8px 12px;
-    border-radius: 8px;
-    &:focus-visible {
-      outline: 0;
-    }
-  `
+        box-sizing: border-box;
+        width: 320px;
+        font-family: 'IBM Plex Sans', sans-serif;
+        font-size: 0.875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        padding: 8px 12px;
+        border-radius: 8px;
+        &:focus-visible {
+        outline: 0;
+        }
+    `
 );
-const DialogButtonStyle = styled("Box")(({ theme }) => ({
+const DialogButtonStyle = styled(Box)(({ theme }) => ({
   "& button": {
     padding: "10px 40px",
     background: "#444444",
@@ -245,42 +245,42 @@ const AddBlog = ({
                   </Box>
                 </Grid>
                 {/* <Grid item lg={6} md={6} sm={12}>
-                  <Box mt={2}>
-                    <Textarea
-                      aria-label="minimum height"
-                      minRows={3}
-                      placeholder="enter short description"
-                      name="short_description"
-                      value={values?.short_description}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      disabled={_image_upload || _isloading}
-                      label="Property facing"
-                    />
-                    <FormHelperText error>
-                      {touched.short_description && errors.short_description}
-                    </FormHelperText>
-                  </Box>
-                </Grid> */}
+                    <Box mt={2}>
+                        <Textarea
+                        aria-label="minimum height"
+                        minRows={3}
+                        placeholder="enter short description"
+                        name="short_description"
+                        value={values?.short_description}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        disabled={_image_upload || _isloading}
+                        label="Property facing"
+                        />
+                        <FormHelperText error>
+                        {touched.short_description && errors.short_description}
+                        </FormHelperText>
+                    </Box>
+                    </Grid> */}
                 {/* <Grid item lg={6} md={6} sm={12}>
-                  <Box mt={2}>
-                    <TextField
-                      fullWidth
-                      disabled={_image_upload || _isloading}
-                      id="outlined-basic"
-                      label="Property facing"
-                      variant="outlined"
-                      placeholder="EnterProperty facing name"
-                      name="project_type"
-                      value={values?.project_type}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                    />
-                    <FormHelperText error>
-                      {touched.project_type && errors.project_type}
-                    </FormHelperText>
-                  </Box>
-                </Grid> */}
+                    <Box mt={2}>
+                        <TextField
+                        fullWidth
+                        disabled={_image_upload || _isloading}
+                        id="outlined-basic"
+                        label="Property facing"
+                        variant="outlined"
+                        placeholder="EnterProperty facing name"
+                        name="project_type"
+                        value={values?.project_type}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        />
+                        <FormHelperText error>
+                        {touched.project_type && errors.project_type}
+                        </FormHelperText>
+                    </Box>
+                    </Grid> */}
                 <Grid item lg={6} md={6} sm={12}>
                   <Box mt={2}>
                     <TextField

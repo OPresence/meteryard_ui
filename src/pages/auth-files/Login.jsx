@@ -9,23 +9,30 @@ import {
   TextField,
   Button,
   IconButton,
-  FormControl,
+  InputAdornment,
   FormHelperText,
   Checkbox,
 } from "@mui/material";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import EnterOptScreen from "../verify-otp/VerifyOTP";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { PostApiFunction } from "../../utils";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Form, Formik } from "formik";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import * as yep from "yup";
 import CircularProgressCompoennt from "../../component/CircularProgressComponent";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../context/Auth";
+import Forgot from "../forgot-password";
+import ResetPassword from "../forgot-password/ResetPassword";
 
-const LoginStyle = styled("Box")(({ theme }) => ({
+const LoginStyle = styled(Box)(({ theme }) => ({
   "& .backgroundBox": {
     backgroundSize: "75%",
     backgroundPosition: "right",
@@ -38,17 +45,22 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       marginBottom: "80px",
     },
   },
-  // "& .checkBox": {
-  //   display: "flex",
-  //   alignItems: "center",
-  // },
+  "& .imageBox": {
+    "@media(max-width:615px)": {
+      display: "none",
+    },
+  },
   "& .loginBox": {
     padding: "0 35px",
     "@media(max-width:615px)": {
       padding: "0 0px",
     },
     "& input": {
-      padding: "10.5px 14px !important",
+      padding: "12px 14px !important",
+      fontSize: "18px",
+      "&::placeholder": {
+        fontSize: "18px",
+      },
     },
     "& h2": {
       fontWeight: "600",
@@ -78,8 +90,18 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     "& .checkBox": {
       display: "flex",
       alignItems: "center",
+      justifyContent: "space-between",
+      "& a": {
+        textDecoration: "none",
+        "& span": {
+          color: "#0099FF",
+        },
+      },
       "& span": {
         color: "#0099FF",
+        "@media(max-width:651px)": {
+          fontSize: "13px",
+        },
       },
     },
     "& .socialIconBox": {
@@ -113,6 +135,9 @@ const LoginStyle = styled("Box")(({ theme }) => ({
     width: "100%",
     justifyContent: "center",
     padding: "0 0px 10px 0",
+    "@media(max-width:615px)": {
+      marginTop: "20px",
+    },
     "& button": {
       padding: "8px 40px",
       background: "#0099FF",
@@ -122,11 +147,45 @@ const LoginStyle = styled("Box")(({ theme }) => ({
       },
     },
   },
+  "& .forgotpassword": {
+    "@media(max-width:615px)": {
+      color: "#a2d117 !important",
+      fontWeight: "600",
+    },
+  },
 }));
-const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
+const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
+  const session = useSession();
+  console.log("sessio44546464646n000---->", session);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [_forgot_open, setForgot_Open] = useState(false);
+  const [_forotp_open, setOTP_Open] = useState(false);
+  const [_saveForgot, setSaveForgot] = useState("");
+  const [_openReset, setOpenReset] = useState(false);
   const formInitialSchema = {
     email: localStorage.getItem("email") || "",
     password: localStorage.getItem("password") || "",
+  };
+
+  const handleOpenForgot = () => {
+    setForgot_Open(true);
+  };
+  const handleCloseForgot = () => {
+    setForgot_Open(false);
+  };
+
+  const handleOpenReset = () => {
+    setOpenReset(true);
+  };
+  const handleCloseReset = () => {
+    setOpenReset(false);
+  };
+
+  const handleOpenOTP = () => {
+    setOTP_Open(true);
+  };
+  const handleCloseOTP = () => {
+    setOTP_Open(false);
   };
   const formValidationSchemaLogin = yep.object().shape({
     email: yep.string().required("Email is required."),
@@ -198,6 +257,43 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
       console.log("error", error);
     }
   };
+  const handleGoogleSignIn = async () => {
+    console.log("11111111111--->");
+    try {
+      // Call the signIn function with the provider name "google"
+      const result = await signIn("google");
+      console.log("00000000--->", result);
+
+      // Check if the authentication was successful
+      if (!result.error) {
+        // Authentication successful, do something (e.g., redirect)
+      } else {
+        // Authentication failed, handle the error
+        console.error("Authentication failed", result.error);
+      }
+    } catch (error) {
+      // Handle any errors that occur during sign-in
+      console.error("Error signing in with Google:", error);
+    }
+  };
+  const handleGithubSignIn = async (value) => {
+    try {
+      // Call the signIn function with the provider name "google"
+      const result = await signIn(value);
+
+      // Check if the authentication was successful
+      if (!result.error) {
+        // Authentication successful, do something (e.g., redirect)
+        console.log("Authentication successful", result);
+      } else {
+        // Authentication failed, handle the error
+        console.error("Authentication failed", result.error);
+      }
+    } catch (error) {
+      // Handle any errors that occur during sign-in
+      console.error("Error signing in with github:", error);
+    }
+  };
   return (
     <LoginStyle>
       <Box className="backgroundBox">
@@ -223,9 +319,6 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                     console.error("API call failed", error);
                   });
               }}
-              // onSubmit={(values) => {
-              //   Login_Function(values);
-              // }}
             >
               {({
                 errors,
@@ -245,7 +338,7 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                       xs={12}
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      <Box maxWidth={500}>
+                      <Box maxWidth={500} className="imageBox">
                         <img src="/images/Group 8422.svg" width={"100%"} />
                       </Box>
                     </Grid>
@@ -300,7 +393,8 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
 
                           <Box mt={2}>
                             <Typography variant="h6">
-                              Enter Your E-Mail
+                              Enter Your Email
+                              <span className="span-astrick">*</span>
                             </Typography>
                             {/* <FormControl fullWidth> */}
                             <TextField
@@ -312,6 +406,9 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                               fullWidth
                               variant="outlined"
                               placeholder="Examle11@gmail.com"
+                              inputProps={{
+                                maxLength: 160,
+                              }}
                             />
                             <FormHelperText
                               error
@@ -319,11 +416,13 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                             >
                               {touched.email && errors.email}
                             </FormHelperText>
-                            {/* </FormControl> */}
                           </Box>
 
                           <Box mt={2}>
-                            <Typography variant="h6">Password</Typography>
+                            <Typography variant="h6">
+                              Password
+                              <span className="span-astrick">*</span>
+                            </Typography>
                             <TextField
                               fullWidth
                               id="password"
@@ -333,6 +432,38 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                               onBlur={handleBlur}
                               value={values.password}
                               placeholder="********"
+                              inputProps={{
+                                maxLength: 16,
+                              }}
+                              type={showPassword ? "text" : "password"}
+                              InputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="end">
+                                    <IconButton
+                                      onClick={() =>
+                                        setShowPassword(!showPassword)
+                                      }
+                                      edge="end"
+                                    >
+                                      {showPassword ? (
+                                        <Visibility
+                                          style={{
+                                            fontSize: "18px",
+                                            color: "#A2D117",
+                                          }}
+                                        />
+                                      ) : (
+                                        <VisibilityOff
+                                          style={{
+                                            fontSize: "18px",
+                                            color: "#A2D117",
+                                          }}
+                                        />
+                                      )}
+                                    </IconButton>
+                                  </InputAdornment>
+                                ),
+                              }}
                             />
                             <FormHelperText
                               error
@@ -352,12 +483,24 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                               )}
                             </Button>
                             <Box className="checkBox" mt={2}>
-                              <Checkbox
-                                checked={isRememberMe}
-                                // onClick={() => setIsRememberMe(isRememberMe)}
-                                onClick={rememberMe}
-                              />
-                              <span>Remember Me</span>
+                              <Box display={"flex"} alignItems={"center"}>
+                                <Checkbox
+                                  checked={isRememberMe}
+                                  onClick={rememberMe}
+                                />
+
+                                <span>Remember Me</span>
+                              </Box>
+                              <Box>
+                                {/* <a href="/forgot-password"> */}
+                                <span
+                                  className="forgotpassword"
+                                  onClick={handleOpenForgot}
+                                  // style={{ color: "#a2d117" }}
+                                >
+                                  Forgot Password?
+                                </span>
+                              </Box>
                             </Box>
                             <Box mt={2}>
                               <Typography variant="h6">
@@ -372,17 +515,24 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
                           </Box>
 
                           <Box mt={2} className="socialIconBox">
-                            <IconButton className="iconButton">
+                            <IconButton
+                              className="iconButton"
+                              onClick={() => signIn("facebook")}
+                            >
                               <FaFacebookF />
                             </IconButton>
                             <IconButton
+                              onClick={() => signIn("google")}
                               className="iconButton"
                               style={{ border: "1px solid #CA0000" }}
                             >
                               <FaGoogle style={{ color: "#CA0000" }} />
                             </IconButton>
-                            <IconButton className="iconButton">
-                              <FaLinkedinIn />
+                            <IconButton
+                              className="iconButton"
+                              onClick={() => signIn("GitHub")}
+                            >
+                              <GitHubIcon />
                             </IconButton>
                           </Box>
                         </Box>
@@ -394,6 +544,36 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen }) => {
             </Formik>
           </Box>
         </Container>
+        {_forgot_open && (
+          <Forgot
+            _forgot_open={_forgot_open}
+            handleOpenForgot={handleOpenForgot}
+            handleCloseForgot={handleCloseForgot}
+            handleOpenOTP={handleOpenOTP}
+            setSaveForgot={setSaveForgot}
+          />
+        )}
+        {_forotp_open && (
+          <EnterOptScreen
+            _forotp_open={_forotp_open}
+            handleOpenOTP={handleOpenOTP}
+            handleCloseOTP={handleCloseOTP}
+            _saveForgot={_saveForgot}
+            handleOpenReset={handleOpenReset}
+            handleOpenForgot={handleOpenForgot}
+          />
+        )}
+        {_openReset && (
+          <ResetPassword
+            _openReset={_openReset}
+            handleOpenReset={handleOpenReset}
+            handleCloseReset={handleCloseReset}
+            _saveForgot={_saveForgot}
+            handleCloseForgot={handleCloseForgot}
+            handleOpenOTP={handleOpenOTP}
+            handleCloseOTP={handleCloseOTP}
+          />
+        )}
       </Box>
     </LoginStyle>
   );

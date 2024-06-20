@@ -1,21 +1,36 @@
-import { Grid, Typography, Box, Container, Button } from "@mui/material";
+import React, { useContext, useRef, useState } from "react";
+import { useTheme } from "@mui/material/styles";
+import {
+  Grid,
+  Typography,
+  Box,
+  Container,
+  Button,
+  useMediaQuery,
+} from "@mui/material";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Divider from "@mui/material/Divider";
 import styled from "@emotion/styled";
-import ButtonComponent from "./ButtonComponent";
-import React, { useEffect, useState, useRef } from "react";
-import { PostApiFunction } from "../utils";
-import Apiconfigs from "../ApiConfig/ApiConfig";
-import useMediaQuery from "@mui/material/useMediaQuery";
-const CardComponentStyle = styled("Box")(({ theme }) => ({
+import SkeltonLoader from "../component/SkeltonLoader";
+import FeaturedPostCard from "./FeaturedPostCard";
+import { AuthContext } from "../context/Auth";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useRouter } from "next/router";
+
+const CardComponentStyle = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
-    padding: "20px 0 30px 0",
+    padding: "0 40px",
+    position: "relative",
     background: "#fff",
-    // padding: "50px",
-    "& h2": {
-      fontWeight: "500",
+    "@media(max-width:615px)": {
+      padding: "0",
+      marginTop: "2rem",
+    },
+    "& container": {
+      padding: "0px",
     },
   },
   "& .circleimg": {
@@ -34,94 +49,73 @@ const CardComponentStyle = styled("Box")(({ theme }) => ({
   "& .large": {
     background: "#FFF",
   },
-  "& .cards": {
-    cursor: "pointer",
-    width: "90%",
-    boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-    borderRadius: "20px",
-    transform: "0",
-    transition: "0.8s",
-    transform: "scale(0.9)",
 
-    "&:hover": {
-      transform: "scale(1)",
-      transition: "0.8s",
+  "& .viewmoreButtonShow": {
+    padding: "10px",
+    position: "absolute",
+    right: "55px",
+    bottom: "0",
+    zIndex: "999",
+    "@media(max-width:615px)": {
+      right: "0px",
+      bottom: "-20px",
     },
-    "& .contentBox": {
-      padding: "0 10px 10px",
-      "& h5": {
-        fontSize: "14px",
-        textAlign: "start",
-        fontWeight: "500",
-        padding: "5px",
-      },
-      "& h4": {
-        fontSize: "12px",
-        color: "#000",
-        fontWeight: "500",
-        margin: "5px 5px",
-      },
-      "& h6": {
-        fontSize: "10px",
-        color: "#818181",
-        fontWeight: "500",
-        margin: "5px 5px",
-      },
-    },
+    "& button": {
+      border: "2px solid #a7d325",
+      background: "none",
+      borderRadius: "20px",
+      color: "#000",
+      border: "none",
 
-    "& h5": {
-      textAlign: "end",
-      fontSize: "18px",
+      "& span": {
+        color: "#a7d325 ",
+      },
     },
   },
 }));
-const CardComponent = () => {
-  const sliderRef = useRef(null);
 
-  const isMobile = useMediaQuery("(max-width:600px)");
-  const projectDetails = [
-    {
-      name: "It Is A Piece Of Really Soft Tissue That Appears As A Thin Line Between The Gums And Lips. You Can Find It OnThe Top And The Bottom Of Your Oral Cavity.",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Delivered Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Pre - Launched Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Running Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "It Is A Piece Of Really Soft Tissue That Appears As A Thin Line Between The Gums And Lips. You Can Find It OnThe Top And The Bottom Of Your Oral Cavity.",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Delivered Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Pre - Launched Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-    {
-      name: "Running Project",
-      image: "/images/meteryard/Images/Screenshot 2023-09-02 100341.png",
-    },
-  ];
+const IconButtonLeftContent = styled(Box)({
+  position: "absolute",
+  left: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  zIndex: 1,
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    left: "0rem",
+  },
+});
+
+const IconButtonRightContent = styled(Box)({
+  position: "absolute",
+  right: "3rem",
+  top: "50%",
+  transform: "translateY(-50%)",
+  color: "black",
+  cursor: "pointer",
+  "@media(max-width:615px)": {
+    right: "0rem",
+  },
+});
+
+const CardComponent = ({ ProductData }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const sliderRef = useRef(null);
+  const auth = useContext(AuthContext);
+  const router = useRouter();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     autoplay: false,
     arrows: false,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-
     responsive: [
       {
         breakpoint: 1280,
@@ -146,7 +140,7 @@ const CardComponent = () => {
       {
         breakpoint: 991,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           autoplay: false,
@@ -156,7 +150,7 @@ const CardComponent = () => {
       {
         breakpoint: 767,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
           autoplay: false,
@@ -186,104 +180,132 @@ const CardComponent = () => {
       },
     ],
   };
-  const [_getlist, setGetList] = useState([]);
-  console.log("res---->5s645sds6a+d4sa", _getlist);
 
-  const [_isloading, setIsLoading] = useState(false);
-
-  const ResidentialAPI = async () => {
-    try {
-      setIsLoading(true);
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeId: "65dc4b9cda234100342352b1",
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setIsLoading(false);
-
-        setGetList(res?.result?.docs);
-      }
-    } catch (error) {
-      setIsLoading(false);
-
-      console.log("eror", error);
+  const handlePrevious = () => {
+    console.log("aadasdd");
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
     }
   };
-  useEffect(() => {
-    ResidentialAPI();
-  }, []);
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+      query: { _id: "FEATURED" },
+    });
+  };
+
   return (
     <CardComponentStyle>
-      <div className="mainSliderDiv">
-        <Container maxWidth>
-          <Box className="projects-card">
-            <Typography variant="h2">Featured Projects</Typography>
-            <Typography variant="h6">
-              Featured Residential Projects Across India
-            </Typography>
-          </Box>
-          <Box mt={isMobile ? 2 : 5}>
-            <Slider {...settings} ref={sliderRef}>
-              {projectDetails.map((data, index) => {
-                return (
-                  <Grid item lg={3} md={6} sm={6} xs={12} key={index}>
-                    <Box
-                      height={"100%"}
-                      pb={"20px"}
-                      display={"flex"}
-                      justifyContent={"center"}
-                    >
-                      <Box className="cards property-card-style">
-                        <Box>
-                          <img
-                            src="/images/meteryard/Images/Screenshot 2023-09-02 100309.png"
-                            width={"100%"}
-                          />
-                        </Box>
-                        <Box className="contentBox">
-                          <Typography variant="h5">
-                            BLK 7-1005, Vascon Tulips Gold
-                          </Typography>
-                          <Typography variant="h4">
-                            BLK 7-1005, Vascon Tulips Gold
-                          </Typography>
-                          <Typography variant="h6">
-                            It Is A Piece Of Really Soft Tissue That Appears As
-                            A Thin Line Between The Gums And Lips.
-                          </Typography>
-                          <Box m={"10px 0"}>
-                            <Divider color="#D2D2D2" />
-                          </Box>
-                          <Box display={"flex"} alignItems={"center"}>
-                            <Box>
-                              <Typography variant="h4">
-                                Property Size
-                              </Typography>
-                              <Typography variant="h5">900 Sqr Ft.</Typography>
-                            </Box>
-                            &nbsp;&nbsp; &nbsp;&nbsp;
-                            <Box>
-                              <Typography variant="h4">
-                                Property Size
-                              </Typography>
-                              <Typography variant="h5">900 Sqr Ft.</Typography>
-                            </Box>
-                          </Box>
-                          <ButtonComponent data={data} />
-                        </Box>
-                      </Box>{" "}
-                    </Box>
-                  </Grid>
-                );
-              })}
-            </Slider>
+      <Box className="mainSliderDiv">
+        <Container>
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+          >
+            <Box>
+              <Typography
+                variant="h1"
+                fontSize={isMobile ? 28 : 48}
+                fontWeight={500}
+                lineHeight={isMobile && 1.5}
+              >
+                {ProductData?.projectType} Projects
+              </Typography>
+              <Typography
+                variant="h6"
+                fontSize={isMobile ? 20 : 24}
+                pl={0.3}
+                fontWeight={300}
+              >
+                {ProductData?.projectType} Projects Across India
+              </Typography>
+            </Box>
           </Box>
         </Container>
-      </div>
+
+        {ProductData?.allProperty?.length > 4 && (
+          <IconButtonLeftContent onClick={handlePrevious}>
+            <ArrowBackIosIcon />
+          </IconButtonLeftContent>
+        )}
+
+        <Box mt={4} width={"95%"} margin={"0 auto"}>
+          {ProductData?.allProperty?.length > 4 ? (
+            <Slider {...settings} ref={sliderRef}>
+              {ProductData?.allProperty?.length &&
+                ProductData?.allProperty?.map((data, index) => {
+                  return (
+                    <Box key={index}>
+                      <FeaturedPostCard data={data} index={index} />
+                    </Box>
+                  );
+                })}
+            </Slider>
+          ) : (
+            <>
+              <Grid container>
+                {ProductData?.allProperty?.length &&
+                  ProductData?.allProperty?.map((data, index) => {
+                    return (
+                      <Grid item lg={3} md={4} sm={6} xs={12} key={index}>
+                        <FeaturedPostCard data={data} />
+                      </Grid>
+                    );
+                  })}
+              </Grid>
+            </>
+          )}
+        </Box>
+
+        {!isMobile && (
+          <Box sx={{ display: "flex", justifyContent: "center", mt: "10px" }}>
+            {React.Children.toArray(
+              auth._isFeaturedPost.map((item, index) => {
+                if (index >= ProductData?.allProperty?.length - 2) return null;
+                return (
+                  <Box
+                    onClick={() => {
+                      setCurrentSlide(index);
+                      sliderRef.current.slickGoTo(index);
+                    }}
+                    style={{
+                      minWidth: "10px",
+                      minHeight: "10px",
+                      borderRadius: "50%",
+                      border: "1px solid #A7D325",
+                      backgroundColor:
+                        currentSlide === index ? "#A7D325" : "white",
+                      marginRight: "4px",
+                    }}
+                  />
+                );
+              })
+            )}
+          </Box>
+        )}
+
+        {ProductData?.allProperty?.length > 4 && (
+          <IconButtonRightContent onClick={handleNext}>
+            <ArrowForwardIosIcon />
+          </IconButtonRightContent>
+        )}
+        <Box className="viewmoreButtonShow" style={{ marginTop: "1rem" }}>
+          {ProductData?.allProperty?.length > 4 && (
+            <Button onClick={handleClick}>
+              View All
+              <ArrowForwardIcon sx={{ fontSize: "18px", marginLeft: "10px" }} />
+            </Button>
+          )}
+        </Box>
+      </Box>
     </CardComponentStyle>
   );
 };

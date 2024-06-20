@@ -31,7 +31,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const DialogStyle = styled("Box")(({ theme }) => ({
+const DialogStyle = styled(Box)(({ theme }) => ({
   "& button": {
     background: "#A2D117",
     padding: "8px 25px",

@@ -2,12 +2,13 @@ import React from "react";
 import { Avatar, Typography, Box } from "@mui/material";
 import styled from "@emotion/styled";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-const SellerListStyle = styled("Box")(({ theme }) => ({
+const SellerListStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
     "& .detailsBox": {
       display: "flex",
       alignItems: "center",
       position: "relative",
+
       "& svg": {
         zIndex: "1",
         left: "25px",
