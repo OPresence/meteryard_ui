@@ -13,13 +13,11 @@
   color: #444444;
   font-family: system-ui;
 }
-@media screen and (max-width:615px) {
-.topHeading h2 {
-  font: normal normal 600 25px/8px Segoe UI;
-  padding-top: 20px;
-
-}
-  
+@media screen and (max-width: 615px) {
+  .topHeading h2 {
+    font: normal normal 600 25px/8px Segoe UI;
+    padding-top: 20px;
+  }
 }
 .ViewPropertyBanner {
   min-height: 365px;
@@ -32,10 +30,9 @@
   font: normal normal 600 40px/88px Segoe UI;
   font-family: system-ui;
 }
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .topHeading h2 span {
     font: normal normal 600 25px/50px Segoe UI;
-  
   }
 }
 
@@ -50,7 +47,6 @@
 }
 
 .imgBox {
-
   position: absolute;
   top: 50px;
   right: 50;
@@ -94,10 +90,9 @@
   color: #ffffff;
   font-family: system-ui;
 }
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .galleryTopCard p {
     display: none;
-  
   }
 }
 .galleryTopCard span {
@@ -148,16 +143,14 @@
   padding-left: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
-  
 }
 .getQnwerontactBtn button {
   background-color: red;
   color: #fff;
   font-size: 12px;
   padding: 10px 20px;
-  clip-path: polygon(0 0, 130% 0, 87% 100%, 0 100%)
+  clip-path: polygon(0 0, 130% 0, 87% 100%, 0 100%);
 }
-
 
 .getQnwerontactBtn button {
   background: #d8232a;
@@ -177,10 +170,10 @@
   bottom: -20px;
   width: 100%;
 }
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .detailsOFRoom {
-  background-color: #fff;
-  padding: 10px;
+    background-color: #fff;
+    padding: 10px;
   }
 }
 .detailsOFRoomContent {
@@ -193,32 +186,32 @@
   border-radius: 20px;
   padding: 9px;
 }
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .detailsOFRoomContent {
-   gap: 10px;
-   display: initial;
-   padding: 10px 0 0 0;
-   
+    gap: 10px;
+    display: initial;
+    padding: 10px 0 0 0;
   }
 }
 .contextDetails {
   text-align: center;
   width: 100%;
 }
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .contextDetails {
-   border-right: none !important;
-  
+    border-right: none !important;
+    display: flex;
+    flex-direction: column;
   }
 }
 .contextDetails h4 {
   color: #444444 !important;
   font-size: 14px;
 }
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .contextDetails h4 {
-    margin-right: 15px;
-  
+    margin-right: 0px;
+    font-size: 10px;
   }
 }
 .socialMediaIcons {
@@ -269,13 +262,10 @@
   font-family: system-ui;
   font-weight: 500;
   white-space: pre;
-
 }
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .moreDetailcontent h3 {
-   
     font-size: 12px;
-
   }
 }
 
@@ -285,7 +275,6 @@
   margin-bottom: 0;
   font-family: system-ui;
   font-weight: 500;
-
 }
 
 .cardContent {
@@ -296,9 +285,8 @@
   width: 100%;
 }
 
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .contentdiv {
-   
     padding-top: 10px;
   }
 }
@@ -329,13 +317,12 @@
   border-radius: 13px 0px 0px 0px;
   margin-top: 20px;
 }
-.ImageBox{
- display: flex;
- justify-content: end;
+.ImageBox {
+  display: flex;
+  justify-content: end;
 }
-@media screen and (max-width:615px) {
+@media screen and (max-width: 615px) {
   .ImageBox {
-   
-   display: none;
+    display: none;
   }
 }

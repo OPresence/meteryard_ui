@@ -1,4 +1,10 @@
-import React, { useContext, useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 import PostCard from "./PostCard";
 import { AuthContext } from "../../../context/Auth";
 import { Box, Divider, Skeleton } from "@mui/material";
@@ -113,7 +119,7 @@ const PostIndex = () => {
         },
       });
       if (res?.responseCode === 200) {
-        fetchPosts()
+        fetchPosts();
       } else {
         console.error("Error adding comment:", res);
       }
@@ -138,12 +144,22 @@ const PostIndex = () => {
         <div>
           {Array.from({ length: 3 }).map((_, index) => (
             <React.Fragment key={index}>
-              <Skeleton animation="wave" variant="circular" width={40} height={40} sx={{ marginTop: '4rem' }} />
+              <Skeleton
+                animation="wave"
+                variant="circular"
+                width={40}
+                height={40}
+                sx={{ marginTop: "4rem" }}
+              />
               <Box display="flex" alignItems="center">
                 <Skeleton animation="wave" width={100} height={40} />
               </Box>
               <Box mt={1} className="contentBox">
-                <Skeleton animation="wave" height={40} style={{ marginBottom: 6 }} />
+                <Skeleton
+                  animation="wave"
+                  height={40}
+                  style={{ marginBottom: 6 }}
+                />
                 <Skeleton animation="wave" height={40} width="80%" />
                 <Box display="flex" alignItems="center" mt={1}>
                   <Box>
@@ -155,7 +171,7 @@ const PostIndex = () => {
                   </Box>
                 </Box>
               </Box>
-              <Divider sx={{ marginTop: '2rem' }} />
+              <Divider sx={{ marginTop: "2rem" }} />
             </React.Fragment>
           ))}
         </div>

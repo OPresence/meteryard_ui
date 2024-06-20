@@ -1,6 +1,6 @@
 import React from "react";
 import PropertyPostIndex from "./PropertyPostIndex";
-import HomeLayout from "../../layout/LoginLayout/LoginLayout";
+import HomeLayout from "../../layout/HomeLayout";
 // import useAuthGuard from "../../component/auth";
 
 const index = () => {

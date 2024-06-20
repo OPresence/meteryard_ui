@@ -1,8 +1,8 @@
 // import Footer from "../PropertyLayout/Footer";
 import React from "react";
-import Topbar from "./Topbar";
+import Topbar from "../Topbar";
 
-import Footer from "../PropertyLayout/FooterV1";
+import Footer from "../Footer";
 
 export default function HomeLayout({ children }) {
   return (

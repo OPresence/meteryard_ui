@@ -1,11 +1,13 @@
-import { color } from "@mui/system";
-
 export default {
   h1: {
     fontFamily: "Inter",
+    color: "#000",
     fontSize: "48px",
     fontWeight: "600",
     lineHeight: "58.09px",
+    "@media(max-width:615px)": {
+      fontSize: "20px",
+    },
   },
   h2: {
     fontSize: "22px",
@@ -13,6 +15,7 @@ export default {
     fontWeight: "400",
     color: "#000",
     fontFamily: "Inter",
+    color: "#000",
   },
   h3: {
     fontSize: "18px",
@@ -20,43 +23,52 @@ export default {
     fontWeight: "400",
     color: "#000",
     fontFamily: "Inter",
+    color: "#000",
+    "@media(max-width:615px)": {
+      fontSize: "12px",
+    },
   },
   h4: {
     fontSize: "22px",
     fontWeight: "600",
     color: "#444444",
     fontFamily: "Inter",
+    color: "#000",
+    textAlign: "center",
   },
   h5: {
-    fontSize: "22px",
-    fontWeight: "500",
-    color: "#000",
     fontFamily: "Inter",
+    fontSize: "20px",
+    fontWeight: "400",
+    lineHeight: "29.05px",
+    textAlign: "center",
+    color:"#000",
+    "@media(max-width:615px)": {
+      fontSize: "18px",
+    },
   },
   h6: {
-    fontSize: "16px",
-    fontWeight: "400",
-    color: "#000",
     fontFamily: "Inter",
+    fontSize: "24px",
+    fontWeight: "400",
+    lineHeight: "29.05px",
+    color: "#000",
+    "@media(max-width:615px)": {
+      fontSize: "14px",
+    },
   },
   overline: {
-    fontSize: "8px",
+    fontWeight: "600 !important",
+    fontSize: "16px",
     fontFamily: "Inter",
+    color: "#000",
   },
 
   button: {
     padding: "0px",
-    // background: "#ACACAC",
     color: "#000",
     borderRadius: 27,
     fontFamily: "Inter",
+    color: "#000",
   },
-
-  // body1: {
-  //   fontFamily: "Inter",
-  //   fontSize: "24px",
-  //   fontWeight: "400",
-  //   lineHeight: "29.05px",
-  //   color: "#000",
-  // },
 };

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid, Typography, FormControlLabel, Button } from "@mui/material";
+import { Box, Grid, Typography, FormControlLabel, Button, useThemeProps } from "@mui/material";
 import styled from "@emotion/styled";
 import PostCheckBox from "../../component/PostCheckBox";
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { SelectField, InputField } from "../../component/FormFields";
-
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .borderBox": {
     width: "250px",
@@ -13,11 +14,12 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     position: "absolute",
   },
   "& .mainBox": {
-    height: "500px",
+  
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     background: "#fff",
     borderRadius: "15px",
     position: "relative",
+ 
   },
   "& .mainBox": {
     // height: "500px",
@@ -95,6 +97,8 @@ const PropertyPost_s_2 = (props) => {
   } = props;
   const [state, setState] = React.useState(false);
   const [_propertyList, setPropertyList] = React.useState([]);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -221,7 +225,7 @@ const PropertyPost_s_2 = (props) => {
   }, []);
   return (
     <PropertyPostScreenStyle>
-      <Box className="mainBox">
+      <Box className="mainBox"maxHeight={isMobile ?"unset":"490"}>
         <Box className="HeadingBox">
           <Typography variant="h2">List Your Property</Typography>
           <Box className="CheckBox">

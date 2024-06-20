@@ -1,10 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Box, Grid } from "@mui/material";
 import PropertyLayout from "../../layout/PropertyLayout";
 import { AuthContext } from "../../context/Auth";
-import ResidentialPostCard from "../../component/ResidentialPostCard";
-import CommercialPostCard from "../../component/CommercialPostCard";
-import AgreeculturePostCard from "../../component/AgreeculturePostCard";
 import FeaturedPostCard from "../../component/FeaturedPostCard";
 import SkeltonLoader from "../../component/SkeltonLoader";
 import { useRouter } from "next/router";
@@ -66,30 +63,6 @@ const AllPropertyIndex = () => {
               )}
             </>
           )}
-
-          {/* {property_id != "FEATURED" ? (
-            <>
-            </>
-          ) : (
-            <>
-          {auth?._isFeaturedPost &&
-            auth?._isFeaturedPost?.map((data, index) => {
-              console.log(
-                "auth?._getproperyPostList------->",
-                property_id == data?.projectTypeId?._id,
-                property_id,
-                data?.projectTypeId?._id
-              );
-              return (
-                <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
-                  <Box>
-                    <FeaturedPostCard data={data} />
-                  </Box>
-                </Grid>
-              );
-            })}
-          </>
-          )} */}
         </Grid>
       </PropertyLayout>
     </Box>

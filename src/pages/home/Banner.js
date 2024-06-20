@@ -15,8 +15,13 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AuthContext } from "../../context/Auth";
 const MainComponent = styled(Box)(({ theme }) => ({
   "& .mainBox": {
-    // height: "100vh",
     overflow: "hidden",
+    "& .backImageBox": {
+      "@media(max-width:615px)": {
+        display: "flex",
+        justifyContent: "end",
+      },
+    },
     "@media(max-width:615px)": {
       marginBottom: "0",
       height: "auto",
@@ -28,9 +33,9 @@ const MainComponent = styled(Box)(({ theme }) => ({
       marginTop: "-10px",
       left: "0",
       "@media(max-width:615px)": {
-        maxWidth: "100%",
+        maxWidth: "70%",
         top: "-2%",
-        left: "10% !important",
+        // left: "20% !important",
       },
     },
   },
@@ -56,7 +61,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
     width: "100%",
 
     "@media(max-width:615px)": {
-      top: "15%",
+      top: "13%",
       left: "0",
     },
     "& .Banner_inputField": {
@@ -85,7 +90,21 @@ const MainComponent = styled(Box)(({ theme }) => ({
         fontSize: "12px",
       },
     },
-
+    "& .ContainerSearchBox": {
+      display: "flex",
+      justifyContent: "center",
+      padding: "0 150px 0 0",
+      // position: "absolute",
+      width: "100%",
+      top: "140%",
+      left: "50%",
+      "@media(max-width:615px)": {
+        padding: "0",
+        left: "0%",
+        top: "100%",
+        margin: "0 0px",
+      },
+    },
     "& .searchbox": {
       background: "#A9D910 0% 0% no-repeat padding-box;",
       position: "absolute",
@@ -96,7 +115,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       alignItems: "center",
       borderRadius: "11px",
       "@media(max-width:615px)": {
-        width: "80px",
+        width: "40px",
         height: "40px !important",
         margin: "5px 8px",
         minWidth: "unset",
@@ -155,7 +174,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       textAlign: "left",
 
       "@media(max-width:615px)": {
-        fontSize: "28px",
+        fontSize: "20px",
         lineHeight: "17.14px",
       },
     },
@@ -168,7 +187,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       textAlign: "left",
 
       "@media(max-width:615px)": {
-        fontSize: "28px",
+        fontSize: "20px",
         lineHeight: "17.14px",
       },
     },
@@ -307,7 +326,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
       boxShadow: " 0px 4px 4px 0px #0000001A",
       "& span": {
         padding: "0 0 0 65px",
-        fontFamily: "Inter",
+        // fontFamily: "Inter",
         fontSize: "12px",
         fontWeight: 600,
         color: "#000000",
@@ -587,13 +606,16 @@ export default function Home() {
       <Box>
         <Box position={"absolute"} className="contentBox">
           <Box
-            width={isMobile ? "85%" : "100%"}
+            width={isMobile ? "100%" : "100%"}
             padding={isMobile && "10px 20px"}
           >
+            <Box>
             <Typography
               variant="h1"
               className="banner-heading"
               lineHeight={isMobile && "2rem"}
+              marginTop={isMobile && "20px"}
+              justifyContent= {isMobile && "flex-start"}
             >
               <span className="find">Find Your Place,</span>
               {isMobile && <br />}
@@ -603,11 +625,11 @@ export default function Home() {
               </span>
             </Typography>
             <Box mt={1.5} mb={1.5}>
-              <Typography variant="h3" fontSize={18}>
+              <Typography variant="h3" width={isMobile ? "68%" :"100%"} fontSize={isMobile ? "14px":"18px"}>
                 Please Select Your Category
               </Typography>
             </Box>
-            <Box display={"flex"} className="buyer-seller-btn">
+            <Box display={"flex"} className="buyer-seller-btn" justifyContent={isMobile && "flex-start"}>
               <Box
                 mt={isMobile ? 2 : 5}
                 position={"relative"}
@@ -679,15 +701,11 @@ export default function Home() {
                 </Box>
               </Box>
             </Box>
+            </Box>
+
             <Box
-              display={"flex"}
-              justifyContent={"center"}
-              padding={isMobile ? "0" : "0 150px 0 0"}
-              position={isMobile && "absolute"}
-              width={isMobile ? "80%" : "100%"}
-              top="140%"
-              left="50%"
-              style={{ transform: isMobile && "translate(-50%,-50%)" }}
+              className="ContainerSearchBox"
+              // style={{ transform: isMobile && "translate(-50%,-50%)" }}
             >
               <Box
                 mt={10}
@@ -735,7 +753,7 @@ export default function Home() {
         </Box>
         <Box className="mainBox">
           <Box display={"flex"} justifyContent={"end"} className="bacBox">
-            <Box>
+            <Box className="backImageBox">
               <Box className="backImage">
                 <img
                   src="/images/picture.png"

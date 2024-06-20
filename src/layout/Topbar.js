@@ -14,20 +14,17 @@ import {
 import CallIcon from "@mui/icons-material/Call";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
-import Logo from "../../component/Logo";
+import Logo from "../component/Logo";
 import styled from "@emotion/styled";
-import MenuComponent from "../../component/MenuComponent";
-import DialogComponent from "../../component/DialogComponent";
+import MenuComponent from "../component/MenuComponent";
+import DialogComponent from "../component/DialogComponent";
 import { useRouter } from "next/router";
-import LoginDialog from "../../component/LoginDialog";
-import "../../Scss/border.css";
-import Apiconfigs from "../../ApiConfig/ApiConfig";
-import { getAPIdata } from "../../utils";
-import { AuthContext } from "../../context/Auth";
+import LoginDialog from "../component/LoginDialog";
+import { AuthContext } from "../context/Auth";
 import CloseIcon from "@mui/icons-material/Close";
-import ProfileMenu from "../../component/ProfileMenu";
-import MobilerMenu from "../../component/MobileMenu";
-import RegisterModal from "../../component/registerSellerModal/RegisterModal";
+import ProfileMenu from "../component/ProfileMenu";
+import MobilerMenu from "../component/MobileMenu";
+import RegisterModal from "../component/registerSellerModal/RegisterModal";
 const MenuStyle = styled(Box)(({ theme }) => ({
   "& .hidebox": {
     display: "block",
@@ -56,7 +53,7 @@ const MenuStyle = styled(Box)(({ theme }) => ({
     background: "#444444",
     border: "1px solid #fff",
     color: "#fff",
-    clipPath: "polygon(0 0, 130% 0, 82% 99%, 0 100%)",
+    // clipPath: "polygon(0 0, 130% 0, 82% 99%, 0 100%)",
     "&:hover": {
       background: "#fff",
       color: "#444444",
@@ -152,7 +149,6 @@ export default function Topbar() {
     drawerOpen: false,
   });
   const [_openDialog, setOpenDialog] = useState(false);
-  console.log("bkdskfks---->", _openDialog);
   const [_openDialogLogin, setOpenDialogLogin] = useState(false);
   const [_selectScreen, setSelectScreen] = useState("");
   const [_signcomplete, setSignUpComplete] = useState(false);
@@ -163,20 +159,6 @@ export default function Topbar() {
   const SignUpDialog = (value) => {
     setSignUpDia(true);
   };
-  const GetProfileFunction = async () => {
-    try {
-      const res = await getAPIdata({
-        endPoint: Apiconfigs?.myProfile,
-        data: window.sessionStorage.getItem("token"),
-      });
-      if (res) {
-        auth?.setGetProfile(res?.result);
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
-
   const router = useRouter();
   const handleClickOpen = () => {
     setOpenDialog(true);
@@ -216,9 +198,9 @@ export default function Topbar() {
       }
     };
   }, []);
-  useEffect(() => {
-    GetProfileFunction();
-  }, []);
+  // useEffect(() => {
+  //   GetProfileFunction();
+  // }, []);
   useEffect(() => {
     setAccessToken(sessionStorage.getItem("token"));
   }, [sessionStorage.getItem("token")]);
@@ -300,25 +282,29 @@ export default function Topbar() {
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 {_accesstoken == null ? (
                   <>
+                    {/* <Box className="cityChat"> */}
                     <Button
                       style={{
                         padding: "5px 30px",
+                        background: "#A7D325",
+                        borderRadius: "15px",
                       }}
                       className="LoginButton"
                       onClick={() => {
                         handleClickOpenLogin("Login");
-                        console.log("nksdnkndsnfk");
+                        // console.log("nksdnkndsnfk");
                       }}
                     >
                       Login
                     </Button>
-                    &nbsp;&nbsp; &nbsp;&nbsp;
+                    {/* </Box> */}
+                    {/* &nbsp;&nbsp; &nbsp;&nbsp;
                     <Button
                       onClick={() => SignUpDialog()}
                       className="LoginButton"
                     >
                       Sign Up
-                    </Button>
+                    </Button> */}
                   </>
                 ) : (
                   <Box display={"flex"} justifyContent={"center"} mt={1}>
@@ -328,13 +314,15 @@ export default function Topbar() {
               </>
             </Box>
           </MenuStyle>
+          {_openDialog && (
+            <DialogComponent
+              open={_openDialog}
+              setOpen={setOpenDialog}
+              handleClickOpen={handleClickOpen}
+              handleClose={handleClose}
+            />
+          )}
 
-          <DialogComponent
-            open={_openDialog}
-            setOpen={setOpenDialog}
-            handleClickOpen={handleClickOpen}
-            handleClose={handleClose}
-          />
           {_openDialogLogin && (
             <LoginDialog
               open={_openDialogLogin}
@@ -393,7 +381,7 @@ export default function Topbar() {
               <Box className={"TopIconBoxChild"} alignItems={"enter"}>
                 <Box display={"flex"} alignItems={"enter"}>
                   <Box className="flexAlign">
-                    <CallIcon className="icon1" /> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <CallIcon className="icon2" /> &nbsp;&nbsp;&nbsp;&nbsp;
                     <a
                       href="tel:7060604604"
                       style={{ textDecoration: "none", color: "inherit" }}
@@ -401,19 +389,36 @@ export default function Topbar() {
                       <Typography variant="body1">7060604604</Typography>
                     </a>
                   </Box>
-                  {/* <Box className="flexAlign" p={"0 0 0 30px"}>
-                    <WhatsAppIcon className="icon2" /> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Typography variant="body1">whatsapp us</Typography>
-                  </Box> */}
+                  <Box className="flexAlign" p={"0 0 0 30px"}>
+                    <CallIcon className="icon2" /> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Typography variant="body1">
+                      contact@meteryard.com
+                    </Typography>
+                  </Box>
                 </Box>
                 <Box className="flexAlign" p={"0 0 0 30px"}>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   {_accesstoken == null ? (
                     <>
-                      <span onClick={() => handleClickOpenLogin("Login")}>
+                      {/* <span onClick={() => handleClickOpenLogin("Login")}>
                         Login
-                      </span>
-                      <span onClick={() => SignUpDialog()}>/Sign Up</span>
+                      </span> */}
+                      <Button
+                        style={{
+                          padding: "5px 30px",
+                          background: "#A7D325",
+                          color: "#000",
+                          borderRadius: "5px",
+                        }}
+                        className="LoginButton"
+                        onClick={() => {
+                          handleClickOpenLogin("Login");
+                          console.log("nksdnkndsnfk");
+                        }}
+                      >
+                        Login
+                      </Button>
+                      {/* <span onClick={() => SignUpDialog()}>/Sign Up</span> */}
                     </>
                   ) : (
                     <ProfileMenu setAccessToken={setAccessToken} />

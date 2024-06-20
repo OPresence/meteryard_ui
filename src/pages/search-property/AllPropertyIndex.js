@@ -1,10 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Box, Grid } from "@mui/material";
 import PropertyLayout from "../../layout/PropertyLayout";
 import { AuthContext } from "../../context/Auth";
-import ResidentialPostCard from "../../component/ResidentialPostCard";
-import CommercialPostCard from "../../component/CommercialPostCard";
-import AgreeculturePostCard from "../../component/AgreeculturePostCard";
 import FeaturedPostCard from "../../component/FeaturedPostCard";
 import SkeltonLoader from "../../component/SkeltonLoader";
 import { useRouter } from "next/router";
@@ -43,15 +40,6 @@ const AllPropertyIndex = () => {
                       <Grid item lg={4} md={6} sm={12} xs={12} key={index}>
                         <Box>
                           <FeaturedPostCard data={data} index={index} />
-                          {/* {data?.projectTypeId?.projectType == "Residential" && (
-                      <ResidentialPostCard data={data} />
-                    )}
-                    {data?.projectTypeId?.projectType == "Commercial" && (
-                      <CommercialPostCard data={data} />
-                    )}
-                    {data?.projectTypeId?.projectType == "Agriculture" && (
-                      <AgreeculturePostCard data={data} />
-                    )} */}
                         </Box>
                       </Grid>
                     );

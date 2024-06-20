@@ -111,7 +111,7 @@ const AddArea = ({
         data: {
           limit: "10",
           page: "1",
-          countryId: _countrycode,
+          countryCode: _countrycode,
         },
         // params: {
         //   stateId: _countrycode,

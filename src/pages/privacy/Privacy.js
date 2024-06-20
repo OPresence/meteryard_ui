@@ -3,12 +3,15 @@ import { Box, Typography, Divider } from "@mui/material";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { Container, styled } from "@mui/system";
 import { PostApiFunction } from "../../utils";
+import HomeLayout from "../../layout/HomeLayout";
+
 const Root = styled(Box)(({ theme }) => ({
   "& .mainAboutSection": {
     padding: "30px 0px",
+    marginTop: "100px",
   },
 }));
-const Aboutus = () => {
+const Privacy = () => {
   const [_privacypolict, setPrivacyPolicy] = useState("");
   const ListPrivacytUsContent = async (values) => {
     try {
@@ -30,7 +33,7 @@ const Aboutus = () => {
     ListPrivacytUsContent();
   }, []);
   return (
-    <>
+    <HomeLayout>
       <Root>
         <Container>
           <Box className="mainAboutSection">
@@ -40,8 +43,8 @@ const Aboutus = () => {
           </Box>
         </Container>
       </Root>
-    </>
+    </HomeLayout>
   );
 };
 
-export default Aboutus;
+export default Privacy;

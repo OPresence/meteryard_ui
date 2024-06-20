@@ -17,7 +17,7 @@ import "react-phone-input-2/lib/style.css";
 import moment from "moment";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-
+import GoogleProvider from "next-auth/providers/facebook";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaGoogle } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -237,7 +237,81 @@ const SignUp = ({
   //   const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
   //   setFieldValue("name", capitalizedValue);
   //   return capitalizedValue;
-  // };
+  // }; 
+
+  function facebookSignup() {
+    const facebookAppId = 'YOUR_FACEBOOK_APP_ID';
+    const facebookRedirectUri = 'http://localhost:3000/';
+  
+    const facebookAuthUrl = `https://www.facebook.com/v3.3/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${facebookRedirectUri}&scope=email&response_type=code`;
+  
+    window.location.href = facebookAuthUrl;
+  }
+  function googleSignup() {
+    const googleClientId = 'YOUR_GOOGLE_CLIENT_ID';
+    const googleRedirectUri = 'http://localhost:3000/';
+  
+    const googleAuthUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${googleRedirectUri}&scope=profile email&response_type=code`;
+  
+    window.location.href = googleAuthUrl;
+  }
+  function linkedinSignup() {
+    const linkedinClientId = 'YOUR_LINKEDIN_CLIENT_ID';
+    const linkedinRedirectUri = 'http://localhost:3000/';
+    const linkedinScope = 'r_liteprofile r_emailaddress';
+  
+    const linkedinAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?client_id=${linkedinClientId}&redirect_uri=${linkedinRedirectUri}&scope=${linkedinScope}&response_type=code&state=${generateRandomState()}`;
+  
+    window.location.href = linkedinAuthUrl;
+  }
+  function generateRandomState() {
+    return Math.random().toString(36).substr(2, 10);
+  }
+  function handleSocialRedirect() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+  
+    if (code) {
+      // Exchange authorization code for access token
+      fetch('/api/social-token', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code, provider: getProviderFromUrl() })
+      })
+     .then(response => response.json())
+     .then(data => {
+        // Use access token to sign up or log in user
+        console.log(data);
+      })
+     .catch(error => {
+      console.error(error);
+    });
+  }
+}
+
+// Get provider from URL
+function getProviderFromUrl() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const provider = urlParams.get('provider');
+
+  return provider;
+}
+
+// Add event listeners to social media buttons
+document.addEventListener('DOMContentLoaded', () => {
+  const facebookButton = document.getElementById('facebook-button');
+  const googleButton = document.getElementById('google-button');
+  const LinkedInButton = document.getElementById('LinkedIn-button');
+  
+  facebookButton.addEventListener('click', facebookSignup);
+  googleButton.addEventListener('click', googleSignup);
+  LinkedInButton.addEventListener('click', linkedinSignup);
+
+  // Handle redirect from social media providers
+  handleSocialRedirect();
+});
   return (
     <LoginStyle>
       <Box className="backgroundBox">
@@ -554,16 +628,17 @@ const SignUp = ({
                             <span>Remember Me</span>
                           </Box> */}
                           <Box mt={1} className="socialIconBox">
-                            <IconButton className="iconButton">
+                            <IconButton className="iconButton" onClick={facebookSignup}>
                               <FaFacebookF />
                             </IconButton>
                             <IconButton
                               className="iconButton"
                               style={{ border: "1px solid #CA0000" }}
+                              onClick={googleSignup}
                             >
                               <FaGoogle style={{ color: "#CA0000" }} />
                             </IconButton>
-                            <IconButton className="iconButton">
+                            <IconButton className="iconButton" onClick={linkedinSignup}>
                               <FaLinkedinIn />
                             </IconButton>
                           </Box>

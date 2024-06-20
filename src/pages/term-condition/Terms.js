@@ -8,6 +8,7 @@ import { Container, styled } from "@mui/system";
 const Root = styled(Box)(({ theme }) => ({
   "& .mainAboutSection": {
     padding: "30px 0px",
+    marginTop: "100px",
     "& h2": {
       fontFamily: "Inter",
       fontSize: "45px",

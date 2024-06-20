@@ -25,6 +25,7 @@ export default function Auth(props) {
   const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
   const [_getproprty_type, setGetPropetyType] = useState("");
   const [statesHome, setStatesHome] = useState([]);
+  console.log("statesHome000-->",statesHome);
   const [_citylist, setCityList] = useState([]);
   const [_isFeaturedPost, setIsFeatured] = useState([]);
   const [_getCityValue, setGetCityValue] = useState("0");
@@ -32,8 +33,9 @@ export default function Auth(props) {
   const [_getproperyPostList, setproperyPostList] = useState([]);
   const [_getproperFilteryPostList, setproperyFilterPostList] = useState([]);
   const [_pro_with_subpro, setPro_With_Subpro] = useState([]);
-  const [_getstate, setGetState] = useState("");
-
+  // const [_getstate, setGetState] = useState("");
+  const [_getallProduct, setGetAllProduct] = useState([]);
+  const [_loadingAllProduct, setLoadingAllProduct] = useState(false);
   // filter state
   const [_isloadingProp, setIsloadingProp] = useState(false);
   const [_priceRange, setPriceRangeState] = useState("");
@@ -41,19 +43,20 @@ export default function Auth(props) {
   const [_propertySubType, setPropertySubType] = useState("");
   const [_cityselect, setCitySelect] = useState("0");
   const [_searchproperty, setSearchProperty] = useState("");
-  console.log("_getCityValue--->", _priceRange);
+
   const StateApiFunction = async () => {
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllState,
         data: {
-          countryId: "65ba9a0fd02a1d3150e299bd",
+          countryCode: "IN",
         },
       });
       if (res) {
-        console.log("niuiinii--->", res);
+        console.log("67676674444---->",res?.result);
         if (res?.responseCode == 200) {
-          setStatesHome(res?.result?.docs);
+          setGetCityValue(res?.result[0]?.stateCode)
+          setStatesHome(res?.result);
         } else if (res?.responseCode == 404) {
           setStatesHome([]);
           toast.error(res?.responseMessage);
@@ -78,17 +81,18 @@ export default function Auth(props) {
     }
   };
   const CityApiFunction = async () => {
+    console.log("_getCityValue000-->",_getCityValue);
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllCity,
         data: {
-          stateId: _getCityValue,
+          stateCode: _getCityValue,
+          countryCode: "IN",
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
-          console.log("niuiinii--->", res);
-          setCityList(res?.result?.docs);
+          setCityList(res?.result);
         } else if (res?.responseCode == 400) {
           setCityList([]);
           toast.error(res?.responseMessage);
@@ -119,120 +123,44 @@ export default function Auth(props) {
         data: window.sessionStorage.getItem("token"),
       });
       if (res) {
-        console.log("ndfbdkj--->", res);
         setGetProfile(res?.result);
       }
-    } catch (error) {
-      console.log("error", error);
-    }
+    } catch (error) {}
   };
-  const PostFunction = async ({ data }) => {
+  const AllCategoryProduct = async () => {
     try {
+      setLoadingAllProduct(true);
       const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: data,
+        endPoint: Apiconfigs?.proTypeAccordingPropertyList,
       });
       if (res) {
-        console.log("niuiinii--->", res);
+        setLoadingAllProduct(false);
+
         if (res?.responseCode == 200) {
-          setPostList(res?.result?.docs);
+          setGetAllProduct(res?.result?.docs);
         } else if (res?.responseCode == 404) {
-          setPostList([]);
+          setGetAllProduct([]);
           toast.error(res?.responseMessage);
-          setPostList([]);
+          setGetAllProduct([]);
         } else if (res?.responseCode == 404) {
-          setPostList([]);
+          setGetAllProduct([]);
 
           toast.error(res?.responseMessage); // Display error notification
         } else if (res?.responseCode == 500) {
-          setPostList([]);
+          setGetAllProduct([]);
 
           toast.error(res?.responseMessage); // Display error notification
         } else {
-          setPostList([]);
-
-          toast.error(res?.responseMessage); // Display error notification
+          setGetAllProduct([]);
         }
       }
     } catch (error) {
-      console.log("error");
-      setPostList([]);
-    }
-  };
-  const FeaturedAPI = async () => {
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          page: "1",
-          limit: "10",
-          featuredProperty: "true",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setIsFeatured(res?.result?.docs);
-      }
-    } catch (error) {
-      setIsFeatured([]);
+      setLoadingAllProduct(false);
 
-      console.log("eror", error);
+      console.log("error", error);
     }
   };
-  const ResidentialAPI = async () => {
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeId: ["65dc4b9cda234100342352b1"],
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        // setIsLoading(false);
 
-        setGetList(res?.result?.docs);
-      }
-    } catch (error) {
-      // setIsLoading(false);
-
-      console.log("eror", error);
-    }
-  };
-  const CommercialAPI = async () => {
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeIds: ["65dc4c11da234100342352f4"],
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setGetListCommercial(res?.result?.docs);
-      }
-    } catch (error) {
-      console.log("eror", error);
-    }
-  };
-  const AgreecultureAPIAPI = async () => {
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs?.listAllPropertyPost,
-        data: {
-          projectTypeIds: ["65dc4c1eda234100342352fc"],
-          page: "1",
-          limit: "10",
-        },
-      });
-      if (res?.responseCode == 200) {
-        setGetListAgreeculture(res?.result?.docs);
-      }
-    } catch (error) {
-      console.log("eror", error);
-    }
-  };
   const ProjectType = async () => {
     try {
       setIsLoading(true);
@@ -318,7 +246,6 @@ export default function Auth(props) {
         endPoint: Apiconfigs?.proSubTypeListWithProType,
       });
       if (res) {
-        console.log("setPro_With_Subpro>", res);
         if (res?.responseCode == 200) {
           setPro_With_Subpro(res?.result?.docs);
         } else if (res?.responseCode == 400) {
@@ -346,7 +273,6 @@ export default function Auth(props) {
     }
   };
   const PropertyPostAPI = async (property_id) => {
-    console.log("8888888888888--->", property_id);
     try {
       setIsloadingProp(true);
       const res = await PostApiFunction({
@@ -363,7 +289,6 @@ export default function Auth(props) {
         },
       });
       if (res) {
-        console.log("fetching property post--->", res);
         if (res?.responseCode == 200) {
           setIsloadingProp(false);
 
@@ -401,7 +326,6 @@ export default function Auth(props) {
     }
   };
   const PropertySearchPostAPI = async (property_id) => {
-    console.log("8888888888888--->", property_id);
     try {
       setIsloadingProp(true);
       const res = await PostApiFunction({
@@ -419,7 +343,6 @@ export default function Auth(props) {
         },
       });
       if (res) {
-        console.log("sbjdhskandad4sa69879rt->", res);
         if (res?.responseCode == 200) {
           setIsloadingProp(false);
 
@@ -466,16 +389,6 @@ export default function Auth(props) {
       ProjectType();
     }
   }, []);
-  useEffect(() => {
-    if (RouterName == "CityChat") {
-      PostFunction({
-        data: {
-          page: 1,
-          limit: 10,
-        },
-      });
-    }
-  }, []);
 
   useEffect(() => {
     if (endTime) {
@@ -486,32 +399,37 @@ export default function Auth(props) {
     }
   });
   useEffect(() => {
+    console.log("6666666666");
     StateApiFunction();
-    FeaturedAPI();
-    ResidentialAPI();
-    CommercialAPI();
-    AgreecultureAPIAPI();
     ProjectType();
+    AllCategoryProduct();
   }, []);
   useEffect(() => {
     CityApiFunction();
   }, [_getCityValue]);
-  useEffect(() => {
-    StateApiFunction();
-  }, [_getCityValue]);
 
   useEffect(() => {
-    PropertyPostAPI();
+    if (
+      (_propertySubType != "" ||
+        _getCityValue != 0 ||
+        _cityselect != 0 ||
+        _priceRange != "") &&
+      RouterName == "search-property"
+    ) {
+      PropertyPostAPI();
+    }
   }, [_propertySubType, _getCityValue, _cityselect, _priceRange]);
   useEffect(() => {
-    PropertySearchPostAPI();
-  }, [
-    _propertySubType,
-    _getCityValue,
-    _cityselect,
-    _priceRange,
-    // _searchproperty,
-  ]);
+    if (
+      (_propertySubType != "" ||
+        _getCityValue != 0 ||
+        _cityselect != 0 ||
+        _priceRange != "") &&
+      RouterName == "search-property"
+    ) {
+      PropertySearchPostAPI();
+    }
+  }, [_propertySubType, _getCityValue, _cityselect, _priceRange]);
   let data = {
     _accesstoken,
     _getprofile,
@@ -534,15 +452,15 @@ export default function Auth(props) {
     _isloadingProp,
     _getCityValue,
     _cityselect,
+    _getallProduct,
+    _loadingAllProduct,
     PropertyPostAPI: (value) => PropertyPostAPI(value),
     PropertySearchPostAPI: (value) => PropertySearchPostAPI(value),
 
-    ResidentialAPI: (value) => ResidentialAPI(value),
-    CommercialAPI: (value) => CommercialAPI(value),
-    AgreecultureAPIAPI: (value) => AgreecultureAPIAPI(value),
+    AllCategoryProduct: (value) => AllCategoryProduct(value),
+
     setGetProfile: (value) => setGetProfile(value),
     setEndtime: (value) => setEndtime(value),
-    PostFunction: () => PostFunction(),
     setAccessToken: (value) => setAccessToken(value),
     setGetPropetyType: (value) => setGetPropetyType(value),
     setGetProject_sub_Type: (value) => setGetProject_sub_Type(value),

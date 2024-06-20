@@ -1,17 +1,15 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Typography,
-  Container,
   Box,
 } from "@mui/material";
 import styled from "@emotion/styled";
-import { cityObject } from "../utils";
-
+import { useRouter } from "next/router";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import { AuthContext } from "../context/Auth";
 const MenuComponentStyle = styled(Box)(({ theme }) => ({
   "& .submenueTab": {
     "& h5": {
@@ -70,10 +68,11 @@ const MenuComponentStyle = styled(Box)(({ theme }) => ({
 }));
 export default function MobilerMenu() {
   const [expanded, setExpanded] = React.useState(false);
-
+  const auth = useContext(AuthContext);
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+  const router = useRouter();
 
   return (
     <MenuComponentStyle>
@@ -90,13 +89,29 @@ export default function MobilerMenu() {
             <Typography variant="h5">Cities</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {cityObject.map((data, index) => {
-              return (
-                <Box key={index}>
-                  <Typography variant="h4">{data}</Typography>
-                </Box>
-              );
-            })}
+            {console.log("98988--->",auth?.statesHome)}
+            {auth?.statesHome &&
+              auth?.statesHome?.map((data, index) => {
+                return (
+                  <Box
+                    key={index}
+                    style={{ cursor: "pointer", padding: "4px 0" }}
+                    onClick={() => {
+                      auth?.setGetCityValue(
+                        data?._id,
+                        router.push({
+                          pathname: "/all-property",
+                          query: data?.stateCode,
+                        })
+                      );
+                    }}
+                  >
+                    <Typography className="cityname" variant="h6">
+                      {data.stateName}
+                    </Typography>
+                  </Box>
+                );
+              })}
           </AccordionDetails>
         </Accordion>
         <Accordion
@@ -111,13 +126,28 @@ export default function MobilerMenu() {
             <Typography variant="h5">Property Type</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {cityObject.map((data, index) => {
-              return (
-                <Box key={index}>
-                  <Typography variant="h4">{data}</Typography>
-                </Box>
-              );
-            })}
+            <Box mt={1}>
+              {auth?._propertyList &&
+                auth?._propertyList?.map((data, index) => {
+                  return (
+                    <Box
+                      key={index}
+                      style={{ cursor: "pointer", padding: "4px 0" }}
+                      onClick={() => {
+                        auth?.setGetPropetyType(data?._id),
+                          router.push({
+                            pathname: "/all-property",
+                            query: data?._id,
+                          });
+                      }}
+                    >
+                      <Typography className="cityname" variant="h6">
+                        {data.projectType}
+                      </Typography>
+                    </Box>
+                  );
+                })}
+            </Box>
           </AccordionDetails>
         </Accordion>
       </Box>

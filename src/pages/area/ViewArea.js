@@ -114,7 +114,7 @@ const ViewArea = ({
         endPoint: Apiconfigs?.listAllState,
         data: {
           limit: "10",
-          countryId: _countrycode,
+          countryCode: _countrycode,
         },
       });
       if (res) {

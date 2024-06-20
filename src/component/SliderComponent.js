@@ -23,8 +23,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
     margin: "0 auto",
     marginTop: "-90px",
     "@media(max-width:615px)": {
-      padding: "0px 0 60px 0",
-      marginTop: "4rem",
+      marginTop: "40px",
     },
   },
   "& .circleimg": {
@@ -33,20 +32,16 @@ const MainComponent = styled(Box)(({ theme }) => ({
     flexDirection: "column",
     alignItems: "center",
 
-    "& h6": {
-      color: "orange",
-      fontSize: "16px",
-      marginTop: "2rem",
-      fontWeight: "400",
-      // marginLeft: "-4rem",
-    },
-
     "& svg": {
       color: "orange",
     },
     "& .img": {
       height: "100px",
       width: "120px",
+      "@media(max-width:615px)": {
+        height: "60px",
+        width: "70px",
+      },
     },
   },
   "& .large": {
@@ -61,6 +56,9 @@ const MainComponent = styled(Box)(({ theme }) => ({
     borderRadius: "10px",
     marginTop: "2rem",
     position: "relative",
+    "@media(max-width:615px)": {
+      height: "150px",
+    },
 
     "& h5": {
       marginTop: "1rem",
@@ -80,6 +78,9 @@ const MainComponent = styled(Box)(({ theme }) => ({
   },
   "& .container": {
     height: "310px",
+    "@media(max-width:615px)": {
+      height: "200px",
+    },
   },
 }));
 
@@ -163,7 +164,7 @@ const SliderComponent = () => {
           slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -173,7 +174,7 @@ const SliderComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -183,7 +184,7 @@ const SliderComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -193,7 +194,7 @@ const SliderComponent = () => {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           dots: false,
         },
       },
@@ -203,7 +204,7 @@ const SliderComponent = () => {
           slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
@@ -214,7 +215,7 @@ const SliderComponent = () => {
           slidesToScroll: 1,
           infinite: true,
           infinite: true,
-          autoplay: true,
+          autoplay: false,
           initialSlide: 1,
         },
       },
@@ -254,7 +255,7 @@ const SliderComponent = () => {
                 key={index}
                 style={{ padding: "800px" }}
               >
-                <Container maxWidth className="container">
+                <Container className="container">
                   <Box display={"flex"} justifyContent={"center"} key={index}>
                     <Card className="cards project-slider">
                       <Box className="circleimg">
@@ -262,23 +263,12 @@ const SliderComponent = () => {
                           <img src={data?.image} alt="img" width={"100%"} />
                         </Box>
                         <Box mt={3}>
-                          <Typography variant="p" fontSize={isMobile ? 16 : 24}>
+                          <Typography
+                            variant="h6"
+                            fontSize={isMobile ? 16 : 24}
+                          >
                             {data?.name}
                           </Typography>
-                        </Box>
-                        <Box
-                          display={"flex"}
-                          position={"absolute"}
-                          bottom={"0"}
-                          // width={"100%"}
-                          left={"20px"}
-                          // backgroundColor={isMobile && "#E0AF00"}
-                          // color={isMobile && ""}
-                        >
-                          <Typography variant="h6">View all</Typography>
-                          <span className="rightIcon">
-                            <ChevronRightIcon />
-                          </span>
                         </Box>
                       </Box>
                     </Card>

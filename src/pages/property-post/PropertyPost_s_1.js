@@ -1,23 +1,12 @@
-import React, { useEffect, useContext } from "react";
-import {
-  Box,
-  Grid,
-  Typography,
-  FormControlLabel,
-  Button,
-  Stepper,
-  Step,
-  StepLabel,
-} from "@mui/material";
+import { useEffect, useContext } from "react";
+import { Box, Grid, Typography, FormControlLabel, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
-import { PostApiFunction } from "../../utils";
-import Apiconfigs from "../../ApiConfig/ApiConfig";
 import { SelectField, InputField } from "../../component/FormFields";
-import { withStyles } from "@material-ui/core/styles";
+// import { withStyles } from "@material-ui/styles";
+import { withStyles } from "@mui/styles";
 import { AuthContext } from "../../context/Auth";
-import Checkbox from "@material-ui/core/Checkbox";
-import { fontSize } from "@mui/system";
+import Checkbox from "@mui/material/Checkbox";
 
 const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .borderBox": {
@@ -25,7 +14,6 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     height: "350px",
     position: "absolute",
   },
-
   "& .mainBoxS1": {
     "& .HeadingBox": {
       padding: "0 20px",
@@ -50,11 +38,27 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
       },
     },
   },
+  "& .Properties-categories": {
+    "@media(max-width:615px)": {
+      display: "flex",
+      "& span":{
+        fontSize: "12px",
+      },
+      "& svg":{
+        fontSize: "14px",
+      },
+    },
+  },
   "& .buttonStyle": {
-    padding: "5px 20px",
-    borderRadius: "26px",
+    padding: "3px 25px",
+    borderRadius: "10px",
     color: "#000",
     margin: "0 15px 10px 0",
+    textTransform: "capitalize",
+    "@media(max-width:615px)": {
+      margin: "5px",
+      fontSize: "10px",
+    },
   },
   "& .Property_Type": {
     "& h3": {
@@ -62,6 +66,7 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     },
     "@media(max-width:615px)": {
       paddingTop: "15px",
+      display: "flex",
     },
   },
 }));
@@ -77,7 +82,11 @@ const GreenCheckbox = withStyles({
       // fontSize: "50px !important",
     },
     "& .MuiSvgIcon-root": {
-      fill: "red !important", // Change the fill color of the SVG icon to green
+      fill: "rgb(186, 220, 84) !important", // Change the fill color of the SVG icon to green
+      // color: "black",
+      "@media(max-width:615px)": {
+        padding: "0",
+      },
     },
   },
   checked: {},
@@ -182,15 +191,15 @@ const PropertyPost_s_1 = (props) => {
               </Box>
             ) : (
               <>
-                <Box mb={1} className="Property_Type">
+                {/* <Box mb={1} className="Property_Type">
                   <Typography variant="h3">Property Type</Typography>
-                </Box>
-                <Box>
+                </Box> */}
+                <Box className="Properties-categories">
                   {auth?._propertyList?.map((data, index) => (
                     <Box
                       display={"inline-flex"}
                       key={index}
-                      style={{ padding: "0 0 0 10px" }}
+                      style={{ padding: "0 0 0 10px", color: "#000" }}
                     >
                       <FormControlLabel
                         control={
@@ -205,10 +214,7 @@ const PropertyPost_s_1 = (props) => {
                     </Box>
                   ))}
                 </Box>
-                <Box className="Property_Type">
-                  <Typography variant="h3">Property Category</Typography>
-                </Box>
-                <Box mb={2} mt={1}>
+                <Box className="Property_Type" mb={2} mt={1}>
                   {auth?._subytypelist &&
                     auth?._subytypelist?.map((data, index) => {
                       return (
@@ -224,9 +230,9 @@ const PropertyPost_s_1 = (props) => {
                                   }
                                 : {
                                     background: "#fff",
-                                    border: "1px solid #000",
+                                    border: "1px solid #badc54",
 
-                                    color: "#000",
+                                    color: "#badc54",
                                   }
                             }
                             onClick={() =>

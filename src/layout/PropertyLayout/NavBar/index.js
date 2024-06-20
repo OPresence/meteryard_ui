@@ -1,10 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-// import { FaHospitalUser, FaSquarespace, FaWallet } from "react-icons/fa";
-// import {
-//   AiFillHome,
-//   AiFillDashboard,
-//   AiOutlineTransaction,
-// } from "react-icons/ai";
+
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 import AccordionComponent from "../../../pages/CityChat/AccordionComponent";
@@ -186,56 +181,6 @@ function reduceChildRoutes({
   }
   return acc;
 }
-// const sections = [
-//   {
-//     items: [
-//       {
-//         title: "Dashboard",
-//         icon: AiFillHome,
-//         href: "/dashboard",
-//       },
-//       {
-//         title: "User Management",
-//         icon: AiFillDashboard,
-//         href: "/user-management",
-//       },
-//       {
-//         title: "Influencer Management",
-//         icon: FaHospitalUser,
-//         href: "/dashboard/influencer-management",
-//       },
-//       {
-//         title: "Transaction Management",
-//         icon: AiOutlineTransaction,
-//         href: "/dashboard/transaction-management",
-//       },
-//     ],
-//   },
-// ];
-// const sections1 = [
-//   {
-//     items: [
-//       {
-//         title: "Dashboard",
-//         icon: AiFillHome,
-//         href: "/sniper-dashboard",
-//         tabview: "Sniper",
-//       },
-//       {
-//         title: "Bot settings",
-//         icon: AiFillDashboard,
-//         href: "/bot-setting",
-//         tabview: "Sniper",
-//       },
-//       {
-//         title: "Transaction History",
-//         icon: FaSquarespace,
-//         href: "/sniper-transactions",
-//         tabview: "Sniper",
-//       },
-//     ],
-//   },
-// ];
 const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   const router = useRouter();
   const auth = useContext(AuthContext);
