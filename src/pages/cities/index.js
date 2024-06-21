@@ -142,6 +142,7 @@ const StateComponent = () => {
         data: {
           page: page,
           limit: "10",
+          countryCode: "IN",
         },
       });
       if (res) {
@@ -149,7 +150,7 @@ const StateComponent = () => {
         if (res?.responseCode == 200) {
           setIsLoading(false);
           setCount(res?.result?.pages);
-          setBannerList(res?.result?.docs);
+          setBannerList(res?.result);
         } else if (res?.responseCode == 404) {
           setBannerList([]);
           toast.error(res?.responseMessage);

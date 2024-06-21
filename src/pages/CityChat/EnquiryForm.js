@@ -233,7 +233,7 @@ const EnquiryForm = ({
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setStateList(res?.result?.docs);
+          setStateList(res?.result);
         } else if (res?.responseCode == 404) {
           setStateList([]);
         } else {
@@ -250,12 +250,13 @@ const EnquiryForm = ({
         endPoint: Apiconfigs?.listAllCity,
         data: {
           limit: "10",
-          stateId: _statename,
+          stateCode: _statename,
+          countryCode: "IN",
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setCityList(res?.result?.docs);
+          setCityList(res?.result);
         } else if (res?.responseCode == 404) {
           setCityList([]);
         } else {
@@ -270,12 +271,12 @@ const EnquiryForm = ({
     GetStateList();
   }, []);
   useEffect(() => {
-    if (_statename) {
+    if (_statename != "0") {
       GetCityList();
     }
   }, [_statename]);
   useEffect(() => {
-    ProjectType();
+    // ProjectType();
   }, []);
   useEffect(() => {
     if (_getproprty_type) {

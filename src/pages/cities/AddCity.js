@@ -99,6 +99,7 @@ const AddCity = ({
         endPoint: Apiconfigs?.listAllState,
         data: {
           limit: "10",
+          countryCode: "IN",
         },
         params: {
           countryCode: _countrycode,
@@ -106,7 +107,7 @@ const AddCity = ({
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setStateList(res?.result?.docs);
+          setStateList(res?.result);
         } else if (res?.responseCode == 404) {
           setStateList([]);
         } else {

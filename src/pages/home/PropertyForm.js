@@ -170,7 +170,7 @@ export default function PropertyForm({
     }
   };
   useEffect(() => {
-    ProjectType();
+    // ProjectType();
   }, []);
   useEffect(() => {
     SubProjectType();

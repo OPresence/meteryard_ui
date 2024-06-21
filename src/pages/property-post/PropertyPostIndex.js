@@ -31,7 +31,7 @@ import { AuthContext } from "../../context/Auth";
 import { display } from "@mui/system";
 
 const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
-  "& input, select, fieldset": {background:"#fff"},
+  "& input, select, fieldset": {},
   "& .MainBoxIndex": {
     height: "100vh",
     display: "flex",
@@ -146,7 +146,7 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
       maxHeight: "unset",
       boxShadow: "none",
       marginTop: "-20px",
-      background:"transparent"
+      background: "transparent",
     },
     // "&::before": {
     //   content: '""',
@@ -188,8 +188,8 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
     "& .HeadingBox": {
       padding: "20 0px",
       "@media(max-width:615px)": {
-          padding: "0px 0px",
-        },
+        padding: "0px 0px",
+      },
       "& h2": {
         textAlign: "center",
         color: "#000",
@@ -340,7 +340,7 @@ const PropertyPostIndex = () => {
   });
   const [_projecttype, setProjectType] = useState([]);
   const [open, setOpen] = useState(false);
-
+  console.log("selectedImagessdsds---->", imageUploadResponses);
   const handleChangeCheck = (event) => {
     if (!_checked) {
       setChecked(true);
@@ -463,18 +463,6 @@ const PropertyPostIndex = () => {
     setOpen(false);
   };
 
-  const ProjectType = async () => {
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs.listAllProjectType,
-      });
-      if (res) {
-        setProjectType(res?.result?.docs);
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
   const FurnichingTypeType = async () => {
     try {
       const res = await PostApiFunction({
@@ -567,7 +555,7 @@ const PropertyPostIndex = () => {
           <PropertyPost_s_3
             formField={formField}
             _isloading={_isloading}
-            _projecttype={_projecttype}
+            _projecttype={auth?._propertyList}
             _videoupload={_videoupload}
             _imageuploading={_imageuploading}
             _coverImage={_coverImage}
@@ -577,6 +565,7 @@ const PropertyPostIndex = () => {
             handleFileChangeImage={handleFileChangeImage}
             address={address}
             setAddress={setAddress}
+            setSelectedImages={setSelectedImages}
             coordinates={coordinates}
             setCoordinates={setCoordinates}
             _consition={_consition}
@@ -716,7 +705,7 @@ const PropertyPostIndex = () => {
     setActiveStep(activeStep - 1);
   }
   useEffect(() => {
-    ProjectType();
+    // ProjectType();
   }, []);
 
   return (
@@ -763,7 +752,7 @@ const PropertyPostIndex = () => {
                           display: "flex",
                           justifyContent: "center",
                           flexDirection: isMobile ? "row" : "column",
-                          gap: isMobile? "20px":"30px",
+                          gap: isMobile ? "20px" : "30px",
                         }}
                       >
                         <Step
@@ -780,7 +769,7 @@ const PropertyPostIndex = () => {
 
                           <img
                             src="/images/property-post/step_one.svg"
-                            width={isMobile?"50":"60"}
+                            width={isMobile ? "50" : "60"}
                             marginRight={isMobile ? "0px" : "0px"}
                           />
                           <Typography
@@ -807,14 +796,14 @@ const PropertyPostIndex = () => {
                           {activeStep >= 1 ? (
                             <img
                               src="/images/property-post/step_2 copy.svg"
-                              width={isMobile?"50":"60"}
+                              width={isMobile ? "50" : "60"}
                               fill={"#badc54"}
                               style={{ marginLeft: "-11px" }}
                             />
                           ) : (
                             <img
                               src="/images/property-post/step_2.svg"
-                              width={isMobile?"50":"60"}
+                              width={isMobile ? "50" : "60"}
                               fill={"#fff"}
                               style={{ marginLeft: "-11px" }}
                             />
@@ -842,13 +831,13 @@ const PropertyPostIndex = () => {
                           {activeStep >= 2 ? (
                             <img
                               src="/images/property-post/step_3 copy.svg"
-                              width={isMobile?"50":"60"}
+                              width={isMobile ? "50" : "60"}
                               fill={"#badc54"}
                             />
                           ) : (
                             <img
                               src="/images/property-post/step_3.svg"
-                              width={isMobile?"50":"60"}
+                              width={isMobile ? "50" : "60"}
                               fill={"#fff"}
                             />
                           )}

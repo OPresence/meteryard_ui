@@ -317,7 +317,7 @@ const StateComponent = () => {
     }
   }, [page]);
   useEffect(() => {
-    GetProjectTypeList();
+    // GetProjectTypeList();
   }, []);
   return (
     <AdminLayout>
