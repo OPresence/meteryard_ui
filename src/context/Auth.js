@@ -25,7 +25,7 @@ export default function Auth(props) {
   const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
   const [_getproprty_type, setGetPropetyType] = useState("");
   const [statesHome, setStatesHome] = useState([]);
-  console.log("statesHome000-->",statesHome);
+  console.log("statesHome000-->", statesHome);
   const [_citylist, setCityList] = useState([]);
   const [_isFeaturedPost, setIsFeatured] = useState([]);
   const [_getCityValue, setGetCityValue] = useState("0");
@@ -53,9 +53,9 @@ export default function Auth(props) {
         },
       });
       if (res) {
-        console.log("67676674444---->",res?.result);
+        console.log("67676674444---->", res?.result);
         if (res?.responseCode == 200) {
-          setGetCityValue(res?.result[0]?.stateCode)
+          setGetCityValue(res?.result[0]?.stateCode);
           setStatesHome(res?.result);
         } else if (res?.responseCode == 404) {
           setStatesHome([]);
@@ -81,7 +81,7 @@ export default function Auth(props) {
     }
   };
   const CityApiFunction = async () => {
-    console.log("_getCityValue000-->",_getCityValue);
+    console.log("_getCityValue000-->", _getCityValue);
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllCity,
@@ -405,7 +405,9 @@ export default function Auth(props) {
     AllCategoryProduct();
   }, []);
   useEffect(() => {
-    CityApiFunction();
+    if (_getCityValue != "0") {
+      CityApiFunction();
+    }
   }, [_getCityValue]);
 
   useEffect(() => {

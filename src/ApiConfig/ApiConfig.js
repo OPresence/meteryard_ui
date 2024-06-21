@@ -2,7 +2,7 @@ var URL_ENDPOINT;
 if (process.env.NODE_ENV !== "production") {
   URL_ENDPOINT = process.env.NEXT_PUBLIC_SITE_URL;
 } else {
-  URL_ENDPOINT =  process.env.NEXT_PUBLIC_SITE_URL;
+  URL_ENDPOINT = process.env.NEXT_PUBLIC_SITE_URL;
 }
 
 const Apiconfigs = {
