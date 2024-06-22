@@ -41,7 +41,7 @@ const SubMenuStyle = styled(Box)(({ theme }) => ({
     "& .choose-section": {
       paddingLeft: "9px",
       height: "300px",
-      overflowY:"scroll",
+      overflowY: "scroll",
     },
   },
 }));
@@ -70,8 +70,6 @@ const SubMenuComponent = () => {
                 window.innerWidth >= 600
                   ? "0px 5px 10px 0px rgba(0, 0, 0, 0.5)"
                   : "unset",
-                 
-                  
             }}
           >
             <Box
@@ -79,7 +77,7 @@ const SubMenuComponent = () => {
               height={"100%"}
               className="choose-section"
             >
-              <Typography variant="h6">Choose your city</Typography>
+              <Typography variant="h6">Choose your State</Typography>
               <Box mt={1} overflowY="scroll">
                 {auth?.statesHome &&
                   auth?.statesHome?.map((data, index) => {
@@ -89,7 +87,7 @@ const SubMenuComponent = () => {
                         style={{ cursor: "pointer", padding: "4px 0" }}
                         onClick={() => auth?.setGetCityValue(data?.stateCode)}
                       >
-                        <Typography  variant="overline">
+                        <Typography variant="overline">
                           {data.stateName}
                         </Typography>
                       </Box>
@@ -105,28 +103,34 @@ const SubMenuComponent = () => {
             </Box>
           </Grid>
           <Grid item lg={8} md={8} sm={8} xs={12}>
-            <Box overflowY="scroll" style={{height:"300px",overflowY:"scroll",overflowX:"hidden"}} overflowX="hidden">
-            <Grid container spacing={1}>
-            {auth?._citylist &&
-              auth?._citylist?.map((data, index) => {
-                return (
-                  <Grid item lg={6} md={6} sm={12} xs={12}>
-
-                  <Box
-                    key={index}
-                    style={{ cursor: "pointer", padding: "4px 0" }}
-                  >
-                    <Link href="/all-property">
-                      <Typography className="cityname" variant="h6">
-                        {data?.cityName}
-                      </Typography>
-                    </Link>
-                  </Box>
-                  </Grid>
-                );
-              })}
-            </Grid>
-
+            <Box
+              overflowY="scroll"
+              style={{
+                height: "300px",
+                overflowY: "scroll",
+                overflowX: "hidden",
+              }}
+              overflowX="hidden"
+            >
+              <Grid container spacing={1}>
+                {auth?._citylist &&
+                  auth?._citylist?.map((data, index) => {
+                    return (
+                      <Grid item lg={6} md={6} sm={12} xs={12}>
+                        <Box
+                          key={index}
+                          style={{ cursor: "pointer", padding: "4px 0" }}
+                        >
+                          <Link href="/all-property">
+                            <Typography className="cityname" variant="h6">
+                              {data?.cityName}
+                            </Typography>
+                          </Link>
+                        </Box>
+                      </Grid>
+                    );
+                  })}
+              </Grid>
             </Box>
           </Grid>
         </Grid>

@@ -3,21 +3,18 @@ import { Box } from "@mui/material";
 // import zIndex from "@mui/material/styles/zIndex";
 const PageLoading = () => {
   return (
-    <div>
+    <Box display={"flex"} alignItems={"center"}>
       <Box
-        // maxWidth={250}
+        maxWidth={250}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
         position={"relative"}
         style={{ background: "#fff", zIndex: "999" }}
       >
-        <img
-          src="https://res.cloudinary.com/mobiloitteblockchain/image/upload/v1714070452/jles2cbdr0nz8rytfhx2.gif"
-          //   width={"100%"}
-        />
+        <img src="/images/loader.gif" width={"100%"} />
       </Box>
-    </div>
+    </Box>
   );
 };
 

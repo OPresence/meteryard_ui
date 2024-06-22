@@ -114,6 +114,7 @@ const VerifyOTP = ({
           toast.success(res?.responseMessage);
           // handleClickOpenLogin();
           // auth.setEndtime(moment().add(3, "m").unix());
+          setSignUpComplete(false);
           setOpen(false);
           console.log("dkfkdfdsjjkkdsf=----->", setOpen);
           setSelectScreen("Login");

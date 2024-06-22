@@ -41,7 +41,7 @@ const MenuComponent = () => {
         <Box className={"dropdown"} style={{ width: "100%" }}>
           <Box>
             <button className="dropbtn">
-              Cities <ChevronRightIcon className="rightBtn" />
+              States <ChevronRightIcon className="rightBtn" />
             </button>
           </Box>
 

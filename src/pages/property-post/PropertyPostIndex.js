@@ -3,8 +3,6 @@ import PropertyPost_s_1 from "./PropertyPost_s_1";
 import PropertyPost_s_2 from "./PropertyPost_s_2";
 import PropertyPost_s_3 from "./PropertyPost_s_3";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
-// import MobilerMenu from "@/component/MobileMenu";
-// import "../../Scss/Propertyindex.scss"
 import {
   Box,
   Grid,
@@ -16,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import styled from "@emotion/styled";
-import Logo from "../../component/Logo";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import { useTheme } from "@mui/material/styles";
@@ -28,7 +25,6 @@ import Apiconfigs from "../../ApiConfig/ApiConfig";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { formFieldValue, ValidationValue, initialValue } from "../../utils";
 import { AuthContext } from "../../context/Auth";
-import { display } from "@mui/system";
 
 const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
   "& input, select, fieldset": {},
@@ -385,21 +381,15 @@ const PropertyPostIndex = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Check if the video duration is less than or equal to 30 seconds
       const video = document.createElement("video");
       video.preload = "metadata";
       video.onloadedmetadata = async function () {
         if (video.duration > 30) {
           alert("Please upload a video that is 30 seconds or shorter.");
-          // Optionally, you can clear the file input
-          // fileInputRef.current.value = "";
         } else {
           try {
-            // setImageUploading(true)
-
             setVideoUpload(true);
             const res = await imageUploadFunction(e.target.files[0]);
-
             if (res?.responseCode == 200) {
               setVideoUpload(false);
             }

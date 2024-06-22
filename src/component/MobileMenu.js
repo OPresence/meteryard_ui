@@ -86,10 +86,10 @@ export default function MobilerMenu() {
             aria-controls="panel1bh-content"
             id="panel1bh-header"
           >
-            <Typography variant="h5">Cities</Typography>
+            <Typography variant="h5">States</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {console.log("98988--->",auth?.statesHome)}
+            {console.log("98988--->", auth?.statesHome)}
             {auth?.statesHome &&
               auth?.statesHome?.map((data, index) => {
                 return (

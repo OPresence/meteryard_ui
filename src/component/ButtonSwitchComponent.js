@@ -202,15 +202,15 @@ export default function ButtonSwitchComponent({
                             <Typography variant="h6">Property Post</Typography>
                           </Box>
                           <Button
-                            // onClick={() => {
-                            //   if (auth?._getprofile?.userType == "SELLER") {
-                            //     router.push("property-post");
-                            //   } else {
-                            //     toast.error(
-                            //       "Only Seller post the property please login."
-                            //     );
-                            //   }
-                            // }}
+                            onClick={() => {
+                              if (auth?._getprofile?.userType == "SELLER") {
+                                router.push("property-post");
+                              } else {
+                                toast.error(
+                                  "Only Seller post the property please login."
+                                );
+                              }
+                            }}
                             className="searchbox_button"
                             style={{
                               background: "#A7D325 0% 0% no-repeat padding-box",

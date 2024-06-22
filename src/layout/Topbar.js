@@ -142,7 +142,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
   },
 }));
 export default function Topbar() {
-  const auth = useContext(AuthContext);
+  // const auth = useContext(AuthContext);
 
   const [state, setState] = useState({
     mobileView: false,

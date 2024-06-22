@@ -140,6 +140,7 @@ const DialogStyleComponent = styled(Dialog)({
 });
 const RegisterModal = ({ open, setOpen, handleClickOpenLogin }) => {
   const [_signcomplete, setSignUpComplete] = useState(false);
+  console.log("_signcomplete--->", _signcomplete);
   const [setscreen, setSelectScreen] = useState(false);
 
   return (
