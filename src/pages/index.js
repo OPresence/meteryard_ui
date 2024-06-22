@@ -6,16 +6,13 @@ import ProjectComponent from "../component/ProjectComponent";
 import MasterCardProduct from "../component/MasterCardProduct";
 import FeatureProperty from "../component/FeatureProperty";
 export default function ClientPage() {
-
   return (
     <Box>
       <Banner />
       <SliderComponent />
-      <FeatureProperty/>
+      <FeatureProperty />
       <MasterCardProduct />
-      {/* <YoutubeComponent /> */}
       <ProjectComponent />
-      {/* <TESTIMONIAL /> */}
     </Box>
   );
 }

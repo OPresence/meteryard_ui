@@ -146,7 +146,7 @@ const VerifyOTP = ({
       if (res) {
         if (res?.responseCode == 200) {
           setIsLoadingOTP(false);
-          auth.setEndtime(moment().add(2, "m").unix());
+          auth.setEndtime(moment().add(30, "s").unix());
 
           toast.success(res?.responseMessage);
         } else if (res?.responseCode == 409) {
