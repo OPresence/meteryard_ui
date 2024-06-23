@@ -165,6 +165,7 @@ const RegisterModal = ({ open, setOpen, handleClickOpenLogin }) => {
                   setSignUpComplete={setSignUpComplete}
                   open={open}
                   setOpen={setOpen}
+                  // isloading={}
                 />
               ) : (
                 <Otp

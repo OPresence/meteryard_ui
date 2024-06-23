@@ -128,7 +128,7 @@ const PhoneINputStyle = styled(Box)(({ theme }) => ({
   },
 }));
 const RegisterSeller = ({
-  handleClose,
+  // isloading,
   open,
   setOpen,
   setSignUpComplete,
@@ -155,19 +155,6 @@ const RegisterSeller = ({
     background: "transparent",
     padding: "10.5px 45px !important",
   };
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   phoneNumber: "",
-  //   password: "",
-  //   propertyType: "",
-  //   propertyCategory: "",
-  //   city: "",
-  //   localArea: "",
-  //   location: "",
-  //   getAlert1: false,
-  //   getAlert2: false,
-  // });
 
   const handleButtonClick = () => {
     console.log("Button clicked");
@@ -258,7 +245,7 @@ const RegisterSeller = ({
       const res = await PostApiFunction({
         endPoint: Apiconfigs.userSignUp,
         data: {
-          profile: _image_upload,
+          profilePicture: _image_upload,
           name: values?.name,
           email: values?.email,
           password: values?.password,
@@ -311,13 +298,13 @@ const RegisterSeller = ({
         }}
         validationSchema={formValidationSchema}
         onSubmit={(values, { resetForm }) => {
-          SignUp_Function(values)
-            .then(() => {
-              resetForm();
-            })
-            .catch((error) => {
-              console.error("API call failed", error);
-            });
+          SignUp_Function(values);
+          // .then(() => {
+          //   resetForm();
+          // })
+          // .catch((error) => {
+          //   console.error("API call failed", error);
+          // });
         }}
       >
         {({
@@ -502,6 +489,7 @@ const RegisterSeller = ({
                         fullWidth
                         name="stateName"
                         onChange={(e) => {
+                          console.log("787878---->", e.target.value);
                           auth?.setGetCityValue(e.target.value);
                           setFieldValue("stateName", e.target.value);
                         }}
@@ -514,7 +502,7 @@ const RegisterSeller = ({
                             return (
                               <MenuItem
                                 key={index}
-                                value={data?._id}
+                                value={data?.stateCode}
                                 sx={{
                                   fontSize: "18px !important",
                                 }}
@@ -695,13 +683,14 @@ const RegisterSeller = ({
                 </Box>
 
                 <Box mt={4} className="loginBox1">
-                  <Button className="singup" type="submit">
+                  <Button className="singup" type="submit" disabled={isloading}>
                     Submit &nbsp;
                     {isloading && (
                       <CircularProgressCompoennt colorValue={"#fff"} />
                     )}
                   </Button>
                   <Button
+                    disabled={isloading}
                     onClick={() => setOpen(false)}
                     // className="singup"
                     style={{

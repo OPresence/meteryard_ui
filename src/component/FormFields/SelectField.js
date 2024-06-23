@@ -105,6 +105,7 @@ function SelectField(props) {
   // onChange Dropdown Function
   const handleChange = (event) => {
     const { value } = event.target;
+    console.log("dnfjkfnksdnfsd---->", event.target);
     if (label == "State") {
       props?.set_State(value);
     }
@@ -144,7 +145,9 @@ function SelectField(props) {
             data?.map((item) => (
               <option
                 key={item?._id || item?.value}
-                value={item?._id || item?.value}
+                value={
+                  item?.stateCode ? item?.stateCode : item?._id || item?.value
+                }
               >
                 {item?.projectType ||
                   item?.name ||

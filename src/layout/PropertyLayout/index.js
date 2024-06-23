@@ -182,12 +182,12 @@ const PropertyLayout = ({ children }) => {
               Coohom 3D Design Tool
             </Typography>
 
-            <div className="open-link">
+            {/* <div className="open-link">
               <a href="/open" target="_blank">
                 Open
               </a>
               <ChevronRightIcon className="rightIcon" />
-            </div>
+            </div> */}
           </div>
         </Box>
       </AdvertisementContainer>
