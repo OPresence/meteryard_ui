@@ -8,6 +8,7 @@ import {
   Typography,
   useMediaQuery,
   Button,
+  Grid,
 } from "@mui/material";
 import styled from "@emotion/styled";
 import Slider from "react-slick";
@@ -224,18 +225,35 @@ const FeatureProperty = () => {
             <ArrowBackIosIcon />
           </IconButtonLeftContent>
         )}
+        {console.log("_featured_property90--->", _featured_property)}
         <Box mt={4} width={"95%"} margin={"0 auto"}>
-          <Slider {...settings} ref={sliderRef}>
-            {!auth?._loadingAllProduct &&
-              _featured_property?.length > 0 &&
-              _featured_property?.map((ProductData, _id) => {
-                return (
-                  <Box key={_id}>
-                    <FeaturedPostCard data={ProductData} />
-                  </Box>
-                );
-              })}
-          </Slider>
+          {_featured_property?.length > 4 ? (
+            <Slider {...settings} ref={sliderRef}>
+              {!auth?._loadingAllProduct &&
+                _featured_property?.length > 0 &&
+                _featured_property?.map((ProductData, _id) => {
+                  return (
+                    <Box key={_id}>
+                      <FeaturedPostCard data={ProductData} />
+                    </Box>
+                  );
+                })}
+            </Slider>
+          ) : (
+            <Grid container spacing={3}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
+                {!auth?._loadingAllProduct &&
+                  _featured_property?.length > 0 &&
+                  _featured_property?.map((ProductData, _id) => {
+                    return (
+                      <Box key={_id}>
+                        <FeaturedPostCard data={ProductData} />
+                      </Box>
+                    );
+                  })}
+              </Grid>
+            </Grid>
+          )}
         </Box>
         {_featured_property?.length > 4 && (
           <IconButtonRightContent onClick={handleNext}>
