@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Typography,
@@ -7,14 +7,11 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import "./PropertyCss.css";
 import GalleryImg from "../../component/GalleryImg";
 import styled from "@emotion/styled";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import PropertyMoreDetails from "../../component/PropertyMoreDetails";
-import SuggestionProperties from "../../component/SuggestionProperties";
-import ResidentialProperty from "../../component/ResidentialProperty";
 import { useRouter } from "next/router";
 import HomeLayout from "../../layout/HomeLayout";
 import ContactOwnerModal from "../../component/ContactOwnerModal";
@@ -70,7 +67,7 @@ const ViewPropertyIndex = () => {
                 <Typography variant="body1">
                   Featured Residential projects across India
                 </Typography>
-                <Box style={{ display: "flex", justifyContent: "end" }}>
+                <Box style={{ display: "flex", justifyContent: "flex-end" }}>
                   <Box className="imgBox" maxWidth={350}>
                     <img src="/images/Group 8252.svg" alt="img" />
                   </Box>
@@ -79,26 +76,6 @@ const ViewPropertyIndex = () => {
             </Box>
             <Box mt={"50px"}>
               <Box className="galleryCardInfo">
-                {/* <Box className="galleryTopCard">
-                  <Box
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Typography variant="body1">
-                      Save Time & money <br /> with &nbsp;&nbsp;
-                      <span>MB Prime</span>
-                    </Typography>
-
-                    <Typography variant="body1">Save Time & money</Typography>
-
-                    <Button className="joinPrimeButton">Join prime</Button>
-                  </Box>
-                </Box> */}
-
                 <Box className="gallery">
                   <Grid container>
                     <Grid item lg={5} md={6} xs={12}>
@@ -108,7 +85,7 @@ const ViewPropertyIndex = () => {
                     </Grid>
                     <Grid item lg={7} md={6} xs={12}>
                       {dataArray?.image?.length > 0 && (
-                        <Box display={"flex"} justifyContent={"end"}>
+                        <Box display={"flex"} justifyContent={"flex-end"}>
                           <Box height={"353px"} width={"100%"}>
                             <GalleryImg ArrayImage={dataArray?.image} />
                           </Box>

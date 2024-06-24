@@ -152,7 +152,6 @@ const ResetPassword = ({
   handleCloseOTP,
   handleOpenOTP,
 }) => {
-  console.log("_saveForgot000--->", _saveForgot);
   const [showPassword, setShowPassword] = React.useState(false);
   //   const [_saveForgot, setSaveForgot] = useState("");
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);

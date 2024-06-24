@@ -113,7 +113,6 @@ const Aboutus = () => {
         },
       });
       if (res) {
-        console.log("dnkknsdknfn--->", res?.result?.docs);
         setAboutUS(res?.result?.docs[0]);
       }
     } catch (error) {

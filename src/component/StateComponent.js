@@ -68,7 +68,6 @@ export default function StateComponent({
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  console.log("ertyguiop0--->", auth?._cityselect, auth?._getCityValue);
   const handleChangevalue = (event) => {
     if (type == "Select State") {
       auth?.setGetCityValue(event.target.value);

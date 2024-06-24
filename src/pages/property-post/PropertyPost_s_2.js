@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Box, Grid, Typography, FormControlLabel, Button, useThemeProps } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  FormControlLabel,
+  Button,
+  useThemeProps,
+} from "@mui/material";
 import styled from "@emotion/styled";
 import PostCheckBox from "../../component/PostCheckBox";
 import { PostApiFunction } from "../../utils";
@@ -14,12 +21,10 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
     position: "absolute",
   },
   "& .mainBox": {
-  
     boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
     background: "#fff",
     borderRadius: "15px",
     position: "relative",
- 
   },
   "& .mainBox": {
     // height: "500px",
@@ -221,11 +226,10 @@ const PropertyPost_s_2 = (props) => {
   useEffect(() => {
     ProjectType();
     scrollToTop();
-    console.log("bbbbbbbmbmbm");
   }, []);
   return (
     <PropertyPostScreenStyle>
-      <Box className="mainBox"maxHeight={isMobile ?"unset":"490"}>
+      <Box className="mainBox" maxHeight={isMobile ? "unset" : "490"}>
         <Box className="HeadingBox">
           <Typography variant="h2">List Your Property</Typography>
           <Box className="CheckBox">

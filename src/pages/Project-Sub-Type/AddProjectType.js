@@ -44,7 +44,6 @@ const AddProjectType = ({
   _isloading,
   AddMoreList,
 }) => {
-  console.log("00004545400000000--->", _getcountrylist);
   const [_initialstate, setInitialState] = useState({
     project_type: "",
     project_type_sub: "",

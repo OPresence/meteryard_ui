@@ -83,7 +83,6 @@ const VerifyOTP = ({
   const [getOtpValidate, setOtpValidate] = useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [isloading_otp, setIsLoadingOTP] = useState(false);
-  console.log("dsnfbkdsnkfndskfdsnfnsdjk");
   const handleOtpChange = async (enteredOtp) => {
     if (_OTP.length < 4) {
       setOtpValidate(true);
@@ -110,14 +109,13 @@ const VerifyOTP = ({
       });
       if (res) {
         if (res?.responseCode == 200) {
+          setSelectScreen("Login");
           setIsLoading(false);
           toast.success(res?.responseMessage);
           // handleClickOpenLogin();
           // auth.setEndtime(moment().add(3, "m").unix());
           setSignUpComplete(false);
           setOpen(false);
-          console.log("dkfkdfdsjjkkdsf=----->", setOpen);
-          setSelectScreen("Login");
         } else if (res?.responseCode == 409) {
           toast.error(res?.responseMessage);
           // setSignUpComplete(false);

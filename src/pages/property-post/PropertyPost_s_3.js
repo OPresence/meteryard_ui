@@ -208,11 +208,12 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
       stateId,
       cityId,
     },
+    setGetState_Object,
     setSelectedImages,
+    setGetCity_Object,
   } = props;
   const fileInputRef = useRef(null);
   const [_stateList, setStateList] = React.useState([]);
-  console.log("_stateListsdsd0s000--->", _stateList);
   const [_cityList, setCityList] = React.useState([]);
   const [_getstate, setState] = useState("0");
   const [_images, setImages] = useState([]);
@@ -227,7 +228,14 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
     setImages((prevImages) => [...prevImages, ...newImages].slice(0, 10));
     setSelectedImages(files);
   };
-
+  const handleChangeState = (value) => {
+    const selectedObj = _stateList.find((item) => item.stateCode === value);
+    setGetState_Object(selectedObj);
+  };
+  const handleChangeCity = (value) => {
+    const selectedObj = _cityList.find((item) => item.stateCode === value);
+    setGetCity_Object(selectedObj);
+  };
   const removeImage = (image) => {
     setImages(_images.filter((img) => img !== image));
   };
@@ -255,7 +263,6 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
       });
       if (res) {
         if (res?.responseCode == 200) {
-          console.log("hvghbjkl", res?.result);
           setStateList(res?.result);
         } else if (res?.responseCode == 404) {
           setStateList([]);
@@ -377,6 +384,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                               yourMaxLengthValue={10}
                               data={_stateList}
                               set_State={setState}
+                              handleChangeState={handleChangeState}
                             />
                           </Box>
                         </Grid>
@@ -391,6 +399,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                               fullWidth
                               yourMaxLengthValue={10}
                               data={_cityList}
+                              handleChangeCity={handleChangeCity}
                             />
                           </Box>
                         </Grid>
@@ -523,14 +532,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                                   onClick={() => fileInputRef.current.click()}
                                   onChange={handleFileChangeImage}
                                 >
-                                  <Typography
-                                    variant="h6"
-                                    style={{
-                                      fontWeight: "600",
-                                      textAlign: "center",
-                                      fontSize: "13px",
-                                    }}
-                                  >
+                                  <Typography variant="h2" textAlign="center">
                                     Add More Images
                                   </Typography>
                                   <AddIcon />

@@ -542,7 +542,6 @@ export default function Home() {
           setVideoURL(res?.result[0]?.mediaUrl);
           return res;
         } else {
-          console.log("Uploaded image:", res);
           return res; // Return the response for later use
         }
       }
@@ -576,9 +575,7 @@ export default function Home() {
       const processImage = async (index) => {
         if (index < selectedImages.length) {
           const image = selectedImages[index];
-          console.log("Processing image:", image);
           const response = await imageUploadFunction(image);
-          // console.log("responses---->0", response?.result[0]?.mediaUrl);
           responses.push(response?.result[0]?.mediaUrl);
 
           // Process the next image recursively

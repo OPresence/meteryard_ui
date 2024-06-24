@@ -291,7 +291,6 @@ function reduceChildRoutes({
 
   if (item.items) {
     const { pathname } = router;
-    console.log("pathname--->", pathname);
     const isMatch = /^\/your-pattern/.test(pathname);
     // const open = matchPath(pathname, {
     //   path: item.href,

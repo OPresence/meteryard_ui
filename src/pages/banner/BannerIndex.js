@@ -80,7 +80,6 @@ const BannerIndex = () => {
 
   const [_imageurl, setImageURL] = useState("");
   const [openView, setOpenView] = useState(false);
-  console.log("_viewData--->", _viewData);
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -119,7 +118,6 @@ const BannerIndex = () => {
         data: formdata,
       });
       if (res) {
-        console.log("res000990---->", res);
         setImageURL(res?.result[0]?.mediaUrl);
       }
     } catch (error) {

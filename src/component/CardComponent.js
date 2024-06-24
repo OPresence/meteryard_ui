@@ -182,7 +182,6 @@ const CardComponent = ({ ProductData }) => {
   };
 
   const handlePrevious = () => {
-    console.log("aadasdd");
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
     }

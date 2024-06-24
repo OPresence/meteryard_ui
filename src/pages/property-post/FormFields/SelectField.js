@@ -108,7 +108,6 @@ function SelectField(props) {
     field.onChange(event); // This is important to update the Formik state
     ChangeDropDownValue && ChangeDropDownValue(value || value?.stateId); // Optional: Call your custom function
   };
-  console.log("fieldh4644648694sjsdas--->", field);
 
   const [touched, error] = at(meta, "touched", "error");
   const isError = touched && error && true;

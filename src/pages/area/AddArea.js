@@ -52,7 +52,6 @@ const AddArea = ({
   AddMoreList,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
-  console.log("_countrycode-->", _countrycode);
   const [_countrylist, setCountryList] = useState([]);
   const [_statename, setStateName] = useState("");
   const [_statelist, setStateList] = useState([]);
@@ -132,8 +131,6 @@ const AddArea = ({
   };
   const GetCityList = async () => {
     try {
-      console.log("hdsbbfdsjbfjds--->", _statename);
-
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllCity,
         data: {

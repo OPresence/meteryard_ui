@@ -9,7 +9,6 @@ const useAuthGuard = () => {
   useEffect(() => {
     const isAuthenticated = !!sessionStorage.getItem("token");
     if (!isAuthenticated) {
-      console.log("isAuthenticated--->", isAuthenticated);
       router.push("/");
     }
   }, []);

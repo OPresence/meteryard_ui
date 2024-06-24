@@ -167,7 +167,6 @@ const AddState = ({
   _isloading,
   AddMoreList,
 }) => {
-  console.log("_getcountrylist---->", _getcountrylist);
   const [_countrycode, setCountryCode] = useState("");
 
   const [_initialstate, setInitialState] = useState({

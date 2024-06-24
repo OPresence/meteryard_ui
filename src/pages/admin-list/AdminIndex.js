@@ -166,7 +166,6 @@ const AdminIndex = () => {
           setIsLoading(false);
           handleClose();
         } else if (res?.responseCode == 409) {
-          console.log("sjdjsjdsjhd---->", typeof res?.responseCode);
           toast.error(res?.responseMessage);
           setIsLoading(false);
           handleClose();

@@ -74,7 +74,6 @@ const SellerIndex = () => {
   const [_IconType, setIconType] = useState("");
   const [_confirm, setConfirm] = useState(false);
   const [_listloading, setListLoading] = useState(false);
-  console.log("_viewData---->", _viewData);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -168,7 +167,6 @@ const SellerIndex = () => {
           setIsLoading(false);
           handleClose();
         } else if (res?.responseCode == 409) {
-          console.log("sjdjsjdsjhd---->", typeof res?.responseCode);
           toast.error(res?.responseMessage);
           setIsLoading(false);
           handleClose();

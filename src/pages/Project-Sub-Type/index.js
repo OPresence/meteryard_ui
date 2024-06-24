@@ -150,7 +150,6 @@ const StateComponent = () => {
         },
       });
       if (res) {
-        console.log("zxxzxzXz--->", res);
         if (res?.responseCode == 200) {
           setCountryList(res?.result?.docs);
         } else if (res?.responseCode == 404) {
@@ -165,7 +164,6 @@ const StateComponent = () => {
   };
 
   const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
     try {
       setIsLoading(true);
       const res = await PostApiFunction({

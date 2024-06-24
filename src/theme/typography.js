@@ -42,7 +42,7 @@ export default {
     fontWeight: "400",
     lineHeight: "29.05px",
     textAlign: "center",
-    color:"#000",
+    color: "#000",
     "@media(max-width:615px)": {
       fontSize: "18px",
     },

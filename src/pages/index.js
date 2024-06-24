@@ -1,3 +1,4 @@
+"use-client";
 import HomeLayout from "@/layout/HomeLayout";
 import { Box } from "@mui/material";
 import Banner from "../pages/home/Banner";

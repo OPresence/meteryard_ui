@@ -89,7 +89,6 @@ export default function MobilerMenu() {
             <Typography variant="h5">States</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {console.log("98988--->", auth?.statesHome)}
             {auth?.statesHome &&
               auth?.statesHome?.map((data, index) => {
                 return (

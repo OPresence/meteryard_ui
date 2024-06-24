@@ -88,7 +88,6 @@ const ViewBlog = ({
   });
 
   useEffect(() => {
-    console.log("_viewData--->", _viewData);
     setInitialState({
       seo_url: _viewData?.seo_url,
       author_name: _viewData?.authorName,

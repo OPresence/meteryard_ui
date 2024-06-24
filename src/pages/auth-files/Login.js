@@ -156,7 +156,6 @@ const LoginStyle = styled(Box)(({ theme }) => ({
 }));
 const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
   const session = useSession();
-  console.log("sessio44546464646n000---->", session);
   const [showPassword, setShowPassword] = React.useState(false);
   const [_forgot_open, setForgot_Open] = useState(false);
   const [_forotp_open, setOTP_Open] = useState(false);
@@ -199,7 +198,6 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
       ),
   });
   const Auth = useContext(AuthContext);
-  console.log("Authdfdf--->", Auth);
   const [isloading, setIsLoading] = useState(false);
   const [isRememberMe, setIsRememberMe] = useState(false);
   function rememberMe() {
@@ -228,7 +226,6 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
         data: data_Login,
       });
       if (res) {
-        console.log("njkdnsjfds---->", res);
         if (res?.responseCode == 200) {
           sessionStorage.setItem("token", res?.result?.token);
           toast.success(res?.responseMessage);
@@ -258,11 +255,9 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
     }
   };
   const handleGoogleSignIn = async () => {
-    console.log("11111111111--->");
     try {
       // Call the signIn function with the provider name "google"
       const result = await signIn("google");
-      console.log("00000000--->", result);
 
       // Check if the authentication was successful
       if (!result.error) {
@@ -284,7 +279,6 @@ const Login = ({ _selectScreen, setSelectScreen, setOpen, handleClose }) => {
       // Check if the authentication was successful
       if (!result.error) {
         // Authentication successful, do something (e.g., redirect)
-        console.log("Authentication successful", result);
       } else {
         // Authentication failed, handle the error
         console.error("Authentication failed", result.error);

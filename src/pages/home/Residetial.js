@@ -16,7 +16,6 @@ export default function Residetial({
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpansion = (id) => {
-    console.log("idsjd--->", id);
     setGetPropetyType(id);
     setExpanded((prevExpanded) => !prevExpanded);
   };
@@ -42,7 +41,6 @@ export default function Residetial({
           },
         }}
       >
-        {console.log("datadfjdfj--->", data)}
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
@@ -62,7 +60,6 @@ export default function Residetial({
           </Box>
         </AccordionSummary>
         <AccordionDetails>
-          {console.log("propertyName--->", _subtypelist)}
           <>
             {_subtypelist?.map((data2, index) => {
               return (

@@ -296,7 +296,6 @@ const ViewArea = ({
                         onChange={handleChange}
                         onBlur={handleBlur}
                       >
-                        {console.log("_citylist0---->", _citylist)}
                         {_citylist &&
                           _citylist?.map((data, index) => {
                             return (

@@ -181,7 +181,6 @@ const HouseForm = ({
     },
   ];
   const [selectedImages1, setSelectedImages1] = useState([]);
-  console.log("selectedImages---->", selectedImages);
   const [_initialstate, setInitialState] = useState({
     listed_name: "",
     furnishing: "",
@@ -303,7 +302,6 @@ const HouseForm = ({
         }}
         validationSchema={formValidationSchemaDepartment}
         onSubmit={(values, { resetForm }) => {
-          console.log("authhdjshdj----->", Auth?._accesstoken);
           if (
             Auth?._accesstoken == null ||
             Auth?._accesstoken == undefined ||

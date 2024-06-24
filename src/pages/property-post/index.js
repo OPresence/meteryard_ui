@@ -5,7 +5,6 @@ import HomeLayout from "../../layout/HomeLayout";
 
 const index = () => {
   // useAuthGuard(); // Use the auth guard hook here
-  console.log("0000000000---->");
   return (
     <HomeLayout>
       <PropertyPostIndex />

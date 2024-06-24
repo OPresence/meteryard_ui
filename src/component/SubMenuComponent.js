@@ -3,37 +3,16 @@ import styled from "@emotion/styled";
 import { Box, Typography, Grid } from "@mui/material";
 import { AuthContext } from "../context/Auth";
 import Link from "next/link";
-import { height } from "@mui/system";
 
 const SubMenuStyle = styled(Box)(({ theme }) => ({
   "& .mainBox": {
-    // padding: "20px 20px 0 20px  ",
     marginTop: "10px",
-
     boxShadow: "unset",
-    // "& h5": {
-    //   fontSize: "16px",
-    //   fontWeight: "600",
-    //   position: "relative",
-    //   "@media(max-width:615px)": {
-    //     "&::after": {
-    //       top: "27px",
-    //       width: "100px !important",
-    //       height: "1.5px",
-    //       backgroundColor: "#a2d017",
-    //     },
-    //   },
-    //   "&::after": {
-    //     content: '""',
-    //     position: "absolute",
-    //     bottom: "0",
-    //     width: "0",
-    //     left: "0",
-    //     right: "0",
-    //     height: "2px",
-    //     transition: "0.1s ease-in-out",
-    //   },
-    // },
+    "& .gridBox": {
+      height: "300px",
+      overflowY: "scroll",
+      overflowX: "hidden",
+    },
     "& h6": {
       fontSize: "15px",
       fontWeight: "600",
@@ -78,22 +57,22 @@ const SubMenuComponent = () => {
               className="choose-section"
             >
               <Typography variant="h6">Choose your State</Typography>
-              <Box mt={1} overflowY="scroll">
-                {auth?.statesHome &&
-                  auth?.statesHome?.map((data, index) => {
-                    return (
-                      <Box
-                        key={index}
-                        style={{ cursor: "pointer", padding: "4px 0" }}
-                        onClick={() => auth?.setGetCityValue(data?.stateCode)}
-                      >
-                        <Typography variant="overline">
-                          {data.stateName}
-                        </Typography>
-                      </Box>
-                    );
-                  })}
-              </Box>
+              {/* <Box mt={1} style="overflowY:scroll"> */}
+              {auth?.statesHome &&
+                auth?.statesHome?.map((data, index) => {
+                  return (
+                    <Box
+                      key={index}
+                      style={{ cursor: "pointer", padding: "4px 0" }}
+                      onClick={() => auth?.setGetCityValue(data?.stateCode)}
+                    >
+                      <Typography variant="overline">
+                        {data.stateName}
+                      </Typography>
+                    </Box>
+                  );
+                })}
+              {/* </Box> */}
               <Box maxWidth={125} position={"absolute"} bottom={0}>
                 <img
                   src="/images/meteryard/Graphics/Group 7795.png"
@@ -103,24 +82,13 @@ const SubMenuComponent = () => {
             </Box>
           </Grid>
           <Grid item lg={8} md={8} sm={8} xs={12}>
-            <Box
-              overflowY="scroll"
-              style={{
-                height: "300px",
-                overflowY: "scroll",
-                overflowX: "hidden",
-              }}
-              overflowX="hidden"
-            >
+            <Box className="gridBox">
               <Grid container spacing={1}>
                 {auth?._citylist &&
                   auth?._citylist?.map((data, index) => {
                     return (
-                      <Grid item lg={6} md={6} sm={12} xs={12}>
-                        <Box
-                          key={index}
-                          style={{ cursor: "pointer", padding: "4px 0" }}
-                        >
+                      <Grid item lg={6} md={6} sm={12} xs={12} key={index}>
+                        <Box style={{ cursor: "pointer", padding: "4px 0" }}>
                           <Link href="/all-property">
                             <Typography className="cityname" variant="h6">
                               {data?.cityName}

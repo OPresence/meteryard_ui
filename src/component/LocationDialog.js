@@ -35,7 +35,6 @@ const LocationDialog = ({
     setAddress(value);
     setCoordinates(latLng);
   };
-  console.log("Coordinates:", coordinates);
 
   return (
     <LocationStyle>
@@ -95,7 +94,6 @@ const LocationDialog = ({
           )}
         </PlacesAutocomplete> */}
       </Box>
-      {console.log("coordinates--->", coordinates)}
       {/* {type != "Area" && (
         <Box mt={2} zIndex={0}>
           <GoogleMap

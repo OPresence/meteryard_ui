@@ -52,7 +52,6 @@ const ViewCity = ({
   type,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
-  console.log("_countrycode-->", _viewData);
   const [_countrylist, setCountryList] = useState([]);
   const [_statelist, setStateList] = useState([]);
   const [_initialstate, setInitialState] = useState({
