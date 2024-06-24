@@ -7,7 +7,7 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import "./PropertyCss.css";
+// import "./PropertyCss.css";
 import GalleryImg from "../../component/GalleryImg";
 import styled from "@emotion/styled";
 import CollectionsIcon from "@mui/icons-material/Collections";
