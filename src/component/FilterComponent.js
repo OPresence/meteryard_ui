@@ -74,7 +74,6 @@ const FilterComponent = ({
           <Box display={"flex"} alignItems={"center"}>
             {ButtonName != "enquery" && ButtonName != "Create User" ? (
               <>
-                {console.log("xcjxghkdfjhkghfkgk")}
                 <DialogComponent
                   ButtonName={ButtonName}
                   HeadingDialog={HeadingDialog}

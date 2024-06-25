@@ -158,7 +158,6 @@ const StateComponent = () => {
   };
 
   const Create_ProjectType = async (value) => {
-    console.log("valuenxnncx---->", value);
     try {
       setIsLoading(true);
       const res = await PostApiFunction({

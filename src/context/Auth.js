@@ -25,7 +25,6 @@ export default function Auth(props) {
   const [_getproject_sub_type, setGetProject_sub_Type] = useState("");
   const [_getproprty_type, setGetPropetyType] = useState("");
   const [statesHome, setStatesHome] = useState([]);
-  // console.log("statesHome000-->", statesHome);
   const [_citylist, setCityList] = useState([]);
   const [_isFeaturedPost, setIsFeatured] = useState([]);
   const [_getCityValue, setGetCityValue] = useState("0");
@@ -33,7 +32,6 @@ export default function Auth(props) {
   const [_getproperyPostList, setproperyPostList] = useState([]);
   const [_getproperFilteryPostList, setproperyFilterPostList] = useState([]);
   const [_pro_with_subpro, setPro_With_Subpro] = useState([]);
-  // const [_getstate, setGetState] = useState("");
   const [_getallProduct, setGetAllProduct] = useState([]);
   const [_loadingAllProduct, setLoadingAllProduct] = useState(false);
   const [_featured_property, setFeatyredProperty] = useState([]);
@@ -45,9 +43,7 @@ export default function Auth(props) {
   const [_propertySubType, setPropertySubType] = useState("");
   const [_cityselect, setCitySelect] = useState("0");
   const [_searchproperty, setSearchProperty] = useState("");
-  const getFeaturedProperty = (feature_data) => {
-    console.log("feature_datasds----->", feature_data);
-  };
+  const getFeaturedProperty = (feature_data) => {};
   const StateApiFunction = async () => {
     try {
       const res = await PostApiFunction({
@@ -57,7 +53,6 @@ export default function Auth(props) {
         },
       });
       if (res) {
-        console.log("67676674444---->", res?.result);
         if (res?.responseCode == 200) {
           setGetCityValue(res?.result[0]?.stateCode);
           setStatesHome(res?.result);
@@ -403,7 +398,6 @@ export default function Auth(props) {
     }
   });
   useEffect(() => {
-    console.log("6666666666");
     StateApiFunction();
     ProjectType();
     AllCategoryProduct();
@@ -436,7 +430,6 @@ export default function Auth(props) {
       PropertySearchPostAPI();
     }
   }, [_propertySubType, _getCityValue, _cityselect, _priceRange]);
-  console.log("_getCityValue000-->", timeLeft);
 
   let data = {
     _accesstoken,

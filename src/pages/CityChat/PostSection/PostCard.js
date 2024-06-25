@@ -156,8 +156,6 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
     setReplyingTo(commentId);
   };
 
-  console.log("mjnnkn--->", liked);
-  console.log("data--->", data);
   const handleLike = () => {
     setLiked(!liked);
     onLike(data?._id, !liked);
@@ -225,7 +223,6 @@ const PostCard = ({ data, onLike, AddCommentFunction, AddReplyFunction }) => {
         })
       );
       const new_comments = comments.concat(commentsWithReplies);
-      console.log("new comments", new_comments);
       setComments(new_comments);
     } catch (error) {
       console.error("Error fetching comments:", error);

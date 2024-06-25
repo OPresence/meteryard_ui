@@ -167,7 +167,6 @@ const SignUp = ({
   const [_isSignup, setIsSignUp] = useState(false);
   const [_countrycode, setCountryCode] = useState("");
   const [selectedValue, setSelectedValue] = useState("BUYER"); // Initial selected value
-  console.log("selectedValue00-->", selectedValue);
   const handleChangeType = (event) => {
     if (event.target.value == "SELLER") {
       SignUpDialog();
@@ -195,7 +194,6 @@ const SignUp = ({
         endPoint: Apiconfigs.userSignUp,
         data: {
           name: values?.name,
-
           email: values?.email,
           password: values?.password,
           phoneNumber: values?.PhoneNumber,
@@ -203,12 +201,12 @@ const SignUp = ({
         },
       });
       if (res) {
-        console.log("fdfdfd--->", res);
+        setSelectScreen("OTP");
         if (res?.responseCode == 200) {
           // toast.success("SignUp successful!"); // Display success notification
           toast.success(res?.responseMessage);
           setIsLoading(false);
-          auth.setEndtime(moment().add(30, "s").unix());
+          auth.setEndtime(moment().add(1, "m").unix());
 
           setSignUpComplete(res?.result);
         } else if (res?.responseCode == 409) {
@@ -232,36 +230,30 @@ const SignUp = ({
       console.log("error", error);
     }
   };
-  // const handleNameChange = (event, setFieldValue) => {
-  //   const { value } = event.target;
-  //   const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
-  //   setFieldValue("name", capitalizedValue);
-  //   return capitalizedValue;
-  // }; 
 
   function facebookSignup() {
-    const facebookAppId = 'YOUR_FACEBOOK_APP_ID';
-    const facebookRedirectUri = 'http://localhost:3000/';
-  
+    const facebookAppId = "YOUR_FACEBOOK_APP_ID";
+    const facebookRedirectUri = "http://localhost:3000/";
+
     const facebookAuthUrl = `https://www.facebook.com/v3.3/dialog/oauth?client_id=${facebookAppId}&redirect_uri=${facebookRedirectUri}&scope=email&response_type=code`;
-  
+
     window.location.href = facebookAuthUrl;
   }
   function googleSignup() {
-    const googleClientId = 'YOUR_GOOGLE_CLIENT_ID';
-    const googleRedirectUri = 'http://localhost:3000/';
-  
+    const googleClientId = "YOUR_GOOGLE_CLIENT_ID";
+    const googleRedirectUri = "http://localhost:3000/";
+
     const googleAuthUrl = `https://accounts.google.com/o/oauth2/auth?client_id=${googleClientId}&redirect_uri=${googleRedirectUri}&scope=profile email&response_type=code`;
-  
+
     window.location.href = googleAuthUrl;
   }
   function linkedinSignup() {
-    const linkedinClientId = 'YOUR_LINKEDIN_CLIENT_ID';
-    const linkedinRedirectUri = 'http://localhost:3000/';
-    const linkedinScope = 'r_liteprofile r_emailaddress';
-  
+    const linkedinClientId = "YOUR_LINKEDIN_CLIENT_ID";
+    const linkedinRedirectUri = "http://localhost:3000/";
+    const linkedinScope = "r_liteprofile r_emailaddress";
+
     const linkedinAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?client_id=${linkedinClientId}&redirect_uri=${linkedinRedirectUri}&scope=${linkedinScope}&response_type=code&state=${generateRandomState()}`;
-  
+
     window.location.href = linkedinAuthUrl;
   }
   function generateRandomState() {
@@ -269,49 +261,49 @@ const SignUp = ({
   }
   function handleSocialRedirect() {
     const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-  
+    const code = urlParams.get("code");
+
     if (code) {
       // Exchange authorization code for access token
-      fetch('/api/social-token', {
-        method: 'POST',
+      fetch("/api/social-token", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ code, provider: getProviderFromUrl() })
+        body: JSON.stringify({ code, provider: getProviderFromUrl() }),
       })
-     .then(response => response.json())
-     .then(data => {
-        // Use access token to sign up or log in user
-        console.log(data);
-      })
-     .catch(error => {
-      console.error(error);
-    });
+        .then((response) => response.json())
+        .then((data) => {
+          // Use access token to sign up or log in user
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }
-}
 
-// Get provider from URL
-function getProviderFromUrl() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const provider = urlParams.get('provider');
+  // Get provider from URL
+  function getProviderFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const provider = urlParams.get("provider");
 
-  return provider;
-}
+    return provider;
+  }
 
-// Add event listeners to social media buttons
-document.addEventListener('DOMContentLoaded', () => {
-  const facebookButton = document.getElementById('facebook-button');
-  const googleButton = document.getElementById('google-button');
-  const LinkedInButton = document.getElementById('LinkedIn-button');
-  
-  facebookButton.addEventListener('click', facebookSignup);
-  googleButton.addEventListener('click', googleSignup);
-  LinkedInButton.addEventListener('click', linkedinSignup);
+  // Add event listeners to social media buttons
+  document.addEventListener("DOMContentLoaded", () => {
+    const facebookButton = document.getElementById("facebook-button");
+    const googleButton = document.getElementById("google-button");
+    const LinkedInButton = document.getElementById("LinkedIn-button");
 
-  // Handle redirect from social media providers
-  handleSocialRedirect();
-});
+    facebookButton.addEventListener("click", facebookSignup);
+    googleButton.addEventListener("click", googleSignup);
+    LinkedInButton.addEventListener("click", linkedinSignup);
+
+    // Handle redirect from social media providers
+    handleSocialRedirect();
+  });
   return (
     <LoginStyle>
       <Box className="backgroundBox">
@@ -628,7 +620,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span>Remember Me</span>
                           </Box> */}
                           <Box mt={1} className="socialIconBox">
-                            <IconButton className="iconButton" onClick={facebookSignup}>
+                            <IconButton
+                              className="iconButton"
+                              onClick={facebookSignup}
+                            >
                               <FaFacebookF />
                             </IconButton>
                             <IconButton
@@ -638,7 +633,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             >
                               <FaGoogle style={{ color: "#CA0000" }} />
                             </IconButton>
-                            <IconButton className="iconButton" onClick={linkedinSignup}>
+                            <IconButton
+                              className="iconButton"
+                              onClick={linkedinSignup}
+                            >
                               <FaLinkedinIn />
                             </IconButton>
                           </Box>

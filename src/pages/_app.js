@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import PageLoading from "../component/PageLoading";
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const theme = createTheme();
+  console.log("themedsdsd------>", theme);
   const router = useRouter();
   const getLayout = Component.getLayout || ((page) => page);
   const [isClient, setIsClient] = useState(false);

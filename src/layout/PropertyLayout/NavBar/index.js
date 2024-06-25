@@ -188,7 +188,6 @@ const NavBar = ({ onMobileClose, openMobile, tabView, setSelectedTab }) => {
   const [sliderValue, setSliderValue] = React.useState([10, 50]); // State to store the Slider's value
   const [selectedSubTypes, setSelectedSubTypes] = useState([]);
   const handleCheckboxChange = (parentId, subTypeId) => {
-    console.log("hdhdskjds");
     setSelectedSubTypes((prevState) => {
       const isAlreadySelected = prevState.some(
         (item) => item.parentId === parentId && item.subTypeId === subTypeId

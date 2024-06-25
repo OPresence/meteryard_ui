@@ -83,7 +83,6 @@ const CountryIndex = () => {
   const [_image_upload, setImageUpload] = useState(false);
   const [_imageurl, setImageURL] = useState("");
   const [openView, setOpenView] = useState(false);
-  console.log("_viewData--->", _viewData);
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -145,8 +144,6 @@ const CountryIndex = () => {
         },
       });
       if (res) {
-        console.log("res000990---->", res);
-
         setListLoading(false);
 
         if (res?.responseCode == 200) {

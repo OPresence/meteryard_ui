@@ -13,7 +13,6 @@ export default function InputField(props) {
       return error;
     }
   }
-  console.log("props---->", props?.name == "description");
   function handleChange(event) {
     helpers.setValue(event.target.value);
   }

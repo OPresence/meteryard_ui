@@ -133,7 +133,7 @@ const RegisterSeller = ({
   setOpen,
   setSignUpComplete,
   data,
-  index,
+  setSelectScreen,
 }) => {
   const router = useRouter();
   const auth = useContext(AuthContext);
@@ -148,7 +148,6 @@ const RegisterSeller = ({
   const [_image_upload, setImageUpload] = useState(false);
   const fileInputRef = useRef(null);
 
-  console.log("_image_uploadj-->", _image_type);
   const phoneInputStyles = {
     width: "100%",
     height: "44px",
@@ -157,12 +156,8 @@ const RegisterSeller = ({
   };
 
   const handleButtonClick = () => {
-    console.log("Button clicked");
     if (fileInputRef.current) {
-      console.log("Triggering file input click");
       fileInputRef.current.click();
-    } else {
-      console.log("File input ref is null");
     }
   };
 
@@ -259,11 +254,12 @@ const RegisterSeller = ({
         },
       });
       if (res) {
-        console.log("fdfdfd--->", res);
         if (res?.responseCode == 200) {
+          setSelectScreen("OTP");
+
           toast.success(res?.responseMessage);
           setIsLoading(false);
-          auth.setEndtime(moment().add(2, "m").unix());
+          auth.setEndtime(moment().add(1, "m").unix());
 
           setSignUpComplete(res?.result);
         } else if (res?.responseCode == 409) {
@@ -456,7 +452,6 @@ const RegisterSeller = ({
                             }
                             setCountryCode(e.dialCode);
                             setFieldValue("PhoneNumber", formattedPhone);
-                            console.log("formattedPhone--->", formattedPhone);
                           }}
                           inputStyle={phoneInputStyles}
                           inputProps={{
@@ -489,7 +484,6 @@ const RegisterSeller = ({
                         fullWidth
                         name="stateName"
                         onChange={(e) => {
-                          console.log("787878---->", e.target.value);
                           auth?.setGetCityValue(e.target.value);
                           setFieldValue("stateName", e.target.value);
                         }}

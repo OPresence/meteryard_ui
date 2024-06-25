@@ -16,7 +16,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function ContactOwnerModal({ open, dataArray, handleClose }) {
-  console.log("dataArray9090---->", dataArray);
   return (
     <React.Fragment>
       <Dialog

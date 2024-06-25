@@ -292,7 +292,6 @@ export default function Topbar() {
                       className="LoginButton"
                       onClick={() => {
                         handleClickOpenLogin("Login");
-                        // console.log("nksdnkndsnfk");
                       }}
                     >
                       Login
@@ -413,7 +412,6 @@ export default function Topbar() {
                         className="LoginButton"
                         onClick={() => {
                           handleClickOpenLogin("Login");
-                          console.log("nksdnkndsnfk");
                         }}
                       >
                         Login

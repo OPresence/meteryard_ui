@@ -161,7 +161,6 @@ const FeatureProperty = () => {
     ],
   };
   const handlePrevious = () => {
-    console.log("aadasdd");
     if (sliderRef.current) {
       sliderRef.current.slickPrev();
     }
@@ -225,7 +224,6 @@ const FeatureProperty = () => {
             <ArrowBackIosIcon />
           </IconButtonLeftContent>
         )}
-        {console.log("_featured_property90--->", _featured_property)}
         <Box mt={4} width={"95%"} margin={"0 auto"}>
           {_featured_property?.length > 4 ? (
             <Slider {...settings} ref={sliderRef}>

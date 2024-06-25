@@ -122,8 +122,6 @@ const EnquiryForm = ({
   const [_citylist, setCityList] = useState([]);
   const [_statename, setStateName] = useState("");
 
-  console.log("_getproprty_type-->", _subtypelist);
-
   const auth = useContext(AuthContext);
   const [_initialstate, setInitialState] = useState({
     fullname: "",
@@ -184,7 +182,6 @@ const EnquiryForm = ({
     }
   };
   const SubProjectType = async (id) => {
-    console.log("dfdsbfdsifiudsui9888");
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllProjectSubType,
@@ -195,7 +192,6 @@ const EnquiryForm = ({
         },
       });
       if (res?.responseCode == 200) {
-        console.log("dnfknkdfn--0->", res);
         setSubTypeList(res?.result?.docs);
         setItemData(resolvedData);
         // return res?.result?.docs;
@@ -286,7 +282,6 @@ const EnquiryForm = ({
 
   const EnquiryFunction = async (value) => {
     if (_getwhatsapp_check && _getemail_check) {
-      console.log("dnjnfkdkfndn--->", value);
       try {
         setIsLoading(true);
         const res = await PostApiFunction({

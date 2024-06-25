@@ -60,7 +60,6 @@ const UpdateCountry = ({
     imageValue: "",
     status: "",
   });
-  console.log("djfd--->", type);
   const formValidationSchemaDepartment = yep.object().shape({
     countryName: yep.string().required("country name is required."),
     phoneNo: yep.string().required("Country code is required."),

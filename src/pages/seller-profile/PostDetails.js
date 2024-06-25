@@ -183,7 +183,6 @@ const PostStyle = styled("Box")(({ theme }) => ({
 
 const PostDetails = () => {
   const auth = useContext(AuthContext);
-  console.log("auth45454----->", auth?._getprofile);
 
   const ArrayJson = [{}, {}, {}, {}];
   return (

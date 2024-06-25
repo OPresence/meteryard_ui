@@ -138,7 +138,6 @@ const StateComponent = () => {
   };
 
   const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
     try {
       setIsLoading(true);
       const res = await PostApiFunction({

@@ -81,7 +81,6 @@ const StateComponent = () => {
   const [_imageurl, setImageURL] = useState("");
   const [openView, setOpenView] = useState(false);
   const [_getcountrylist, setCountryList] = useState([]);
-  console.log("_viewData--->", _viewData);
   const handleChange = (event, value) => {
     setPage(value);
   };

@@ -280,11 +280,6 @@ const StepperStyle = styled("Stepper")(({ theme }) => ({
     color: "red !important",
   },
 }));
-const StyledStepLabel = styled(StepLabel)(({ theme }) => ({
-  "& .MuiStepLabel-completed": {
-    color: "red !important",
-  },
-}));
 
 const PropertyPostIndex = () => {
   const router = useRouter();
@@ -295,6 +290,9 @@ const PropertyPostIndex = () => {
     width: undefined,
     height: undefined,
   });
+  const [_getstate_object, setGetState_Object] = useState("");
+  const [_getcity_object, setGetCity_Object] = useState("");
+
   useEffect(() => {
     function handleResize() {
       setWindowSize({
@@ -336,7 +334,6 @@ const PropertyPostIndex = () => {
   });
   const [_projecttype, setProjectType] = useState([]);
   const [open, setOpen] = useState(false);
-  console.log("selectedImagessdsds---->", imageUploadResponses);
   const handleChangeCheck = (event) => {
     if (!_checked) {
       setChecked(true);
@@ -368,7 +365,6 @@ const PropertyPostIndex = () => {
         } else {
           setImageUploading(false);
 
-          console.log("Uploaded image:", res);
           return res; // Return the response for later use
         }
       }
@@ -567,6 +563,9 @@ const PropertyPostIndex = () => {
             setCoverImage={setCoverImage}
             handleChangeCheck={handleChangeCheck}
             _video_url={_video_url}
+            _getstate_object={_getstate_object}
+            setGetState_Object={setGetState_Object}
+            setGetCity_Object={setGetCity_Object}
           />
         );
     }
@@ -592,7 +591,6 @@ const PropertyPostIndex = () => {
     }
   }
   async function PropertyPostFunction(values, actions) {
-    console.log("valuessdsd0000---------->", values);
     if (_coverImage != "") {
       try {
         setIsLoading(true);
@@ -630,8 +628,8 @@ const PropertyPostIndex = () => {
             },
             localAreaName: values?.localArea,
             price_breakup: Number(values?.price_breakup?.replaceAll(",", "")),
-            stateId: values?.stateId,
-            cityId: values?.cityId,
+            stateId: _getstate_object?._id,
+            cityId: _getcity_object?._id,
           },
         });
         if (res) {
@@ -919,7 +917,7 @@ const PropertyPostIndex = () => {
                                       <>
                                         &nbsp;&nbsp;{" "}
                                         <CircularProgressComponent
-                                          color="#000"
+                                          colorValue="#fff"
                                           size={24}
                                           className={"buttonProgress"}
                                         />

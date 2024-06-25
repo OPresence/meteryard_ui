@@ -345,7 +345,6 @@ const DepartmentList = () => {
             />
           )}
         </Box>
-        {console.log("_countdfdf--->", _count)}
         {_count > 10 && (
           <Box mt={2} display={"flex"} justifyContent={"center"}>
             <ListPagination

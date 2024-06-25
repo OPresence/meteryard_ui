@@ -22,7 +22,6 @@ const Privacy = () => {
         },
       });
       if (res) {
-        console.log("dnkknsdknfn--->", res?.result?.docs);
         setPrivacyPolicy(res?.result?.docs[0]);
       }
     } catch (error) {
