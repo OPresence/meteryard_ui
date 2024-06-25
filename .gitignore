@@ -14,7 +14,9 @@
 /.env.development
 /.env.production
 /.pack
+/.dockerfile
 /.next
+/.docker-compose
 /.pack
 /.pack.gz
 /.trace

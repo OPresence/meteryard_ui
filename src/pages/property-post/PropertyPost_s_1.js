@@ -3,7 +3,6 @@ import { Box, Grid, Typography, FormControlLabel, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
 import { SelectField, InputField } from "../../component/FormFields";
-// import { withStyles } from "@material-ui/styles";
 import { withStyles } from "@mui/styles";
 import { AuthContext } from "../../context/Auth";
 import Checkbox from "@mui/material/Checkbox";
@@ -41,10 +40,10 @@ const PropertyPostScreenStyle = styled(Box)(({ theme }) => ({
   "& .Properties-categories": {
     "@media(max-width:615px)": {
       display: "flex",
-      "& span":{
+      "& span": {
         fontSize: "12px",
       },
-      "& svg":{
+      "& svg": {
         fontSize: "14px",
       },
     },
