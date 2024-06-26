@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "test": "jest",
  "start": "next start",
     "start:staging": "cross-env NODE_ENV=staging next start",
     "start:production": "NODE_ENV=production next start",
