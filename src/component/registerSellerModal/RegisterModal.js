@@ -7,6 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import styled from "@emotion/styled";
 import DialogTitle from "@mui/material/DialogTitle";
+import Login from "../../pages/auth-files/Login";
 const DialogStyleComponent = styled(Dialog)({
   "& .MuiDialog-paper": {
     width: "100%",
@@ -140,7 +141,7 @@ const DialogStyleComponent = styled(Dialog)({
 });
 const RegisterModal = ({ open, setOpen, handleClickOpenLogin }) => {
   const [_signcomplete, setSignUpComplete] = useState(false);
-  const [setscreen, setSelectScreen] = useState(false);
+  const [_screen, setSelectScreen] = useState(false);
 
   return (
     <div>
@@ -159,11 +160,19 @@ const RegisterModal = ({ open, setOpen, handleClickOpenLogin }) => {
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
-              {!_signcomplete ? (
+              {_screen == "Sign Up" ? (
                 <RegisterSeller
                   setSignUpComplete={setSignUpComplete}
                   open={open}
                   setOpen={setOpen}
+                  setSelectScreen={setSelectScreen}
+                />
+              ) : _screen == "Login" ? (
+                <Login
+                  _selectScreen={_screen}
+                  setSelectScreen={setSelectScreen}
+                  // setOpen={setOpen}
+                  // handleClose={handleClose}
                 />
               ) : (
                 <Otp

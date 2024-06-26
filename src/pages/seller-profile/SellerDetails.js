@@ -58,7 +58,6 @@ const SellerDtailsStyle = styled("div")(({ theme }) => ({
 }));
 const SellerDetails = () => {
   const auth = useContext(AuthContext);
-  console.log("auth45454----->", auth?._getprofile);
   return (
     <SellerDtailsStyle>
       <Box className="mainBox">

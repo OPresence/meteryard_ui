@@ -128,12 +128,12 @@ const PhoneINputStyle = styled(Box)(({ theme }) => ({
   },
 }));
 const RegisterSeller = ({
-  handleClose,
+  // isloading,
   open,
   setOpen,
   setSignUpComplete,
   data,
-  index,
+  setSelectScreen,
 }) => {
   const router = useRouter();
   const auth = useContext(AuthContext);
@@ -148,34 +148,16 @@ const RegisterSeller = ({
   const [_image_upload, setImageUpload] = useState(false);
   const fileInputRef = useRef(null);
 
-  console.log("_image_uploadj-->", _image_type);
   const phoneInputStyles = {
     width: "100%",
     height: "44px",
     background: "transparent",
     padding: "10.5px 45px !important",
   };
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   email: "",
-  //   phoneNumber: "",
-  //   password: "",
-  //   propertyType: "",
-  //   propertyCategory: "",
-  //   city: "",
-  //   localArea: "",
-  //   location: "",
-  //   getAlert1: false,
-  //   getAlert2: false,
-  // });
 
   const handleButtonClick = () => {
-    console.log("Button clicked");
     if (fileInputRef.current) {
-      console.log("Triggering file input click");
       fileInputRef.current.click();
-    } else {
-      console.log("File input ref is null");
     }
   };
 
@@ -258,7 +240,7 @@ const RegisterSeller = ({
       const res = await PostApiFunction({
         endPoint: Apiconfigs.userSignUp,
         data: {
-          profile: _image_upload,
+          profilePicture: _image_upload,
           name: values?.name,
           email: values?.email,
           password: values?.password,
@@ -272,11 +254,12 @@ const RegisterSeller = ({
         },
       });
       if (res) {
-        console.log("fdfdfd--->", res);
         if (res?.responseCode == 200) {
+          setSelectScreen("OTP");
+
           toast.success(res?.responseMessage);
           setIsLoading(false);
-          auth.setEndtime(moment().add(2, "m").unix());
+          auth.setEndtime(moment().add(1, "m").unix());
 
           setSignUpComplete(res?.result);
         } else if (res?.responseCode == 409) {
@@ -311,13 +294,13 @@ const RegisterSeller = ({
         }}
         validationSchema={formValidationSchema}
         onSubmit={(values, { resetForm }) => {
-          SignUp_Function(values)
-            .then(() => {
-              resetForm();
-            })
-            .catch((error) => {
-              console.error("API call failed", error);
-            });
+          SignUp_Function(values);
+          // .then(() => {
+          //   resetForm();
+          // })
+          // .catch((error) => {
+          //   console.error("API call failed", error);
+          // });
         }}
       >
         {({
@@ -469,7 +452,6 @@ const RegisterSeller = ({
                             }
                             setCountryCode(e.dialCode);
                             setFieldValue("PhoneNumber", formattedPhone);
-                            console.log("formattedPhone--->", formattedPhone);
                           }}
                           inputStyle={phoneInputStyles}
                           inputProps={{
@@ -514,7 +496,7 @@ const RegisterSeller = ({
                             return (
                               <MenuItem
                                 key={index}
-                                value={data?._id}
+                                value={data?.stateCode}
                                 sx={{
                                   fontSize: "18px !important",
                                 }}
@@ -695,13 +677,14 @@ const RegisterSeller = ({
                 </Box>
 
                 <Box mt={4} className="loginBox1">
-                  <Button className="singup" type="submit">
+                  <Button className="singup" type="submit" disabled={isloading}>
                     Submit &nbsp;
                     {isloading && (
                       <CircularProgressCompoennt colorValue={"#fff"} />
                     )}
                   </Button>
                   <Button
+                    disabled={isloading}
                     onClick={() => setOpen(false)}
                     // className="singup"
                     style={{

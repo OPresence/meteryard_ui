@@ -52,7 +52,6 @@ const AddArea = ({
   AddMoreList,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
-  console.log("_countrycode-->", _countrycode);
   const [_countrylist, setCountryList] = useState([]);
   const [_statename, setStateName] = useState("");
   const [_statelist, setStateList] = useState([]);
@@ -119,7 +118,7 @@ const AddArea = ({
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setStateList(res?.result?.docs);
+          setStateList(res?.result);
         } else if (res?.responseCode == 404) {
           setStateList([]);
         } else {
@@ -132,13 +131,13 @@ const AddArea = ({
   };
   const GetCityList = async () => {
     try {
-      console.log("hdsbbfdsjbfjds--->", _statename);
-
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllCity,
         data: {
           limit: "10",
-          stateId: _statename,
+          countryCode: "IN",
+
+          stateCode: _statename,
         },
         // params: {
         //   stateId: _statename,
@@ -146,7 +145,7 @@ const AddArea = ({
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setCityList(res?.result?.docs);
+          setCityList(res?.result);
         } else if (res?.responseCode == 404) {
           setCityList([]);
         } else {
@@ -166,7 +165,7 @@ const AddArea = ({
     }
   }, [_countrycode]);
   useEffect(() => {
-    if (_statename) {
+    if (_statename != "0") {
       GetCityList();
     }
   }, [_statename]);

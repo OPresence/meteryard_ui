@@ -63,7 +63,6 @@ const AddUser = ({
     phoneNo: yep.string().required("Phone Number is required."),
   });
   const DepartList = async (value, code) => {
-    console.log("value000--->", value, code);
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs.listAllDepartment,

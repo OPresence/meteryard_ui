@@ -1,11 +1,23 @@
-import { useContext } from "react";
+import { useContext, useRef, useState, useEffect } from "react";
 import FeaturedPostCard from "../component/FeaturedPostCard";
 import { useTheme } from "@mui/material/styles";
 import { AuthContext } from "../context/Auth";
-import { Box, Container, Typography, useMediaQuery, Grid } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  useMediaQuery,
+  Button,
+  Grid,
+} from "@mui/material";
+import styled from "@emotion/styled";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import styled from "@emotion/styled";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useRouter } from "next/router";
 
 const CardComponentStyle = styled(Box)(({ theme }) => ({
   "& .mainSliderDiv": {
@@ -20,28 +32,12 @@ const CardComponentStyle = styled(Box)(({ theme }) => ({
       padding: "0px",
     },
   },
-  "& .circleimg": {
-    width: "100%",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    height: "250px",
-    "& h6": {
-      color: "#A7D325",
-      fontSize: "14px",
-    },
-    "& svg": {
-      color: "#A7D325",
-    },
-  },
-  "& .large": {
-    background: "#FFF",
-  },
 
   "& .viewmoreButtonShow": {
     padding: "10px",
     position: "absolute",
     right: "55px",
-    bottom: "0",
+    bottom: "-15px",
     zIndex: "999",
     "@media(max-width:615px)": {
       right: "0px",
@@ -86,9 +82,113 @@ const IconButtonRightContent = styled(Box)({
   },
 });
 const FeatureProperty = () => {
+  const router = useRouter();
   const auth = useContext(AuthContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const sliderRef = useRef(null);
+  const [_featured_property, setFeatyredProperty] = useState([]);
+  const settings = {
+    dots: false,
+    infinite: true,
+    autoplay: false,
+    arrows: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          autoplay: false,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          infinite: true,
+          autoplay: false,
+          initialSlide: 1,
+        },
+      },
+    ],
+  };
+  const handlePrevious = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const handleNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
+
+  const handleClick = () => {
+    router.push({
+      pathname: "/all-property",
+      query: { _id: "FEATURED" },
+    });
+  };
+  useEffect(() => {
+    auth?._getallProduct?.map((productData, index) =>
+      setFeatyredProperty(
+        productData?.allProperty?.filter((dataFind) => {
+          if (dataFind?.featuredProperty) {
+            return dataFind;
+          }
+        })
+      )
+    );
+  }, [auth?._getallProduct?.length]);
 
   return (
     <CardComponentStyle>
@@ -119,44 +219,53 @@ const FeatureProperty = () => {
             </Box>
           </Box>
         </Container>
-        {/* {ProductData?.allProperty?.length > 4 && (
+        {_featured_property?.length > 4 && (
           <IconButtonLeftContent onClick={handlePrevious}>
             <ArrowBackIosIcon />
           </IconButtonLeftContent>
-        )} */}
+        )}
         <Box mt={4} width={"95%"} margin={"0 auto"}>
-          {!auth?._loadingAllProduct &&
-            auth?._getallProduct?.length > 0 &&
-            auth?._getallProduct?.map((ProductData, _id) => {
-              return (
-                <Box>
-                  <Grid container>
-                    {ProductData?.allProperty?.length &&
-                      ProductData?.allProperty?.map((data, index) => {
-                        console.log(
-                          "nhjgfhjkl;j894498--->",
-                          data?.featuredProperty
-                        );
-                        if (data?.featuredProperty) {
-                          return (
-                            <Grid item lg={3} md={4} sm={6} xs={12} key={index}>
-                              <Box key={index} mt={5}>
-                                <FeaturedPostCard data={data} />
-                              </Box>
-                            </Grid>
-                          );
-                        }
-                      })}
-                  </Grid>
-                </Box>
-              );
-            })}
+          {_featured_property?.length > 4 ? (
+            <Slider {...settings} ref={sliderRef}>
+              {!auth?._loadingAllProduct &&
+                _featured_property?.length > 0 &&
+                _featured_property?.map((ProductData, _id) => {
+                  return (
+                    <Box key={_id}>
+                      <FeaturedPostCard data={ProductData} />
+                    </Box>
+                  );
+                })}
+            </Slider>
+          ) : (
+            <Grid container spacing={3}>
+              <Grid item lg={3} md={4} sm={6} xs={12}>
+                {!auth?._loadingAllProduct &&
+                  _featured_property?.length > 0 &&
+                  _featured_property?.map((ProductData, _id) => {
+                    return (
+                      <Box key={_id}>
+                        <FeaturedPostCard data={ProductData} />
+                      </Box>
+                    );
+                  })}
+              </Grid>
+            </Grid>
+          )}
         </Box>
-        {/* {ProductData?.allProperty?.length > 4 && (
+        {_featured_property?.length > 4 && (
           <IconButtonRightContent onClick={handleNext}>
             <ArrowForwardIosIcon />
           </IconButtonRightContent>
-        )} */}
+        )}
+        <Box className="viewmoreButtonShow" style={{ marginTop: "1rem" }}>
+          {_featured_property?.length > 4 && (
+            <Button onClick={handleClick}>
+              View All
+              <ArrowForwardIcon sx={{ fontSize: "18px", marginLeft: "10px" }} />
+            </Button>
+          )}
+        </Box>
       </Box>
     </CardComponentStyle>
   );

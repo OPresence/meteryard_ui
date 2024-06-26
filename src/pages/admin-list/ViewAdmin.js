@@ -64,7 +64,6 @@ const ViewAdmin = ({
     phoneNo: yep.string().required("Phone Number is required."),
   });
 
-  console.log("value0005878787--->", _viewData, _departmentlist);
   useEffect(() => {
     setInitialState({
       department: _viewData?.departmentId?._id,

@@ -38,7 +38,7 @@ const Otp = ({
               xs={12}
               style={{ display: "flex", alignItems: "center" }}
             >
-              <Box maxWidth={500} className="imageBox">
+              <Box maxWidth={450} className="imageBox">
                 <img src="/images/Group 8422.svg" width={"100%"} />
               </Box>
             </Grid>

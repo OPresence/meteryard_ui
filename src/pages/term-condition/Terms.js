@@ -33,7 +33,6 @@ const Terms = () => {
         },
       });
       if (res) {
-        console.log("dnkknsdknfn--->", res?.result?.docs);
         setconditionyPolicy(res?.result?.docs[0]);
       }
     } catch (error) {

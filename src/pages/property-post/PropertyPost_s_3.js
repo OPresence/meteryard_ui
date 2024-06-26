@@ -1,27 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  Box,
-  Grid,
-  Typography,
-  TextField,
-  Button,
-  CircularProgress,
-} from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import styled from "@emotion/styled";
-import PostCheckBox from "../../component/PostCheckBox";
 import Checkbox from "@mui/material/Checkbox";
 import { PostApiFunction } from "../../utils";
 import Apiconfigs from "../../ApiConfig/ApiConfig";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import AddIcon from "@mui/icons-material/Add";
-import LocationDialog from "../../component/LocationDialog";
 import CloseIcon from "@mui/icons-material/Close";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import { SelectField, InputField } from "../../component/FormFields";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
-import { margin } from "@mui/system";
 const PriceBox = styled(Box)(({ theme }) => ({
   "& .mainPriceBox": {
     padding: "10px",
@@ -63,7 +53,7 @@ const PriceBox = styled(Box)(({ theme }) => ({
       width: "94px",
       padding: "9px",
       cursor: "pointer",
-      marginBottom:"10px",
+      marginBottom: "10px",
       "& svg": {
         color: "#676767",
         fontSize: "22px",
@@ -84,7 +74,7 @@ const PriceBox = styled(Box)(({ theme }) => ({
         display: "block",
         maxWidth: "50%",
         padding: "0",
-        
+
         "@media(max-width:615px)": {
           alignItems: "start",
           maxWidth: "100%",
@@ -217,8 +207,10 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
       localArea,
       stateId,
       cityId,
-      Image,
     },
+    setGetState_Object,
+    setSelectedImages,
+    setGetCity_Object,
   } = props;
   const fileInputRef = useRef(null);
   const [_stateList, setStateList] = React.useState([]);
@@ -234,13 +226,19 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
     const files = Array.from(e.target.files);
     const newImages = files.map((file) => URL.createObjectURL(file));
     setImages((prevImages) => [...prevImages, ...newImages].slice(0, 10));
-    
+    setSelectedImages(files);
   };
-
+  const handleChangeState = (value) => {
+    const selectedObj = _stateList.find((item) => item.stateCode === value);
+    setGetState_Object(selectedObj);
+  };
+  const handleChangeCity = (value) => {
+    const selectedObj = _cityList.find((item) => item.stateCode === value);
+    setGetCity_Object(selectedObj);
+  };
   const removeImage = (image) => {
     setImages(_images.filter((img) => img !== image));
   };
-  console.log("bjdsbfbds---->", _getstate);
   const scrollToTop = () => {
     window.scrollTo({
       bottm: 900,
@@ -259,10 +257,13 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllState,
+        data: {
+          countryCode: "IN",
+        },
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setStateList(res?.result?.docs);
+          setStateList(res?.result);
         } else if (res?.responseCode == 404) {
           setStateList([]);
           toast.error(res?.responseMessage);
@@ -291,12 +292,13 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllCity,
         data: {
-          stateId: _getstate,
+          stateCode: _getstate,
+          countryCode: "IN",
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setCityList(res?.result?.docs);
+          setCityList(res?.result);
         } else if (res?.responseCode == 404) {
           setCityList([]);
           toast.error(res?.responseMessage);
@@ -325,8 +327,11 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
     scrollToTop();
   }, []);
   useEffect(() => {
-    CityFunctionList();
+    if (_getstate != "0") {
+      CityFunctionList();
+    }
   }, [_getstate]);
+
   return (
     <PropertyPostScreenStyle>
       <Box className="mainBox">
@@ -379,6 +384,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                               yourMaxLengthValue={10}
                               data={_stateList}
                               set_State={setState}
+                              handleChangeState={handleChangeState}
                             />
                           </Box>
                         </Grid>
@@ -393,6 +399,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                               fullWidth
                               yourMaxLengthValue={10}
                               data={_cityList}
+                              handleChangeCity={handleChangeCity}
                             />
                           </Box>
                         </Grid>
@@ -496,10 +503,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                             </Box>
                           </label>
                         </Box>
-                        <div
-                          className="multipleImageBox"
-                          
-                        >
+                        <div className="multipleImageBox">
                           {_images.length == 0 ? (
                             <span
                               className="cameraBox"
@@ -528,14 +532,7 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                                   onClick={() => fileInputRef.current.click()}
                                   onChange={handleFileChangeImage}
                                 >
-                                  <Typography
-                                    variant="h6"
-                                    style={{
-                                      fontWeight: "600",
-                                      textAlign: "center",
-                                      fontSize: "13px",
-                                    }}
-                                  >
+                                  <Typography variant="h2" textAlign="center">
                                     Add More Images
                                   </Typography>
                                   <AddIcon />
@@ -631,7 +628,12 @@ const PropertyPost_s_3 = (props, handleFileChangeImage) => {
                   </Grid>
 
                   <Box>
-                    <Box display={"flex"} gap={"20px"} mt={2} flexDirection={isMobile?"column":"row"}>
+                    <Box
+                      display={"flex"}
+                      gap={"20px"}
+                      mt={2}
+                      flexDirection={isMobile ? "column" : "row"}
+                    >
                       <Box
                         display={"inline-flex"}
                         alignItems={"center"}

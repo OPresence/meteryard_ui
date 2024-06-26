@@ -52,7 +52,6 @@ const ViewCity = ({
   type,
 }) => {
   const [_countrycode, setCountryCode] = useState("");
-  console.log("_countrycode-->", _viewData);
   const [_countrylist, setCountryList] = useState([]);
   const [_statelist, setStateList] = useState([]);
   const [_initialstate, setInitialState] = useState({
@@ -100,6 +99,7 @@ const ViewCity = ({
         endPoint: Apiconfigs?.listAllState,
         data: {
           limit: "10",
+          countryCode: "IN",
         },
         params: {
           countryCode: _countrycode,
@@ -107,7 +107,7 @@ const ViewCity = ({
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setStateList(res?.result?.docs);
+          setStateList(res?.result);
         } else if (res?.responseCode == 404) {
           setStateList([]);
         } else {

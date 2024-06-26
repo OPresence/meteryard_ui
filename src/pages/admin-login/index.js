@@ -209,7 +209,6 @@ const AdminLogin = () => {
       });
       if (res) {
         if (res?.responseCode == 200) {
-          console.log("05444646454--->", res);
           handleClose();
           setIsLoading(false);
           window.sessionStorage.setItem("adminToken", res?.result?.token);

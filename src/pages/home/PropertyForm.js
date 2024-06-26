@@ -106,7 +106,6 @@ export default function PropertyForm({
         endPoint: Apiconfigs?.listAllProjectType,
       });
       if (res) {
-        console.log("res00-->", res?.result?.docs);
         if (res?.responseCode == 200) {
           setPropertyList(res?.result?.docs);
         } else if (res?.responseCode == 404) {
@@ -143,7 +142,6 @@ export default function PropertyForm({
         },
       });
       if (res?.responseCode == 200) {
-        console.log("dnfknkdfn--0->", res);
         setSubTypeList(res?.result?.docs);
         setItemData(resolvedData);
         // return res?.result?.docs;
@@ -170,7 +168,7 @@ export default function PropertyForm({
     }
   };
   useEffect(() => {
-    ProjectType();
+    // ProjectType();
   }, []);
   useEffect(() => {
     SubProjectType();

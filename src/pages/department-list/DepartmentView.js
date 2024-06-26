@@ -86,7 +86,6 @@ const DepartmentView = ({
           setFieldValue,
         }) => (
           <Form>
-            {console.log("values--->", values)}
             <Box display={"flex"} justifyContent={"center"} mt={3} mb={5}>
               <Box maxWidth={400} width={"100%"}>
                 <TextField

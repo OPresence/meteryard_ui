@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Box, Container, IconButton, Grid, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import SubMenuComponent from "./SubMenuComponent";
 import SubMenu2Component from "./SubMenu2Component";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -41,7 +41,7 @@ const MenuComponent = () => {
         <Box className={"dropdown"} style={{ width: "100%" }}>
           <Box>
             <button className="dropbtn">
-              Cities <ChevronRightIcon className="rightBtn" />
+              States <ChevronRightIcon className="rightBtn" />
             </button>
           </Box>
 

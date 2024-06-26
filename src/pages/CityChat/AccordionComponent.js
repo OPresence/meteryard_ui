@@ -52,7 +52,6 @@ export default function ControlledAccordions({
   const auth = useContext(AuthContext);
   const [checked_get, setChecked_Get] = React.useState("");
   const handleChange = (panel) => (event, isExpanded) => {
-    console.log("data?.projectType=---->", data?.projectType);
     setExpanded(isExpanded ? panel : false);
     auth?.setPropertyType(panel);
   };

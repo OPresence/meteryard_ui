@@ -126,7 +126,7 @@ const StateComponent = () => {
     }
   };
 
-  const GetCityList = async () => {
+  const ProjectTypeFunction = async () => {
     try {
       setListLoading(true);
       const res = await PostApiFunction({
@@ -157,8 +157,7 @@ const StateComponent = () => {
     }
   };
 
-  const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
+  const Create_ProjectType = async (value) => {
     try {
       setIsLoading(true);
       const res = await PostApiFunction({
@@ -171,7 +170,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          ProjectTypeFunction();
           setIsLoading(false);
           handleClose();
         } else if (res?.responseCode == 404) {
@@ -208,7 +207,7 @@ const StateComponent = () => {
         },
       });
       if (res) {
-        GetCityList();
+        ProjectTypeFunction();
         if (res?.responseCode == 200) {
           setIsLoading(false);
           handleViewClose();
@@ -245,7 +244,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          ProjectTypeFunction();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -280,7 +279,7 @@ const StateComponent = () => {
       if (res) {
         if (res?.responseCode == 200) {
           toast.success(res?.responseMessage);
-          GetCityList();
+          ProjectTypeFunction();
           setIsLoading(false);
           confirmModalClose();
         } else if (res?.responseCode == 404) {
@@ -305,7 +304,7 @@ const StateComponent = () => {
   };
   useEffect(() => {
     if (page) {
-      GetCityList();
+      ProjectTypeFunction();
     }
   }, [page]);
   return (
@@ -322,7 +321,7 @@ const StateComponent = () => {
               handleClose={handleClose}
               handleClickOpen={handleOpen}
               ImageUpload={ImageUpload}
-              AddMoreList={Add_Country}
+              AddMoreList={Create_ProjectType}
               _isloading={_isloading}
               _image_upload={_image_upload}
               _getcountrylist={_getcountrylist}

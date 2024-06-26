@@ -142,7 +142,7 @@ const MainComponent = styled(Box)(({ theme }) => ({
   },
 }));
 export default function Topbar() {
-  const auth = useContext(AuthContext);
+  // const auth = useContext(AuthContext);
 
   const [state, setState] = useState({
     mobileView: false,
@@ -292,7 +292,6 @@ export default function Topbar() {
                       className="LoginButton"
                       onClick={() => {
                         handleClickOpenLogin("Login");
-                        // console.log("nksdnkndsnfk");
                       }}
                     >
                       Login
@@ -413,7 +412,6 @@ export default function Topbar() {
                         className="LoginButton"
                         onClick={() => {
                           handleClickOpenLogin("Login");
-                          console.log("nksdnkndsnfk");
                         }}
                       >
                         Login

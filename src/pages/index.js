@@ -1,3 +1,4 @@
+"use-client";
 import HomeLayout from "@/layout/HomeLayout";
 import { Box } from "@mui/material";
 import Banner from "../pages/home/Banner";
@@ -6,16 +7,14 @@ import ProjectComponent from "../component/ProjectComponent";
 import MasterCardProduct from "../component/MasterCardProduct";
 import FeatureProperty from "../component/FeatureProperty";
 export default function ClientPage() {
-
   return (
     <Box>
       <Banner />
+      77777
       <SliderComponent />
-      <FeatureProperty/>
+      <FeatureProperty />
       <MasterCardProduct />
-      {/* <YoutubeComponent /> */}
       <ProjectComponent />
-      {/* <TESTIMONIAL /> */}
     </Box>
   );
 }

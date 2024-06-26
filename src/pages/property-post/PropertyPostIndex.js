@@ -3,8 +3,6 @@ import PropertyPost_s_1 from "./PropertyPost_s_1";
 import PropertyPost_s_2 from "./PropertyPost_s_2";
 import PropertyPost_s_3 from "./PropertyPost_s_3";
 import CircularProgressComponent from "../../component/CircularProgressComponent";
-// import MobilerMenu from "@/component/MobileMenu";
-// import "../../Scss/Propertyindex.scss"
 import {
   Box,
   Grid,
@@ -16,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import styled from "@emotion/styled";
-import Logo from "../../component/Logo";
 import { Formik, Form } from "formik";
 import { toast } from "react-toastify";
 import { useTheme } from "@mui/material/styles";
@@ -28,10 +25,9 @@ import Apiconfigs from "../../ApiConfig/ApiConfig";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { formFieldValue, ValidationValue, initialValue } from "../../utils";
 import { AuthContext } from "../../context/Auth";
-import { display } from "@mui/system";
 
 const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
-  "& input, select, fieldset": {background:"#fff"},
+  "& input, select, fieldset": {},
   "& .MainBoxIndex": {
     height: "100vh",
     display: "flex",
@@ -146,7 +142,7 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
       maxHeight: "unset",
       boxShadow: "none",
       marginTop: "-20px",
-      background:"transparent"
+      background: "transparent",
     },
     // "&::before": {
     //   content: '""',
@@ -188,8 +184,8 @@ const PropertyPostIndexStyle = styled(Box)(({ theme }) => ({
     "& .HeadingBox": {
       padding: "20 0px",
       "@media(max-width:615px)": {
-          padding: "0px 0px",
-        },
+        padding: "0px 0px",
+      },
       "& h2": {
         textAlign: "center",
         color: "#000",
@@ -284,11 +280,6 @@ const StepperStyle = styled("Stepper")(({ theme }) => ({
     color: "red !important",
   },
 }));
-const StyledStepLabel = styled(StepLabel)(({ theme }) => ({
-  "& .MuiStepLabel-completed": {
-    color: "red !important",
-  },
-}));
 
 const PropertyPostIndex = () => {
   const router = useRouter();
@@ -299,6 +290,9 @@ const PropertyPostIndex = () => {
     width: undefined,
     height: undefined,
   });
+  const [_getstate_object, setGetState_Object] = useState("");
+  const [_getcity_object, setGetCity_Object] = useState("");
+
   useEffect(() => {
     function handleResize() {
       setWindowSize({
@@ -340,7 +334,6 @@ const PropertyPostIndex = () => {
   });
   const [_projecttype, setProjectType] = useState([]);
   const [open, setOpen] = useState(false);
-
   const handleChangeCheck = (event) => {
     if (!_checked) {
       setChecked(true);
@@ -372,7 +365,6 @@ const PropertyPostIndex = () => {
         } else {
           setImageUploading(false);
 
-          console.log("Uploaded image:", res);
           return res; // Return the response for later use
         }
       }
@@ -385,21 +377,15 @@ const PropertyPostIndex = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Check if the video duration is less than or equal to 30 seconds
       const video = document.createElement("video");
       video.preload = "metadata";
       video.onloadedmetadata = async function () {
         if (video.duration > 30) {
           alert("Please upload a video that is 30 seconds or shorter.");
-          // Optionally, you can clear the file input
-          // fileInputRef.current.value = "";
         } else {
           try {
-            // setImageUploading(true)
-
             setVideoUpload(true);
             const res = await imageUploadFunction(e.target.files[0]);
-
             if (res?.responseCode == 200) {
               setVideoUpload(false);
             }
@@ -463,18 +449,6 @@ const PropertyPostIndex = () => {
     setOpen(false);
   };
 
-  const ProjectType = async () => {
-    try {
-      const res = await PostApiFunction({
-        endPoint: Apiconfigs.listAllProjectType,
-      });
-      if (res) {
-        setProjectType(res?.result?.docs);
-      }
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
   const FurnichingTypeType = async () => {
     try {
       const res = await PostApiFunction({
@@ -567,7 +541,7 @@ const PropertyPostIndex = () => {
           <PropertyPost_s_3
             formField={formField}
             _isloading={_isloading}
-            _projecttype={_projecttype}
+            _projecttype={auth?._propertyList}
             _videoupload={_videoupload}
             _imageuploading={_imageuploading}
             _coverImage={_coverImage}
@@ -577,6 +551,7 @@ const PropertyPostIndex = () => {
             handleFileChangeImage={handleFileChangeImage}
             address={address}
             setAddress={setAddress}
+            setSelectedImages={setSelectedImages}
             coordinates={coordinates}
             setCoordinates={setCoordinates}
             _consition={_consition}
@@ -588,6 +563,9 @@ const PropertyPostIndex = () => {
             setCoverImage={setCoverImage}
             handleChangeCheck={handleChangeCheck}
             _video_url={_video_url}
+            _getstate_object={_getstate_object}
+            setGetState_Object={setGetState_Object}
+            setGetCity_Object={setGetCity_Object}
           />
         );
     }
@@ -613,7 +591,6 @@ const PropertyPostIndex = () => {
     }
   }
   async function PropertyPostFunction(values, actions) {
-    console.log("valuessdsd0000---------->", values);
     if (_coverImage != "") {
       try {
         setIsLoading(true);
@@ -651,8 +628,8 @@ const PropertyPostIndex = () => {
             },
             localAreaName: values?.localArea,
             price_breakup: Number(values?.price_breakup?.replaceAll(",", "")),
-            stateId: values?.stateId,
-            cityId: values?.cityId,
+            stateId: _getstate_object?._id,
+            cityId: _getcity_object?._id,
           },
         });
         if (res) {
@@ -716,7 +693,7 @@ const PropertyPostIndex = () => {
     setActiveStep(activeStep - 1);
   }
   useEffect(() => {
-    ProjectType();
+    // ProjectType();
   }, []);
 
   return (
@@ -763,7 +740,7 @@ const PropertyPostIndex = () => {
                           display: "flex",
                           justifyContent: "center",
                           flexDirection: isMobile ? "row" : "column",
-                          gap: isMobile? "20px":"30px",
+                          gap: isMobile ? "20px" : "30px",
                         }}
                       >
                         <Step
@@ -780,7 +757,7 @@ const PropertyPostIndex = () => {
 
                           <img
                             src="/images/property-post/step_one.svg"
-                            width={isMobile?"50":"60"}
+                            width={isMobile ? "50" : "60"}
                             marginRight={isMobile ? "0px" : "0px"}
                           />
                           <Typography
@@ -807,14 +784,14 @@ const PropertyPostIndex = () => {
                           {activeStep >= 1 ? (
                             <img
                               src="/images/property-post/step_2 copy.svg"
-                              width={isMobile?"50":"60"}
+                              width={isMobile ? "50" : "60"}
                               fill={"#badc54"}
                               style={{ marginLeft: "-11px" }}
                             />
                           ) : (
                             <img
                               src="/images/property-post/step_2.svg"
-                              width={isMobile?"50":"60"}
+                              width={isMobile ? "50" : "60"}
                               fill={"#fff"}
                               style={{ marginLeft: "-11px" }}
                             />
@@ -842,13 +819,13 @@ const PropertyPostIndex = () => {
                           {activeStep >= 2 ? (
                             <img
                               src="/images/property-post/step_3 copy.svg"
-                              width={isMobile?"50":"60"}
+                              width={isMobile ? "50" : "60"}
                               fill={"#badc54"}
                             />
                           ) : (
                             <img
                               src="/images/property-post/step_3.svg"
-                              width={isMobile?"50":"60"}
+                              width={isMobile ? "50" : "60"}
                               fill={"#fff"}
                             />
                           )}
@@ -940,7 +917,7 @@ const PropertyPostIndex = () => {
                                       <>
                                         &nbsp;&nbsp;{" "}
                                         <CircularProgressComponent
-                                          color="#000"
+                                          colorValue="#fff"
                                           size={24}
                                           className={"buttonProgress"}
                                         />

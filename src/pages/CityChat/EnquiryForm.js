@@ -122,8 +122,6 @@ const EnquiryForm = ({
   const [_citylist, setCityList] = useState([]);
   const [_statename, setStateName] = useState("");
 
-  console.log("_getproprty_type-->", _subtypelist);
-
   const auth = useContext(AuthContext);
   const [_initialstate, setInitialState] = useState({
     fullname: "",
@@ -184,7 +182,6 @@ const EnquiryForm = ({
     }
   };
   const SubProjectType = async (id) => {
-    console.log("dfdsbfdsifiudsui9888");
     try {
       const res = await PostApiFunction({
         endPoint: Apiconfigs?.listAllProjectSubType,
@@ -195,7 +192,6 @@ const EnquiryForm = ({
         },
       });
       if (res?.responseCode == 200) {
-        console.log("dnfknkdfn--0->", res);
         setSubTypeList(res?.result?.docs);
         setItemData(resolvedData);
         // return res?.result?.docs;
@@ -233,7 +229,7 @@ const EnquiryForm = ({
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setStateList(res?.result?.docs);
+          setStateList(res?.result);
         } else if (res?.responseCode == 404) {
           setStateList([]);
         } else {
@@ -250,12 +246,13 @@ const EnquiryForm = ({
         endPoint: Apiconfigs?.listAllCity,
         data: {
           limit: "10",
-          stateId: _statename,
+          stateCode: _statename,
+          countryCode: "IN",
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setCityList(res?.result?.docs);
+          setCityList(res?.result);
         } else if (res?.responseCode == 404) {
           setCityList([]);
         } else {
@@ -270,12 +267,12 @@ const EnquiryForm = ({
     GetStateList();
   }, []);
   useEffect(() => {
-    if (_statename) {
+    if (_statename != "0") {
       GetCityList();
     }
   }, [_statename]);
   useEffect(() => {
-    ProjectType();
+    // ProjectType();
   }, []);
   useEffect(() => {
     if (_getproprty_type) {
@@ -285,7 +282,6 @@ const EnquiryForm = ({
 
   const EnquiryFunction = async (value) => {
     if (_getwhatsapp_check && _getemail_check) {
-      console.log("dnjnfkdkfndn--->", value);
       try {
         setIsLoading(true);
         const res = await PostApiFunction({

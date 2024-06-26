@@ -82,7 +82,6 @@ const BlogIndex = () => {
   const [_image_upload, setImageUpload] = useState(false);
   const [_imageurl, setImageURL] = useState("");
   const [_imageurl1, setImageURL1] = useState("");
-  console.log("_imageurl1ssd--->", _imageurl1);
   const [openView, setOpenView] = useState(false);
   const [_getcountrylist, setCountryList] = useState([]);
 
@@ -169,7 +168,6 @@ const BlogIndex = () => {
   };
 
   const Add_Country = async (value) => {
-    console.log("valuenxnncx---->", value);
     try {
       setIsLoading(true);
       const res = await PostApiFunction({

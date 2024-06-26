@@ -11,13 +11,10 @@ const CheckBoxComponent = ({
 }) => {
   const auth = useContext(AuthContext);
   const [checked, setChecked] = useState(false);
-  console.log("data000--->", data);
   useEffect(() => {
     if (checked) {
       setChecked_Get(checked);
-      console.log("11111111111111111111");
     } else {
-      console.log("000000000000000000000");
     }
   }, [checked]);
 

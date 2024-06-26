@@ -1,112 +1,108 @@
-import React from 'react';
-import { Box, Typography, Divider } from '@mui/material';
-import AccordionComponent from '../CityChat/AccordionComponent';
-import PriceRangeComponent from '../../component/PriceRangeComponent';
-import StateComponent from '../../component/StateComponent';
+import React from "react";
+import { Box, Typography, Divider } from "@mui/material";
+import AccordionComponent from "../CityChat/AccordionComponent";
+import PriceRangeComponent from "../../component/PriceRangeComponent";
+import StateComponent from "../../component/StateComponent";
 
 const MobileModal = () => {
   const CheckBoxName = [
     {
-      name: 'Residential',
+      name: "Residential",
       valueName: [
-        { name: 'HOUSE' },
-        { name: 'VILLA' },
-        { name: 'APARTMENTS' },
-        { name: 'PLOTS' },
+        { name: "HOUSE" },
+        { name: "VILLA" },
+        { name: "APARTMENTS" },
+        { name: "PLOTS" },
       ],
     },
   ];
 
   const CheckBoxName1 = [
     {
-      name: 'Commercial',
+      name: "Commercial",
       valueName: [
-        { name: 'HOUSE' },
-        { name: 'VILLA' },
-        { name: 'APARTMENTS' },
-        { name: 'PLOTS' },
+        { name: "HOUSE" },
+        { name: "VILLA" },
+        { name: "APARTMENTS" },
+        { name: "PLOTS" },
       ],
     },
   ];
 
   const CheckBoxName2 = [
     {
-      name: 'Agriculture',
+      name: "Agriculture",
       valueName: [
-        { name: 'HOUSE' },
-        { name: 'VILLA' },
-        { name: 'APARTMENTS' },
-        { name: 'PLOTS' },
+        { name: "HOUSE" },
+        { name: "VILLA" },
+        { name: "APARTMENTS" },
+        { name: "PLOTS" },
       ],
     },
   ];
 
   const State_name = [
-    { name: 'Uttar Pradesh' },
-    { name: 'Delhi' },
-    { name: 'Gujarat' },
+    { name: "Uttar Pradesh" },
+    { name: "Delhi" },
+    { name: "Gujarat" },
   ];
 
   const City_name = [
-    { name: 'Agra' },
-    { name: 'Mumbai' },
-    { name: 'Delhi' },
-    { name: 'Bangalore' },
+    { name: "Agra" },
+    { name: "Mumbai" },
+    { name: "Delhi" },
+    { name: "Bangalore" },
   ];
 
   const City_name_LocalArea = [
-    { name: 'Pashchim Puri' },
-    { name: 'Sikandra' },
-    { name: 'Bodla' },
-    { name: 'Fatehabad Road' },
-    { name: 'Kamla Nagar' },
+    { name: "Pashchim Puri" },
+    { name: "Sikandra" },
+    { name: "Bodla" },
+    { name: "Fatehabad Road" },
+    { name: "Kamla Nagar" },
   ];
 
   return (
-    <Box sx={{ 
-      maxHeight: '80vh', 
-      overflowY: 'auto',
-      '&::-webkit-scrollbar': {
-        width: '0px', 
-      }
-    }}>
+    <Box
+      overflowY={"auto"}
+      sx={{
+        maxHeight: "80vh",
+
+        "&::-webkit-scrollbar": {
+          width: "0px",
+        },
+      }}
+    >
       <Box mb={2}>
-        <Typography variant="h2" sx={{ textAlign: 'center', fontSize: '500', fontSize: '20px', }}>Property category</Typography>
+        <Typography
+          variant="h2"
+          sx={{ textAlign: "center", fontSize: "500", fontSize: "20px" }}
+        >
+          Property category
+        </Typography>
       </Box>
       {CheckBoxName.map((data, index) => (
-        <AccordionComponent
-          key={index}
-          data={data}
-          index={index}
-        />
+        <AccordionComponent key={index} data={data} index={index} />
       ))}
-      <Box m={'8px 0 0 0'}>
+      <Box m={"8px 0 0 0"}>
         <Divider className="devider" />
       </Box>
       {CheckBoxName1.map((data, index) => (
-        <AccordionComponent
-          key={index}
-          data={data}
-          index={index}
-        />
+        <AccordionComponent key={index} data={data} index={index} />
       ))}
-      <Box m={'8px 0 0 0'}>
+      <Box m={"8px 0 0 0"}>
         <Divider className="devider" />
       </Box>
       {CheckBoxName2.map((data, index) => (
-        <AccordionComponent
-          key={index}
-          data={data}
-          index={index}
-        />
+        <AccordionComponent key={index} data={data} index={index} />
       ))}
-      <Box m={'8px 0 0 0'}>
+      <Box m={"8px 0 0 0"}>
         <Divider className="devider" />
       </Box>
       <Box>
         <PriceRangeComponent />
       </Box>
-      <Box m={'8px 0 0 0'}>
+      <Box m={"8px 0 0 0"}>
         <Divider className="devider" />
       </Box>
       <Box>
@@ -116,17 +112,13 @@ const MobileModal = () => {
           name="State"
         />
       </Box>
-      <Box m={'8px 0 0 0'}>
+      <Box m={"8px 0 0 0"}>
         <Divider className="devider" />
       </Box>
       <Box>
-        <StateComponent
-          StattName={City_name}
-          type="Select City"
-          name="City"
-        />
+        <StateComponent StattName={City_name} type="Select City" name="City" />
       </Box>
-      <Box m={'8px 0 0 0'}>
+      <Box m={"8px 0 0 0"}>
         <Divider className="devider" />
       </Box>
       <Box>
@@ -136,7 +128,7 @@ const MobileModal = () => {
           name="Local Area"
         />
       </Box>
-      <Box m={'8px 0 0 0'}>
+      <Box m={"8px 0 0 0"}>
         <Divider className="devider" />
       </Box>
     </Box>

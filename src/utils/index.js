@@ -260,7 +260,6 @@ export const convertDateTime = (val) => {
 
 const apiUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
-
 export const getAPIdata = async ({ endPoint, data }) => {
   try {
     let res;
@@ -363,8 +362,6 @@ export const PutApiFunction = async ({ endPoint, data, params }) => {
   }
 };
 export const DeleteApiFunction = async ({ endPoint, data, params }) => {
-  console.log("ndkjjfhdkj-->", params, endPoint);
-
   try {
     let res,
       token = sessionStorage.getItem("adminToken");

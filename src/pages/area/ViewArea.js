@@ -119,7 +119,7 @@ const ViewArea = ({
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setStateList(res?.result?.docs);
+          setStateList(res?.result);
         } else if (res?.responseCode == 404) {
           setStateList([]);
         } else {
@@ -136,12 +136,14 @@ const ViewArea = ({
         endPoint: Apiconfigs?.listAllCity,
         data: {
           limit: "10",
-          stateId: _statename,
+          countryCode: "IN",
+
+          stateCode: _statename,
         },
       });
       if (res) {
         if (res?.responseCode == 200) {
-          setCityList(res?.result?.docs);
+          setCityList(res?.result);
         } else if (res?.responseCode == 404) {
           setCityList([]);
         } else {
@@ -162,7 +164,7 @@ const ViewArea = ({
     }
   }, [_countrycode]);
   useEffect(() => {
-    if (_statename) {
+    if (_statename != "0") {
       GetCityList();
     }
   }, [_statename]);
@@ -294,7 +296,6 @@ const ViewArea = ({
                         onChange={handleChange}
                         onBlur={handleBlur}
                       >
-                        {console.log("_citylist0---->", _citylist)}
                         {_citylist &&
                           _citylist?.map((data, index) => {
                             return (

@@ -16,7 +16,8 @@ const baseOptions = {
 
     MuiContainer: {
       root: {
-        "@media(max-width:1280px)": {
+        "@media(min-width:1200px)": {
+          maxWidth: "1360px !important",
           paddingLeft: "60px",
           paddingRight: "60px",
         },
@@ -41,3 +42,21 @@ export const createTheme = (config = {}) => {
 
   return theme;
 };
+// src/theme.js
+
+// import { createTheme } from "@mui/material/styles";
+// const themeManage = createTheme({
+//   palette: {
+//     primary: {
+//       main: "#1976d2", // blue
+//     },
+//     secondary: {
+//       main: "#dc004e", // pink
+//     },
+//   },
+//   typography: {
+//     fontFamily: "Roboto, Arial, sans-serif",
+//   },
+// });
+
+// export default themeManage;

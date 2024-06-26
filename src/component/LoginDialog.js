@@ -45,7 +45,7 @@ const LoginDialog = ({
             />
           ) : (
             <>
-              {!_signcomplete ? (
+              {_selectScreen == "Sign Up" ? (
                 <SignUp
                   _selectScreen={_selectScreen}
                   setSelectScreen={setSelectScreen}

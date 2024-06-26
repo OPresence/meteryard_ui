@@ -58,7 +58,6 @@ const ViewUser = ({
   const [_countrycode, setCountryCode] = useState("");
   const [_departmentlist, setDepartmentList] = useState([]);
   const [_initialstate, setInitialState] = useState({
-    // department: _viewData?.departmentId?._id,
     Name: _viewData?.name,
     email: _viewData?.email,
     password: _viewData?.userType,
@@ -66,36 +65,13 @@ const ViewUser = ({
     status: _viewData?.status,
   });
   const formValidationSchemaDepartment = yep.object().shape({
-    // department: yep.string().required("Department name is required."),
     Name: yep.string().required("Name is required."),
     email: yep.string().required("Email is required."),
     password: yep.string().required("Password is required."),
     phoneNo: yep.string().required("Phone Number is required."),
   });
-  //   const DepartList = async (value, code) => {
-  //     try {
-  //       const res = await PostApiFunction({
-  //         endPoint: Apiconfigs.listAllDepartment,
-  //       });
-  //       if (res) {
-  //         if (res?.responseCode == 200) {
-  //           setDepartmentList(res?.result?.docs);
-  //         } else if (res?.responseCode == 404) {
-  //           toast.error(res?.responseMessage);
-  //         } else if (res?.responseCode == 501) {
-  //           toast.error(res?.responseMessage);
-  //         } else {
-  //           toast.error(res?.responseMessage);
-  //         }
-  //       }
-  //     } catch (error) {
-  //       console.log("error", error);
-  //     }
-  //   };
-  //   console.log("value0005878787--->", _viewData);
   useEffect(() => {
     setInitialState({
-      //   department: _viewData?.departmentId?._id,
       Name: _viewData?.name,
       email: _viewData?.email,
       password: _viewData?.userType,

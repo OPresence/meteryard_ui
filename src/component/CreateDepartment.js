@@ -34,7 +34,6 @@ const CreateDepartment = ({ handleClose, AddMoreList, _isloading, open }) => {
     status: "",
   };
   const [_initialstate, setInitialState] = useState(formInitialSchema);
-  console.log("kfdkjfdn-===>?", _initialstate);
   const formValidationSchemaDepartment = yep.object().shape({
     departmentName: yep.string().required("department name is required."),
     status: yep.string().required("status is required."),

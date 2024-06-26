@@ -181,13 +181,6 @@ const PropertyLayout = ({ children }) => {
             <Typography variant="h3" className="heading3">
               Coohom 3D Design Tool
             </Typography>
-
-            <div className="open-link">
-              <a href="/open" target="_blank">
-                Open
-              </a>
-              <ChevronRightIcon className="rightIcon" />
-            </div>
           </div>
         </Box>
       </AdvertisementContainer>
