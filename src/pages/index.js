@@ -10,6 +10,7 @@ export default function ClientPage() {
   return (
     <Box>
       <Banner />
+      77777
       <SliderComponent />
       <FeatureProperty />
       <MasterCardProduct />
