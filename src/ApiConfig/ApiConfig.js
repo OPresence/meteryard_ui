@@ -1,8 +1,8 @@
 var URL_ENDPOINT;
 if (process.env.NODE_ENV !== "production") {
-  URL_ENDPOINT = process.env.NEXT_PUBLIC_SITE_URL;
+  URL_ENDPOINT = 'http://15.206.167.77:3020/api/v1';
 } else {
-  URL_ENDPOINT = process.env.NEXT_PUBLIC_SITE_URL;
+  URL_ENDPOINT = 'http://15.206.167.77:3020/api/v1';
 }
 
 const Apiconfigs = {

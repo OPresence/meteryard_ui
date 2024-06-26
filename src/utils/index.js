@@ -258,7 +258,7 @@ export const convertDateTime = (val) => {
   return toDateFormat;
 };
 
-const apiUrl = process.env.NEXT_PUBLIC_SITE_URL;
+const apiUrl = 'http://15.206.167.77:3020/api/v1';
 
 export const getAPIdata = async ({ endPoint, data }) => {
   try {
